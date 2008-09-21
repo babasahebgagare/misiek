@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- You may freely edit this file. See commented blocks below for -->
+<!-- some examples of how to customize the build. -->
+<!-- (If you delete it and reopen the project it will be recreated.) -->
+<project name="MyPlugin" default="default" basedir="../">
+    <description>Ant script</description>
+
+    <property name="cytoscape-path" value="/mnt/dane/Cytoscape2_6_0" />
+    <property name="cytoscape-plugins" value="${cytoscape-path}/plugins" />
+    <property name="project-name" value="MyPlugin" />
+
+
+    <target name="run-plugin" description="Run Cytoscape with plugin">
+        <ant antfile="${project-name}/build.xml" inheritall="false" target="jar" />
+        <copy file="${project-name}/dist/${project-name}.jar" todir="${cytoscape-plugins}" />
+        <exec executable="${cytoscape-path}/Cytoscape" />
+    </target>
+
+</project>
