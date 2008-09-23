@@ -7,7 +7,7 @@
 
     <property name="cytoscape-path" value="/mnt/dane/Cytoscape2_6_0" />
     <property name="cytoscape-plugins" value="${cytoscape-path}/plugins" />
-    <property name="project-name" value="MyPlugin" />
+    <property name="project-name" value="MCVPlugin" />
 
 
     <target name="run-plugin" description="Run Cytoscape with plugin">
