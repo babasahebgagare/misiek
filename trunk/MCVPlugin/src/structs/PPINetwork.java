@@ -18,7 +18,7 @@ public class PPINetwork {
 
     public void addInteraction(String ID, String SourceID, String TargetID, Double Probability) {
         Interaction interaction = new Interaction(ID, SourceID, TargetID, Probability);
-        //TODO
+
         interactions.put(ID, interaction);
     }
 
