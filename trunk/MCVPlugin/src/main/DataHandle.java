@@ -43,6 +43,12 @@ public class DataHandle {
         network.addRootProtein(ProteinID, FamilyID);
     }
 
+    public static void createInteraction(String ID, String NetworkID, String SourceID, String TargetID, Double Probability) {
+        PPINetwork network = networks.get(NetworkID);
+
+        network.addInteraction(ID, SourceID, TargetID, Probability);
+    }
+
     public static Map<String, PPINetwork> getNetworks() {
         return networks;
     }

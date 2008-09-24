@@ -16,6 +16,12 @@ public class PPINetwork {
         context = new PPINetworkContext(ParentNetworkID);
     }
 
+    public void addInteraction(String ID, String SourceID, String TargetID, Double Probability) {
+        Interaction interaction = new Interaction(ID, SourceID, TargetID, Probability);
+        //TODO
+        interactions.put(ID, interaction);
+    }
+
     public void addProtein(String ProteinID, String ParentProteinID, String FamilyID) {
         Protein protein = new Protein(ProteinID, ParentProteinID, ID, FamilyID);
         proteins.put(ProteinID, protein);

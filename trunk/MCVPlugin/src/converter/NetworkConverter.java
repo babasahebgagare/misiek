@@ -15,8 +15,9 @@ public class NetworkConverter {
         if (Cytoscape.getNetwork(network.getCytoID()) == Cytoscape.getNullNetwork()) {
             CyNetwork newNet = Cytoscape.createNetwork(network.getID(), true);
             network.setCytoID(newNet.getIdentifier());
-            
+
             ProteinsConverter.convertNetworkProteins(newNet, network.getProteins().values());
+            InteractionsConverter.convertNetworkInteractions(newNet, network.getInteractions().values());
         }
 
     }

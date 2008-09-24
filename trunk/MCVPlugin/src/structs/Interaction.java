@@ -7,6 +7,13 @@ public class Interaction {
     private String targetID;
     private Double probability;
 
+    Interaction(String ID, String SourceID, String TargetID, Double Probability) {
+        this.ID = ID;
+        this.sourceID = SourceID;
+        this.targetID = TargetID;
+        this.probability = Probability;
+    }
+
     public String getID() {
         return ID;
     }
