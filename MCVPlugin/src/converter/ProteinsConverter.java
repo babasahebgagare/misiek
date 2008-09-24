@@ -1,14 +1,19 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package converter;
 
-/**
- *
- * @author misiek
- */
+import cytoscape.CyNetwork;
+import cytoscape.CyNode;
+import cytoscape.Cytoscape;
+import java.util.Collection;
+import structs.Protein;
+
 public class ProteinsConverter {
 
+    static void convertNetworkProteins(CyNetwork cyNetwork, Collection<Protein> proteins) {
+
+        for (Protein protein : proteins) {
+            
+            CyNode node = Cytoscape.getCyNode(protein.getID(), true);
+            cyNetwork.addNode(node.getRootGraphIndex());
+        }
+    }
 }

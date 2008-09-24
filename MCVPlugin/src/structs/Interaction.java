@@ -1,9 +1,5 @@
 package structs;
 
-/**
- *
- * @author misiek
- */
 public class Interaction {
 
     private String ID;
@@ -42,8 +38,4 @@ public class Interaction {
     public void setTargetID(String targetID) {
         this.targetID = targetID;
     }
-    
-    
-    
-    
 }
