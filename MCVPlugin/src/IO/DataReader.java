@@ -19,6 +19,8 @@ public class DataReader {
     private static String FAMILIES_END = "ENDFAMILIES";
     private static String FAMILY = "FAMILY";
     private static String FAMILY_END = "ENDFAMILY";
+    private static String INTERACTIONS = "INTERACTIONS";
+    private static String INTERACTIONS_END = "ENDINTERACTIONS";
 
     public static void ReadDataFromFile(String filepath) {
         File file = new File(filepath);
@@ -54,6 +56,9 @@ public class DataReader {
             }
             if (line.equals(FAMILIES)) {
                 ReadFamiliesFromBuffer(br);
+            }
+            if (line.equals(INTERACTIONS)) {
+                ReadInteractionsFromBuffer(br);
             }
         }
     }
@@ -96,6 +101,22 @@ public class DataReader {
                 }
             } catch (Exception e) {
                 throw new IOException("ReadFamilyFromBuffer: Bład podczas tworzenia białka");
+            }
+        }
+    }
+
+    private static void ReadInteractionsFromBuffer(BufferedReader br) throws IOException {
+        String line;
+
+        while (!(line = br.readLine()).equals(INTERACTIONS_END)) {
+            if (line.equals("") || line == null) {
+                throw new IOException("ReadInteractionsFromBuffer: Nieoczekiwany koniec pliku");
+            }
+            try {
+                String[] words = line.split(":");
+                DataHandle.createInteraction(words[0], words[1], words[2], words[3], Double.parseDouble(words[4]));
+            } catch (Exception e) {
+                throw new IOException("ReadInteractionsFromBuffer: Blad podczas tworzenia interakcji");
             }
         }
     }
