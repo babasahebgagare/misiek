@@ -17,6 +17,8 @@ public class DataReader {
     private static String TREE_END = "ENDTREE";
     private static String FAMILIES = "FAMILIES";
     private static String FAMILIES_END = "ENDFAMILIES";
+    private static String FAMILY = "FAMILY";
+    private static String FAMILY_END = "ENDFAMILY";
 
     public static void ReadDataFromFile(String filepath) {
         File file = new File(filepath);
@@ -56,21 +58,61 @@ public class DataReader {
         }
     }
 
-    private static void ReadFamiliesFromBuffer(BufferedReader br) {
-        
+    private static void ReadFamiliesFromBuffer(BufferedReader br) throws IOException {
+        String line;
+
+        while (!(line = br.readLine()).equals(FAMILIES_END)) {
+            if (line.equals("") || line == null) {
+                throw new IOException("ReadFamiliesFromBuffer: Nieoczekiwany koniec pliku");
+            }
+            if (line.equals(FAMILY)) {
+                ReadFamilyFromBuffer(br);
+            }
+        }
+    }
+
+    private static void ReadFamilyFromBuffer(BufferedReader br) throws IOException {
+        String line;
+        String famID;
+        line = br.readLine();
+        try {
+            String[] words = line.split(":");
+            famID = words[1];
+            DataHandle.createFamily(famID);
+        } catch (Exception e) {
+            throw new IOException("ReadFamilyFromBuffer: Oczekiwano nazwy rodziny");
+        }
+        while (!(line = br.readLine()).equals(FAMILY_END)) {
+            if (line.equals("") || line == null) {
+                throw new IOException("ReadFamilyFromBuffer: Nieoczekiwany koniec pliku");
+            }
+            try {
+                String[] words = line.split(":");
+                if (words.length == 2) {
+                    DataHandle.createRootProtein(words[0], words[1], famID);
+                }
+                if (words.length == 3) {
+                    DataHandle.createProtein(words[0], words[1], words[2], famID);
+                }
+            } catch (Exception e) {
+                throw new IOException("ReadFamilyFromBuffer: Bład podczas tworzenia białka");
+            }
+        }
     }
 
     private static void ReadTreeFromBuffer(BufferedReader br) throws IOException {
         String line;
 
         while (!(line = br.readLine()).equals(TREE_END)) {
-            if(line == null) break;
+            if (line.equals("") || line == null) {
+                throw new IOException("ReadTreeFromBuffer: Nieoczekiwany koniec pliku");
+            }
             String[] data = line.split(":");
             if (data.length == 1) {
-                DataHandle.getInstance().createRootPPINetwork(data[0].trim());
+                DataHandle.createRootPPINetwork(data[0].trim());
             }
             if (data.length == 2) {
-                DataHandle.getInstance().createPPINetwork(data[0].trim(), data[1].trim());
+                DataHandle.createPPINetwork(data[0].trim(), data[1].trim());
             }
         }
     }

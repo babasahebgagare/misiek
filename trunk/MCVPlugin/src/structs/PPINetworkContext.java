@@ -3,7 +3,7 @@ package structs;
 public class PPINetworkContext {
 
     private String ParentNetworkID = null;
-    
+
     PPINetworkContext(String ParentID) {
         ParentNetworkID = ParentID;
     }
@@ -15,6 +15,4 @@ public class PPINetworkContext {
     public void setParentNetworkID(String ParentNetworkID) {
         this.ParentNetworkID = ParentNetworkID;
     }
-
-    
 }

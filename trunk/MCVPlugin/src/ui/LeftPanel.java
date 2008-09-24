@@ -3,13 +3,10 @@
  *
  * Created on 23 wrzesień 2008, 20:25
  */
-
 package ui;
 
 import IO.DataReader;
 import converter.AllNetworksConverter;
-import converter.SimpleCytoNetwork;
-import utils.Messenger;
 
 /**
  *
@@ -77,11 +74,8 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
     AllNetworksConverter.convertAllNetworks();
 }//GEN-LAST:event_jButton2ActionPerformed
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     // End of variables declaration//GEN-END:variables
-
 }

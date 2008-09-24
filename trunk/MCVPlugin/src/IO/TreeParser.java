@@ -7,25 +7,25 @@ public class TreeParser {
     public static void parseTree(String tree) {
         tree = tree.trim();
         int last = tree.lastIndexOf(")");
-        
+
         String subTree = tree.substring(1, last);
-        String RootNetworkID = tree.substring(last+1, tree.length());
-        
-        DataHandle.getInstance().createRootPPINetwork(RootNetworkID);
+        String RootNetworkID = tree.substring(last + 1, tree.length());
+
+        DataHandle.createRootPPINetwork(RootNetworkID);
         parseSubTree(subTree, RootNetworkID);
-    } 
-    
+    }
+
     private static void parseSubTree(String tree, String parent) {
         tree = tree.trim();
-        if(tree.charAt(0) == '(') {
-            int last = tree.lastIndexOf(")");    
+        if (tree.charAt(0) == '(') {
+            int last = tree.lastIndexOf(")");
             String subTree = tree.substring(1, last);
-            String NetworkID = tree.substring(last+1, tree.length());
-        
-            DataHandle.getInstance().createPPINetwork(NetworkID, parent);
-            parseSubTree(subTree, NetworkID);            
+            String NetworkID = tree.substring(last + 1, tree.length());
+
+            DataHandle.createPPINetwork(NetworkID, parent);
+            parseSubTree(subTree, NetworkID);
         } else {
-            DataHandle.getInstance().createPPINetwork(tree, parent);
+            DataHandle.createPPINetwork(tree, parent);
         }
-    }    
+    }
 }

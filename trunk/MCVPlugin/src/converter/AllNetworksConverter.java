@@ -7,14 +7,13 @@ import structs.PPINetwork;
 public class AllNetworksConverter {
 
     public static void convertAllNetworks() {
-        
-        Collection<PPINetwork> networks = DataHandle.getInstance().getNetworks().values();
-        
-        for(PPINetwork network: networks) {
-            
+
+        Collection<PPINetwork> networks = DataHandle.getNetworks().values();
+
+        for (PPINetwork network : networks) {
+
             NetworkConverter.convertPPINetwork(network);
         }
-        
+
     }
-    
 }

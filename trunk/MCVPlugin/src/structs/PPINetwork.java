@@ -15,7 +15,17 @@ public class PPINetwork {
         ID = NetworkID;
         context = new PPINetworkContext(ParentNetworkID);
     }
-    
+
+    public void addProtein(String ProteinID, String ParentProteinID, String FamilyID) {
+        Protein protein = new Protein(ProteinID, ParentProteinID, ID, FamilyID);
+        proteins.put(ProteinID, protein);
+    }
+
+    public void addRootProtein(String ProteinID, String FamilyID) {
+        Protein protein = new Protein(ProteinID, ID, FamilyID);
+        proteins.put(ProteinID, protein);
+    }
+
     public String getID() {
         return ID;
     }
@@ -55,5 +65,4 @@ public class PPINetwork {
     public void setCytoID(String CytoID) {
         this.CytoID = CytoID;
     }
-    
 }
