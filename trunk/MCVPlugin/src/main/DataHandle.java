@@ -2,11 +2,13 @@ package main;
 
 import java.util.HashMap;
 import java.util.Map;
+import mappers.IDMapper;
 import structs.Family;
 import structs.PPINetwork;
 
 public class DataHandle {
 
+    private static IDMapper networkIDMapper = new IDMapper();
     private static Map<String, PPINetwork> networks = new HashMap<String, PPINetwork>();
     private static Map<String, Family> families = new HashMap<String, Family>();
 
@@ -47,6 +49,16 @@ public class DataHandle {
         PPINetwork network = networks.get(NetworkID);
 
         network.addInteraction(ID, SourceID, TargetID, Probability);
+    }
+
+    public static PPINetwork findNetworkByCytoID(String PPINetworkCytoID) {
+
+        String PPINetworkID = networkIDMapper.getIDByCytoID(PPINetworkCytoID);
+        return networks.get(PPINetworkID);
+    }
+
+    public static void addNetworkIDMapping(String CytoID, String ID) {
+        networkIDMapper.addMapping(CytoID, ID);
     }
 
     public static Map<String, PPINetwork> getNetworks() {

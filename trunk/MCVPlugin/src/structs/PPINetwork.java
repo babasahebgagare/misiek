@@ -32,6 +32,14 @@ public class PPINetwork {
         proteins.put(ProteinID, protein);
     }
 
+    public Protein getProtein(String ProteinID) {
+        return proteins.get(ProteinID);
+    }
+
+    public Interaction getInteraction(String IntaractionID) {
+        return interactions.get(IntaractionID);
+    }
+
     public String getID() {
         return ID;
     }

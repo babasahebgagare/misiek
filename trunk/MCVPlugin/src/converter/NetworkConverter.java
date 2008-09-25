@@ -2,6 +2,7 @@ package converter;
 
 import cytoscape.CyNetwork;
 import cytoscape.Cytoscape;
+import main.DataHandle;
 import structs.PPINetwork;
 
 public class NetworkConverter {
@@ -11,6 +12,7 @@ public class NetworkConverter {
         if (Cytoscape.getNetwork(network.getCytoID()) == Cytoscape.getNullNetwork()) {
             CyNetwork newNet = Cytoscape.createNetwork(network.getID(), true);
             network.setCytoID(newNet.getIdentifier());
+            DataHandle.addNetworkIDMapping(newNet.getIdentifier(), network.getID());
 
             ProteinsConverter.convertNetworkProteins(newNet, network.getProteins().values());
             InteractionsConverter.convertNetworkInteractions(newNet, network.getInteractions().values());
