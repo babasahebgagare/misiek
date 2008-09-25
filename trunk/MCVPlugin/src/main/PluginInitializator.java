@@ -19,12 +19,12 @@ public class PluginInitializator {
         leftPanel.add(ResourceBundle.getBundle("resources/ui").getString("TABNAME"), new LeftPanel());
     }
 
-    public static void initAll() throws CloneNotSupportedException {
+    public static void initAll() {
         initUI();
         initVisualStyles();
     }
 
-    public static void initVisualStyles() throws CloneNotSupportedException {
+    public static void initVisualStyles() {
         VisualMappingManager vmm = Cytoscape.getVisualMappingManager();
         CalculatorCatalog catalog = vmm.getCalculatorCatalog();
         VisualStyle MCVStyle = catalog.getVisualStyle("MCVStyle");
