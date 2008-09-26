@@ -3,21 +3,21 @@ package structs;
 public class Protein {
 
     private String ID;
-    private String FamilyID;
+    private Family Family;
     private ProteinContext context;
 
-    public Protein(String ID, String NetworkID, String famID) {
+    public Protein(String ID, String NetworkID, Family fam) {
         this.ID = ID;
-        this.FamilyID = famID;
+        this.Family = fam;
         this.context = new ProteinContext(NetworkID, null);
     }
-    
-    public Protein(String ID, String ParentProteinID, String NetworkID, String famID) {
+
+    public Protein(String ID, String ParentProteinID, String NetworkID, Family fam) {
         this.ID = ID;
-        this.FamilyID = famID;
+        this.Family = fam;
         this.context = new ProteinContext(NetworkID, ParentProteinID);
     }
-    
+
     public String getID() {
         return ID;
     }
@@ -34,12 +34,11 @@ public class Protein {
         this.context = context;
     }
 
-    public String getFamilyID() {
-        return FamilyID;
+    public Family getFamily() {
+        return this.Family;
     }
 
-    public void setFamilyID(String FamilyID) {
-        this.FamilyID = FamilyID;
+    public void setFamily(Family Family) {
+        this.Family = Family;
     }
-    
 }

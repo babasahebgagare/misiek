@@ -22,13 +22,13 @@ public class PPINetwork {
         interactions.put(ID, interaction);
     }
 
-    public void addProtein(String ProteinID, String ParentProteinID, String FamilyID) {
-        Protein protein = new Protein(ProteinID, ParentProteinID, ID, FamilyID);
+    public void addProtein(String ProteinID, String ParentProteinID, Family Family) {
+        Protein protein = new Protein(ProteinID, ParentProteinID, ID, Family);
         proteins.put(ProteinID, protein);
     }
 
-    public void addRootProtein(String ProteinID, String FamilyID) {
-        Protein protein = new Protein(ProteinID, ID, FamilyID);
+    public void addRootProtein(String ProteinID, Family Family) {
+        Protein protein = new Protein(ProteinID, ID, Family);
         proteins.put(ProteinID, protein);
     }
 
