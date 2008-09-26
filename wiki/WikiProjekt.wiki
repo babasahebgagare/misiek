@@ -9,9 +9,7 @@ aplikację Cytoscape 2.6.1.
 
 Źródła projektu można pobrać przy pomocy klienta SVN w Netbeans "Subversion".
 Po pobraniu źródeł dodaj następujące biblioteki Cytoscape do aplikacji:
-
 CYTOSCAPE_HOME/Cytoscape.jar
-
 CYTOSCAPE_HOME/lib/giny.jar
 
 Usuń biblioteki, do których są niepoprawne odwołania.
