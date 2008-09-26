@@ -1,5 +1,6 @@
 package IO;
 
+import java.awt.Color;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -83,7 +84,10 @@ public class DataReader {
         try {
             String[] words = line.split(":");
             famID = words[1];
-            DataHandle.createFamily(famID);
+            line = br.readLine();
+            words = line.split(":");
+            Color color = new Color(Integer.parseInt(words[1]), Integer.parseInt(words[2]), Integer.parseInt(words[3]));
+            DataHandle.createFamily(famID, color);
         } catch (Exception e) {
             throw new IOException("ReadFamilyFromBuffer: Oczekiwano nazwy rodziny");
         }

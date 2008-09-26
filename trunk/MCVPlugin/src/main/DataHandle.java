@@ -2,6 +2,7 @@ package main;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.awt.Color;
 import mappers.IDMapper;
 import structs.Family;
 import structs.PPINetwork;
@@ -26,23 +27,23 @@ public class DataHandle {
         }
     }
 
-    public static void createFamily(String FamilyID) {
+    public static void createFamily(String FamilyID, Color color) {
         if (!families.containsKey(FamilyID)) {
-            Family fam = new Family(FamilyID);
+            Family fam = new Family(FamilyID, color);
             families.put(FamilyID, fam);
         }
     }
 
     public static void createProtein(String ProteinID, String ParentProteinID, String NetworkID, String FamilyID) {
         PPINetwork network = networks.get(NetworkID);
-
-        network.addProtein(ProteinID, ParentProteinID, FamilyID);
+        Family family = families.get(FamilyID);
+        network.addProtein(ProteinID, ParentProteinID, family);
     }
 
     public static void createRootProtein(String ProteinID, String NetworkID, String FamilyID) {
         PPINetwork network = networks.get(NetworkID);
-
-        network.addRootProtein(ProteinID, FamilyID);
+        Family family = families.get(FamilyID);
+        network.addRootProtein(ProteinID, family);
     }
 
     public static void createInteraction(String ID, String NetworkID, String SourceID, String TargetID, Double Probability) {
