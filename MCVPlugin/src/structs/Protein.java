@@ -1,21 +1,26 @@
 package structs;
 
+import projector.ProjectorInfo;
+
 public class Protein {
 
     private String ID;
     private Family Family;
     private ProteinContext context;
+    private ProjectorInfo projects;
 
-    public Protein(String ID, String NetworkID, Family fam) {
+    public Protein(String ID, PPINetwork Network, Family fam) {
         this.ID = ID;
         this.Family = fam;
-        this.context = new ProteinContext(NetworkID, null);
+        this.context = new ProteinContext(Network, null);
+        this.projects = new ProjectorInfo();
     }
 
-    public Protein(String ID, String ParentProteinID, String NetworkID, Family fam) {
+    public Protein(String ID, Protein ParentProtein, PPINetwork Network, Family fam) {
         this.ID = ID;
         this.Family = fam;
-        this.context = new ProteinContext(NetworkID, ParentProteinID);
+        this.context = new ProteinContext(Network, ParentProtein);
+        this.projects = new ProjectorInfo();
     }
 
     public String getID() {
@@ -40,5 +45,13 @@ public class Protein {
 
     public void setFamily(Family Family) {
         this.Family = Family;
+    }
+
+    public ProjectorInfo getProjects() {
+        return projects;
+    }
+
+    public void setProjects(ProjectorInfo projects) {
+        this.projects = projects;
     }
 }

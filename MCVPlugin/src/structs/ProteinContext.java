@@ -2,27 +2,27 @@ package structs;
 
 public class ProteinContext {
 
-    private String ParentProteinID;
-    private String NetworkID;
+    private PPINetwork Network;
+    private Protein ParentProtein;
 
-    ProteinContext(String NetworkID, String ParentProteinID) {
-        this.NetworkID = NetworkID;
-        this.ParentProteinID = ParentProteinID;
+    public ProteinContext(PPINetwork Network, Protein ParentProtein) {
+        this.Network = Network;
+        this.ParentProtein = ParentProtein;
     }
 
-    public String getNetworkID() {
-        return NetworkID;
+    public PPINetwork getNetwork() {
+        return Network;
     }
 
-    public void setNetworkID(String NetworkID) {
-        this.NetworkID = NetworkID;
+    public void setNetwork(PPINetwork Network) {
+        this.Network = Network;
     }
 
-    public String getParentProteinID() {
-        return ParentProteinID;
+    public Protein getParentProtein() {
+        return ParentProtein;
     }
 
-    public void setParentProteinID(String ParentProteinID) {
-        this.ParentProteinID = ParentProteinID;
+    public void setParentProtein(Protein ParentProtein) {
+        this.ParentProtein = ParentProtein;
     }
 }

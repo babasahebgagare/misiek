@@ -11,9 +11,9 @@ public class PPINetwork {
     private String ID;
     private String CytoID;
 
-    public PPINetwork(String NetworkID, String ParentNetworkID) {
+    public PPINetwork(String NetworkID, PPINetwork ParentNetwork) {
         ID = NetworkID;
-        context = new PPINetworkContext(ParentNetworkID);
+        context = new PPINetworkContext(ParentNetwork);
     }
 
     public void addInteraction(String ID, String SourceID, String TargetID, Double Probability) {
@@ -22,13 +22,13 @@ public class PPINetwork {
         interactions.put(ID, interaction);
     }
 
-    public void addProtein(String ProteinID, String ParentProteinID, Family Family) {
-        Protein protein = new Protein(ProteinID, ParentProteinID, ID, Family);
+    public void addProtein(String ProteinID, Protein ParentProtein, Family Family) {
+        Protein protein = new Protein(ProteinID, ParentProtein, this, Family);
         proteins.put(ProteinID, protein);
     }
 
     public void addRootProtein(String ProteinID, Family Family) {
-        Protein protein = new Protein(ProteinID, ID, Family);
+        Protein protein = new Protein(ProteinID, this, Family);
         proteins.put(ProteinID, protein);
     }
 

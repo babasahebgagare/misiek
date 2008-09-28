@@ -6,6 +6,7 @@ import java.awt.Color;
 import mappers.IDMapper;
 import structs.Family;
 import structs.PPINetwork;
+import structs.Protein;
 
 public class DataHandle {
 
@@ -22,7 +23,8 @@ public class DataHandle {
 
     public static void createPPINetwork(String NetworkID, String ParentNetworkID) {
         if (!networks.containsKey(NetworkID)) {
-            PPINetwork net = new PPINetwork(NetworkID, ParentNetworkID);
+            PPINetwork ParentNetwork = networks.get(ParentNetworkID);
+            PPINetwork net = new PPINetwork(NetworkID, ParentNetwork);
             networks.put(NetworkID, net);
         }
     }
@@ -36,8 +38,10 @@ public class DataHandle {
 
     public static void createProtein(String ProteinID, String ParentProteinID, String NetworkID, String FamilyID) {
         PPINetwork network = networks.get(NetworkID);
+        PPINetwork ParentNetwork = network.getContext().getParentNetwork();
+        Protein ParentProtein = ParentNetwork.getProteins().get(ParentProteinID);
         Family family = families.get(FamilyID);
-        network.addProtein(ProteinID, ParentProteinID, family);
+        network.addProtein(ProteinID, ParentProtein, family);
     }
 
     public static void createRootProtein(String ProteinID, String NetworkID, String FamilyID) {
