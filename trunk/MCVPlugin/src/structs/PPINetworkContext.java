@@ -2,17 +2,17 @@ package structs;
 
 public class PPINetworkContext {
 
-    private String ParentNetworkID = null;
+    private PPINetwork ParentNetwork;
 
-    PPINetworkContext(String ParentID) {
-        ParentNetworkID = ParentID;
+    public PPINetworkContext(PPINetwork ParentNetwork) {
+        this.ParentNetwork = ParentNetwork;
     }
 
-    public String getParentNetworkID() {
-        return ParentNetworkID;
+    public PPINetwork getParentNetwork() {
+        return ParentNetwork;
     }
 
-    public void setParentNetworkID(String ParentNetworkID) {
-        this.ParentNetworkID = ParentNetworkID;
+    public void setParentNetwork(PPINetwork ParentNetwork) {
+        this.ParentNetwork = ParentNetwork;
     }
 }
