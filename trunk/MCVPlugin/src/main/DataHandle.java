@@ -6,11 +6,13 @@ import java.awt.Color;
 import mappers.IDMapper;
 import structs.Family;
 import structs.PPINetwork;
+import structs.PPINetworkProjection;
 import structs.Protein;
 
 public class DataHandle {
 
     private static IDMapper networkIDMapper = new IDMapper();
+    private static Map<String, PPINetworkProjection> projections = new HashMap<String, PPINetworkProjection>();
     private static Map<String, PPINetwork> networks = new HashMap<String, PPINetwork>();
     private static Map<String, Family> families = new HashMap<String, Family>();
 
