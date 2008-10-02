@@ -7,8 +7,11 @@ package ui;
 
 import IO.DataReader;
 import converter.AllNetworksConverter;
+import converter.AllProjectionsConverter;
+import main.DataHandle;
+import projector.Projector;
 import projector.ProjectorInfoCalculator;
-import projector.ProjectorTest;
+import utils.Messenger;
 
 /**
  *
@@ -74,14 +77,14 @@ public class LeftPanel extends javax.swing.JPanel {
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3)
-                .addContainerGap(180, Short.MAX_VALUE))
+                .addContainerGap(192, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    DataReader.ReadDataFromFile("/home/misiek/misiek/trunk/MCVPlugin/data/data.txt");
+    DataReader.ReadDataFromFile("/media/disk-1/misiek/trunk/MCVPlugin/data/data.txt");
 }//GEN-LAST:event_jButton1ActionPerformed
 
 private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -90,7 +93,9 @@ private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
 private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
     ProjectorInfoCalculator.calculateProjectorInfo();
-    ProjectorTest.projectAllSelected();
+    Projector.projectAllSelected(DataHandle.getNetworks().values());   //TODO
+
+    AllProjectionsConverter.convertAllProjections();
 }//GEN-LAST:event_jButton3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

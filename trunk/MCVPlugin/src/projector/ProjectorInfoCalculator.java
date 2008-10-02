@@ -6,7 +6,6 @@ import java.util.Map;
 import structs.PPINetwork;
 import main.DataHandle;
 import structs.Protein;
-import utils.Messenger;
 
 public class ProjectorInfoCalculator {
 
@@ -26,15 +25,17 @@ public class ProjectorInfoCalculator {
     }
 
     private static void addProjectorInfoForProteins(Protein A, Protein B) {
+
         PPINetwork ANetwork = A.getContext().getNetwork();
         PPINetwork BNetwork = B.getContext().getNetwork();
+
         Map<String, Collection<Protein>> AMap = A.getProjects().getProjectorMap();
         Map<String, Collection<Protein>> BMap = B.getProjects().getProjectorMap();
 
-        if (AMap.get(BNetwork.getID()) == null) {
+        if (!AMap.containsKey(BNetwork.getID())) {
             AMap.put(BNetwork.getID(), new HashSet<Protein>());
         }
-        if (BMap.get(ANetwork.getID()) == null) {
+        if (!BMap.containsKey(ANetwork.getID())) {
             BMap.put(ANetwork.getID(), new HashSet<Protein>());
         }
 
@@ -43,7 +44,7 @@ public class ProjectorInfoCalculator {
     }
 
     private static void calculateProjectorInfoForProtein(Protein protein) {
-        Protein parentProtein = protein.getContext().getParentProtein();
+        Protein parentProtein = protein;
 
         while (parentProtein != null) {
             addProjectorInfoForProteins(protein, parentProtein);
