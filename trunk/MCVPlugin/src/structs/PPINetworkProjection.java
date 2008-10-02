@@ -16,6 +16,14 @@ public class PPINetworkProjection {
         this.context = new PPINetworkProjectionContext(motherNetwork);
     }
 
+    public ProteinProjection getProteinProjection(String ID) {
+        return proteinProjections.get(ID);
+    }
+
+    public GroupNode getGroupNode(String ID) {
+        return groupNodes.get(ID);
+    }
+
     public void addGroupNode(GroupNode node) {
         groupNodes.put(node.getID(), node);
     }

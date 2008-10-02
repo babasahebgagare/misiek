@@ -81,6 +81,12 @@ public class DataHandle {
         return networks.get(PPINetworkID);
     }
 
+    public static PPINetworkProjection findProjectionByCytoID(String PPINetworkProjectionCytoID) {
+
+        String PPINetworkProjectionID = projectionsIDMapper.getIDByCytoID(PPINetworkProjectionCytoID);
+        return projections.get(PPINetworkProjectionID);
+    }
+
     public static void addProjectionIDMapping(String CytoID, String ID) {
         projectionsIDMapper.addMapping(CytoID, ID);
     }
