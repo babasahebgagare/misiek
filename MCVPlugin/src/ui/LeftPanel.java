@@ -8,10 +8,11 @@ package ui;
 import IO.DataReader;
 import converter.AllNetworksConverter;
 import converter.AllProjectionsConverter;
+import java.io.File;
+import javax.swing.JFileChooser;
 import main.DataHandle;
 import projector.Projector;
 import projector.ProjectorInfoCalculator;
-import utils.Messenger;
 
 /**
  *
@@ -84,7 +85,16 @@ public class LeftPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
 private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    DataReader.ReadDataFromFile("/media/disk-3/misiek/trunk/MCVPlugin/data/data.txt");
+
+    JFileChooser fc = new JFileChooser();
+    int returnVal = fc.showOpenDialog(fc);
+
+    if (returnVal == JFileChooser.APPROVE_OPTION) {
+        File file = fc.getSelectedFile();
+        DataReader.ReadDataFromFile(file.getAbsolutePath());
+    } else {
+    }
+
 }//GEN-LAST:event_jButton1ActionPerformed
 
 private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
