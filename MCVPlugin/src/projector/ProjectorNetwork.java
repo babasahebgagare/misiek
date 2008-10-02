@@ -1,41 +1,52 @@
 package projector;
 
-import cytoscape.CyNode;
-import cytoscape.Cytoscape;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 import main.DataHandle;
+import structs.GroupNode;
 import structs.PPINetwork;
+import structs.PPINetworkProjection;
 import structs.Protein;
 
 public class ProjectorNetwork {
 
-    public static void projectAllSelected(Collection<PPINetwork> networks) {
-        Collection<Protein> selectedProteins = getSelectedProteins();
+    private static String createProjectionID(Collection<Protein> selectedProteins, PPINetwork network, PPINetwork motherNetwork) {
+        return "PROJECTION_" + motherNetwork.getID() + "_ON_" + network.getID();
+    }
 
-        for (PPINetwork network : networks) {
-            projectProteinsOnNetwork(selectedProteins, network);
+    private static String createProteinProjectionID(Protein protein) {
+        return "PROJECTION_" + protein.getID();
+    }
+
+    private static String createGroupNodeID(Protein protein) {
+        return "GROUP_NODE" + protein.getID();
+    }
+
+    public static void projectProteinsOnNetwork(Collection<Protein> selectedProteins, PPINetwork network, PPINetwork motherNetwork) {
+
+        String projectionID = createProjectionID(selectedProteins, network, motherNetwork);
+
+        PPINetworkProjection projection = DataHandle.createProjectionNetwork(projectionID, motherNetwork);
+
+        for (Protein protein : selectedProteins) {
+            projectProtein(protein, network, projection);   //TODO
+
         }
     }
 
-    public static Collection<Protein> getSelectedProteins() {
-        Set<CyNode> cyNodes = Cytoscape.getCurrentNetwork().getSelectedNodes();
-        String PPINetworkCytoID = Cytoscape.getCurrentNetwork().getIdentifier();
-        PPINetwork currNetwork = DataHandle.findNetworkByCytoID(PPINetworkCytoID);
+    private static void projectProtein(Protein protein, PPINetwork network, PPINetworkProjection projection) {
 
-        Collection<Protein> ret = new HashSet<Protein>();
+        String groupNodeID = createGroupNodeID(protein);
+        GroupNode node = DataHandle.createGroupNode(groupNodeID);
+        projection.addGroupNode(node);
 
-        for (CyNode node : cyNodes) {
-            ret.add(currNetwork.getProtein(node.getIdentifier()));
+        Collection<Protein> proteinProjections = protein.getProjects().getProjectorMap().get(network.getID());
+
+        if (proteinProjections != null) {
+
+            for (Protein proteinProject : proteinProjections) {
+                String ProteinProjectionID = createProteinProjectionID(proteinProject);
+                DataHandle.createProteinProjection(ProteinProjectionID, proteinProject, projection);
+            }
         }
-
-        return ret;
-    }
-
-    private static void projectProteinsOnNetwork(Collection<Protein> selectedProteins, PPINetwork network) {
-        
-        
-        
     }
 }
