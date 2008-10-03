@@ -19,8 +19,8 @@ public class DataHandle {
     private static Map<String, PPINetwork> networks = new HashMap<String, PPINetwork>();
     private static Map<String, Family> families = new HashMap<String, Family>();
 
-    public static GroupNode createGroupNode(String groupNodeID) {
-        GroupNode node = new GroupNode(groupNodeID);
+    public static GroupNode createGroupNode(String groupNodeID, Protein motherProtein) {
+        GroupNode node = new GroupNode(groupNodeID, motherProtein);
         return node;
     }
 
