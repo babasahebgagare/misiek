@@ -36,7 +36,7 @@ public class ProjectorNetwork {
     private static void projectProtein(Protein protein, PPINetwork network, PPINetworkProjection projection) {
 
         String groupNodeID = createGroupNodeID(protein);
-        GroupNode node = DataHandle.createGroupNode(groupNodeID);
+        GroupNode node = DataHandle.createGroupNode(groupNodeID, protein);
         projection.addGroupNode(node);
 
         Collection<Protein> proteinProjections = protein.getProjects().getProjectorMap().get(network.getID());
