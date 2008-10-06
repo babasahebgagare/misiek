@@ -6,6 +6,7 @@ import structs.GroupNode;
 import structs.PPINetwork;
 import structs.PPINetworkProjection;
 import structs.Protein;
+import structs.ProteinProjection;
 
 public class ProjectorNetwork {
 
@@ -45,7 +46,8 @@ public class ProjectorNetwork {
 
             for (Protein proteinProject : proteinProjections) {
                 String ProteinProjectionID = createProteinProjectionID(proteinProject);
-                DataHandle.createProteinProjection(ProteinProjectionID, proteinProject, projection);
+                ProteinProjection proteinProjection = DataHandle.createProteinProjection(ProteinProjectionID, proteinProject, projection);
+                node.addProteinInside(proteinProjection);
             }
         }
     }
