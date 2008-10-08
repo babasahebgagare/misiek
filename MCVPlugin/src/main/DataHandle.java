@@ -18,6 +18,7 @@ public class DataHandle {
     private static Map<String, PPINetworkProjection> projections = new HashMap<String, PPINetworkProjection>();
     private static Map<String, PPINetwork> networks = new HashMap<String, PPINetwork>();
     private static Map<String, Family> families = new HashMap<String, Family>();
+    private static PPINetwork rootNetwork;
 
     public static GroupNode createGroupNode(String groupNodeID, Protein motherProtein) {
         GroupNode node = new GroupNode(groupNodeID, motherProtein);
@@ -39,13 +40,14 @@ public class DataHandle {
     public static void createRootPPINetwork(String NetworkID) {
         PPINetwork net = new PPINetwork(NetworkID, null);
         networks.put(NetworkID, net);
-    //   return net;
+        rootNetwork = net;
     }
 
     public static void createPPINetwork(String NetworkID, String ParentNetworkID) {
         //   if (!networks.containsKey(NetworkID)) {
         PPINetwork ParentNetwork = networks.get(ParentNetworkID);
         PPINetwork net = new PPINetwork(NetworkID, ParentNetwork);
+        ParentNetwork.getContext().addChild(net);
         networks.put(NetworkID, net);
     }
 
@@ -125,5 +127,21 @@ public class DataHandle {
 
     public static void setProjections(Map<String, PPINetworkProjection> projections) {
         DataHandle.projections = projections;
+    }
+
+    public static IDMapper getProjectionsIDMapper() {
+        return projectionsIDMapper;
+    }
+
+    public static void setProjectionsIDMapper(IDMapper projectionsIDMapper) {
+        DataHandle.projectionsIDMapper = projectionsIDMapper;
+    }
+
+    public static PPINetwork getRootNetwork() {
+        return rootNetwork;
+    }
+
+    public static void setRootNetwork(PPINetwork rootNetwork) {
+        DataHandle.rootNetwork = rootNetwork;
     }
 }
