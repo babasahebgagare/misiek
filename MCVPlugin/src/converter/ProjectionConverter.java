@@ -15,6 +15,7 @@ class ProjectionConverter {
 
             ProteinProjectionsConverter.convertProteinProjections(newNet, projection.getProteinProjections().values());
             GroupNodesConverter.convertGroupNodes(newNet, projection.getGroupNodes().values());
+            InteractionsConverter.convertNetworkInteractions(newNet, projection.getGroupNodeInteractions().values());
         }
     }
 }

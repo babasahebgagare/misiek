@@ -3,6 +3,7 @@ package projector;
 import java.util.Collection;
 import main.DataHandle;
 import structs.GroupNode;
+import structs.Interaction;
 import structs.PPINetwork;
 import structs.PPINetworkProjection;
 import structs.Protein;
@@ -22,6 +23,14 @@ public class ProjectorNetwork {
         return "GROUP_NODE" + protein.getID();
     }
 
+    private static String createGroupNodeID(String proteinID) {
+        return "GROUP_NODE" + proteinID;
+    }
+
+    private static String createGroupNodeInteractionID(String interactionID) {
+        return "PROJECTION_" + interactionID;
+    }
+
     public static void projectProteinsOnNetwork(Collection<Protein> selectedProteins, PPINetwork network, PPINetwork motherNetwork) {
 
         String projectionID = createProjectionID(selectedProteins, network, motherNetwork);
@@ -32,6 +41,21 @@ public class ProjectorNetwork {
             projectProtein(protein, network, projection);   //TODO
 
         }
+        for (Interaction interaction : motherNetwork.getInteractions().values()) {
+            projectInteraction(interaction, network, projection);
+
+        }
+
+    }
+
+    private static void projectInteraction(Interaction interaction, PPINetwork network, PPINetworkProjection projection) {
+
+        String groupNodeInteractionID = createGroupNodeInteractionID(interaction.getID());
+        String groupNodeInteractionSourceID = createGroupNodeID(interaction.getSourceID());
+        String groupNodeInteractionTargetID = createGroupNodeID(interaction.getTargetID());
+
+        Interaction groupNodeInteraction = new Interaction(groupNodeInteractionID, groupNodeInteractionSourceID, groupNodeInteractionTargetID, interaction.getProbability());
+        projection.addGroupNodeInteraction(groupNodeInteraction);
     }
 
     private static void projectProtein(Protein protein, PPINetwork network, PPINetworkProjection projection) {
