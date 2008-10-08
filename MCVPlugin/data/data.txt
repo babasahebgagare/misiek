@@ -13,6 +13,9 @@ COLOR:10:200:20
 Fam1Prot1:ABC
 Fam1Prot2:Fam1Prot1:AB
 Fam1Prot3:Fam1Prot1:C
+Fam1Prot4:Fam1Prot1:AB
+Fam1Prot5:Fam1Prot1:AB
+Fam1Prot6:Fam1Prot1:AB
 ENDFAMILY
 FAMILY
 NAME:Fam2
