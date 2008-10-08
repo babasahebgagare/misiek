@@ -19,6 +19,14 @@ public class ProjectorNetwork {
         return "PROJECTION_" + protein.getID();
     }
 
+    private static String createProteinProjectionInteractionID(String InteractionID) {
+        return "PROJECTION_" + InteractionID;
+    }
+
+    private static String createProteinProjectionID(String proteinID) {
+        return "PROJECTION_" + proteinID;
+    }
+
     private static String createGroupNodeID(Protein protein) {
         return "GROUP_NODE" + protein.getID();
     }
@@ -46,6 +54,19 @@ public class ProjectorNetwork {
 
         }
 
+        for (Interaction interaction : network.getInteractions().values()) {
+            projectProteinInteraction(interaction, projection);
+        }
+
+    }
+
+    private static void projectProteinInteraction(Interaction interaction, PPINetworkProjection projection) {
+        String proteinInteractionID = createProteinProjectionInteractionID(interaction.getID());
+        String proteinInteractionSourceID = createProteinProjectionID(interaction.getSourceID());
+        String proteinInteractionTargetID = createProteinProjectionID(interaction.getTargetID());
+
+        Interaction proteinProjectionInteraction = new Interaction(proteinInteractionID, proteinInteractionSourceID, proteinInteractionTargetID, interaction.getProbability());
+        projection.addProteinProjectionInteraction(proteinProjectionInteraction);
     }
 
     private static void projectInteraction(Interaction interaction, PPINetwork network, PPINetworkProjection projection) {

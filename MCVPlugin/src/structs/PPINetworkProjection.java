@@ -26,6 +26,10 @@ public class PPINetworkProjection {
         return groupNodes.get(ID);
     }
 
+    public void addProteinProjectionInteraction(Interaction interaction) {
+        proteinProjectionInteractions.put(interaction.getID(), interaction);
+    }
+
     public void addGroupNodeInteraction(Interaction interaction) {
         groupNodeInteractions.put(interaction.getID(), interaction);
     }
