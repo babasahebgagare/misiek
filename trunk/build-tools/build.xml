@@ -5,7 +5,7 @@
 <project name="MyPlugin" default="default" basedir="../">
     <description>Ant script</description>
 
-    <property name="cytoscape-path" value="/home/misiek/Cytoscape_v2.6.1" />
+    <property name="cytoscape-path" value="D:\Programy\Cytoscape_v2.6.1" />
     <property name="cytoscape-plugins" value="${cytoscape-path}/plugins" />
     <property name="project-name" value="MCVPlugin" />
 

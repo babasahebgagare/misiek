@@ -8,11 +8,16 @@ package ui;
 import IO.DataReader;
 import converter.AllNetworksConverter;
 import converter.AllProjectionsConverter;
+import cytoscape.dialogs.plugins.TreeNode;
+import cytoscape.util.swing.AbstractTreeTableModel;
 import java.io.File;
 import javax.swing.JFileChooser;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeModel;
 import main.DataHandle;
 import projector.Projector;
 import projector.ProjectorInfoCalculator;
+import structs.PPINetwork;
 import visual.layout.Layouter;
 
 /**
@@ -24,6 +29,32 @@ public class LeftPanel extends javax.swing.JPanel {
     /** Creates new form LeftPanel */
     public LeftPanel() {
         initComponents();
+    }
+
+    private TreeNode createRecTreeModel(PPINetwork rootNetwork) {
+        if (rootNetwork == null) {
+            return null;
+        } else {
+            TreeNode ret = new TreeNode(rootNetwork.getID());
+
+            for (PPINetwork child : rootNetwork.getContext().getChildrenNetworks()) {
+                TreeNode childNode = createRecTreeModel(child);
+                if (childNode != null) {
+                    ret.addChild(childNode);
+                }
+            }
+            return ret;
+        }
+    }
+
+    private void initDataView() {
+        initTreeDataView();
+    }
+
+    private void initTreeDataView() {
+        TreeNode root = createRecTreeModel(DataHandle.getRootNetwork());
+        TreeModel newModel = new DefaultTreeModel(root);
+        jTree1.setModel(newModel);
     }
 
     /** This method is called from within the constructor to
@@ -39,6 +70,8 @@ public class LeftPanel extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTree1 = new javax.swing.JTree();
 
         jButton1.setText("Load file");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -68,18 +101,27 @@ public class LeftPanel extends javax.swing.JPanel {
             }
         });
 
+        jScrollPane1.setViewportView(jTree1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
-                .addContainerGap(225, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1)
+                            .addComponent(jButton2)
+                            .addComponent(jButton3)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(155, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,9 +132,11 @@ public class LeftPanel extends javax.swing.JPanel {
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton4)
-                .addContainerGap(162, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -104,6 +148,7 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     if (returnVal == JFileChooser.APPROVE_OPTION) {
         File file = fc.getSelectedFile();
         DataReader.ReadDataFromFile(file.getAbsolutePath());
+        initDataView();
     } else {
     }
 
@@ -129,5 +174,7 @@ private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTree jTree1;
     // End of variables declaration//GEN-END:variables
 }
