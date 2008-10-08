@@ -7,6 +7,8 @@ public class PPINetworkProjection {
 
     private Map<String, GroupNode> groupNodes = new HashMap<String, GroupNode>();
     private Map<String, ProteinProjection> proteinProjections = new HashMap<String, ProteinProjection>();
+    private Map<String, Interaction> groupNodeInteractions = new HashMap<String, Interaction>();
+    private Map<String, Interaction> proteinProjectionInteractions = new HashMap<String, Interaction>();
     private PPINetworkProjectionContext context;
     private String ID;
     private String CytoID;
@@ -22,6 +24,10 @@ public class PPINetworkProjection {
 
     public GroupNode getGroupNode(String ID) {
         return groupNodes.get(ID);
+    }
+
+    public void addGroupNodeInteraction(Interaction interaction) {
+        groupNodeInteractions.put(interaction.getID(), interaction);
     }
 
     public void addGroupNode(GroupNode node) {
@@ -62,5 +68,29 @@ public class PPINetworkProjection {
 
     public void setProteinProjections(Map<String, ProteinProjection> proteinProjections) {
         this.proteinProjections = proteinProjections;
+    }
+
+    public PPINetworkProjectionContext getContext() {
+        return context;
+    }
+
+    public void setContext(PPINetworkProjectionContext context) {
+        this.context = context;
+    }
+
+    public Map<String, Interaction> getGroupNodeInteractions() {
+        return groupNodeInteractions;
+    }
+
+    public void setGroupNodeInteractions(Map<String, Interaction> groupNodeInteractions) {
+        this.groupNodeInteractions = groupNodeInteractions;
+    }
+
+    public Map<String, Interaction> getProteinProjectionInteractions() {
+        return proteinProjectionInteractions;
+    }
+
+    public void setProteinProjectionInteractions(Map<String, Interaction> proteinProjectionInteractions) {
+        this.proteinProjectionInteractions = proteinProjectionInteractions;
     }
 }

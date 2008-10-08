@@ -1,6 +1,6 @@
 package structs;
 
-class PPINetworkProjectionContext {
+public class PPINetworkProjectionContext {
 
     private PPINetwork motherNetwork;
 
