@@ -9,7 +9,6 @@ import IO.DataReader;
 import converter.AllNetworksConverter;
 import converter.AllProjectionsConverter;
 import cytoscape.dialogs.plugins.TreeNode;
-import cytoscape.util.swing.AbstractTreeTableModel;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.tree.DefaultTreeModel;
@@ -29,6 +28,7 @@ public class LeftPanel extends javax.swing.JPanel {
     /** Creates new form LeftPanel */
     public LeftPanel() {
         initComponents();
+        initDataView();
     }
 
     private TreeNode createRecTreeModel(PPINetwork rootNetwork) {
