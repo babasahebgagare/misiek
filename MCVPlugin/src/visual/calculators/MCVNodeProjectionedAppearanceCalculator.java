@@ -6,6 +6,7 @@ import cytoscape.Cytoscape;
 import cytoscape.view.CyNetworkView;
 import cytoscape.visual.NodeAppearance;
 import cytoscape.visual.NodeAppearanceCalculator;
+import cytoscape.visual.NodeShape;
 import cytoscape.visual.VisualPropertyType;
 import giny.model.Node;
 import giny.view.NodeView;
@@ -42,7 +43,9 @@ public class MCVNodeProjectionedAppearanceCalculator extends NodeAppearanceCalcu
         appr.set(VisualPropertyType.NODE_LABEL, groupNode.getID());
         appr.set(VisualPropertyType.NODE_FILL_COLOR, new Color(10, 150, 10));   // TODO bad constanse
 
-        appr.set(VisualPropertyType.NODE_SIZE, 100);
+        appr.set(VisualPropertyType.NODE_SIZE, 120);
+
+        appr.set(VisualPropertyType.NODE_SHAPE, NodeShape.ELLIPSE);
         appr.set(VisualPropertyType.NODE_OPACITY, 0.5);
     }
 
