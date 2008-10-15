@@ -6,7 +6,7 @@
 package ui;
 
 import IO.DataReader;
-import converter.AllNetworksConverter;
+import converter.NetworksConverter;
 import converter.AllProjectionsConverter;
 import cytoscape.dialogs.plugins.TreeNode;
 import java.io.File;
@@ -21,7 +21,6 @@ import projector.Projector;
 import projector.ProjectorInfoCalculator;
 import structs.PPINetwork;
 import tester.TestCanvas;
-import utils.Messenger;
 import visual.layout.Layouter;
 
 /**
@@ -185,7 +184,8 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 }//GEN-LAST:event_jButton1ActionPerformed
 
 private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    AllNetworksConverter.convertAllNetworks();
+    Collection<PPINetwork> networks = getSelectedNetworks();
+    NetworksConverter.convertNetworks(networks);
 }//GEN-LAST:event_jButton2ActionPerformed
 
 private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
