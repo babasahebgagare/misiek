@@ -50,7 +50,7 @@ public class MCVNodeProjectionedAppearanceCalculator extends NodeAppearanceCalcu
     }
 
     private void calculateProjectionedProteinAppearance(NodeAppearance appr, ProteinProjection proteinProjection) {
-        Family family = proteinProjection.getContext().getMotherProtein().getFamily();
+        Family family = proteinProjection.getProjectionContext().getMotherProtein().getFamily();
         appr.set(VisualPropertyType.NODE_LABEL, proteinProjection.getID());
         appr.set(VisualPropertyType.NODE_FILL_COLOR, family.getColor());
     }

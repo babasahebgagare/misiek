@@ -1,28 +1,19 @@
 package structs;
 
-public class ProteinProjection {
+public class ProteinProjection extends Protein {
 
-    private String ID;
-    private ProteinProjectionContext context;
+    private ProteinProjectionContext projectionContext;
 
     public ProteinProjection(String ID, Protein motherProtein) {
-        this.ID = ID;
-        this.context = new ProteinProjectionContext(motherProtein);
+        super(ID, motherProtein.getContext().getNetwork(), motherProtein.getFamily());
+        this.projectionContext = new ProteinProjectionContext(motherProtein);
     }
 
-    public String getID() {
-        return ID;
+    public ProteinProjectionContext getProjectionContext() {
+        return projectionContext;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
-    }
-
-    public ProteinProjectionContext getContext() {
-        return context;
-    }
-
-    public void setContext(ProteinProjectionContext context) {
-        this.context = context;
+    public void setProjectionContext(ProteinProjectionContext projectionContext) {
+        this.projectionContext = projectionContext;
     }
 }
