@@ -7,13 +7,15 @@ import java.util.HashSet;
 import java.util.Set;
 import main.DataHandle;
 import structs.PPINetwork;
+import structs.PPINetworkProjection;
 import structs.Protein;
+import utils.Messenger;
 
 public class Projector {
 
     public static void projectAllSelected(Collection<PPINetwork> networks) {
         Collection<Protein> selectedProteins = getSelectedProteins();
-        PPINetwork motherNetwork = DataHandle.findNetworkByCytoID(Cytoscape.getCurrentNetwork().getIdentifier());
+        PPINetwork motherNetwork = selectedProteins.iterator().next().getContext().getNetwork();
 
         for (PPINetwork network : networks) {
             ProjectorNetwork.projectProteinsOnNetwork(selectedProteins, network, motherNetwork);
@@ -24,11 +26,23 @@ public class Projector {
         Set<CyNode> cyNodes = Cytoscape.getCurrentNetwork().getSelectedNodes();
         String PPINetworkCytoID = Cytoscape.getCurrentNetwork().getIdentifier();
         PPINetwork currNetwork = DataHandle.findNetworkByCytoID(PPINetworkCytoID);
-
         Collection<Protein> ret = new HashSet<Protein>();
 
-        for (CyNode node : cyNodes) {
-            ret.add(currNetwork.getProtein(node.getIdentifier()));
+        if (currNetwork != null) {
+
+            for (CyNode node : cyNodes) {
+                ret.add(currNetwork.getProtein(node.getIdentifier()));
+            }
+        }
+        PPINetworkProjection currNetworkProj = DataHandle.findProjectionByCytoID(PPINetworkCytoID);
+        if (currNetworkProj != null) {
+            for (CyNode node : cyNodes) {
+                Messenger.Message(node.getIdentifier());
+                Protein protein = currNetworkProj.getProteinProjection(node.getIdentifier());
+                if (protein != null) {
+                    ret.add(protein);
+                }
+            }
         }
 
         return ret;

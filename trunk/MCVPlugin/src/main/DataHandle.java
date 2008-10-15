@@ -33,6 +33,8 @@ public class DataHandle {
 
     public static ProteinProjection createProteinProjection(String ProteinProjectionID, Protein protein, PPINetworkProjection projection) {
         ProteinProjection proteinProjection = new ProteinProjection(ProteinProjectionID, protein);
+        proteinProjection.setContext(protein.getContext());
+        proteinProjection.setProjects(protein.getProjects());
         projection.addProteinProjection(proteinProjection);
         return proteinProjection;
     }
