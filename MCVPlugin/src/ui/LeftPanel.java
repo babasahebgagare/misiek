@@ -10,14 +10,18 @@ import converter.AllNetworksConverter;
 import converter.AllProjectionsConverter;
 import cytoscape.dialogs.plugins.TreeNode;
 import java.io.File;
+import java.util.Collection;
+import java.util.HashSet;
 import javax.swing.JFileChooser;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
+import javax.swing.tree.TreePath;
 import main.DataHandle;
 import projector.Projector;
 import projector.ProjectorInfoCalculator;
 import structs.PPINetwork;
 import tester.TestCanvas;
+import utils.Messenger;
 import visual.layout.Layouter;
 
 /**
@@ -46,6 +50,17 @@ public class LeftPanel extends javax.swing.JPanel {
             }
             return ret;
         }
+    }
+
+    private Collection<PPINetwork> getSelectedNetworks() {
+        Collection<PPINetwork> networks = new HashSet<PPINetwork>();
+
+        for (TreePath path : jTree1.getSelectionPaths()) {
+            String PPINetworkID = ((TreeNode) path.getLastPathComponent()).getTitle();
+            networks.add(DataHandle.getNetworks().get(PPINetworkID));
+        }
+
+        return networks;
     }
 
     private void initDataView() {
@@ -120,17 +135,21 @@ public class LeftPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2)
-                            .addComponent(jButton3)
-                            .addComponent(jButton4)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(155, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
                         .addComponent(jButton5)
-                        .addGap(102, 102, 102))))
+                        .addGap(100, 100, 100))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE))
+                        .addContainerGap(153, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton3)
+                        .addContainerGap(291, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton4)
+                        .addContainerGap(223, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,11 +162,11 @@ public class LeftPanel extends javax.swing.JPanel {
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton4)
-                .addGap(18, 18, 18)
+                .addGap(23, 23, 23)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(233, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -171,7 +190,9 @@ private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
 private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
     ProjectorInfoCalculator.calculateProjectorInfo();
-    Projector.projectAllSelected(DataHandle.getNetworks().values());   //TODO
+    Collection<PPINetwork> networks = getSelectedNetworks();
+
+    Projector.projectAllSelected(networks);
 
     AllProjectionsConverter.convertAllProjections();
 }//GEN-LAST:event_jButton3ActionPerformed
