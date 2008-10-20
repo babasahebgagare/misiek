@@ -10,13 +10,19 @@ public class TestPaintAbs extends JComponent {
 
     @Override
     public Rectangle getBounds(Rectangle rv) {
-        return new Rectangle(0, 0, 3000, 3000);
+        return new Rectangle(10, 10, 50, 50);
     }
 
     @Override
     public void paint(Graphics g) {
         Graphics2D g2d = (Graphics2D) g.create();
         g2d.setColor(Color.BLACK);
-        g2d.draw(new Rectangle(5, 5, 10, 10));
+        Rectangle r = new Rectangle(1, 1, 38, 38) {
+        };
+
+        // g2d.setColor(new Color((float)0.5, (float)0.5, (float)0.5, (float)0.5));
+        g2d.fill(r);
+        g2d.draw(r);
+
     }
 }

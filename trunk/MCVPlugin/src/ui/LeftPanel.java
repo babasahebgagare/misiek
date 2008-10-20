@@ -20,6 +20,7 @@ import main.DataHandle;
 import projector.Projector;
 import projector.ProjectorInfoCalculator;
 import structs.PPINetwork;
+import tester.PrefuseTester;
 import tester.TestCanvas;
 import visual.layout.Layouter;
 
@@ -119,7 +120,7 @@ public class LeftPanel extends javax.swing.JPanel {
 
         jScrollPane1.setViewportView(jTree1);
 
-        jButton5.setText("jButton5");
+        jButton5.setText("Profuse test");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -202,7 +203,7 @@ private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 }//GEN-LAST:event_jButton4ActionPerformed
 
 private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-    TestCanvas.test();
+    PrefuseTester.test();
 }//GEN-LAST:event_jButton5ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
