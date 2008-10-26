@@ -2,6 +2,7 @@ package tester;
 
 import cytoscape.Cytoscape;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDesktopPane;
@@ -22,10 +23,12 @@ import prefuse.controls.ZoomControl;
 import prefuse.data.Graph;
 import prefuse.data.Node;
 import prefuse.data.Schema;
+import prefuse.data.Table;
 import prefuse.data.io.DataIOException;
 import prefuse.data.io.GraphMLReader;
 import prefuse.render.DefaultRendererFactory;
 import prefuse.render.LabelRenderer;
+import prefuse.render.ShapeRenderer;
 import prefuse.util.ColorLib;
 import prefuse.visual.NodeItem;
 import prefuse.visual.VisualItem;
@@ -50,9 +53,9 @@ public class PrefuseTester extends Display {
 
         Node r = g.addNode();
         //r.set("name", "name");
-       // r.setString("node", "name");
+        // r.setString("node", "name");
         nodeTest = r;
-      ///  r.setString("node", "gender");
+        ///  r.setString("node", "gender");
 
         for (int i = 1; i <= n; ++i) {
             Node nn = g.addNode();
@@ -68,40 +71,79 @@ public class PrefuseTester extends Display {
 
         Graph graph = null;
 
-                //getStar(10);
+        //  try {
+        ///  graph = getStar(10);
+        //graph = new GraphMLReader().readGraph("http://prefuse.org/doc/manual/introduction/example/socialnet.xml");
+        //     } catch (DataIOException ex) {
+        //         Messenger.Message("blad");
+        //     }
+        //  graph.addColumn("tekst", String.class);
+        //    graph.addColumn("name", String.class);
 
-        // add the graph to the visualization as the data group "graph"
-// nodes and edges are accessible as "graph.nodes" and "graph.edges"
+        //   int nodeID = graph.addNodeRow();
+        Table nodeTable = new Table();
+        Table edgeTable = new Table();
+        edgeTable.addColumn(Graph.DEFAULT_SOURCE_KEY, int.class);
+        edgeTable.addColumn(Graph.DEFAULT_TARGET_KEY, int.class);
+        
+        nodeTable.addColumn("gender", String.class);
+        nodeTable.addColumn("name", String.class);
+
+        int idNode = nodeTable.addRow();
+        nodeTable.setString(idNode, "name", "aaaa");
+        nodeTable.setString(idNode, "gender", "F");
+
+        int idNode2 = nodeTable.addRow();
+        nodeTable.setString(idNode2, "name", "bbb");
+        nodeTable.setString(idNode2, "gender", "G");
+        
+        int edgeID = edgeTable.addRow();
+        edgeTable.setInt(edgeID, Graph.DEFAULT_SOURCE_KEY, idNode);
+        edgeTable.setInt(edgeID, Graph.DEFAULT_TARGET_KEY, idNode2);
+        
+        graph = new Graph(nodeTable, true);
+        
+     //   graph.addEdge(idNode, idNode2);
+        //  nodeTable.setS
+
+
         Visualization vis = new Visualization();
-      //  try {
-            graph= getStar(10);
-            //graph = new GraphMLReader().readGraph("http://prefuse.org/doc/manual/introduction/example/socialnet.xml");
-   //     } catch (DataIOException ex) {
-   //         Messenger.Message("blad");
-   //     }
         vis.addGraph("graph", graph);
 
-     //   NodeItem nodeItem = (NodeItem) vis.getVisualItem("graph.nodes", nodeTest);
+        Iterator nodesIt = vis.getVisualGroup("graph").tuples();
+        while (nodesIt.hasNext()) {
+            NodeItem item = (NodeItem) nodesIt.next();
+        //    Messenger.Message(item.getX());//, item.getY(), item.getEndX(), item.getEndY());
+       //     Messenger.Message(item.getY());
+        //    Messenger.Message(item.getEndX());
+       //     Messenger.Message(item.getEndX());
+        }
 
-    //    if (nodeItem == null) {
-   //         Messenger.Message("null");
-   //     }
-    //    nodeItem.setVisible(true);
+        //   NodeItem nodeItem = (NodeItem) vis.getVisualItem("graph.nodes", nodeTest);
 
-     //   nodeItem.setSize(40.0);
-     //   nodeItem.setShape(Constants.SHAPE_ELLIPSE);
+        //    if (nodeItem == null) {
+        //         Messenger.Message("null");
+        //     }
+        //    nodeItem.setVisible(true);
+
+        //   nodeItem.setSize(40.0);
+        //   nodeItem.setShape(Constants.SHAPE_ELLIPSE);
         Display display = new Display(vis);
         display.setSize(720, 500); // set display size
 
-        LabelRenderer r = new LabelRenderer();
-        r.setRoundedCorner(8, 8); // round the corners
-        //MyRenderer myRenderer = new MyRenderer();
-
+        //  LabelRenderer r = new LabelRenderer("name");
+        //r.setRoundedCorner(8, 8); // round the corners
+        ShapeRenderer r = new ShapeRenderer();
+        r.rectangle(0, 0, 10, 10);
+      //  Edge
+        
+//b5bc6d2c650500109d2cff73bf7fe35b/1225027103/2918938/bialas_h8memixtape2.rar
         //    Messenger.Message("2");
 // create a new default renderer factory
 // return our name label renderer as the default for all non-EdgeItems
 // includes straight line edges for EdgeItems by default
-        DefaultRendererFactory fr = new DefaultRendererFactory(r);
+        DefaultRendererFactory fr = new DefaultRendererFactory();
+        fr.setDefaultRenderer(r);
         vis.setRendererFactory(fr);
 // create our nominal color palette
 // pink for females, baby blue for males
