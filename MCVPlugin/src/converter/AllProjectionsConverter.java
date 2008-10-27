@@ -2,7 +2,7 @@ package converter;
 
 import java.util.Collection;
 import main.DataHandle;
-import structs.PPINetworkProjection;
+import structs.model.PPINetworkProjection;
 
 public class AllProjectionsConverter {
 

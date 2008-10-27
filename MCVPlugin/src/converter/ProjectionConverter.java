@@ -3,7 +3,7 @@ package converter;
 import cytoscape.CyNetwork;
 import cytoscape.Cytoscape;
 import main.DataHandle;
-import structs.PPINetworkProjection;
+import structs.model.PPINetworkProjection;
 
 class ProjectionConverter {
 

@@ -4,12 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.awt.Color;
 import mappers.IDMapper;
-import structs.Family;
-import structs.GroupNode;
-import structs.PPINetwork;
-import structs.PPINetworkProjection;
-import structs.Protein;
-import structs.ProteinProjection;
+import structs.model.Family;
+import structs.model.GroupNode;
+import structs.model.PPINetwork;
+import structs.model.PPINetworkProjection;
+import structs.model.Protein;
+import structs.model.ProteinProjection;
 
 public class DataHandle {
 
