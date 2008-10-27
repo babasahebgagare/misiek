@@ -5,7 +5,7 @@ import cytoscape.CyNetwork;
 import cytoscape.Cytoscape;
 import cytoscape.data.Semantics;
 import java.util.Collection;
-import structs.Interaction;
+import structs.model.Interaction;
 
 public class InteractionsConverter {
 

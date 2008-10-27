@@ -2,12 +2,12 @@ package projector;
 
 import java.util.Collection;
 import main.DataHandle;
-import structs.GroupNode;
-import structs.Interaction;
-import structs.PPINetwork;
-import structs.PPINetworkProjection;
-import structs.Protein;
-import structs.ProteinProjection;
+import structs.model.GroupNode;
+import structs.model.Interaction;
+import structs.model.PPINetwork;
+import structs.model.PPINetworkProjection;
+import structs.model.Protein;
+import structs.model.ProteinProjection;
 
 public class ProjectorNetwork {
 

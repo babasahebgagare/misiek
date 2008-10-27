@@ -3,7 +3,7 @@ package converter;
 import cytoscape.CyNetwork;
 import cytoscape.Cytoscape;
 import main.DataHandle;
-import structs.PPINetwork;
+import structs.model.PPINetwork;
 
 public class NetworkConverter {
 

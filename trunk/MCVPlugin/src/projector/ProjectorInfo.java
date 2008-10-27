@@ -3,7 +3,7 @@ package projector;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import structs.Protein;
+import structs.model.Protein;
 
 public class ProjectorInfo {
 

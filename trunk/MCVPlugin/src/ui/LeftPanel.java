@@ -19,7 +19,7 @@ import javax.swing.tree.TreePath;
 import main.DataHandle;
 import projector.Projector;
 import projector.ProjectorInfoCalculator;
-import structs.PPINetwork;
+import structs.model.PPINetwork;
 import tester.PrefuseTester;
 import tester.TestCanvas;
 import visual.layout.Layouter;

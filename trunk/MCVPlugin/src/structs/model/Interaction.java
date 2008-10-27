@@ -1,4 +1,4 @@
-package structs;
+package structs.model;
 
 public class Interaction {
 

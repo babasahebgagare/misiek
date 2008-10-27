@@ -4,7 +4,7 @@ import cytoscape.CyNetwork;
 import cytoscape.CyNode;
 import cytoscape.Cytoscape;
 import java.util.Collection;
-import structs.Protein;
+import structs.model.Protein;
 
 public class ProteinsConverter {
 

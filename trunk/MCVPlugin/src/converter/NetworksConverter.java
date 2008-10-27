@@ -2,7 +2,7 @@ package converter;
 
 import java.util.Collection;
 import main.DataHandle;
-import structs.PPINetwork;
+import structs.model.PPINetwork;
 
 public class NetworksConverter {
 

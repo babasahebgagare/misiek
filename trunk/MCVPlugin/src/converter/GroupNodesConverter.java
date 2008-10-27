@@ -4,7 +4,7 @@ import cytoscape.CyNetwork;
 import cytoscape.CyNode;
 import cytoscape.Cytoscape;
 import java.util.Collection;
-import structs.GroupNode;
+import structs.model.GroupNode;
 
 class GroupNodesConverter {
 

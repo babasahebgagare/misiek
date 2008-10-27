@@ -1,4 +1,4 @@
-package structs;
+package structs.model;
 
 import java.util.HashMap;
 import java.util.Map;

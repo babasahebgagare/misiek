@@ -6,9 +6,9 @@ import cytoscape.view.CyNetworkView;
 import giny.view.NodeView;
 import java.util.Collection;
 import main.DataHandle;
-import structs.GroupNode;
-import structs.PPINetworkProjection;
-import structs.ProteinProjection;
+import structs.model.GroupNode;
+import structs.model.PPINetworkProjection;
+import structs.model.ProteinProjection;
 
 public class Layouter {
 

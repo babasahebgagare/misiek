@@ -6,9 +6,9 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import main.DataHandle;
-import structs.PPINetwork;
-import structs.PPINetworkProjection;
-import structs.Protein;
+import structs.model.PPINetwork;
+import structs.model.PPINetworkProjection;
+import structs.model.Protein;
 import utils.Messenger;
 
 public class Projector {

@@ -3,9 +3,9 @@ package projector;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
-import structs.PPINetwork;
+import structs.model.PPINetwork;
 import main.DataHandle;
-import structs.Protein;
+import structs.model.Protein;
 
 public class ProjectorInfoCalculator {
 
