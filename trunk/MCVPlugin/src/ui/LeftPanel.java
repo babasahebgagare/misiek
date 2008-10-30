@@ -8,7 +8,11 @@ package ui;
 import IO.DataReader;
 import converter.NetworksConverter;
 import converter.AllProjectionsConverter;
+import cytoscape.Cytoscape;
 import cytoscape.dialogs.plugins.TreeNode;
+import cytoscape.giny.CytoscapeFingRootGraph;
+import cytoscape.visual.TestNodeView;
+import giny.model.RootGraph;
 import java.io.File;
 import java.util.Collection;
 import java.util.HashSet;
@@ -20,9 +24,11 @@ import main.DataHandle;
 import projector.Projector;
 import projector.ProjectorInfoCalculator;
 import structs.model.PPINetwork;
+import tester.MyNodeView;
 import tester.PrefuseTester;
 import tester.TestCanvas;
 import visual.layout.Layouter;
+import visual.renderers.MCVBackgroundRenderer;
 
 /**
  *
@@ -89,6 +95,7 @@ public class LeftPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTree1 = new javax.swing.JTree();
         jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
 
         jButton1.setText("Load file");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -127,6 +134,13 @@ public class LeftPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton6.setText("Rysuj tlo");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -135,21 +149,25 @@ public class LeftPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
-                        .addComponent(jButton5)
-                        .addGap(100, 100, 100))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE))
-                        .addContainerGap(153, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton3)
-                        .addContainerGap(291, Short.MAX_VALUE))
+                        .addContainerGap(337, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton4)
-                        .addContainerGap(223, Short.MAX_VALUE))))
+                        .addContainerGap(269, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton6)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jButton5)
+                                .addGap(100, 100, 100))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,7 +177,9 @@ public class LeftPanel extends javax.swing.JPanel {
                     .addComponent(jButton1)
                     .addComponent(jButton5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -203,15 +223,30 @@ private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 }//GEN-LAST:event_jButton4ActionPerformed
 
 private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-    PrefuseTester.test();
+    //  PrefuseTester.test();
+    Cytoscape.getCurrentNetworkView().setZoom(0.5);
+
 }//GEN-LAST:event_jButton5ActionPerformed
 
+private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+     /*RootGraph root = Cytoscape.getRootGraph();
+    int node1ID = root.createNode();
+    Cytoscape.getCurrentNetwork().addNode(node1ID);
+    int metaID = root.createNode();
+    Cytoscape.getCurrentNetwork().addNode(metaID);
+   // root.(metaID, node1ID);*/
+    MCVBackgroundRenderer.backgroundRender();
+    /*CytoscapeFingRootGraph dummyGraph = new CytoscapeFingRootGraph();
+     Cytoscape.getCurrentNetworkView().addNodeView(metaID, new MyNodeView());
+    //dummyGraph.*/
+}//GEN-LAST:event_jButton6ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTree jTree1;
     // End of variables declaration//GEN-END:variables
