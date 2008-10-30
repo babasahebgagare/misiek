@@ -22,7 +22,6 @@ import main.MenusHandle;
 import projector.Projector;
 import projector.ProjectorInfoCalculator;
 import structs.model.PPINetwork;
-import utils.MemoLogger;
 import visual.layout.Layouter;
 import visual.renderers.MCVBackgroundRenderer;
 

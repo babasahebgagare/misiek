@@ -29,7 +29,17 @@ public abstract class BackgroundElement extends JComponent implements ViewportCh
         this.Rwidth = width;
         this.Rheight = height;
 
-        setBounds(getStartX(), getStartY(), width, height);
+        InnerCanvas canvas = view.getCanvas();
+
+        AffineTransform f = canvas.getAffineTransform();
+
+        if (f == null) {
+            return;
+        }
+
+        Point2D pstart = f.transform(new Point2D.Double(getStartX(), getStartY()), null);
+        Point2D pend = f.transform(new Point2D.Double(getEndX(), getEndY()), null);
+        setBounds(pstart.getX(), pstart.getY(), pend.getX(), pend.getY());
 
         view.addViewportChangeListener(this);
     }
@@ -80,7 +90,8 @@ public abstract class BackgroundElement extends JComponent implements ViewportCh
         }
 
         Point2D pstart = f.transform(new Point2D.Double(getStartX(), getStartY()), null);
-        setBounds(pstart.getX(), pstart.getY(), Rwidth * newScaleFactor, Rheight * newScaleFactor);
+        Point2D pend = f.transform(new Point2D.Double(getEndX(), getEndY()), null);
+        setBounds(pstart.getX(), pstart.getY(), pend.getX(), pend.getY());
         scaleFactor = newScaleFactor;
     }
 
