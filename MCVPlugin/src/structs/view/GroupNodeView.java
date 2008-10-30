@@ -1,42 +1,47 @@
 package structs.view;
 
+import ding.view.DGraphView;
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import javax.swing.JComponent;
+import java.awt.geom.Line2D;
+import java.awt.geom.Point2D;
 
-public class GroupNodeView extends JComponent {
+public class GroupNodeView extends BackgroundElement {
 
-    int centrumX;
-    int centrumY;
-    int width;
-    int height;
+    Color color;
 
-    public GroupNodeView(int centrumX, int centrumY, int width, int height) {
-        this.centrumX = centrumX;
-        this.centrumY = centrumY;
-        this.width = width;
-        this.height = height;
+    public GroupNodeView(int centrumX, int centrumY, int width, int height, DGraphView view) {
+        super(view, centrumX, centrumY, width, height);
+    }
+
+    public void setFillColor(Color c) {
+        color = c;
     }
 
     @Override
-    public Rectangle getBounds(Rectangle rv) {
-        int leftX = centrumX - width / 2;
-        int topY = centrumY - height / 2;
-        return new Rectangle(leftX, topY, width, height);
-    }
+    protected void doPaint(Graphics2D g2d) {
+        g2d.setColor(color);
 
-    @Override
-    public void paint(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g.create();
-        g2d.setColor(Color.BLACK);
+        Line2D l = new Line2D.Double(getStartX(), getStartY(), getEndX(), getEndY());
+        Rectangle b = relativeToBounds(viewportTransform(l)).getBounds();
 
-        Rectangle r = new Rectangle(0, 0, width, height) {
-        };
+        //Rectangle r = new Rectangle(getVStartX(), getVStartY(), getVEndX(), getVEndY());
+        Point2D start = l.getP1();
+        Point2D end = l.getP2();
 
+        double xdir = end.getX() - start.getX();
+        double ydir = end.getY() - start.getY();
+
+        double xs = xdir >= 0 ? b.x : b.x + b.width;
+        double ys = ydir >= 0 ? b.y : b.y + b.height;
+        double xe = xdir >= 0 ? xs + b.width : b.x;
+        double ye = ydir >= 0 ? ys + b.height : b.y;
+
+        Rectangle r = new Rectangle((int) xs, (int) ys, (int) xe, (int) ye);
         g2d.fill(r);
         g2d.draw(r);
 
+        g2d.dispose();
     }
 }
