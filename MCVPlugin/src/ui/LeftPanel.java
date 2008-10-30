@@ -10,9 +10,6 @@ import converter.NetworksConverter;
 import converter.AllProjectionsConverter;
 import cytoscape.Cytoscape;
 import cytoscape.dialogs.plugins.TreeNode;
-import cytoscape.giny.CytoscapeFingRootGraph;
-import cytoscape.visual.TestNodeView;
-import giny.model.RootGraph;
 import java.io.File;
 import java.util.Collection;
 import java.util.HashSet;
@@ -21,12 +18,11 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 import main.DataHandle;
+import main.MenusHandle;
 import projector.Projector;
 import projector.ProjectorInfoCalculator;
 import structs.model.PPINetwork;
-import tester.MyNodeView;
-import tester.PrefuseTester;
-import tester.TestCanvas;
+import utils.MemoLogger;
 import visual.layout.Layouter;
 import visual.renderers.MCVBackgroundRenderer;
 
@@ -40,6 +36,7 @@ public class LeftPanel extends javax.swing.JPanel {
     public LeftPanel() {
         initComponents();
         initDataView();
+        MenusHandle.setMemo(jTextArea1);
     }
 
     private TreeNode createRecTreeModel(PPINetwork rootNetwork) {
@@ -96,6 +93,8 @@ public class LeftPanel extends javax.swing.JPanel {
         jTree1 = new javax.swing.JTree();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         jButton1.setText("Load file");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -141,6 +140,10 @@ public class LeftPanel extends javax.swing.JPanel {
             }
         });
 
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane2.setViewportView(jTextArea1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -148,6 +151,9 @@ public class LeftPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton3)
                         .addContainerGap(337, Short.MAX_VALUE))
@@ -186,7 +192,9 @@ public class LeftPanel extends javax.swing.JPanel {
                 .addComponent(jButton4)
                 .addGap(23, 23, 23)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(233, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(36, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -229,16 +237,16 @@ private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 }//GEN-LAST:event_jButton5ActionPerformed
 
 private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-     /*RootGraph root = Cytoscape.getRootGraph();
+    /*RootGraph root = Cytoscape.getRootGraph();
     int node1ID = root.createNode();
     Cytoscape.getCurrentNetwork().addNode(node1ID);
     int metaID = root.createNode();
     Cytoscape.getCurrentNetwork().addNode(metaID);
-   // root.(metaID, node1ID);*/
+    // root.(metaID, node1ID);*/
     MCVBackgroundRenderer.backgroundRender();
-    /*CytoscapeFingRootGraph dummyGraph = new CytoscapeFingRootGraph();
-     Cytoscape.getCurrentNetworkView().addNodeView(metaID, new MyNodeView());
-    //dummyGraph.*/
+/*CytoscapeFingRootGraph dummyGraph = new CytoscapeFingRootGraph();
+Cytoscape.getCurrentNetworkView().addNodeView(metaID, new MyNodeView());
+//dummyGraph.*/
 }//GEN-LAST:event_jButton6ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -248,6 +256,8 @@ private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTree jTree1;
     // End of variables declaration//GEN-END:variables
 }
