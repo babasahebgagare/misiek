@@ -91,7 +91,7 @@ public class ProjectorNetwork {
 
             for (Protein proteinProject : proteinProjections) {
                 String ProteinProjectionID = createProteinProjectionID(proteinProject);
-                ProteinProjection proteinProjection = DataHandle.createProteinProjection(ProteinProjectionID, proteinProject, projection);
+                ProteinProjection proteinProjection = DataHandle.createProteinProjection(ProteinProjectionID, protein, proteinProject, projection);
                 node.addProteinInside(proteinProjection);
             }
         }
