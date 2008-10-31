@@ -24,23 +24,23 @@ public class ProjectorInfoCalculator {
         }
     }
 
-    private static void addProjectorInfoForProteins(Protein A, Protein B) {
+    private static void addProjectorInfoForProteins(Protein Down, Protein Up) {
 
-        PPINetwork ANetwork = A.getContext().getNetwork();
-        PPINetwork BNetwork = B.getContext().getNetwork();
+        PPINetwork DownNetwork = Down.getContext().getNetwork();
+        PPINetwork UpNetwork = Up.getContext().getNetwork();
 
-        Map<String, Collection<Protein>> AMap = A.getProjects().getProjectorMap();
-        Map<String, Collection<Protein>> BMap = B.getProjects().getProjectorMap();
+        Map<String, Collection<Protein>> UpMap = Down.getProjects().getProjectorMapUp();
+        Map<String, Collection<Protein>> DownMap = Up.getProjects().getProjectorMapDown();
 
-        if (!AMap.containsKey(BNetwork.getID())) {
-            AMap.put(BNetwork.getID(), new HashSet<Protein>());
+        if (!UpMap.containsKey(UpNetwork.getID())) {
+            UpMap.put(UpNetwork.getID(), new HashSet<Protein>());
         }
-        if (!BMap.containsKey(ANetwork.getID())) {
-            BMap.put(ANetwork.getID(), new HashSet<Protein>());
+        if (!DownMap.containsKey(DownNetwork.getID())) {
+            DownMap.put(DownNetwork.getID(), new HashSet<Protein>());
         }
 
-        AMap.get(BNetwork.getID()).add(B);
-        BMap.get(ANetwork.getID()).add(A);
+        UpMap.get(UpNetwork.getID()).add(Up);
+        DownMap.get(DownNetwork.getID()).add(Down);
     }
 
     private static void calculateProjectorInfoForProtein(Protein protein) {
