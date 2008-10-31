@@ -85,7 +85,18 @@ public class ProjectorNetwork {
         GroupNode node = DataHandle.createGroupNode(groupNodeID, protein);
         projection.addGroupNode(node);
 
-        Collection<Protein> proteinProjections = protein.getProjects().getProjectorMap().get(network.getID());
+        Collection<Protein> proteinProjections = protein.getProjects().getProjectorMapUp().get(network.getID());
+
+        if (proteinProjections != null) {
+
+            for (Protein proteinProject : proteinProjections) {
+                String ProteinProjectionID = createProteinProjectionID(proteinProject);
+                ProteinProjection proteinProjection = DataHandle.createProteinProjection(ProteinProjectionID, protein, proteinProject, projection);
+                node.addProteinInside(proteinProjection);
+            }
+        }
+
+        proteinProjections = protein.getProjects().getProjectorMapDown().get(network.getID());
 
         if (proteinProjections != null) {
 

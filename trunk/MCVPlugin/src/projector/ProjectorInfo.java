@@ -7,16 +7,25 @@ import structs.model.Protein;
 
 public class ProjectorInfo {
 
-    private Map<String, Collection<Protein>> projectorMap = new HashMap<String, Collection<Protein>>();
+    private Map<String, Collection<Protein>> projectorMapUp = new HashMap<String, Collection<Protein>>();
+    private Map<String, Collection<Protein>> projectorMapDown = new HashMap<String, Collection<Protein>>();
 
     public ProjectorInfo() {
     }
 
-    public Map<String, Collection<Protein>> getProjectorMap() {
-        return projectorMap;
+    public Map<String, Collection<Protein>> getProjectorMapDown() {
+        return projectorMapDown;
     }
 
-    public void setProjectorMap(Map<String, Collection<Protein>> projectorMap) {
-        this.projectorMap = projectorMap;
+    public void setProjectorMapDown(Map<String, Collection<Protein>> projectorMapDown) {
+        this.projectorMapDown = projectorMapDown;
+    }
+
+    public Map<String, Collection<Protein>> getProjectorMapUp() {
+        return projectorMapUp;
+    }
+
+    public void setProjectorMapUp(Map<String, Collection<Protein>> projectorMapUp) {
+        this.projectorMapUp = projectorMapUp;
     }
 }
