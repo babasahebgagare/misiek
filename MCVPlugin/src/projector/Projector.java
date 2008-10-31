@@ -38,7 +38,7 @@ public class Projector {
         if (currNetworkProj != null) {
             for (CyNode node : cyNodes) {
                 Messenger.Message(node.getIdentifier());
-                Protein protein = currNetworkProj.getProteinProjection(node.getIdentifier());
+                Protein protein = currNetworkProj.getProteinProjection(node.getIdentifier()).getProtein();
                 if (protein != null) {
                     ret.add(protein);
                 }
