@@ -18,7 +18,19 @@ public class Projector {
         PPINetwork motherNetwork = selectedProteins.iterator().next().getContext().getNetwork();
 
         for (PPINetwork network : networks) {
-            ProjectorNetwork.projectProteinsOnNetwork(selectedProteins, network, motherNetwork);
+            switch (network.getContext().getHierarchy().getNetworkPosition(motherNetwork)) {
+                case ABOVE:
+                    ProjectorNetwork.projectProteinsToDownOnNetwork(selectedProteins, network, motherNetwork);
+                    break;
+                case BELOW:
+                    ProjectorNetwork.projectProteinsToUpOnNetwork(selectedProteins, network, motherNetwork);
+                    break;
+                case NEIGHBOUR:
+                    Messenger.Message("NEIGHBOUR");
+                    break;
+                default:
+                    Messenger.Message("DEFAULT");
+            }
         }
     }
 

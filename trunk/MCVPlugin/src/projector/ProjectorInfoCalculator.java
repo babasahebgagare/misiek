@@ -6,22 +6,20 @@ import java.util.Map;
 import structs.model.PPINetwork;
 import main.DataHandle;
 import structs.model.Protein;
+import utils.MemoLogger;
 
 public class ProjectorInfoCalculator {
 
     public static void calculateProjectorInfo() {
 
-        Collection<PPINetwork> networks = DataHandle.getNetworks().values();
+        calculateNetworkTreeInfo();
+        calculateProteinsInfo();
 
-        for (PPINetwork network : networks) {
+    }
 
-            Collection<Protein> proteins = network.getProteins().values();
-
-            for (Protein protein : proteins) {
-                calculateProjectorInfoForProtein(protein);
-
-            }
-        }
+    private static void addProjectorInfoForNetworks(PPINetwork downNetwork, PPINetwork upNetwork) {
+        downNetwork.getContext().getHierarchy().addNetworkAbove(upNetwork);
+        upNetwork.getContext().getHierarchy().addNetworkBelow(downNetwork);
     }
 
     private static void addProjectorInfoForProteins(Protein Down, Protein Up) {
@@ -43,6 +41,18 @@ public class ProjectorInfoCalculator {
         DownMap.get(DownNetwork.getID()).add(Down);
     }
 
+    private static void calculateInfoForNetwork(PPINetwork network) {
+        PPINetwork upNetwork = network;
+
+        MemoLogger.log("network search: " + network.getID());
+        while (upNetwork != null) {
+            addProjectorInfoForNetworks(network, upNetwork);
+            MemoLogger.log("netUp: " + upNetwork.getID());
+
+            upNetwork = upNetwork.getContext().getParentNetwork();
+        }
+    }
+
     private static void calculateProjectorInfoForProtein(Protein protein) {
         Protein parentProtein = protein;
 
@@ -52,6 +62,28 @@ public class ProjectorInfoCalculator {
             parentProtein = parentProtein.getContext().getParentProtein();
 
 
+        }
+    }
+
+    private static void calculateProteinsInfo() {
+        Collection<PPINetwork> networks = DataHandle.getNetworks().values();
+
+        for (PPINetwork network : networks) {
+
+            Collection<Protein> proteins = network.getProteins().values();
+
+            for (Protein protein : proteins) {
+                calculateProjectorInfoForProtein(protein);
+
+            }
+        }
+    }
+
+    private static void calculateNetworkTreeInfo() {
+        Collection<PPINetwork> networks = DataHandle.getNetworks().values();
+
+        for (PPINetwork network : networks) {
+            calculateInfoForNetwork(network);
         }
     }
 }
