@@ -8,8 +8,13 @@ import structs.model.PPINetwork;
 import structs.model.PPINetworkProjection;
 import structs.model.Protein;
 import structs.model.ProteinProjection;
+import utils.Messenger;
 
 public class ProjectorNetwork {
+
+    static void projectProteinsToUpOnNetwork(Collection<Protein> selectedProteins, PPINetwork networkAbove, PPINetwork networkBelow) {
+        Messenger.Message("projection Up");
+    }
 
     private static String createProjectionID(Collection<Protein> selectedProteins, PPINetwork network, PPINetwork motherNetwork) {
         return "PROJECTION_" + motherNetwork.getID() + "_ON_" + network.getID();
@@ -39,7 +44,7 @@ public class ProjectorNetwork {
         return "PROJECTION_" + interactionID;
     }
 
-    public static void projectProteinsOnNetwork(Collection<Protein> selectedProteins, PPINetwork network, PPINetwork motherNetwork) {
+    public static void projectProteinsToDownOnNetwork(Collection<Protein> selectedProteins, PPINetwork network, PPINetwork motherNetwork) {
 
         String projectionID = createProjectionID(selectedProteins, network, motherNetwork);
 
@@ -86,17 +91,6 @@ public class ProjectorNetwork {
         projection.addGroupNode(node);
 
         Collection<Protein> proteinProjections = protein.getProjects().getProjectorMapUp().get(network.getID());
-
-        if (proteinProjections != null) {
-
-            for (Protein proteinProject : proteinProjections) {
-                String ProteinProjectionID = createProteinProjectionID(proteinProject);
-                ProteinProjection proteinProjection = DataHandle.createProteinProjection(ProteinProjectionID, protein, proteinProject, projection);
-                node.addProteinInside(proteinProjection);
-            }
-        }
-
-        proteinProjections = protein.getProjects().getProjectorMapDown().get(network.getID());
 
         if (proteinProjections != null) {
 

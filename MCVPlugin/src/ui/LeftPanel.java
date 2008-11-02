@@ -27,6 +27,7 @@ import visual.renderers.MCVBackgroundRenderer;
 
 /**
  *
+ * 
  * @author  misiek
  */
 public class LeftPanel extends javax.swing.JPanel {
@@ -205,6 +206,7 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     if (returnVal == JFileChooser.APPROVE_OPTION) {
         File file = fc.getSelectedFile();
         DataReader.ReadDataFromFile(file.getAbsolutePath());
+        ProjectorInfoCalculator.calculateProjectorInfo();
         initDataView();
     } else {
     }
@@ -217,7 +219,6 @@ private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 }//GEN-LAST:event_jButton2ActionPerformed
 
 private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-    ProjectorInfoCalculator.calculateProjectorInfo();
     Collection<PPINetwork> networks = getSelectedNetworks();
 
     Projector.projectAllSelected(networks);
