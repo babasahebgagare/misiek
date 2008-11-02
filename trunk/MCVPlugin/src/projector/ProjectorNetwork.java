@@ -8,12 +8,34 @@ import structs.model.PPINetwork;
 import structs.model.PPINetworkProjection;
 import structs.model.Protein;
 import structs.model.ProteinProjection;
-import utils.Messenger;
+import utils.MemoLogger;
 
 public class ProjectorNetwork {
 
     static void projectProteinsToUpOnNetwork(Collection<Protein> selectedProteins, PPINetwork networkAbove, PPINetwork networkBelow) {
-        Messenger.Message("projection Up");
+        String projectionID = createProjectionID(selectedProteins, networkAbove, networkBelow);
+
+        PPINetworkProjection projection = DataHandle.createProjectionNetwork(projectionID, networkBelow);
+
+        for (Protein proteinBelow : selectedProteins) {
+
+            Collection<Protein> proteinProjections = proteinBelow.getProjects().getProjectorMapUp().get(networkAbove.getID());
+
+            if (proteinProjections != null) {
+
+                for (Protein proteinAbove : proteinProjections) {
+                    String ProteinProjectionID = createProteinProjectionID(proteinAbove);
+                    MemoLogger.log("PROJ: " + projectionID);
+                    ProteinProjection proteinProjection = DataHandle.createProteinProjection(ProteinProjectionID, proteinBelow, proteinAbove, projection);
+                }
+            }
+        }
+    /*
+    for (Interaction interaction : motherNetwork.getInteractions().values()) {
+    projectInteraction(interaction, network, projection);
+    
+    }*/
+
     }
 
     private static String createProjectionID(Collection<Protein> selectedProteins, PPINetwork network, PPINetwork motherNetwork) {
@@ -90,7 +112,7 @@ public class ProjectorNetwork {
         GroupNode node = DataHandle.createGroupNode(groupNodeID, protein);
         projection.addGroupNode(node);
 
-        Collection<Protein> proteinProjections = protein.getProjects().getProjectorMapUp().get(network.getID());
+        Collection<Protein> proteinProjections = protein.getProjects().getProjectorMapDown().get(network.getID());
 
         if (proteinProjections != null) {
 
