@@ -7,12 +7,11 @@ import java.util.HashSet;
 import java.util.Set;
 import main.DataHandle;
 import structs.model.PPINetwork;
-import structs.model.PPINetworkProjection;
 import structs.model.Protein;
 import utils.Messenger;
 
 public class Projector {
-
+/*
     public static void projectAllSelected(Collection<PPINetwork> networks) {
         Collection<Protein> selectedProteins = getSelectedProteins();
         PPINetwork motherNetwork = selectedProteins.iterator().next().getContext().getNetwork();
@@ -58,5 +57,5 @@ public class Projector {
         }
 
         return ret;
-    }
+    }*/
 }

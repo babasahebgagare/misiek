@@ -5,13 +5,12 @@ import main.DataHandle;
 import structs.model.GroupNode;
 import structs.model.Interaction;
 import structs.model.PPINetwork;
-import structs.model.PPINetworkProjection;
 import structs.model.Protein;
 import structs.model.ProteinProjection;
 import utils.MemoLogger;
 
 public class ProjectorNetwork {
-
+/*
     static void projectProteinsToUpOnNetwork(Collection<Protein> selectedProteins, PPINetwork networkAbove, PPINetwork networkBelow) {
         String projectionID = createProjectionID(selectedProteins, networkAbove, networkBelow);
 
@@ -30,11 +29,11 @@ public class ProjectorNetwork {
                 }
             }
         }
-    /*
+    
     for (Interaction interaction : motherNetwork.getInteractions().values()) {
     projectInteraction(interaction, network, projection);
     
-    }*/
+ }
 
     }
 
@@ -122,5 +121,5 @@ public class ProjectorNetwork {
                 node.addProteinInside(proteinProjection);
             }
         }
-    }
+    }*/
 }

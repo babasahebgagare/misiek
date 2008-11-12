@@ -9,7 +9,6 @@ public class PPINetwork {
     private Map<String, Interaction> interactions = new HashMap<String, Interaction>();
     private PPINetworkContext context = null;
     private String ID;
-    private String CytoID;
 
     public PPINetwork(String NetworkID, PPINetwork ParentNetwork) {
         ID = NetworkID;
@@ -70,13 +69,5 @@ public class PPINetwork {
 
     public void setProteins(Map<String, Protein> proteins) {
         this.proteins = proteins;
-    }
-
-    public String getCytoID() {
-        return CytoID;
-    }
-
-    public void setCytoID(String CytoID) {
-        this.CytoID = CytoID;
     }
 }

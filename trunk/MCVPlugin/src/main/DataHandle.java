@@ -3,39 +3,34 @@ package main;
 import java.util.HashMap;
 import java.util.Map;
 import java.awt.Color;
-import mappers.IDMapper;
 import structs.model.Family;
 import structs.model.GroupNode;
 import structs.model.PPINetwork;
-import structs.model.PPINetworkProjection;
 import structs.model.Protein;
-import structs.model.ProteinProjection;
 
 public class DataHandle {
 
-    private static IDMapper networkIDMapper = new IDMapper();
-    private static IDMapper projectionsIDMapper = new IDMapper();
-    private static Map<String, PPINetworkProjection> projections = new HashMap<String, PPINetworkProjection>();
     private static Map<String, PPINetwork> networks = new HashMap<String, PPINetwork>();
     private static Map<String, Family> families = new HashMap<String, Family>();
     private static PPINetwork rootNetwork;
 
-    public static GroupNode createGroupNode(String groupNodeID, Protein motherProtein) {
+    /*public static GroupNode createGroupNode(String groupNodeID, Protein motherProtein) {
         GroupNode node = new GroupNode(groupNodeID, motherProtein);
         return node;
     }
-
-    public static PPINetworkProjection createProjectionNetwork(String ProjectionID, PPINetwork motherNetwork) {
-        PPINetworkProjection projection = new PPINetworkProjection(ProjectionID, motherNetwork);
-        projections.put(ProjectionID, projection);
-        return projection;
+    
+    public static CytoPPINetworkProjection createProjectionNetwork(String ProjectionID, PPINetwork motherNetwork) {
+    CytoPPINetworkProjection projection = new CytoPPINetworkProjection(ProjectionID, motherNetwork);
+    projections.put(ProjectionID, projection);
+    return projection;
     }
-
-    public static ProteinProjection createProteinProjection(String ProteinProjectionID, Protein motherProtein, Protein protein, PPINetworkProjection projection) {
-        ProteinProjection proteinProjection = new ProteinProjection(ProteinProjectionID, protein, motherProtein);
-        projection.addProteinProjection(proteinProjection);
-        return proteinProjection;
+    
+    public static ProteinProjection createProteinProjection(String ProteinProjectionID, Protein motherProtein, Protein protein, CytoPPINetworkProjection projection) {
+    ProteinProjection proteinProjection = new ProteinProjection(ProteinProjectionID, protein, motherProtein);
+    projection.addProteinProjection(proteinProjection);
+    return proteinProjection;
     }
+     */
 
     public static void createRootPPINetwork(String NetworkID) {
         PPINetwork net = new PPINetwork(NetworkID, null);
@@ -77,26 +72,6 @@ public class DataHandle {
         network.addInteraction(ID, SourceID, TargetID, Probability);
     }
 
-    public static PPINetwork findNetworkByCytoID(String PPINetworkCytoID) {
-
-        String PPINetworkID = networkIDMapper.getIDByCytoID(PPINetworkCytoID);
-        return networks.get(PPINetworkID);
-    }
-
-    public static PPINetworkProjection findProjectionByCytoID(String PPINetworkProjectionCytoID) {
-
-        String PPINetworkProjectionID = projectionsIDMapper.getIDByCytoID(PPINetworkProjectionCytoID);
-        return projections.get(PPINetworkProjectionID);
-    }
-
-    public static void addProjectionIDMapping(String CytoID, String ID) {
-        projectionsIDMapper.addMapping(CytoID, ID);
-    }
-
-    public static void addNetworkIDMapping(String CytoID, String ID) {
-        networkIDMapper.addMapping(CytoID, ID);
-    }
-
     public static Map<String, PPINetwork> getNetworks() {
         return networks;
     }
@@ -111,30 +86,6 @@ public class DataHandle {
 
     public static void setFamilies(Map<String, Family> families) {
         DataHandle.families = families;
-    }
-
-    public static IDMapper getNetworkIDMapper() {
-        return networkIDMapper;
-    }
-
-    public static void setNetworkIDMapper(IDMapper networkIDMapper) {
-        DataHandle.networkIDMapper = networkIDMapper;
-    }
-
-    public static Map<String, PPINetworkProjection> getProjections() {
-        return projections;
-    }
-
-    public static void setProjections(Map<String, PPINetworkProjection> projections) {
-        DataHandle.projections = projections;
-    }
-
-    public static IDMapper getProjectionsIDMapper() {
-        return projectionsIDMapper;
-    }
-
-    public static void setProjectionsIDMapper(IDMapper projectionsIDMapper) {
-        DataHandle.projectionsIDMapper = projectionsIDMapper;
     }
 
     public static PPINetwork getRootNetwork() {

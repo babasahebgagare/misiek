@@ -3,12 +3,12 @@ package converter;
 import cytoscape.CyNetwork;
 import cytoscape.Cytoscape;
 import main.DataHandle;
-import structs.model.PPINetworkProjection;
+import structs.model.CytoPPINetworkProjection;
 
 class ProjectionConverter {
 
-    static void convertPPINetworkProjection(PPINetworkProjection projection) {
-        if (Cytoscape.getNetwork(projection.getCytoID()) == Cytoscape.getNullNetwork()) {
+    static void convertPPINetworkProjection(CytoPPINetworkProjection projection) {
+     /*   if (Cytoscape.getNetwork(projection.getCytoID()) == Cytoscape.getNullNetwork()) {
             CyNetwork newNet = Cytoscape.createNetwork(projection.getID(), true);
             projection.setCytoID(newNet.getIdentifier());
             DataHandle.addProjectionIDMapping(newNet.getIdentifier(), projection.getID());
@@ -17,6 +17,6 @@ class ProjectionConverter {
             GroupNodesConverter.convertGroupNodes(newNet, projection.getGroupNodes().values());
             InteractionsConverter.convertNetworkInteractions(newNet, projection.getGroupNodeInteractions().values());
             InteractionsConverter.convertNetworkInteractions(newNet, projection.getProteinProjectionInteractions().values());
-        }
+        }*/
     }
 }

@@ -7,8 +7,9 @@ import ding.view.DGraphView;
 import ding.view.DingCanvas;
 import giny.view.NodeView;
 import main.DataHandle;
+import structs.model.CytoPPINetworkProjection;
 import structs.model.GroupNode;
-import structs.model.PPINetworkProjection;
+
 import structs.model.Protein;
 import structs.view.GroupNodeView;
 
@@ -34,23 +35,23 @@ public class MCVBackgroundRenderer {
 
     private static void renderGroupNodes(DingCanvas backgroungCanvas, CyNetworkView cyNetworkView) {
         backgroungCanvas.removeAll();
+/*
+        CytoPPINetworkProjection projection = DataHandle.findProjectionByCytoID(cyNetworkView.getIdentifier());
 
-        PPINetworkProjection projection = DataHandle.findProjectionByCytoID(cyNetworkView.getIdentifier());
-
-        for (GroupNode groupNode : projection.getGroupNodes().values()) {
-
-            Protein motherProtein = groupNode.getContext().getMotherProtein();
-            CyNode parentCyNode = Cytoscape.getCyNode(motherProtein.getID());
-
-            CyNetworkView parentNetworkView = Cytoscape.getNetworkView(motherProtein.getContext().getNetwork().getCytoID());
-            NodeView parentNodeView = parentNetworkView.getNodeView(parentCyNode);
-
-            GroupNodeView groupNodeView = new GroupNodeView((int) parentNodeView.getXPosition(), (int) parentNodeView.getYPosition(), 100, 100, (DGraphView) cyNetworkView);
-            groupNodeView.setFillColor(motherProtein.getFamily().getColor().darker().darker());
-
-            backgroungCanvas.add(groupNodeView);
-            groupNodeView.repaint();
-        }
+          for (GroupNode groupNode : projection.getGroupNodes().values()) {
+        
+        Protein motherProtein = groupNode.getContext().getMotherProtein();
+        CyNode parentCyNode = Cytoscape.getCyNode(motherProtein.getID());
+        
+        CyNetworkView parentNetworkView = Cytoscape.getNetworkView(motherProtein.getContext().getNetwork().getCytoID());
+        NodeView parentNodeView = parentNetworkView.getNodeView(parentCyNode);
+        
+        GroupNodeView groupNodeView = new GroupNodeView((int) parentNodeView.getXPosition(), (int) parentNodeView.getYPosition(), 100, 100, (DGraphView) cyNetworkView);
+        groupNodeView.setFillColor(motherProtein.getFamily().getColor().darker().darker());
+        
+        backgroungCanvas.add(groupNodeView);
+        groupNodeView.repaint();
+        }*/
         backgroungCanvas.repaint();
         cyNetworkView.updateView();
     }
