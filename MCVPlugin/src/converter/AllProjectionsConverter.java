@@ -1,15 +1,16 @@
 package converter;
 
 import java.util.Collection;
+import main.CytoDataHandle;
 import main.DataHandle;
-import structs.model.PPINetworkProjection;
+import structs.model.CytoPPINetworkProjection;
 
 public class AllProjectionsConverter {
 
     public static void convertAllProjections() {
-        Collection<PPINetworkProjection> projections = DataHandle.getProjections().values();
+        Collection<CytoPPINetworkProjection> projections = CytoDataHandle.getProjections().values();
 
-        for (PPINetworkProjection projection : projections) {
+        for (CytoPPINetworkProjection projection : projections) {
 
             ProjectionConverter.convertPPINetworkProjection(projection);
         }

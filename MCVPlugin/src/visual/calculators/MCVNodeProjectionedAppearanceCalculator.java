@@ -14,7 +14,6 @@ import java.awt.Color;
 import main.DataHandle;
 import structs.model.Family;
 import structs.model.GroupNode;
-import structs.model.PPINetworkProjection;
 import structs.model.Protein;
 import structs.model.ProteinProjection;
 
@@ -23,7 +22,7 @@ public class MCVNodeProjectionedAppearanceCalculator extends NodeAppearanceCalcu
     @Override
     public void calculateNodeAppearance(NodeAppearance appr, Node node, CyNetwork cyNetwork) {
         super.calculateNodeAppearance(appr, node, cyNetwork);
-
+/*
         PPINetworkProjection projection = DataHandle.findProjectionByCytoID(cyNetwork.getIdentifier());
         if (projection != null) {
             GroupNode groupNode = projection.getGroupNode(node.getIdentifier());
@@ -36,9 +35,9 @@ public class MCVNodeProjectionedAppearanceCalculator extends NodeAppearanceCalcu
             if (proteinProjection != null) {
                 calculateProjectionedProteinAppearance(appr, proteinProjection);
             }
-        }
+        }*/
     }
-
+/*
     private void calculateGroupNodeAppearance(NodeAppearance appr, Node node, GroupNode groupNode) {
         appr.set(VisualPropertyType.NODE_LABEL, groupNode.getID());
         appr.set(VisualPropertyType.NODE_FILL_COLOR, new Color(10, 150, 10));   // TODO bad constanse
@@ -69,5 +68,5 @@ public class MCVNodeProjectionedAppearanceCalculator extends NodeAppearanceCalcu
         nodeView.setXPosition(parentNodeView.getXPosition());
         nodeView.setYPosition(parentNodeView.getYPosition());
 
-    }
+    }*/
 }

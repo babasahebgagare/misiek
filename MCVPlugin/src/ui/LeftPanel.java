@@ -8,6 +8,7 @@ package ui;
 import IO.DataReader;
 import converter.NetworksConverter;
 import converter.AllProjectionsConverter;
+import converter.CytoNetworkConverter;
 import cytoscape.Cytoscape;
 import cytoscape.dialogs.plugins.TreeNode;
 import java.io.File;
@@ -17,10 +18,13 @@ import javax.swing.JFileChooser;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
+import main.CytoDataHandle;
 import main.DataHandle;
 import main.MenusHandle;
+import projector.CytoProjector;
 import projector.Projector;
 import projector.ProjectorInfoCalculator;
+import structs.model.CytoAbstractPPINetwork;
 import structs.model.PPINetwork;
 import visual.layout.Layouter;
 import visual.renderers.MCVBackgroundRenderer;
@@ -61,6 +65,17 @@ public class LeftPanel extends javax.swing.JPanel {
         for (TreePath path : jTree1.getSelectionPaths()) {
             String PPINetworkID = ((TreeNode) path.getLastPathComponent()).getTitle();
             networks.add(DataHandle.getNetworks().get(PPINetworkID));
+        }
+
+        return networks;
+    }
+
+    private Collection<CytoAbstractPPINetwork> getSelectedCytoNetworks() {
+        Collection<CytoAbstractPPINetwork> networks = new HashSet<CytoAbstractPPINetwork>();
+
+        for (TreePath path : jTree1.getSelectionPaths()) {
+            String PPINetworkID = ((TreeNode) path.getLastPathComponent()).getTitle();
+            networks.add(CytoDataHandle.getCytoNetwork(PPINetworkID));
         }
 
         return networks;
@@ -216,14 +231,15 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
     Collection<PPINetwork> networks = getSelectedNetworks();
     NetworksConverter.convertNetworks(networks);
+
 }//GEN-LAST:event_jButton2ActionPerformed
 
 private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-    Collection<PPINetwork> networks = getSelectedNetworks();
+    Collection<CytoAbstractPPINetwork> cytoNetworks = getSelectedCytoNetworks();
 
-    Projector.projectAllSelected(networks);
+    //CytoProjector.projectAllCytoSelected(cytoNetworks);
 
-    AllProjectionsConverter.convertAllProjections();
+//AllProjectionsConverter.convertAllProjections();
 }//GEN-LAST:event_jButton3ActionPerformed
 
 private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
