@@ -247,10 +247,6 @@ private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
     //  PrefuseTester.test();
 
-    PPINetwork net = DataHandle.getRootNetwork();
-    Protein protein = net.getProtein("Fam1Prot1");
-    Messenger.Message(protein.getContext().getNetwork().getID());
-    Messenger.Message(protein.getProjects().getProjectorMapDown().get("AB").size());
 //NetbeansTest.test();
 //Cytoscape.getCurrentNetworkView().setZoom(0.5);
 

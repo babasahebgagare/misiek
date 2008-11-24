@@ -5,9 +5,12 @@ import cytoscape.view.cytopanels.CytoPanelImp;
 import cytoscape.visual.CalculatorCatalog;
 import cytoscape.visual.VisualMappingManager;
 import cytoscape.visual.VisualStyle;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ResourceBundle;
 import javax.swing.SwingConstants;
 import ui.LeftPanel;
+import utils.MemoLogger;
 import visual.calculators.MCVEdgeAppearanceCalculator;
 import visual.calculators.MCVEdgeProjectionedAppearanceCalculator;
 import visual.calculators.MCVNodeAppearanceCalculator;
@@ -29,6 +32,24 @@ public class PluginInitializator {
             catalog.addVisualStyle(MCVStyle);
         } else {
         }
+    }
+
+    private static void initNetworkListeners() {
+        Cytoscape.getSwingPropertyChangeSupport().addPropertyChangeListener(new PropertyChangeListener() {
+
+            public void propertyChange(PropertyChangeEvent evt) {
+                String PropertyName = evt.getPropertyName();
+                if (PropertyName.equals(Cytoscape.NETWORK_CREATED)) {
+                    MemoLogger.log("Network created: " + evt.getNewValue().toString());
+                } else if (PropertyName.equals(Cytoscape.NETWORK_DESTROYED)) {
+                    MemoLogger.log("Network deleted: " + evt.getNewValue().toString());
+                } else if (PropertyName.equals(Cytoscape.NETWORK_LOADED)) {
+                    MemoLogger.log("Network loaded: " + evt.getNewValue().toString());
+                } else if (PropertyName.equals(Cytoscape.NETWORK_SAVED)) {
+                    MemoLogger.log("Network saved: " + evt.getNewValue().toString());
+                }
+            }
+        });
     }
 
     private static void initProjectionedVisualStyle() {
@@ -61,6 +82,6 @@ public class PluginInitializator {
     public static void initVisualStyles() {
         initCommonVisualStyle();
         initProjectionedVisualStyle();
-
+        initNetworkListeners();
     }
 }
