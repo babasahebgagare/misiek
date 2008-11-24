@@ -60,4 +60,12 @@ public class CytoPPINetworkProjection extends CytoAbstractPPINetwork {
     public void setCytoMotherNetwork(CytoAbstractPPINetwork cytoMotherNetwork) {
         this.cytoMotherNetwork = cytoMotherNetwork;
     }
+
+    public Collection<CytoGroupNode> getCytoGroupNodes() {
+        return cytoGroupNodes.values();
+    }
+
+    public void setCytoGroupNodes(Map<String, CytoGroupNode> cytoGroupNodes) {
+        this.cytoGroupNodes = cytoGroupNodes;
+    }
 }
