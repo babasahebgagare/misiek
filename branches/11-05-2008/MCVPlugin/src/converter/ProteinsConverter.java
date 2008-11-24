@@ -11,8 +11,9 @@ public class ProteinsConverter {
     static void convertNetworkProteins(CyNetwork cyNetwork, Collection<Protein> proteins) {
 
         for (Protein protein : proteins) {
-            
-            CyNode node = Cytoscape.getCyNode(protein.getID(), true);
+
+            CyNode node = Cytoscape.getCyNode(protein.getID() + ":" + protein.getContext().getNetwork().getID(), true);
+            //CyNode node = Cytoscape.getCyNode(protein.getID(), true);
             cyNetwork.addNode(node.getRootGraphIndex());
         }
     }

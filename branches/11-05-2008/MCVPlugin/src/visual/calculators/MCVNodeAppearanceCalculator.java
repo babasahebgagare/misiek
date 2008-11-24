@@ -9,6 +9,7 @@ import main.DataHandle;
 import structs.model.Family;
 import structs.model.PPINetwork;
 import structs.model.Protein;
+import utils.IDConverter;
 
 public class MCVNodeAppearanceCalculator extends NodeAppearanceCalculator {
 
@@ -18,7 +19,7 @@ public class MCVNodeAppearanceCalculator extends NodeAppearanceCalculator {
 
         PPINetwork network = DataHandle.findNetworkByCytoID(cyNetwork.getIdentifier());
         if (network != null) {
-            Protein protein = network.getProtein(node.getIdentifier());
+            Protein protein = network.getProtein(IDConverter.splitCytoID(node.getIdentifier()));
             Family family = protein.getFamily();
 
             appr.set(VisualPropertyType.NODE_LABEL, protein.getID());
