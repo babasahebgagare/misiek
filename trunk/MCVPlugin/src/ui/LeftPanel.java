@@ -266,8 +266,11 @@ private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
     Collection<PPINetwork> networks = getSelectedNetworks();
 
-    CytoProjector.projectSelected(networks);
-
+    CytoPPINetworkProjection projection = CytoProjector.projectSelected(networks);
+    CyNetworkView cyNetworkView = Cytoscape.getNetworkView(projection.getCytoID());
+    if (projection != null && cyNetworkView != Cytoscape.getNullNetworkView()) {
+        Layouter.ProjectionLayout(projection, cyNetworkView);
+    }
 //    Cytoscape.getVisualMappingManager().setVisualStyle("MCVStyle");
 
 }//GEN-LAST:event_jButton3ActionPerformed
