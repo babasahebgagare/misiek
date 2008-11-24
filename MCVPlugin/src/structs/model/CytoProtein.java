@@ -1,11 +1,12 @@
 package structs.model;
 
-public class CytoProtein extends CytoObject {
+public class CytoProtein extends CytoNetworkObject {
 
     private Protein protein;
 
-    public CytoProtein(String CytoID, Protein protein) {
+    public CytoProtein(String CytoID, Protein protein, CytoAbstractPPINetwork cytoNetwork) {
         this.setCytoID(CytoID);
+        this.setCytoNetowork(cytoNetwork);
         this.protein = protein;
     }
 

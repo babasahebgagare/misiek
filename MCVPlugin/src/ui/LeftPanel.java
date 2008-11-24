@@ -7,8 +7,6 @@ package ui;
 
 import IO.DataReader;
 import converter.NetworksConverter;
-import converter.AllProjectionsConverter;
-import converter.CytoNetworkConverter;
 import cytoscape.Cytoscape;
 import cytoscape.dialogs.plugins.TreeNode;
 import java.io.File;
@@ -18,14 +16,14 @@ import javax.swing.JFileChooser;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
-import main.CytoDataHandle;
 import main.DataHandle;
 import main.MenusHandle;
 import projector.CytoProjector;
-import projector.Projector;
 import projector.ProjectorInfoCalculator;
-import structs.model.CytoAbstractPPINetwork;
 import structs.model.PPINetwork;
+import structs.model.Protein;
+import tester.NetbeansTest;
+import utils.Messenger;
 import visual.layout.Layouter;
 import visual.renderers.MCVBackgroundRenderer;
 
@@ -65,17 +63,6 @@ public class LeftPanel extends javax.swing.JPanel {
         for (TreePath path : jTree1.getSelectionPaths()) {
             String PPINetworkID = ((TreeNode) path.getLastPathComponent()).getTitle();
             networks.add(DataHandle.getNetworks().get(PPINetworkID));
-        }
-
-        return networks;
-    }
-
-    private Collection<CytoAbstractPPINetwork> getSelectedCytoNetworks() {
-        Collection<CytoAbstractPPINetwork> networks = new HashSet<CytoAbstractPPINetwork>();
-
-        for (TreePath path : jTree1.getSelectionPaths()) {
-            String PPINetworkID = ((TreeNode) path.getLastPathComponent()).getTitle();
-            networks.add(CytoDataHandle.getCytoNetwork(PPINetworkID));
         }
 
         return networks;
@@ -232,14 +219,16 @@ private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     Collection<PPINetwork> networks = getSelectedNetworks();
     NetworksConverter.convertNetworks(networks);
 
+    Cytoscape.getVisualMappingManager().setVisualStyle("MCVStyle");
 }//GEN-LAST:event_jButton2ActionPerformed
 
 private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-    Collection<CytoAbstractPPINetwork> cytoNetworks = getSelectedCytoNetworks();
+    Collection<PPINetwork> networks = getSelectedNetworks();
 
-    //CytoProjector.projectAllCytoSelected(cytoNetworks);
+    CytoProjector.projectSelected(networks);
 
-//AllProjectionsConverter.convertAllProjections();
+//    Cytoscape.getVisualMappingManager().setVisualStyle("MCVStyle");
+
 }//GEN-LAST:event_jButton3ActionPerformed
 
 private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -248,21 +237,18 @@ private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
 private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
     //  PrefuseTester.test();
-    Cytoscape.getCurrentNetworkView().setZoom(0.5);
+
+    PPINetwork net = DataHandle.getRootNetwork();
+    Protein protein = net.getProtein("Fam1Prot1");
+    Messenger.Message(protein.getContext().getNetwork().getID());
+    Messenger.Message(protein.getProjects().getProjectorMapDown().get("AB").size());
+//NetbeansTest.test();
+//Cytoscape.getCurrentNetworkView().setZoom(0.5);
 
 }//GEN-LAST:event_jButton5ActionPerformed
 
 private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-    /*RootGraph root = Cytoscape.getRootGraph();
-    int node1ID = root.createNode();
-    Cytoscape.getCurrentNetwork().addNode(node1ID);
-    int metaID = root.createNode();
-    Cytoscape.getCurrentNetwork().addNode(metaID);
-    // root.(metaID, node1ID);*/
     MCVBackgroundRenderer.backgroundRender();
-/*CytoscapeFingRootGraph dummyGraph = new CytoscapeFingRootGraph();
-Cytoscape.getCurrentNetworkView().addNodeView(metaID, new MyNodeView());
-//dummyGraph.*/
 }//GEN-LAST:event_jButton6ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

@@ -2,129 +2,62 @@ package structs.model;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 public class CytoPPINetworkProjection extends CytoAbstractPPINetwork {
 
-    public CytoPPINetworkProjection(PPINetwork network, String ID) {
+    private Map<String, CytoProteinProjection> proteins = new HashMap<String, CytoProteinProjection>();
+    private Map<String, CytoInteraction> interactions = new HashMap<String, CytoInteraction>();
+    private Map<String, CytoGroupNode> cytoGroupNodes = new HashMap<String, CytoGroupNode>();
+    private CytoAbstractPPINetwork cytoMotherNetwork;
+
+    public CytoPPINetworkProjection(CytoAbstractPPINetwork cytoMotherNetwork, PPINetwork network, String ID) {
         super(network, ID);
+        this.cytoMotherNetwork = cytoMotherNetwork;
+    }
+
+    public void addCytoGroupNode(CytoGroupNode node) {
+        cytoGroupNodes.put(node.getID(), node);
+    }
+
+    public void addCytoProtein(CytoProteinProjection proteinProjection) {
+        proteins.put(proteinProjection.getCytoID(), proteinProjection);
+    }
+
+    public void addCytoInteraction(CytoInteraction cytoInteractionProjection) {
+        interactions.put(cytoInteractionProjection.getCytoID(), cytoInteractionProjection);
     }
 
     @Override
     public Collection<CytoProtein> getCytoProteins() {
-        return null;
-    //    throw new UnsupportedOperationException("Not supported yet.");
+        Collection<CytoProtein> ret = new HashSet<CytoProtein>();
+        for (CytoProteinProjection cytoProteinProjection : proteins.values()) {
+            ret.add(cytoProteinProjection);
+        }
+        return ret;
     }
 
     @Override
     public CytoProtein getCytoProtein(String ID) {
-        return null;
-    //    throw new UnsupportedOperationException("Not supported yet.");
+        return proteins.get(ID);
     }
 
     @Override
     public Collection<CytoInteraction> getCytoInteractions() {
-        return null;
-    //    throw new UnsupportedOperationException("Not supported yet.");
+        return interactions.values();
     }
 
     @Override
     public CytoInteraction getCytoInteraction(String ID) {
-        return null;
-    //      throw new UnsupportedOperationException("Not supported yet.");
+        return interactions.get(ID);
     }
-    /*
-    private Map<String, GroupNode> groupNodes = new HashMap<String, GroupNode>();
-    private Map<String, ProteinProjection> proteinProjections = new HashMap<String, ProteinProjection>();
-    private Map<String, Interaction> groupNodeInteractions = new HashMap<String, Interaction>();
-    private Map<String, Interaction> proteinProjectionInteractions = new HashMap<String, Interaction>();
-    private PPINetworkProjectionContext context;
-    private String ID;
-    private String CytoID;
-    
-    public CytoPPINetworkProjection(String ID, PPINetwork motherNetwork) {
-    this.ID = ID;
-    this.context = new PPINetworkProjectionContext(motherNetwork);
+
+    public CytoAbstractPPINetwork getCytoMotherNetwork() {
+        return cytoMotherNetwork;
     }
-    
-    public ProteinProjection getProteinProjection(String ID) {
-    return proteinProjections.get(ID);
+
+    public void setCytoMotherNetwork(CytoAbstractPPINetwork cytoMotherNetwork) {
+        this.cytoMotherNetwork = cytoMotherNetwork;
     }
-    
-    public GroupNode getGroupNode(String ID) {
-    return groupNodes.get(ID);
-    }
-    
-    public void addProteinProjectionInteraction(Interaction interaction) {
-    proteinProjectionInteractions.put(interaction.getID(), interaction);
-    }
-    
-    public void addGroupNodeInteraction(Interaction interaction) {
-    groupNodeInteractions.put(interaction.getID(), interaction);
-    }
-    
-    public void addGroupNode(GroupNode node) {
-    groupNodes.put(node.getID(), node);
-    }
-    
-    public void addProteinProjection(ProteinProjection proteinProjection) {
-    proteinProjections.put(proteinProjection.getID(), proteinProjection);
-    }
-    
-    public String getCytoID() {
-    return CytoID;
-    }
-    
-    public void setCytoID(String CytoID) {
-    this.CytoID = CytoID;
-    }
-    
-    public String getID() {
-    return ID;
-    }
-    
-    public void setID(String ID) {
-    this.ID = ID;
-    }
-    
-    public Map<String, GroupNode> getGroupNodes() {
-    return groupNodes;
-    }
-    
-    public void setGroupNodes(Map<String, GroupNode> groupNodes) {
-    this.groupNodes = groupNodes;
-    }
-    
-    public Map<String, ProteinProjection> getProteinProjections() {
-    return proteinProjections;
-    }
-    
-    public void setProteinProjections(Map<String, ProteinProjection> proteinProjections) {
-    this.proteinProjections = proteinProjections;
-    }
-    
-    public PPINetworkProjectionContext getContext() {
-    return context;
-    }
-    
-    public void setContext(PPINetworkProjectionContext context) {
-    this.context = context;
-    }
-    
-    public Map<String, Interaction> getGroupNodeInteractions() {
-    return groupNodeInteractions;
-    }
-    
-    public void setGroupNodeInteractions(Map<String, Interaction> groupNodeInteractions) {
-    this.groupNodeInteractions = groupNodeInteractions;
-    }
-    
-    public Map<String, Interaction> getProteinProjectionInteractions() {
-    return proteinProjectionInteractions;
-    }
-    
-    public void setProteinProjectionInteractions(Map<String, Interaction> proteinProjectionInteractions) {
-    this.proteinProjectionInteractions = proteinProjectionInteractions;
-    }
-     */
 }

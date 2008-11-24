@@ -16,6 +16,7 @@ Fam1Prot3:Fam1Prot1:C
 Fam1Prot4:Fam1Prot1:AB
 Fam1Prot5:Fam1Prot1:AB
 Fam1Prot6:Fam1Prot1:AB
+Fam1Prot7:Fam1Prot4:A
 ENDFAMILY
 FAMILY
 NAME:Fam2

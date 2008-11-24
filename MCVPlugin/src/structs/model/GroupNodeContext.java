@@ -5,31 +5,31 @@ import java.util.HashSet;
 
 public class GroupNodeContext {
 
-    private Protein motherProtein;
-    private Collection<ProteinProjection> insideProteins;
+    private CytoProtein motherProtein;
+    private Collection<CytoProtein> insideProteins;
 
-    public GroupNodeContext(Protein motherProtein) {
+    public GroupNodeContext(CytoProtein motherProtein) {
         this.motherProtein = motherProtein;
-        this.insideProteins = new HashSet<ProteinProjection>();
+        this.insideProteins = new HashSet<CytoProtein>();
     }
 
-    public void addProteinInside(ProteinProjection proteinProjection) {
+    public void addProteinInside(CytoProtein proteinProjection) {
         insideProteins.add(proteinProjection);
     }
 
-    public Protein getMotherProtein() {
-        return motherProtein;
-    }
-
-    public void setMotherProtein(Protein motherProtein) {
-        this.motherProtein = motherProtein;
-    }
-
-    public Collection<ProteinProjection> getInsideProteins() {
+    public Collection<CytoProtein> getInsideProteins() {
         return insideProteins;
     }
 
-    public void setInsideProteins(Collection<ProteinProjection> insideProteins) {
+    public void setInsideProteins(Collection<CytoProtein> insideProteins) {
         this.insideProteins = insideProteins;
+    }
+
+    public CytoProtein getMotherProtein() {
+        return motherProtein;
+    }
+
+    public void setMotherProtein(CytoProtein motherProtein) {
+        this.motherProtein = motherProtein;
     }
 }

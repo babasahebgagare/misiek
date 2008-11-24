@@ -13,7 +13,7 @@ import giny.view.NodeView;
 import java.awt.Color;
 import main.DataHandle;
 import structs.model.Family;
-import structs.model.GroupNode;
+import structs.model.CytoGroupNode;
 import structs.model.Protein;
 import structs.model.ProteinProjection;
 
