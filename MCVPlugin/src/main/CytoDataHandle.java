@@ -65,6 +65,13 @@ public class CytoDataHandle {
         CytoDataHandle.projections = projections;
     }
 
+    public static CytoPPINetworkProjection findNetworkProjectionByCytoID(String CytoID) {
+        String CytoPPINetworkID = networkIDMapper.getIDByCytoID(CytoID);
+        CytoPPINetworkProjection ret = projections.get(CytoPPINetworkID);
+
+        return ret;
+    }
+
     public static CytoAbstractPPINetwork findNetworkByCytoID(String CytoID) {
         String CytoPPINetworkID = networkIDMapper.getIDByCytoID(CytoID);
         CytoAbstractPPINetwork ret = cytoNetworks.get(CytoPPINetworkID);

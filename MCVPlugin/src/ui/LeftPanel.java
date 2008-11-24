@@ -7,8 +7,10 @@ package ui;
 
 import IO.DataReader;
 import converter.NetworksConverter;
+import cytoscape.CyNetwork;
 import cytoscape.Cytoscape;
 import cytoscape.dialogs.plugins.TreeNode;
+import cytoscape.view.CyNetworkView;
 import java.io.File;
 import java.util.Collection;
 import java.util.HashSet;
@@ -16,10 +18,12 @@ import javax.swing.JFileChooser;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
+import main.CytoDataHandle;
 import main.DataHandle;
 import main.MenusHandle;
 import projector.CytoProjector;
 import projector.ProjectorInfoCalculator;
+import structs.model.CytoPPINetworkProjection;
 import structs.model.PPINetwork;
 import structs.model.Protein;
 import tester.NetbeansTest;
@@ -232,7 +236,12 @@ private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 }//GEN-LAST:event_jButton3ActionPerformed
 
 private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-    Layouter.AllProjectionsLayout();
+    CyNetworkView cyNetworkView = Cytoscape.getCurrentNetworkView();
+    CytoPPINetworkProjection projection = CytoDataHandle.findNetworkProjectionByCytoID(cyNetworkView.getIdentifier());
+
+    if (projection != null) {
+        Layouter.ProjectionLayout(projection, cyNetworkView);
+    }
 }//GEN-LAST:event_jButton4ActionPerformed
 
 private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed

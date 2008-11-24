@@ -3,6 +3,7 @@ package projector;
 import java.util.Collection;
 import main.CytoDataHandle;
 import structs.model.CytoAbstractPPINetwork;
+import structs.model.CytoGroupNode;
 import structs.model.CytoInteraction;
 import structs.model.CytoPPINetworkProjection;
 import structs.model.CytoProtein;
@@ -106,9 +107,9 @@ public class ProjectorNetwork {
 
         Protein protein = cytoProtein.getProtein();
 
-        //   String groupNodeID = createGroupNodeID(cytoProtein);
-        //   CytoGroupNode node = CytoDataHandle.createCytoGroupNode(groupNodeID, cytoProtein);
-        //     projection.addCytoGroupNode(node);
+        String groupNodeID = createGroupNodeID(cytoProtein);
+        CytoGroupNode node = CytoDataHandle.createCytoGroupNode(groupNodeID, cytoProtein);
+        projection.addCytoGroupNode(node);
 
         Collection<Protein> proteinProjections = protein.getProjects().getProjectorMapDown().get(projection.getNetwork().getID());
         if (proteinProjections != null) {
@@ -116,7 +117,7 @@ public class ProjectorNetwork {
             for (Protein proteinProject : proteinProjections) {
                 String ProteinProjectionID = createProteinProjectionID(proteinProject);
                 CytoProteinProjection proteinProjection = CytoDataHandle.createCytoProteinProjection(ProteinProjectionID, proteinProject, projection);
-            //       node.addCytoProteinInside(proteinProjection);
+                node.addCytoProteinInside(proteinProjection);
             }
 
         }
