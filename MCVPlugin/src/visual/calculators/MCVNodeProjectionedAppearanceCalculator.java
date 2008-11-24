@@ -17,6 +17,7 @@ import structs.model.GroupNode;
 import structs.model.PPINetworkProjection;
 import structs.model.Protein;
 import structs.model.ProteinProjection;
+import utils.MemoLogger;
 
 public class MCVNodeProjectionedAppearanceCalculator extends NodeAppearanceCalculator {
 
@@ -58,8 +59,9 @@ public class MCVNodeProjectionedAppearanceCalculator extends NodeAppearanceCalcu
     private void setGroupNodePosition(Node node, GroupNode groupNode, CyNetwork cyNetwork) {
         Protein motherProtein = groupNode.getContext().getMotherProtein();
 
-        CyNode parentCyNode = Cytoscape.getCyNode(motherProtein.getID());
+        CyNode parentCyNode = Cytoscape.getCyNode(motherProtein.getID()+":"+motherProtein.getContext().getNetwork().getID());
         CyNetworkView parentNetworkView = Cytoscape.getNetworkView(motherProtein.getContext().getNetwork().getCytoID());
+        MemoLogger.log("tu");
         NodeView parentNodeView = parentNetworkView.getNodeView(parentCyNode);
 
         CyNetworkView cyNetworkView = Cytoscape.getNetworkView(cyNetwork.getIdentifier());

@@ -9,6 +9,7 @@ import main.DataHandle;
 import structs.model.PPINetwork;
 import structs.model.PPINetworkProjection;
 import structs.model.Protein;
+import utils.IDConverter;
 import utils.Messenger;
 
 public class Projector {
@@ -43,14 +44,14 @@ public class Projector {
         if (currNetwork != null) {
 
             for (CyNode node : cyNodes) {
-                ret.add(currNetwork.getProtein(node.getIdentifier()));
+                ret.add(currNetwork.getProtein(IDConverter.splitCytoID(node.getIdentifier())));
             }
         }
         PPINetworkProjection currNetworkProj = DataHandle.findProjectionByCytoID(PPINetworkCytoID);
         if (currNetworkProj != null) {
             for (CyNode node : cyNodes) {
                 Messenger.Message(node.getIdentifier());
-                Protein protein = currNetworkProj.getProteinProjection(node.getIdentifier()).getProtein();
+                Protein protein = currNetworkProj.getProteinProjection(IDConverter.splitCytoID(node.getIdentifier())).getProtein();
                 if (protein != null) {
                     ret.add(protein);
                 }

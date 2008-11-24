@@ -11,7 +11,7 @@ class ProteinProjectionsConverter {
     static void convertProteinProjections(CyNetwork cyNetwork, Collection<ProteinProjection> proteinProjections) {
         for (ProteinProjection proteinProjection : proteinProjections) {
 
-            CyNode node = Cytoscape.getCyNode(proteinProjection.getID(), true);
+            CyNode node = Cytoscape.getCyNode(proteinProjection.getID() + ":" + cyNetwork.getTitle(), true);
             cyNetwork.addNode(node.getRootGraphIndex());
         }
     }

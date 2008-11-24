@@ -43,7 +43,7 @@ public class ProjectorNetwork {
     }
 
     private static String createProteinProjectionID(Protein protein) {
-        return "PROJECTION_" + protein.getID();
+        return  protein.getID();
     }
 
     private static String createProteinProjectionInteractionID(String InteractionID) {
@@ -51,7 +51,7 @@ public class ProjectorNetwork {
     }
 
     private static String createProteinProjectionID(String proteinID) {
-        return "PROJECTION_" + proteinID;
+        return  proteinID;
     }
 
     private static String createGroupNodeID(Protein protein) {
