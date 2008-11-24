@@ -8,7 +8,7 @@ import ding.view.DingCanvas;
 import giny.view.NodeView;
 import main.DataHandle;
 import structs.model.CytoPPINetworkProjection;
-import structs.model.GroupNode;
+import structs.model.CytoGroupNode;
 
 import structs.model.Protein;
 import structs.view.GroupNodeView;

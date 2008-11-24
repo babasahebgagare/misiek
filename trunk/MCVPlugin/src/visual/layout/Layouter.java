@@ -6,7 +6,7 @@ import cytoscape.view.CyNetworkView;
 import giny.view.NodeView;
 import java.util.Collection;
 import main.DataHandle;
-import structs.model.GroupNode;
+import structs.model.CytoGroupNode;
 import structs.model.ProteinProjection;
 
 public class Layouter {
