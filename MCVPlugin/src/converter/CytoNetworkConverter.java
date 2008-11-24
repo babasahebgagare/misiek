@@ -2,6 +2,9 @@ package converter;
 
 import cytoscape.CyNetwork;
 import cytoscape.Cytoscape;
+import cytoscape.layout.CyLayoutAlgorithm;
+import cytoscape.layout.CyLayouts;
+import cytoscape.view.CyNetworkView;
 import cytoscape.visual.VisualStyle;
 import main.CytoDataHandle;
 import structs.model.CytoAbstractPPINetwork;
@@ -18,13 +21,19 @@ public class CytoNetworkConverter {
             CytoInteractionsConverter.convertCytoNetworkInteractions(newNet, cytoNetwork.getCytoInteractions());
 
             applyVisualStyleForNetwork(newNet);
-
+            applyCyLayoutAlgorithm(newNet);
         }
     }
 
+    private static void applyCyLayoutAlgorithm(CyNetwork cyNetwork) {
+        CyNetworkView cyNetworkView = Cytoscape.createNetworkView(cyNetwork);
+        Cytoscape.getVisualMappingManager().setNetworkView(cyNetworkView);
+        CyLayoutAlgorithm layout = CyLayouts.getDefaultLayout();
+        layout.doLayout(cyNetworkView);
+        cyNetworkView.setZoom(0.7);
+    }
+
     private static void applyVisualStyleForNetwork(CyNetwork cyNetwork) {
-      //  CyNetworkView cyNetworkView = Cytoscape.createNetworkView(cyNetwork);
-      //  Cytoscape.getVisualMappingManager().setNetworkView(cyNetworkView);
         VisualStyle MCVStyle = Cytoscape.getVisualMappingManager().getCalculatorCatalog().getVisualStyle("MCVStyle");
         Cytoscape.getVisualMappingManager().setVisualStyle(MCVStyle);
     }
