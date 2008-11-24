@@ -3,6 +3,7 @@ package main;
 import java.util.HashMap;
 import java.util.Map;
 import java.awt.Color;
+import java.util.Collection;
 import structs.model.Family;
 import structs.model.PPINetwork;
 import structs.model.Protein;
@@ -61,8 +62,16 @@ public class DataHandle {
         networks = nets;
     }
 
-    public static Map<String, Family> getFamilies() {
-        return families;
+    public static Collection<Family> getFamilies() {
+        return families.values();
+    }
+
+    public static Family getFamily(String ID) {
+        return families.get(ID);
+    }
+
+    public static Collection<String> getFamiliesKeys() {
+        return families.keySet();
     }
 
     public static void setFamilies(Map<String, Family> families) {
