@@ -18,13 +18,13 @@ public class CytoProjector {
     public static void projectSelected(Collection<PPINetwork> networks) {
         Collection<CytoProtein> selectedProteins = getSelectedProteins();
         CytoAbstractPPINetwork motherCytoNetwork = selectedProteins.iterator().next().getCytoNetowork();
-
+        CytoPPINetworkProjection ret = null;
         for (PPINetwork network : networks) {
             PPINetwork motherNetwork = motherCytoNetwork.getNetwork();
 
             switch (network.getContext().getHierarchy().getNetworkPosition(motherNetwork)) {
                 case ABOVE:
-                    CytoPPINetworkProjection ret = ProjectorNetwork.projectProteinsToDownOnNetwork(selectedProteins, network, motherCytoNetwork);
+                    ret = ProjectorNetwork.projectProteinsToDownOnNetwork(selectedProteins, network, motherCytoNetwork);
                     CytoNetworkConverter.convertCytoNetwork(ret);
                     break;
                 case BELOW:
@@ -38,7 +38,6 @@ public class CytoProjector {
                     Messenger.Message("DEFAULT");
             }
         }
-
     }
 
     public static Collection<CytoProtein> getSelectedProteins() {
