@@ -223,7 +223,7 @@ private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     Collection<PPINetwork> networks = getSelectedNetworks();
     NetworksConverter.convertNetworks(networks);
 
-    Cytoscape.getVisualMappingManager().setVisualStyle("MCVStyle");
+  //  Cytoscape.getVisualMappingManager().setVisualStyle("MCVStyle");
 }//GEN-LAST:event_jButton2ActionPerformed
 
 private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

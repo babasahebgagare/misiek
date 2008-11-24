@@ -2,6 +2,7 @@ package converter;
 
 import cytoscape.CyNetwork;
 import cytoscape.Cytoscape;
+import cytoscape.visual.VisualStyle;
 import main.CytoDataHandle;
 import structs.model.CytoAbstractPPINetwork;
 
@@ -15,6 +16,16 @@ public class CytoNetworkConverter {
 
             CytoProteinsConverter.convertCytoNetworkProteins(newNet, cytoNetwork.getCytoProteins());
             CytoInteractionsConverter.convertCytoNetworkInteractions(newNet, cytoNetwork.getCytoInteractions());
+
+            applyVisualStyleForNetwork(newNet);
+
         }
+    }
+
+    private static void applyVisualStyleForNetwork(CyNetwork cyNetwork) {
+      //  CyNetworkView cyNetworkView = Cytoscape.createNetworkView(cyNetwork);
+      //  Cytoscape.getVisualMappingManager().setNetworkView(cyNetworkView);
+        VisualStyle MCVStyle = Cytoscape.getVisualMappingManager().getCalculatorCatalog().getVisualStyle("MCVStyle");
+        Cytoscape.getVisualMappingManager().setVisualStyle(MCVStyle);
     }
 }
