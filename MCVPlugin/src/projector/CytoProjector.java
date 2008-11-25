@@ -15,7 +15,7 @@ import utils.Messenger;
 
 public class CytoProjector {
 
-    public static void projectSelected(Collection<PPINetwork> networks) {
+    public static CytoPPINetworkProjection projectSelected(Collection<PPINetwork> networks) {
         Collection<CytoProtein> selectedProteins = getSelectedProteins();
         CytoAbstractPPINetwork motherCytoNetwork = selectedProteins.iterator().next().getCytoNetowork();
         CytoPPINetworkProjection ret = null;
@@ -38,6 +38,7 @@ public class CytoProjector {
                     Messenger.Message("DEFAULT");
             }
         }
+        return ret;
     }
 
     public static Collection<CytoProtein> getSelectedProteins() {
