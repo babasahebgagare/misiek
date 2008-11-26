@@ -3,19 +3,17 @@ package IO.defaultreader;
 import java.awt.Color;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Random;
 import main.DataHandle;
+import utils.ColorGenerator;
 
 public class DefaultTreeParser {
-
-    private static Random rand = new Random(1243242);
 
     public static void readAllTreeString(String treeString) {
         int lastIndex = treeString.lastIndexOf(")");
         String FamilyName = treeString.substring(lastIndex + 1).trim();
         String tree = treeString.substring(1, lastIndex).trim();
 
-        Color color = generateColor();
+        Color color = ColorGenerator.generateColor(FamilyName);
 
         DataHandle.createFamily(FamilyName, color);
         readTreeSpaciesString(tree, FamilyName, null);
@@ -57,10 +55,6 @@ public class DefaultTreeParser {
         ret.add(substring.substring(lastIndex, substring.length()));
 
         return ret;
-    }
-
-    private static Color generateColor() {
-        return new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255));
     }
 
     private static Collection<String> readTreeSpaciesCollection(String substring) {
