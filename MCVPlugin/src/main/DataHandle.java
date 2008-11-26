@@ -7,6 +7,7 @@ import java.util.Collection;
 import structs.model.Family;
 import structs.model.PPINetwork;
 import structs.model.Protein;
+import sun.net.NetworkServer;
 import utils.MemoLogger;
 
 public class DataHandle {
@@ -14,6 +15,15 @@ public class DataHandle {
     private static Map<String, PPINetwork> networks = new HashMap<String, PPINetwork>();
     private static Map<String, Family> families = new HashMap<String, Family>();
     private static PPINetwork rootNetwork;
+
+    public static void createInteraction(String EdgeID, String SourceID, String TargetID, Double Probability) {
+        for (PPINetwork network : networks.values()) {
+
+            if (network.getProtein(TargetID) != null) {
+                network.addInteraction(EdgeID, SourceID, TargetID, Probability);
+            }
+        }
+    }
 
     public static void createRootPPINetwork(String NetworkID) {
         PPINetwork net = new PPINetwork(NetworkID, null);
