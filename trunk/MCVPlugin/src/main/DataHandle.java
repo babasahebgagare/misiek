@@ -7,6 +7,7 @@ import java.util.Collection;
 import structs.model.Family;
 import structs.model.PPINetwork;
 import structs.model.Protein;
+import utils.MemoLogger;
 
 public class DataHandle {
 
@@ -30,20 +31,26 @@ public class DataHandle {
 
     public static void createFamily(String FamilyID, Color color) {
         //  if (!families.containsKey(FamilyID)) {
+        MemoLogger.log("creating fam:" + FamilyID);
         Family fam = new Family(FamilyID, color);
         families.put(FamilyID, fam);
     }
 
     public static void createProtein(String ProteinID, String ParentProteinID, String NetworkID, String FamilyID) {
-        PPINetwork network = networks.get(NetworkID);
-        PPINetwork ParentNetwork = network.getContext().getParentNetwork();
-        Protein ParentProtein = ParentNetwork.getProteins().get(ParentProteinID);
-        Family family = families.get(FamilyID);
-        network.addProtein(ProteinID, ParentProtein, family);
+        if (ParentProteinID != null) {
+            PPINetwork network = networks.get(NetworkID);
+            PPINetwork ParentNetwork = network.getContext().getParentNetwork();
+            Protein ParentProtein = ParentNetwork.getProteins().get(ParentProteinID);
+            Family family = families.get(FamilyID);
+            network.addProtein(ProteinID, ParentProtein, family);
+        } else {
+            createRootProtein(ProteinID, NetworkID, FamilyID);
+        }
     }
 
     public static void createRootProtein(String ProteinID, String NetworkID, String FamilyID) {
         PPINetwork network = networks.get(NetworkID);
+        MemoLogger.log("searching for famility: " + FamilyID);
         Family family = families.get(FamilyID);
         network.addRootProtein(ProteinID, family);
     }
