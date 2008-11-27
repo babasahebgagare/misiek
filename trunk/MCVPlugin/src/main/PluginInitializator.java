@@ -12,9 +12,7 @@ import javax.swing.SwingConstants;
 import ui.LeftPanel;
 import utils.MemoLogger;
 import visual.calculators.MCVEdgeAppearanceCalculator;
-import visual.calculators.MCVEdgeProjectionedAppearanceCalculator;
 import visual.calculators.MCVNodeAppearanceCalculator;
-import visual.calculators.MCVNodeProjectionedAppearanceCalculator;
 
 public class PluginInitializator {
 
@@ -52,22 +50,6 @@ public class PluginInitializator {
         });
     }
 
-    private static void initProjectionedVisualStyle() {
-        VisualMappingManager vmm = Cytoscape.getVisualMappingManager();
-        CalculatorCatalog catalog = vmm.getCalculatorCatalog();
-        VisualStyle MCVProjStyle = catalog.getVisualStyle("MCVProjStyle");
-        if (MCVProjStyle == null) {
-
-            MCVProjStyle = new VisualStyle(vmm.getVisualStyle());
-            MCVProjStyle.setName("MCVProjStyle");
-            MCVProjStyle.setNodeAppearanceCalculator(new MCVNodeProjectionedAppearanceCalculator());
-            MCVProjStyle.setEdgeAppearanceCalculator(new MCVEdgeProjectionedAppearanceCalculator());
-
-            catalog.addVisualStyle(MCVProjStyle);
-        } else {
-        }
-    }
-
     private static void initUI() {
         CytoPanelImp leftPanel = (CytoPanelImp) Cytoscape.getDesktop().getCytoPanel(SwingConstants.WEST);
 
@@ -81,7 +63,6 @@ public class PluginInitializator {
 
     public static void initVisualStyles() {
         initCommonVisualStyle();
-        initProjectionedVisualStyle();
         initNetworkListeners();
     }
 }

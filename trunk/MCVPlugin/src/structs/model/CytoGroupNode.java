@@ -3,11 +3,11 @@ package structs.model;
 public class CytoGroupNode {
 
     private String ID;
-    private GroupNodeContext context;
+    private CytoGroupNodeContext context;
 
     public CytoGroupNode(String ID, CytoProtein motherProtein) {
         this.ID = ID;
-        this.context = new GroupNodeContext(motherProtein);
+        this.context = new CytoGroupNodeContext(motherProtein);
     }
 
     public void addCytoProteinInside(CytoProteinProjection proteinProjection) {
@@ -22,11 +22,11 @@ public class CytoGroupNode {
         this.ID = ID;
     }
 
-    public GroupNodeContext getContext() {
+    public CytoGroupNodeContext getContext() {
         return context;
     }
 
-    public void setContext(GroupNodeContext context) {
+    public void setContext(CytoGroupNodeContext context) {
         this.context = context;
     }
 }

@@ -3,12 +3,12 @@ package structs.model;
 import java.util.Collection;
 import java.util.HashSet;
 
-public class GroupNodeContext {
+public class CytoGroupNodeContext {
 
     private CytoProtein motherProtein;
     private Collection<CytoProtein> insideProteins;
 
-    public GroupNodeContext(CytoProtein motherProtein) {
+    public CytoGroupNodeContext(CytoProtein motherProtein) {
         this.motherProtein = motherProtein;
         this.insideProteins = new HashSet<CytoProtein>();
     }
