@@ -13,27 +13,28 @@ public class CytoNetworkConverter {
 
     public static void convertCytoNetwork(CytoAbstractPPINetwork cytoNetwork) {
         if (Cytoscape.getNetwork(cytoNetwork.getCytoID()) == Cytoscape.getNullNetwork()) {
-            CyNetwork newNet = Cytoscape.createNetwork(cytoNetwork.getID(), true);
-            cytoNetwork.setCytoID(newNet.getIdentifier());
-            CytoDataHandle.addNetworkIDMapping(newNet.getIdentifier(), cytoNetwork.getID());
+            CyNetwork cyNetwork = Cytoscape.createNetwork(cytoNetwork.getID(), true);
+            cytoNetwork.setCytoID(cyNetwork.getIdentifier());
+            CytoDataHandle.addNetworkIDMapping(cyNetwork.getIdentifier(), cytoNetwork.getID());
 
-            CytoProteinsConverter.convertCytoNetworkProteins(newNet, cytoNetwork.getCytoProteins());
-            CytoInteractionsConverter.convertCytoNetworkInteractions(newNet, cytoNetwork.getCytoInteractions());
+            CytoProteinsConverter.convertCytoNetworkProteins(cyNetwork, cytoNetwork.getCytoProteins());
+            CytoInteractionsConverter.convertCytoNetworkInteractions(cyNetwork, cytoNetwork.getCytoInteractions());
 
-            applyVisualStyleForNetwork(newNet);
-            applyCyLayoutAlgorithm(newNet);
+            CyNetworkView cyNetworkView = Cytoscape.createNetworkView(cyNetwork);
+
+            applyVisualStyleForNetwork(cyNetwork, cyNetworkView);
+            applyCyLayoutAlgorithm(cyNetwork, cyNetworkView);
         }
     }
 
-    private static void applyCyLayoutAlgorithm(CyNetwork cyNetwork) {
-        CyNetworkView cyNetworkView = Cytoscape.createNetworkView(cyNetwork);
+    private static void applyCyLayoutAlgorithm(CyNetwork cyNetwork, CyNetworkView cyNetworkView) {
         Cytoscape.getVisualMappingManager().setNetworkView(cyNetworkView);
         CyLayoutAlgorithm layout = CyLayouts.getDefaultLayout();
         layout.doLayout(cyNetworkView);
         cyNetworkView.setZoom(0.7);
     }
 
-    private static void applyVisualStyleForNetwork(CyNetwork cyNetwork) {
+    static void applyVisualStyleForNetwork(CyNetwork cyNetwork, CyNetworkView cyNetworkView) {
         VisualStyle MCVStyle = Cytoscape.getVisualMappingManager().getCalculatorCatalog().getVisualStyle("MCVStyle");
         Cytoscape.getVisualMappingManager().setVisualStyle(MCVStyle);
     }

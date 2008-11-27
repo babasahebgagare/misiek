@@ -11,43 +11,12 @@ import structs.model.CytoProteinProjection;
 import structs.model.Interaction;
 import structs.model.PPINetwork;
 import structs.model.Protein;
+import utils.IDCreator;
 
 public class ProjectorNetwork {
 
-    private static String createProjectionID(PPINetwork networkTarget, CytoAbstractPPINetwork cytoNetworkSource) {
-        return "PROJECTION_" + networkTarget.getID() + cytoNetworkSource.getID();
-    }
-
-    private static String createProjectionID(Collection<CytoProtein> selectedProteins, CytoAbstractPPINetwork network, CytoAbstractPPINetwork motherNetwork) {
-        return "PROJECTION_" + motherNetwork.getID() + "_ON_" + network.getID();
-    }
-
-    private static String createProteinProjectionID(Protein protein) {
-        return "PROJECTION_" + protein.getID();
-    }
-
-    private static String createProteinProjectionInteractionID(String InteractionID) {
-        return "PROJECTION_" + InteractionID;
-    }
-
-    private static String createProteinProjectionID(String proteinID) {
-        return "PROJECTION_" + proteinID;
-    }
-
-    private static String createGroupNodeID(CytoProtein cytoProtein) {
-        return "GROUP_NODE" + cytoProtein.getCytoID();
-    }
-
-    private static String createGroupNodeID(String proteinID) {
-        return "GROUP_NODE" + proteinID;
-    }
-
-    private static String createGroupNodeInteractionID(String interactionID) {
-        return "PROJECTION_" + interactionID;
-    }
-
     static CytoPPINetworkProjection projectProteinsToDownOnNetwork(Collection<CytoProtein> selectedProteins, PPINetwork networkTarget, CytoAbstractPPINetwork cytoNetworkSource) {
-        String projectionID = createProjectionID(networkTarget, cytoNetworkSource);
+        String projectionID = IDCreator.createNetworkProjectionID(networkTarget, cytoNetworkSource);
 
         CytoPPINetworkProjection projection = CytoDataHandle.createCytoProjectionNetwork(projectionID, cytoNetworkSource, networkTarget);
 
@@ -68,7 +37,7 @@ public class ProjectorNetwork {
     }
 
     static CytoPPINetworkProjection projectProteinsToUpOnNetwork(Collection<CytoProtein> selectedProteins, PPINetwork networkTarget, CytoAbstractPPINetwork cytoNetworkSource) {
-        String projectionID = createProjectionID(networkTarget, cytoNetworkSource);
+        String projectionID = IDCreator.createNetworkProjectionID(networkTarget, cytoNetworkSource);
         CytoPPINetworkProjection projection = CytoDataHandle.createCytoProjectionNetwork(projectionID, cytoNetworkSource, networkTarget);
 
         for (CytoProtein cytoProteinBelow : selectedProteins) {
@@ -78,7 +47,7 @@ public class ProjectorNetwork {
             if (proteinProjections != null) {
 
                 for (Protein proteinAbove : proteinProjections) {
-                    String ProteinProjectionID = createProteinProjectionID(proteinAbove);
+                    String ProteinProjectionID = IDCreator.createProteinProjectionID(proteinAbove, projection);
                     CytoDataHandle.createCytoProteinProjection(ProteinProjectionID, proteinAbove, projection);
                 }
             }
@@ -92,9 +61,9 @@ public class ProjectorNetwork {
     }
 
     private static void projectCytoInteraction(Interaction interaction, CytoPPINetworkProjection projection) {
-        String proteinInteractionID = createProteinProjectionInteractionID(interaction.getID());
-        String proteinInteractionSourceID = createProteinProjectionID(interaction.getSourceID());
-        String proteinInteractionTargetID = createProteinProjectionID(interaction.getTargetID());
+        String proteinInteractionID = IDCreator.createInteractionProjectionID(interaction, projection);
+        String proteinInteractionSourceID = IDCreator.createProteinProjectionID(interaction.getSource(), projection);
+        String proteinInteractionTargetID = IDCreator.createProteinProjectionID(interaction.getTarget(), projection);
 
         CytoProtein source = projection.getCytoProtein(proteinInteractionSourceID);
         CytoProtein target = projection.getCytoProtein(proteinInteractionTargetID);
@@ -107,7 +76,7 @@ public class ProjectorNetwork {
 
         Protein protein = cytoProtein.getProtein();
 
-        String groupNodeID = createGroupNodeID(cytoProtein);
+        String groupNodeID = IDCreator.createGroupNodeID(cytoProtein);
         CytoGroupNode node = CytoDataHandle.createCytoGroupNode(groupNodeID, cytoProtein);
         projection.addCytoGroupNode(node);
 
@@ -115,7 +84,7 @@ public class ProjectorNetwork {
         if (proteinProjections != null) {
 
             for (Protein proteinProject : proteinProjections) {
-                String ProteinProjectionID = createProteinProjectionID(proteinProject);
+                String ProteinProjectionID = IDCreator.createProteinProjectionID(proteinProject, projection);
                 CytoProteinProjection proteinProjection = CytoDataHandle.createCytoProteinProjection(ProteinProjectionID, proteinProject, projection);
                 node.addCytoProteinInside(proteinProjection);
             }

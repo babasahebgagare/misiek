@@ -142,14 +142,16 @@ public class LeftPanel extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
 
-        jButton1.setText("Load file");
+        jButton1.setText("Załaduj dane");
+        jButton1.setToolTipText("Ładuje dane z plików .spy, .trees, .int");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Convert Networks");
+        jButton2.setText("Wyświetl sieć");
+        jButton2.setToolTipText("Wyswietla zaznaczone sieci w drzewku");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -157,6 +159,7 @@ public class LeftPanel extends javax.swing.JPanel {
         });
 
         jButton3.setText("Rzutuj");
+        jButton3.setToolTipText("Rzutuje na zaznaczone sieci w drzewku");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -213,9 +216,9 @@ public class LeftPanel extends javax.swing.JPanel {
                             .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
-                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)))
+                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE))
                 .addContainerGap())
@@ -285,11 +288,11 @@ private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
     Collection<PPINetwork> networks = getSelectedNetworks();
 
-    CytoPPINetworkProjection projection = CytoProjector.projectSelected(networks);
-    CyNetworkView cyNetworkView = Cytoscape.getNetworkView(projection.getCytoID());
-    if (projection != null && cyNetworkView != Cytoscape.getNullNetworkView()) {
-        Layouter.ProjectionLayout(projection, cyNetworkView);
-    }
+    CytoProjector.projectSelected(networks);
+/*CyNetworkView cyNetworkView = Cytoscape.getNetworkView(projection.getCytoID());
+if (projection != null && cyNetworkView != Cytoscape.getNullNetworkView()) {
+Layouter.ProjectionLayout(projection, cyNetworkView);
+}*/
 //    Cytoscape.getVisualMappingManager().setVisualStyle("MCVStyle");
 
 }//GEN-LAST:event_jButton3ActionPerformed

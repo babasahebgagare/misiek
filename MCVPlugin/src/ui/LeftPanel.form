@@ -28,9 +28,9 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jButton4" pref="137" max="32767" attributes="1"/>
-                          <Component id="jButton6" pref="137" max="32767" attributes="1"/>
-                          <Component id="jButton5" alignment="0" pref="137" max="32767" attributes="1"/>
+                          <Component id="jButton4" pref="159" max="32767" attributes="1"/>
+                          <Component id="jButton6" pref="159" max="32767" attributes="1"/>
+                          <Component id="jButton5" alignment="0" pref="159" max="32767" attributes="1"/>
                       </Group>
                   </Group>
                   <Component id="jScrollPane1" alignment="0" pref="274" max="32767" attributes="1"/>
@@ -71,7 +71,8 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Load file"/>
+        <Property name="text" type="java.lang.String" value="Za&#x142;aduj dane"/>
+        <Property name="toolTipText" type="java.lang.String" value="&#x141;aduje dane z plik&#xf3;w .spy, .trees, .int"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
@@ -79,7 +80,8 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButton2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Convert Networks"/>
+        <Property name="text" type="java.lang.String" value="Wy&#x15b;wietl sie&#x107;"/>
+        <Property name="toolTipText" type="java.lang.String" value="Wyswietla zaznaczone sieci w drzewku"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
@@ -88,6 +90,7 @@
     <Component class="javax.swing.JButton" name="jButton3">
       <Properties>
         <Property name="text" type="java.lang.String" value="Rzutuj"/>
+        <Property name="toolTipText" type="java.lang.String" value="Rzutuje na zaznaczone sieci w drzewku"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>

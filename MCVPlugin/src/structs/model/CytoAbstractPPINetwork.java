@@ -15,6 +15,8 @@ public abstract class CytoAbstractPPINetwork extends CytoObject {
 
     public abstract CytoInteraction getCytoInteraction(String ID);
 
+    public abstract void addCytoInteraction(CytoInteraction cytoInteraction);
+
     public CytoAbstractPPINetwork(PPINetwork network, String ID) {
         this.network = network;
         this.ID = ID;

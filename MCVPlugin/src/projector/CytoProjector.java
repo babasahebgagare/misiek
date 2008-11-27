@@ -12,33 +12,41 @@ import structs.model.CytoPPINetworkProjection;
 import structs.model.CytoProtein;
 import structs.model.PPINetwork;
 import utils.Messenger;
+import visual.layout.Layouter;
 
 public class CytoProjector {
 
-    public static CytoPPINetworkProjection projectSelected(Collection<PPINetwork> networks) {
-        Collection<CytoProtein> selectedProteins = getSelectedProteins();
-        CytoAbstractPPINetwork motherCytoNetwork = selectedProteins.iterator().next().getCytoNetowork();
+    private static CytoPPINetworkProjection projectNetwork(Collection<CytoProtein> selectedProteins, CytoAbstractPPINetwork motherCytoNetwork, PPINetwork network) {
+        PPINetwork motherNetwork = motherCytoNetwork.getNetwork();
         CytoPPINetworkProjection ret = null;
-        for (PPINetwork network : networks) {
-            PPINetwork motherNetwork = motherCytoNetwork.getNetwork();
-
-            switch (network.getContext().getHierarchy().getNetworkPosition(motherNetwork)) {
-                case ABOVE:
-                    ret = ProjectorNetwork.projectProteinsToDownOnNetwork(selectedProteins, network, motherCytoNetwork);
-                    CytoNetworkConverter.convertCytoNetwork(ret);
-                    break;
-                case BELOW:
-                    ret = ProjectorNetwork.projectProteinsToUpOnNetwork(selectedProteins, network, motherCytoNetwork);
-                    CytoNetworkConverter.convertCytoNetwork(ret);
-                    break;
-                case NEIGHBOUR:
-                    Messenger.Message("NEIGHBOUR");
-                    break;
-                default:
-                    Messenger.Message("DEFAULT");
-            }
+        switch (network.getContext().getHierarchy().getNetworkPosition(motherNetwork)) {
+            case ABOVE:
+                ret = ProjectorNetwork.projectProteinsToDownOnNetwork(selectedProteins, network, motherCytoNetwork);
+                CytoNetworkConverter.convertCytoNetwork(ret);
+                Layouter.ProjectionsLayout(ret);
+                break;
+            case BELOW:
+                ret = ProjectorNetwork.projectProteinsToUpOnNetwork(selectedProteins, network, motherCytoNetwork);
+                CytoNetworkConverter.convertCytoNetwork(ret);
+                break;
+            case NEIGHBOUR:
+                Messenger.Message("NEIGHBOUR");
+                break;
+            default:
+                Messenger.Message("DEFAULT");
         }
         return ret;
+    }
+
+    public static void projectSelected(Collection<PPINetwork> networks) {
+        Collection<CytoProtein> selectedProteins = getSelectedProteins();
+        CytoAbstractPPINetwork motherCytoNetwork = selectedProteins.iterator().next().getCytoNetowork();
+
+        for (PPINetwork network : networks) {
+            projectNetwork(selectedProteins, motherCytoNetwork, network);
+
+
+        }
     }
 
     public static Collection<CytoProtein> getSelectedProteins() {

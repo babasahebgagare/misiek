@@ -16,7 +16,10 @@ public class PPINetwork {
     }
 
     public void addInteraction(String ID, String SourceID, String TargetID, Double Probability) {
-        Interaction interaction = new Interaction(ID, SourceID, TargetID, Probability);
+        Protein source = this.getProtein(SourceID);
+        Protein target = this.getProtein(TargetID);
+
+        Interaction interaction = new Interaction(ID, source, target, Probability, this);
 
         interactions.put(ID, interaction);
     }
