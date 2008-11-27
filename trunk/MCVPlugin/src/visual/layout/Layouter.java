@@ -36,7 +36,8 @@ public class Layouter {
     }
 
     public static void ProjectionsLayout(CytoPPINetworkProjection projection) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        CyNetworkView cyNetworkView =Cytoscape.getNetworkView(projection.getCytoID());
+        ProjectionLayout(projection, cyNetworkView);
     }
 
     public static void ProjectionLayout(CytoPPINetworkProjection projection, CyNetworkView cyNetworkView) {

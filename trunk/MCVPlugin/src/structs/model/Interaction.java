@@ -3,15 +3,17 @@ package structs.model;
 public class Interaction {
 
     private String ID;
-    private String sourceID;
-    private String targetID;
+    private Protein source;
+    private Protein target;
     private Double probability;
+    private PPINetwork network;
 
-    public Interaction(String ID, String SourceID, String TargetID, Double Probability) {
+    public Interaction(String ID, Protein source, Protein target, Double Probability, PPINetwork network) {
         this.ID = ID;
-        this.sourceID = SourceID;
-        this.targetID = TargetID;
+        this.source = source;
+        this.target = target;
         this.probability = Probability;
+        this.network = network;
     }
 
     public String getID() {
@@ -30,19 +32,27 @@ public class Interaction {
         this.probability = probability;
     }
 
-    public String getSourceID() {
-        return sourceID;
+    public Protein getSource() {
+        return source;
     }
 
-    public void setSourceID(String sourceID) {
-        this.sourceID = sourceID;
+    public void setSource(Protein source) {
+        this.source = source;
     }
 
-    public String getTargetID() {
-        return targetID;
+    public Protein getTarget() {
+        return target;
     }
 
-    public void setTargetID(String targetID) {
-        this.targetID = targetID;
+    public void setTarget(Protein target) {
+        this.target = target;
+    }
+
+    public PPINetwork getNetwork() {
+        return network;
+    }
+
+    public void setNetwork(PPINetwork network) {
+        this.network = network;
     }
 }
