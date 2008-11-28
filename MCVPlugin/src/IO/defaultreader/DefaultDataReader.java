@@ -8,11 +8,12 @@ import java.util.Collection;
 import java.util.HashSet;
 import main.DataHandle;
 import org.openide.util.Exceptions;
+import structs.model.PPINetwork;
 import utils.Messenger;
 
 public class DefaultDataReader implements DataReaderInterface {
 
-    private void readInteractions(BufferedReader br) throws IOException {
+    private void readInteractions(BufferedReader br, double treshold) throws IOException {
         String line = br.readLine();
         while (line != null && !line.equals("")) {
             String[] intData = line.split("        ");
@@ -21,8 +22,11 @@ public class DefaultDataReader implements DataReaderInterface {
             String TargetID = intData[1].trim();
             String EdgeID = SourceID + "_" + TargetID;
 
+
             Double Probability = Double.parseDouble(intData[2].trim());
-            DataHandle.createInteraction(EdgeID, SourceID, TargetID, Probability);
+            if (Probability.doubleValue() >= treshold) {
+                DataHandle.createInteraction(EdgeID, SourceID, TargetID, Probability);
+            }
 
             line = br.readLine();
         }
@@ -75,11 +79,11 @@ public class DefaultDataReader implements DataReaderInterface {
         }
     }
 
-    public void readInteractions(String filepath) {
+    public void readInteractions(String filepath, double treshold) {
         try {
             MCVBufferedReader mbr = new MCVBufferedReader(filepath);
             BufferedReader br = mbr.getBufferedReader();
-            readInteractions(br);
+            readInteractions(br, treshold);
             mbr.close();
         } catch (FileNotFoundException e) {
             Messenger.Error(e);
@@ -143,5 +147,13 @@ public class DefaultDataReader implements DataReaderInterface {
         ret.add(substring.substring(lastIndex + 1, substring.length()));
 
         return ret;
+    }
+
+    public void readInteractions(String filepath) {
+        readInteractions(filepath, 1.0);
+    }
+
+    public void readInteractions(String filepath, PPINetwork network, double treshold) {
+        //    throw new UnsupportedOperationException("Not supported yet.");
     }
 }

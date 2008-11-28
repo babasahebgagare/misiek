@@ -36,7 +36,7 @@ public class Layouter {
     }
 
     public static void ProjectionsLayout(CytoPPINetworkProjection projection) {
-        CyNetworkView cyNetworkView =Cytoscape.getNetworkView(projection.getCytoID());
+        CyNetworkView cyNetworkView = Cytoscape.getNetworkView(projection.getCytoID());
         ProjectionLayout(projection, cyNetworkView);
     }
 
