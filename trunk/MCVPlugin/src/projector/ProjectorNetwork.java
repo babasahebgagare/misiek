@@ -12,6 +12,7 @@ import structs.model.Interaction;
 import structs.model.PPINetwork;
 import structs.model.Protein;
 import utils.IDCreator;
+import utils.MemoLogger;
 
 public class ProjectorNetwork {
 
@@ -78,6 +79,12 @@ public class ProjectorNetwork {
 
         String groupNodeID = IDCreator.createGroupNodeID(cytoProtein);
         CytoGroupNode node = CytoDataHandle.createCytoGroupNode(groupNodeID, cytoProtein);
+        if (node == null) {
+            MemoLogger.log("null");
+        } else {
+            MemoLogger.log(node.getID());
+            MemoLogger.log(node.getContext().toString());
+        }
         projection.addCytoGroupNode(node);
 
         Collection<Protein> proteinProjections = protein.getProjects().getProjectorMapDown().get(projection.getNetwork().getID());
