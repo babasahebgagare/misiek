@@ -11,7 +11,7 @@ import org.openide.util.Exceptions;
 import structs.model.PPINetwork;
 import utils.Messenger;
 
-public class DefaultDataReader implements DataReaderInterface {
+public class DefaultDataReader extends AbstractDataReader {
 
     private void readInteractions(BufferedReader br, double treshold) throws IOException {
         String line = br.readLine();
@@ -32,13 +32,32 @@ public class DefaultDataReader implements DataReaderInterface {
         }
     }
 
+    private void readInteractions(BufferedReader br, PPINetwork network, double treshold) throws IOException {
+        String line = br.readLine();
+        while (line != null && !line.equals("")) {
+            String[] intData = line.split("        ");
+
+            String SourceID = intData[0].trim();
+            String TargetID = intData[1].trim();
+            String EdgeID = SourceID + "_" + TargetID;
+
+
+            Double Probability = Double.parseDouble(intData[2].trim());
+            if (Probability.doubleValue() >= treshold && network.containsProtein(SourceID)) {
+                DataHandle.createInteraction(EdgeID, SourceID, TargetID, Probability);
+            }
+
+            line = br.readLine();
+        }
+    }
+
     private void readSpacies(BufferedReader br) throws IOException {
         String treeString = br.readLine();
         //  Messenger.Message(treeString);
         readSpaciesString(treeString, null);
     }
 
-    public void readSpacies(String filepath) {
+    private void readSpacies(String filepath) {
         try {
             MCVBufferedReader mbr = new MCVBufferedReader(filepath);
             BufferedReader br = mbr.getBufferedReader();
@@ -64,7 +83,7 @@ public class DefaultDataReader implements DataReaderInterface {
         }
     }
 
-    public void readTrees(String filepath) {
+    private void readTrees(String filepath) {
         try {
             MCVBufferedReader mbr = new MCVBufferedReader(filepath);
             BufferedReader br = mbr.getBufferedReader();
@@ -79,7 +98,7 @@ public class DefaultDataReader implements DataReaderInterface {
         }
     }
 
-    public void readInteractions(String filepath, double treshold) {
+    private void readInteractions(String filepath, double treshold) {
         try {
             MCVBufferedReader mbr = new MCVBufferedReader(filepath);
             BufferedReader br = mbr.getBufferedReader();
@@ -149,11 +168,39 @@ public class DefaultDataReader implements DataReaderInterface {
         return ret;
     }
 
-    public void readInteractions(String filepath) {
-        readInteractions(filepath, 1.0);
+    @Override
+    public void readSpacies() {
+        String spaciespath = getFilepath().concat("spy");
+        readSpacies(spaciespath);
     }
 
-    public void readInteractions(String filepath, PPINetwork network, double treshold) {
-        //    throw new UnsupportedOperationException("Not supported yet.");
+    @Override
+    public void readTrees() {
+        String treepath = getFilepath().concat("trees");
+        readTrees(treepath);
+    }
+
+    @Override
+    public void readInteractions(double treshold) {
+        String intpath = getFilepath().concat("int");
+        readInteractions(intpath, treshold);
+    }
+
+    @Override
+    public void readInteractions(PPINetwork network, double treshold) {
+        String intpath = getFilepath().concat("int");
+
+        try {
+            MCVBufferedReader mbr = new MCVBufferedReader(intpath);
+            BufferedReader br = mbr.getBufferedReader();
+            readInteractions(br, network, treshold);
+            mbr.close();
+        } catch (FileNotFoundException e) {
+            Messenger.Error(e);
+            Exceptions.printStackTrace(e);
+        } catch (IOException e) {
+            Messenger.Error(e);
+            Exceptions.printStackTrace(e);
+        }
     }
 }

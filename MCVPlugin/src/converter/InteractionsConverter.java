@@ -8,7 +8,7 @@ import structs.model.Interaction;
 
 public class InteractionsConverter {
 
-    static void convertNetworkInteractions(CytoAbstractPPINetwork cytoPPINetwork, Collection<Interaction> interactions) {
+    public static void convertNetworkInteractions(CytoAbstractPPINetwork cytoPPINetwork, Collection<Interaction> interactions) {
         for (Interaction interaction : interactions) {
             CytoProtein source = cytoPPINetwork.getCytoProtein(interaction.getSource().getID());
             CytoProtein target = cytoPPINetwork.getCytoProtein(interaction.getTarget().getID());

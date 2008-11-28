@@ -7,9 +7,9 @@ import cytoscape.data.Semantics;
 import java.util.Collection;
 import structs.model.CytoInteraction;
 
-class CytoInteractionsConverter {
+public class CytoInteractionsConverter {
 
-    static void convertCytoNetworkInteractions(CyNetwork cyNetwork, Collection<CytoInteraction> cytoInteractions) {
+    public static void convertCytoNetworkInteractions(CyNetwork cyNetwork, Collection<CytoInteraction> cytoInteractions) {
         for (CytoInteraction cytoInteraction : cytoInteractions) {
 
             CyEdge edge = Cytoscape.getCyEdge(cytoInteraction.getSource().getCytoID(), cytoInteraction.getCytoID(), cytoInteraction.getTarget().getCytoID(), Semantics.INTERACTION);
