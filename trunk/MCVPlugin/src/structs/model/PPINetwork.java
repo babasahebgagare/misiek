@@ -24,6 +24,14 @@ public class PPINetwork {
         interactions.put(ID, interaction);
     }
 
+    public boolean containsProtein(String ProteinID) {
+        return proteins.containsKey(ProteinID);
+    }
+
+    public boolean containsInteraction(String InteractionID) {
+        return interactions.containsKey(InteractionID);
+    }
+
     public void addProtein(String ProteinID, Protein ParentProtein, Family Family) {
         Protein protein = new Protein(ProteinID, ParentProtein, this, Family);
         proteins.put(ProteinID, protein);

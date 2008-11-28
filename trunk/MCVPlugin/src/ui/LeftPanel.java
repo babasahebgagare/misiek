@@ -5,9 +5,10 @@
  */
 package ui;
 
-import IO.DataReader;
-import IO.DataReaderInterface;
+import IO.AbstractDataReader;
 import IO.defaultreader.DefaultDataReader;
+import converter.CytoInteractionsConverter;
+import converter.InteractionsConverter;
 import converter.NetworksConverter;
 import cytoscape.Cytoscape;
 import cytoscape.dialogs.plugins.TreeNode;
@@ -29,13 +30,11 @@ import main.DataHandle;
 import main.MenusHandle;
 import projector.CytoProjector;
 import projector.ProjectorInfoCalculator;
-import structs.model.CytoPPINetworkProjection;
+import structs.model.CytoAbstractPPINetwork;
 import structs.model.Family;
+import structs.model.Interaction;
 import structs.model.PPINetwork;
 import utils.MemoLogger;
-import utils.Messenger;
-import visual.layout.Layouter;
-import visual.renderers.MCVBackgroundRenderer;
 
 /**
  *
@@ -43,6 +42,8 @@ import visual.renderers.MCVBackgroundRenderer;
  * @author  misiek
  */
 public class LeftPanel extends javax.swing.JPanel {
+
+    AbstractDataReader dr = new DefaultDataReader();
 
     /** Creates new form LeftPanel */
     public LeftPanel() {
@@ -160,6 +161,11 @@ public class LeftPanel extends javax.swing.JPanel {
         jSpinner1.setName("TresholdSpinner"); // NOI18N
 
         jButton7.setText("Załaduj interakcje");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -322,21 +328,16 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         String filepath = file.getAbsolutePath();
         int pointPosition = filepath.lastIndexOf(".");
         filepath = filepath.substring(0, pointPosition + 1);
+        dr.setFilepath(filepath);
 
-        String spaciespath = filepath.concat("spy");
-        String treepath = filepath.concat("trees");
-        String intpath = filepath.concat("int");
-
-        DataReaderInterface dr = new DefaultDataReader();
-        dr.readSpacies(spaciespath);
+        dr.readSpacies();
         MemoLogger.log("Drzewo gatunkow wczytane");
 
-        dr.readTrees(treepath);
+        dr.readTrees();
         MemoLogger.log("Drzewo rodzin wczytane");
         double treshold = ((Integer) jSpinner1.getValue()).doubleValue() / 100.0;
 
-        Messenger.Message(treshold);
-        dr.readInteractions(intpath, treshold);
+        //    dr.readInteractions(intpath, treshold);
         MemoLogger.log("Interakcje wczytane");
         //DataReader.ReadDataFromFile(file.getAbsolutePath());
         ProjectorInfoCalculator.calculateProjectorInfo();
@@ -375,6 +376,21 @@ private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     //  double treshold = ((Integer) jSpinner1.getValue()).doubleValue() / 100.0;
     // Messenger.Message(treshold);
 }//GEN-LAST:event_jButton4ActionPerformed
+
+private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    double treshold = ((Integer) jSpinner1.getValue()).doubleValue() / 100.0;
+
+    CyNetworkView cyNetworkView = Cytoscape.getCurrentNetworkView();
+
+    CytoAbstractPPINetwork cytoNetwork = CytoDataHandle.findNetworkByCytoID(cyNetworkView.getIdentifier());
+    PPINetwork network = cytoNetwork.getNetwork();
+    Collection<Interaction> interactions = network.getInteractions().values();
+
+    dr.readInteractions(network, treshold);
+    InteractionsConverter.convertNetworkInteractions(cytoNetwork, interactions);
+    CytoInteractionsConverter.convertCytoNetworkInteractions(cyNetworkView.getNetwork(), cytoNetwork.getCytoInteractions());
+
+}//GEN-LAST:event_jButton7ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
