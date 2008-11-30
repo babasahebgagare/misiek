@@ -14,4 +14,8 @@ public class IDMapper {
     public String getIDByCytoID(String CytoID) {
         return map.get(CytoID);
     }
+
+    public void deleteMapping(String CytoID) {
+        map.remove(CytoID);
+    }
 }

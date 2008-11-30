@@ -12,7 +12,6 @@ import structs.model.Interaction;
 import structs.model.PPINetwork;
 import structs.model.Protein;
 import utils.IDCreator;
-import utils.MemoLogger;
 
 public class ProjectorNetwork {
 
@@ -69,8 +68,10 @@ public class ProjectorNetwork {
         CytoProtein source = projection.getCytoProtein(proteinInteractionSourceID);
         CytoProtein target = projection.getCytoProtein(proteinInteractionTargetID);
 
-        CytoInteraction CytoProjectionInteraction = new CytoInteraction(proteinInteractionID, interaction, source, target, projection);
-        projection.addCytoInteraction(CytoProjectionInteraction);
+        if (source != null && target != null) {
+            CytoInteraction CytoProjectionInteraction = new CytoInteraction(proteinInteractionID, interaction, source, target, projection);
+            projection.addCytoInteraction(CytoProjectionInteraction);
+        }
     }
 
     private static void projectCytoProtein(CytoProtein cytoProtein, CytoPPINetworkProjection projection) {
@@ -79,12 +80,6 @@ public class ProjectorNetwork {
 
         String groupNodeID = IDCreator.createGroupNodeID(cytoProtein);
         CytoGroupNode node = CytoDataHandle.createCytoGroupNode(groupNodeID, cytoProtein);
-        if (node == null) {
-            MemoLogger.log("null");
-        } else {
-            MemoLogger.log(node.getID());
-            MemoLogger.log(node.getContext().toString());
-        }
         projection.addCytoGroupNode(node);
 
         Collection<Protein> proteinProjections = protein.getProjects().getProjectorMapDown().get(projection.getNetwork().getID());

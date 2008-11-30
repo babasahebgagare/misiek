@@ -6,7 +6,6 @@
 package ui;
 
 import IO.AbstractDataReader;
-import IO.defaultreader.DefaultDataReader;
 import converter.CytoInteractionsConverter;
 import converter.InteractionsConverter;
 import converter.NetworksConverter;
@@ -35,6 +34,7 @@ import structs.model.Family;
 import structs.model.Interaction;
 import structs.model.PPINetwork;
 import utils.MemoLogger;
+import utils.Messenger;
 
 /**
  *
@@ -42,8 +42,6 @@ import utils.MemoLogger;
  * @author  misiek
  */
 public class LeftPanel extends javax.swing.JPanel {
-
-    AbstractDataReader dr = new DefaultDataReader();
 
     /** Creates new form LeftPanel */
     public LeftPanel() {
@@ -175,9 +173,9 @@ public class LeftPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE))
+                    .addComponent(jButton7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSpinner1, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+                .addComponent(jSpinner1, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -194,7 +192,7 @@ public class LeftPanel extends javax.swing.JPanel {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jButton4.setText("Rozmiesc wierzcholki");
+        jButton4.setText("Usuń krawędzie");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -207,8 +205,8 @@ public class LeftPanel extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton4)
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(137, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,8 +239,8 @@ public class LeftPanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -279,11 +277,11 @@ public class LeftPanel extends javax.swing.JPanel {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -328,17 +326,13 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         String filepath = file.getAbsolutePath();
         int pointPosition = filepath.lastIndexOf(".");
         filepath = filepath.substring(0, pointPosition + 1);
-        dr.setFilepath(filepath);
+        AbstractDataReader.getInstance().setFilepath(filepath);
 
-        dr.readSpacies();
+        AbstractDataReader.getInstance().readSpacies();
         MemoLogger.log("Drzewo gatunkow wczytane");
 
-        dr.readTrees();
+        AbstractDataReader.getInstance().readTrees();
         MemoLogger.log("Drzewo rodzin wczytane");
-        double treshold = ((Integer) jSpinner1.getValue()).doubleValue() / 100.0;
-
-        //    dr.readInteractions(intpath, treshold);
-        MemoLogger.log("Interakcje wczytane");
         //DataReader.ReadDataFromFile(file.getAbsolutePath());
         ProjectorInfoCalculator.calculateProjectorInfo();
         initDataView();
@@ -367,31 +361,48 @@ Layouter.ProjectionLayout(projection, cyNetworkView);
 }//GEN-LAST:event_jButton3ActionPerformed
 
 private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-    /*    CyNetworkView cyNetworkView = Cytoscape.getCurrentNetworkView();
-    CytoPPINetworkProjection projection = CytoDataHandle.findNetworkProjectionByCytoID(cyNetworkView.getIdentifier());
 
-    if (projection != null) {
-    Layouter.ProjectionLayout(projection, cyNetworkView);
-    }*/
-    //  double treshold = ((Integer) jSpinner1.getValue()).doubleValue() / 100.0;
-    // Messenger.Message(treshold);
+
+    CyNetworkView cyNetworkView = Cytoscape.getCurrentNetworkView();
+
+    CytoAbstractPPINetwork cytoNetwork = CytoDataHandle.findNetworkByCytoID(cyNetworkView.getIdentifier());
+
+    CytoDataHandle.deleteCytoscapeInteractions(cytoNetwork);
+
+    cytoNetwork.deleteCytoInteractions();
+
+/*    CyNetworkView cyNetworkView = Cytoscape.getCurrentNetworkView();
+CytoPPINetworkProjection projection = CytoDataHandle.findNetworkProjectionByCytoID(cyNetworkView.getIdentifier());
+
+if (projection != null) {
+Layouter.ProjectionLayout(projection, cyNetworkView);
+}*/
+//  double treshold = ((Integer) jSpinner1.getValue()).doubleValue() / 100.0;
+// Messenger.Message(treshold);
 }//GEN-LAST:event_jButton4ActionPerformed
 
 private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+
+    /*    SwingUtilities.invokeLater(new Runnable() {
+
+    public void run() {*/
     double treshold = ((Integer) jSpinner1.getValue()).doubleValue() / 100.0;
 
     CyNetworkView cyNetworkView = Cytoscape.getCurrentNetworkView();
 
     CytoAbstractPPINetwork cytoNetwork = CytoDataHandle.findNetworkByCytoID(cyNetworkView.getIdentifier());
-    PPINetwork network = cytoNetwork.getNetwork();
-    Collection<Interaction> interactions = network.getInteractions().values();
-
-    dr.readInteractions(network, treshold);
+   
+   
+    CytoDataHandle.updateCytoInteractions(cytoNetwork, treshold);
+    
+     PPINetwork network = cytoNetwork.getNetwork();
+     Collection<Interaction> interactions = network.getInteractions().values();
+    //AbstractDataReader.getInstance().readInteractions(network, treshold);
     InteractionsConverter.convertNetworkInteractions(cytoNetwork, interactions);
     CytoInteractionsConverter.convertCytoNetworkInteractions(cyNetworkView.getNetwork(), cytoNetwork.getCytoInteractions());
-
+/*}
+});*/
 }//GEN-LAST:event_jButton7ActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

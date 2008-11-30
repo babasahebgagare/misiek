@@ -8,48 +8,10 @@ import java.util.Collection;
 import java.util.HashSet;
 import main.DataHandle;
 import org.openide.util.Exceptions;
-import structs.model.PPINetwork;
+import structs.model.CytoAbstractPPINetwork;
 import utils.Messenger;
 
 public class DefaultDataReader extends AbstractDataReader {
-
-    private void readInteractions(BufferedReader br, double treshold) throws IOException {
-        String line = br.readLine();
-        while (line != null && !line.equals("")) {
-            String[] intData = line.split("        ");
-
-            String SourceID = intData[0].trim();
-            String TargetID = intData[1].trim();
-            String EdgeID = SourceID + "_" + TargetID;
-
-
-            Double Probability = Double.parseDouble(intData[2].trim());
-            if (Probability.doubleValue() >= treshold) {
-                DataHandle.createInteraction(EdgeID, SourceID, TargetID, Probability);
-            }
-
-            line = br.readLine();
-        }
-    }
-
-    private void readInteractions(BufferedReader br, PPINetwork network, double treshold) throws IOException {
-        String line = br.readLine();
-        while (line != null && !line.equals("")) {
-            String[] intData = line.split("        ");
-
-            String SourceID = intData[0].trim();
-            String TargetID = intData[1].trim();
-            String EdgeID = SourceID + "_" + TargetID;
-
-
-            Double Probability = Double.parseDouble(intData[2].trim());
-            if (Probability.doubleValue() >= treshold && network.containsProtein(SourceID)) {
-                DataHandle.createInteraction(EdgeID, SourceID, TargetID, Probability);
-            }
-
-            line = br.readLine();
-        }
-    }
 
     private void readSpacies(BufferedReader br) throws IOException {
         String treeString = br.readLine();
@@ -102,7 +64,7 @@ public class DefaultDataReader extends AbstractDataReader {
         try {
             MCVBufferedReader mbr = new MCVBufferedReader(filepath);
             BufferedReader br = mbr.getBufferedReader();
-            readInteractions(br, treshold);
+            DefaultInteractionsParser.readInteractions(br, treshold);
             mbr.close();
         } catch (FileNotFoundException e) {
             Messenger.Error(e);
@@ -186,14 +148,31 @@ public class DefaultDataReader extends AbstractDataReader {
         readInteractions(intpath, treshold);
     }
 
-    @Override
+    /*  @Override
     public void readInteractions(PPINetwork network, double treshold) {
+    String intpath = getFilepath().concat("int");
+
+    try {
+    MCVBufferedReader mbr = new MCVBufferedReader(intpath);
+    BufferedReader br = mbr.getBufferedReader();
+    DefaultInteractionsParser.readInteractions(br, network, treshold);
+    mbr.close();
+    } catch (FileNotFoundException e) {
+    Messenger.Error(e);
+    Exceptions.printStackTrace(e);
+    } catch (IOException e) {
+    Messenger.Error(e);
+    Exceptions.printStackTrace(e);
+    }
+    }*/
+    @Override
+    public void readInteractions(CytoAbstractPPINetwork cytoNetwork, double treshold) {
         String intpath = getFilepath().concat("int");
 
         try {
             MCVBufferedReader mbr = new MCVBufferedReader(intpath);
             BufferedReader br = mbr.getBufferedReader();
-            readInteractions(br, network, treshold);
+            DefaultInteractionsParser.readInteractions(br, cytoNetwork, treshold);
             mbr.close();
         } catch (FileNotFoundException e) {
             Messenger.Error(e);

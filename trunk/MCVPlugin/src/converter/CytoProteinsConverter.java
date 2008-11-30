@@ -12,6 +12,7 @@ class CytoProteinsConverter {
         for (CytoProtein cytoProtein : cytoProteins) {
 
             CyNode node = Cytoscape.getCyNode(cytoProtein.getCytoID(), true);
+            node.setIdentifier(cytoProtein.getCytoID());
             newNet.addNode(node.getRootGraphIndex());
         }
     }

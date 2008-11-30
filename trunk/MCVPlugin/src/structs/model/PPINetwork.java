@@ -42,6 +42,10 @@ public class PPINetwork {
         proteins.put(ProteinID, protein);
     }
 
+    public void deleteInteractions() {
+        interactions = new HashMap<String, Interaction>();
+    }
+
     public Protein getProtein(String ProteinID) {
         return proteins.get(ProteinID);
     }

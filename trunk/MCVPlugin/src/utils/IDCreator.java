@@ -12,7 +12,7 @@ public class IDCreator {
 
     public static String createNetworkProjectionID(PPINetwork networkTarget, CytoAbstractPPINetwork cytoNetworkSource) {
         networkID++;
-        return "PROJ_" + cytoNetworkSource.getID() + "_ON_" + networkTarget.getID() + String.valueOf(networkID);
+        return "PROJ_" + cytoNetworkSource.getID() + "_ON_" + networkTarget.getID() + "_" + String.valueOf(networkID);
     }
 
     public static String createProteinProjectionID(Protein targetProteinProject, CytoAbstractPPINetwork cytoProjection) {

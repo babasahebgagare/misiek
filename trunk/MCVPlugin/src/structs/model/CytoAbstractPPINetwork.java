@@ -1,11 +1,30 @@
 package structs.model;
 
 import java.util.Collection;
+import utils.IDCreator;
 
 public abstract class CytoAbstractPPINetwork extends CytoObject {
 
     private PPINetwork network;
     private String ID;
+
+    public boolean containsCytoProtein(String SourceID) {
+        Protein protein = this.network.getProtein(SourceID);
+
+        if (protein == null) {
+            return false;
+        }
+
+        String cytoProteinID = IDCreator.createProteinProjectionID(protein, this);
+
+        return getCytoProtein(cytoProteinID) != null;
+    }
+
+    public abstract void deleteCytoInteractions();
+
+    public abstract void deleteCytoProtein(String ID);
+
+    public abstract void deleteCytoInteraction(String ID);
 
     public abstract Collection<CytoProtein> getCytoProteins();
 

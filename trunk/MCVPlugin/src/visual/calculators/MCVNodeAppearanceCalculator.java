@@ -9,6 +9,7 @@ import main.CytoDataHandle;
 import structs.model.CytoAbstractPPINetwork;
 import structs.model.CytoProtein;
 import structs.model.Family;
+import structs.model.Protein;
 
 public class MCVNodeAppearanceCalculator extends NodeAppearanceCalculator {
 
@@ -19,11 +20,15 @@ public class MCVNodeAppearanceCalculator extends NodeAppearanceCalculator {
         CytoAbstractPPINetwork cytoNetwork = CytoDataHandle.findNetworkByCytoID(cyNetwork.getIdentifier());
         if (cytoNetwork != null) {
             CytoProtein cytoProtein = cytoNetwork.getCytoProtein(node.getIdentifier());
-            Family family = cytoProtein.getProtein().getFamily();
-
-            appr.set(VisualPropertyType.NODE_LABEL, cytoProtein.getProtein().getID());
-            appr.set(VisualPropertyType.NODE_FILL_COLOR, family.getColor());
-            appr.set(VisualPropertyType.NODE_TOOLTIP, family.getFamilyID());
+            if (cytoProtein != null) {
+                Protein protein = cytoProtein.getProtein();
+                if (protein != null) {
+                    Family family = protein.getFamily();
+                    appr.set(VisualPropertyType.NODE_LABEL, protein.getID());
+                    appr.set(VisualPropertyType.NODE_FILL_COLOR, family.getColor());
+                    appr.set(VisualPropertyType.NODE_TOOLTIP, family.getFamilyID());
+                }
+            }
         }
     }
 }
