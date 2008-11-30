@@ -9,7 +9,7 @@
             <folders/>
             <ide-actions>
                 <action name="run">
-                    <target>run-plugin</target>
+                    <target>run-plugin-console</target>
                 </action>
             </ide-actions>
             <view>

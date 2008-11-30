@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- You may freely edit this file. See commented blocks below for -->
-<!-- some examples of how to customize the build. -->
-<!-- (If you delete it and reopen the project it will be recreated.) -->
+
 <project name="MyPlugin" default="default" basedir="../">
     <description>Ant script</description>
 
@@ -9,11 +7,20 @@
     <property name="cytoscape-plugins" value="${cytoscape-path}/plugins" />
     <property name="project-name" value="MCVPlugin" />
 
-
-    <target name="run-plugin" description="Run Cytoscape with plugin">
+    <target name="compile-plugin" description="Compile Cytoscape plugin">
         <ant antfile="${project-name}/build.xml" inheritall="false" target="jar" />
+    </target>
+
+    <target name="copy-plugin" description="Copy Cytoscape plugin">
         <copy file="${project-name}/dist/${project-name}.jar" todir="${cytoscape-plugins}" />
-        <exec executable="${cytoscape-path}/Cytoscape" />
+    </target>
+
+    <target name="run-plugin" depends="compile-plugin,copy-plugin" description="Run Cytoscape with plugin">
+        <exec command="${cytoscape-path}/cytoscape" />
+    </target>
+
+    <target name="run-plugin-console" depends="compile-plugin,copy-plugin" description="Run Cytoscape with plugin in console">
+        <exec command="java -Dswing.aatext=true -Xss5M -Xmx512M -jar ${cytoscape-path}/cytoscape.jar cytoscape.CyMain -p ${cytoscape-path}/plugins" />
     </target>
 
 </project>
