@@ -7,7 +7,6 @@ import java.util.Collection;
 import structs.model.Family;
 import structs.model.PPINetwork;
 import structs.model.Protein;
-import sun.net.NetworkServer;
 import utils.MemoLogger;
 
 public class DataHandle {
@@ -101,5 +100,9 @@ public class DataHandle {
 
     public static void setRootNetwork(PPINetwork rootNetwork) {
         DataHandle.rootNetwork = rootNetwork;
+    }
+
+    static void deleteInteractions(PPINetwork network) {
+        network.deleteInteractions();
     }
 }

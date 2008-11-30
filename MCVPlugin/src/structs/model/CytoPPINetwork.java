@@ -40,4 +40,19 @@ public class CytoPPINetwork extends CytoAbstractPPINetwork {
     public CytoInteraction getCytoInteraction(String ID) {
         return interactions.get(ID);
     }
+
+    @Override
+    public void deleteCytoProtein(String ID) {
+        proteins.remove(ID);
+    }
+
+    @Override
+    public void deleteCytoInteraction(String ID) {
+        interactions.remove(ID);
+    }
+
+    @Override
+    public void deleteCytoInteractions() {
+        interactions = new HashMap<String, CytoInteraction>();
+    }
 }

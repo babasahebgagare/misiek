@@ -68,4 +68,19 @@ public class CytoPPINetworkProjection extends CytoAbstractPPINetwork {
     public void setCytoGroupNodes(Map<String, CytoGroupNode> cytoGroupNodes) {
         this.cytoGroupNodes = cytoGroupNodes;
     }
+
+    @Override
+    public void deleteCytoProtein(String ID) {
+        proteins.remove(ID);
+    }
+
+    @Override
+    public void deleteCytoInteraction(String ID) {
+        interactions.remove(ID);
+    }
+
+    @Override
+    public void deleteCytoInteractions() {
+        interactions = new HashMap<String, CytoInteraction>();
+    }
 }
