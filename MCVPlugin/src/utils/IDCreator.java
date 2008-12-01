@@ -9,6 +9,10 @@ public class IDCreator {
 
     private static int networkID = 0;
 
+    public static String createInteractionID(String SourceID, String TargetID) {
+        return SourceID + "-" + TargetID;
+    }
+
     public static String createNetworkProjectionID(PPINetwork networkTarget, CytoAbstractPPINetwork cytoNetworkSource) {
         networkID++;
         return "PROJ_" + cytoNetworkSource.getID() + "_ON_" + networkTarget.getID() + "_" + String.valueOf(networkID);
@@ -19,7 +23,7 @@ public class IDCreator {
     }
 
     public static String createInteractionProjectionID(String interactionID, CytoAbstractPPINetwork cytoProjection) {
-        return "PROJ_" + interactionID + ":" + cytoProjection.getID();
+        return interactionID + ":" + cytoProjection.getID();
     }
 
     public static String createGroupNodeID(CytoProtein cytoProtein) {
