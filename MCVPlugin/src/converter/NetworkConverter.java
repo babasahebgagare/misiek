@@ -11,7 +11,6 @@ public class NetworkConverter {
         CytoPPINetwork cytoPPINetwork = CytoDataHandle.createCytoNetwork(network.getID(), network);
 
         ProteinsConverter.convertNetworkProteins(cytoPPINetwork, network.getProteins().values());
-        InteractionsConverter.convertNetworkInteractions(cytoPPINetwork, network.getInteractions().values());
         return cytoPPINetwork;
     }
 }

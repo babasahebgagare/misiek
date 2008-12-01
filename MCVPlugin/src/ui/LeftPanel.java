@@ -7,7 +7,6 @@ package ui;
 
 import IO.AbstractDataReader;
 import converter.CytoInteractionsConverter;
-import converter.InteractionsConverter;
 import converter.NetworksConverter;
 import cytoscape.Cytoscape;
 import cytoscape.dialogs.plugins.TreeNode;
@@ -31,10 +30,8 @@ import projector.CytoProjector;
 import projector.ProjectorInfoCalculator;
 import structs.model.CytoAbstractPPINetwork;
 import structs.model.Family;
-import structs.model.Interaction;
 import structs.model.PPINetwork;
 import utils.MemoLogger;
-import utils.Messenger;
 
 /**
  *
@@ -392,13 +389,8 @@ private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
     CytoAbstractPPINetwork cytoNetwork = CytoDataHandle.findNetworkByCytoID(cyNetworkView.getIdentifier());
    
-   
     CytoDataHandle.updateCytoInteractions(cytoNetwork, treshold);
     
-     PPINetwork network = cytoNetwork.getNetwork();
-     Collection<Interaction> interactions = network.getInteractions().values();
-    //AbstractDataReader.getInstance().readInteractions(network, treshold);
-    InteractionsConverter.convertNetworkInteractions(cytoNetwork, interactions);
     CytoInteractionsConverter.convertCytoNetworkInteractions(cyNetworkView.getNetwork(), cytoNetwork.getCytoInteractions());
 /*}
 });*/
