@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import main.CytoDataHandle;
 import structs.model.CytoAbstractPPINetwork;
+import utils.IDCreator;
 import utils.Messenger;
 
 /**
@@ -64,7 +65,7 @@ public class DefaultInteractionsParser {
 
                 String SourceID = readWord(br);
                 String TargetID = readWord(br);
-                String EdgeID = SourceID + "_" + TargetID;
+                String EdgeID = IDCreator.createInteractionID(SourceID, TargetID);
 
                 Double Probability = Double.parseDouble(readWord(br));
 
