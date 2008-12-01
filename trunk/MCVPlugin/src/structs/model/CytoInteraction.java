@@ -2,24 +2,24 @@ package structs.model;
 
 public class CytoInteraction extends CytoNetworkObject {
 
-    private Interaction interaction;
+    private Double probability;
     private CytoProtein source;
     private CytoProtein target;
 
-    public CytoInteraction(String CytoID, Interaction interaction, CytoProtein source, CytoProtein target, CytoAbstractPPINetwork cytoNetwork) {
+    public CytoInteraction(String CytoID, CytoProtein source, CytoProtein target, CytoAbstractPPINetwork cytoNetwork, Double probability) {
         this.setCytoID(CytoID);
         this.setCytoNetowork(cytoNetwork);
-        this.interaction = interaction;
         this.source = source;
         this.target = target;
+        this.probability = probability;
     }
 
-    public Interaction getInteraction() {
-        return interaction;
+    public Double getProbability() {
+        return probability;
     }
 
-    public void setInteraction(Interaction interaction) {
-        this.interaction = interaction;
+    public void setProbability(Double probability) {
+        this.probability = probability;
     }
 
     public CytoProtein getSource() {

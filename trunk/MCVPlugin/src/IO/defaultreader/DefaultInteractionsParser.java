@@ -6,6 +6,7 @@ package IO.defaultreader;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import main.CytoDataHandle;
 import main.DataHandle;
 import structs.model.CytoAbstractPPINetwork;
 import utils.Messenger;
@@ -71,7 +72,7 @@ public class DefaultInteractionsParser {
 
                 Double Probability = Double.parseDouble(intData[2].trim());
                 if (Probability.doubleValue() >= treshold) {
-                    DataHandle.createInteraction(EdgeID, SourceID, TargetID, Probability);
+                    //        DataHandle.createInteraction(EdgeID, SourceID, TargetID, Probability);
                 }
             }
             line = br.readLine();
@@ -111,7 +112,7 @@ public class DefaultInteractionsParser {
                 Double Probability = Double.parseDouble(readWord(br));
 
                 if (Probability.doubleValue() >= treshold && cytoNetwork.containsCytoProtein(SourceID) && cytoNetwork.containsCytoProtein(TargetID)) {
-                    DataHandle.createInteraction(EdgeID, SourceID, TargetID, Probability);
+                    CytoDataHandle.createCytoInteraction(EdgeID, SourceID, TargetID, Probability, cytoNetwork);
                 }
 
             } catch (Exception ex) {

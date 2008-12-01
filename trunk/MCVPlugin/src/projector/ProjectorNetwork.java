@@ -4,11 +4,9 @@ import java.util.Collection;
 import main.CytoDataHandle;
 import structs.model.CytoAbstractPPINetwork;
 import structs.model.CytoGroupNode;
-import structs.model.CytoInteraction;
 import structs.model.CytoPPINetworkProjection;
 import structs.model.CytoProtein;
 import structs.model.CytoProteinProjection;
-import structs.model.Interaction;
 import structs.model.PPINetwork;
 import structs.model.Protein;
 import utils.IDCreator;
@@ -24,15 +22,6 @@ public class ProjectorNetwork {
             projectCytoProtein(cytoProtein, projection);   //TODO
 
         }
-        for (Interaction interaction : networkTarget.getInteractions().values()) {
-            projectCytoInteraction(interaction, projection);
-        }
-        /*
-        for (Interaction interaction : network.getInteractions().values()) {
-        projectProteinInteraction(interaction, projection);
-        }
-         */
-
         return projection;
     }
 
@@ -53,25 +42,7 @@ public class ProjectorNetwork {
             }
         }
 
-        for (Interaction interaction : networkTarget.getInteractions().values()) {
-            projectCytoInteraction(interaction, projection);
-        }
-
         return projection;
-    }
-
-    private static void projectCytoInteraction(Interaction interaction, CytoPPINetworkProjection projection) {
-        String proteinInteractionID = IDCreator.createInteractionProjectionID(interaction, projection);
-        String proteinInteractionSourceID = IDCreator.createProteinProjectionID(interaction.getSource(), projection);
-        String proteinInteractionTargetID = IDCreator.createProteinProjectionID(interaction.getTarget(), projection);
-
-        CytoProtein source = projection.getCytoProtein(proteinInteractionSourceID);
-        CytoProtein target = projection.getCytoProtein(proteinInteractionTargetID);
-
-        if (source != null && target != null) {
-            CytoInteraction CytoProjectionInteraction = new CytoInteraction(proteinInteractionID, interaction, source, target, projection);
-            projection.addCytoInteraction(CytoProjectionInteraction);
-        }
     }
 
     private static void projectCytoProtein(CytoProtein cytoProtein, CytoPPINetworkProjection projection) {

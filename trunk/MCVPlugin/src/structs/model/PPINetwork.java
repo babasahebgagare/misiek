@@ -6,7 +6,6 @@ import java.util.Map;
 public class PPINetwork {
 
     private Map<String, Protein> proteins = new HashMap<String, Protein>();
-    private Map<String, Interaction> interactions = new HashMap<String, Interaction>();
     private PPINetworkContext context = null;
     private String ID;
 
@@ -15,21 +14,8 @@ public class PPINetwork {
         context = new PPINetworkContext(ParentNetwork);
     }
 
-    public void addInteraction(String ID, String SourceID, String TargetID, Double Probability) {
-        Protein source = this.getProtein(SourceID);
-        Protein target = this.getProtein(TargetID);
-
-        Interaction interaction = new Interaction(ID, source, target, Probability, this);
-
-        interactions.put(ID, interaction);
-    }
-
     public boolean containsProtein(String ProteinID) {
         return proteins.containsKey(ProteinID);
-    }
-
-    public boolean containsInteraction(String InteractionID) {
-        return interactions.containsKey(InteractionID);
     }
 
     public void addProtein(String ProteinID, Protein ParentProtein, Family Family) {
@@ -42,16 +28,8 @@ public class PPINetwork {
         proteins.put(ProteinID, protein);
     }
 
-    public void deleteInteractions() {
-        interactions = new HashMap<String, Interaction>();
-    }
-
     public Protein getProtein(String ProteinID) {
         return proteins.get(ProteinID);
-    }
-
-    public Interaction getInteraction(String IntaractionID) {
-        return interactions.get(IntaractionID);
     }
 
     public String getID() {
@@ -68,14 +46,6 @@ public class PPINetwork {
 
     public void setContext(PPINetworkContext context) {
         this.context = context;
-    }
-
-    public Map<String, Interaction> getInteractions() {
-        return interactions;
-    }
-
-    public void setInteractions(Map<String, Interaction> interactions) {
-        this.interactions = interactions;
     }
 
     public Map<String, Protein> getProteins() {

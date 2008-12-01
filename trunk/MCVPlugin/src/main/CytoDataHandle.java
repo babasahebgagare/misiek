@@ -17,12 +17,26 @@ import structs.model.CytoProteinProjection;
 import structs.model.PPINetwork;
 import structs.model.CytoPPINetworkProjection;
 import structs.model.Protein;
+import utils.IDCreator;
 
 public class CytoDataHandle {
 
     private static IDMapper networkIDMapper = new IDMapper();
     private static Map<String, CytoPPINetworkProjection> projections = new HashMap<String, CytoPPINetworkProjection>();
     private static Map<String, CytoPPINetwork> cytoNetworks = new HashMap<String, CytoPPINetwork>();
+
+    public static void createCytoInteraction(String EdgeID, String SourceID, String TargetID, Double Probability, CytoAbstractPPINetwork cytoNetwork) {
+
+        String SourceCytoID = IDCreator.createProteinProjectionID(SourceID, cytoNetwork);
+        String TargetCytoID = IDCreator.createProteinProjectionID(TargetID, cytoNetwork);
+        String EdgeCytoID = IDCreator.createInteractionProjectionID(EdgeID, cytoNetwork);
+
+        CytoProtein source = cytoNetwork.getCytoProtein(SourceCytoID);
+        CytoProtein target = cytoNetwork.getCytoProtein(TargetCytoID);
+
+        CytoInteraction cytoInteraction = new CytoInteraction(EdgeCytoID, source, target, cytoNetwork, Probability);
+        cytoNetwork.addCytoInteraction(cytoInteraction);
+    }
 
     public static void deleteCytoscapeInteractions(CytoAbstractPPINetwork cytoNetwork) {
         CyNetwork cyNetwork = Cytoscape.getNetwork(cytoNetwork.getCytoID());
@@ -46,7 +60,6 @@ public class CytoDataHandle {
     public static void updateCytoInteractions(CytoAbstractPPINetwork cytoNetwork, double treshold) {
         deleteCytoscapeInteractions(cytoNetwork);
         cytoNetwork.deleteCytoInteractions();
-        DataHandle.deleteInteractions(cytoNetwork.getNetwork());
         AbstractDataReader.getInstance().readInteractions(cytoNetwork, treshold);
     }
 

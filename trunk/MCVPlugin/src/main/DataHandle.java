@@ -15,15 +15,6 @@ public class DataHandle {
     private static Map<String, Family> families = new HashMap<String, Family>();
     private static PPINetwork rootNetwork;
 
-    public static void createInteraction(String EdgeID, String SourceID, String TargetID, Double Probability) {
-        for (PPINetwork network : networks.values()) {
-
-            if (network.getProtein(TargetID) != null) {
-                network.addInteraction(EdgeID, SourceID, TargetID, Probability);
-            }
-        }
-    }
-
     public static void createRootPPINetwork(String NetworkID) {
         PPINetwork net = new PPINetwork(NetworkID, null);
         networks.put(NetworkID, net);
@@ -64,12 +55,6 @@ public class DataHandle {
         network.addRootProtein(ProteinID, family);
     }
 
-    public static void createInteraction(String ID, String NetworkID, String SourceID, String TargetID, Double Probability) {
-        PPINetwork network = networks.get(NetworkID);
-
-        network.addInteraction(ID, SourceID, TargetID, Probability);
-    }
-
     public static Map<String, PPINetwork> getNetworks() {
         return networks;
     }
@@ -100,9 +85,5 @@ public class DataHandle {
 
     public static void setRootNetwork(PPINetwork rootNetwork) {
         DataHandle.rootNetwork = rootNetwork;
-    }
-
-    static void deleteInteractions(PPINetwork network) {
-        network.deleteInteractions();
     }
 }
