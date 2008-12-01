@@ -16,6 +16,8 @@ import structs.model.CytoProtein;
 import structs.model.CytoProteinProjection;
 import structs.model.PPINetwork;
 import structs.model.CytoPPINetworkProjection;
+import structs.model.CytoPPINetworkProjectionToDown;
+import structs.model.CytoPPINetworkProjectionToUp;
 import structs.model.Protein;
 import utils.IDCreator;
 
@@ -68,14 +70,20 @@ public class CytoDataHandle {
         return cytoGroupNode;
     }
 
-    public static CytoPPINetworkProjection createCytoProjectionNetwork(String projectionID, CytoAbstractPPINetwork cytoMotherNetwork, PPINetwork network) {
-        CytoPPINetworkProjection projection = new CytoPPINetworkProjection(cytoMotherNetwork, network, projectionID);
+    public static CytoPPINetworkProjectionToDown createCytoProjectionToDown(String projectionID, CytoAbstractPPINetwork cytoMotherNetwork, PPINetwork network) {
+        CytoPPINetworkProjectionToDown projection = new CytoPPINetworkProjectionToDown(cytoMotherNetwork, network, projectionID);
         projections.put(projectionID, projection);
         return projection;
     }
 
-    public static CytoProteinProjection createCytoProteinProjection(String ProteinProjectionID, Protein proteinProject, CytoPPINetworkProjection projection) {
-        CytoProteinProjection proteinProjection = new CytoProteinProjection(ProteinProjectionID, proteinProject, projection);
+    public static CytoPPINetworkProjectionToUp createCytoProjectionToUp(String projectionID, CytoAbstractPPINetwork cytoMotherNetwork, PPINetwork network) {
+        CytoPPINetworkProjectionToUp projection = new CytoPPINetworkProjectionToUp(cytoMotherNetwork, network, projectionID);
+        projections.put(projectionID, projection);
+        return projection;
+    }
+
+    public static CytoProteinProjection createCytoProteinProjection(String ProteinProjectionID, Protein proteinProject, CytoPPINetworkProjection projection, CytoProtein cytoMotherProtein) {
+        CytoProteinProjection proteinProjection = new CytoProteinProjection(ProteinProjectionID, proteinProject, projection, cytoMotherProtein);
         projection.addCytoProtein(proteinProjection);
         return proteinProjection;
     }

@@ -5,6 +5,8 @@ import main.CytoDataHandle;
 import structs.model.CytoAbstractPPINetwork;
 import structs.model.CytoGroupNode;
 import structs.model.CytoPPINetworkProjection;
+import structs.model.CytoPPINetworkProjectionToDown;
+import structs.model.CytoPPINetworkProjectionToUp;
 import structs.model.CytoProtein;
 import structs.model.CytoProteinProjection;
 import structs.model.PPINetwork;
@@ -13,10 +15,10 @@ import utils.IDCreator;
 
 public class ProjectorNetwork {
 
-    static CytoPPINetworkProjection projectProteinsToDownOnNetwork(Collection<CytoProtein> selectedProteins, PPINetwork networkTarget, CytoAbstractPPINetwork cytoNetworkSource) {
+    static CytoPPINetworkProjectionToDown projectProteinsToDownOnNetwork(Collection<CytoProtein> selectedProteins, PPINetwork networkTarget, CytoAbstractPPINetwork cytoNetworkSource) {
         String projectionID = IDCreator.createNetworkProjectionID(networkTarget, cytoNetworkSource);
 
-        CytoPPINetworkProjection projection = CytoDataHandle.createCytoProjectionNetwork(projectionID, cytoNetworkSource, networkTarget);
+        CytoPPINetworkProjectionToDown projection = CytoDataHandle.createCytoProjectionToDown(projectionID, cytoNetworkSource, networkTarget);
 
         for (CytoProtein cytoProtein : selectedProteins) {
             projectCytoProtein(cytoProtein, projection);   //TODO
@@ -25,9 +27,9 @@ public class ProjectorNetwork {
         return projection;
     }
 
-    static CytoPPINetworkProjection projectProteinsToUpOnNetwork(Collection<CytoProtein> selectedProteins, PPINetwork networkTarget, CytoAbstractPPINetwork cytoNetworkSource) {
+    static CytoPPINetworkProjectionToUp projectProteinsToUpOnNetwork(Collection<CytoProtein> selectedProteins, PPINetwork networkTarget, CytoAbstractPPINetwork cytoNetworkSource) {
         String projectionID = IDCreator.createNetworkProjectionID(networkTarget, cytoNetworkSource);
-        CytoPPINetworkProjection projection = CytoDataHandle.createCytoProjectionNetwork(projectionID, cytoNetworkSource, networkTarget);
+        CytoPPINetworkProjectionToUp projection = CytoDataHandle.createCytoProjectionToUp(projectionID, cytoNetworkSource, networkTarget);
 
         for (CytoProtein cytoProteinBelow : selectedProteins) {
             Protein protein = cytoProteinBelow.getProtein();
@@ -37,7 +39,9 @@ public class ProjectorNetwork {
 
                 for (Protein proteinAbove : proteinProjections) {
                     String ProteinProjectionID = IDCreator.createProteinProjectionID(proteinAbove, projection);
-                    CytoDataHandle.createCytoProteinProjection(ProteinProjectionID, proteinAbove, projection);
+                    if (!projection.containsCytoProtein(ProteinProjectionID)) {
+                        CytoDataHandle.createCytoProteinProjection(ProteinProjectionID, proteinAbove, projection, cytoProteinBelow);
+                    }
                 }
             }
         }
@@ -45,7 +49,7 @@ public class ProjectorNetwork {
         return projection;
     }
 
-    private static void projectCytoProtein(CytoProtein cytoProtein, CytoPPINetworkProjection projection) {
+    private static void projectCytoProtein(CytoProtein cytoProtein, CytoPPINetworkProjectionToDown projection) {
 
         Protein protein = cytoProtein.getProtein();
 
@@ -58,7 +62,7 @@ public class ProjectorNetwork {
 
             for (Protein proteinProject : proteinProjections) {
                 String ProteinProjectionID = IDCreator.createProteinProjectionID(proteinProject, projection);
-                CytoProteinProjection proteinProjection = CytoDataHandle.createCytoProteinProjection(ProteinProjectionID, proteinProject, projection);
+                CytoProteinProjection proteinProjection = CytoDataHandle.createCytoProteinProjection(ProteinProjectionID, proteinProject, projection, cytoProtein);
                 node.addCytoProteinInside(proteinProjection);
             }
 

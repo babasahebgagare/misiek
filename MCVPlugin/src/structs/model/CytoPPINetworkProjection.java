@@ -9,16 +9,11 @@ public class CytoPPINetworkProjection extends CytoAbstractPPINetwork {
 
     private Map<String, CytoProteinProjection> proteins = new HashMap<String, CytoProteinProjection>();
     private Map<String, CytoInteraction> interactions = new HashMap<String, CytoInteraction>();
-    private Map<String, CytoGroupNode> cytoGroupNodes = new HashMap<String, CytoGroupNode>();
     private CytoAbstractPPINetwork cytoMotherNetwork;
 
     public CytoPPINetworkProjection(CytoAbstractPPINetwork cytoMotherNetwork, PPINetwork network, String ID) {
         super(network, ID);
         this.cytoMotherNetwork = cytoMotherNetwork;
-    }
-
-    public void addCytoGroupNode(CytoGroupNode node) {
-        cytoGroupNodes.put(node.getID(), node);
     }
 
     public void addCytoProtein(CytoProteinProjection proteinProjection) {
@@ -27,6 +22,10 @@ public class CytoPPINetworkProjection extends CytoAbstractPPINetwork {
 
     public void addCytoInteraction(CytoInteraction cytoInteractionProjection) {
         interactions.put(cytoInteractionProjection.getCytoID(), cytoInteractionProjection);
+    }
+
+    public Collection<CytoProteinProjection> getCytoProteinsProjections() {
+        return proteins.values();
     }
 
     @Override
@@ -59,14 +58,6 @@ public class CytoPPINetworkProjection extends CytoAbstractPPINetwork {
 
     public void setCytoMotherNetwork(CytoAbstractPPINetwork cytoMotherNetwork) {
         this.cytoMotherNetwork = cytoMotherNetwork;
-    }
-
-    public Collection<CytoGroupNode> getCytoGroupNodes() {
-        return cytoGroupNodes.values();
-    }
-
-    public void setCytoGroupNodes(Map<String, CytoGroupNode> cytoGroupNodes) {
-        this.cytoGroupNodes = cytoGroupNodes;
     }
 
     @Override
