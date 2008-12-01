@@ -60,21 +60,6 @@ public class DefaultDataReader extends AbstractDataReader {
         }
     }
 
-    private void readInteractions(String filepath, double treshold) {
-        try {
-            MCVBufferedReader mbr = new MCVBufferedReader(filepath);
-            BufferedReader br = mbr.getBufferedReader();
-            DefaultInteractionsParser.readInteractions(br, treshold);
-            mbr.close();
-        } catch (FileNotFoundException e) {
-            Messenger.Error(e);
-            Exceptions.printStackTrace(e);
-        } catch (IOException e) {
-            Messenger.Error(e);
-            Exceptions.printStackTrace(e);
-        }
-    }
-
     private static void readSpaciesString(String treeString, String parent) {
         ParserStruct struct = extractNodeName(treeString);
 
@@ -142,29 +127,6 @@ public class DefaultDataReader extends AbstractDataReader {
         readTrees(treepath);
     }
 
-    @Override
-    public void readInteractions(double treshold) {
-        String intpath = getFilepath().concat("int");
-        readInteractions(intpath, treshold);
-    }
-
-    /*  @Override
-    public void readInteractions(PPINetwork network, double treshold) {
-    String intpath = getFilepath().concat("int");
-
-    try {
-    MCVBufferedReader mbr = new MCVBufferedReader(intpath);
-    BufferedReader br = mbr.getBufferedReader();
-    DefaultInteractionsParser.readInteractions(br, network, treshold);
-    mbr.close();
-    } catch (FileNotFoundException e) {
-    Messenger.Error(e);
-    Exceptions.printStackTrace(e);
-    } catch (IOException e) {
-    Messenger.Error(e);
-    Exceptions.printStackTrace(e);
-    }
-    }*/
     @Override
     public void readInteractions(CytoAbstractPPINetwork cytoNetwork, double treshold) {
         String intpath = getFilepath().concat("int");
