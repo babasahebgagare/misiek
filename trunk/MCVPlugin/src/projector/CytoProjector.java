@@ -38,8 +38,8 @@ public class CytoProjector {
         return ret;
     }
 
-    public static void projectSelected(Collection<PPINetwork> networks) {
-        Collection<CytoProtein> selectedProteins = getSelectedProteins();
+    public static void projectSelected(Collection<CytoProtein> selectedProteins, Collection<PPINetwork> networks) {
+        
         CytoAbstractPPINetwork motherCytoNetwork = selectedProteins.iterator().next().getCytoNetowork();
 
         for (PPINetwork network : networks) {
