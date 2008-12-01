@@ -16,11 +16,13 @@ public class MCVEdgeAppearanceCalculator extends EdgeAppearanceCalculator {
         super.calculateEdgeAppearance(appr, edge, cyNetwork);
 
         CytoAbstractPPINetwork cytoNetwork = CytoDataHandle.findNetworkByCytoID(cyNetwork.getIdentifier());
+
         if (cytoNetwork != null) {
             CytoInteraction cytoInteraction = cytoNetwork.getCytoInteraction(edge.getIdentifier());
+            double probability = cytoInteraction.getProbability().doubleValue();
 
-            appr.set(VisualPropertyType.EDGE_LINE_WIDTH, calculateCytoInteractionWidth(cytoInteraction.getProbability().doubleValue())); //TODO - BAD CONST
-            appr.set(VisualPropertyType.EDGE_TOOLTIP, String.valueOf(cytoInteraction.getProbability().doubleValue()));
+            appr.set(VisualPropertyType.EDGE_LINE_WIDTH, new Float(probability * 5.0)); //TODO - BAD CONST
+            appr.set(VisualPropertyType.EDGE_TOOLTIP, String.valueOf(probability));
 
         }
     }

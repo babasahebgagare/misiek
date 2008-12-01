@@ -119,9 +119,11 @@ public class CytoDataHandle {
 
     public static CytoAbstractPPINetwork findNetworkByCytoID(String CytoID) {
         String CytoPPINetworkID = networkIDMapper.getIDByCytoID(CytoID);
+
         CytoAbstractPPINetwork ret = cytoNetworks.get(CytoPPINetworkID);
 
         if (ret == null) {
+
             ret = projections.get(CytoPPINetworkID);
         }
 

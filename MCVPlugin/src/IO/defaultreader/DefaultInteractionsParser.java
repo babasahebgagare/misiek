@@ -7,7 +7,6 @@ package IO.defaultreader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import main.CytoDataHandle;
-import main.DataHandle;
 import structs.model.CytoAbstractPPINetwork;
 import utils.Messenger;
 

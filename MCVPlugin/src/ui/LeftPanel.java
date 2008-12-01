@@ -8,6 +8,7 @@ package ui;
 import IO.AbstractDataReader;
 import converter.CytoInteractionsConverter;
 import converter.NetworksConverter;
+import cytoscape.CyNode;
 import cytoscape.Cytoscape;
 import cytoscape.dialogs.plugins.TreeNode;
 import cytoscape.view.CyNetworkView;
@@ -15,6 +16,7 @@ import java.awt.Color;
 import java.io.File;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Set;
 import javax.swing.JColorChooser;
 import javax.swing.JFileChooser;
 import javax.swing.ListSelectionModel;
@@ -24,14 +26,17 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 import main.CytoDataHandle;
+import main.CytoVisualHandle;
 import main.DataHandle;
 import main.MenusHandle;
 import projector.CytoProjector;
 import projector.ProjectorInfoCalculator;
 import structs.model.CytoAbstractPPINetwork;
+import structs.model.CytoProtein;
 import structs.model.Family;
 import structs.model.PPINetwork;
 import utils.MemoLogger;
+import utils.Messenger;
 
 /**
  *
@@ -73,6 +78,20 @@ public class LeftPanel extends javax.swing.JPanel {
         }
 
         return networks;
+    }
+
+    public static Collection<CytoProtein> getSelectedProteins() {
+        Set<CyNode> cyNodes = Cytoscape.getCurrentNetwork().getSelectedNodes();
+        String PPINetworkCytoID = Cytoscape.getCurrentNetwork().getIdentifier();
+        CytoAbstractPPINetwork currCytoNetwork = CytoDataHandle.findNetworkByCytoID(PPINetworkCytoID);
+        Collection<CytoProtein> ret = new HashSet<CytoProtein>();
+
+        if (currCytoNetwork != null) {
+            for (CyNode node : cyNodes) {
+                ret.add(currCytoNetwork.getCytoProtein(node.getIdentifier()));
+            }
+        }
+        return ret;
     }
 
     private void initColorList() {
@@ -341,19 +360,17 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
     Collection<PPINetwork> networks = getSelectedNetworks();
     NetworksConverter.convertNetworks(networks);
-
-//  Cytoscape.getVisualMappingManager().setVisualStyle("MCVStyle");
 }//GEN-LAST:event_jButton2ActionPerformed
 
 private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
     Collection<PPINetwork> networks = getSelectedNetworks();
+    Collection<CytoProtein> selectedProteins = getSelectedProteins();
 
-    CytoProjector.projectSelected(networks);
-/*CyNetworkView cyNetworkView = Cytoscape.getNetworkView(projection.getCytoID());
-if (projection != null && cyNetworkView != Cytoscape.getNullNetworkView()) {
-Layouter.ProjectionLayout(projection, cyNetworkView);
-}*/
-//    Cytoscape.getVisualMappingManager().setVisualStyle("MCVStyle");
+    if (selectedProteins.size() > 0) {
+        CytoProjector.projectSelected(selectedProteins, networks);
+    } else {
+        Messenger.Message("Musisz zaznaczyć białka do rzutowania!");
+    }
 
 }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -368,14 +385,6 @@ private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
     cytoNetwork.deleteCytoInteractions();
 
-/*    CyNetworkView cyNetworkView = Cytoscape.getCurrentNetworkView();
-CytoPPINetworkProjection projection = CytoDataHandle.findNetworkProjectionByCytoID(cyNetworkView.getIdentifier());
-
-if (projection != null) {
-Layouter.ProjectionLayout(projection, cyNetworkView);
-}*/
-//  double treshold = ((Integer) jSpinner1.getValue()).doubleValue() / 100.0;
-// Messenger.Message(treshold);
 }//GEN-LAST:event_jButton4ActionPerformed
 
 private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -388,10 +397,12 @@ private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     CyNetworkView cyNetworkView = Cytoscape.getCurrentNetworkView();
 
     CytoAbstractPPINetwork cytoNetwork = CytoDataHandle.findNetworkByCytoID(cyNetworkView.getIdentifier());
-   
+
     CytoDataHandle.updateCytoInteractions(cytoNetwork, treshold);
-    
+
     CytoInteractionsConverter.convertCytoNetworkInteractions(cyNetworkView.getNetwork(), cytoNetwork.getCytoInteractions());
+
+    CytoVisualHandle.applyVisualStyleForNetwork(cyNetworkView);
 /*}
 });*/
 }//GEN-LAST:event_jButton7ActionPerformed
