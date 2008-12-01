@@ -59,48 +59,6 @@ public class DefaultInteractionsParser {
         return myValue;
     }
 
-    public static void readInteractions(BufferedReader br, double treshold) throws IOException {
-        String line = br.readLine();
-        while (line != null && !line.equals("")) {
-            String[] intData = line.split("        ");
-
-            if (intData.length == 3) {
-                String SourceID = intData[0].trim();
-                String TargetID = intData[1].trim();
-                String EdgeID = SourceID + "_" + TargetID;
-
-
-                Double Probability = Double.parseDouble(intData[2].trim());
-                if (Probability.doubleValue() >= treshold) {
-                    //        DataHandle.createInteraction(EdgeID, SourceID, TargetID, Probability);
-                }
-            }
-            line = br.readLine();
-        }
-    }
-
-    /*   public static void readInteractions(BufferedReader br, PPINetwork network, double treshold) throws IOException {
-
-    while (br.ready()) {
-    try {
-    String SourceID = readWord(br);
-    String TargetID = readWord(br);
-    String EdgeID = SourceID + "_" + TargetID;
-
-    Double Probability = Double.parseDouble(readWord(br));
-
-    //c
-    if (Probability.doubleValue() >= treshold && network.containsProtein(SourceID) && network.containsProtein(TargetID)) {
-    DataHandle.createInteraction(EdgeID, SourceID, TargetID, Probability);
-    }
-
-
-    } catch (Exception ex) {
-    Messenger.Error(ex);
-    }
-    }
-    }
-     */
     static void readInteractions(BufferedReader br, CytoAbstractPPINetwork cytoNetwork, double treshold) throws IOException {
         while (br.ready()) {
             try {
