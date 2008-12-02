@@ -1,12 +1,12 @@
 package IO;
 
-import IO.defaultreader.DefaultDataReader;
+import IO.tasks.TasksDataReader;
 import structs.model.CytoAbstractPPINetwork;
 
 public abstract class AbstractDataReader {
 
     String filepath;
-    private static AbstractDataReader reader = new DefaultDataReader();
+    private static AbstractDataReader reader = new TasksDataReader();
 
     public static AbstractDataReader getInstance() {
         return reader;
