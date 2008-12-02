@@ -1,13 +1,13 @@
 package IO.tasks;
 
-import IO.defaultreader.*;
+import IO.AbstractDataReader;
 import cytoscape.Cytoscape;
 import cytoscape.task.Task;
 import cytoscape.task.ui.JTaskConfig;
 import cytoscape.task.util.TaskManager;
 import structs.model.CytoAbstractPPINetwork;
 
-public class TasksDataReader extends DefaultDataReader {
+public class TasksDataReader extends AbstractDataReader {
 
     @Override
     public void readInteractions(CytoAbstractPPINetwork cytoNetwork, double treshold) {
@@ -24,5 +24,37 @@ public class TasksDataReader extends DefaultDataReader {
 
         TaskManager.executeTask(task, jTaskConfig);
 
+    }
+
+    @Override
+    public void readTrees() {
+        String treespath = getFilepath().concat("trees");
+
+        Task task = new LoadTreesTask(treespath);
+        JTaskConfig jTaskConfig = new JTaskConfig();
+
+        jTaskConfig.displayCancelButton(false);
+        jTaskConfig.setOwner(Cytoscape.getDesktop());
+        jTaskConfig.displayCloseButton(false);
+        jTaskConfig.displayStatus(true);
+        jTaskConfig.setAutoDispose(true);
+
+        TaskManager.executeTask(task, jTaskConfig);
+    }
+
+    @Override
+    public void readSpacies() {
+        String spspath = getFilepath().concat("spy");
+
+        Task task = new LoadSpaciesTask(spspath);
+        JTaskConfig jTaskConfig = new JTaskConfig();
+
+        jTaskConfig.displayCancelButton(false);
+        jTaskConfig.setOwner(Cytoscape.getDesktop());
+        jTaskConfig.displayCloseButton(false);
+        jTaskConfig.displayStatus(true);
+        jTaskConfig.setAutoDispose(true);
+
+        TaskManager.executeTask(task, jTaskConfig);
     }
 }
