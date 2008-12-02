@@ -3,6 +3,7 @@ package visual.calculators;
 import cytoscape.CyNetwork;
 import cytoscape.visual.NodeAppearance;
 import cytoscape.visual.NodeAppearanceCalculator;
+import cytoscape.visual.NodeShape;
 import cytoscape.visual.VisualPropertyType;
 import giny.model.Node;
 import main.CytoDataHandle;
@@ -27,6 +28,7 @@ public class MCVNodeAppearanceCalculator extends NodeAppearanceCalculator {
                     appr.set(VisualPropertyType.NODE_LABEL, protein.getID());
                     appr.set(VisualPropertyType.NODE_FILL_COLOR, family.getColor());
                     appr.set(VisualPropertyType.NODE_TOOLTIP, family.getFamilyID());
+                    appr.set(VisualPropertyType.NODE_SHAPE, NodeShape.ROUND_RECT);
                 }
             }
         }
