@@ -1,7 +1,6 @@
 package IO.tasks;
 
-import IO.defaultreader.DefaultInteractionsParser;
-import cytoscape.logger.CyLogger;
+import IO.defaultreader.DefaultTreeParser;
 import cytoscape.task.Task;
 import cytoscape.task.TaskMonitor;
 import cytoscape.task.ui.JTask;
@@ -11,18 +10,12 @@ import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import main.CytoDataHandle;
-import structs.model.CytoAbstractPPINetwork;
-import utils.IDCreator;
 
-public class LoadInteractionsTask implements Task {
+public class LoadTreesTask implements Task {
 
     private TaskMonitor taskMonitor;
     private Thread myThread = null;
-    private CytoAbstractPPINetwork cytoNetwork = null;
-    private double treshold;
     private File file;
-    private boolean interrupted = false;
     private long max;
     private long current;
     private FileInputStream fis;
@@ -30,11 +23,10 @@ public class LoadInteractionsTask implements Task {
     private DataInputStream dis;
     private BufferedReader br;
 
-    public LoadInteractionsTask(String intpath, CytoAbstractPPINetwork cytoNetwork, double treshold) {
-        this.cytoNetwork = cytoNetwork;
-        this.treshold = treshold;
-        this.file = new File(intpath);
+    public LoadTreesTask(String treespath) {
+        this.file = new File(treespath);
         this.max = file.length();
+
     }
 
     public void run() {
@@ -52,33 +44,32 @@ public class LoadInteractionsTask implements Task {
 
             while (br.ready()) {
                 try {
+                    String line = null;
 
-                    String SourceID = DefaultInteractionsParser.readWord(br);
-                    String TargetID = DefaultInteractionsParser.readWord(br);
-                    String EdgeID = IDCreator.createInteractionID(SourceID, TargetID);
+                    line = br.readLine();
 
-                    Double Probability = Double.parseDouble(DefaultInteractionsParser.readWord(br));
+                    if (line != null && !line.equals("")) {
+                        String[] families = line.split(";");
 
-                    if (Probability.doubleValue() >= treshold && cytoNetwork.containsCytoProtein(SourceID) && cytoNetwork.containsCytoProtein(TargetID)) {
-                        CytoDataHandle.createCytoInteraction(EdgeID, SourceID, TargetID, Probability, cytoNetwork);
+                        for (String family : families) {
+                            DefaultTreeParser.readAllTreeString(family);
+                        }
+
+                        current = fis.getChannel().position();
+                        float percent = current * 100 / max;
+                        taskMonitor.setPercentCompleted(Math.round(percent));
                     }
-
-                    current = fis.getChannel().position();
-                    float percent = current * 100 / max;
-                    taskMonitor.setPercentCompleted(Math.round(percent));
-
                 } catch (Exception ex) {
-                    taskMonitor.setException(ex, "Problem podczas ładowania interakcji");
+                    taskMonitor.setException(ex, "Problem podczas ładowania drzew genow");
                 }
             }
 
-
+            taskMonitor.setPercentCompleted(100);
             br.close();
             dis.close();
             bis.close();
             fis.close();
 
-            taskMonitor.setPercentCompleted(100);
         } catch (Exception e) {
             taskMonitor.setException(e, "Problem podczas tworzenia lub zamykania strumieni");
 
@@ -97,8 +88,6 @@ public class LoadInteractionsTask implements Task {
                 dis.close();
                 bis.close();
                 fis.close();
-                cytoNetwork.deleteCytoInteractions();
-                this.interrupted = true;
                 ((JTask) taskMonitor).setDone();
             }
         } catch (Exception ex) {
@@ -111,6 +100,6 @@ public class LoadInteractionsTask implements Task {
     }
 
     public String getTitle() {
-        return new String("Czytanie danych interakcji dla sieci: " + cytoNetwork.getID());
+        return new String("Wczytywanie drzew rodzin białek");
     }
 }
