@@ -32,7 +32,7 @@ public class LoadTreesTask implements Task {
     public void run() {
         myThread = Thread.currentThread();
 
-        taskMonitor.setStatus("Ładowanie interakcji");
+        taskMonitor.setStatus("Ładowanie białek");
         taskMonitor.setPercentCompleted(-1);
         try {
             fis = new FileInputStream(file);
