@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package IO.parsers;
+package IO.parsers.defaultparser;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,7 +15,7 @@ import utils.Messenger;
  *
  * @author misiek
  */
-public class InteractionsParser {
+public class DefaultInteractionsParser {
 
     public static void EatWhiteSpace(BufferedReader br) {
         int ch;

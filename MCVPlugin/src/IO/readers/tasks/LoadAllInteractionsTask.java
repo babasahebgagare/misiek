@@ -1,6 +1,6 @@
-package IO.tasks;
+package IO.readers.tasks;
 
-import IO.parsers.FamiliesTreeParser;
+import IO.parsers.defaultparser.DefaultInteractionsParser;
 import cytoscape.task.Task;
 import cytoscape.task.TaskMonitor;
 import cytoscape.task.ui.JTask;
@@ -10,12 +10,16 @@ import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import main.DataHandle;
+import utils.IDCreator;
 
-public class LoadTreesTask implements Task {
+public class LoadAllInteractionsTask implements Task {
 
     private TaskMonitor taskMonitor;
     private Thread myThread = null;
+    private double treshold;
     private File file;
+    private boolean interrupted = false;
     private long max;
     private long current;
     private FileInputStream fis;
@@ -23,16 +27,16 @@ public class LoadTreesTask implements Task {
     private DataInputStream dis;
     private BufferedReader br;
 
-    public LoadTreesTask(String treespath) {
-        this.file = new File(treespath);
+    LoadAllInteractionsTask(String intpath, double treshold) {
+        this.treshold = treshold;
+        this.file = new File(intpath);
         this.max = file.length();
-
     }
 
     public void run() {
         myThread = Thread.currentThread();
 
-        taskMonitor.setStatus("Ładowanie białek");
+        taskMonitor.setStatus("Ładowanie interakcji");
         taskMonitor.setPercentCompleted(-1);
         try {
             fis = new FileInputStream(file);
@@ -44,32 +48,33 @@ public class LoadTreesTask implements Task {
 
             while (br.ready()) {
                 try {
-                    String line = null;
 
-                    line = br.readLine();
+                    String SourceID = DefaultInteractionsParser.readWord(br);
+                    String TargetID = DefaultInteractionsParser.readWord(br);
+                    String EdgeID = IDCreator.createInteractionID(SourceID, TargetID);
 
-                    if (line != null && !line.equals("")) {
-                        String[] families = line.split(";");
+                    Double Probability = Double.parseDouble(DefaultInteractionsParser.readWord(br));
 
-                        for (String family : families) {
-                            FamiliesTreeParser.readAllTreeString(family);
-                        }
-
-                        current = fis.getChannel().position();
-                        float percent = current * 100 / max;
-                        taskMonitor.setPercentCompleted(Math.round(percent));
+                    if (Probability.doubleValue() >= treshold) {
+                        DataHandle.createInteraction(EdgeID, SourceID, TargetID, Probability);
                     }
+
+                    current = fis.getChannel().position();
+                    float percent = current * 100 / max;
+                    taskMonitor.setPercentCompleted(Math.round(percent));
+
                 } catch (Exception ex) {
-                    taskMonitor.setException(ex, "Problem podczas ładowania drzew genow");
+                    taskMonitor.setException(ex, "Problem podczas ładowania interakcji");
                 }
             }
 
-            taskMonitor.setPercentCompleted(100);
+
             br.close();
             dis.close();
             bis.close();
             fis.close();
 
+            taskMonitor.setPercentCompleted(100);
         } catch (Exception e) {
             taskMonitor.setException(e, "Problem podczas tworzenia lub zamykania strumieni");
 
@@ -88,6 +93,8 @@ public class LoadTreesTask implements Task {
                 dis.close();
                 bis.close();
                 fis.close();
+                //TODO
+                this.interrupted = true;
                 ((JTask) taskMonitor).setDone();
             }
         } catch (Exception ex) {
@@ -100,6 +107,6 @@ public class LoadTreesTask implements Task {
     }
 
     public String getTitle() {
-        return new String("Wczytywanie drzew rodzin białek");
+        return new String("Czytanie interakcji z odcięciem: " + treshold + " dla wszystkich sieci...");
     }
 }

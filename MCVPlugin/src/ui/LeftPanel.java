@@ -460,7 +460,7 @@ private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     CyNetworkView cyNetworkView = Cytoscape.getCurrentNetworkView();
 
     CytoAbstractPPINetwork cytoNetwork = CytoDataHandle.findNetworkByCytoID(cyNetworkView.getIdentifier());
-    
+
     InteractionsManager.getInstance().loadAndShowInteractionsFromModel(cytoNetwork, treshold);
 }//GEN-LAST:event_jButton6ActionPerformed
 

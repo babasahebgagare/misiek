@@ -1,4 +1,4 @@
-package IO.tasks;
+package IO.readers.tasks;
 
 import IO.AbstractDataReader;
 import cytoscape.Cytoscape;

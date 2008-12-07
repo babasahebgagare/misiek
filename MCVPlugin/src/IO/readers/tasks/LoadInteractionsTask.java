@@ -1,6 +1,6 @@
-package IO.tasks;
+package IO.readers.tasks;
 
-import IO.parsers.InteractionsParser;
+import IO.parsers.defaultparser.DefaultInteractionsParser;
 import cytoscape.task.Task;
 import cytoscape.task.TaskMonitor;
 import cytoscape.task.ui.JTask;
@@ -10,13 +10,15 @@ import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import main.DataHandle;
+import main.CytoDataHandle;
+import structs.model.CytoAbstractPPINetwork;
 import utils.IDCreator;
 
-public class LoadAllInteractionsTask implements Task {
+public class LoadInteractionsTask implements Task {
 
     private TaskMonitor taskMonitor;
     private Thread myThread = null;
+    private CytoAbstractPPINetwork cytoNetwork = null;
     private double treshold;
     private File file;
     private boolean interrupted = false;
@@ -27,7 +29,8 @@ public class LoadAllInteractionsTask implements Task {
     private DataInputStream dis;
     private BufferedReader br;
 
-    LoadAllInteractionsTask(String intpath, double treshold) {
+    public LoadInteractionsTask(String intpath, CytoAbstractPPINetwork cytoNetwork, double treshold) {
+        this.cytoNetwork = cytoNetwork;
         this.treshold = treshold;
         this.file = new File(intpath);
         this.max = file.length();
@@ -49,14 +52,14 @@ public class LoadAllInteractionsTask implements Task {
             while (br.ready()) {
                 try {
 
-                    String SourceID = InteractionsParser.readWord(br);
-                    String TargetID = InteractionsParser.readWord(br);
+                    String SourceID = DefaultInteractionsParser.readWord(br);
+                    String TargetID = DefaultInteractionsParser.readWord(br);
                     String EdgeID = IDCreator.createInteractionID(SourceID, TargetID);
 
-                    Double Probability = Double.parseDouble(InteractionsParser.readWord(br));
+                    Double Probability = Double.parseDouble(DefaultInteractionsParser.readWord(br));
 
-                    if (Probability.doubleValue() >= treshold) {
-                        DataHandle.createInteraction(EdgeID, SourceID, TargetID, Probability);
+                    if (Probability.doubleValue() >= treshold && cytoNetwork.containsCytoProtein(SourceID) && cytoNetwork.containsCytoProtein(TargetID)) {
+                        CytoDataHandle.createCytoInteraction(EdgeID, SourceID, TargetID, Probability, cytoNetwork);
                     }
 
                     current = fis.getChannel().position();
@@ -93,7 +96,7 @@ public class LoadAllInteractionsTask implements Task {
                 dis.close();
                 bis.close();
                 fis.close();
-                //TODO
+                cytoNetwork.deleteCytoInteractions();
                 this.interrupted = true;
                 ((JTask) taskMonitor).setDone();
             }
@@ -107,6 +110,6 @@ public class LoadAllInteractionsTask implements Task {
     }
 
     public String getTitle() {
-        return new String("Czytanie interakcji z odcięciem: " + treshold + " dla wszystkich sieci...");
+        return new String("Czytanie danych interakcji dla sieci: " + cytoNetwork.getID());
     }
 }
