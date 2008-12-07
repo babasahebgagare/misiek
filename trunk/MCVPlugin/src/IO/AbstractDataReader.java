@@ -1,6 +1,6 @@
 package IO;
 
-import IO.tasks.TasksDataReader;
+import IO.readers.tasks.TasksDataReader;
 import structs.model.CytoAbstractPPINetwork;
 
 public abstract class AbstractDataReader {
