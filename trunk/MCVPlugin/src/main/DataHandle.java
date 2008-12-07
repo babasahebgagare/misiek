@@ -5,15 +5,32 @@ import java.util.Map;
 import java.awt.Color;
 import java.util.Collection;
 import structs.model.Family;
+import structs.model.Interaction;
 import structs.model.PPINetwork;
 import structs.model.Protein;
-import utils.MemoLogger;
 
 public class DataHandle {
 
     private static Map<String, PPINetwork> networks = new HashMap<String, PPINetwork>();
     private static Map<String, Family> families = new HashMap<String, Family>();
     private static PPINetwork rootNetwork;
+
+    private static void createInteaction(String EdgeID, String SourceID, String TargetID, Double Probability, PPINetwork network) {
+        Protein source = network.getProtein(SourceID);
+        Protein target = network.getProtein(TargetID);
+
+        Interaction interaction = new Interaction(source, target, Probability, EdgeID, network);
+        network.addInteraction(interaction);
+    }
+
+    public static void createInteraction(String EdgeID, String SourceID, String TargetID, Double Probability) {
+        for (PPINetwork network : networks.values()) {
+
+            if (network.containsProtein(TargetID) && network.containsProtein(SourceID)) {
+                createInteaction(EdgeID, SourceID, TargetID, Probability, network);
+            }
+        }
+    }
 
     public static void createRootPPINetwork(String NetworkID) {
         PPINetwork net = new PPINetwork(NetworkID, null);
@@ -30,8 +47,6 @@ public class DataHandle {
     }
 
     public static void createFamily(String FamilyID, Color color) {
-        //  if (!families.containsKey(FamilyID)) {
-        MemoLogger.log("creating fam:" + FamilyID);
         Family fam = new Family(FamilyID, color);
         families.put(FamilyID, fam);
     }
@@ -50,7 +65,6 @@ public class DataHandle {
 
     public static void createRootProtein(String ProteinID, String NetworkID, String FamilyID) {
         PPINetwork network = networks.get(NetworkID);
-        MemoLogger.log("searching for famility: " + FamilyID);
         Family family = families.get(FamilyID);
         network.addRootProtein(ProteinID, family);
     }

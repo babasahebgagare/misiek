@@ -1,6 +1,5 @@
 package structs.model;
 
-import cytoscape.data.Interaction;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,6 +13,10 @@ public class PPINetwork {
     public PPINetwork(String NetworkID, PPINetwork ParentNetwork) {
         ID = NetworkID;
         context = new PPINetworkContext(ParentNetwork);
+    }
+
+    public void addInteraction(Interaction interaction) {
+        interactions.put(interaction.getID(), interaction);
     }
 
     public boolean containsProtein(String ProteinID) {

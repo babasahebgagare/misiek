@@ -60,6 +60,18 @@ public class TasksDataReader extends AbstractDataReader {
 
     @Override
     public void readAllInteractions(double treshold) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String intpath = getFilepath().concat("int");
+
+        Task task = new LoadAllInteractionsTask(intpath, treshold);
+        JTaskConfig jTaskConfig = new JTaskConfig();
+
+        jTaskConfig.displayCancelButton(true);
+        jTaskConfig.setOwner(Cytoscape.getDesktop());
+        jTaskConfig.displayCloseButton(false);
+        jTaskConfig.displayStatus(true);
+        jTaskConfig.setAutoDispose(true);
+
+        TaskManager.executeTask(task, jTaskConfig);
+
     }
 }

@@ -4,7 +4,6 @@ import java.util.Collection;
 import main.CytoDataHandle;
 import structs.model.CytoAbstractPPINetwork;
 import structs.model.CytoGroupNode;
-import structs.model.CytoPPINetworkProjection;
 import structs.model.CytoPPINetworkProjectionToDown;
 import structs.model.CytoPPINetworkProjectionToUp;
 import structs.model.CytoProtein;
@@ -21,7 +20,7 @@ public class ProjectorNetwork {
         CytoPPINetworkProjectionToDown projection = CytoDataHandle.createCytoProjectionToDown(projectionID, cytoNetworkSource, networkTarget);
 
         for (CytoProtein cytoProtein : selectedProteins) {
-            projectCytoProtein(cytoProtein, projection);   //TODO
+            projectCytoProtein(cytoProtein, projection);
 
         }
         return projection;

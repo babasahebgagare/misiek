@@ -18,6 +18,7 @@ import structs.model.PPINetwork;
 import structs.model.CytoPPINetworkProjection;
 import structs.model.CytoPPINetworkProjectionToDown;
 import structs.model.CytoPPINetworkProjectionToUp;
+import structs.model.Interaction;
 import structs.model.Protein;
 import utils.IDCreator;
 
@@ -36,7 +37,20 @@ public class CytoDataHandle {
         CytoProtein source = cytoNetwork.getCytoProtein(SourceCytoID);
         CytoProtein target = cytoNetwork.getCytoProtein(TargetCytoID);
 
-        CytoInteraction cytoInteraction = new CytoInteraction(EdgeCytoID, source, target, cytoNetwork, Probability);
+        CytoInteraction cytoInteraction = new CytoInteraction(EdgeCytoID, source, target, cytoNetwork, Probability, null);
+        cytoNetwork.addCytoInteraction(cytoInteraction);
+    }
+
+    public static void createCytoInteraction(Interaction interaction, CytoAbstractPPINetwork cytoNetwork) {
+
+        String SourceCytoID = IDCreator.createProteinProjectionID(interaction.getSource().getID(), cytoNetwork);
+        String TargetCytoID = IDCreator.createProteinProjectionID(interaction.getTarget().getID(), cytoNetwork);
+        String EdgeCytoID = IDCreator.createInteractionProjectionID(interaction.getID(), cytoNetwork);
+
+        CytoProtein source = cytoNetwork.getCytoProtein(SourceCytoID);
+        CytoProtein target = cytoNetwork.getCytoProtein(TargetCytoID);
+
+        CytoInteraction cytoInteraction = new CytoInteraction(EdgeCytoID, source, target, cytoNetwork, interaction.getProbability(), interaction);
         cytoNetwork.addCytoInteraction(cytoInteraction);
     }
 
