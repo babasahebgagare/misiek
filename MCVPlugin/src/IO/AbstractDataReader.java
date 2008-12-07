@@ -12,6 +12,12 @@ public abstract class AbstractDataReader {
         return reader;
     }
 
+    public abstract void readAllInteractions(double treshold);
+
+    public void readAllInteractions() {
+        readAllInteractions(1.0);
+    }
+
     public abstract void readInteractions(CytoAbstractPPINetwork cytoNetwork, double treshold);
 
     public void readInteractions(CytoAbstractPPINetwork cytoNetwork) {

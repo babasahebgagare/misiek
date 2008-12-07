@@ -1,4 +1,4 @@
-package IO.defaultreader;
+package IO.parsers;
 
 import java.util.Collection;
 

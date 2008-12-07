@@ -1,5 +1,8 @@
 package IO.defaultreader;
 
+import IO.parsers.InteractionsParser;
+import IO.parsers.FamiliesTreeParser;
+import IO.parsers.SpaciesParser;
 import IO.*;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -12,7 +15,7 @@ public class DefaultDataReader extends AbstractDataReader {
 
     private void readSpacies(BufferedReader br) throws IOException {
         String treeString = br.readLine();
-        DefaultSpaciesParser.readSpaciesString(treeString, null);
+        SpaciesParser.readSpaciesString(treeString, null);
     }
 
     private void readSpacies(String filepath) {
@@ -35,7 +38,7 @@ public class DefaultDataReader extends AbstractDataReader {
         while (line != null && !line.equals("")) {
             String[] families = line.split(";");
             for (String family : families) {
-                DefaultTreeParser.readAllTreeString(family);
+                FamiliesTreeParser.readAllTreeString(family);
             }
             line = br.readLine();
         }
@@ -75,7 +78,7 @@ public class DefaultDataReader extends AbstractDataReader {
         try {
             MCVBufferedReader mbr = new MCVBufferedReader(intpath);
             BufferedReader br = mbr.getBufferedReader();
-            DefaultInteractionsParser.readInteractions(br, cytoNetwork, treshold);
+            InteractionsParser.readInteractions(br, cytoNetwork, treshold);
             mbr.close();
         } catch (FileNotFoundException e) {
             Messenger.Error(e);
@@ -84,5 +87,10 @@ public class DefaultDataReader extends AbstractDataReader {
             Messenger.Error(e);
             Exceptions.printStackTrace(e);
         }
+    }
+
+    @Override
+    public void readAllInteractions(double treshold) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

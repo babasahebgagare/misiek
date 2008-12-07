@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package IO.defaultreader;
+package IO.parsers;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,7 +15,7 @@ import utils.Messenger;
  *
  * @author misiek
  */
-public class DefaultInteractionsParser {
+public class InteractionsParser {
 
     public static void EatWhiteSpace(BufferedReader br) {
         int ch;
@@ -59,7 +59,7 @@ public class DefaultInteractionsParser {
         return myValue;
     }
 
-    static void readInteractions(BufferedReader br, CytoAbstractPPINetwork cytoNetwork, double treshold) throws IOException {
+    public static void readInteractions(BufferedReader br, CytoAbstractPPINetwork cytoNetwork, double treshold) throws IOException {
         while (br.ready()) {
             try {
 

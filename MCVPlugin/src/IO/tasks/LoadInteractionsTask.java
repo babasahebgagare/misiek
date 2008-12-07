@@ -1,7 +1,6 @@
 package IO.tasks;
 
-import IO.defaultreader.DefaultInteractionsParser;
-import cytoscape.logger.CyLogger;
+import IO.parsers.InteractionsParser;
 import cytoscape.task.Task;
 import cytoscape.task.TaskMonitor;
 import cytoscape.task.ui.JTask;
@@ -53,11 +52,11 @@ public class LoadInteractionsTask implements Task {
             while (br.ready()) {
                 try {
 
-                    String SourceID = DefaultInteractionsParser.readWord(br);
-                    String TargetID = DefaultInteractionsParser.readWord(br);
+                    String SourceID = InteractionsParser.readWord(br);
+                    String TargetID = InteractionsParser.readWord(br);
                     String EdgeID = IDCreator.createInteractionID(SourceID, TargetID);
 
-                    Double Probability = Double.parseDouble(DefaultInteractionsParser.readWord(br));
+                    Double Probability = Double.parseDouble(InteractionsParser.readWord(br));
 
                     if (Probability.doubleValue() >= treshold && cytoNetwork.containsCytoProtein(SourceID) && cytoNetwork.containsCytoProtein(TargetID)) {
                         CytoDataHandle.createCytoInteraction(EdgeID, SourceID, TargetID, Probability, cytoNetwork);

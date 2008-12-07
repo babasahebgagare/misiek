@@ -1,6 +1,6 @@
 package IO.tasks;
 
-import IO.defaultreader.DefaultTreeParser;
+import IO.parsers.FamiliesTreeParser;
 import cytoscape.task.Task;
 import cytoscape.task.TaskMonitor;
 import cytoscape.task.ui.JTask;
@@ -52,7 +52,7 @@ public class LoadTreesTask implements Task {
                         String[] families = line.split(";");
 
                         for (String family : families) {
-                            DefaultTreeParser.readAllTreeString(family);
+                            FamiliesTreeParser.readAllTreeString(family);
                         }
 
                         current = fis.getChannel().position();

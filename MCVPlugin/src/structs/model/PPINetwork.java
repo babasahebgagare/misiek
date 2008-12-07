@@ -1,11 +1,13 @@
 package structs.model;
 
+import cytoscape.data.Interaction;
 import java.util.HashMap;
 import java.util.Map;
 
 public class PPINetwork {
 
     private Map<String, Protein> proteins = new HashMap<String, Protein>();
+    private Map<String, Interaction> interactions = new HashMap<String, Interaction>();
     private PPINetworkContext context = null;
     private String ID;
 
@@ -54,5 +56,13 @@ public class PPINetwork {
 
     public void setProteins(Map<String, Protein> proteins) {
         this.proteins = proteins;
+    }
+
+    public Map<String, Interaction> getInteractions() {
+        return interactions;
+    }
+
+    public void setInteractions(Map<String, Interaction> interactions) {
+        this.interactions = interactions;
     }
 }
