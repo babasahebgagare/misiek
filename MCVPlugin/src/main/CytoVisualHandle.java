@@ -10,6 +10,9 @@ import cytoscape.layout.CyLayoutAlgorithm;
 import cytoscape.layout.CyLayouts;
 import cytoscape.view.CyNetworkView;
 import cytoscape.visual.VisualStyle;
+import ding.view.DGraphView;
+import giny.view.NodeView;
+import javax.swing.SwingUtilities;
 
 public class CytoVisualHandle {
 
@@ -24,6 +27,17 @@ public class CytoVisualHandle {
         VisualStyle MCVStyle = Cytoscape.getVisualMappingManager().getCalculatorCatalog().getVisualStyle("MCVStyle");
         cyNetworkView.applyVizmapper(MCVStyle);
         Cytoscape.getVisualMappingManager().setVisualStyle(MCVStyle);
+    }
 
+    public static void setDefaultCenter(final CyNetworkView cyNetworkView) {
+
+        SwingUtilities.invokeLater(new Runnable() {
+
+            public void run() {
+                DGraphView graphView = (DGraphView) cyNetworkView;
+                graphView.fitContent();
+                cyNetworkView.updateView();
+            }
+        });
     }
 }
