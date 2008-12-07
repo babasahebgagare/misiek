@@ -22,6 +22,7 @@ public class CytoNetworkConverter {
 
             CytoVisualHandle.applyVisualStyleForNetwork(cyNetworkView);
             CytoVisualHandle.applyCyLayoutAlgorithm(cyNetwork, cyNetworkView);
+            CytoVisualHandle.setDefaultCenter(cyNetworkView);
         }
     }
 }
