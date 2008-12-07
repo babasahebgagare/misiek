@@ -57,4 +57,9 @@ public class TasksDataReader extends AbstractDataReader {
 
         TaskManager.executeTask(task, jTaskConfig);
     }
+
+    @Override
+    public void readAllInteractions(double treshold) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

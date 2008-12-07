@@ -1,6 +1,6 @@
 package IO.tasks;
 
-import IO.defaultreader.DefaultSpaciesParser;
+import IO.parsers.SpaciesParser;
 import cytoscape.task.Task;
 import cytoscape.task.TaskMonitor;
 import cytoscape.task.ui.JTask;
@@ -39,7 +39,7 @@ public class LoadSpaciesTask implements Task {
 
             try {
                 String treeString = br.readLine();
-                DefaultSpaciesParser.readSpaciesString(treeString, null);
+                SpaciesParser.readSpaciesString(treeString, null);
             } catch (Exception ex) {
                 taskMonitor.setException(ex, "Problem podczas wczytywania drzewa gatunków");
             }

@@ -1,4 +1,4 @@
-package IO.defaultreader;
+package IO.parsers;
 
 import java.awt.Color;
 import java.util.Collection;
@@ -6,7 +6,32 @@ import java.util.HashSet;
 import main.DataHandle;
 import utils.ColorGenerator;
 
-public class DefaultTreeParser {
+public class FamiliesTreeParser {
+
+    public static void parseTree(String tree) {
+        tree = tree.trim();
+        int last = tree.lastIndexOf(")");
+
+        String subTree = tree.substring(1, last);
+        String RootNetworkID = tree.substring(last + 1, tree.length());
+
+        DataHandle.createRootPPINetwork(RootNetworkID);
+        parseSubTree(subTree, RootNetworkID);
+    }
+
+    private static void parseSubTree(String tree, String parent) {
+        tree = tree.trim();
+        if (tree.charAt(0) == '(') {
+            int last = tree.lastIndexOf(")");
+            String subTree = tree.substring(1, last);
+            String NetworkID = tree.substring(last + 1, tree.length());
+
+            DataHandle.createPPINetwork(NetworkID, parent);
+            parseSubTree(subTree, NetworkID);
+        } else {
+            DataHandle.createPPINetwork(tree, parent);
+        }
+    }
 
     public static void readAllTreeString(String treeString) {
         int lastIndex = treeString.lastIndexOf(")");

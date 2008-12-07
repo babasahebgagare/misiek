@@ -1,10 +1,10 @@
-package IO.defaultreader;
+package IO.parsers;
 
 import java.util.Collection;
 import java.util.HashSet;
 import main.DataHandle;
 
-public class DefaultSpaciesParser {
+public class SpaciesParser {
 
     public static void readSpaciesString(String treeString, String parent) {
         ParserStruct struct = extractNodeName(treeString);
