@@ -1,8 +1,8 @@
-package IO.readers.defaultreader;
+package io.readers.defaultreader;
 
-import IO.AbstractDataReader;
-import IO.MCVBufferedReader;
-import IO.parsers.DataParser;
+import io.AbstractDataReader;
+import io.MCVBufferedReader;
+import io.parsers.DataParser;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;

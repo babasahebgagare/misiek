@@ -1,6 +1,6 @@
-package IO.readers.tasks;
+package io.readers.tasks;
 
-import IO.AbstractDataReader;
+import io.AbstractDataReader;
 import cytoscape.Cytoscape;
 import cytoscape.task.Task;
 import cytoscape.task.ui.JTaskConfig;

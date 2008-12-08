@@ -1,4 +1,4 @@
-package IO.parsers;
+package io.parsers;
 
 import java.util.Collection;
 

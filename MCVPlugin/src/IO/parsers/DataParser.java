@@ -1,6 +1,6 @@
-package IO.parsers;
+package io.parsers;
 
-import IO.parsers.rootparser.RootDataParser;
+import io.parsers.rootparser.RootDataParser;
 import java.io.BufferedReader;
 import structs.model.CytoAbstractPPINetwork;
 

@@ -1,6 +1,6 @@
-package IO.parsers.rootparser;
+package io.parsers.rootparser;
 
-import IO.parsers.*;
+import io.parsers.*;
 import java.util.Collection;
 import java.util.HashSet;
 import main.DataHandle;

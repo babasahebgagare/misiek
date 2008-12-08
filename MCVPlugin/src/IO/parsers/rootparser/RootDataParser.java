@@ -1,6 +1,6 @@
-package IO.parsers.rootparser;
+package io.parsers.rootparser;
 
-import IO.parsers.defaultparser.*;
+import io.parsers.defaultparser.*;
 import main.DataHandle;
 
 public class RootDataParser extends DefaultDataParser {

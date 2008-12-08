@@ -5,7 +5,7 @@
  */
 package ui;
 
-import IO.AbstractDataReader;
+import io.AbstractDataReader;
 import controllers.interactions.InteractionsManager;
 import converter.CytoInteractionsConverter;
 import converter.NetworksConverter;

@@ -1,6 +1,6 @@
-package IO.parsers.defaultparser;
+package io.parsers.defaultparser;
 
-import IO.parsers.DataParser;
+import io.parsers.DataParser;
 import java.io.BufferedReader;
 import java.io.IOException;
 import org.openide.util.Exceptions;
