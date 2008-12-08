@@ -6,7 +6,6 @@ import IO.parsers.DataParser;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import org.openide.util.Exceptions;
 import structs.model.CytoAbstractPPINetwork;
 import utils.Messenger;
 
@@ -25,10 +24,10 @@ public class DefaultDataReader extends AbstractDataReader {
             mbr.close();
         } catch (FileNotFoundException e) {
             Messenger.Error(e);
-            Exceptions.printStackTrace(e);
+            //Exceptions.printStackTrace(e);
         } catch (IOException e) {
             Messenger.Error(e);
-            Exceptions.printStackTrace(e);
+            //Exceptions.printStackTrace(e);
         }
     }
 
@@ -51,10 +50,10 @@ public class DefaultDataReader extends AbstractDataReader {
             mbr.close();
         } catch (FileNotFoundException e) {
             Messenger.Error(e);
-            Exceptions.printStackTrace(e);
+            //Exceptions.printStackTrace(e);
         } catch (IOException e) {
             Messenger.Error(e);
-            Exceptions.printStackTrace(e);
+         //   Exceptions.printStackTrace(e);
         }
     }
 
@@ -81,10 +80,10 @@ public class DefaultDataReader extends AbstractDataReader {
             mbr.close();
         } catch (FileNotFoundException e) {
             Messenger.Error(e);
-            Exceptions.printStackTrace(e);
+      //      Exceptions.printStackTrace(e);
         } catch (IOException e) {
             Messenger.Error(e);
-            Exceptions.printStackTrace(e);
+       //     Exceptions.printStackTrace(e);
         }
     }
 

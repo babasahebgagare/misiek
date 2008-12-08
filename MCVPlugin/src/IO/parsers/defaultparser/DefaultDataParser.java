@@ -3,7 +3,6 @@ package IO.parsers.defaultparser;
 import IO.parsers.DataParser;
 import java.io.BufferedReader;
 import java.io.IOException;
-import org.openide.util.Exceptions;
 import structs.model.CytoAbstractPPINetwork;
 
 public class DefaultDataParser extends DataParser {
@@ -19,7 +18,6 @@ public class DefaultDataParser extends DataParser {
             DefaultInteractionsParser.readInteractions(br, cytoNetwork, treshold);
         } catch (IOException ex) {
             System.out.println("ERROR during interactions parsing");
-            Exceptions.printStackTrace(ex);
         }
     }
 
