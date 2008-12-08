@@ -4,22 +4,13 @@
  */
 package tester;
 
-import cytoscape.Cytoscape;
-import ding.view.DGraphView;
-import ding.view.DingCanvas;
-import java.awt.Point;
-import org.netbeans.api.visual.action.ActionFactory;
-import org.netbeans.api.visual.widget.LabelWidget;
-import org.netbeans.api.visual.widget.LayerWidget;
-import org.netbeans.api.visual.widget.Scene;
-import utils.MemoLogger;
 
 /**
  *
  * @author misiek
  */
 public class NetbeansTest {
-
+/*
     public static void test() {
 
         MemoLogger.log("tescik1");
@@ -54,5 +45,5 @@ MemoLogger.log("tescik2");
         widget.setPreferredLocation (new Point (x, y));
         return widget;
     }
-
+*/
 }
