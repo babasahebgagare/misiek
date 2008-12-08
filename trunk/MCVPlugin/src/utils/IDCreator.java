@@ -19,11 +19,13 @@ public class IDCreator {
     }
 
     public static String createProteinProjectionID(Protein targetProteinProject, CytoAbstractPPINetwork cytoProjection) {
-        return targetProteinProject.getID() + ":" + cytoProjection.getID();
+        //   return targetProteinProject.getID() + ":" + cytoProjection.getID();
+        return targetProteinProject.getID();
     }
 
     public static String createInteractionProjectionID(String interactionID, CytoAbstractPPINetwork cytoProjection) {
-        return interactionID + ":" + cytoProjection.getID();
+        //   return interactionID + ":" + cytoProjection.getID();
+        return interactionID;
     }
 
     public static String createGroupNodeID(CytoProtein cytoProtein) {
@@ -31,6 +33,7 @@ public class IDCreator {
     }
 
     public static String createProteinProjectionID(String ProteinID, CytoAbstractPPINetwork cytoNetwork) {
-        return ProteinID + ":" + cytoNetwork.getID();
+        //   return ProteinID + ":" + cytoNetwork.getID();
+        return ProteinID;
     }
 }

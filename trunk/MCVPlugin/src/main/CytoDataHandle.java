@@ -11,6 +11,7 @@ import mappers.IDMapper;
 import structs.model.CytoAbstractPPINetwork;
 import structs.model.CytoGroupNode;
 import structs.model.CytoInteraction;
+import structs.model.CytoObject;
 import structs.model.CytoPPINetwork;
 import structs.model.CytoProtein;
 import structs.model.CytoProteinProjection;
@@ -25,8 +26,34 @@ import utils.IDCreator;
 public class CytoDataHandle {
 
     private static IDMapper networkIDMapper = new IDMapper();
+    private static Map<Integer, CytoProtein> cytoProteins = new HashMap<Integer, CytoProtein>();
+    private static Map<Integer, CytoInteraction> cytoInteractions = new HashMap<Integer, CytoInteraction>();
     private static Map<String, CytoPPINetworkProjection> projections = new HashMap<String, CytoPPINetworkProjection>();
     private static Map<String, CytoPPINetwork> cytoNetworks = new HashMap<String, CytoPPINetwork>();
+
+    public static void addCytoInteractionMapping(int index, CytoInteraction object) {
+        cytoInteractions.put(new Integer(index), object);
+    }
+
+    public static void deleteCytoInteractionMapping(int index) {
+        cytoInteractions.remove(new Integer(index));
+    }
+
+    public static CytoInteraction getCytoInteractionByIndex(int index) {
+        return cytoInteractions.get(new Integer(index));
+    }
+
+    public static void addCytoProteinMapping(int index, CytoProtein object) {
+        cytoProteins.put(new Integer(index), object);
+    }
+
+    public static void deleteCytoProteinMapping(int index) {
+        cytoProteins.remove(new Integer(index));
+    }
+
+    public static CytoProtein getCytoProteinByIndex(int index) {
+        return cytoProteins.get(new Integer(index));
+    }
 
     public static void createCytoInteraction(String EdgeID, String SourceID, String TargetID, Double Probability, CytoAbstractPPINetwork cytoNetwork) {
 
