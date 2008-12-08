@@ -1,6 +1,6 @@
 package main;
 
-import IO.AbstractDataReader;
+import io.AbstractDataReader;
 import cytoscape.CyEdge;
 import cytoscape.CyNetwork;
 import cytoscape.Cytoscape;

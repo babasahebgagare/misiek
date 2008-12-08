@@ -1,6 +1,6 @@
-package IO.readers.tasks;
+package io.readers.tasks;
 
-import IO.parsers.DataParser;
+import io.parsers.DataParser;
 import cytoscape.task.Task;
 import cytoscape.task.TaskMonitor;
 import cytoscape.task.ui.JTask;

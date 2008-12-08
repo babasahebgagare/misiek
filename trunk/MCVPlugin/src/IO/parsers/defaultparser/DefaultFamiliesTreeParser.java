@@ -1,6 +1,6 @@
-package IO.parsers.defaultparser;
+package io.parsers.defaultparser;
 
-import IO.parsers.*;
+import io.parsers.*;
 import java.awt.Color;
 import java.util.Collection;
 import java.util.HashSet;
