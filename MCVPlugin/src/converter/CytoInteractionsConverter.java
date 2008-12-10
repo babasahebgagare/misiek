@@ -1,9 +1,8 @@
 package converter;
 
-import cytoscape.CyEdge;
 import cytoscape.CyNetwork;
 import cytoscape.Cytoscape;
-import cytoscape.data.Semantics;
+import giny.model.Edge;
 import java.util.Collection;
 import main.CytoDataHandle;
 import structs.model.CytoInteraction;
@@ -12,10 +11,13 @@ public class CytoInteractionsConverter {
 
     public static void convertCytoNetworkInteractions(CyNetwork cyNetwork, Collection<CytoInteraction> cytoInteractions) {
         for (CytoInteraction cytoInteraction : cytoInteractions) {
-            CyEdge edge = Cytoscape.getCyEdge(cytoInteraction.getSource().getCytoID(), cytoInteraction.getCytoID(), cytoInteraction.getTarget().getCytoID(), Semantics.INTERACTION);
+            int rootID = Cytoscape.getRootGraph().createEdge(cytoInteraction.getSource().getIndex(), cytoInteraction.getTarget().getIndex());
+
+            Edge edge = Cytoscape.getRootGraph().getEdge(rootID);
             edge.setIdentifier(cytoInteraction.getCytoID());
-            cyNetwork.addEdge(edge.getRootGraphIndex());
-            CytoDataHandle.addCytoInteractionMapping(edge.getRootGraphIndex(), cytoInteraction);
+            cytoInteraction.setIndex(rootID);
+            cyNetwork.addEdge(rootID);
+            CytoDataHandle.addCytoInteractionMapping(rootID, cytoInteraction);
         }
     }
 }
