@@ -56,6 +56,10 @@ public class DataHandle {
             PPINetwork network = networks.get(NetworkID);
             PPINetwork ParentNetwork = network.getContext().getParentNetwork();
             Protein ParentProtein = ParentNetwork.getProteins().get(ParentProteinID);
+            while (ParentProtein == null && ParentNetwork.getContext().getParentNetwork() != null) {
+                ParentNetwork = ParentNetwork.getContext().getParentNetwork();
+                ParentProtein = ParentNetwork.getProteins().get(ParentProteinID);
+            }
             Family family = families.get(FamilyID);
             network.addProtein(ProteinID, ParentProtein, family);
         } else {
