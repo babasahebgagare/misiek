@@ -1,5 +1,7 @@
 package main;
 
+import cytoscape.Cytoscape;
+import cytoscape.data.CyAttributes;
 import java.util.HashMap;
 import java.util.Map;
 import java.awt.Color;
@@ -15,9 +17,16 @@ public class DataHandle {
     private static Map<String, Family> families = new HashMap<String, Family>();
     private static PPINetwork rootNetwork;
 
+    private static void addInteractionProbabilityAttribute(String cannonName, Double probability) {
+        String attrName = "Probability";
+        final CyAttributes edgeAttrs = Cytoscape.getEdgeAttributes();
+        edgeAttrs.setAttribute(cannonName, attrName, probability);
+    }
+
     private static void createInteaction(String EdgeID, String SourceID, String TargetID, Double Probability, PPINetwork network) {
         Protein source = network.getProtein(SourceID);
         Protein target = network.getProtein(TargetID);
+        addInteractionProbabilityAttribute(EdgeID, Probability);
 
         Interaction interaction = new Interaction(source, target, Probability, EdgeID, network);
         network.addInteraction(interaction);
