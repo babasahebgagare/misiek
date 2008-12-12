@@ -2,7 +2,7 @@ package utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import main.MenusHandle;
+import main.PluginMenusHandle;
 
 public class MemoLogger {
 
@@ -16,6 +16,6 @@ public class MemoLogger {
     }
 
     public static void log(String msg) {
-        MenusHandle.getMemo().append(now() + ": " + msg + "\n");
+        PluginMenusHandle.getMemo().append(now() + ": " + msg + "\n");
     }
 }
