@@ -5,11 +5,11 @@ import cytoscape.Cytoscape;
 import cytoscape.view.CyNetworkView;
 import giny.view.NodeView;
 import java.util.Collection;
-import structs.model.CytoGroupNode;
-import structs.model.CytoPPINetworkProjectionToDown;
-import structs.model.CytoPPINetworkProjectionToUp;
-import structs.model.CytoProtein;
-import structs.model.CytoProteinProjection;
+import viewmodel.structs.CytoGroupNode;
+import viewmodel.structs.CytoPPINetworkProjectionToDown;
+import viewmodel.structs.CytoPPINetworkProjectionToUp;
+import logicmodel.structs.CytoProtein;
+import logicmodel.structs.CytoProteinProjection;
 
 public class Layouter {
 

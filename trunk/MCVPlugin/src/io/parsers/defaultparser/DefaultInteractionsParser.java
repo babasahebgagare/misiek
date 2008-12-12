@@ -6,8 +6,8 @@ package io.parsers.defaultparser;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import main.CytoDataHandle;
-import structs.model.CytoAbstractPPINetwork;
+import viewmodel.controllers.CytoDataHandle;
+import viewmodel.structs.CytoAbstractPPINetwork;
 import utils.IDCreator;
 import utils.Messenger;
 

@@ -3,7 +3,7 @@ package io.parsers.defaultparser;
 import io.parsers.DataParser;
 import java.io.BufferedReader;
 import java.io.IOException;
-import structs.model.CytoAbstractPPINetwork;
+import viewmodel.structs.CytoAbstractPPINetwork;
 
 public class DefaultDataParser extends DataParser {
 

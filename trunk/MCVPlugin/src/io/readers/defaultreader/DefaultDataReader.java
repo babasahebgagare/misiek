@@ -6,7 +6,7 @@ import io.parsers.DataParser;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import structs.model.CytoAbstractPPINetwork;
+import viewmodel.structs.CytoAbstractPPINetwork;
 import utils.Messenger;
 
 public class DefaultDataReader extends AbstractDataReader {

@@ -9,12 +9,12 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.tree.TreePath;
-import main.CytoDataHandle;
-import main.DataHandle;
-import main.PluginMenusHandle;
-import structs.model.CytoAbstractPPINetwork;
-import structs.model.CytoProtein;
-import structs.model.PPINetwork;
+import viewmodel.controllers.CytoDataHandle;
+import logicmodel.controllers.DataHandle;
+import ui.PluginMenusHandle;
+import viewmodel.structs.CytoAbstractPPINetwork;
+import logicmodel.structs.CytoProtein;
+import logicmodel.structs.PPINetwork;
 
 public class DefaultUIController extends UIController {
 

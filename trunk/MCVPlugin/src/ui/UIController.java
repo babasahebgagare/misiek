@@ -2,8 +2,8 @@ package ui;
 
 import cytoscape.CyNetwork;
 import java.util.Collection;
-import structs.model.CytoProtein;
-import structs.model.PPINetwork;
+import logicmodel.structs.CytoProtein;
+import logicmodel.structs.PPINetwork;
 
 public abstract class UIController {
 

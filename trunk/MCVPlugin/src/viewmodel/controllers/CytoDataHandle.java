@@ -1,4 +1,4 @@
-package main;
+package viewmodel.controllers;
 
 import io.AbstractDataReader;
 import cytoscape.CyEdge;
@@ -8,19 +8,19 @@ import cytoscape.view.CyNetworkView;
 import java.util.HashMap;
 import java.util.Map;
 import mappers.IDMapper;
-import structs.model.CytoAbstractPPINetwork;
-import structs.model.CytoGroupNode;
-import structs.model.CytoInteraction;
-import structs.model.CytoObject;
-import structs.model.CytoPPINetwork;
-import structs.model.CytoProtein;
-import structs.model.CytoProteinProjection;
-import structs.model.PPINetwork;
-import structs.model.CytoPPINetworkProjection;
-import structs.model.CytoPPINetworkProjectionToDown;
-import structs.model.CytoPPINetworkProjectionToUp;
-import structs.model.Interaction;
-import structs.model.Protein;
+import viewmodel.structs.CytoAbstractPPINetwork;
+import viewmodel.structs.CytoGroupNode;
+import viewmodel.structs.CytoInteraction;
+import viewmodel.structs.CytoObject;
+import viewmodel.structs.CytoPPINetwork;
+import logicmodel.structs.CytoProtein;
+import logicmodel.structs.CytoProteinProjection;
+import logicmodel.structs.PPINetwork;
+import viewmodel.structs.CytoPPINetworkProjection;
+import viewmodel.structs.CytoPPINetworkProjectionToDown;
+import viewmodel.structs.CytoPPINetworkProjectionToUp;
+import logicmodel.structs.Interaction;
+import logicmodel.structs.Protein;
 import utils.IDCreator;
 
 public class CytoDataHandle {

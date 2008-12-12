@@ -6,12 +6,12 @@ import cytoscape.view.CyNetworkView;
 import ding.view.DGraphView;
 import ding.view.DingCanvas;
 import giny.view.NodeView;
-import main.DataHandle;
-import structs.model.CytoPPINetworkProjection;
-import structs.model.CytoGroupNode;
+import logicmodel.controllers.DataHandle;
+import viewmodel.structs.CytoPPINetworkProjection;
+import viewmodel.structs.CytoGroupNode;
 
-import structs.model.Protein;
-import structs.view.GroupNodeView;
+import logicmodel.structs.Protein;
+import tester.GroupNodeView;
 
 public class MCVBackgroundRenderer {
 

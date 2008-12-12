@@ -1,9 +1,9 @@
 package utils;
 
-import structs.model.CytoAbstractPPINetwork;
-import structs.model.CytoProtein;
-import structs.model.PPINetwork;
-import structs.model.Protein;
+import viewmodel.structs.CytoAbstractPPINetwork;
+import logicmodel.structs.CytoProtein;
+import logicmodel.structs.PPINetwork;
+import logicmodel.structs.Protein;
 
 public class IDCreator {
 

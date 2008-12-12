@@ -6,11 +6,11 @@ import cytoscape.visual.NodeAppearanceCalculator;
 import cytoscape.visual.NodeShape;
 import cytoscape.visual.VisualPropertyType;
 import giny.model.Node;
-import main.CytoDataHandle;
-import structs.model.CytoAbstractPPINetwork;
-import structs.model.CytoProtein;
-import structs.model.Family;
-import structs.model.Protein;
+import viewmodel.controllers.CytoDataHandle;
+import viewmodel.structs.CytoAbstractPPINetwork;
+import logicmodel.structs.CytoProtein;
+import logicmodel.structs.Family;
+import logicmodel.structs.Protein;
 
 public class MCVNodeAppearanceCalculator extends NodeAppearanceCalculator {
 
