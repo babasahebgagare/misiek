@@ -1,4 +1,4 @@
-package main;
+package logicmodel.controllers;
 
 import cytoscape.Cytoscape;
 import cytoscape.data.CyAttributes;
@@ -6,10 +6,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.awt.Color;
 import java.util.Collection;
-import structs.model.Family;
-import structs.model.Interaction;
-import structs.model.PPINetwork;
-import structs.model.Protein;
+import logicmodel.structs.Family;
+import logicmodel.structs.Interaction;
+import logicmodel.structs.PPINetwork;
+import logicmodel.structs.Protein;
 
 public class DataHandle {
 

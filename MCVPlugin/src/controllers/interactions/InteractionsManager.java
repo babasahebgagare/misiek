@@ -1,6 +1,6 @@
 package controllers.interactions;
 
-import structs.model.CytoAbstractPPINetwork;
+import viewmodel.structs.CytoAbstractPPINetwork;
 
 public abstract class InteractionsManager {
 

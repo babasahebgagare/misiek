@@ -5,7 +5,7 @@ import cytoscape.Cytoscape;
 import cytoscape.task.Task;
 import cytoscape.task.ui.JTaskConfig;
 import cytoscape.task.util.TaskManager;
-import structs.model.CytoAbstractPPINetwork;
+import viewmodel.structs.CytoAbstractPPINetwork;
 
 public class TasksDataReader extends AbstractDataReader {
 

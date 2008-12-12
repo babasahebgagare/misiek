@@ -10,8 +10,8 @@ import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import main.CytoDataHandle;
-import structs.model.CytoAbstractPPINetwork;
+import viewmodel.controllers.CytoDataHandle;
+import viewmodel.structs.CytoAbstractPPINetwork;
 import utils.IDCreator;
 
 public class LoadInteractionsTask implements Task {

@@ -4,7 +4,7 @@ import io.parsers.*;
 import java.awt.Color;
 import java.util.Collection;
 import java.util.HashSet;
-import main.DataHandle;
+import logicmodel.controllers.DataHandle;
 import utils.ColorGenerator;
 
 public class RootFamiliesTreeParser {

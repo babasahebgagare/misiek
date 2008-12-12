@@ -10,7 +10,7 @@ import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import main.DataHandle;
+import logicmodel.controllers.DataHandle;
 import utils.IDCreator;
 
 public class LoadAllInteractionsTask implements Task {

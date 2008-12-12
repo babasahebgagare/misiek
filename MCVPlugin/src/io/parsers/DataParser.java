@@ -2,7 +2,7 @@ package io.parsers;
 
 import io.parsers.rootparser.RootDataParser;
 import java.io.BufferedReader;
-import structs.model.CytoAbstractPPINetwork;
+import viewmodel.structs.CytoAbstractPPINetwork;
 
 public abstract class DataParser {
 

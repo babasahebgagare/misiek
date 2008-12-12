@@ -5,9 +5,9 @@ import cytoscape.visual.EdgeAppearance;
 import cytoscape.visual.EdgeAppearanceCalculator;
 import cytoscape.visual.VisualPropertyType;
 import giny.model.Edge;
-import main.CytoDataHandle;
-import structs.model.CytoAbstractPPINetwork;
-import structs.model.CytoInteraction;
+import viewmodel.controllers.CytoDataHandle;
+import viewmodel.structs.CytoAbstractPPINetwork;
+import viewmodel.structs.CytoInteraction;
 
 public class MCVEdgeAppearanceCalculator extends EdgeAppearanceCalculator {
 

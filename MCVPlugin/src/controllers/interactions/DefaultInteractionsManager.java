@@ -1,14 +1,14 @@
 package controllers.interactions;
 
-import converter.CytoInteractionsConverter;
+import viewmodel.controllers.CytoInteractionsConverter;
 import cytoscape.CyNetwork;
 import cytoscape.Cytoscape;
 import cytoscape.view.CyNetworkView;
-import main.CytoDataHandle;
-import main.CytoVisualHandle;
-import structs.model.CytoAbstractPPINetwork;
-import structs.model.Interaction;
-import structs.model.PPINetwork;
+import viewmodel.controllers.CytoDataHandle;
+import viewmodel.controllers.CytoVisualHandle;
+import viewmodel.structs.CytoAbstractPPINetwork;
+import logicmodel.structs.Interaction;
+import logicmodel.structs.PPINetwork;
 
 public class DefaultInteractionsManager extends InteractionsManager {
 
