@@ -24,12 +24,12 @@ public class CytoProjector {
             case ABOVE:
                 CytoPPINetworkProjectionToDown down = ProjectorNetwork.projectProteinsToDownOnNetwork(selectedProteins, network, motherCytoNetwork);
                 CytoNetworkConverter.convertCytoNetwork(down);
-                Layouter.ProjectionToDownLayout(down);
+                Layouter.getInstance().ProjectionToDownLayout(down);
                 break;
             case BELOW:
                 CytoPPINetworkProjectionToUp up = ProjectorNetwork.projectProteinsToUpOnNetwork(selectedProteins, network, motherCytoNetwork);
                 CytoNetworkConverter.convertCytoNetwork(up);
-                Layouter.ProjectionToUpLayout(up);
+                Layouter.getInstance().ProjectionToUpLayout(up);
                 break;
             case NEIGHBOUR:
                 Messenger.Message("NEIGHBOUR");
