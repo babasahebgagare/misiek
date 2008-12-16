@@ -5,35 +5,24 @@
  */
 package ui;
 
-import io.AbstractDataReader;
-import controllers.interactions.InteractionsManager;
-import viewmodel.controllers.CytoInteractionsConverter;
-import logicmodel.controllers.NetworksConverter;
 import cytoscape.Cytoscape;
-import cytoscape.dialogs.plugins.TreeNode;
 import cytoscape.view.CyNetworkView;
 import java.awt.Color;
-import java.io.File;
 import java.util.Collection;
 import javax.swing.JColorChooser;
-import javax.swing.JFileChooser;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeModel;
-import viewmodel.controllers.CytoDataHandle;
-import viewmodel.controllers.CytoVisualHandle;
 import logicmodel.controllers.DataHandle;
-import ui.PluginMenusHandle;
-import viewmodel.controllers.CytoProjector;
-import logicmodel.controllers.ProjectorInfoCalculator;
-import viewmodel.structs.CytoAbstractPPINetwork;
 import logicmodel.structs.CytoProtein;
 import logicmodel.structs.Family;
 import logicmodel.structs.PPINetwork;
-import utils.MemoLogger;
 import utils.Messenger;
+import viewmodel.controllers.CytoDataHandle;
+import viewmodel.controllers.CytoInteractionsConverter;
+import viewmodel.controllers.CytoProjector;
+import viewmodel.controllers.CytoVisualHandle;
+import viewmodel.structs.CytoAbstractPPINetwork;
 
 /**
  *
@@ -49,22 +38,14 @@ public class LeftPanel extends javax.swing.JPanel {
         initSpeciesTree();
         PluginMenusHandle.setTree(jTree1);
         PluginMenusHandle.setMemo(jTextArea1);
-    }
-
-    private TreeNode createRecTreeModel(PPINetwork rootNetwork) {
-        if (rootNetwork == null) {
-            return null;
-        } else {
-            TreeNode ret = new TreeNode(rootNetwork.getID());
-
-            for (PPINetwork child : rootNetwork.getContext().getChildrenNetworks()) {
-                TreeNode childNode = createRecTreeModel(child);
-                if (childNode != null) {
-                    ret.addChild(childNode);
-                }
-            }
-            return ret;
-        }
+        PluginMenusHandle.setLoadDataButton(jButton1);
+        PluginMenusHandle.setDoProjectionButton(jButton3);
+        PluginMenusHandle.setShowNetowrkButton(jButton2);
+        PluginMenusHandle.setFamiliesList(jList1);
+        PluginMenusHandle.setLoadAllInteractionsButton(jButton5);
+        PluginMenusHandle.setShowLoadedInteractionsButton(jButton6);
+        PluginMenusHandle.setLoadInteractionsForNetworkButton(jButton7);
+        UIController.getInstance().initButtonsState();
     }
 
     private void initColorList() {
@@ -89,24 +70,8 @@ public class LeftPanel extends javax.swing.JPanel {
         });
     }
 
-    private void initColorListDataView() {
-        Collection<String> familiesNames = DataHandle.getFamiliesKeys();
-        jList1.setListData(familiesNames.toArray());
-    }
-
-    private void initDataView() {
-        initTreeDataView();
-        initColorListDataView();
-    }
-
     private void initSpeciesTree() {
         jTree1.setModel(null);
-    }
-
-    private void initTreeDataView() {
-        TreeNode root = createRecTreeModel(DataHandle.getRootNetwork());
-        TreeModel newModel = new DefaultTreeModel(root);
-        jTree1.setModel(newModel);
     }
 
     /** This method is called from within the constructor to
@@ -369,33 +334,11 @@ public class LeftPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
 private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-    JFileChooser fc = new JFileChooser();
-    int returnVal = fc.showOpenDialog(fc);
-
-    if (returnVal == JFileChooser.APPROVE_OPTION) {
-        File file = fc.getSelectedFile();
-        String filepath = file.getAbsolutePath();
-        int pointPosition = filepath.lastIndexOf(".");
-        filepath = filepath.substring(0, pointPosition + 1);
-        AbstractDataReader.getInstance().setFilepath(filepath);
-
-        AbstractDataReader.getInstance().readSpacies();
-        MemoLogger.log("Drzewo gatunkow wczytane");
-
-        AbstractDataReader.getInstance().readTrees();
-        MemoLogger.log("Drzewo rodzin wczytane");
-        //DataReader.ReadDataFromFile(file.getAbsolutePath());
-        ProjectorInfoCalculator.calculateProjectorInfo();
-        initDataView();
-    } else {
-    }
-
+    UIController.getInstance().loadData();
 }//GEN-LAST:event_jButton1ActionPerformed
 
 private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    Collection<PPINetwork> networks = UIController.getInstance().getSelectedNetworks();
-    NetworksConverter.convertNetworks(networks);
+    UIController.getInstance().showSelectedNetworks();
 }//GEN-LAST:event_jButton2ActionPerformed
 
 private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -417,15 +360,7 @@ private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     public void run() {*/
     double treshold = ((Integer) jSpinner1.getValue()).doubleValue() / 100.0;
 
-    CyNetworkView cyNetworkView = Cytoscape.getCurrentNetworkView();
-
-    CytoAbstractPPINetwork cytoNetwork = CytoDataHandle.findNetworkByCytoID(cyNetworkView.getIdentifier());
-
-    CytoDataHandle.updateCytoInteractions(cytoNetwork, treshold);
-
-    CytoInteractionsConverter.convertCytoNetworkInteractions(cyNetworkView.getNetwork(), cytoNetwork.getCytoInteractions());
-
-    CytoVisualHandle.applyVisualStyleForNetwork(cyNetworkView);
+    UIController.getInstance().loadInteractionsForNetwork(treshold);
 /*       }
 });
 thread.run();*/
@@ -434,17 +369,13 @@ thread.run();*/
 private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 
     double treshold = ((Integer) jSpinner1.getValue()).doubleValue() / 100.0;
-    AbstractDataReader.getInstance().readAllInteractions(treshold);
+    UIController.getInstance().loadAllInteractions(treshold);
 }//GEN-LAST:event_jButton5ActionPerformed
 
 private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
     double treshold = ((Integer) jSpinner1.getValue()).doubleValue() / 100.0;
+    UIController.getInstance().showLoadedInteractions(treshold);
 
-    CyNetworkView cyNetworkView = Cytoscape.getCurrentNetworkView();
-
-    CytoAbstractPPINetwork cytoNetwork = CytoDataHandle.findNetworkByCytoID(cyNetworkView.getIdentifier());
-
-    InteractionsManager.getInstance().loadAndShowInteractionsFromModel(cytoNetwork, treshold);
 }//GEN-LAST:event_jButton6ActionPerformed
 
 private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -456,7 +387,7 @@ private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 }//GEN-LAST:event_jButton9ActionPerformed
 
 private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-   // UIController.getInstance().deleteUnconnectedNodesFromSelected(Cytoscape.getCurrentNetwork())
+    // UIController.getInstance().deleteUnconnectedNodesFromSelected(Cytoscape.getCurrentNetwork())
 }//GEN-LAST:event_jButton8ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
