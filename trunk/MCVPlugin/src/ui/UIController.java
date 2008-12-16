@@ -22,4 +22,16 @@ public abstract class UIController {
     public abstract void selectUnconnectedNodes(CyNetwork cyNetwork);
 
     public abstract void unselectUnConnectedNodes(CyNetwork cyNetwork);
+
+    public abstract void initButtonsState();
+
+    public abstract void loadData();
+
+    public abstract void showSelectedNetworks();
+
+    public abstract void loadAllInteractions(double treshold);
+
+    public abstract void showLoadedInteractions(double treshold);
+
+    public abstract void loadInteractionsForNetwork(double treshold);
 }
