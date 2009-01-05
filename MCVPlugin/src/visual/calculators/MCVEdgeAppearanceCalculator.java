@@ -5,6 +5,7 @@ import cytoscape.visual.EdgeAppearance;
 import cytoscape.visual.EdgeAppearanceCalculator;
 import cytoscape.visual.VisualPropertyType;
 import giny.model.Edge;
+import java.awt.Color;
 import viewmodel.controllers.CytoDataHandle;
 import viewmodel.structs.CytoAbstractPPINetwork;
 import viewmodel.structs.CytoInteraction;
@@ -23,6 +24,7 @@ public class MCVEdgeAppearanceCalculator extends EdgeAppearanceCalculator {
 
             appr.set(VisualPropertyType.EDGE_LINE_WIDTH, new Float(probability * 5.0)); //TODO - BAD CONST
             appr.set(VisualPropertyType.EDGE_TOOLTIP, String.valueOf(probability));
+            appr.set(VisualPropertyType.EDGE_COLOR, Color.GRAY);
 
         }
     }

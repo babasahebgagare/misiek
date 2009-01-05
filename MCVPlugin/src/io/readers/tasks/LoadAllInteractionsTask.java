@@ -12,6 +12,7 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import logicmodel.controllers.DataHandle;
 import utils.IDCreator;
+import utils.MemoLogger;
 
 public class LoadAllInteractionsTask implements Task {
 
@@ -26,6 +27,8 @@ public class LoadAllInteractionsTask implements Task {
     private BufferedInputStream bis;
     private DataInputStream dis;
     private BufferedReader br;
+    private int created = 0;
+    private int all = 0;
 
     LoadAllInteractionsTask(String intpath, double treshold) {
         this.treshold = treshold;
@@ -48,6 +51,7 @@ public class LoadAllInteractionsTask implements Task {
 
             while (br.ready()) {
                 try {
+                    all++;
 
                     String SourceID = DefaultInteractionsParser.readWord(br);
                     String TargetID = DefaultInteractionsParser.readWord(br);
@@ -56,13 +60,13 @@ public class LoadAllInteractionsTask implements Task {
                     Double Probability = Double.parseDouble(DefaultInteractionsParser.readWord(br));
 
                     if (Probability.doubleValue() >= treshold) {
+                        created++;
                         DataHandle.createInteraction(EdgeID, SourceID, TargetID, Probability);
                     }
 
                     current = fis.getChannel().position();
                     float percent = current * 100 / max;
                     taskMonitor.setPercentCompleted(Math.round(percent));
-
                 } catch (Exception ex) {
                     taskMonitor.setException(ex, "Problem podczas ładowania interakcji");
                 }
@@ -73,7 +77,7 @@ public class LoadAllInteractionsTask implements Task {
             dis.close();
             bis.close();
             fis.close();
-
+            MemoLogger.log("Załadowano: " + Math.round((double) created * 100 / (double) all) + "% powyżej progu");
             taskMonitor.setPercentCompleted(100);
         } catch (Exception e) {
             taskMonitor.setException(e, "Problem podczas tworzenia lub zamykania strumieni");
