@@ -3,7 +3,6 @@ package logicmodel.structs;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import logicmodel.structs.Protein;
 
 public class ProjectorInfo {
 
