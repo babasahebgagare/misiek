@@ -1,7 +1,5 @@
 package logicmodel.structs;
 
-import logicmodel.structs.ProjectorInfo;
-
 public class Protein {
 
     private String ID;

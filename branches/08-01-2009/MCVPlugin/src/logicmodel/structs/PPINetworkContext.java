@@ -2,7 +2,6 @@ package logicmodel.structs;
 
 import java.util.Collection;
 import java.util.HashSet;
-import logicmodel.structs.NetworksHierarchy;
 
 public class PPINetworkContext {
 
