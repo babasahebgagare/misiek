@@ -10,7 +10,6 @@ public class ProteinsConverter {
 
     static void convertNetworkProteins(CytoPPINetwork cytoPPINetwork, Collection<Protein> proteins) {
         for (Protein protein : proteins) {
-
             String cytoProteinID = IDCreator.createProteinProjectionID(protein, cytoPPINetwork);
             CytoProtein cytoProtein = new CytoProtein(cytoProteinID, protein, cytoPPINetwork);
             cytoPPINetwork.addCytoProtein(cytoProtein);

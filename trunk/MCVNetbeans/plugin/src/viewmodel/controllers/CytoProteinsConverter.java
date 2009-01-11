@@ -11,15 +11,15 @@ import logicmodel.structs.CytoProtein;
 
 class CytoProteinsConverter {
 
-    static void convertCytoNetworkProteins(EnvNetwork newNet, Collection<CytoProtein> cytoProteins) {
+    static void convertCytoNetworkProteins(EnvNetwork envNetwork, Collection<CytoProtein> cytoProteins) {
         for (CytoProtein cytoProtein : cytoProteins) {
-            EnvNode node = EnvInterface.getInstance().createNode(newNet, cytoProtein.getProtein().getID());
-//            int rootID = Cytoscape.getRootGraph().createNode();
- //           Node node = Cytoscape.getRootGraph().getNode(rootID);
-//            node.setIdentifier(cytoProtein.getCytoID());
-            cytoProtein.setIndex(node.getIndex());
-        //    newNet.addNode(rootID);
-            CytoDataHandle.addCytoProteinMapping(node.getIndex(), cytoProtein);
+            //  int rootID = Cytoscape.getRootGraph().createNode();
+            EnvNode node = EnvInterface.getInstance().createNode(envNetwork, cytoProtein.getProtein().getID());
+            //     Node node = Cytoscape.getRootGraph().getNode(rootID);
+            //     node.setIdentifier(cytoProtein.getCytoID());
+            //     cytoProtein.setIndex(rootID);
+            //     newNet.addNode(rootID);
+            CytoDataHandle.addCytoProteinMapping(node.getRootID().intValue(), cytoProtein);
         }
     }
 }
