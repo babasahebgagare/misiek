@@ -4,11 +4,11 @@ public class EnvNode {
 
     private EnvNetwork network;
     private String ID;
-    private Integer index;
+    private Integer rootID;
 
     public EnvNode(EnvNetwork network, String ID, Integer index) {
         this.ID = ID;
-        this.index = index;
+        this.rootID = index;
         this.network = network;
     }
 
@@ -20,12 +20,12 @@ public class EnvNode {
         this.ID = ID;
     }
 
-    public Integer getIndex() {
-        return index;
+    public Integer getRootID() {
+        return rootID;
     }
 
-    public void setIndex(Integer index) {
-        this.index = index;
+    public void setRootID(Integer rootID) {
+        this.rootID = rootID;
     }
 
     public EnvNetwork getNetwork() {
