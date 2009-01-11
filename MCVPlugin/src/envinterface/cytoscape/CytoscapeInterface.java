@@ -7,6 +7,8 @@ import envinterface.EnvEdge;
 import envinterface.EnvInterface;
 import envinterface.EnvNetwork;
 import envinterface.EnvNode;
+import giny.model.Edge;
+import giny.model.Node;
 
 public class CytoscapeInterface extends EnvInterface {
 
@@ -22,7 +24,9 @@ public class CytoscapeInterface extends EnvInterface {
     public EnvNode createNode(EnvNetwork network, String ID) {
         CyNetwork cyNetwork = Cytoscape.getNetwork(network.getID());
         int rootID = Cytoscape.getRootGraph().createNode();
-        cyNetwork.addNode(rootID);
+        Node cyNode = Cytoscape.getRootGraph().getNode(rootID);
+        cyNode.setIdentifier(ID);
+        cyNetwork.addNode(cyNode);
         EnvNode node = new EnvNode(network, ID, rootID);
         getNodes().put(new Integer(rootID), node);
         return node;
@@ -31,10 +35,12 @@ public class CytoscapeInterface extends EnvInterface {
     @Override
     public EnvEdge createEdge(EnvNetwork network, String ID, EnvNode source, EnvNode target) {
         CyNetwork cyNetwork = Cytoscape.getNetwork(network.getID());
-        CyNode cysource = (CyNode) Cytoscape.getRootGraph().getNode(source.getIndex().intValue());
-        CyNode cytarget = (CyNode) Cytoscape.getRootGraph().getNode(target.getIndex().intValue());
+        CyNode cysource = (CyNode) Cytoscape.getRootGraph().getNode(source.getRootID().intValue());
+        CyNode cytarget = (CyNode) Cytoscape.getRootGraph().getNode(target.getRootID().intValue());
         int rootID = Cytoscape.getRootGraph().createEdge(cysource, cytarget);
-        cyNetwork.addEdge(rootID);
+        Edge cyEdge = Cytoscape.getRootGraph().getEdge(rootID);
+        cyEdge.setIdentifier(ID);
+        cyNetwork.addEdge(cyEdge);
         EnvEdge edge = new EnvEdge(network, ID, rootID, source, target);
         getEdges().put(new Integer(rootID), edge);
         return edge;
@@ -50,5 +56,10 @@ public class CytoscapeInterface extends EnvInterface {
     public void deleteEdge(int index) {
         Cytoscape.getRootGraph().removeEdge(index);
         getEdges().remove(new Integer(index));
+    }
+
+    @Override
+    public EnvNetwork currentNetwork() {
+        return getNetworks().get(Cytoscape.getCurrentNetwork().getIdentifier());
     }
 }

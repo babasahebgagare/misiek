@@ -17,6 +17,8 @@ public abstract class EnvInterface {
     /**** ABSTRACT ***/
     public abstract EnvNetwork createNetwork(String title);
 
+    public abstract EnvNetwork currentNetwork();
+
     public abstract EnvNode createNode(EnvNetwork network, String ID);
 
     public abstract EnvEdge createEdge(EnvNetwork network, String ID, EnvNode source, EnvNode target);
