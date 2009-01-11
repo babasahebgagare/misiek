@@ -13,18 +13,18 @@ import cytoscape.visual.VisualStyle;
 import javax.swing.SwingUtilities;
 
 public class CytoVisualHandle {
-/*
+
     public static void applyCyLayoutAlgorithm(CyNetwork cyNetwork, CyNetworkView cyNetworkView) {
-        Cytoscape.getVisualMappingManager().setNetworkView(cyNetworkView);
-        CyLayoutAlgorithm layout = CyLayouts.getDefaultLayout();
-        layout.doLayout(cyNetworkView);
-        cyNetworkView.setZoom(0.7);
+   //     Cytoscape.getVisualMappingManager().setNetworkView(cyNetworkView);
+   //     CyLayoutAlgorithm layout = CyLayouts.getDefaultLayout();
+   //     layout.doLayout(cyNetworkView);
+     //   cyNetworkView.setZoom(0.7);
     }
 
     public static void applyVisualStyleForNetwork(CyNetworkView cyNetworkView) {
-        VisualStyle MCVStyle = Cytoscape.getVisualMappingManager().getCalculatorCatalog().getVisualStyle("MCVStyle");
-        cyNetworkView.applyVizmapper(MCVStyle);
-        Cytoscape.getVisualMappingManager().setVisualStyle(MCVStyle);
+       // VisualStyle MCVStyle = Cytoscape.getVisualMappingManager().getCalculatorCatalog().getVisualStyle("MCVStyle");
+      //  cyNetworkView.applyVizmapper(MCVStyle);
+      //  Cytoscape.getVisualMappingManager().setVisualStyle(MCVStyle);
     }
 
     public static void setDefaultCenter(final CyNetworkView cyNetworkView) {
@@ -32,11 +32,10 @@ public class CytoVisualHandle {
         SwingUtilities.invokeLater(new Runnable() {
 
             public void run() {
-                DGraphView graphView = (DGraphView) cyNetworkView;
-                graphView.fitContent();
-                cyNetworkView.updateView();
+         //       DGraphView graphView = (DGraphView) cyNetworkView;
+         //       graphView.fitContent();
+         //       cyNetworkView.updateView();
             }
         });
     }
- */
 }
