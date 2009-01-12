@@ -1,12 +1,12 @@
-package envinterface;
+package envinterface.abstractenv;
 
-public class EnvNetwork {
+public abstract class EnvNetwork {
 
     private String ID;
     private String title;
 
-    public EnvNetwork(String identifier, String title) {
-        this.ID = identifier;
+    public EnvNetwork(String ID, String title) {
+        this.ID = ID;
         this.title = title;
     }
 

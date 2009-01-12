@@ -3,10 +3,12 @@ package envinterface.cytoscape;
 import cytoscape.CyNetwork;
 import cytoscape.CyNode;
 import cytoscape.Cytoscape;
-import envinterface.EnvEdge;
-import envinterface.EnvInterface;
-import envinterface.EnvNetwork;
-import envinterface.EnvNode;
+import cytoscape.view.CyNetworkView;
+import envinterface.abstractenv.EnvEdge;
+import envinterface.abstractenv.EnvInterface;
+import envinterface.abstractenv.EnvNetwork;
+import envinterface.abstractenv.EnvNetworkView;
+import envinterface.abstractenv.EnvNode;
 import giny.model.Edge;
 import giny.model.Node;
 
@@ -14,8 +16,9 @@ public class CytoscapeInterface extends EnvInterface {
 
     @Override
     public EnvNetwork createNetwork(String title) {
-        CyNetwork cyNetwork = Cytoscape.createNetwork(title, true);
-        EnvNetwork network = new EnvNetwork(cyNetwork.getIdentifier(), title);
+        CyNetwork cyNetwork = Cytoscape.createNetwork(title, false);
+        EnvNetwork network = new CytoscapeNetwork(cyNetwork.getIdentifier(), title);
+        createNetworkView(network);
         getNetworks().put(network.getID(), network);
         return network;
     }
@@ -61,5 +64,14 @@ public class CytoscapeInterface extends EnvInterface {
     @Override
     public EnvNetwork currentNetwork() {
         return getNetworks().get(Cytoscape.getCurrentNetwork().getIdentifier());
+    }
+
+    @Override
+    public EnvNetworkView createNetworkView(EnvNetwork envNetwork) {
+        CyNetwork cyNetwork = Cytoscape.getNetwork(envNetwork.getID());
+        CyNetworkView cyNetworkView = Cytoscape.createNetworkView(cyNetwork);
+        EnvNetworkView envNetworkView = new CytoscapeNetworkView(envNetwork, cyNetworkView);
+        getNetworksView().put(envNetwork.getID(), envNetworkView);
+        return envNetworkView;
     }
 }

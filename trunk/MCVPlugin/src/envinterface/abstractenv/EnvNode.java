@@ -1,4 +1,4 @@
-package envinterface;
+package envinterface.abstractenv;
 
 public class EnvNode {
 
