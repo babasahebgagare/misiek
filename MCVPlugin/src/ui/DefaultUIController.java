@@ -6,6 +6,8 @@ import cytoscape.CyNode;
 import cytoscape.Cytoscape;
 import cytoscape.dialogs.plugins.TreeNode;
 import cytoscape.view.CyNetworkView;
+import envinterface.abstractenv.EnvInterface;
+import envinterface.abstractenv.EnvNetwork;
 import giny.model.Edge;
 import io.AbstractDataReader;
 import java.io.File;
@@ -68,6 +70,7 @@ public class DefaultUIController extends UIController {
     }
 
     private void initTreeDataView() {
+        System.out.println("ddd");
         TreeNode root = createRecTreeModel(DataHandle.getRootNetwork());
         TreeModel newModel = new DefaultTreeModel(root);
         PluginMenusHandle.getTree().setModel(newModel);
@@ -214,14 +217,16 @@ public class DefaultUIController extends UIController {
 
     @Override
     public void loadInteractionsForNetwork(double treshold) {
-        CyNetworkView cyNetworkView = Cytoscape.getCurrentNetworkView();
+        //   CyNetworkView cyNetworkView = Cytoscape.getCurrentNetworkView();
 
-        CytoAbstractPPINetwork cytoNetwork = CytoDataHandle.findNetworkByCytoID(cyNetworkView.getIdentifier());
+        EnvNetwork currentNetwork = EnvInterface.getInstance().currentNetwork();
+
+        CytoAbstractPPINetwork cytoNetwork = CytoDataHandle.findNetworkByCytoID(currentNetwork.getID());
 
         CytoDataHandle.updateCytoInteractions(cytoNetwork, treshold);
 
-        CytoInteractionsConverter.convertCytoNetworkInteractions(cyNetworkView.getNetwork(), cytoNetwork.getCytoInteractions());
+        CytoInteractionsConverter.convertCytoNetworkInteractions(currentNetwork, cytoNetwork.getCytoInteractions());
 
-        CytoVisualHandle.applyVisualStyleForNetwork(cyNetworkView);
+    //TODO CytoVisualHandle.applyVisualStyleForNetwork(cyNetworkView);
     }
 }

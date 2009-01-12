@@ -1,4 +1,4 @@
-package envinterface;
+package envinterface.abstractenv;
 
 import envinterface.cytoscape.CytoscapeInterface;
 import java.util.HashMap;
@@ -10,11 +10,14 @@ public abstract class EnvInterface {
     public static EnvInterface getInstance() {
         return inter;
     }
+    private HashMap<String, EnvNetworkView> networksView = new HashMap<String, EnvNetworkView>();
     private HashMap<String, EnvNetwork> networks = new HashMap<String, EnvNetwork>();
     private HashMap<Integer, EnvNode> nodes = new HashMap<Integer, EnvNode>();
     private HashMap<Integer, EnvEdge> edges = new HashMap<Integer, EnvEdge>();
 
     /**** ABSTRACT ***/
+    public abstract EnvNetworkView createNetworkView(EnvNetwork envNetwork);
+
     public abstract EnvNetwork createNetwork(String title);
 
     public abstract EnvNetwork currentNetwork();
@@ -30,6 +33,10 @@ public abstract class EnvInterface {
     /**** implemented API  ***/
     public boolean existNetwork(String ID) {
         return networks.containsKey(ID);
+    }
+
+    public boolean existNetworkView(String ID) {
+        return networksView.containsKey(ID);
     }
 
     public void deleteNode(Integer index) {
@@ -56,6 +63,10 @@ public abstract class EnvInterface {
         return networks.get(ID);
     }
 
+    public EnvNetworkView getNetworkView(String ID) {
+        return networksView.get(ID);
+    }
+
     public HashMap<String, EnvNetwork> getNetworks() {
         return networks;
     }
@@ -78,5 +89,13 @@ public abstract class EnvInterface {
 
     public void setNodes(HashMap<Integer, EnvNode> nodes) {
         this.nodes = nodes;
+    }
+
+    public HashMap<String, EnvNetworkView> getNetworksView() {
+        return networksView;
+    }
+
+    public void setNetworksView(HashMap<String, EnvNetworkView> networksView) {
+        this.networksView = networksView;
     }
 }

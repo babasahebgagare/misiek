@@ -4,6 +4,8 @@ import viewmodel.controllers.CytoInteractionsConverter;
 import cytoscape.CyNetwork;
 import cytoscape.Cytoscape;
 import cytoscape.view.CyNetworkView;
+import envinterface.abstractenv.EnvInterface;
+import envinterface.abstractenv.EnvNetwork;
 import viewmodel.controllers.CytoDataHandle;
 import viewmodel.controllers.CytoVisualHandle;
 import viewmodel.structs.CytoAbstractPPINetwork;
@@ -33,11 +35,12 @@ public class DefaultInteractionsManager extends InteractionsManager {
 
     @Override
     public void showInteractions(CytoAbstractPPINetwork cytoNetwork) {
-        CyNetworkView cyNetworkView = Cytoscape.getNetworkView(cytoNetwork.getCytoID());
-        CyNetwork cyNetwork = cyNetworkView.getNetwork();
+        //  CyNetworkView cyNetworkView = Cytoscape.getNetworkView(cytoNetwork.getCytoID());
+        //  CyNetwork cyNetwork = cyNetworkView.getNetwork();
+        EnvNetwork envNetwork = EnvInterface.getInstance().currentNetwork();
 
-        CytoInteractionsConverter.convertCytoNetworkInteractions(cyNetwork, cytoNetwork.getCytoInteractions());
-        CytoVisualHandle.applyVisualStyleForNetwork(cyNetworkView);
+        CytoInteractionsConverter.convertCytoNetworkInteractions(envNetwork, cytoNetwork.getCytoInteractions());
+    //   CytoVisualHandle.applyVisualStyleForNetwork(cyNetworkView);
     }
 
     @Override
