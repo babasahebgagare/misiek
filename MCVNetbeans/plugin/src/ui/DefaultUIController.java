@@ -106,7 +106,8 @@ public class DefaultUIController extends UIController {
 
     @Override
     public void loadAllInteractions(double treshold) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        AbstractDataReader.getInstance().readAllInteractions(treshold);
+        PluginMenusHandle.getShowLoadedInteractionsButton().setEnabled(true);
     }
 
     @Override

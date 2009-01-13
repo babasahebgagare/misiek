@@ -19,8 +19,8 @@ public class DataHandle {
 
     private static void addInteractionProbabilityAttribute(String cannonName, Double probability) {
         String attrName = "Probability";
-        final CyAttributes edgeAttrs = Cytoscape.getEdgeAttributes();
-        edgeAttrs.setAttribute(cannonName, attrName, probability);
+   //     final CyAttributes edgeAttrs = Cytoscape.getEdgeAttributes();
+   //     edgeAttrs.setAttribute(cannonName, attrName, probability);
     }
 
     private static void createInteaction(String EdgeID, String SourceID, String TargetID, Double Probability, PPINetwork network) {
