@@ -1,13 +1,8 @@
 package viewmodel.controllers;
 
-import controllers.interactions.InteractionsManager;
-import cytoscape.CyNetwork;
-import cytoscape.Cytoscape;
-import cytoscape.view.CyNetworkView;
-import envinterface.EnvInterface;
-import envinterface.EnvNetwork;
+import envinterface.abstractenv.EnvInterface;
+import envinterface.abstractenv.EnvNetwork;
 import viewmodel.controllers.CytoDataHandle;
-import viewmodel.controllers.CytoVisualHandle;
 import viewmodel.structs.CytoAbstractPPINetwork;
 
 public class CytoNetworkConverter {

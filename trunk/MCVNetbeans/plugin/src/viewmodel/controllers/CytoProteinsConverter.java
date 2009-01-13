@@ -1,10 +1,8 @@
 package viewmodel.controllers;
 
-import cytoscape.CyNetwork;
-import cytoscape.Cytoscape;
-import envinterface.EnvInterface;
-import envinterface.EnvNetwork;
-import envinterface.EnvNode;
+import envinterface.abstractenv.EnvInterface;
+import envinterface.abstractenv.EnvNetwork;
+import envinterface.abstractenv.EnvNode;
 import java.util.Collection;
 import viewmodel.controllers.CytoDataHandle;
 import logicmodel.structs.CytoProtein;
