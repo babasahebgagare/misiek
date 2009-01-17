@@ -105,10 +105,12 @@ public class DefaultUIController extends UIController {
 
     @Override
     public Collection<CytoProtein> getSelectedProteins(CyNetwork cyNetwork) {
+        Collection<CytoProtein> ret = new HashSet<CytoProtein>();
+
         Set<CyNode> cyNodes = cyNetwork.getSelectedNodes();
         String PPINetworkCytoID = Cytoscape.getCurrentNetwork().getIdentifier();
         CytoAbstractPPINetwork currCytoNetwork = CytoDataHandle.findNetworkByCytoID(PPINetworkCytoID);
-        Collection<CytoProtein> ret = new HashSet<CytoProtein>();
+        
 
         if (currCytoNetwork != null) {
             for (CyNode node : cyNodes) {
