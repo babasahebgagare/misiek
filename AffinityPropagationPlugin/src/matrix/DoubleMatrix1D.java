@@ -43,4 +43,14 @@ public class DoubleMatrix1D extends Matrix1D<Double> implements DoubleMatrix1DIn
         }
         return res;
     }
+
+    @Override
+    public DoubleMatrix1D clone() {
+        DoubleMatrix1D res = new DoubleMatrix1D(this.N);
+        for (int i = 0; i < this.N; i++) {
+            res.set(i, this.get(i));
+        }
+
+        return res;
+    }
 }

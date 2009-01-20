@@ -1,9 +1,13 @@
 package matrix;
 
-public abstract class Matrix1D<T> implements Matrix1DInterface<T> {
+public abstract class Matrix1D<T> implements Matrix1DInterface<T>, Cloneable {
 
     T[] vector;
     int N;
+
+    public T[] getVector() {
+        return vector;
+    }
 
     public Matrix1D(int N) {
         this.N = N;
@@ -33,7 +37,7 @@ public abstract class Matrix1D<T> implements Matrix1DInterface<T> {
     public int maxIndex() {
         int maxi = 0;
         for (int i = 0; i < N; i++) {
-            if(((Comparable)(this.vector[i])).compareTo(this.vector[maxi]) == 1) {
+            if (((Comparable) (this.vector[i])).compareTo(this.vector[maxi]) == 1) {
                 maxi = i;
             }
         }
@@ -51,4 +55,6 @@ public abstract class Matrix1D<T> implements Matrix1DInterface<T> {
         return res;
     }
 
+    @Override
+    public abstract Matrix1D<T> clone();
 }

@@ -9,6 +9,8 @@ public interface Matrix1DInterface<T> {
 
     public T get(int i);
 
+    public T[] getVector();
+
     public T max();
 
     public int maxIndex();

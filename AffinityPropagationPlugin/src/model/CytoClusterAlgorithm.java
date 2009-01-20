@@ -39,7 +39,7 @@ import java.beans.PropertyChangeSupport;
 
 import javax.swing.JPanel;
 
-public interface ClusterAlgorithm {
+public interface CytoClusterAlgorithm {
 
     public static String CLUSTER_COMPUTED = "CLUSTER_COMPUTED";
 
@@ -53,7 +53,7 @@ public interface ClusterAlgorithm {
 
     public void updateSettings();
 
-    public ClusterProperties getSettings();
+    public CytoClusterProperties getSettings();
 
     public void halt();
 

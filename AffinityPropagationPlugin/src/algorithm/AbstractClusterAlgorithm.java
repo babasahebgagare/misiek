@@ -10,5 +10,9 @@ public abstract class AbstractClusterAlgorithm {
 
     public abstract void halt();
 
-    public abstract void doCluster();
+    public abstract void setN(int N);
+
+    public abstract void setSimilarities(double[][] sim);
+
+    public abstract Integer[] doCluster();
 }

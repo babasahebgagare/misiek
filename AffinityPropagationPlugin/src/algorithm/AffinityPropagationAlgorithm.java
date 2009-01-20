@@ -1,5 +1,7 @@
 package algorithm;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import matrix.DoubleMatrix1D;
 import matrix.DoubleMatrix2D;
 import matrix.IntegerMatrix1D;
@@ -7,7 +9,9 @@ import matrix.IntegerMatrix1D;
 public class AffinityPropagationAlgorithm extends AbstractClusterAlgorithm {
 
     private int N;
+    private IntegerMatrix1D idx;
     private DoubleMatrix2D S;
+    private IntegerMatrix1D C;
     private DoubleMatrix2D A;
     private DoubleMatrix2D E;
     private DoubleMatrix1D dA;
@@ -44,11 +48,12 @@ public class AffinityPropagationAlgorithm extends AbstractClusterAlgorithm {
     }
 
     @Override
-    public void doCluster() {
+    public Integer[] doCluster() {
 
         double[] pom = new double[N];
 
-        for (int iter = 0; iter < 100; iter++) {
+        for (int iter = 0; iter < 3; iter++) {
+            System.out.println("iteration: " + iter);
             Rold = R.copy();
 
             AS = A.plus(S);
@@ -103,31 +108,36 @@ public class AffinityPropagationAlgorithm extends AbstractClusterAlgorithm {
         //          System.out.println(A);
         }
 
+        //    System.out.println("S: " + S);
         E = R.plus(A);
         I = E.diag().findG(0);
         int K = I.size();
 
+        C = S.getColumns(I).maxrIndexes();
 
-        System.out.println("A: " + A);
-        System.out.println("E: " + E);
-        System.out.println("I: " + I);
-        DoubleMatrix2D CI = S.maxr();
-        
+        //    System.out.println("C: " + C);
+        C = tmp(C, I);
+        //    System.out.println("C: " + C);
+        idx = idx(C, I);
+
+        //    System.out.println("A: " + A);
+        //   System.out.println("E: " + E);
+        //   System.out.println("I: " + I);
+        //  System.out.println("idx: " + idx);
+
+        //     ArrayList res= new ArrayList<Integer>();
 
 
-        double[] c = new double[I.max()+1];
-        for (int i = 0; i < I.size(); i++) {
-            c[I.get(i)] = i;
-        }
-
+        return idx.getVector();
     }
 
-    public DoubleMatrix2D getSimilarity() {
-        return S;
+    public double[][] getSimilarities() {
+        return S.getMatrix();
     }
 
-    public void setSimilarity(DoubleMatrix2D similarity) {
-        this.S = similarity;
+    public void setSimilarities(double[][] similarities) {
+        int N = similarities.length;
+        this.S = new DoubleMatrix2D(N, N, similarities);
     }
 
     public double getLambda() {
@@ -161,4 +171,25 @@ public class AffinityPropagationAlgorithm extends AbstractClusterAlgorithm {
     public void setR(DoubleMatrix2D R) {
         this.R = R;
     }
+
+    public IntegerMatrix1D idx(IntegerMatrix1D C, IntegerMatrix1D I) {
+
+        IntegerMatrix1D res = new IntegerMatrix1D(C.size());
+
+        for (int i = 0; i < C.size(); i++) {
+            res.set(i, I.get(C.get(i).intValue()));
+        }
+
+        return res;
+    }
+
+    public IntegerMatrix1D tmp(IntegerMatrix1D C, IntegerMatrix1D I) {
+        IntegerMatrix1D res = C.clone();
+        for (int i = 0; i < I.size(); i++) {
+            res.set(I.get(i), new Integer(i));
+        }
+
+        return res;
+    }
 }
+

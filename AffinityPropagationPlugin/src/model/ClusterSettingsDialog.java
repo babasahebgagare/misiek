@@ -20,10 +20,10 @@ import java.awt.event.ActionListener;
  */
 public class ClusterSettingsDialog extends javax.swing.JDialog implements ActionListener {
 
-    private ClusterAlgorithm currentAlgorithm = null;
+    private CytoClusterAlgorithm currentAlgorithm = null;
 
     /** Creates new form ClusterSettingsDialog */
-    public ClusterSettingsDialog(ClusterAlgorithm algorithm) {//, java.awt.Frame parent, boolean modal) {
+    public ClusterSettingsDialog(CytoClusterAlgorithm algorithm) {//, java.awt.Frame parent, boolean modal) {
         //  super(parent, modal);
         initComponents();
         currentAlgorithm = algorithm;
@@ -124,8 +124,8 @@ public class ClusterSettingsDialog extends javax.swing.JDialog implements Action
     public void actionPerformed(ActionEvent e) {
         updateAllSettings();
         if (e.getActionCommand().equals("execute")) {
-            TaskManager.executeTask(new ClusterTask(currentAlgorithm, this),
-                    ClusterTask.getDefaultTaskConfig());
+            TaskManager.executeTask(new CytoClusterTask(currentAlgorithm, this),
+                    CytoClusterTask.getDefaultTaskConfig());
         }
     }
 }

@@ -18,4 +18,14 @@ public class IntegerMatrix1D extends Matrix1D<Integer> {
         }
         return res;
     }
+
+    @Override
+    public IntegerMatrix1D clone() {
+        IntegerMatrix1D res = new IntegerMatrix1D(this.N);
+        for(int i=0; i<this.N; i++) {
+            res.set(i, this.get(i));
+        }
+
+        return res;
+    }
 }

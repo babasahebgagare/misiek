@@ -2,14 +2,14 @@ package model;
 
 import java.util.Vector;
 
-public class Clustering {
+public class CytoClustering {
 
 	
 	private double clusteringThresh; 
 	private Vector <Vector> clusters;
 	public int numClusters = -1;
 	
-	public Clustering(int size,double clusteringThresh)
+	public CytoClustering(int size,double clusteringThresh)
 	{
 		clusters = new Vector(size);
 		
