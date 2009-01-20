@@ -10,8 +10,8 @@
  */
 package main;
 
-import model.AffinityClustering;
-import model.ClusterAlgorithm;
+import model.CytoAffinityClustering;
+import model.CytoClusterAlgorithm;
 import model.ClusterSettingsDialog;
 
 /**
@@ -63,7 +63,7 @@ public class AffinityPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ClusterAlgorithm algorithm = new AffinityClustering();
+        CytoClusterAlgorithm algorithm = new CytoAffinityClustering();
 
         ClusterSettingsDialog csd = new ClusterSettingsDialog(algorithm);
         csd.setVisible(true);

@@ -9,16 +9,16 @@ import javax.swing.JPanel;
 
 // clusterMaker imports
 
-public abstract class AbstractClusterAlgorithm implements ClusterAlgorithm {
+public abstract class CytoAbstractClusterAlgorithm implements CytoClusterAlgorithm {
 	// Common class values
-	protected ClusterProperties clusterProperties = null;
+	protected CytoClusterProperties clusterProperties = null;
 	protected PropertyChangeSupport pcs;
 	protected boolean debug = false;
 	boolean canceled = false;
 
-	public AbstractClusterAlgorithm() {
+	public CytoAbstractClusterAlgorithm() {
 		pcs = new PropertyChangeSupport(new Object());
-		clusterProperties = new ClusterProperties(getShortName());
+		clusterProperties = new CytoClusterProperties(getShortName());
 	}
 
 	/************************************************************************
@@ -51,7 +51,7 @@ public abstract class AbstractClusterAlgorithm implements ClusterAlgorithm {
 		clusterProperties.revertProperties();
 	}
 
-	public ClusterProperties getSettings() {
+	public CytoClusterProperties getSettings() {
 		return clusterProperties;
 	}
 

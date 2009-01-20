@@ -227,6 +227,21 @@ public class DoubleMatrix2D<E> implements Cloneable, java.io.Serializable {
         return res;
     }
 
+    public IntegerMatrix1D maxrIndexes() {
+        IntegerMatrix1D res = new IntegerMatrix1D(N);
+
+        for (int i = 0; i < N; i++) {
+            int maxj = 0;
+            for (int j = 0; j < M; j++) {
+                if (this.matrix[i][j] > this.matrix[i][maxj]) {
+                    maxj = j;
+                }
+            }
+            res.set(i, new Integer(maxj));
+        }
+        return res;
+    }
+
     public DoubleMatrix2D max(double v) {
         DoubleMatrix2D res = new DoubleMatrix2D(this);
 
@@ -237,6 +252,35 @@ public class DoubleMatrix2D<E> implements Cloneable, java.io.Serializable {
                 }
             }
         }
+        return res;
+    }
+
+    public DoubleMatrix2D getColumns(IntegerMatrix1D indexes) {
+        DoubleMatrix2D res = new DoubleMatrix2D(this.N, indexes.N);
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < indexes.N; j++) {
+                res.set(i, j, this.matrix[i][indexes.get(j).intValue()]);
+            }
+        }
+
+        return res;
+    }
+
+    public DoubleMatrix1D getColumn(int j) {
+        DoubleMatrix1D res = new DoubleMatrix1D(N);
+        for (int i = 0; i < N; i++) {
+            res.set(i, this.matrix[i][j]);
+        }
+
+        return res;
+    }
+
+    public DoubleMatrix1D getRow(int i) {
+        DoubleMatrix1D res = new DoubleMatrix1D(M);
+        for (int j = 0; j < M; j++) {
+            res.set(j, this.matrix[i][j]);
+        }
+
         return res;
     }
 
