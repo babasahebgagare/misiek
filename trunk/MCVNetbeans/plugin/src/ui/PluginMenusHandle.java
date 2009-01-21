@@ -2,6 +2,7 @@ package ui;
 
 import javax.swing.JButton;
 import javax.swing.JList;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTree;
 
@@ -16,6 +17,7 @@ public class PluginMenusHandle {
     private static JButton loadAllInteractionsButton = null;
     private static JButton showLoadedInteractionsButton = null;
     private static JButton loadInteractionsForNetworkButton = null;
+    private static JTabbedPane tabbedpane = null;
 
     public static JList getFamiliesList() {
         return familiesList;
@@ -87,5 +89,13 @@ public class PluginMenusHandle {
 
     public static void setLoadInteractionsForNetworkButton(JButton loadInteractionsForNetworkButton) {
         PluginMenusHandle.loadInteractionsForNetworkButton = loadInteractionsForNetworkButton;
+    }
+
+    public static JTabbedPane getTabbedpane() {
+        return tabbedpane;
+    }
+
+    public static void setTabbedpane(JTabbedPane tabbedpane) {
+        PluginMenusHandle.tabbedpane = tabbedpane;
     }
 }

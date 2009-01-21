@@ -28,6 +28,11 @@ public abstract class EnvNodeView {
         this.YPosition = YPosition;
     }
 
+    public void setPosition(int x, int y) {
+        this.XPosition = x;
+        this.YPosition = y;
+    }
+
     public EnvNetworkView getEnvNetworkView() {
         return envNetworkView;
     }
