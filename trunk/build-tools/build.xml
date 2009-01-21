@@ -30,11 +30,11 @@
     </target>
 
     <target name="run-plugin-console" depends="compile-plugin,copy-plugin" description="Run Cytoscape with plugin in console">
-        <exec command="java -Dswing.aatext=true -Xss5M -Xmx1024M -jar cytoscape.jar cytoscape.CyMain -p plugins" dir="${cytoscape-path}" />
+        <exec command="java -Dswing.aatext=true -Xss5M -Xmx1500M -jar cytoscape.jar cytoscape.CyMain -p plugins" dir="${cytoscape-path}" />
     </target>
 
     <target name="run" description="Run">
-        <exec command="java -Dswing.aatext=true -Xss5M -Xmx1024M -jar cytoscape.jar cytoscape.CyMain -p plugins" dir="${cytoscape-path}" />
+        <exec command="java -Dswing.aatext=true -Xss5M -Xmx1500M -jar cytoscape.jar cytoscape.CyMain -p plugins" dir="${cytoscape-path}" />
     </target>
 
 </project>
