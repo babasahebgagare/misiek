@@ -13,7 +13,6 @@ import cytoscape.task.TaskMonitor;
 import java.util.HashMap;
 import java.util.List;
 import javax.swing.JPanel;
-import matrix.DoubleMatrix2D;
 
 /**
  *
@@ -21,12 +20,17 @@ import matrix.DoubleMatrix2D;
  */
 public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
 
-    private final String ATTRIBUTE_NAME = "Probability";
-    private final String ATTRIBUTE_CLUSTER_ID = "cluster_id";
+    private final String nodeNameAttr;
+    private final String edgeNameAttr;
     private AffinityPropagationAlgorithm af = new AffinityPropagationAlgorithm();
     HashMap<String, Integer> nodeMapping = new HashMap<String, Integer>();
     HashMap<Integer, String> idMapping = new HashMap<Integer, String>();
     CyAttributes nodesAttributes = Cytoscape.getNodeAttributes();
+
+    public CytoAffinityClustering(String nodeNameAttr, String edgeNameAttr) {
+        this.nodeNameAttr = nodeNameAttr;
+        this.edgeNameAttr = edgeNameAttr;
+    }
 
     @Override
     public String getShortName() {
@@ -58,7 +62,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
         Integer[] clusters = af.doCluster();
 
         for (int i = 0; i < clusters.length; i++) {
-            nodesAttributes.setAttribute(idMapping.get(new Integer(i)), ATTRIBUTE_CLUSTER_ID, clusters[i]);
+            nodesAttributes.setAttribute(idMapping.get(new Integer(i)), nodeNameAttr, clusters[i]);
         }
         monitor.setPercentCompleted(100);
     /*    double v[][] = {{-1, -2, -1, -10}, {-3, -1, -120, -22}, {-10, -50, -3, -1}, {-1, -30, -4, -1}};
@@ -111,7 +115,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
             System.out.println(sourceIndex);
             System.out.println(targetIndex);
 
-            Double prob = edgesAttributes.getDoubleAttribute(id, ATTRIBUTE_NAME);
+            Double prob = edgesAttributes.getDoubleAttribute(id, edgeNameAttr);
 
             //   System.out.println(prob);
 
