@@ -2,18 +2,16 @@ package ui;
 
 import controllers.interactions.InteractionsManager;
 import cytoscape.CyNetwork;
-import cytoscape.CyNode;
 import cytoscape.Cytoscape;
 import cytoscape.dialogs.plugins.TreeNode;
 import cytoscape.view.CyNetworkView;
 import envinterface.abstractenv.EnvInterface;
 import envinterface.abstractenv.EnvNetwork;
-import giny.model.Edge;
+//import giny.model.Edge;
 import io.AbstractDataReader;
 import java.io.File;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Set;
 import javax.swing.JFileChooser;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
@@ -27,19 +25,18 @@ import logicmodel.structs.CytoProtein;
 import logicmodel.structs.PPINetwork;
 import utils.MemoLogger;
 import viewmodel.controllers.CytoInteractionsConverter;
-import viewmodel.controllers.CytoVisualHandle;
 
 public class DefaultUIController extends UIController {
 
     private Collection<Integer> connectedNodesIDs(CyNetwork cyNetwork) {
-        int[] edgesID = cyNetwork.getEdgeIndicesArray();
+        //      int[] edgesID = cyNetwork.getEdgeIndicesArray();
         Collection<Integer> nodes = new HashSet<Integer>();
-
+        /*
         for (int i = 0; i < edgesID.length; i++) {
-            Edge edge = (Edge) Cytoscape.getRootGraph().getEdge(edgesID[i]);
-            nodes.add(new Integer(edge.getSource().getRootGraphIndex()));
-            nodes.add(new Integer(edge.getTarget().getRootGraphIndex()));
-        }
+        Edge edge = (Edge) Cytoscape.getRootGraph().getEdge(edgesID[i]);
+        nodes.add(new Integer(edge.getSource().getRootGraphIndex()));
+        nodes.add(new Integer(edge.getTarget().getRootGraphIndex()));
+        }*/
         return nodes;
     }
 
@@ -77,17 +74,18 @@ public class DefaultUIController extends UIController {
     }
 
     private Collection<Integer> unconnectedNodesIDs(CyNetwork cyNetwork) {
-        int[] nodesID = cyNetwork.getNodeIndicesArray();
-        int[] edgesID = cyNetwork.getEdgeIndicesArray();
         Collection<Integer> nodes = new HashSet<Integer>();
+        /*int[] nodesID = cyNetwork.getNodeIndicesArray();
+        int[] edgesID = cyNetwork.getEdgeIndicesArray();
+        
         for (int i = 0; i < nodesID.length; i++) {
-            nodes.add(new Integer(nodesID[i]));
+        nodes.add(new Integer(nodesID[i]));
         }
         for (int i = 0; i < edgesID.length; i++) {
-            Edge edge = (Edge) Cytoscape.getRootGraph().getEdge(edgesID[i]);
-            nodes.remove(new Integer(edge.getSource().getRootGraphIndex()));
-            nodes.remove(new Integer(edge.getTarget().getRootGraphIndex()));
-        }
+        Edge edge = (Edge) Cytoscape.getRootGraph().getEdge(edgesID[i]);
+        nodes.remove(new Integer(edge.getSource().getRootGraphIndex()));
+        nodes.remove(new Integer(edge.getTarget().getRootGraphIndex()));
+        }*/
         return nodes;
     }
 
@@ -106,17 +104,17 @@ public class DefaultUIController extends UIController {
     @Override
     public Collection<CytoProtein> getSelectedProteins(CyNetwork cyNetwork) {
         Collection<CytoProtein> ret = new HashSet<CytoProtein>();
-
+        /*
         Set<CyNode> cyNodes = cyNetwork.getSelectedNodes();
         String PPINetworkCytoID = Cytoscape.getCurrentNetwork().getIdentifier();
         CytoAbstractPPINetwork currCytoNetwork = CytoDataHandle.findNetworkByCytoID(PPINetworkCytoID);
         
 
         if (currCytoNetwork != null) {
-            for (CyNode node : cyNodes) {
-                ret.add(currCytoNetwork.getCytoProtein(node.getIdentifier()));
-            }
+        for (CyNode node : cyNodes) {
+        ret.add(currCytoNetwork.getCytoProtein(node.getIdentifier()));
         }
+        }*/
         return ret;
     }
 

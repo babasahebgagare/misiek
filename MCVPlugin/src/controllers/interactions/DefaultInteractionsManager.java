@@ -1,13 +1,9 @@
 package controllers.interactions;
 
 import viewmodel.controllers.CytoInteractionsConverter;
-import cytoscape.CyNetwork;
-import cytoscape.Cytoscape;
-import cytoscape.view.CyNetworkView;
 import envinterface.abstractenv.EnvInterface;
 import envinterface.abstractenv.EnvNetwork;
 import viewmodel.controllers.CytoDataHandle;
-import viewmodel.controllers.CytoVisualHandle;
 import viewmodel.structs.CytoAbstractPPINetwork;
 import logicmodel.structs.Interaction;
 import logicmodel.structs.PPINetwork;

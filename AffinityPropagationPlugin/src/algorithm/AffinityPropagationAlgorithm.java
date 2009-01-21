@@ -52,7 +52,7 @@ public class AffinityPropagationAlgorithm extends AbstractClusterAlgorithm {
 
         double[] pom = new double[N];
 
-        for (int iter = 0; iter < 3; iter++) {
+        for (int iter = 0; iter < 10; iter++) {
             System.out.println("iteration: " + iter);
             Rold = R.copy();
 

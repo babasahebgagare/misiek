@@ -20,6 +20,7 @@ import javax.swing.JPanel;
  */
 public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
 
+    private double INF = 100000;
     private final String nodeNameAttr;
     private final String edgeNameAttr;
     private AffinityPropagationAlgorithm af = new AffinityPropagationAlgorithm();
@@ -93,7 +94,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
                 if (i == j) {
                     sim[i][i] = 0.0;
                 } else {
-                    sim[i][j] = -1.0;
+                    sim[i][j] = -INF;
                 }
             }
         }
