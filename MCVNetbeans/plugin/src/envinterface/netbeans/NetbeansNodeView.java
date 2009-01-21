@@ -3,6 +3,7 @@ package envinterface.netbeans;
 import envinterface.abstractenv.EnvNetworkView;
 import envinterface.abstractenv.EnvNode;
 import envinterface.abstractenv.EnvNodeView;
+import java.awt.Point;
 import org.netbeans.api.visual.widget.Widget;
 
 public class NetbeansNodeView extends EnvNodeView {
@@ -19,5 +20,11 @@ public class NetbeansNodeView extends EnvNodeView {
 
     public void setNodeWidget(Widget nodeWidget) {
         this.nodeWidget = nodeWidget;
+    }
+
+    @Override
+    public void setPosition(int x, int y) {
+        super.setPosition(x, y);
+  //      nodeWidget.getScene().getSceneAnimator().animatePreferredLocation(nodeWidget, new Point(x, y));
     }
 }

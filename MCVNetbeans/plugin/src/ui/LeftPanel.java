@@ -7,6 +7,7 @@ package ui;
 
 import cytoscape.Cytoscape;
 import cytoscape.view.CyNetworkView;
+import envinterface.netbeans.NetbeansInterface;
 import java.awt.Color;
 import java.util.Collection;
 import javax.swing.JColorChooser;
@@ -17,6 +18,8 @@ import logicmodel.controllers.DataHandle;
 import logicmodel.structs.CytoProtein;
 import logicmodel.structs.Family;
 import logicmodel.structs.PPINetwork;
+import org.netbeans.api.visual.graph.layout.GraphLayout;
+import org.netbeans.api.visual.graph.layout.GridGraphLayout;
 import utils.Messenger;
 import viewmodel.controllers.CytoDataHandle;
 import viewmodel.controllers.CytoInteractionsConverter;
@@ -104,6 +107,7 @@ public class LeftPanel extends javax.swing.JPanel {
         jButton7 = new javax.swing.JButton();
         jSpinner1 = new javax.swing.JSpinner();
         jButton6 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -281,6 +285,13 @@ public class LeftPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton10.setText("jButton10");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -291,7 +302,10 @@ public class LeftPanel extends javax.swing.JPanel {
                     .addComponent(jButton7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
                     .addComponent(jButton5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
                     .addComponent(jButton6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jButton10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
+                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -304,7 +318,9 @@ public class LeftPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton6)
                 .addGap(11, 11, 11)
-                .addComponent(jSpinner1, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jSpinner1, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+                    .addComponent(jButton10))
                 .addContainerGap())
         );
 
@@ -346,7 +362,7 @@ private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     Collection<CytoProtein> selectedProteins = UIController.getInstance().getSelectedProteins(Cytoscape.getCurrentNetwork());
 
     if (selectedProteins.size() > 0) {
-   //     CytoProjector.projectSelected(selectedProteins, networks);
+        //     CytoProjector.projectSelected(selectedProteins, networks);
     } else {
         Messenger.Message("Musisz zaznaczyć białka do rzutowania!");
     }
@@ -390,8 +406,13 @@ private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     // UIController.getInstance().deleteUnconnectedNodesFromSelected(Cytoscape.getCurrentNetwork())
 }//GEN-LAST:event_jButton8ActionPerformed
 
+private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+    NetbeansInterface.getInstance().doGridlayout();
+}//GEN-LAST:event_jButton10ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

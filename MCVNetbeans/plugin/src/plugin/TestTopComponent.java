@@ -6,11 +6,10 @@ package plugin;
 
 import java.io.Serializable;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
 import org.openide.util.NbBundle;
 import org.openide.windows.TopComponent;
 import org.openide.windows.WindowManager;
-import ui.LeftPanel;
+import ui.PluginMenusHandle;
 //import org.openide.util.Utilities;
 
 /**
@@ -28,6 +27,7 @@ final class TestTopComponent extends TopComponent {
         setName(NbBundle.getMessage(TestTopComponent.class, "CTL_TestTopComponent"));
         setToolTipText(NbBundle.getMessage(TestTopComponent.class, "HINT_TestTopComponent"));
 //        setIcon(Utilities.loadImage(ICON_PATH, true));
+        PluginMenusHandle.setTabbedpane(jTabbedPane1);
 
     }
 
@@ -39,43 +39,34 @@ final class TestTopComponent extends TopComponent {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-
-        org.openide.awt.Mnemonics.setLocalizedText(jButton1, org.openide.util.NbBundle.getMessage(TestTopComponent.class, "TestTopComponent.jButton1.text")); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        leftPanel1 = new ui.LeftPanel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1)
-                .addContainerGap(315, Short.MAX_VALUE))
+                .addComponent(leftPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1)
-                .addContainerGap(428, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(leftPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        LeftPanel left = new LeftPanel();
-        JFrame frame = new JFrame("sasas");
-        frame.setVisible(true);
-        frame.add(left);
-        frame.pack();
-        left.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private ui.LeftPanel leftPanel1;
     // End of variables declaration//GEN-END:variables
 /**
      * Gets default instance. Do not use directly: reserved for *.settings files only,

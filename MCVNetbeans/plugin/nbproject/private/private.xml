@@ -2,29 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
-        <file>file:/D:/misiek/MCVNetbeans/plugin/manifest.mf</file>
-        <file>file:/D:/misiek/MCVNetbeans/plugin/nbproject/project.properties</file>
-        <file>file:/D:/misiek/MCVNetbeans/plugin/src/controllers/interactions/DefaultInteractionsManager.java</file>
-        <file>file:/D:/misiek/MCVNetbeans/plugin/src/envinterface/EnvInterface.java</file>
-        <file>file:/D:/misiek/MCVNetbeans/plugin/src/envinterface/EnvNetwork.java</file>
-        <file>file:/D:/misiek/MCVNetbeans/plugin/src/envinterface/EnvNetworkView.java</file>
-        <file>file:/D:/misiek/MCVNetbeans/plugin/src/envinterface/netbeans/NetbeansInterface.java</file>
-        <file>file:/D:/misiek/MCVNetbeans/plugin/src/io/readers/tasks/LoadAllInteractionsTask.java</file>
-        <file>file:/D:/misiek/MCVNetbeans/plugin/src/io/readers/tasks/LoadInteractionsTask.java</file>
-        <file>file:/D:/misiek/MCVNetbeans/plugin/src/io/readers/tasks/LoadSpaciesTask.java</file>
-        <file>file:/D:/misiek/MCVNetbeans/plugin/src/io/readers/tasks/TasksDataReader.java</file>
-        <file>file:/D:/misiek/MCVNetbeans/plugin/src/logicmodel/controllers/DataHandle.java</file>
-        <file>file:/D:/misiek/MCVNetbeans/plugin/src/logicmodel/controllers/NetworksConverter.java</file>
-        <file>file:/D:/misiek/MCVNetbeans/plugin/src/ui/DefaultUIController.java</file>
-        <file>file:/D:/misiek/MCVNetbeans/plugin/src/ui/PluginMenusHandle.java</file>
-        <file>file:/D:/misiek/MCVNetbeans/plugin/src/utils/Messenger.java</file>
-        <file>file:/D:/misiek/MCVNetbeans/plugin/src/viewmodel/controllers/CytoDataHandle.java</file>
-        <file>file:/D:/misiek/MCVNetbeans/plugin/src/viewmodel/controllers/CytoInteractionsConverter.java</file>
-        <file>file:/D:/misiek/MCVNetbeans/plugin/src/viewmodel/controllers/CytoNetworkConverter.java</file>
-        <file>file:/D:/misiek/MCVNetbeans/plugin/src/viewmodel/controllers/CytoProjector.java</file>
-        <file>file:/D:/misiek/MCVNetbeans/plugin/src/viewmodel/controllers/CytoProteinsConverter.java</file>
-        <file>file:/D:/misiek/MCVNetbeans/plugin/src/viewmodel/controllers/CytoVisualHandle.java</file>
-        <file>file:/D:/misiek/MCVNetbeans/plugin/src/visual/layout/DefaultLayouter.java</file>
-        <file>file:/D:/misiek/MCVNetbeans/plugin/src/visual/layout/Layouter.java</file>
+        <file>file:/D:/misiek2/trunk/MCVNetbeans/plugin/src/envinterface/netbeans/NetbeansGraphScene.java</file>
     </open-files>
 </project-private>

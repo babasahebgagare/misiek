@@ -16,11 +16,15 @@ public abstract class EnvInterface {
     private HashMap<Integer, EnvEdge> edges = new HashMap<Integer, EnvEdge>();
 
     /**** ABSTRACT ***/
+    public abstract void doGridlayout();
+
     public abstract EnvNetworkView createNetworkView(EnvNetwork envNetwork);
 
     public abstract EnvNetwork createNetwork(String title);
 
     public abstract EnvNetwork currentNetwork();
+
+    public abstract EnvNetworkView currentNetworkView();
 
     public abstract EnvNode createNode(EnvNetwork network, String ID);
 
@@ -98,5 +102,4 @@ public abstract class EnvInterface {
     public void setNetworksView(HashMap<String, EnvNetworkView> networksView) {
         this.networksView = networksView;
     }
-    
 }

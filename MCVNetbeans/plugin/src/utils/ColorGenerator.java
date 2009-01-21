@@ -10,4 +10,8 @@ public class ColorGenerator {
     public static Color generateColor(String FamilyName) {
         return new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255));
     }
+
+    public static int random(int n) {
+        return rand.nextInt(n);
+    }
 }
