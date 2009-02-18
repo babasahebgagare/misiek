@@ -30,10 +30,12 @@ public class AffinityPropagationAlgorithmTest {
 
     @Test
     public void testDoCluster() {
-        double[][] sim = {{3, 3}};
-        System.out.println("doCluster");
-        AffinityPropagationAlgorithm instance = new AffinityPropagationAlgorithm();
+        double[][] sim = {{0, -3, -3, - 1}, {-3, 0, -1, -1}, {-1, -2, -3, -4}, {-3, -1, -1, -2}};
+        AffinityPropagationAlgorithm instance = new MatrixPropagationAlgorithm();
         instance.setLambda(0.5);
+        instance.setN(4);
+        instance.init();
+
         instance.setSimilarities(sim);
         instance.doCluster();
     }

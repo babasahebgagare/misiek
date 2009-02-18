@@ -20,6 +20,7 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
     private DoubleMatrix2D Rold;
     private DoubleMatrix2D YI;
     private DoubleMatrix2D YI2;
+    private DoubleMatrix2D S;
     private double inf = 1100000.0;
 
     @Override
@@ -163,5 +164,21 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
 
         return res;
     }
-}
 
+    public double[][] getSimilarities() {
+        return S.getMatrix();
+    }
+
+    public void setSimilarities(double[][] similarities) {
+        N = similarities.length;
+        this.S = new DoubleMatrix2D(N, N, similarities);
+    }
+
+    public DoubleMatrix2D getS() {
+        return S;
+    }
+
+    public void setS(DoubleMatrix2D S) {
+        this.S = S;
+    }
+}
