@@ -5,7 +5,6 @@ import cytoscape.CyNode;
 import cytoscape.Cytoscape;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 import viewmodel.structs.CytoAbstractPPINetwork;
 import viewmodel.structs.CytoPPINetworkProjection;
@@ -25,12 +24,12 @@ public class CytoProjector {
             case ABOVE:
                 CytoPPINetworkProjectionToDown down = ProjectorNetwork.projectProteinsToDownOnNetwork(selectedProteins, network, motherCytoNetwork);
                 CytoNetworkConverter.convertCytoNetwork(down);
-                //  Layouter.getInstance().ProjectionToDownLayout(down);
+                Layouter.getInstance().ProjectionToDownLayout(down);
                 break;
             case BELOW:
                 CytoPPINetworkProjectionToUp up = ProjectorNetwork.projectProteinsToUpOnNetwork(selectedProteins, network, motherCytoNetwork);
                 CytoNetworkConverter.convertCytoNetwork(up);
-                //     Layouter.getInstance().ProjectionToUpLayout(up);
+                Layouter.getInstance().ProjectionToUpLayout(up);
                 break;
             case NEIGHBOUR:
                 Messenger.Message("NEIGHBOUR");
@@ -42,11 +41,9 @@ public class CytoProjector {
     }
 
     public static void projectSelected(Collection<CytoProtein> selectedProteins, Collection<PPINetwork> networks) {
-        System.out.println("aaaa" + selectedProteins.size());
-        Iterator<CytoProtein> it = selectedProteins.iterator();
 
-        CytoAbstractPPINetwork motherCytoNetwork = it.next().getCytoNetowork();
-        System.out.println("ddsdssd");
+        CytoAbstractPPINetwork motherCytoNetwork = selectedProteins.iterator().next().getCytoNetowork();
+
         for (PPINetwork network : networks) {
             projectNetwork(selectedProteins, motherCytoNetwork, network);
 
