@@ -5,6 +5,7 @@
 package cyto;
 
 import algorithm.AffinityPropagationAlgorithm;
+import algorithm.MatrixPropagationAlgorithm;
 import cytoscape.CyEdge;
 import cytoscape.CyNode;
 import cytoscape.Cytoscape;
@@ -23,7 +24,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
     private double INF = 100000;
     private final String nodeNameAttr;
     private final String edgeNameAttr;
-    private AffinityPropagationAlgorithm af = new AffinityPropagationAlgorithm();
+    private AffinityPropagationAlgorithm af = new MatrixPropagationAlgorithm();
     HashMap<String, Integer> nodeMapping = new HashMap<String, Integer>();
     HashMap<Integer, String> idMapping = new HashMap<Integer, String>();
     CyAttributes nodesAttributes = Cytoscape.getNodeAttributes();
@@ -66,16 +67,16 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
             nodesAttributes.setAttribute(idMapping.get(new Integer(i)), nodeNameAttr, clusters[i]);
         }
         monitor.setPercentCompleted(100);
-        /*    double v[][] = {{-1, -2, -1, -10}, {-3, -1, -120, -22}, {-10, -50, -3, -1}, {-1, -30, -4, -1}};
+    /*    double v[][] = {{-1, -2, -1, -10}, {-3, -1, -120, -22}, {-10, -50, -3, -1}, {-1, -30, -4, -1}};
 
 
 
 
-        af.setN(4);
-        af.setLambda(0.5);
-        af.setSimilarities(v);
-        af.init();
-        System.out.println(af.doCluster());*/
+    af.setN(4);
+    af.setLambda(0.5);
+    af.setSimilarities(v);
+    af.init();
+    System.out.println(af.doCluster());*/
 
     }
 
@@ -127,6 +128,6 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
         }
         af.setSimilarities(sim);
 
-        // System.out.println("m:" + m);
+    // System.out.println("m:" + m);
     }
 }
