@@ -66,16 +66,16 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
             nodesAttributes.setAttribute(idMapping.get(new Integer(i)), nodeNameAttr, clusters[i]);
         }
         monitor.setPercentCompleted(100);
-    /*    double v[][] = {{-1, -2, -1, -10}, {-3, -1, -120, -22}, {-10, -50, -3, -1}, {-1, -30, -4, -1}};
+        /*    double v[][] = {{-1, -2, -1, -10}, {-3, -1, -120, -22}, {-10, -50, -3, -1}, {-1, -30, -4, -1}};
 
 
 
 
-    af.setN(4);
-    af.setLambda(0.5);
-    af.setSimilarities(v);
-    af.init();
-    System.out.println(af.doCluster());*/
+        af.setN(4);
+        af.setLambda(0.5);
+        af.setSimilarities(v);
+        af.init();
+        System.out.println(af.doCluster());*/
 
     }
 
@@ -122,11 +122,11 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
 
             //       System.out.flush();
 
-            sim[sourceIndex.intValue()][targetIndex.intValue()] = prob.doubleValue() - 1;
-            sim[targetIndex.intValue()][sourceIndex.intValue()] = prob.doubleValue() - 1;
+            sim[sourceIndex.intValue()][targetIndex.intValue()] = Math.log(prob);
+            sim[targetIndex.intValue()][sourceIndex.intValue()] = Math.log(prob);
         }
         af.setSimilarities(sim);
 
-    // System.out.println("m:" + m);
+        // System.out.println("m:" + m);
     }
 }
