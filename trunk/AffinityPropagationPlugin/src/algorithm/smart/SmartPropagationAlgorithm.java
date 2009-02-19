@@ -6,6 +6,9 @@ package algorithm.smart;
 
 import algorithm.AffinityPropagationAlgorithm;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 
 public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
 
@@ -46,7 +49,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
 
     @Override
     public Integer[] doCluster() {
-        for (int iter = 0; iter < 1; iter++) {
+        for (int iter = 0; iter < 10; iter++) {
             copyResponsibilies();
             computeResponsibilities();
             avgResponsibilies();
@@ -54,6 +57,19 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
             computeAvailabilities();
             avgAvailabilities();
         }
+        Collection<Examplar> centers = computeCenters();
+        Map<String, Collection<String>> assigments = computeAssigments(centers);
+
+        System.out.println("CENTERS: " + centers.toString() + "ENDS");
+        System.out.println("ASSIGMENTS: ");
+        for (String key : assigments.keySet()) {
+            System.out.println(key + "\n");
+            for (String ex : assigments.get(key)) {
+                System.out.println(ex);
+            }
+            System.out.println("\n");
+        }
+        System.out.println("ENDS ASSIGMENTS: ");
         return null;
     }
 
@@ -75,6 +91,31 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
         }
     }
 
+    private Map<String, Collection<String>> computeAssigments(Collection<Examplar> centers) {
+        Map<String, Collection<String>> ret = new HashMap<String, Collection<String>>();
+        for (Examplar center : centers) {
+            ret.put(center.getName(), new HashSet<String>());
+        }
+        for (Examplar examplar : examplars.getExamplars().values()) {
+            String maxid = null;
+            double max = -INF;
+
+            for (Examplar center : centers) {
+                SiblingData sibling = examplar.getSiblingMap().get(center.getName());
+                if (sibling != null) {
+                    double sim = sibling.getS();
+                    if (sim > max) {
+                        max = sim;
+                        maxid = center.getName();
+                    }
+                }
+            }
+            ret.get(maxid).add(examplar.getName());
+        }
+
+        return ret;
+    }
+
     private void computeAvailabilities() {
         for (Examplar examplar : examplars.getExamplars().values()) {
             Collection<SiblingData> siblings = examplar.getSiblingMap().values();
@@ -86,6 +127,19 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
                 }
             }
         }
+    }
+
+    private Collection<Examplar> computeCenters() {
+        Collection<Examplar> ret = new HashSet<Examplar>();
+        for (Examplar examplar : examplars.getExamplars().values()) {
+            SiblingData sibling = examplar.getSiblingMap().get(examplar.getName());
+            double e = sibling.getA() + sibling.getR();
+            if (e > 0) {
+                ret.add(examplar);
+            }
+        }
+
+        return ret;
     }
 
     private double computeEqPom(String name) {
