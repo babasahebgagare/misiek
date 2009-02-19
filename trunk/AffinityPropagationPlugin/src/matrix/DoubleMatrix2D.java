@@ -299,7 +299,7 @@ public class DoubleMatrix2D<E> implements Cloneable, java.io.Serializable {
 
     @Override
     public String toString() {
-        String res = "";
+        String res = "\n";
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
                 res += this.matrix[i][j] + " ";
