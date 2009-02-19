@@ -39,7 +39,7 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
 
         double[] pom = new double[N];
 
-        for (int iter = 0; iter < 10; iter++) {
+        for (int iter = 0; iter < 1; iter++) {
             System.out.println("iteration: " + iter);
             System.out.println("Rold: " + R.toString());
             Rold = R.copy();
@@ -73,7 +73,7 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
             System.out.println("Ravg: " + R.toString());
 
             //          System.out.println("R" + R);
-
+            System.out.println("Aold: " + A.toString());
             Aold = A.clone();
             Rp = R.max(0);
             for (int i = 0; i < N; i++) {
@@ -93,6 +93,7 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
             for (int i = 0; i < N; i++) {
                 A.getMatrix()[i][i] = dA.get(i);
             }
+            System.out.println("Anew: " + A.toString());
             A = A.mul((1 - getLambda())).plus(Aold.mul(getLambda()));
         //       System.out.println("A");
         //          System.out.println(A);
