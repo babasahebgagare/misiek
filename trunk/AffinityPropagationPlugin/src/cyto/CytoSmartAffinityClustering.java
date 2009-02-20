@@ -21,16 +21,23 @@ import javax.swing.JPanel;
  */
 public class CytoSmartAffinityClustering extends CytoAbstractClusterAlgorithm {
 
-    private final String nodeNameAttr;
-    private final String edgeNameAttr;
+    private String nodeNameAttr;
+    private String edgeNameAttr;
+    private int iterations;
+    private double preferences;
+    private double lambda;
     private SmartPropagationAlgorithm af = new SmartPropagationAlgorithm();
     HashMap<String, Integer> nodeMapping = new HashMap<String, Integer>();
     HashMap<Integer, String> idMapping = new HashMap<Integer, String>();
     CyAttributes nodesAttributes = Cytoscape.getNodeAttributes();
 
-    public CytoSmartAffinityClustering(String nodeNameAttr, String edgeNameAttr) {
+    public CytoSmartAffinityClustering(String nodeNameAttr, String edgeNameAttr, double lambda, double preferences, int iterations) {
         this.nodeNameAttr = nodeNameAttr;
         this.edgeNameAttr = edgeNameAttr;
+        this.lambda = lambda;
+        this.preferences = preferences;
+        this.iterations = iterations;
+
     }
 
     @Override
@@ -78,11 +85,12 @@ public class CytoSmartAffinityClustering extends CytoAbstractClusterAlgorithm {
         List<CyNode> nodes = Cytoscape.getCurrentNetwork().nodesList();
         CyAttributes edgesAttributes = Cytoscape.getEdgeAttributes();
 
-        af.setLambda(0.5);
+        af.setLambda(lambda);
+        af.setIterations(iterations);
 
         for (CyNode node : nodes) {
             String name = node.getIdentifier();
-            af.setSimilarity(name, name, Math.log(0.8), 0);
+            af.setSimilarity(name, name, preferences, 0);
         }
         for (CyEdge edge : edges) {
 
