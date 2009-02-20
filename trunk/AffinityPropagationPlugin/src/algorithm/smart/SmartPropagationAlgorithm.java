@@ -29,17 +29,14 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
 
     @Override
     public void init() {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void halt() {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void setN(int N) {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
@@ -48,29 +45,37 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
     }
 
     @Override
-    public Integer[] doCluster() {
-        for (int iter = 0; iter < 10; iter++) {
+    public Map<String, String> doClusterString() {
+        for (int iter = 0; iter < 5; iter++) {
+            System.out.println("iteration: " + iter);
             copyResponsibilies();
             computeResponsibilities();
             avgResponsibilies();
             copyAvailabilities();
             computeAvailabilities();
             avgAvailabilities();
+            /*for (Examplar examplar : examplars.getExamplars().values()) {
+            System.out.println("EX NAME: " + examplar.getName());
+            SiblingData sib = examplar.getSiblingMap().get(examplar.getName());
+            System.out.println("A: " + sib.getA() + " S: " + sib.getS() + " R: " + sib.getR());
+            }*/
+            Collection<Examplar> centers = computeCenters();
+            System.out.println("clusters: " + centers.size());
         }
         Collection<Examplar> centers = computeCenters();
-        Map<String, Collection<String>> assigments = computeAssigments(centers);
+        Map<String, String> assigments = computeAssigments(centers);
 
-        System.out.println("CENTERS: " + centers.toString() + "ENDS");
+        /*   System.out.println("CENTERS: " + centers.toString() + "ENDS");
         System.out.println("ASSIGMENTS: ");
         for (String key : assigments.keySet()) {
-            System.out.println(key + "\n");
-            for (String ex : assigments.get(key)) {
-                System.out.println(ex);
-            }
-            System.out.println("\n");
+        System.out.println(key + "\n");
+        for (String ex : assigments.get(key)) {
+        System.out.println(ex);
         }
-        System.out.println("ENDS ASSIGMENTS: ");
-        return null;
+        System.out.println("\n");
+        }
+        System.out.println("ENDS ASSIGMENTS: ");*/
+        return assigments;
     }
 
     private void avgAvailabilities() {
@@ -91,11 +96,9 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
         }
     }
 
-    private Map<String, Collection<String>> computeAssigments(Collection<Examplar> centers) {
-        Map<String, Collection<String>> ret = new HashMap<String, Collection<String>>();
-        for (Examplar center : centers) {
-            ret.put(center.getName(), new HashSet<String>());
-        }
+    private Map<String, String> computeAssigments(Collection<Examplar> centers) {
+        Map<String, String> ret = new HashMap<String, String>();
+
         for (Examplar examplar : examplars.getExamplars().values()) {
             String maxid = null;
             double max = -INF;
@@ -110,7 +113,9 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
                     }
                 }
             }
-            ret.get(maxid).add(examplar.getName());
+            if (maxid != null) {
+                ret.put(examplar.getName(), maxid);
+            }
         }
 
         return ret;
@@ -171,7 +176,8 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
     }
 
     private double computeNotEqPom(String examplarName, String siblingName) {
-        double rkk = examplars.getExamplars().get(examplarName).getSiblingMap().get(siblingName).getR();
+        SiblingData sib = examplars.getExamplars().get(siblingName).getSiblingMap().get(siblingName);
+        double rkk = sib.getR();
 
         double sum = 0;
 
@@ -216,5 +222,10 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
                 sibling.setRold(sibling.getR());
             }
         }
+    }
+
+    @Override
+    public Integer[] doCluster() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

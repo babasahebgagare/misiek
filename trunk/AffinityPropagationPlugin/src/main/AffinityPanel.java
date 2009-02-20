@@ -13,6 +13,7 @@ package main;
 import cyto.CytoAffinityClustering;
 import cyto.CytoClusterAlgorithm;
 import cyto.CytoClusterTask;
+import cyto.CytoSmartAffinityClustering;
 import cytoscape.task.util.TaskManager;
 
 /**
@@ -124,12 +125,9 @@ public class AffinityPanel extends javax.swing.JPanel {
         String nodeNameAttr = jTextField1.getText();
         String edgeNameAttr = jTextField2.getText();
 
-        CytoClusterAlgorithm algorithm = new CytoAffinityClustering(nodeNameAttr, edgeNameAttr);
+        CytoClusterAlgorithm algorithm = new CytoSmartAffinityClustering(nodeNameAttr, edgeNameAttr);
         TaskManager.executeTask(new CytoClusterTask(algorithm),
                 CytoClusterTask.getDefaultTaskConfig());
-    /*  ClusterSettingsDialog csd = new ClusterSettingsDialog(algorithm);
-    csd.setVisible(true);
-    csd.actionPerformed(evt); */
     }//GEN-LAST:event_jButton1ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

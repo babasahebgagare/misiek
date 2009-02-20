@@ -1,5 +1,6 @@
 package algorithm;
 
+import java.util.Map;
 import matrix.DoubleMatrix1D;
 import matrix.DoubleMatrix2D;
 import matrix.IntegerMatrix1D;
@@ -181,5 +182,10 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
 
     public void setS(DoubleMatrix2D S) {
         this.S = S;
+    }
+
+    @Override
+    public Map<String, String> doClusterString() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

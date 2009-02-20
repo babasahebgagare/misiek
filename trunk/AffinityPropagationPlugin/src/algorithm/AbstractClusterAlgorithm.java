@@ -1,5 +1,7 @@
 package algorithm;
 
+import java.util.Map;
+
 public abstract class AbstractClusterAlgorithm {
 
     public abstract String getShortName();
@@ -15,4 +17,6 @@ public abstract class AbstractClusterAlgorithm {
     public abstract void setSimilarities(double[][] sim);
 
     public abstract Integer[] doCluster();
+
+    public abstract Map<String, String> doClusterString();
 }
