@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.PriorityQueue;
 
 public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
 
@@ -45,7 +46,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
     }
 
     @Override
-    public Map<String, String> doClusterString() {
+    public Map<String, Cluster<String>> doClusterString2() {
         int iterations = getIterations();
         for (int iter = 0; iter < iterations; iter++) {
             System.out.println("iteration: " + iter);
@@ -64,7 +65,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
             System.out.println("clusters: " + centers.size());
         }
         Collection<Examplar> centers = computeCenters();
-        Map<String, String> assigments = computeAssigments(centers);
+        Map<String, Cluster<String>> assigments = computeAssigments2(centers);
 
         /*   System.out.println("CENTERS: " + centers.toString() + "ENDS");
         System.out.println("ASSIGMENTS: ");
@@ -119,6 +120,39 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
             }
         }
 
+        return ret;
+    }
+
+    private Map<String, Cluster<String>> computeAssigments2(Collection<Examplar> centers) {
+        Map<String, Cluster<String>> ret = new HashMap<String, Cluster<String>>();
+
+        for (Examplar center : centers) {
+            Cluster<String> clust = new Cluster<String>(center.getName());
+            clust.add(center.getName());
+            ret.put(center.getName(), clust);
+        }
+
+        for (Examplar examplar : examplars.getExamplars().values()) {
+            if (!centers.contains(examplar.getName())) {
+
+                String maxid = null;
+                double max = -INF;
+
+                for (Examplar center : centers) {
+                    SiblingData sibling = examplar.getSiblingMap().get(center.getName());
+                    if (sibling != null) {
+                        double sim = sibling.getS();
+                        if (sim > max) {
+                            max = sim;
+                            maxid = center.getName();
+                        }
+                    }
+                }
+                if (maxid != null) {
+                    ret.get(maxid).add(examplar.getName());
+                }
+            }
+        }
         return ret;
     }
 
@@ -227,6 +261,11 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
 
     @Override
     public Integer[] doCluster() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public Map<String, String> doClusterString() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }

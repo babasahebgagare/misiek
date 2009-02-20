@@ -1,5 +1,6 @@
 package algorithm;
 
+import algorithm.smart.Cluster;
 import java.util.Map;
 
 public abstract class AbstractClusterAlgorithm {
@@ -19,4 +20,6 @@ public abstract class AbstractClusterAlgorithm {
     public abstract Integer[] doCluster();
 
     public abstract Map<String, String> doClusterString();
+    
+    public abstract Map<String, Cluster<String>> doClusterString2();
 }

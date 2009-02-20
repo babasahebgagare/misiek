@@ -4,15 +4,18 @@
  */
 package cyto;
 
+import algorithm.smart.Cluster;
 import algorithm.smart.SmartPropagationAlgorithm;
 import cytoscape.CyEdge;
 import cytoscape.CyNode;
 import cytoscape.Cytoscape;
 import cytoscape.data.CyAttributes;
 import cytoscape.task.TaskMonitor;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
 import javax.swing.JPanel;
 
 /**
@@ -61,21 +64,39 @@ public class CytoSmartAffinityClustering extends CytoAbstractClusterAlgorithm {
 
     @Override
     public void doCluster(TaskMonitor monitor) {
+        PriorityQueue<Cluster<String>> clusterprior = new PriorityQueue<Cluster<String>>();
 
         monitor.setStatus("Ładowanie macierzy doległości");
         setParameters();
         monitor.setStatus("Klastrowanie");
 
         af.init();
-        Map<String, String> clusters = af.doClusterString();
+        //Map<String, String> clusters = af.doClusterString();
+        //
 
-        for (String nodeID : clusters.keySet()) {
-            String cluserid = clusters.get(nodeID);
 
-            if (nodeID != null && cluserid != null) {
-                nodesAttributes.setAttribute(nodeID, nodeNameAttr, cluserid);
-            }
+        Map<String, Cluster<String>> clusters = af.doClusterString2();
+
+        for (Cluster<String> cluster : clusters.values()) {
+            clusterprior.add(cluster);
         }
+
+        int i = 0;
+
+        while (clusterprior.peek().size() > 1) {
+            Cluster<String> cluster = clusterprior.poll();
+            for (String element : cluster.getElements()) {
+                nodesAttributes.setAttribute(element, nodeNameAttr, new Integer(i));
+            }
+            i++;
+        }
+        /*        for (String nodeID : clusters.keySet()) {
+        String cluserid = clusters.get(nodeID);
+
+        if (nodeID != null && cluserid != null) {
+        nodesAttributes.setAttribute(nodeID, nodeNameAttr, cluserid);
+        }
+        }*/
 
         monitor.setPercentCompleted(100);
     }
