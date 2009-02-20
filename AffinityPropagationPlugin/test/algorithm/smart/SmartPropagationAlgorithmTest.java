@@ -45,7 +45,7 @@ public class SmartPropagationAlgorithmTest {
 
 
         System.out.println(instance.getExamplars().toString());
-        instance.doCluster();
+        instance.doClusterString();
         System.out.println(instance.getExamplars().toString());
     }
 
