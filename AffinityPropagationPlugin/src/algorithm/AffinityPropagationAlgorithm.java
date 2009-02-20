@@ -3,6 +3,7 @@ package algorithm;
 public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgorithm {
 
     private double lambda = 0.5;
+    private int iterations = 10;
 
     @Override
     public String getShortName() {
@@ -20,5 +21,13 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
 
     public void setLambda(double lambda) {
         this.lambda = lambda;
+    }
+
+    public int getIterations() {
+        return iterations;
+    }
+
+    public void setIterations(int iterations) {
+        this.iterations = iterations;
     }
 }

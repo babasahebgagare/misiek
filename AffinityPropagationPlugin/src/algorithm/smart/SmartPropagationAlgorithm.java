@@ -46,7 +46,8 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
 
     @Override
     public Map<String, String> doClusterString() {
-        for (int iter = 0; iter < 5; iter++) {
+        int iterations = getIterations();
+        for (int iter = 0; iter < iterations; iter++) {
             System.out.println("iteration: " + iter);
             copyResponsibilies();
             computeResponsibilities();
