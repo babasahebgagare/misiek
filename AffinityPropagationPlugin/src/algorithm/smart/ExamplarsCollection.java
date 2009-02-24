@@ -15,13 +15,13 @@ public class ExamplarsCollection {
 
     Map<String, Examplar> examplars = new HashMap<String, Examplar>();
 
-    public void setSimilarity(String from, String to, double sim, double a) {
+    public void setSimilarity(String from, String to, double sim) {
         Examplar exfrom = examplars.get(from);
         if (exfrom == null) {
             exfrom = new Examplar(from);
             examplars.put(from, exfrom);
         }
-        exfrom.createSibling(a, sim, to);
+        exfrom.createSibling(sim, to);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package algorithm;
 
+import algorithm.smart.Cluster;
 import java.util.Map;
 import matrix.DoubleMatrix1D;
 import matrix.DoubleMatrix2D;
@@ -186,6 +187,11 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
 
     @Override
     public Map<String, String> doClusterString() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public Map<String, Cluster<String>> doClusterString2() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }
