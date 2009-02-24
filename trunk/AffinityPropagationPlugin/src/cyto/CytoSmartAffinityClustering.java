@@ -111,17 +111,21 @@ public class CytoSmartAffinityClustering extends CytoAbstractClusterAlgorithm {
 
         for (CyNode node : nodes) {
             String name = node.getIdentifier();
-            af.setSimilarity(name, name, preferences, 0);
+            af.setSimilarity(name, name, preferences);
         }
         for (CyEdge edge : edges) {
 
             String id = edge.getIdentifier();
             String sourceID = edge.getSource().getIdentifier();
             String targetID = edge.getTarget().getIdentifier();
+            if (sourceID.equals("fu_i6587") || targetID.equals("fu_i6587")) {
+                System.out.println("SOURCE " + sourceID + "TARGET: " + targetID);
+            }
 
             if (!sourceID.equals(targetID)) {
                 Double prob = edgesAttributes.getDoubleAttribute(id, edgeNameAttr);
-                af.setSimilarity(sourceID, targetID, Math.log(prob), 0);
+                af.setSimilarity(sourceID, targetID, Math.log(prob));
+                af.setSimilarity(targetID, sourceID, Math.log(prob));
             }
         }
 

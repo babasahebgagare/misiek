@@ -20,14 +20,14 @@ public class Examplar {
         this.name = name;
     }
 
-    public void createSibling(double a, double s, String siblingName) {
-        SiblingData sibling = new SiblingData(a, s, siblingName);
+    public void createSibling(double s, String siblingName) {
+        SiblingData sibling = new SiblingData(s, siblingName);
         siblingMap.put(siblingName, sibling);
     }
 
     @Override
     public String toString() {
-        String ret = "";
+        String ret = name + ": ";
         for (String key : siblingMap.keySet()) {
             ret += siblingMap.get(key).toString() + "\n";
         }

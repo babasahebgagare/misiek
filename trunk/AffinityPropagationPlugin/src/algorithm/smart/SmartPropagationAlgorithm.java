@@ -9,15 +9,14 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.PriorityQueue;
 
 public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
 
     private ExamplarsCollection examplars = new ExamplarsCollection();
     private double INF = 1000000;
 
-    public void setSimilarity(String from, String to, double sim, double a) {
-        examplars.setSimilarity(from, to, sim, a);
+    public void setSimilarity(String from, String to, double sim) {
+        examplars.setSimilarity(from, to, sim);
     }
 
     public ExamplarsCollection getExamplars() {
@@ -133,7 +132,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
         }
 
         for (Examplar examplar : examplars.getExamplars().values()) {
-            if (!centers.contains(examplar.getName())) {
+            if (!ret.containsKey(examplar.getName())) {
 
                 String maxid = null;
                 double max = -INF;
@@ -149,7 +148,8 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
                     }
                 }
                 if (maxid != null) {
-                    ret.get(maxid).add(examplar.getName());
+                    Cluster<String> cluster = ret.get(maxid);
+                    cluster.add(examplar.getName());
                 }
             }
         }
@@ -217,7 +217,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
         double sum = 0;
 
         for (Examplar examplar : examplars.getExamplars().values()) {
-            if (!examplar.getName().equals(examplarName)) {
+            if (!examplar.getName().equals(examplarName) && !examplar.getName().equals(siblingName)) {
                 SiblingData sibling = examplar.getSiblingMap().get(siblingName);
                 if (sibling != null) {
                     double rik = sibling.getR();

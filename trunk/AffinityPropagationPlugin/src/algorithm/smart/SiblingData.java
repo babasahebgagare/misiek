@@ -17,8 +17,8 @@ public class SiblingData {
     private double s;
     private String examplarName;
 
-    public SiblingData(double a, double s, String examplarName) {
-        this.a = a;
+    public SiblingData(double s, String examplarName) {
+        this.a = 0;
         this.s = s;
         this.r = 0;
         this.rold = 0;
