@@ -5,6 +5,8 @@
 package algorithm.smart;
 
 import algorithm.AffinityPropagationAlgorithm;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -14,6 +16,11 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
 
     private ExamplarsCollection examplars = new ExamplarsCollection();
     private double INF = 1000000;
+    private ActionListener iteractionListener = null;
+
+    public void addIterationListener(ActionListener listener) {
+        this.iteractionListener = listener;
+    }
 
     public void setSimilarity(String from, String to, double sim) {
         examplars.setSimilarity(from, to, sim);
@@ -48,7 +55,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
     public Map<String, Cluster<String>> doClusterString2() {
         int iterations = getIterations();
         for (int iter = 0; iter < iterations; iter++) {
-            System.out.println("iteration: " + iter);
+
             copyResponsibilies();
             computeResponsibilities();
             avgResponsibilies();
@@ -61,7 +68,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
             System.out.println("A: " + sib.getA() + " S: " + sib.getS() + " R: " + sib.getR());
             }*/
             Collection<Examplar> centers = computeCenters();
-            System.out.println("clusters: " + centers.size());
+            iteractionListener.actionPerformed(new ActionEvent(new IterationData(iter, centers.size()), 0, "ITERATION"));
         }
         Collection<Examplar> centers = computeCenters();
         Map<String, Cluster<String>> assigments = computeAssigments2(centers);
