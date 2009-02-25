@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package algorithm.smart;
 
 import algorithm.AffinityPropagationAlgorithm;
@@ -62,27 +58,13 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
             copyAvailabilities();
             computeAvailabilities();
             avgAvailabilities();
-            /*for (Examplar examplar : examplars.getExamplars().values()) {
-            System.out.println("EX NAME: " + examplar.getName());
-            SiblingData sib = examplar.getSiblingMap().get(examplar.getName());
-            System.out.println("A: " + sib.getA() + " S: " + sib.getS() + " R: " + sib.getR());
-            }*/
+
             Collection<Examplar> centers = computeCenters();
-            iteractionListener.actionPerformed(new ActionEvent(new IterationData(iter, centers.size()), 0, "ITERATION"));
+            iteractionListener.actionPerformed(new ActionEvent(new IterationData(iter + 1, centers.size()), 0, "ITERATION"));
         }
         Collection<Examplar> centers = computeCenters();
         Map<String, Cluster<String>> assigments = computeAssigments2(centers);
 
-        /*   System.out.println("CENTERS: " + centers.toString() + "ENDS");
-        System.out.println("ASSIGMENTS: ");
-        for (String key : assigments.keySet()) {
-        System.out.println(key + "\n");
-        for (String ex : assigments.get(key)) {
-        System.out.println(ex);
-        }
-        System.out.println("\n");
-        }
-        System.out.println("ENDS ASSIGMENTS: ");*/
         return assigments;
     }
 
