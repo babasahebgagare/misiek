@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import javax.swing.JPanel;
+import listeners.IterationListener;
 
 /**
  *
@@ -69,7 +70,7 @@ public class CytoSmartAffinityClustering extends CytoAbstractClusterAlgorithm {
         monitor.setStatus("Ładowanie macierzy doległości");
         setParameters();
         monitor.setStatus("Klastrowanie");
-
+        createIteractionListener(monitor);
         af.init();
         //Map<String, String> clusters = af.doClusterString();
         //
@@ -118,9 +119,6 @@ public class CytoSmartAffinityClustering extends CytoAbstractClusterAlgorithm {
             String id = edge.getIdentifier();
             String sourceID = edge.getSource().getIdentifier();
             String targetID = edge.getTarget().getIdentifier();
-            if (sourceID.equals("fu_i6587") || targetID.equals("fu_i6587")) {
-                System.out.println("SOURCE " + sourceID + "TARGET: " + targetID);
-            }
 
             if (!sourceID.equals(targetID)) {
                 Double prob = edgesAttributes.getDoubleAttribute(id, edgeNameAttr);
@@ -129,5 +127,9 @@ public class CytoSmartAffinityClustering extends CytoAbstractClusterAlgorithm {
             }
         }
 
+    }
+
+    public void createIteractionListener(TaskMonitor monitor) {
+        af.addIterationListener(new IterationListener(monitor, iterations));
     }
 }
