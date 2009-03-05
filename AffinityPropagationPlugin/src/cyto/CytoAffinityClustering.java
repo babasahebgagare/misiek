@@ -1,10 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cyto;
 
-import algorithm.AffinityPropagationAlgorithm;
 import algorithm.MatrixPropagationAlgorithm;
 import cytoscape.CyEdge;
 import cytoscape.CyNode;
@@ -21,17 +16,24 @@ import javax.swing.JPanel;
  */
 public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
 
-    private double INF = 100000;
-    private final String nodeNameAttr;
-    private final String edgeNameAttr;
-    private AffinityPropagationAlgorithm af = new MatrixPropagationAlgorithm();
+    private String nodeNameAttr;
+    private String edgeNameAttr;
+    private int iterations;
+    private double preferences;
+    private double lambda;
+    private MatrixPropagationAlgorithm af = new MatrixPropagationAlgorithm();
     HashMap<String, Integer> nodeMapping = new HashMap<String, Integer>();
     HashMap<Integer, String> idMapping = new HashMap<Integer, String>();
     CyAttributes nodesAttributes = Cytoscape.getNodeAttributes();
+    private double INF = 100000;
 
-    public CytoAffinityClustering(String nodeNameAttr, String edgeNameAttr) {
+    public CytoAffinityClustering(String nodeNameAttr, String edgeNameAttr, double lambda, double preferences, int iterations) {
         this.nodeNameAttr = nodeNameAttr;
         this.edgeNameAttr = edgeNameAttr;
+        this.lambda = lambda;
+        this.preferences = preferences;
+        this.iterations = iterations;
+
     }
 
     @Override
@@ -87,8 +89,10 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
 
         int N = nodes.size();
         af.setN(N);
-        af.setLambda(0.5);
-        double[][] sim = new double[N][N];
+        af.setLambda(lambda);
+        af.setIterations(iterations);
+
+        double[][] sim = new double[nodes.size()][nodes.size()];
 
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
@@ -99,10 +103,13 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
                 }
             }
         }
+
         int i = 0;
         for (CyNode node : nodes) {
-            nodeMapping.put(node.getIdentifier(), new Integer(i));
-            idMapping.put(new Integer(i), node.getIdentifier());
+            String name = node.getIdentifier();
+            idMapping.put(new Integer(i), name);
+            nodeMapping.put(name, new Integer(i));
+            sim[i][i] = preferences;
             i++;
         }
         for (CyEdge edge : edges) {
@@ -112,22 +119,18 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
             String targetID = edge.getTarget().getIdentifier();
             Integer sourceIndex = nodeMapping.get(sourceID);
             Integer targetIndex = nodeMapping.get(targetID);
-            System.out.println(sourceID);
-            System.out.println(targetID);
-            System.out.println(sourceIndex);
-            System.out.println(targetIndex);
 
-            Double prob = edgesAttributes.getDoubleAttribute(id, edgeNameAttr);
-
-            //   System.out.println(prob);
-
-            //       System.out.flush();
-
-            sim[sourceIndex.intValue()][targetIndex.intValue()] = Math.log(prob);
-            sim[targetIndex.intValue()][sourceIndex.intValue()] = Math.log(prob);
+            if (!sourceID.equals(targetID)) {
+                Double prob = edgesAttributes.getDoubleAttribute(id, edgeNameAttr);
+                sim[sourceIndex.intValue()][targetIndex.intValue()] = Math.log(prob);
+                sim[targetIndex.intValue()][sourceIndex.intValue()] = Math.log(prob);
+            }
         }
         af.setSimilarities(sim);
 
-    // System.out.println("m:" + m);
+    }
+
+    public void createIteractionListener(TaskMonitor monitor) {
+        //   af.addIterationListener(new IterationListener(monitor, iterations));
     }
 }
