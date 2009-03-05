@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cyto;
 
 import algorithm.smart.Cluster;
@@ -11,11 +7,13 @@ import cytoscape.CyNode;
 import cytoscape.Cytoscape;
 import cytoscape.data.CyAttributes;
 import cytoscape.task.TaskMonitor;
-import java.util.Collection;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 import listeners.IterationListener;
 
@@ -31,9 +29,9 @@ public class CytoSmartAffinityClustering extends CytoAbstractClusterAlgorithm {
     private double preferences;
     private double lambda;
     private SmartPropagationAlgorithm af = new SmartPropagationAlgorithm();
+    CyAttributes nodesAttributes = Cytoscape.getNodeAttributes();
     HashMap<String, Integer> nodeMapping = new HashMap<String, Integer>();
     HashMap<Integer, String> idMapping = new HashMap<Integer, String>();
-    CyAttributes nodesAttributes = Cytoscape.getNodeAttributes();
 
     public CytoSmartAffinityClustering(String nodeNameAttr, String edgeNameAttr, double lambda, double preferences, int iterations) {
         this.nodeNameAttr = nodeNameAttr;
@@ -68,7 +66,11 @@ public class CytoSmartAffinityClustering extends CytoAbstractClusterAlgorithm {
         PriorityQueue<Cluster<String>> clusterprior = new PriorityQueue<Cluster<String>>();
 
         monitor.setStatus("Ładowanie macierzy doległości");
-        setParameters();
+        try {
+            setParameters();
+        } catch (IOException ex) {
+            Logger.getLogger(CytoSmartAffinityClustering.class.getName()).log(Level.SEVERE, null, ex);
+        }
         monitor.setStatus("Klastrowanie");
         createIteractionListener(monitor);
         af.init();
@@ -78,6 +80,13 @@ public class CytoSmartAffinityClustering extends CytoAbstractClusterAlgorithm {
 
         Map<String, Cluster<String>> clusters = af.doClusterString2();
 
+
+
+        //    for (String cluster : clusters.keySet()) {
+
+        //     System.out.println(cluster);
+        //  }
+        //  System.out.println("SIZE: " + clusters.size());
         for (Cluster<String> cluster : clusters.values()) {
             clusterprior.add(cluster);
         }
@@ -87,7 +96,8 @@ public class CytoSmartAffinityClustering extends CytoAbstractClusterAlgorithm {
         while (clusterprior.peek().size() > 1) {
             Cluster<String> cluster = clusterprior.poll();
             for (String element : cluster.getElements()) {
-                nodesAttributes.setAttribute(element, nodeNameAttr, new Integer(i));
+                String nodeID = idMapping.get(Integer.valueOf(element));
+                nodesAttributes.setAttribute(nodeID, nodeNameAttr, new Integer(i));
             }
             i++;
         }
@@ -102,7 +112,7 @@ public class CytoSmartAffinityClustering extends CytoAbstractClusterAlgorithm {
         monitor.setPercentCompleted(100);
     }
 
-    private void setParameters() {
+    private void setParameters() throws IOException {
         List<CyEdge> edges = Cytoscape.getCurrentNetwork().edgesList();
         List<CyNode> nodes = Cytoscape.getCurrentNetwork().nodesList();
         CyAttributes edgesAttributes = Cytoscape.getEdgeAttributes();
@@ -110,20 +120,31 @@ public class CytoSmartAffinityClustering extends CytoAbstractClusterAlgorithm {
         af.setLambda(lambda);
         af.setIterations(iterations);
 
+        int i = 1;
+
         for (CyNode node : nodes) {
             String name = node.getIdentifier();
-            af.setSimilarity(name, name, preferences);
+            idMapping.put(new Integer(i), name);
+            nodeMapping.put(name, new Integer(i));
+            af.setSimilarity(new Integer(i).toString(), new Integer(i).toString(), preferences);
+            i++;
         }
+
+        System.out.println("N: " + (i - 1));
         for (CyEdge edge : edges) {
 
             String id = edge.getIdentifier();
             String sourceID = edge.getSource().getIdentifier();
             String targetID = edge.getTarget().getIdentifier();
+            Integer sourceIndex = nodeMapping.get(sourceID);
+            Integer targetIndex = nodeMapping.get(targetID);
 
             if (!sourceID.equals(targetID)) {
                 Double prob = edgesAttributes.getDoubleAttribute(id, edgeNameAttr);
-                af.setSimilarity(sourceID, targetID, Math.log(prob));
-                af.setSimilarity(targetID, sourceID, Math.log(prob));
+                af.setSimilarity(sourceIndex.toString(), targetIndex.toString(), Math.log(prob));
+                af.setSimilarity(targetIndex.toString(), sourceIndex.toString(), Math.log(prob));
+            //                af.setSimilarity(sourceID, targetID, Math.log(prob));
+            //                af.setSimilarity(targetID, sourceID, Math.log(prob));
             }
         }
 
