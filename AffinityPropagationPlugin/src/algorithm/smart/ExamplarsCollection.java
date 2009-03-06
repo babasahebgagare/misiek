@@ -15,6 +15,10 @@ public class ExamplarsCollection {
 
     Map<String, Examplar> examplars = new HashMap<String, Examplar>();
 
+    public int size() {
+        return examplars.size();
+    }
+
     public void setSimilarity(String from, String to, double sim) {
         Examplar exfrom = examplars.get(from);
         if (exfrom == null) {
@@ -40,5 +44,4 @@ public class ExamplarsCollection {
     public void setExamplars(Map<String, Examplar> examplars) {
         this.examplars = examplars;
     }
-    
 }
