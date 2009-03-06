@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
-public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
+public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<String> {
 
     private ExamplarsCollection examplars = new ExamplarsCollection();
     private double INF = 1000000;
