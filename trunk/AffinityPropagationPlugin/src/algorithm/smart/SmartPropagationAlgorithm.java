@@ -1,6 +1,6 @@
 package algorithm.smart;
 
-import algorithm.AffinityPropagationAlgorithm;
+import algorithm.abs.AffinityPropagationAlgorithm;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collection;
@@ -18,54 +18,12 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
         this.iteractionListener = listener;
     }
 
-    public void setSimilarity(String from, String to, double sim) {
-        examplars.setSimilarity(from, to, sim);
-    }
-
     public ExamplarsCollection getExamplars() {
         return examplars;
     }
 
     public void setExamplars(ExamplarsCollection examplars) {
         this.examplars = examplars;
-    }
-
-    @Override
-    public void init() {
-    }
-
-    @Override
-    public void halt() {
-    }
-
-    @Override
-    public void setN(int N) {
-    }
-
-    @Override
-    public void setSimilarities(double[][] sim) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public Map<String, Cluster<String>> doClusterString2() {
-        int iterations = getIterations();
-        for (int iter = 0; iter < iterations; iter++) {
-
-            copyResponsibilies();
-            computeResponsibilities();
-            avgResponsibilies();
-            copyAvailabilities();
-            computeAvailabilities();
-            avgAvailabilities();
-
-            Collection<Examplar> centers = computeCenters();
-            iteractionListener.actionPerformed(new ActionEvent(new IterationData(iter + 1, centers.size()), 0, "ITERATION"));
-        }
-        Collection<Examplar> centers = computeCenters();
-        Map<String, Cluster<String>> assigments = computeAssigments2(centers);
-
-        return assigments;
     }
 
     private void avgAvailabilities() {
@@ -249,12 +207,54 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
     }
 
     @Override
-    public Integer[] doCluster() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void setSimilarities(String from, String to, Double sim) {
+        examplars.setSimilarity(from, to, sim);
     }
 
     @Override
-    public Map<String, String> doClusterString() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Map<String, String> doCluster() {
+        Map<String, Cluster<String>> help = doClusterAssoc();
+        Map<String, String> res = new HashMap<String, String>();
+
+        for (String examplar : help.keySet()) {
+            for (String obj : help.get(examplar).getElements()) {
+                res.put(obj, examplar);
+            }
+        }
+
+        return res;
+    }
+
+    @Override
+    public Map<String, Cluster<String>> doClusterAssoc() {
+        int iterations = getIterations();
+        for (int iter = 0; iter < iterations; iter++) {
+
+            copyResponsibilies();
+            computeResponsibilities();
+            avgResponsibilies();
+            copyAvailabilities();
+            computeAvailabilities();
+            avgAvailabilities();
+
+            Collection<Examplar> centers = computeCenters();
+            iteractionListener.actionPerformed(new ActionEvent(new IterationData(iter + 1, centers.size()), 0, "ITERATION"));
+        }
+        Collection<Examplar> centers = computeCenters();
+        Map<String, Cluster<String>> assigments = computeAssigments2(centers);
+
+        return assigments;
+    }
+
+    @Override
+    public void init() {
+    }
+
+    @Override
+    public void halt() {
+    }
+
+    @Override
+    public void setN(int N) {
     }
 }

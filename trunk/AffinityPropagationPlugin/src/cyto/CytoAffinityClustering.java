@@ -1,6 +1,7 @@
 package cyto;
 
-import algorithm.MatrixPropagationAlgorithm;
+import algorithm.abs.AffinityPropagationAlgorithm;
+import algorithm.matrix.MatrixPropagationAlgorithm;
 import cytoscape.CyEdge;
 import cytoscape.CyNode;
 import cytoscape.Cytoscape;
@@ -8,6 +9,7 @@ import cytoscape.data.CyAttributes;
 import cytoscape.task.TaskMonitor;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JPanel;
 
 /**
@@ -38,12 +40,12 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
 
     @Override
     public String getShortName() {
-        return "Affinity propagation";
+        return af.getShortName();
     }
 
     @Override
     public String getName() {
-        return "Affinity propagation";
+        return af.getName();
     }
 
     @Override
@@ -63,10 +65,11 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
         monitor.setStatus("Klastrowanie");
 
         af.init();
-        Integer[] clusters = af.doCluster();
+        Map<String, String> clusters = af.doCluster();
 
-        for (int i = 0; i < clusters.length; i++) {
-            nodesAttributes.setAttribute(idMapping.get(new Integer(i)), nodeNameAttr, clusters[i]);
+        for (String node : clusters.keySet()) {
+            String nodeID = idMapping.get(Integer.valueOf(node));
+            nodesAttributes.setAttribute(nodeID, nodeNameAttr, clusters.get(node));
         }
         monitor.setPercentCompleted(100);
     /*    double v[][] = {{-1, -2, -1, -10}, {-3, -1, -120, -22}, {-10, -50, -3, -1}, {-1, -30, -4, -1}};
