@@ -14,6 +14,14 @@ import java.util.Map;
 public class ExamplarsCollection {
 
     Map<String, Examplar> examplars = new HashMap<String, Examplar>();
+    Integer convits = null;
+
+    public ExamplarsCollection() {
+    }
+
+    public ExamplarsCollection(Integer convits) {
+        this.convits = convits;
+    }
 
     public int size() {
         return examplars.size();
@@ -22,7 +30,7 @@ public class ExamplarsCollection {
     public void setSimilarity(String from, String to, double sim) {
         Examplar exfrom = examplars.get(from);
         if (exfrom == null) {
-            exfrom = new Examplar(from);
+            exfrom = new Examplar(from, convits);
             examplars.put(from, exfrom);
         }
         exfrom.createSibling(sim, to);
