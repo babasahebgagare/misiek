@@ -9,7 +9,6 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -45,25 +44,25 @@ public class SmartPropagationAlgorithmTest {
 
 
         System.out.println(instance.getExamplars().toString());
-        instance.doClusterString();
+        instance.doCluster();
         System.out.println(instance.getExamplars().toString());
     }
 
     private void loadData(SmartPropagationAlgorithm instance) {
-        instance.setSimilarity("1", "1", -2, 0);
-        instance.setSimilarity("1", "2", -3, 0);
-        instance.setSimilarity("1", "3", -3, 0);
-        instance.setSimilarity("1", "4", -1, 0);
-        instance.setSimilarity("2", "1", -3, 0);
-        instance.setSimilarity("2", "2", -1, 0);
-        instance.setSimilarity("2", "3", -1, 0);
-        instance.setSimilarity("2", "4", -1, 0);
-        instance.setSimilarity("3", "2", -2, 0);
-        instance.setSimilarity("3", "3", -0, 0);
-        instance.setSimilarity("3", "4", -4, 0);
-        instance.setSimilarity("4", "2", -1, 0);
-        instance.setSimilarity("4", "3", -1, 0);
-        instance.setSimilarity("4", "4", 0, 0);
+        instance.setSimilarities("1", "1", -2.);
+        instance.setSimilarities("1", "2", -3.);
+        instance.setSimilarities("1", "3", -3.);
+        instance.setSimilarities("1", "4", -1.);
+        instance.setSimilarities("2", "1", -3.);
+        instance.setSimilarities("2", "2", -1.);
+        instance.setSimilarities("2", "3", -1.);
+        instance.setSimilarities("2", "4", -1.);
+        instance.setSimilarities("3", "2", -2.);
+        instance.setSimilarities("3", "3", -0.);
+        instance.setSimilarities("3", "4", -4.);
+        instance.setSimilarities("4", "2", -1.);
+        instance.setSimilarities("4", "3", -1.);
+        instance.setSimilarities("4", "4", 0.);
     }
     /*
     @Test

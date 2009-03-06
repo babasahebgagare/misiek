@@ -22,7 +22,7 @@ import listeners.IterationListener;
  *
  * @author misiek
  */
-public class CytoAffinityCluster extends CytoAbstractClusterAlgorithm {
+public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
 
     private String nodeNameAttr;
     private String edgeNameAttr;
@@ -34,7 +34,7 @@ public class CytoAffinityCluster extends CytoAbstractClusterAlgorithm {
     HashMap<String, Integer> nodeMapping = new HashMap<String, Integer>();
     HashMap<Integer, String> idMapping = new HashMap<Integer, String>();
 
-    public CytoAffinityCluster(String nodeNameAttr, String edgeNameAttr, double lambda, double preferences, int iterations) {
+    public CytoAffinityClustering(String nodeNameAttr, String edgeNameAttr, double lambda, double preferences, int iterations) {
         this.nodeNameAttr = nodeNameAttr;
         this.edgeNameAttr = edgeNameAttr;
         this.lambda = lambda;
@@ -71,7 +71,7 @@ public class CytoAffinityCluster extends CytoAbstractClusterAlgorithm {
         try {
             setParameters();
         } catch (IOException ex) {
-            Logger.getLogger(CytoAffinityCluster.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CytoAffinityClustering.class.getName()).log(Level.SEVERE, null, ex);
         }
         monitor.setStatus("Klastrowanie");
         createIteractionListener(monitor);
