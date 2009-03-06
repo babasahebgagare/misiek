@@ -44,12 +44,12 @@ public class CytoSmartAffinityClustering extends CytoAbstractClusterAlgorithm {
 
     @Override
     public String getShortName() {
-        return "Affinity propagation";
+        return af.getShortName();
     }
 
     @Override
     public String getName() {
-        return "Affinity propagation";
+        return af.getName();
     }
 
     @Override
@@ -78,7 +78,7 @@ public class CytoSmartAffinityClustering extends CytoAbstractClusterAlgorithm {
         //
 
 
-        Map<String, Cluster<String>> clusters = af.doClusterString2();
+        Map<String, Cluster<String>> clusters = af.doClusterAssoc();
 
 
 
@@ -126,7 +126,7 @@ public class CytoSmartAffinityClustering extends CytoAbstractClusterAlgorithm {
             String name = node.getIdentifier();
             idMapping.put(new Integer(i), name);
             nodeMapping.put(name, new Integer(i));
-            af.setSimilarity(new Integer(i).toString(), new Integer(i).toString(), preferences);
+            af.setSimilarities(new Integer(i).toString(), new Integer(i).toString(), preferences);
             i++;
         }
 
@@ -141,8 +141,8 @@ public class CytoSmartAffinityClustering extends CytoAbstractClusterAlgorithm {
 
             if (!sourceID.equals(targetID)) {
                 Double prob = edgesAttributes.getDoubleAttribute(id, edgeNameAttr);
-                af.setSimilarity(sourceIndex.toString(), targetIndex.toString(), Math.log(prob));
-                af.setSimilarity(targetIndex.toString(), sourceIndex.toString(), Math.log(prob));
+                af.setSimilarities(sourceIndex.toString(), targetIndex.toString(), Math.log(prob));
+                af.setSimilarities(targetIndex.toString(), sourceIndex.toString(), Math.log(prob));
             //                af.setSimilarity(sourceID, targetID, Math.log(prob));
             //                af.setSimilarity(targetID, sourceID, Math.log(prob));
             }
