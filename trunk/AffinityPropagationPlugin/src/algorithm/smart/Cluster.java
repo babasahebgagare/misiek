@@ -16,7 +16,7 @@ public class Cluster<T> implements Comparable {
     private String name;
     private Collection<T> elements = new HashSet<T>();
 
-    Cluster(String name) {
+    public Cluster(String name) {
         this.name = name;
     }
 

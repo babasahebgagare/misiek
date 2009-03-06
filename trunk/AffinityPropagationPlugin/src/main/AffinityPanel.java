@@ -1,16 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * AffinityPanel.java
- *
- * Created on 2009-01-08, 00:58:49
- */
 package main;
 
-import cyto.CytoAffinityClustering;
 import cyto.CytoClusterAlgorithm;
 import cyto.CytoClusterTask;
 import cyto.CytoSmartAffinityClustering;

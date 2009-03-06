@@ -2,7 +2,6 @@ package algorithm.smart;
 
 import algorithm.abs.AffinityPropagationAlgorithm;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -12,11 +11,6 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
 
     private ExamplarsCollection examplars = new ExamplarsCollection();
     private double INF = 1000000;
-    private ActionListener iteractionListener = null;
-
-    public void addIterationListener(ActionListener listener) {
-        this.iteractionListener = listener;
-    }
 
     public ExamplarsCollection getExamplars() {
         return examplars;

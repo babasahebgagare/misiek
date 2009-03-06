@@ -1,5 +1,6 @@
 package cyto;
 
+import algorithm.abs.AffinityPropagationAlgorithm;
 import algorithm.smart.Cluster;
 import algorithm.smart.SmartPropagationAlgorithm;
 import cytoscape.CyEdge;
@@ -28,7 +29,7 @@ public class CytoSmartAffinityClustering extends CytoAbstractClusterAlgorithm {
     private int iterations;
     private double preferences;
     private double lambda;
-    private SmartPropagationAlgorithm af = new SmartPropagationAlgorithm();
+    private AffinityPropagationAlgorithm af = new SmartPropagationAlgorithm();
     CyAttributes nodesAttributes = Cytoscape.getNodeAttributes();
     HashMap<String, Integer> nodeMapping = new HashMap<String, Integer>();
     HashMap<Integer, String> idMapping = new HashMap<Integer, String>();
@@ -44,12 +45,12 @@ public class CytoSmartAffinityClustering extends CytoAbstractClusterAlgorithm {
 
     @Override
     public String getShortName() {
-        return af.getShortName();
+        return "AP";
     }
 
     @Override
     public String getName() {
-        return af.getName();
+        return "Affinity Propagation";
     }
 
     @Override
@@ -66,6 +67,7 @@ public class CytoSmartAffinityClustering extends CytoAbstractClusterAlgorithm {
         PriorityQueue<Cluster<String>> clusterprior = new PriorityQueue<Cluster<String>>();
 
         monitor.setStatus("Ładowanie macierzy doległości");
+
         try {
             setParameters();
         } catch (IOException ex) {
@@ -73,7 +75,7 @@ public class CytoSmartAffinityClustering extends CytoAbstractClusterAlgorithm {
         }
         monitor.setStatus("Klastrowanie");
         createIteractionListener(monitor);
-        af.init();
+
         //Map<String, String> clusters = af.doClusterString();
         //
 
@@ -120,7 +122,9 @@ public class CytoSmartAffinityClustering extends CytoAbstractClusterAlgorithm {
         af.setLambda(lambda);
         af.setIterations(iterations);
 
-        int i = 1;
+        int i = 0;
+        af.setN(nodes.size());
+        af.init();
 
         for (CyNode node : nodes) {
             String name = node.getIdentifier();

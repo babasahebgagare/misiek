@@ -2,13 +2,15 @@ package algorithm.matrix;
 
 import algorithm.abs.*;
 import algorithm.smart.Cluster;
+import algorithm.smart.IterationData;
+import java.awt.event.ActionEvent;
 import java.util.HashMap;
 import java.util.Map;
 import matrix.DoubleMatrix1D;
 import matrix.DoubleMatrix2D;
 import matrix.IntegerMatrix1D;
 
-public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
+public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<String> {
 
     private int N;
     private IntegerMatrix1D idx;
@@ -31,6 +33,7 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
     public void init() {
         A = new DoubleMatrix2D(N, N, 0);
         R = new DoubleMatrix2D(N, N, 0);
+        S = new DoubleMatrix2D(N, N, -inf);
     }
 
     @Override
@@ -65,18 +68,17 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
             DoubleMatrix2D Rep = new DoubleMatrix2D(N, pom);
             //         System.out.println("Rep" + Rep);
             R = S.minus(Rep);
-
             //          System.out.println("R" + R);
 
             for (int i = 0; i < N; i++) {
                 R.set(i, (int) YI.getMatrix()[i][0], S.get(i, (int) YI.getMatrix()[i][0]) - YI2.get(i, 1));
             }
-            System.out.println("Rnew: " + R.toString());
+
             R = R.mul(1 - getLambda()).plus(Rold.mul(getLambda()));
-            System.out.println("Ravg: " + R.toString());
+
 
             //          System.out.println("R" + R);
-            System.out.println("Aold: " + A.toString());
+
             Aold = A.clone();
             Rp = R.max(0);
             for (int i = 0; i < N; i++) {
@@ -96,10 +98,11 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
             for (int i = 0; i < N; i++) {
                 A.getMatrix()[i][i] = dA.get(i);
             }
-            System.out.println("Anew: " + A.toString());
+
             A = A.mul((1 - getLambda())).plus(Aold.mul(getLambda()));
-        //       System.out.println("A");
-        //          System.out.println(A);
+            //       System.out.println("A");
+            //          System.out.println(A);
+            iteractionListener.actionPerformed(new ActionEvent(new IterationData(iter + 1, 0), 0, "ITERATION"));
         }
 
         //    System.out.println("S: " + S);
@@ -167,7 +170,22 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
 
     @Override
     public Map<String, Cluster<String>> doClusterAssoc() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Map<String, String> map = doCluster();
+        Map<String, Cluster<String>> res = new HashMap<String, Cluster<String>>();
+
+        for (String examplar : map.values()) {
+            Cluster<String> clust = new Cluster<String>(examplar);
+            clust.add(examplar);
+            res.put(examplar, clust);
+        }
+
+        for (String obj : map.keySet()) {
+            String ex = map.get(obj);
+            Cluster<String> clust = res.get(ex);
+            clust.add(obj);
+        }
+
+        return res;
     }
 
     @Override
@@ -176,7 +194,7 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
         try {
             int i = Integer.valueOf(x);
             int j = Integer.valueOf(y);
-            S.set(i, j, sim);
+            S.set(i, j, sim.doubleValue());
 
         } catch (Exception ex) {
             System.out.println("setSimilarities!");
