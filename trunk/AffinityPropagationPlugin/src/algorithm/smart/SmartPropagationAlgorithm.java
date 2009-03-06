@@ -38,32 +38,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
         }
     }
 
-    private Map<String, String> computeAssigments(Collection<Examplar> centers) {
-        Map<String, String> ret = new HashMap<String, String>();
-
-        for (Examplar examplar : examplars.getExamplars().values()) {
-            String maxid = null;
-            double max = -INF;
-
-            for (Examplar center : centers) {
-                SiblingData sibling = examplar.getSiblingMap().get(center.getName());
-                if (sibling != null) {
-                    double sim = sibling.getS();
-                    if (sim > max) {
-                        max = sim;
-                        maxid = center.getName();
-                    }
-                }
-            }
-            if (maxid != null) {
-                ret.put(examplar.getName(), maxid);
-            }
-        }
-
-        return ret;
-    }
-
-    private Map<String, Cluster<String>> computeAssigments2(Collection<Examplar> centers) {
+    private Map<String, Cluster<String>> computeAssigments(Collection<Examplar> centers) {
         Map<String, Cluster<String>> ret = new HashMap<String, Cluster<String>>();
 
         for (Examplar center : centers) {
@@ -222,7 +197,8 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
     @Override
     public Map<String, Cluster<String>> doClusterAssoc() {
         int iterations = getIterations();
-        for (int iter = 0; iter < iterations; iter++) {
+        iteractionListener.actionPerformed(new ActionEvent(new IterationData(1, examplars.size()), 0, "ITERATION"));
+        for (int iter = 1; iter <= iterations; iter++) {
 
             copyResponsibilies();
             computeResponsibilities();
@@ -231,11 +207,14 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
             computeAvailabilities();
             avgAvailabilities();
 
-            Collection<Examplar> centers = computeCenters();
-            iteractionListener.actionPerformed(new ActionEvent(new IterationData(iter + 1, centers.size()), 0, "ITERATION"));
+
+            if (iter != iterations) {
+                Collection<Examplar> centers = computeCenters();
+                iteractionListener.actionPerformed(new ActionEvent(new IterationData(iter + 1, centers.size()), 0, "ITERATION"));
+            }
         }
         Collection<Examplar> centers = computeCenters();
-        Map<String, Cluster<String>> assigments = computeAssigments2(centers);
+        Map<String, Cluster<String>> assigments = computeAssigments(centers);
 
         return assigments;
     }
