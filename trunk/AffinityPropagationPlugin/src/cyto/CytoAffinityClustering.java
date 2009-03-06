@@ -29,6 +29,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
     private int iterations;
     private double preferences;
     private double lambda;
+    private Integer convits = null;
     private AffinityPropagationAlgorithm af = new SmartPropagationAlgorithm();
     CyAttributes nodesAttributes = Cytoscape.getNodeAttributes();
     HashMap<String, Integer> nodeMapping = new HashMap<String, Integer>();
@@ -40,7 +41,17 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
         this.lambda = lambda;
         this.preferences = preferences;
         this.iterations = iterations;
+        this.convits = null;
 
+    }
+
+    public CytoAffinityClustering(String nodeNameAttr, String edgeNameAttr, double lambda, double preferences, int iterations, Integer convits) {
+        this.nodeNameAttr = nodeNameAttr;
+        this.edgeNameAttr = edgeNameAttr;
+        this.lambda = lambda;
+        this.preferences = preferences;
+        this.iterations = iterations;
+        this.convits = convits;
     }
 
     @Override
@@ -66,29 +77,18 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
     public void doCluster(TaskMonitor monitor) {
         PriorityQueue<Cluster<String>> clusterprior = new PriorityQueue<Cluster<String>>();
 
-        monitor.setStatus("Ładowanie macierzy doległości");
+        monitor.setStatus("Loading similarity matrix...");
 
         try {
             setParameters();
         } catch (IOException ex) {
             Logger.getLogger(CytoAffinityClustering.class.getName()).log(Level.SEVERE, null, ex);
         }
-        monitor.setStatus("Klastrowanie");
+        monitor.setStatus("Clustering...");
         createIteractionListener(monitor);
-
-        //Map<String, String> clusters = af.doClusterString();
-        //
-
 
         Map<String, Cluster<String>> clusters = af.doClusterAssoc();
 
-
-
-        //    for (String cluster : clusters.keySet()) {
-
-        //     System.out.println(cluster);
-        //  }
-        //  System.out.println("SIZE: " + clusters.size());
         for (Cluster<String> cluster : clusters.values()) {
             clusterprior.add(cluster);
         }
@@ -103,13 +103,6 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
             }
             i++;
         }
-        /*        for (String nodeID : clusters.keySet()) {
-        String cluserid = clusters.get(nodeID);
-
-        if (nodeID != null && cluserid != null) {
-        nodesAttributes.setAttribute(nodeID, nodeNameAttr, cluserid);
-        }
-        }*/
 
         monitor.setPercentCompleted(100);
     }
@@ -121,6 +114,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
 
         af.setLambda(lambda);
         af.setIterations(iterations);
+        af.setConvits(convits);
 
         int i = 0;
         af.setN(nodes.size());
@@ -134,7 +128,6 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
             i++;
         }
 
-        System.out.println("N: " + (i - 1));
         for (CyEdge edge : edges) {
 
             String id = edge.getIdentifier();

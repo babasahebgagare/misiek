@@ -6,6 +6,7 @@ public abstract class AffinityPropagationAlgorithm<T> extends AbstractClusterAlg
 
     private double lambda = 0.5;
     private int iterations = 10;
+    protected Integer convits = null;
     protected ActionListener iteractionListener = null;
 
     public void addIterationListener(ActionListener listener) {
@@ -36,5 +37,13 @@ public abstract class AffinityPropagationAlgorithm<T> extends AbstractClusterAlg
 
     public void setIterations(int iterations) {
         this.iterations = iterations;
+    }
+
+    public Integer getConvits() {
+        return convits;
+    }
+
+    public void setConvits(Integer convits) {
+        this.convits = convits;
     }
 }

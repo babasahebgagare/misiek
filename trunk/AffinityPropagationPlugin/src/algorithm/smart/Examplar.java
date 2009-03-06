@@ -1,11 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package algorithm.smart;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Vector;
 
 /**
  *
@@ -15,9 +12,15 @@ public class Examplar {
 
     private Map<String, SiblingData> siblingMap = new HashMap<String, SiblingData>();
     private String name;
+    private Vector<Boolean> imcenter = null;
+    private Integer convits = null;
 
-    public Examplar(String name) {
+    public Examplar(String name, Integer convits) {
         this.name = name;
+        this.convits = convits;
+        if (convits != null) {
+            imcenter = new Vector<Boolean>();
+        }
     }
 
     public void createSibling(double s, String siblingName) {
@@ -40,5 +43,34 @@ public class Examplar {
 
     public String getName() {
         return name;
+    }
+
+    public void setImCenter(Boolean c, int iteration) {
+        if (convits != null) {
+
+            imcenter.add(0, c);
+            if (imcenter.size() == convits.intValue() + 1) {
+                imcenter.remove(convits.intValue());
+            }
+        }
+    }
+
+    public boolean changed() {
+
+        if (imcenter.size() < convits) {
+            return true;
+        }
+
+        boolean res = false;
+        boolean value = imcenter.firstElement();
+
+        for (Boolean b : imcenter) {
+            if (b != value) {
+                res = true;
+                break;
+            }
+        }
+
+        return res;
     }
 }

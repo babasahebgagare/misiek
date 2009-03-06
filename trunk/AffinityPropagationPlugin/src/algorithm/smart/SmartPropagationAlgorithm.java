@@ -7,10 +7,13 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
+/** You have to set parameters and do init() befor clustering. */
 public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<String> {
 
-    private ExamplarsCollection examplars = new ExamplarsCollection();
+    private ExamplarsCollection examplars = null;
     private double INF = 1000000;
+    private int iteration;
+    private boolean convergence;
 
     public ExamplarsCollection getExamplars() {
         return examplars;
@@ -36,6 +39,22 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
                 sibling.setR(sibling.getR() * getLambda() + (1 - getLambda()) * sibling.getRold());
             }
         }
+    }
+
+    private boolean checkConvergence() {
+        if (convits == null) {
+            return false;
+        }
+        boolean res = true;
+
+        for (Examplar examplar : examplars.getExamplars().values()) {
+            if (examplar.changed()) {
+                res = false;
+                break;
+            }
+        }
+
+        return res;
     }
 
     private Map<String, Cluster<String>> computeAssigments(Collection<Examplar> centers) {
@@ -92,6 +111,9 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
             double e = sibling.getA() + sibling.getR();
             if (e > 0) {
                 ret.add(examplar);
+                examplar.setImCenter(true, iteration);
+            } else {
+                examplar.setImCenter(false, iteration);
             }
         }
 
@@ -198,7 +220,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
     public Map<String, Cluster<String>> doClusterAssoc() {
         int iterations = getIterations();
         iteractionListener.actionPerformed(new ActionEvent(new IterationData(1, examplars.size()), 0, "ITERATION"));
-        for (int iter = 1; iter <= iterations; iter++) {
+        for (iteration = 0; iteration < iterations; iteration++) {
 
             copyResponsibilies();
             computeResponsibilities();
@@ -207,10 +229,13 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
             computeAvailabilities();
             avgAvailabilities();
 
-
-            if (iter != iterations) {
+            if (iteration + 1 != iterations) {
                 Collection<Examplar> centers = computeCenters();
-                iteractionListener.actionPerformed(new ActionEvent(new IterationData(iter + 1, centers.size()), 0, "ITERATION"));
+                iteractionListener.actionPerformed(new ActionEvent(new IterationData(iteration + 2, centers.size()), 0, "ITERATION"));
+            }
+            convergence = checkConvergence();
+            if (convergence) {
+                break;
             }
         }
         Collection<Examplar> centers = computeCenters();
@@ -221,6 +246,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
 
     @Override
     public void init() {
+        examplars = new ExamplarsCollection(convits);
     }
 
     @Override
