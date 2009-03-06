@@ -1,6 +1,6 @@
 package algorithm.abs;
 
-public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgorithm<String> {
+public abstract class AffinityPropagationAlgorithm<T> extends AbstractClusterAlgorithm<T> {
 
     private double lambda = 0.5;
     private int iterations = 10;
