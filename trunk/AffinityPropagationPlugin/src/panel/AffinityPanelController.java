@@ -1,0 +1,245 @@
+package panel;
+
+import cyto.CytoAffinityClustering;
+import cyto.CytoClusterAlgorithm;
+import cyto.CytoClusterTask;
+import cytoscape.task.util.TaskManager;
+import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.JTextField;
+import utils.Messenger;
+
+/**
+ *
+ * @author misiek (mw219725@gmail.com)
+ */
+public class AffinityPanelController {
+
+    private JTextField lambdaField;
+    private JTextField convitsField;
+    private JTextField nodeAttrField;
+    private JTextField edgeAttrField;
+    private JSpinner iterationsField;
+    private JTextField preferencesField;
+
+    public JPanel createAffinityPanel() {
+        JPanel panel = new AffinityPanel(this);
+        return panel;
+    }
+
+    void doCluster() {
+        CytoClusterAlgorithm algorithm = null;
+
+        Double lambda = getLambda();
+        Double preferences = getPreferences();
+        Integer iterations = getIterations();
+        Integer convits = getConvits();
+        String nodeNameAttr = getNodeAttr();
+        String edgeNameAttr = getEdgeAttr();
+
+        if (!validateValues(lambda, preferences, iterations, convits, nodeNameAttr, edgeNameAttr)) {
+            return;
+        }
+        Double logpreferences = Math.log(preferences);
+
+        if (convits != null) {
+            algorithm = new CytoAffinityClustering(nodeNameAttr, edgeNameAttr, lambda.doubleValue(), logpreferences.doubleValue(), iterations.intValue(), convits);
+        } else {
+            algorithm = new CytoAffinityClustering(nodeNameAttr, edgeNameAttr, lambda.doubleValue(), logpreferences.doubleValue(), iterations.intValue());
+        }
+        TaskManager.executeTask(new CytoClusterTask(algorithm),
+                CytoClusterTask.getDefaultTaskConfig());
+    }
+
+    private boolean validateConvits(Integer convits) {
+        return true;
+    }
+
+    private boolean validateEdgeNameAttr(String edgeNameAttr) {
+        return (edgeNameAttr != null && !edgeNameAttr.equals(""));
+    }
+
+    private boolean validateIterations(Integer iterations) {
+        return (iterations != null && iterations > 0);
+    }
+
+    private boolean validateLambda(Double lambda) {
+        return (lambda != null && lambda < 1.0 && lambda > 0.0);
+    }
+
+    private boolean validateNodeNameAttr(String nodeNameAttr) {
+        return (nodeNameAttr != null && !nodeNameAttr.equals(""));
+    }
+
+    private boolean validatePreferences(Double preferences) {
+        return (preferences != null && preferences > 0.0);
+    }
+
+    private boolean validateValues(Double lambda, Double preferences, Integer iterations, Integer convits, String nodeNameAttr, String edgeNameAttr) {
+        if (!validateLambda(lambda)) {
+            Messenger.Message("Lambda is not validate");
+            return false;
+        }
+        if (!validatePreferences(preferences)) {
+            Messenger.Message("Preferences are not validate");
+            return false;
+        }
+        if (!validateIterations(iterations)) {
+            Messenger.Message("Iteration number is not validate");
+            return false;
+        }
+        if (!validateConvits(convits)) {
+            Messenger.Message("Convits are not validate");
+            return false;
+        }
+        if (!validateEdgeNameAttr(edgeNameAttr)) {
+            Messenger.Message("Edge name attribute is not validate");
+            return false;
+        }
+        if (!validateNodeNameAttr(nodeNameAttr)) {
+            Messenger.Message("Node name attribure is not validate");
+            return false;
+        }
+        return true;
+    }
+
+    private void initConvitsField() {
+        convitsField.setText("3");
+    }
+
+    private void initEdgeAttrField() {
+        edgeAttrField.setText("Probability");
+    }
+
+    private void initIterationsField() {
+        iterationsField.setValue(new Integer(10));
+    }
+
+    private void initLambdaField() {
+        lambdaField.setText("0.5");
+    }
+
+    private void initNodeAttrField() {
+        nodeAttrField.setText("clusterid");
+    }
+
+    private void initPreferencesField() {
+        preferencesField.setText("0.2");
+    }
+
+    public void initPanelFields() {
+        initLambdaField();
+        initConvitsField();
+        initNodeAttrField();
+        initEdgeAttrField();
+        initIterationsField();
+        initPreferencesField();
+    }
+
+    public Integer getIterations() {
+        try {
+            return (Integer) iterationsField.getValue();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public Double getPreferences() {
+
+        try {
+            return Double.valueOf(preferencesField.getText());
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public Double getLambda() {
+
+        try {
+            return Double.valueOf(lambdaField.getText());
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public Integer getConvits() {
+
+        try {
+            return Integer.valueOf(convitsField.getText());
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public String getNodeAttr() {
+        try {
+            return nodeAttrField.getText();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public String getEdgeAttr() {
+        try {
+            return edgeAttrField.getText();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public JTextField getCovitsField() {
+        return convitsField;
+    }
+
+    public void setCovitsField(JTextField covitsField) {
+        this.convitsField = covitsField;
+    }
+
+    public JTextField getConvitsField() {
+        return convitsField;
+    }
+
+    public void setConvitsField(JTextField convitsField) {
+        this.convitsField = convitsField;
+    }
+
+    public JTextField getEdgeAttrField() {
+        return edgeAttrField;
+    }
+
+    public void setEdgeAttrField(JTextField edgeAttrField) {
+        this.edgeAttrField = edgeAttrField;
+    }
+
+    public JSpinner getIterationsField() {
+        return iterationsField;
+    }
+
+    public void setIterationsField(JSpinner iterationsField) {
+        this.iterationsField = iterationsField;
+    }
+
+    public JTextField getLambdaField() {
+        return lambdaField;
+    }
+
+    public void setLambdaField(JTextField lambdaField) {
+        this.lambdaField = lambdaField;
+    }
+
+    public JTextField getNodeAttrField() {
+        return nodeAttrField;
+    }
+
+    public void setNodeAttrField(JTextField nodeAttr) {
+        this.nodeAttrField = nodeAttr;
+    }
+
+    public JTextField getPreferencesField() {
+        return preferencesField;
+    }
+
+    public void setPreferencesField(JTextField preferencesField) {
+        this.preferencesField = preferencesField;
+    }
+}

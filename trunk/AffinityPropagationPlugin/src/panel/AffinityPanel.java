@@ -1,19 +1,25 @@
-package main;
+package panel;
 
-import cyto.CytoClusterAlgorithm;
-import cyto.CytoClusterTask;
-import cyto.CytoAffinityClustering;
-import cytoscape.task.util.TaskManager;
-
-/**
- *
- * @author misiek
- */
 public class AffinityPanel extends javax.swing.JPanel {
+
+    AffinityPanelController pc = null;
 
     /** Creates new form AffinityPanel */
     public AffinityPanel() {
         initComponents();
+    }
+
+    /** Creates new form AffinityPanel */
+    public AffinityPanel(AffinityPanelController pc) {
+        this.pc = pc;
+        initComponents();
+        pc.setCovitsField(jTextField5);
+        pc.setEdgeAttrField(jTextField2);
+        pc.setNodeAttrField(jTextField1);
+        pc.setIterationsField(jSpinner1);
+        pc.setLambdaField(jTextField4);
+        pc.setPreferencesField(jTextField3);
+        pc.initPanelFields();
     }
 
     /** This method is called from within the constructor to
@@ -182,38 +188,7 @@ public class AffinityPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        CytoClusterAlgorithm algorithm = null;
-
-        String nodeNameAttr = jTextField1.getText();
-        String edgeNameAttr = jTextField2.getText();
-        String preferences_str = jTextField3.getText();
-        String lambda_str = jTextField4.getText();
-        String convits_str = jTextField5.getText();
-
-
-        Double lambda = Double.valueOf(lambda_str);
-        Double preferences = Math.log(Double.valueOf(preferences_str));
-
-        if (lambda == null) {
-            lambda = 0.5;
-        }
-        if (preferences == null) {
-            lambda = Math.log(0.7);
-        }
-
-        Integer iterations = (Integer) jSpinner1.getValue();
-        Integer convits = Integer.valueOf(convits_str);
-
-        //     CytoClusterAlgorithm algorithm = new CytoAffinityClustering(nodeNameAttr, edgeNameAttr, lambda, preferences, iterations.intValue());
-        //    TaskManager.executeTask(new CytoClusterTask(algorithm), CytoClusterTask.getDefaultTaskConfig());
-
-        if (convits != null) {
-            algorithm = new CytoAffinityClustering(nodeNameAttr, edgeNameAttr, lambda.doubleValue(), preferences.doubleValue(), iterations.intValue(), convits);
-        } else {
-            algorithm = new CytoAffinityClustering(nodeNameAttr, edgeNameAttr, lambda.doubleValue(), preferences.doubleValue(), iterations.intValue());
-        }
-        TaskManager.executeTask(new CytoClusterTask(algorithm),
-                CytoClusterTask.getDefaultTaskConfig());
+        pc.doCluster();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
