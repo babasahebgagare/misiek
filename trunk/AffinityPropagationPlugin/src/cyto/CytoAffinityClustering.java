@@ -75,6 +75,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
 
     @Override
     public void doCluster(TaskMonitor monitor) {
+        super.setCurrentThread();
         PriorityQueue<Cluster<String>> clusterprior = new PriorityQueue<Cluster<String>>();
 
         monitor.setStatus("Loading similarity matrix...");
