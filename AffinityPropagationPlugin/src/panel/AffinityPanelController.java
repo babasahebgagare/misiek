@@ -64,7 +64,8 @@ public class AffinityPanelController {
                 CytoClusterTask.getDefaultTaskConfig());
 
         Integer clusters = algorithm.getClustersNumber();
-        psc.addClusteringStat(lambda, preferences, clusters, iterations, nodeNameAttr);
+        String network = Cytoscape.getCurrentNetwork().getTitle();
+        psc.addClusteringStat(network, lambda, preferences, clusters, iterations, nodeNameAttr);
     }
 
     private boolean validateConvits(Integer convits) {
