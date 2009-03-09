@@ -22,8 +22,8 @@ public class AffinityStatsPanelController {
         this.statsTable = statsTable;
     }
 
-    public void addClusteringStat(Double lambda, Double preferences, Integer clusters, Integer iterations, String clusterID) {
+    public void addClusteringStat(String network, Double lambda, Double preferences, Integer clusters, Integer iterations, String clusterID) {
         DefaultTableModel model = (DefaultTableModel) statsTable.getModel();
-        model.addRow(new Object[]{iterations, preferences, lambda, clusters, clusterID});
+        model.addRow(new Object[]{network, iterations, preferences, lambda, clusters, clusterID});
     }
 }
