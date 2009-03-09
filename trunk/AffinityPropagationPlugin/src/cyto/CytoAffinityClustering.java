@@ -75,7 +75,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
 
     @Override
     public void doCluster(TaskMonitor monitor) {
-        super.setCurrentThread();
+        super.setMyThread(Thread.currentThread());
         PriorityQueue<Cluster<String>> clusterprior = new PriorityQueue<Cluster<String>>();
 
         monitor.setStatus("Loading similarity matrix...");
@@ -90,22 +90,24 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
 
         Map<String, Cluster<String>> clusters = af.doClusterAssoc();
 
-        for (Cluster<String> cluster : clusters.values()) {
-            clusterprior.add(cluster);
-        }
-
-        int i = 0;
-
-        while (clusterprior.peek().size() > 1) {
-            Cluster<String> cluster = clusterprior.poll();
-            for (String element : cluster.getElements()) {
-                String nodeID = idMapping.get(Integer.valueOf(element));
-                nodesAttributes.setAttribute(nodeID, nodeNameAttr, new Integer(i));
+        if (!canceled) {
+            for (Cluster<String> cluster : clusters.values()) {
+                clusterprior.add(cluster);
             }
-            i++;
-        }
 
-        monitor.setPercentCompleted(100);
+            int i = 0;
+
+            while (clusterprior.peek().size() > 1) {
+                Cluster<String> cluster = clusterprior.poll();
+                for (String element : cluster.getElements()) {
+                    String nodeID = idMapping.get(Integer.valueOf(element));
+                    nodesAttributes.setAttribute(nodeID, nodeNameAttr, new Integer(i));
+                }
+                i++;
+            }
+
+            monitor.setPercentCompleted(100);
+        }
     }
 
     private void setParameters() throws IOException {
