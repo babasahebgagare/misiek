@@ -20,7 +20,6 @@ public class Stats {
 
         // sort it
         Arrays.sort(vectorCopy);
-
         // Get the median
         int mid = vectorCopy.length / 2;
         if (vectorCopy.length % 2 == 1) {
