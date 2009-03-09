@@ -74,7 +74,6 @@ public class AffinityPanel extends javax.swing.JPanel {
         jLabel3.setName("jLabel3"); // NOI18N
 
         jTextField3.setText("0.2");
-        jTextField3.setToolTipText("median is default");
         jTextField3.setName("jTextField3"); // NOI18N
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
