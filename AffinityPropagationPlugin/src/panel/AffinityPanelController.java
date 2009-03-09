@@ -3,7 +3,11 @@ package panel;
 import cyto.CytoAffinityClustering;
 import cyto.CytoClusterAlgorithm;
 import cyto.CytoClusterTask;
+import cytoscape.Cytoscape;
+import cytoscape.data.CyAttributes;
+import cytoscape.data.CyAttributesUtils;
 import cytoscape.task.util.TaskManager;
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
@@ -18,7 +22,7 @@ public class AffinityPanelController {
     private JTextField lambdaField;
     private JTextField convitsField;
     private JTextField nodeAttrField;
-    private JTextField edgeAttrField;
+    private JComboBox edgeAttrField;
     private JSpinner iterationsField;
     private JTextField preferencesField;
 
@@ -107,8 +111,16 @@ public class AffinityPanelController {
         convitsField.setText("3");
     }
 
-    private void initEdgeAttrField() {
-        edgeAttrField.setText("Probability");
+    public void initEdgeAttrField() {
+        edgeAttrField.removeAllItems();
+        CyAttributes edgesAttributes = Cytoscape.getEdgeAttributes();
+        for (String attrName : edgesAttributes.getAttributeNames()) {
+            final byte cyType = edgesAttributes.getType(attrName);
+            if (cyType == CyAttributes.TYPE_FLOATING) {
+                edgeAttrField.addItem(attrName);
+            }
+        }
+    //edgeAttrField.addItem("Probability");
     }
 
     private void initIterationsField() {
@@ -181,7 +193,7 @@ public class AffinityPanelController {
 
     public String getEdgeAttr() {
         try {
-            return edgeAttrField.getText();
+            return (String) edgeAttrField.getSelectedItem();
         } catch (Exception e) {
             return null;
         }
@@ -203,11 +215,11 @@ public class AffinityPanelController {
         this.convitsField = convitsField;
     }
 
-    public JTextField getEdgeAttrField() {
+    public JComboBox getEdgeAttrField() {
         return edgeAttrField;
     }
 
-    public void setEdgeAttrField(JTextField edgeAttrField) {
+    public void setEdgeAttrField(JComboBox edgeAttrField) {
         this.edgeAttrField = edgeAttrField;
     }
 
