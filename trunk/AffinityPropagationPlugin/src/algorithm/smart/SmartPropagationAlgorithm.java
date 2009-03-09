@@ -240,6 +240,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
         }
         Collection<Examplar> centers = computeCenters();
         Map<String, Cluster<String>> assigments = computeAssigments(centers);
+        // centers = refine(assigments);
 
         return assigments;
     }
@@ -256,4 +257,19 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
     @Override
     public void setN(int N) {
     }
+    /*
+    private Collection<Examplar> refine(Map<String, Cluster<String>> assigments) {
+    Collection<Examplar> res = new HashSet<Examplar>();
+
+    for (Cluster<String> cluster : assigments.values()) {
+    Double
+    for (String examplar : cluster.getElements()) {
+
+    Double sim
+    }
+    }
+    return res;
+
+    }
+     * */
 }
