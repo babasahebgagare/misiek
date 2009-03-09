@@ -3,15 +3,19 @@ package panel;
 import cyto.CytoAffinityClustering;
 import cyto.CytoClusterAlgorithm;
 import cyto.CytoClusterTask;
+import cytoscape.CyEdge;
 import cytoscape.Cytoscape;
 import cytoscape.data.CyAttributes;
-import cytoscape.data.CyAttributesUtils;
 import cytoscape.task.util.TaskManager;
+import giny.model.Edge;
+import java.util.List;
+import java.util.Vector;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import utils.Messenger;
+import utils.Stats;
 
 /**
  *
@@ -81,27 +85,27 @@ public class AffinityPanelController {
 
     private boolean validateValues(Double lambda, Double preferences, Integer iterations, Integer convits, String nodeNameAttr, String edgeNameAttr) {
         if (!validateLambda(lambda)) {
-            Messenger.Message("Lambda is not validate");
+            Messenger.Message("Lambda is not valid!");
             return false;
         }
         if (!validatePreferences(preferences)) {
-            Messenger.Message("Preferences are not validate");
+            Messenger.Message("Preferences are not valid!");
             return false;
         }
         if (!validateIterations(iterations)) {
-            Messenger.Message("Iteration number is not validate");
+            Messenger.Message("Iteration number is not valid!");
             return false;
         }
         if (!validateConvits(convits)) {
-            Messenger.Message("Convits are not validate");
+            Messenger.Message("Convits are not valid!");
             return false;
         }
         if (!validateEdgeNameAttr(edgeNameAttr)) {
-            Messenger.Message("Edge name attribute is not validate");
+            Messenger.Message("Edge name attribute is not valid!");
             return false;
         }
         if (!validateNodeNameAttr(nodeNameAttr)) {
-            Messenger.Message("Node name attribure is not validate");
+            Messenger.Message("Node name attribure is not valid!");
             return false;
         }
         return true;
@@ -120,7 +124,34 @@ public class AffinityPanelController {
                 edgeAttrField.addItem(attrName);
             }
         }
-    //edgeAttrField.addItem("Probability");
+        refreshStats();
+    }
+
+    public void refreshStats() {
+        String edgeNameAttr = getEdgeAttr();
+        if (!validateEdgeNameAttr(edgeNameAttr)) {
+            return;
+        }
+        List<CyEdge> edges = Cytoscape.getCurrentNetwork().edgesList();
+        CyAttributes edgesAttributes = Cytoscape.getEdgeAttributes();
+        Vector<Double> probs = new Vector<Double>();
+
+        for (Edge edge : edges) {
+
+            String id = edge.getIdentifier();
+            String sourceID = edge.getSource().getIdentifier();
+            String targetID = edge.getTarget().getIdentifier();
+
+            if (!sourceID.equals(targetID)) {
+
+                Double prob = edgesAttributes.getDoubleAttribute(id, edgeNameAttr);
+                probs.add(prob);
+
+            }
+        }
+
+        Double median = Stats.median(probs);
+        setPreferences(median);
     }
 
     private void initIterationsField() {
@@ -163,6 +194,11 @@ public class AffinityPanelController {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    public void setPreferences(Double p) {
+
+        preferencesField.setText(String.valueOf(p));
     }
 
     public Double getLambda() {
