@@ -13,7 +13,7 @@ public abstract class CytoAbstractClusterAlgorithm implements CytoClusterAlgorit
     protected CytoClusterProperties clusterProperties = null;
     protected PropertyChangeSupport pcs;
     protected boolean debug = false;
-    boolean canceled = false;
+    protected boolean canceled = false;
     private Thread myThread = null;
 
     public CytoAbstractClusterAlgorithm() {
@@ -70,10 +70,6 @@ public abstract class CytoAbstractClusterAlgorithm implements CytoClusterAlgorit
         }
     }
 
-    protected void setCurrentThread() {
-        myThread = Thread.currentThread();
-    }
-
     /*public static double mean(Double[] vector) {
     double result = 0.0;
     for (int i = 0; i < vector.length; i++) {
@@ -102,5 +98,9 @@ public abstract class CytoAbstractClusterAlgorithm implements CytoClusterAlgorit
     }*/
     public PropertyChangeSupport getPropertyChangeSupport() {
         return pcs;
+    }
+
+    void setMyThread(Thread currentThread) {
+        myThread = currentThread;
     }
 }
