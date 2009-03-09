@@ -59,5 +59,7 @@ public interface CytoClusterAlgorithm {
 
     public void doCluster(TaskMonitor monitor);
 
+    public Integer getClustersNumber();
+
     public PropertyChangeSupport getPropertyChangeSupport();
 }

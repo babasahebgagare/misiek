@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 public abstract class CytoAbstractClusterAlgorithm implements CytoClusterAlgorithm {
     // Common class values
 
+    protected Integer clustersNumber;
     protected CytoClusterProperties clusterProperties = null;
     protected PropertyChangeSupport pcs;
     protected boolean debug = false;
@@ -70,32 +71,10 @@ public abstract class CytoAbstractClusterAlgorithm implements CytoClusterAlgorit
         }
     }
 
-    /*public static double mean(Double[] vector) {
-    double result = 0.0;
-    for (int i = 0; i < vector.length; i++) {
-    result += vector[i].doubleValue();
-    }
-    return (result/(double)vector.length);
+    public Integer getClustersNumber() {
+        return clustersNumber;
     }
 
-    // Inefficient, but simple approach to finding the median
-    public static double median(Double[] vector) {
-    // Clone the input vector
-    Double[] vectorCopy = new Double[vector.length];
-    for (int i = 0; i < vector.length; i++) {
-    vectorCopy[i] = new Double(vector[i].doubleValue());
-    }
-
-    // sort it
-    Arrays.sort(vectorCopy);
-
-    // Get the median
-    int mid = vector.length/2;
-    if (vector.length%2 == 1) {
-    return (vectorCopy[mid].doubleValue());
-    }
-    return ((vectorCopy[mid-1].doubleValue()+vectorCopy[mid].doubleValue()) / 2);
-    }*/
     public PropertyChangeSupport getPropertyChangeSupport() {
         return pcs;
     }

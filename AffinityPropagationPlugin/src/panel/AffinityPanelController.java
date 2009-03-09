@@ -29,6 +29,11 @@ public class AffinityPanelController {
     private JComboBox edgeAttrField;
     private JSpinner iterationsField;
     private JTextField preferencesField;
+    private AffinityStatsPanelController psc;
+
+    public AffinityPanelController(AffinityStatsPanelController psc) {
+        this.psc = psc;
+    }
 
     public JPanel createAffinityPanel() {
         JPanel panel = new AffinityPanel(this);
@@ -57,6 +62,9 @@ public class AffinityPanelController {
         }
         TaskManager.executeTask(new CytoClusterTask(algorithm),
                 CytoClusterTask.getDefaultTaskConfig());
+
+        Integer clusters = algorithm.getClustersNumber();
+        psc.addClusteringStat(lambda, preferences, clusters, iterations, nodeNameAttr);
     }
 
     private boolean validateConvits(Integer convits) {
