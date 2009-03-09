@@ -4,12 +4,10 @@ import cytoscape.Cytoscape;
 import cytoscape.plugin.CytoscapePlugin;
 import cytoscape.view.cytopanels.CytoPanelImp;
 import java.awt.FlowLayout;
-import java.awt.LayoutManager;
-import java.awt.LayoutManager2;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import panel.AffinityPanelController;
-import panel.AffinityStatsPanel;
+import panel.AffinityStatsPanelController;
 
 public class AffinityMain extends CytoscapePlugin {
 
@@ -17,17 +15,18 @@ public class AffinityMain extends CytoscapePlugin {
 
         CytoPanelImp leftPanel = (CytoPanelImp) Cytoscape.getDesktop().getCytoPanel(SwingConstants.WEST);
 
-        AffinityPanelController pc = new AffinityPanelController();
         JPanel myAff = new JPanel();
-
         myAff.setLayout(new FlowLayout());
+
+        AffinityStatsPanelController psc = new AffinityStatsPanelController();
+        AffinityPanelController pc = new AffinityPanelController(psc);
+
         JPanel afpanel = pc.createAffinityPanel();
-        JPanel stats = new AffinityStatsPanel();
+        JPanel stats = psc.createAffinityStatsPanel();
         myAff.add(afpanel);
         myAff.add(stats);
 
-
-        leftPanel.add("Affinity", myAff);
+        leftPanel.add("Affinity panel", myAff);
         System.out.println("Affinity propagation");
     }
 }

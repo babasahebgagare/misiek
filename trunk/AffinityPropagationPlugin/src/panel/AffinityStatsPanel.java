@@ -1,14 +1,8 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
  * AffinityStatsPanel.java
  *
  * Created on 2009-03-09, 13:38:13
  */
-
 package panel;
 
 /**
@@ -17,9 +11,17 @@ package panel;
  */
 public class AffinityStatsPanel extends javax.swing.JPanel {
 
+    private AffinityStatsPanelController psc = null;
+
     /** Creates new form AffinityStatsPanel */
     public AffinityStatsPanel() {
         initComponents();
+    }
+
+    public AffinityStatsPanel(AffinityStatsPanelController psc) {
+        this.psc = psc;
+        initComponents();
+        psc.setStatsTable(jTable1);
     }
 
     /** This method is called from within the constructor to
@@ -40,20 +42,17 @@ public class AffinityStatsPanel extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Iterations", "Preferences", "Lambda", "Clusters"
+                "Iterations", "Preferences", "Lambda", "Clusters", "ClusterID"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -73,7 +72,7 @@ public class AffinityStatsPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -84,11 +83,8 @@ public class AffinityStatsPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
-
 }

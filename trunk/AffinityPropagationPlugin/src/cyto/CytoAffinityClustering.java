@@ -106,6 +106,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
                 i++;
             }
 
+            clustersNumber = i;
             monitor.setPercentCompleted(100);
         }
     }
