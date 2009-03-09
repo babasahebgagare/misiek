@@ -115,6 +115,11 @@ public class AffinityPanelController {
         convitsField.setText("3");
     }
 
+    public void refresh() {
+        initEdgeAttrField();
+        refreshStats();
+    }
+
     public void initEdgeAttrField() {
         edgeAttrField.removeAllItems();
         CyAttributes edgesAttributes = Cytoscape.getEdgeAttributes();
@@ -124,7 +129,6 @@ public class AffinityPanelController {
                 edgeAttrField.addItem(attrName);
             }
         }
-        refreshStats();
     }
 
     public void refreshStats() {
