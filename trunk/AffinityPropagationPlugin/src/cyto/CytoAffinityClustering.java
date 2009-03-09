@@ -13,6 +13,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
@@ -97,7 +99,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
 
             int i = 0;
 
-            while (clusterprior.peek().size() > 1) {
+            while (clusterprior.size() > 0 && clusterprior.peek().size() > 1) {
                 Cluster<String> cluster = clusterprior.poll();
                 for (String element : cluster.getElements()) {
                     String nodeID = idMapping.get(Integer.valueOf(element));
@@ -106,14 +108,33 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
                 i++;
             }
 
+
             clustersNumber = i;
             monitor.setPercentCompleted(100);
         }
     }
 
+    private Set<String> selectConnectedNodes(List<CyEdge> edges, List<CyNode> nodes) {
+        Set<String> nodesNames = new TreeSet<String>();
+
+
+        for (CyEdge edge : edges) {
+            String sourceID = edge.getSource().getIdentifier();
+            String targetID = edge.getTarget().getIdentifier();
+
+            nodesNames.add(targetID);
+            nodesNames.add(sourceID);
+
+        }
+
+        return nodesNames;
+    }
+
     private void setParameters() throws IOException {
         List<CyEdge> edges = Cytoscape.getCurrentNetwork().edgesList();
         List<CyNode> nodes = Cytoscape.getCurrentNetwork().nodesList();
+        Set<String> nodeNames = selectConnectedNodes(edges, nodes);
+
         CyAttributes edgesAttributes = Cytoscape.getEdgeAttributes();
 
         af.setLambda(lambda);
@@ -124,8 +145,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
         af.setN(nodes.size());
         af.init();
 
-        for (CyNode node : nodes) {
-            String name = node.getIdentifier();
+        for (String name : nodeNames) {
             idMapping.put(new Integer(i), name);
             nodeMapping.put(name, new Integer(i));
             af.setSimilarities(new Integer(i).toString(), new Integer(i).toString(), preferences);
