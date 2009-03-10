@@ -1,5 +1,0 @@
-Manifest-Version: 1.0
-OpenIDE-Module: cytoscapetask
-OpenIDE-Module-Localizing-Bundle: cytoscapetask/Bundle.properties
-OpenIDE-Module-Specification-Version: 1.0
-
