@@ -17,7 +17,7 @@ import utils.Messenger;
  */
 public class DefaultInteractionsParser {
 
-    public static void EatWhiteSpace(BufferedReader br) {
+    public static void eatWhiteSpace(BufferedReader br) {
         int ch;
 
         try {
@@ -42,7 +42,7 @@ public class DefaultInteractionsParser {
         int ch;                        // input variable
         String myValue = "";           // myValue is initially empty
 
-        EatWhiteSpace(br);               // eat leading white space
+        eatWhiteSpace(br);               // eat leading white space
 
         try {
             for (;;) {
@@ -74,7 +74,7 @@ public class DefaultInteractionsParser {
                 }
 
             } catch (Exception ex) {
-                Messenger.Error(ex);
+                Messenger.error(ex);
             }
         }
     }

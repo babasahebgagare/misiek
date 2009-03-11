@@ -28,7 +28,7 @@ public class TestCanvas {
         // palette.setBounds(50, 50, 300, 300);
         JInternalFrame frames[] = cytoDesk.getAllFrames();
 
-        Messenger.Message(frames.length);
+        Messenger.message(frames.length);
 
         //    cytoDesk.add(palette, JDesktopPane.PALETTE_LAYER);
         //   palette.setVisible(true);
@@ -67,48 +67,43 @@ public class TestCanvas {
         a.addComponentListener(new ComponentListener() {
 
             public void componentResized(ComponentEvent e) {
-                Messenger.Message("componentResized");
+                Messenger.message("componentResized");
             }
 
             public void componentMoved(ComponentEvent e) {
-                Messenger.Message("componentMoved");
+                Messenger.message("componentMoved");
             }
 
             public void componentShown(ComponentEvent e) {
-                Messenger.Message("componentShown");
+                Messenger.message("componentShown");
             }
 
             public void componentHidden(ComponentEvent e) {
-                Messenger.Message("componentHidden");
+                Messenger.message("componentHidden");
             }
         });
         a.addMouseListener(new MouseListener() {
 
             public void mouseClicked(MouseEvent e) {
-                Messenger.Message("mouseClicked");
+                Messenger.message("mouseClicked");
             }
 
             public void mousePressed(MouseEvent e) {
-                Messenger.Message("mousePressed");
+                Messenger.message("mousePressed");
             }
 
             public void mouseReleased(MouseEvent e) {
-                Messenger.Message("mouseReleased");
+                Messenger.message("mouseReleased");
             }
 
             public void mouseEntered(MouseEvent e) {
-                Messenger.Message("mouseEntered");
+                Messenger.message("mouseEntered");
             }
 
             public void mouseExited(MouseEvent e) {
-                Messenger.Message("mouseExited");
+                Messenger.message("mouseExited");
             }
         });
-
-        if (a == null) {
-            //   Messenger.Message("error" + cyNetworkView.getIdentifier() + ": " + cyNetworkView.getTitle());
-        } else {
-        }
 
 
         //     palette.add(a);
@@ -209,63 +204,63 @@ public class TestCanvas {
         BACKGROUNDCanvas.addMouseListener(new MouseListener() {
 
             public void mouseClicked(MouseEvent e) {
-                Messenger.Message("back");
+                Messenger.message("back");
             }
 
             public void mousePressed(MouseEvent e) {
-                Messenger.Message("back");
+                Messenger.message("back");
             }
 
             public void mouseReleased(MouseEvent e) {
-                Messenger.Message("back");
+                Messenger.message("back");
             }
 
             public void mouseEntered(MouseEvent e) {
-                Messenger.Message("back");
+                Messenger.message("back");
             }
 
             public void mouseExited(MouseEvent e) {
-                Messenger.Message("back");
+                Messenger.message("back");
             }
         });
         a.addComponentListener(new ComponentListener() {
 
             public void componentResized(ComponentEvent e) {
-                Messenger.Message("componentResized");
+                Messenger.message("componentResized");
             }
 
             public void componentMoved(ComponentEvent e) {
-                Messenger.Message("componentMoved");
+                Messenger.message("componentMoved");
             }
 
             public void componentShown(ComponentEvent e) {
-                Messenger.Message("componentShown");
+                Messenger.message("componentShown");
             }
 
             public void componentHidden(ComponentEvent e) {
-                Messenger.Message("componentHidden");
+                Messenger.message("componentHidden");
             }
         });
         a.addMouseListener(new MouseListener() {
 
             public void mouseClicked(MouseEvent e) {
-                Messenger.Message("mouseClicked");
+                Messenger.message("mouseClicked");
             }
 
             public void mousePressed(MouseEvent e) {
-                Messenger.Message("mousePressed");
+                Messenger.message("mousePressed");
             }
 
             public void mouseReleased(MouseEvent e) {
-                Messenger.Message("mouseReleased");
+                Messenger.message("mouseReleased");
             }
 
             public void mouseEntered(MouseEvent e) {
-                Messenger.Message("mouseEntered");
+                Messenger.message("mouseEntered");
             }
 
             public void mouseExited(MouseEvent e) {
-                Messenger.Message("mouseExited");
+                Messenger.message("mouseExited");
             }
         });
 

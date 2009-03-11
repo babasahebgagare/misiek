@@ -29,7 +29,7 @@ public class MCVEdgeAppearanceCalculator extends EdgeAppearanceCalculator {
         }
     }
 
-    private double calculateCytoInteractionWidth(double probability) {
+    /*private double calculateCytoInteractionWidth(double probability) {
         return probability * probability * 5;
-    }
+    }*/
 }

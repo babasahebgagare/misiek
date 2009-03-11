@@ -2,27 +2,27 @@ package logicmodel.structs;
 
 public class ProteinContext {
 
-    private PPINetwork Network;
-    private Protein ParentProtein;
+    private PPINetwork network;
+    private Protein parentProtein;
 
     public ProteinContext(PPINetwork Network, Protein ParentProtein) {
-        this.Network = Network;
-        this.ParentProtein = ParentProtein;
+        this.network = Network;
+        this.parentProtein = ParentProtein;
     }
 
     public PPINetwork getNetwork() {
-        return Network;
+        return network;
     }
 
     public void setNetwork(PPINetwork Network) {
-        this.Network = Network;
+        this.network = Network;
     }
 
     public Protein getParentProtein() {
-        return ParentProtein;
+        return parentProtein;
     }
 
     public void setParentProtein(Protein ParentProtein) {
-        this.ParentProtein = ParentProtein;
+        this.parentProtein = ParentProtein;
     }
 }

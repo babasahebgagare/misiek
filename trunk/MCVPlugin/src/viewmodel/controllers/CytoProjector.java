@@ -32,10 +32,10 @@ public class CytoProjector {
                 Layouter.getInstance().projectionToUpLayout(up);
                 break;
             case NEIGHBOUR:
-                Messenger.Message("NEIGHBOUR");
+                Messenger.message("NEIGHBOUR");
                 break;
             default:
-                Messenger.Message("DEFAULT");
+                Messenger.message("DEFAULT");
         }
         return null;
     }

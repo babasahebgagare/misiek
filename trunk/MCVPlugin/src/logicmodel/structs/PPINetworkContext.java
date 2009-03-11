@@ -2,38 +2,37 @@ package logicmodel.structs;
 
 import java.util.Collection;
 import java.util.HashSet;
-import logicmodel.structs.NetworksHierarchy;
 
 public class PPINetworkContext {
 
-    private PPINetwork ParentNetwork;
-    private Collection<PPINetwork> ChildrenNetworks;
+    private PPINetwork parentNetwork;
+    private Collection<PPINetwork> childrenNetworks;
     private NetworksHierarchy hierarchy;
 
     public PPINetworkContext(PPINetwork ParentNetwork) {
-        this.ParentNetwork = ParentNetwork;
-        this.ChildrenNetworks = new HashSet<PPINetwork>();
+        this.parentNetwork = ParentNetwork;
+        this.childrenNetworks = new HashSet<PPINetwork>();
         this.hierarchy = new NetworksHierarchy();
     }
 
     public void addChild(PPINetwork child) {
-        ChildrenNetworks.add(child);
+        childrenNetworks.add(child);
     }
 
     public PPINetwork getParentNetwork() {
-        return ParentNetwork;
+        return parentNetwork;
     }
 
     public void setParentNetwork(PPINetwork ParentNetwork) {
-        this.ParentNetwork = ParentNetwork;
+        this.parentNetwork = ParentNetwork;
     }
 
     public Collection<PPINetwork> getChildrenNetworks() {
-        return ChildrenNetworks;
+        return childrenNetworks;
     }
 
     public void setChildrenNetworks(Collection<PPINetwork> ChildrenNetworks) {
-        this.ChildrenNetworks = ChildrenNetworks;
+        this.childrenNetworks = ChildrenNetworks;
     }
 
     public NetworksHierarchy getHierarchy() {

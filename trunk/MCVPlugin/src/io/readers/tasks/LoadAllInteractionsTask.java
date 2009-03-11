@@ -16,11 +16,10 @@ import utils.MemoLogger;
 
 public class LoadAllInteractionsTask implements Task {
 
-    private TaskMonitor taskMonitor;
+    private TaskMonitor taskMonitor = null;
     private Thread myThread = null;
     private double treshold;
     private File file;
-    private boolean interrupted = false;
     private long max;
     private long current;
     private FileInputStream fis;
@@ -65,7 +64,7 @@ public class LoadAllInteractionsTask implements Task {
                     }
 
                     current = fis.getChannel().position();
-                    float percent = current * 100 / max;
+                    float percent = current * 100 / (float) max;
                     taskMonitor.setPercentCompleted(Math.round(percent));
                 } catch (Exception ex) {
                     taskMonitor.setException(ex, "Problem podczas ładowania interakcji");
@@ -98,7 +97,6 @@ public class LoadAllInteractionsTask implements Task {
                 bis.close();
                 fis.close();
                 //TODO
-                this.interrupted = true;
                 ((JTask) taskMonitor).setDone();
             }
         } catch (Exception ex) {
@@ -111,6 +109,6 @@ public class LoadAllInteractionsTask implements Task {
     }
 
     public String getTitle() {
-        return new String("Czytanie interakcji z odcięciem: " + treshold + " dla wszystkich sieci...");
+        return "Czytanie interakcji z odcięciem: " + treshold + " dla wszystkich sieci...";
     }
 }

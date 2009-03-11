@@ -13,13 +13,13 @@ import java.io.InputStreamReader;
 
 public class LoadTreesTask implements Task {
 
-    private TaskMonitor taskMonitor;
+    private TaskMonitor taskMonitor = null;
     private Thread myThread = null;
     private File file;
     private long max;
     private long current;
-    private FileInputStream fis;
-    private BufferedInputStream bis;
+    private FileInputStream fis = null;
+    private BufferedInputStream bis = null;
     private DataInputStream dis;
     private BufferedReader br;
 
@@ -44,7 +44,7 @@ public class LoadTreesTask implements Task {
 
             while (br.ready()) {
                 try {
-                    String line = null;
+                    String line;
 
                     line = br.readLine();
 
@@ -56,7 +56,7 @@ public class LoadTreesTask implements Task {
                         }
 
                         current = fis.getChannel().position();
-                        float percent = current * 100 / max;
+                        float percent = current * 100 / (float)max;
                         taskMonitor.setPercentCompleted(Math.round(percent));
                     }
                 } catch (Exception ex) {
@@ -100,6 +100,6 @@ public class LoadTreesTask implements Task {
     }
 
     public String getTitle() {
-        return new String("Wczytywanie drzew rodzin białek");
+        return "Wczytywanie drzew rodzin białek";
     }
 }

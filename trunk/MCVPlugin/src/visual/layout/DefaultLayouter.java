@@ -15,7 +15,7 @@ public class DefaultLayouter extends Layouter {
 
     private static double R = 30.0;  //TODO bad constant
 
-    private static void GroupNodeLayout(CytoGroupNode cytoGroupNode, CyNetworkView cyNetworkView) {
+    private static void groupNodeLayout(CytoGroupNode cytoGroupNode, CyNetworkView cyNetworkView) {
         Collection<CytoProtein> cytoProteins = cytoGroupNode.getContext().getInsideProteins();
 
         CytoProtein parentProtein = cytoGroupNode.getContext().getMotherProtein();
@@ -40,24 +40,24 @@ public class DefaultLayouter extends Layouter {
     @Override
     public void projectionToDownLayout(CytoPPINetworkProjectionToDown projection) {
         CyNetworkView cyNetworkView = Cytoscape.getNetworkView(projection.getCytoID());
-        ProjectionToDownLayout(projection, cyNetworkView);
+        projectionToDownLayout(projection, cyNetworkView);
     }
 
-    private void ProjectionToDownLayout(CytoPPINetworkProjectionToDown projection, CyNetworkView cyNetworkView) {
+    private void projectionToDownLayout(CytoPPINetworkProjectionToDown projection, CyNetworkView cyNetworkView) {
         Collection<CytoGroupNode> cytoGroupNodes = projection.getCytoGroupNodes();
 
         for (CytoGroupNode cytoGroupNode : cytoGroupNodes) {
-            GroupNodeLayout(cytoGroupNode, cyNetworkView);
+            groupNodeLayout(cytoGroupNode, cyNetworkView);
         }
     }
 
     @Override
     public void projectionToUpLayout(CytoPPINetworkProjectionToUp projection) {
         CyNetworkView cyNetworkView = Cytoscape.getNetworkView(projection.getCytoID());
-        ProjectionToUpLayout(projection, cyNetworkView);
+        projectionToUpLayout(projection, cyNetworkView);
     }
 
-    private void ProjectionToUpLayout(CytoPPINetworkProjectionToUp projection, CyNetworkView cyNetworkView) {
+    private void projectionToUpLayout(CytoPPINetworkProjectionToUp projection, CyNetworkView cyNetworkView) {
 
 
         for (CytoProteinProjection cytoProteinProjection : projection.getCytoProteinsProjections()) {

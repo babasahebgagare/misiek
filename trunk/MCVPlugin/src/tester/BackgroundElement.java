@@ -19,15 +19,15 @@ public abstract class BackgroundElement extends JComponent implements ViewportCh
     private double scaleFactor = 1;
     private int XCenter;
     private int YCenter;
-    private int Rwidth;
-    private int Rheight;
+    private int rwidth;
+    private int rheight;
 
     public BackgroundElement(DGraphView view, int XCenter, int YCenter, int width, int height) {
         this.view = view;
         this.XCenter = XCenter;
         this.YCenter = YCenter;
-        this.Rwidth = width;
-        this.Rheight = height;
+        this.rwidth = width;
+        this.rheight = height;
 
         InnerCanvas canvas = view.getCanvas();
 
@@ -96,19 +96,19 @@ public abstract class BackgroundElement extends JComponent implements ViewportCh
     }
 
     public int getRheight() {
-        return Rheight;
+        return rheight;
     }
 
     public void setRheight(int Rheight) {
-        this.Rheight = Rheight;
+        this.rheight = Rheight;
     }
 
     public int getRwidth() {
-        return Rwidth;
+        return rwidth;
     }
 
     public void setRwidth(int Rwidth) {
-        this.Rwidth = Rwidth;
+        this.rwidth = Rwidth;
     }
 
     public int getXCenter() {
@@ -128,18 +128,18 @@ public abstract class BackgroundElement extends JComponent implements ViewportCh
     }
 
     public int getStartX() {
-        return XCenter - Rwidth / 2;
+        return XCenter - rwidth / 2;
     }
 
     public int getStartY() {
-        return YCenter - Rheight / 2;
+        return YCenter - rheight / 2;
     }
 
     public int getEndX() {
-        return XCenter + Rwidth / 2;
+        return XCenter + rwidth / 2;
     }
 
     public int getEndY() {
-        return YCenter + Rheight / 2;
+        return YCenter + rheight / 2;
     }
 }

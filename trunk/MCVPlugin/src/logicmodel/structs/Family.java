@@ -4,24 +4,24 @@ import java.awt.Color;
 
 public class Family {
 
-    private String FamilyID;
+    private String familyID;
     private Color color;
 
     public Family(String FamilyID, Color color) {
-        this.FamilyID = FamilyID;
+        this.familyID = FamilyID;
         this.color = color;
     }
 
     public Family(String FamilyID) {
-        this.FamilyID = FamilyID;
+        this.familyID = FamilyID;
     }
 
     public String getFamilyID() {
-        return FamilyID;
+        return familyID;
     }
 
     public void setFamilyID(String FamilyID) {
-        this.FamilyID = FamilyID;
+        this.familyID = FamilyID;
     }
 
     public Color getColor() {
