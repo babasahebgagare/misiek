@@ -9,7 +9,11 @@ import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import viewmodel.controllers.CytoDataHandle;
 import viewmodel.structs.CytoAbstractPPINetwork;
 import utils.IDCreator;
@@ -36,61 +40,44 @@ public class LoadInteractionsTask implements Task {
     }
 
     public void run() {
-        myThread = Thread.currentThread();
-
-        taskMonitor.setStatus("Ładowanie interakcji");
-        taskMonitor.setPercentCompleted(-1);
         try {
+            myThread = Thread.currentThread();
+            taskMonitor.setStatus("Ładowanie interakcji");
+            taskMonitor.setPercentCompleted(-1);
             fis = new FileInputStream(file);
             bis = new BufferedInputStream(fis);
             dis = new DataInputStream(bis);
             br = new BufferedReader(new InputStreamReader(dis));
-
             taskMonitor.setPercentCompleted(0);
-
             while (br.ready()) {
-                try {
-
-                    String SourceID = DefaultInteractionsParser.readWord(br);
-                    String TargetID = DefaultInteractionsParser.readWord(br);
-                    String EdgeID = IDCreator.createInteractionID(SourceID, TargetID);
-
-                    Double Probability = Double.parseDouble(DefaultInteractionsParser.readWord(br));
-
-                    if (Probability.doubleValue() >= treshold && cytoNetwork.containsCytoProtein(SourceID) && cytoNetwork.containsCytoProtein(TargetID)) {
-                        CytoDataHandle.createCytoInteraction(EdgeID, SourceID, TargetID, Probability, cytoNetwork);
-                    }
-
-                    current = fis.getChannel().position();
-                    float percent = current * 100 / (float) max;
-                    taskMonitor.setPercentCompleted(Math.round(percent));
-
-                } catch (Exception ex) {
-                    taskMonitor.setException(ex, "Problem podczas ładowania interakcji");
-                    System.out.println(ex.getMessage());
+                String SourceID = DefaultInteractionsParser.readWord(br);
+                String TargetID = DefaultInteractionsParser.readWord(br);
+                String EdgeID = IDCreator.createInteractionID(SourceID, TargetID);
+                Double Probability = Double.parseDouble(DefaultInteractionsParser.readWord(br));
+                if (Probability.doubleValue() >= treshold && cytoNetwork.containsCytoProtein(SourceID) && cytoNetwork.containsCytoProtein(TargetID)) {
+                    CytoDataHandle.createCytoInteraction(EdgeID, SourceID, TargetID, Probability, cytoNetwork);
                 }
+                current = fis.getChannel().position();
+                float percent = current * 100 / (float) max;
+                taskMonitor.setPercentCompleted(Math.round(percent));
             }
-
-
             br.close();
             dis.close();
             bis.close();
             fis.close();
-
             taskMonitor.setPercentCompleted(100);
-        } catch (Exception e) {
-            taskMonitor.setException(e, "Problem podczas tworzenia lub zamykania strumieni");
-
-            return;
+        } catch (IOException ex) {
+            Logger.getLogger(LoadInteractionsTask.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     public void halt() {
 
         System.out.println("zatrzymywanie działania");
 
-        try {
-            if (myThread != null) {
+        if (myThread != null) {
+            try {
                 myThread.interrupt();
                 br.close();
                 dis.close();
@@ -98,9 +85,9 @@ public class LoadInteractionsTask implements Task {
                 fis.close();
                 cytoNetwork.deleteCytoInteractions();
                 ((JTask) taskMonitor).setDone();
+            } catch (IOException ex) {
+                Logger.getLogger(LoadInteractionsTask.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
         }
     }
 
