@@ -9,7 +9,10 @@ import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class LoadSpaciesTask implements Task {
 
@@ -27,32 +30,23 @@ public class LoadSpaciesTask implements Task {
     }
 
     public void run() {
-        myThread = Thread.currentThread();
-
-        taskMonitor.setStatus("Ładowanie drzewa gatunków");
-        taskMonitor.setPercentCompleted(-1);
         try {
+            myThread = Thread.currentThread();
+            taskMonitor.setStatus("Ładowanie drzewa gatunków");
+            taskMonitor.setPercentCompleted(-1);
             fis = new FileInputStream(file);
             bis = new BufferedInputStream(fis);
             dis = new DataInputStream(bis);
             br = new BufferedReader(new InputStreamReader(dis));
-
-            try {
-                String treeString = br.readLine();
-                DataParser.getInstance().readSpaciesString(treeString);
-            } catch (Exception ex) {
-                taskMonitor.setException(ex, "Problem podczas wczytywania drzewa gatunków");
-            }
+            String treeString = br.readLine();
+            DataParser.getInstance().readSpaciesString(treeString);
             taskMonitor.setPercentCompleted(100);
             br.close();
             dis.close();
             bis.close();
             fis.close();
-
-        } catch (Exception e) {
-            taskMonitor.setException(e, "Problem podczas tworzenia lub zamykania strumieni");
-
-            return;
+        } catch (IOException ex) {
+            Logger.getLogger(LoadSpaciesTask.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -60,21 +54,21 @@ public class LoadSpaciesTask implements Task {
 
         System.out.println("zatrzymywanie działania");
 
-        try {
-            if (myThread != null) {
+        if (myThread != null) {
+            try {
                 myThread.interrupt();
                 br.close();
                 dis.close();
                 bis.close();
                 fis.close();
                 ((JTask) taskMonitor).setDone();
+            } catch (IOException ex) {
+                Logger.getLogger(LoadSpaciesTask.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
         }
     }
 
-    public void setTaskMonitor(TaskMonitor taskMonitor) throws IllegalThreadStateException {
+    public void setTaskMonitor(TaskMonitor taskMonitor) {
         this.taskMonitor = taskMonitor;
     }
 
