@@ -17,7 +17,7 @@ public class DefaultDataParser extends DataParser {
         try {
             DefaultInteractionsParser.readInteractions(br, cytoNetwork, treshold);
         } catch (IOException ex) {
-            System.out.println("ERROR during interactions parsing");
+            System.out.println(ex.getMessage());
         }
     }
 

@@ -206,7 +206,7 @@ public class DefaultUIController extends UIController {
     @Override
     public void showLoadedInteractions(double treshold) {
         CyNetworkView cyNetworkView = Cytoscape.getCurrentNetworkView();
-
+        System.out.println(cyNetworkView.getIdentifier());
         CytoAbstractPPINetwork cytoNetwork = CytoDataHandle.findNetworkByCytoID(cyNetworkView.getIdentifier());
 
         InteractionsManager.getInstance().loadAndShowInteractionsFromModel(cytoNetwork, treshold);

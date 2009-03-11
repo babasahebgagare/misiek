@@ -16,6 +16,7 @@ public class DefaultInteractionsManager extends InteractionsManager {
     public void loadInteractionsFromModel(CytoAbstractPPINetwork cytoNetwork, double treshold) {
 
         PPINetwork network = cytoNetwork.getNetwork();
+        System.out.println(network.getInteractions().size());
 
         for (Interaction interaction : network.getInteractions().values()) {
 
