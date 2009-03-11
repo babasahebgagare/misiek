@@ -20,8 +20,8 @@ public class LoadTreesTask implements Task {
     private long current;
     private FileInputStream fis = null;
     private BufferedInputStream bis = null;
-    private DataInputStream dis;
-    private BufferedReader br;
+    private DataInputStream dis = null;
+    private BufferedReader br = null;
 
     public LoadTreesTask(String treespath) {
         this.file = new File(treespath);

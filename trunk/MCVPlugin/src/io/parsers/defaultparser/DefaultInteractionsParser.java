@@ -40,7 +40,7 @@ public class DefaultInteractionsParser {
 
     public static String readWord(BufferedReader br) {
         int ch;                        // input variable
-        String myValue = "";           // myValue is initially empty
+        StringBuffer myValue = new StringBuffer("");           // myValue is initially empty
 
         eatWhiteSpace(br);               // eat leading white space
 
@@ -50,13 +50,13 @@ public class DefaultInteractionsParser {
                 if (ch < 1 || java.lang.Character.isWhitespace((char) ch)) {
                     break;                   // break for eof or white space
                 }
-                myValue += (char) ch;      // append it to myValue
+                myValue.append(ch);      // append it to myValue
             }
         } catch (IOException e) {
             System.out.println(e);
         }
 
-        return myValue;
+        return myValue.toString();
     }
 
     public static void readInteractions(BufferedReader br, CytoAbstractPPINetwork cytoNetwork, double treshold) throws IOException {

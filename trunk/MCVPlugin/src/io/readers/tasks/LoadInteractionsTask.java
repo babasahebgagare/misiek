@@ -16,17 +16,17 @@ import utils.IDCreator;
 
 public class LoadInteractionsTask implements Task {
 
-    private TaskMonitor taskMonitor;
+    private TaskMonitor taskMonitor = null;
     private Thread myThread = null;
     private CytoAbstractPPINetwork cytoNetwork = null;
     private double treshold;
     private File file;
     private long max;
     private long current;
-    private FileInputStream fis;
-    private BufferedInputStream bis;
-    private DataInputStream dis;
-    private BufferedReader br;
+    private FileInputStream fis = null;
+    private BufferedInputStream bis = null;
+    private DataInputStream dis = null;
+    private BufferedReader br = null;
 
     public LoadInteractionsTask(String intpath, CytoAbstractPPINetwork cytoNetwork, double treshold) {
         this.cytoNetwork = cytoNetwork;

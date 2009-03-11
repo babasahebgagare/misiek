@@ -131,7 +131,7 @@ public class ClusterSettingsDialog extends JDialog
 	}
 
 	public void propertyChange(PropertyChangeEvent evt) {
-		if ( evt.getPropertyName() == ClusterAlgorithm.CLUSTER_COMPUTED ){
+		if ( evt.getPropertyName().equals(ClusterAlgorithm.CLUSTER_COMPUTED )){
 			updateVizButton();
     }
 	}

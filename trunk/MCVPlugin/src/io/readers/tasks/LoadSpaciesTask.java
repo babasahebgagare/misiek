@@ -13,13 +13,13 @@ import java.io.InputStreamReader;
 
 public class LoadSpaciesTask implements Task {
 
-    private TaskMonitor taskMonitor;
+    private TaskMonitor taskMonitor = null;
     private Thread myThread = null;
     private File file;
-    private FileInputStream fis;
-    private BufferedInputStream bis;
-    private DataInputStream dis;
-    private BufferedReader br;
+    private FileInputStream fis = null;
+    private BufferedInputStream bis = null;
+    private DataInputStream dis = null;
+    private BufferedReader br = null;
 
     public LoadSpaciesTask(String sppath) {
         this.file = new File(sppath);
