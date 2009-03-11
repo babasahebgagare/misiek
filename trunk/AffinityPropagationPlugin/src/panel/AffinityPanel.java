@@ -2,14 +2,16 @@ package panel;
 
 public class AffinityPanel extends javax.swing.JPanel {
 
-    AffinityPanelController pc = null;
+    private AffinityPanelController pc = null;
 
     /** Creates new form AffinityPanel */
     public AffinityPanel() {
         initComponents();
     }
 
-    /** Creates new form AffinityPanel */
+    /** Creates new form AffinityPanel
+     * @param pc
+     */
     public AffinityPanel(AffinityPanelController pc) {
         this.pc = pc;
         initComponents();

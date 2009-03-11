@@ -18,12 +18,12 @@ public class DoubleMatrix1D extends Matrix1D<Double> implements DoubleMatrix1DIn
         super(N);
         this.setVector(new Double[N]);
         for (int i = 0; i < N; i++) {
-            this.getVector()[i] = new Double(t);
+            this.getVector()[i] = Double.valueOf(t);
         }
     }
 
     public void set(int i, double t) {
-        super.set(i, new Double(t));
+        super.set(i, Double.valueOf(t));
     }
 
     public IntegerMatrix1D findG(double x) {

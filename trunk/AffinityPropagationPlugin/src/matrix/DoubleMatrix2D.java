@@ -3,10 +3,10 @@ package matrix;
 public class DoubleMatrix2D implements Cloneable, java.io.Serializable {
 
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private double[][] matrix;
+     *
+     */
+    private static final long serialVersionUID = 1L;
+    private double[][] matrix;
     private int N,  M;
 
     public DoubleMatrix2D(int M, double[] v) {
@@ -68,7 +68,7 @@ public class DoubleMatrix2D implements Cloneable, java.io.Serializable {
     public DoubleMatrix1D diag() {
         DoubleMatrix1D res = new DoubleMatrix1D(N, 0);
         for (int i = 0; i < N; i++) {
-            res.set(i, new Double(this.matrix[i][i]));
+            res.set(i, Double.valueOf(this.matrix[i][i]));
         }
 
         return res;
@@ -94,10 +94,9 @@ public class DoubleMatrix2D implements Cloneable, java.io.Serializable {
         return matrix[i][j];
     }
 
- /*   public double[][] get() {
-        return matrix;
+    /*   public double[][] get() {
+    return matrix;
     }*/
-
     public void set(int n, int m, double[][] matrix) {
         this.N = n;
         this.M = m;

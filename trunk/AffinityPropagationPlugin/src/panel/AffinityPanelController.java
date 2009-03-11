@@ -23,13 +23,13 @@ import utils.Stats;
  */
 public class AffinityPanelController {
 
-    private JTextField lambdaField;
-    private JTextField convitsField;
-    private JTextField nodeAttrField;
-    private JComboBox edgeAttrField;
-    private JSpinner iterationsField;
-    private JTextField preferencesField;
-    private AffinityStatsPanelController psc;
+    private JTextField lambdaField = null;
+    private JTextField convitsField = null;
+    private JTextField nodeAttrField = null;
+    private JComboBox edgeAttrField = null;
+    private JSpinner iterationsField = null;
+    private JTextField preferencesField = null;
+    private AffinityStatsPanelController psc = null;
 
     public AffinityPanelController(AffinityStatsPanelController psc) {
         this.psc = psc;
@@ -41,7 +41,7 @@ public class AffinityPanelController {
     }
 
     void doCluster() {
-        CytoClusterAlgorithm algorithm = null;
+        CytoClusterAlgorithm algorithm;
 
         Double lambda = getLambda();
         Double preferences = getPreferences();
@@ -196,6 +196,7 @@ public class AffinityPanelController {
         try {
             return (Integer) iterationsField.getValue();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return null;
         }
     }
@@ -205,6 +206,7 @@ public class AffinityPanelController {
         try {
             return Double.valueOf(preferencesField.getText());
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return null;
         }
     }
@@ -219,6 +221,7 @@ public class AffinityPanelController {
         try {
             return Double.valueOf(lambdaField.getText());
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return null;
         }
     }
@@ -228,24 +231,17 @@ public class AffinityPanelController {
         try {
             return Integer.valueOf(convitsField.getText());
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return null;
         }
     }
 
     public String getNodeAttr() {
-        try {
-            return nodeAttrField.getText();
-        } catch (Exception e) {
-            return null;
-        }
+        return nodeAttrField.getText();
     }
 
     public String getEdgeAttr() {
-        try {
-            return (String) edgeAttrField.getSelectedItem();
-        } catch (Exception e) {
-            return null;
-        }
+        return (String) edgeAttrField.getSelectedItem();
     }
 
     public JTextField getCovitsField() {
