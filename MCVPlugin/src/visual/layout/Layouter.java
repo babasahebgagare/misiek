@@ -11,7 +11,7 @@ public abstract class Layouter {
         return layouter;
     }
 
-    public abstract void ProjectionToDownLayout(CytoPPINetworkProjectionToDown projection);
+    public abstract void projectionToDownLayout(CytoPPINetworkProjectionToDown projection);
 
-    public abstract void ProjectionToUpLayout(CytoPPINetworkProjectionToUp projection);
+    public abstract void projectionToUpLayout(CytoPPINetworkProjectionToUp projection);
 }

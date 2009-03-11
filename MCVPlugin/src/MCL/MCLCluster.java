@@ -95,7 +95,7 @@ public class MCLCluster extends AbstractClusterAlgorithm {
 		// Number of iterations
 		clusterProperties.add(new Tunable("rNumber",
 		                                  "Number of iterations",
-		                                  Tunable.INTEGER, new Integer(8),
+		                                  Tunable.INTEGER, Integer.valueOf(8),
 		                                  (Object)null, (Object)null, 0));
 
 		// Number of iterations
@@ -114,7 +114,7 @@ public class MCLCluster extends AbstractClusterAlgorithm {
 
 		clusterProperties.add(new Tunable("attributeListGroup",
 		                                  "Source for array data",
-		                                  Tunable.GROUP, new Integer(1)));
+		                                  Tunable.GROUP, Integer.valueOf(1)));
 
 
 		// The attribute to use to get the weights
