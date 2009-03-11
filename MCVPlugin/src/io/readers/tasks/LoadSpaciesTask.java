@@ -79,6 +79,6 @@ public class LoadSpaciesTask implements Task {
     }
 
     public String getTitle() {
-        return new String("Wczytywanie drzewa gatunków");
+        return "Wczytywanie drzewa gatunków";
     }
 }

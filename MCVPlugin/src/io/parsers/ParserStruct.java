@@ -4,22 +4,22 @@ import java.util.Collection;
 
 public class ParserStruct {
 
-    private String NodeName;
-    private Collection<String> SubNodes;
+    private String nodeName;
+    private Collection<String> subNodes;
 
     public String getNodeName() {
-        return NodeName;
+        return nodeName;
     }
 
     public void setNodeName(String NodeName) {
-        this.NodeName = NodeName;
+        this.nodeName = NodeName;
     }
 
     public Collection<String> getSubNodes() {
-        return SubNodes;
+        return subNodes;
     }
 
     public void setSubNodes(Collection<String> SubNodes) {
-        this.SubNodes = SubNodes;
+        this.subNodes = SubNodes;
     }
 }

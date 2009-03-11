@@ -21,7 +21,6 @@ public class LoadInteractionsTask implements Task {
     private CytoAbstractPPINetwork cytoNetwork = null;
     private double treshold;
     private File file;
-    private boolean interrupted = false;
     private long max;
     private long current;
     private FileInputStream fis;
@@ -63,7 +62,7 @@ public class LoadInteractionsTask implements Task {
                     }
 
                     current = fis.getChannel().position();
-                    float percent = current * 100 / max;
+                    float percent = current * 100 / (float) max;
                     taskMonitor.setPercentCompleted(Math.round(percent));
 
                 } catch (Exception ex) {
@@ -97,7 +96,6 @@ public class LoadInteractionsTask implements Task {
                 bis.close();
                 fis.close();
                 cytoNetwork.deleteCytoInteractions();
-                this.interrupted = true;
                 ((JTask) taskMonitor).setDone();
             }
         } catch (Exception ex) {
@@ -110,6 +108,6 @@ public class LoadInteractionsTask implements Task {
     }
 
     public String getTitle() {
-        return new String("Czytanie danych interakcji dla sieci: " + cytoNetwork.getID());
+        return "Czytanie danych interakcji dla sieci: " + cytoNetwork.getID();
     }
 }

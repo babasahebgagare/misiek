@@ -2,13 +2,13 @@ package viewmodel.structs;
 
 public class CytoObject {
 
-    private String CytoID;
+    private String cytoID;
 
     public String getCytoID() {
-        return CytoID;
+        return cytoID;
     }
 
     public void setCytoID(String CytoID) {
-        this.CytoID = CytoID;
+        this.cytoID = CytoID;
     }
 }

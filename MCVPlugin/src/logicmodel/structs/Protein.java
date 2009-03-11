@@ -5,20 +5,20 @@ import logicmodel.structs.ProjectorInfo;
 public class Protein {
 
     private String ID;
-    private Family Family;
+    private Family family;
     private ProteinContext context;
     private ProjectorInfo projects;
 
     public Protein(String ID, PPINetwork Network, Family fam) {
         this.ID = ID;
-        this.Family = fam;
+        this.family = fam;
         this.context = new ProteinContext(Network, null);
         this.projects = new ProjectorInfo();
     }
 
     public Protein(String ID, Protein ParentProtein, PPINetwork Network, Family fam) {
         this.ID = ID;
-        this.Family = fam;
+        this.family = fam;
         this.context = new ProteinContext(Network, ParentProtein);
         this.projects = new ProjectorInfo();
     }
@@ -40,11 +40,11 @@ public class Protein {
     }
 
     public Family getFamily() {
-        return this.Family;
+        return this.family;
     }
 
     public void setFamily(Family Family) {
-        this.Family = Family;
+        this.family = Family;
     }
 
     public ProjectorInfo getProjects() {

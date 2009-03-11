@@ -364,7 +364,7 @@ private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     if (selectedProteins.size() > 0) {
         CytoProjector.projectSelected(selectedProteins, networks);
     } else {
-        Messenger.Message("Musisz zaznaczyć białka do rzutowania!");
+        Messenger.message("Musisz zaznaczyć białka do rzutowania!");
     }
 
 }//GEN-LAST:event_jButton3ActionPerformed

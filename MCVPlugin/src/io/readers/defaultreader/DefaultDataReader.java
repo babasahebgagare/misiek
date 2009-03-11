@@ -23,10 +23,10 @@ public class DefaultDataReader extends AbstractDataReader {
             readSpacies(br);
             mbr.close();
         } catch (FileNotFoundException e) {
-            Messenger.Error(e);
+            Messenger.error(e);
             //Exceptions.printStackTrace(e);
         } catch (IOException e) {
-            Messenger.Error(e);
+            Messenger.error(e);
             //Exceptions.printStackTrace(e);
         }
     }
@@ -49,10 +49,10 @@ public class DefaultDataReader extends AbstractDataReader {
             readTrees(br);
             mbr.close();
         } catch (FileNotFoundException e) {
-            Messenger.Error(e);
+            Messenger.error(e);
             //Exceptions.printStackTrace(e);
         } catch (IOException e) {
-            Messenger.Error(e);
+            Messenger.error(e);
          //   Exceptions.printStackTrace(e);
         }
     }
@@ -79,10 +79,10 @@ public class DefaultDataReader extends AbstractDataReader {
             DataParser.getInstance().readInteractions(br, cytoNetwork, treshold);
             mbr.close();
         } catch (FileNotFoundException e) {
-            Messenger.Error(e);
+            Messenger.error(e);
       //      Exceptions.printStackTrace(e);
         } catch (IOException e) {
-            Messenger.Error(e);
+            Messenger.error(e);
        //     Exceptions.printStackTrace(e);
         }
     }
