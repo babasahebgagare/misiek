@@ -50,7 +50,7 @@ public class DefaultInteractionsParser {
                 if (ch < 1 || java.lang.Character.isWhitespace((char) ch)) {
                     break;                   // break for eof or white space
                 }
-                myValue.append(ch);      // append it to myValue
+                myValue.append((char) ch);      // append it to myValue
             }
         } catch (IOException e) {
             System.out.println(e);
@@ -61,21 +61,17 @@ public class DefaultInteractionsParser {
 
     public static void readInteractions(BufferedReader br, CytoAbstractPPINetwork cytoNetwork, double treshold) throws IOException {
         while (br.ready()) {
-            try {
 
-                String SourceID = readWord(br);
-                String TargetID = readWord(br);
-                String EdgeID = IDCreator.createInteractionID(SourceID, TargetID);
+            String SourceID = readWord(br);
+            String TargetID = readWord(br);
+            String EdgeID = IDCreator.createInteractionID(SourceID, TargetID);
 
-                Double Probability = Double.parseDouble(readWord(br));
+            Double Probability = Double.parseDouble(readWord(br));
 
-                if (Probability.doubleValue() >= treshold && cytoNetwork.containsCytoProtein(SourceID) && cytoNetwork.containsCytoProtein(TargetID)) {
-                    CytoDataHandle.createCytoInteraction(EdgeID, SourceID, TargetID, Probability, cytoNetwork);
-                }
-
-            } catch (Exception ex) {
-                Messenger.error(ex);
+            if (Probability.doubleValue() >= treshold && cytoNetwork.containsCytoProtein(SourceID) && cytoNetwork.containsCytoProtein(TargetID)) {
+                CytoDataHandle.createCytoInteraction(EdgeID, SourceID, TargetID, Probability, cytoNetwork);
             }
+
         }
     }
 }

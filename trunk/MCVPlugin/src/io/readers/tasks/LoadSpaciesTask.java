@@ -70,7 +70,7 @@ public class LoadSpaciesTask implements Task {
                 ((JTask) taskMonitor).setDone();
             }
         } catch (Exception ex) {
-            System.out.println("Problem podczas przerywania wczytywania danych");
+            System.out.println(ex.getMessage());
         }
     }
 

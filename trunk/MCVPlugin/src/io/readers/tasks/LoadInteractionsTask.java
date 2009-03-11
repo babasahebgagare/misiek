@@ -67,6 +67,7 @@ public class LoadInteractionsTask implements Task {
 
                 } catch (Exception ex) {
                     taskMonitor.setException(ex, "Problem podczas ładowania interakcji");
+                    System.out.println(ex.getMessage());
                 }
             }
 
@@ -99,7 +100,7 @@ public class LoadInteractionsTask implements Task {
                 ((JTask) taskMonitor).setDone();
             }
         } catch (Exception ex) {
-            System.out.println("Problem podczas przerywania wczytywania danych");
+            System.out.println(ex.getMessage());
         }
     }
 

@@ -61,6 +61,7 @@ public class LoadTreesTask implements Task {
                     }
                 } catch (Exception ex) {
                     taskMonitor.setException(ex, "Problem podczas ładowania drzew genow");
+                    throw ex;
                 }
             }
 
@@ -91,7 +92,7 @@ public class LoadTreesTask implements Task {
                 ((JTask) taskMonitor).setDone();
             }
         } catch (Exception ex) {
-            System.out.println("Problem podczas przerywania wczytywania danych");
+            System.out.println(ex.getMessage());
         }
     }
 

@@ -68,6 +68,7 @@ public class LoadAllInteractionsTask implements Task {
                     taskMonitor.setPercentCompleted(Math.round(percent));
                 } catch (Exception ex) {
                     taskMonitor.setException(ex, "Problem podczas ładowania interakcji");
+                    throw ex;
                 }
             }
 
@@ -79,9 +80,7 @@ public class LoadAllInteractionsTask implements Task {
             MemoLogger.log("Załadowano: " + Math.round((double) created * 100 / (double) all) + "% powyżej progu");
             taskMonitor.setPercentCompleted(100);
         } catch (Exception e) {
-            taskMonitor.setException(e, "Problem podczas tworzenia lub zamykania strumieni");
-
-            return;
+            System.out.println(e.getMessage());
         }
     }
 
@@ -100,7 +99,7 @@ public class LoadAllInteractionsTask implements Task {
                 ((JTask) taskMonitor).setDone();
             }
         } catch (Exception ex) {
-            System.out.println("Problem podczas przerywania wczytywania danych");
+            System.out.println(ex.getMessage());
         }
     }
 
