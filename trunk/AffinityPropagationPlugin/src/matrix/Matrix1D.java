@@ -1,12 +1,20 @@
 package matrix;
 
-public class Matrix1D<T> implements Matrix1DInterface<T>, Cloneable {
+public abstract class Matrix1D<T> implements Matrix1DInterface<T> {
 
     private T[] vector;
     private int N;
 
+    public void setValue(int i, T t) {
+        this.vector[i] = t;
+    }
+
+    public T getValue(int i) {
+        return this.vector[i];
+    }
+
     public T[] getVector() {
-        return vector;
+        return this.vector;
     }
 
     @SuppressWarnings("unchecked")
@@ -18,8 +26,10 @@ public class Matrix1D<T> implements Matrix1DInterface<T>, Cloneable {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public Matrix1D(int N) {
         this.N = N;
+        this.vector = (T[]) new Object[this.N];
     }
 
     @SuppressWarnings("unchecked")
@@ -51,7 +61,8 @@ public class Matrix1D<T> implements Matrix1DInterface<T>, Cloneable {
     public int maxIndex() {
         int maxi = 0;
         for (int i = 0; i < N; i++) {
-            int compareTo = ((Comparable) (this.getVector()[i])).compareTo(this.getVector()[maxi]);
+            @SuppressWarnings("unchecked")
+            int compareTo = ((Comparable) (this.getValue(i))).compareTo(this.getValue(maxi));
             if (compareTo == 1) {
                 maxi = i;
             }
@@ -71,14 +82,5 @@ public class Matrix1D<T> implements Matrix1DInterface<T>, Cloneable {
         return res.toString();
     }
 
-    @Override
-    public Matrix1D<T> clone() throws CloneNotSupportedException {
-        super.clone();
-        Matrix1D<T> res = new Matrix1D<T>(this.size());
-        for (int i = 0; i < this.size(); i++) {
-            res.set(i, this.get(i));
-        }
-
-        return res;
-    }
+    public abstract Matrix1D<T> copy();
 }

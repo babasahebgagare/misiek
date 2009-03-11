@@ -9,9 +9,10 @@ import java.util.HashSet;
 
 /**
  *
+ * @param <T>
  * @author misiek
  */
-public class Cluster<T> implements Comparable<T> {
+public class Cluster<T> implements Comparable {
 
     private String name;
     private Collection<T> elements = new HashSet<T>();
@@ -36,8 +37,8 @@ public class Cluster<T> implements Comparable<T> {
         return elements;
     }
 
-    @SuppressWarnings("unchecked")
-    public int compareTo(final Object c) {
+    public int compareTo(Object c) {
+        @SuppressWarnings("unchecked")
         Cluster<T> cluster = (Cluster<T>) c;
         if (cluster == null) {
             return -1;
@@ -49,5 +50,8 @@ public class Cluster<T> implements Comparable<T> {
         } else {
             return 0;
         }
+
     }
+
+    /*  */
 }

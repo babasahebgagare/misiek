@@ -6,6 +6,8 @@ import algorithm.smart.IterationData;
 import java.awt.event.ActionEvent;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import matrix.DoubleMatrix1D;
 import matrix.DoubleMatrix2D;
 import matrix.IntegerMatrix1D;
@@ -110,9 +112,12 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
         I = E.diag().findG(0);
 
         C = S.getColumns(I).maxrIndexes();
-
-        //    System.out.println("C: " + C);
-        C = tmp(C, I);
+        try {
+            //    System.out.println("C: " + C);
+            C = tmp(C, I);
+        } catch (CloneNotSupportedException ex) {
+            Logger.getLogger(MatrixPropagationAlgorithm.class.getName()).log(Level.SEVERE, null, ex);
+        }
         //    System.out.println("C: " + C);
         idx = idx(C, I);
 
@@ -122,8 +127,8 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
         //  System.out.println("idx: " + idx);
 
         //     ArrayList res= new ArrayList<Integer>();
-        for (int i = 0; i < idx.getVector().length; i++) {
-            res.put(String.valueOf(i), String.valueOf(idx.getVector()[i]));
+        for (int i = 0; i < idx.size(); i++) {
+            res.put(String.valueOf(i), String.valueOf(idx.getValue(i)));
         }
 
 
@@ -149,8 +154,8 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
         return res;
     }
 
-    public IntegerMatrix1D tmp(IntegerMatrix1D C, IntegerMatrix1D I) {
-        IntegerMatrix1D res = (IntegerMatrix1D) C.clone();
+    public IntegerMatrix1D tmp(IntegerMatrix1D C, IntegerMatrix1D I) throws CloneNotSupportedException {
+        IntegerMatrix1D res = C.copy();
         for (int i = 0; i < I.size(); i++) {
             res.set(I.get(i), Integer.valueOf(i));
         }

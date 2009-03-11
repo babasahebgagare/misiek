@@ -1,6 +1,7 @@
 package cyto;
 
 import algorithm.abs.AffinityPropagationAlgorithm;
+import algorithm.matrix.MatrixPropagationAlgorithm;
 import algorithm.smart.Cluster;
 import algorithm.smart.SmartPropagationAlgorithm;
 import cytoscape.CyEdge;
@@ -32,7 +33,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
     private double preferences;
     private double lambda;
     private Integer convits = null;
-    private AffinityPropagationAlgorithm<String> af = new SmartPropagationAlgorithm();
+    private AffinityPropagationAlgorithm<String> af = new MatrixPropagationAlgorithm();
     CyAttributes nodesAttributes = Cytoscape.getNodeAttributes();
     HashMap<String, Integer> nodeMapping = new HashMap<String, Integer>();
     HashMap<Integer, String> idMapping = new HashMap<Integer, String>();
@@ -103,7 +104,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
                 Cluster<String> cluster = clusterprior.poll();
                 for (String element : cluster.getElements()) {
                     String nodeID = idMapping.get(Integer.valueOf(element));
-                    nodesAttributes.setAttribute(nodeID, nodeNameAttr,Integer.valueOf(i));
+                    nodesAttributes.setAttribute(nodeID, nodeNameAttr, Integer.valueOf(i));
                 }
                 i++;
             }
@@ -140,13 +141,14 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
         af.setLambda(lambda);
         af.setIterations(iterations);
         af.setConvits(convits);
-
-        int i = 0;
-        af.setN(nodes.size());
+        af.setN(nodeNames.size());
         af.init();
 
+        int i = 0;
+        System.out.println("ALL SIZE: " + nodeNames.size());
+
         for (String name : nodeNames) {
-        	Integer it = Integer.valueOf(i);
+            Integer it = Integer.valueOf(i);
             idMapping.put(it, name);
             nodeMapping.put(name, it);
             af.setSimilarities(it.toString(), it.toString(), preferences);
