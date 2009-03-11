@@ -22,10 +22,10 @@ public class LoadAllInteractionsTask implements Task {
     private File file;
     private long max;
     private long current;
-    private FileInputStream fis;
-    private BufferedInputStream bis;
-    private DataInputStream dis;
-    private BufferedReader br;
+    private FileInputStream fis = null;
+    private BufferedInputStream bis = null;
+    private DataInputStream dis = null;
+    private BufferedReader br = null;
     private int created = 0;
     private int all = 0;
 

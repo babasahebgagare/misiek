@@ -21,7 +21,6 @@ public class Clustering {
 			clusters.add(v);
 		}
 		
-		clusteringThresh = this.clusteringThresh;
 	}
 	
 	//Find the cluster that contains a particular element
