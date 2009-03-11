@@ -30,11 +30,13 @@ public class Examplar {
 
     @Override
     public String toString() {
-        String ret = name + ": ";
+        StringBuffer ret = new StringBuffer(name);
+        ret.append(": ");
         for (String key : siblingMap.keySet()) {
-            ret += siblingMap.get(key).toString() + "\n";
+            ret.append(siblingMap.get(key).toString());
+            ret.append("\n");
         }
-        return ret;
+        return ret.toString();
     }
 
     public Map<String, SiblingData> getSiblingMap() {

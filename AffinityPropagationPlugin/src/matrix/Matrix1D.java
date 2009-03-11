@@ -1,21 +1,36 @@
 package matrix;
 
-public abstract class Matrix1D<T> implements Matrix1DInterface<T>, Cloneable {
+public class Matrix1D<T> implements Matrix1DInterface<T>, Cloneable {
 
-    T[] vector;
-    int N;
+    private T[] vector;
+    private int N;
 
     public T[] getVector() {
         return vector;
     }
+    
+    @SuppressWarnings("unchecked")
+	public void setVector(T[] v) {
+        this.N = v.length;
+        this.vector = (T[]) new Object[this.N];
+        for(int i=0; i<this.size(); i++) {
+        	this.vector[i] = v[i];        	
+        }
+	}
 
-    public Matrix1D(int N) {
+
+	public Matrix1D(int N) {
         this.N = N;
     }
 
-    public Matrix1D(T[] vector) {
-        this.N = vector.length;
-        this.vector = vector;
+    @SuppressWarnings("unchecked")
+	public Matrix1D(T[] v) {
+        this.N = v.length;
+        this.vector = (T[]) new Object[this.N];
+        for(int i=0; i<this.size(); i++) {
+        	this.vector[i] = v[i];        	
+        }
+        
     }
 
     public int size() {
@@ -37,7 +52,8 @@ public abstract class Matrix1D<T> implements Matrix1DInterface<T>, Cloneable {
     public int maxIndex() {
         int maxi = 0;
         for (int i = 0; i < N; i++) {
-            if (((Comparable) (this.vector[i])).compareTo(this.vector[maxi]) == 1) {
+            int compareTo = ((Comparable) (this.getVector()[i])).compareTo(this.getVector()[maxi]);
+			if (compareTo == 1) {
                 maxi = i;
             }
         }
@@ -47,14 +63,22 @@ public abstract class Matrix1D<T> implements Matrix1DInterface<T>, Cloneable {
 
     @Override
     public String toString() {
-        String res = "";
+        StringBuffer res = new StringBuffer();
         for (int i = 0; i < N; i++) {
-            res += vector[i].toString() + " ";
+            res.append(vector[i].toString());
+            res.append(" ");
         }
-        res += "\n";
-        return res;
+        res.append("\n");
+        return res.toString();
     }
 
     @Override
-    public abstract Matrix1D<T> clone();
+    public Matrix1D<T> clone() {
+        Matrix1D<T> res = new Matrix1D<T>(this.size());
+        for(int i=0; i<this.size(); i++) {
+            res.set(i, this.get(i));
+        }
+
+        return res;
+    }
 }

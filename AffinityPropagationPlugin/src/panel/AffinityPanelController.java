@@ -94,27 +94,27 @@ public class AffinityPanelController {
 
     private boolean validateValues(Double lambda, Double preferences, Integer iterations, Integer convits, String nodeNameAttr, String edgeNameAttr) {
         if (!validateLambda(lambda)) {
-            Messenger.Message("Lambda is not valid!");
+            Messenger.message("Lambda is not valid!");
             return false;
         }
         if (!validatePreferences(preferences)) {
-            Messenger.Message("Preferences are not valid!");
+            Messenger.message("Preferences are not valid!");
             return false;
         }
         if (!validateIterations(iterations)) {
-            Messenger.Message("Iteration number is not valid!");
+            Messenger.message("Iteration number is not valid!");
             return false;
         }
         if (!validateConvits(convits)) {
-            Messenger.Message("Convits are not valid!");
+            Messenger.message("Convits are not valid!");
             return false;
         }
         if (!validateEdgeNameAttr(edgeNameAttr)) {
-            Messenger.Message("Edge name attribute is not valid!");
+            Messenger.message("Edge name attribute is not valid!");
             return false;
         }
         if (!validateNodeNameAttr(nodeNameAttr)) {
-            Messenger.Message("Node name attribure is not valid!");
+            Messenger.message("Node name attribure is not valid!");
             return false;
         }
         return true;
@@ -168,7 +168,7 @@ public class AffinityPanelController {
     }
 
     private void initIterationsField() {
-        iterationsField.setValue(new Integer(10));
+        iterationsField.setValue(Integer.valueOf(10));
     }
 
     private void initLambdaField() {

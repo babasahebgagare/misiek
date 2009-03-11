@@ -38,11 +38,14 @@ public class ExamplarsCollection {
 
     @Override
     public String toString() {
-        String ret = "";
+        StringBuffer ret = new StringBuffer();
         for (String key : examplars.keySet()) {
-            ret += key + ": " + examplars.get(key).toString() + "\n";
+            ret.append(key);
+            ret.append(": ");
+            ret.append(examplars.get(key).toString());
+            ret.append("\n");
         }
-        return ret;
+        return ret.toString();
     }
 
     public Map<String, Examplar> getExamplars() {

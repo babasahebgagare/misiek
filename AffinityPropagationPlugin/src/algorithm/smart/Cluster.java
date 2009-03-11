@@ -11,7 +11,7 @@ import java.util.HashSet;
  *
  * @author misiek
  */
-public class Cluster<T> implements Comparable {
+public class Cluster<T> implements Comparable<T> {
 
     private String name;
     private Collection<T> elements = new HashSet<T>();
@@ -36,14 +36,17 @@ public class Cluster<T> implements Comparable {
         return elements;
     }
 
-    public int compareTo(Object c) {
-
-        if (this.size() > ((Cluster) c).size()) {
+    @SuppressWarnings("unchecked")
+	public int compareTo(Object c) {
+    	Cluster<T> cluster =  (Cluster<T>) c;
+    	if(cluster == null) return -1;
+        if (this.size() > cluster.size()) {
             return -1;
-        } else if (this.size() < ((Cluster) c).size()) {
+        } else if (this.size() < cluster.size()) {
             return 1;
         } else {
             return 0;
         }
     }
+
 }

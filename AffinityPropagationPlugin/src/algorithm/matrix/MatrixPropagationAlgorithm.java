@@ -108,7 +108,6 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
         //    System.out.println("S: " + S);
         E = R.plus(A);
         I = E.diag().findG(0);
-        int K = I.size();
 
         C = S.getColumns(I).maxrIndexes();
 
@@ -151,9 +150,9 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
     }
 
     public IntegerMatrix1D tmp(IntegerMatrix1D C, IntegerMatrix1D I) {
-        IntegerMatrix1D res = C.clone();
+        IntegerMatrix1D res = (IntegerMatrix1D) C.clone();
         for (int i = 0; i < I.size(); i++) {
-            res.set(I.get(i), new Integer(i));
+            res.set(I.get(i), Integer.valueOf(i));
         }
 
         return res;
