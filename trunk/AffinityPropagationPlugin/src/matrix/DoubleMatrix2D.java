@@ -1,8 +1,12 @@
 package matrix;
 
-public class DoubleMatrix2D<E> implements Cloneable, java.io.Serializable {
+public class DoubleMatrix2D implements Cloneable, java.io.Serializable {
 
-    private double[][] matrix;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private double[][] matrix;
     private int N,  M;
 
     public DoubleMatrix2D(int M, double[] v) {
@@ -90,9 +94,9 @@ public class DoubleMatrix2D<E> implements Cloneable, java.io.Serializable {
         return matrix[i][j];
     }
 
-    public double[][] get() {
+ /*   public double[][] get() {
         return matrix;
-    }
+    }*/
 
     public void set(int n, int m, double[][] matrix) {
         this.N = n;
@@ -237,7 +241,7 @@ public class DoubleMatrix2D<E> implements Cloneable, java.io.Serializable {
                     maxj = j;
                 }
             }
-            res.set(i, new Integer(maxj));
+            res.set(i, Integer.valueOf(maxj));
         }
         return res;
     }
@@ -256,9 +260,9 @@ public class DoubleMatrix2D<E> implements Cloneable, java.io.Serializable {
     }
 
     public DoubleMatrix2D getColumns(IntegerMatrix1D indexes) {
-        DoubleMatrix2D res = new DoubleMatrix2D(this.N, indexes.N);
+        DoubleMatrix2D res = new DoubleMatrix2D(this.N, indexes.size());
         for (int i = 0; i < N; i++) {
-            for (int j = 0; j < indexes.N; j++) {
+            for (int j = 0; j < indexes.size(); j++) {
                 res.set(i, j, this.matrix[i][indexes.get(j).intValue()]);
             }
         }
@@ -299,14 +303,15 @@ public class DoubleMatrix2D<E> implements Cloneable, java.io.Serializable {
 
     @Override
     public String toString() {
-        String res = "\n";
+        StringBuffer res = new StringBuffer();
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
-                res += this.matrix[i][j] + " ";
+                res.append(this.matrix[i][j]);
+                res.append(" ");
             }
-            res += "\n";
+            res.append("\n");
 
         }
-        return res;
+        return res.toString();
     }
 }

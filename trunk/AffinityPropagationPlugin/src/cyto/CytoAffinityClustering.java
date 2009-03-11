@@ -32,7 +32,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
     private double preferences;
     private double lambda;
     private Integer convits = null;
-    private AffinityPropagationAlgorithm af = new SmartPropagationAlgorithm();
+    private AffinityPropagationAlgorithm<String> af = new SmartPropagationAlgorithm();
     CyAttributes nodesAttributes = Cytoscape.getNodeAttributes();
     HashMap<String, Integer> nodeMapping = new HashMap<String, Integer>();
     HashMap<Integer, String> idMapping = new HashMap<Integer, String>();
@@ -103,7 +103,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
                 Cluster<String> cluster = clusterprior.poll();
                 for (String element : cluster.getElements()) {
                     String nodeID = idMapping.get(Integer.valueOf(element));
-                    nodesAttributes.setAttribute(nodeID, nodeNameAttr, new Integer(i));
+                    nodesAttributes.setAttribute(nodeID, nodeNameAttr,Integer.valueOf(i));
                 }
                 i++;
             }
@@ -146,9 +146,10 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
         af.init();
 
         for (String name : nodeNames) {
-            idMapping.put(new Integer(i), name);
-            nodeMapping.put(name, new Integer(i));
-            af.setSimilarities(new Integer(i).toString(), new Integer(i).toString(), preferences);
+        	Integer it = Integer.valueOf(i);
+            idMapping.put(it, name);
+            nodeMapping.put(name, it);
+            af.setSimilarities(it.toString(), it.toString(), preferences);
             i++;
         }
 

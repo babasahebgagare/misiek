@@ -40,7 +40,7 @@ public abstract class CytoAbstractClusterAlgorithm implements CytoClusterAlgorit
      ***********************************************************************/
     protected void initializeProperties() {
         clusterProperties.add(new Tunable("debug", "Enable debugging",
-                Tunable.BOOLEAN, new Boolean(false),
+                Tunable.BOOLEAN, Boolean.valueOf(false),
                 Tunable.NOINPUT));
     }
 
