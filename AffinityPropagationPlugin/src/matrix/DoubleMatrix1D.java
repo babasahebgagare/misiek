@@ -6,7 +6,7 @@ public class DoubleMatrix1D extends Matrix1D<Double> implements DoubleMatrix1DIn
         super(vector.length);
         this.setVector(new Double[this.size()]);
         for (int i = 0; i < this.size(); i++) {
-            this.getVector()[i] = vector[i];
+            this.setValue(i, vector[i]);
         }
     }
 
@@ -18,7 +18,7 @@ public class DoubleMatrix1D extends Matrix1D<Double> implements DoubleMatrix1DIn
         super(N);
         this.setVector(new Double[N]);
         for (int i = 0; i < N; i++) {
-            this.getVector()[i] = Double.valueOf(t);
+            this.setValue(i, Double.valueOf(t));
         }
     }
 
@@ -29,19 +29,28 @@ public class DoubleMatrix1D extends Matrix1D<Double> implements DoubleMatrix1DIn
     public IntegerMatrix1D findG(double x) {
         int count = 0;
         for (int i = 0; i < this.size(); i++) {
-            if (this.getVector()[i].doubleValue() > x) {
+            if (this.getValue(i).doubleValue() > x) {
                 count++;
             }
         }
         IntegerMatrix1D res = new IntegerMatrix1D(count);
         count = 0;
         for (int i = 0; i < this.size(); i++) {
-            if (this.getVector()[i].doubleValue() > x) {
+            if (this.getValue(i).doubleValue() > x) {
                 res.set(count, Integer.valueOf(i));
                 count++;
             }
         }
         return res;
     }
-    
+
+    @Override
+    public DoubleMatrix1D copy() {
+        DoubleMatrix1D res = new DoubleMatrix1D(this.size());
+        for (int i = 0; i < this.size(); i++) {
+            res.set(i, this.get(i));
+        }
+
+        return res;
+    }
 }

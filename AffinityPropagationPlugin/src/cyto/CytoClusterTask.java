@@ -65,6 +65,7 @@ public class CytoClusterTask implements Task {
 
     /**
      * Sets the task monitor to be used for the cluster.
+     * @param monitor
      */
     public void setTaskMonitor(TaskMonitor monitor) {
         this.monitor = monitor;
