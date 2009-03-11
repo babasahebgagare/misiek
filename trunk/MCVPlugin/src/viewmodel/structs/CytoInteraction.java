@@ -8,7 +8,6 @@ public class CytoInteraction extends CytoNetworkObject {
     private Double probability;
     private CytoProtein source;
     private CytoProtein target;
-    private Interaction interaction;
 
     public CytoInteraction(String CytoID, CytoProtein source, CytoProtein target, CytoAbstractPPINetwork cytoNetwork, Double probability, Interaction interaction) {
         this.setCytoID(CytoID);
@@ -16,7 +15,6 @@ public class CytoInteraction extends CytoNetworkObject {
         this.source = source;
         this.target = target;
         this.probability = probability;
-        this.interaction = interaction;
     }
 
     public Double getProbability() {

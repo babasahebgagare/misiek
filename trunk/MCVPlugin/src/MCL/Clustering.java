@@ -17,7 +17,7 @@ public class Clustering {
 		for(int i=0; i<size; i++)
 		{
 			Vector <Integer> v = new Vector();
-			v.add(new Integer(i));
+			v.add(Integer.valueOf(i));
 			clusters.add(v);
 		}
 		
@@ -31,7 +31,7 @@ public class Clustering {
 		{
 			Vector v = (Vector)clusters.elementAt(i);
 			
-			if (v.contains(new Integer(element)))
+			if (v.contains(Integer.valueOf(element)))
 				return i;
 		}
 		

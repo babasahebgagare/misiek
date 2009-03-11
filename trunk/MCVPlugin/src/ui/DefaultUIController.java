@@ -35,8 +35,8 @@ public class DefaultUIController extends UIController {
 
         for (int i = 0; i < edgesID.length; i++) {
             Edge edge = (Edge) Cytoscape.getRootGraph().getEdge(edgesID[i]);
-            nodes.add(new Integer(edge.getSource().getRootGraphIndex()));
-            nodes.add(new Integer(edge.getTarget().getRootGraphIndex()));
+            nodes.add(Integer.valueOf(edge.getSource().getRootGraphIndex()));
+            nodes.add(Integer.valueOf(edge.getTarget().getRootGraphIndex()));
         }
         return nodes;
     }
@@ -78,12 +78,12 @@ public class DefaultUIController extends UIController {
         int[] edgesID = cyNetwork.getEdgeIndicesArray();
         Collection<Integer> nodes = new HashSet<Integer>();
         for (int i = 0; i < nodesID.length; i++) {
-            nodes.add(new Integer(nodesID[i]));
+            nodes.add(Integer.valueOf(nodesID[i]));
         }
         for (int i = 0; i < edgesID.length; i++) {
             Edge edge = (Edge) Cytoscape.getRootGraph().getEdge(edgesID[i]);
-            nodes.remove(new Integer(edge.getSource().getRootGraphIndex()));
-            nodes.remove(new Integer(edge.getTarget().getRootGraphIndex()));
+            nodes.remove(Integer.valueOf(edge.getSource().getRootGraphIndex()));
+            nodes.remove(Integer.valueOf(edge.getTarget().getRootGraphIndex()));
         }
         return nodes;
     }

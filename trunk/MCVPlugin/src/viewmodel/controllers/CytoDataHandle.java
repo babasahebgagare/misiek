@@ -32,27 +32,27 @@ public class CytoDataHandle {
     private static Map<String, CytoPPINetwork> cytoNetworks = new HashMap<String, CytoPPINetwork>();
 
     public static void addCytoInteractionMapping(int index, CytoInteraction object) {
-        cytoInteractions.put(new Integer(index), object);
+        cytoInteractions.put(Integer.valueOf(index), object);
     }
 
     public static void deleteCytoInteractionMapping(int index) {
-        cytoInteractions.remove(new Integer(index));
+        cytoInteractions.remove(Integer.valueOf(index));
     }
 
     public static CytoInteraction getCytoInteractionByIndex(int index) {
-        return cytoInteractions.get(new Integer(index));
+        return cytoInteractions.get(Integer.valueOf(index));
     }
 
     public static void addCytoProteinMapping(int index, CytoProtein object) {
-        cytoProteins.put(new Integer(index), object);
+        cytoProteins.put(Integer.valueOf(index), object);
     }
 
     public static void deleteCytoProteinMapping(int index) {
-        cytoProteins.remove(new Integer(index));
+        cytoProteins.remove(Integer.valueOf(index));
     }
 
     public static CytoProtein getCytoProteinByIndex(int index) {
-        return cytoProteins.get(new Integer(index));
+        return cytoProteins.get(Integer.valueOf(index));
     }
 
     public static void createCytoInteraction(String EdgeID, String SourceID, String TargetID, Double Probability, CytoAbstractPPINetwork cytoNetwork) {

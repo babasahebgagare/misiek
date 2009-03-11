@@ -38,7 +38,7 @@ public class DefaultLayouter extends Layouter {
     }
 
     @Override
-    public void ProjectionToDownLayout(CytoPPINetworkProjectionToDown projection) {
+    public void projectionToDownLayout(CytoPPINetworkProjectionToDown projection) {
         CyNetworkView cyNetworkView = Cytoscape.getNetworkView(projection.getCytoID());
         ProjectionToDownLayout(projection, cyNetworkView);
     }
@@ -52,7 +52,7 @@ public class DefaultLayouter extends Layouter {
     }
 
     @Override
-    public void ProjectionToUpLayout(CytoPPINetworkProjectionToUp projection) {
+    public void projectionToUpLayout(CytoPPINetworkProjectionToUp projection) {
         CyNetworkView cyNetworkView = Cytoscape.getNetworkView(projection.getCytoID());
         ProjectionToUpLayout(projection, cyNetworkView);
     }
