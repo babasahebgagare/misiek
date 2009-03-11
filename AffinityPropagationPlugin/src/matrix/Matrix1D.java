@@ -8,29 +8,28 @@ public class Matrix1D<T> implements Matrix1DInterface<T>, Cloneable {
     public T[] getVector() {
         return vector;
     }
-    
+
     @SuppressWarnings("unchecked")
-	public void setVector(T[] v) {
+    public void setVector(T[] v) {
         this.N = v.length;
         this.vector = (T[]) new Object[this.N];
-        for(int i=0; i<this.size(); i++) {
-        	this.vector[i] = v[i];        	
+        for (int i = 0; i < this.size(); i++) {
+            this.vector[i] = v[i];
         }
-	}
+    }
 
-
-	public Matrix1D(int N) {
+    public Matrix1D(int N) {
         this.N = N;
     }
 
     @SuppressWarnings("unchecked")
-	public Matrix1D(T[] v) {
+    public Matrix1D(T[] v) {
         this.N = v.length;
         this.vector = (T[]) new Object[this.N];
-        for(int i=0; i<this.size(); i++) {
-        	this.vector[i] = v[i];        	
+        for (int i = 0; i < this.size(); i++) {
+            this.vector[i] = v[i];
         }
-        
+
     }
 
     public int size() {
@@ -53,7 +52,7 @@ public class Matrix1D<T> implements Matrix1DInterface<T>, Cloneable {
         int maxi = 0;
         for (int i = 0; i < N; i++) {
             int compareTo = ((Comparable) (this.getVector()[i])).compareTo(this.getVector()[maxi]);
-			if (compareTo == 1) {
+            if (compareTo == 1) {
                 maxi = i;
             }
         }
@@ -73,9 +72,10 @@ public class Matrix1D<T> implements Matrix1DInterface<T>, Cloneable {
     }
 
     @Override
-    public Matrix1D<T> clone() {
+    public Matrix1D<T> clone() throws CloneNotSupportedException {
+        super.clone();
         Matrix1D<T> res = new Matrix1D<T>(this.size());
-        for(int i=0; i<this.size(); i++) {
+        for (int i = 0; i < this.size(); i++) {
             res.set(i, this.get(i));
         }
 

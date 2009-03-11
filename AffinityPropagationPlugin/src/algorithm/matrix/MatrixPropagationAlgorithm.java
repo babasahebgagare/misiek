@@ -1,6 +1,6 @@
 package algorithm.matrix;
 
-import algorithm.abs.*;
+import algorithm.abs.AffinityPropagationAlgorithm;
 import algorithm.smart.Cluster;
 import algorithm.smart.IterationData;
 import java.awt.event.ActionEvent;
@@ -190,13 +190,8 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
     @Override
     public void setSimilarities(String x, String y, Double sim) {
 
-        try {
-            int i = Integer.valueOf(x);
-            int j = Integer.valueOf(y);
-            S.set(i, j, sim.doubleValue());
-
-        } catch (Exception ex) {
-            System.out.println("setSimilarities!");
-        }
+        int i = Integer.valueOf(x);
+        int j = Integer.valueOf(y);
+        S.set(i, j, sim.doubleValue());
     }
 }

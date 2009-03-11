@@ -37,9 +37,11 @@ public class Cluster<T> implements Comparable<T> {
     }
 
     @SuppressWarnings("unchecked")
-	public int compareTo(Object c) {
-    	Cluster<T> cluster =  (Cluster<T>) c;
-    	if(cluster == null) return -1;
+    public int compareTo(final Object c) {
+        Cluster<T> cluster = (Cluster<T>) c;
+        if (cluster == null) {
+            return -1;
+        }
         if (this.size() > cluster.size()) {
             return -1;
         } else if (this.size() < cluster.size()) {
@@ -48,5 +50,4 @@ public class Cluster<T> implements Comparable<T> {
             return 0;
         }
     }
-
 }

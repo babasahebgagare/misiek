@@ -14,7 +14,7 @@ public class Stats {
         Double[] vectorCopy = new Double[vector.size()];
         int i = 0;
         for (Double el : vector) {
-            vectorCopy[i] = new Double(el.doubleValue());
+            vectorCopy[i] = Double.valueOf(el.doubleValue());
             i++;
         }
 

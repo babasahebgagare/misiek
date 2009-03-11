@@ -204,8 +204,8 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
 
     @Override
     public Map<String, String> doCluster() {
-        Map<String, Cluster<String>> help = doClusterAssoc();
-        Map<String, String> res = new HashMap<String, String>();
+        final Map<String, Cluster<String>> help = doClusterAssoc();
+        final Map<String, String> res = new HashMap<String, String>();
 
         for (String examplar : help.keySet()) {
             for (String obj : help.get(examplar).getElements()) {
