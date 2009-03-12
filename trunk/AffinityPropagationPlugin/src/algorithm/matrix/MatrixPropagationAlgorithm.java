@@ -23,9 +23,9 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
     private IntegerMatrix1D I;
     private DoubleMatrix2D AS;
     private DoubleMatrix2D R;
-    private DoubleMatrix2D Rp;
-    private DoubleMatrix2D Aold;
-    private DoubleMatrix2D Rold;
+    private DoubleMatrix2D rp;
+    private DoubleMatrix2D aold;
+    private DoubleMatrix2D rold;
     private DoubleMatrix2D YI;
     private DoubleMatrix2D YI2;
     private DoubleMatrix2D S;
@@ -50,7 +50,7 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
         Map<String, String> res = new HashMap<String, String>();
 
         for (int iter = 0; iter < iterations; iter++) {
-            Rold = R.copy();
+            rold = R.copy();
 
             AS = A.plus(S);
             //    System.out.println("AS" + AS);
@@ -73,20 +73,20 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
             //          System.out.println("R" + R);
 
             for (int i = 0; i < N; i++) {
-                R.set(i, (int) YI.getMatrix()[i][0], S.get(i, (int) YI.getMatrix()[i][0]) - YI2.get(i, 1));
+                R.set(i, (int) YI.get(i,0), S.get(i, (int) YI.get(i,0)) - YI2.get(i, 1));
             }
 
-            R = R.mul(1 - getLambda()).plus(Rold.mul(getLambda()));
+            R = R.mul(1 - getLambda()).plus(rold.mul(getLambda()));
 
 
             //          System.out.println("R" + R);
 
-            Aold = A.clone();
-            Rp = R.max(0);
+            aold = A.copy();
+            rp = R.max(0);
             for (int i = 0; i < N; i++) {
-                Rp.set(i, i, R.get(i, i));
+                rp.set(i, i, R.get(i, i));
             }
-            A = (new DoubleMatrix2D(N, Rp.sum().getMatrix()[0])).transpose().minus(Rp);
+            A = (new DoubleMatrix2D(N, rp.sum().getVector(0))).transpose().minus(rp);
             //        System.out.println("Rp" + Rp);
             //        System.out.println("sum" + (new DoubleMatrix2D(N, Rp.sum().getMatrix()[0])).transpose());
 
@@ -98,10 +98,10 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
 
             A = A.min(0);
             for (int i = 0; i < N; i++) {
-                A.getMatrix()[i][i] = dA.get(i);
+                A.set(i, i, dA.get(i));
             }
 
-            A = A.mul((1 - getLambda())).plus(Aold.mul(getLambda()));
+            A = A.mul((1 - getLambda())).plus(aold.mul(getLambda()));
             //       System.out.println("A");
             //          System.out.println(A);
             iteractionListener.actionPerformed(new ActionEvent(new IterationData(iter + 1, 0), 0, "ITERATION"));
@@ -161,10 +161,6 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
         }
 
         return res;
-    }
-
-    public double[][] getSimilarities() {
-        return S.getMatrix();
     }
 
     public void setSimilarities(double[][] similarities) {

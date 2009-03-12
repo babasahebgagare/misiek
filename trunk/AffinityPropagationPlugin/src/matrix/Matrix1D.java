@@ -13,10 +13,6 @@ public abstract class Matrix1D<T> implements Matrix1DInterface<T> {
         return this.vector[i];
     }
 
-    public T[] getVector() {
-        return this.vector;
-    }
-
     @SuppressWarnings("unchecked")
     public void setVector(T[] v) {
         this.N = v.length;
