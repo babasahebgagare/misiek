@@ -6,6 +6,7 @@ package algorithm.smart;
 
 import java.util.Collection;
 import java.util.HashSet;
+import utils.Messenger;
 
 /**
  *
@@ -50,5 +51,19 @@ public class Cluster<T> implements Comparable<Cluster<T>> {
         }
     }
 
-    /*  */
+    @Override
+    @SuppressWarnings("unchecked")
+    public boolean equals(Object obj) {
+        if (!obj.getClass().equals(this.getClass())) {
+            return false;
+        } else {
+            Cluster<T> cluster = (Cluster<T>) obj;
+            return (this.compareTo(cluster) == 0);
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 }
