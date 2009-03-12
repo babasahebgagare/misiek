@@ -174,10 +174,6 @@ public class TestCanvas {
         }
         });*/
 
-        if (a == null) {
-            //   Messenger.Message("error" + cyNetworkView.getIdentifier() + ": " + cyNetworkView.getTitle());
-        } else {
-        }
         a.setSize(40, 40);
         a.setBounds(10, 10, 40, 40);
         b.setBounds(50, 50, 90, 90);
@@ -263,11 +259,6 @@ public class TestCanvas {
                 Messenger.message("mouseExited");
             }
         });
-
-        if (a == null) {
-            //   Messenger.Message("error" + cyNetworkView.getIdentifier() + ": " + cyNetworkView.getTitle());
-        } else {
-        }
         a.setSize(40, 40);
         a.setBounds(10, 10, 40, 40);
         b.setBounds(50, 50, 90, 90);
