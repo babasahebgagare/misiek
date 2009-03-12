@@ -1,16 +1,17 @@
 package panel;
 
+import java.io.Serializable;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 /**
  *
  * @author misiek (mw219725@gmail.com)
  */
-public class AffinityStatsPanelController {
+public class AffinityStatsPanelController implements Serializable {
 
+    private final static long serialVersionUID = 7526471155622776148L;
     private JTable statsTable = null;
 
     public JPanel createAffinityStatsPanel() {

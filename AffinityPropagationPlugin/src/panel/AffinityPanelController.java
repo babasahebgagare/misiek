@@ -8,6 +8,7 @@ import cytoscape.Cytoscape;
 import cytoscape.data.CyAttributes;
 import cytoscape.task.util.TaskManager;
 import giny.model.Edge;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.JComboBox;
@@ -21,8 +22,9 @@ import utils.Stats;
  *
  * @author misiek (mw219725@gmail.com)
  */
-public class AffinityPanelController {
+public class AffinityPanelController implements Serializable {
 
+    private final static long serialVersionUID = 7526471155622776147L;
     private JTextField lambdaField = null;
     private JTextField convitsField = null;
     private JTextField nodeAttrField = null;
@@ -145,6 +147,7 @@ public class AffinityPanelController {
         if (!validateEdgeNameAttr(edgeNameAttr)) {
             return;
         }
+        @SuppressWarnings("unchecked")
         List<CyEdge> edges = Cytoscape.getCurrentNetwork().edgesList();
         CyAttributes edgesAttributes = Cytoscape.getEdgeAttributes();
         Vector<Double> probs = new Vector<Double>();
