@@ -217,11 +217,9 @@ public class AffinityPanelController {
     }
 
     public Double getLambda() {
-
         try {
             return Double.valueOf(lambdaField.getText());
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (NumberFormatException e) {
             return null;
         }
     }

@@ -1,6 +1,6 @@
 package matrix;
 
-public class DoubleMatrix2D implements Cloneable, java.io.Serializable {
+public class DoubleMatrix2D implements java.io.Serializable {
 
     /**
      *
@@ -94,6 +94,10 @@ public class DoubleMatrix2D implements Cloneable, java.io.Serializable {
         return matrix[i][j];
     }
 
+    public double[] getVector(int i) {
+        return matrix[i];
+    }
+
     /*   public double[][] get() {
     return matrix;
     }*/
@@ -185,11 +189,6 @@ public class DoubleMatrix2D implements Cloneable, java.io.Serializable {
         return new DoubleMatrix2D(this);
     }
 
-    @Override
-    public DoubleMatrix2D clone() {
-        return this.copy();
-    }
-
     public int getM() {
         return M;
     }
@@ -206,21 +205,13 @@ public class DoubleMatrix2D implements Cloneable, java.io.Serializable {
         this.N = N;
     }
 
-    public double[][] getMatrix() {
-        return matrix;
-    }
-
-    public void setMatrix(double[][] matrix) {
-        this.matrix = matrix;
-    }
-
     public DoubleMatrix2D maxr() {
         DoubleMatrix2D res = new DoubleMatrix2D(N, 2, 0);
 
         for (int i = 0; i < N; i++) {
             int maxj = 0;
             for (int j = 0; j < M; j++) {
-                if (this.matrix[i][j] > this.matrix[i][maxj]) {
+                if (this.get(i, j) > this.get(i, maxj)) {
                     maxj = j;
                 }
             }
