@@ -33,7 +33,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
     private double preferences;
     private double lambda;
     private Integer convits = null;
-    private AffinityPropagationAlgorithm<String> af = new MatrixPropagationAlgorithm();
+    private AffinityPropagationAlgorithm<String> af = new SmartPropagationAlgorithm();
     CyAttributes nodesAttributes = Cytoscape.getNodeAttributes();
     HashMap<String, Integer> nodeMapping = new HashMap<String, Integer>();
     HashMap<Integer, String> idMapping = new HashMap<Integer, String>();
@@ -132,7 +132,9 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
     }
 
     private void setParameters() throws IOException {
+        @SuppressWarnings("unchecked")
         List<CyEdge> edges = Cytoscape.getCurrentNetwork().edgesList();
+        @SuppressWarnings("unchecked")
         List<CyNode> nodes = Cytoscape.getCurrentNetwork().nodesList();
         Set<String> nodeNames = selectConnectedNodes(edges, nodes);
 

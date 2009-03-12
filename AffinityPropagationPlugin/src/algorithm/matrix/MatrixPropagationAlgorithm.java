@@ -6,6 +6,7 @@ import algorithm.smart.IterationData;
 import java.awt.event.ActionEvent;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import matrix.DoubleMatrix1D;
@@ -179,10 +180,9 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
             res.put(examplar, clust);
         }
 
-        for (String obj : map.keySet()) {
-            String ex = map.get(obj);
-            Cluster<String> clust = res.get(ex);
-            clust.add(obj);
+        for (Entry<String, String> obj : map.entrySet()) {
+            Cluster<String> clust = res.get(obj.getValue());
+            clust.add(obj.getKey());
         }
 
         return res;

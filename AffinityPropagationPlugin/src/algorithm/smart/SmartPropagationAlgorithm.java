@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Map.Entry;
 
 /** You have to set parameters and do init() befor clustering. */
 public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<String> {
@@ -207,9 +208,9 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
         final Map<String, Cluster<String>> help = doClusterAssoc();
         final Map<String, String> res = new HashMap<String, String>();
 
-        for (String examplar : help.keySet()) {
-            for (String obj : help.get(examplar).getElements()) {
-                res.put(obj, examplar);
+        for (Entry<String, Cluster<String>> entry : help.entrySet()) {
+            for (String obj : entry.getValue().getElements()) {
+                res.put(obj, entry.getKey());
             }
         }
 
