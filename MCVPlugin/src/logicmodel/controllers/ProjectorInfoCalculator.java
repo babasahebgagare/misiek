@@ -50,6 +50,9 @@ public class ProjectorInfoCalculator {
             MemoLogger.log("netUp: " + upNetwork.getID());
 
             upNetwork = upNetwork.getContext().getParentNetwork();
+            if (upNetwork == null) {
+                break;
+            }
         }
     }
 
@@ -60,7 +63,9 @@ public class ProjectorInfoCalculator {
             addProjectorInfoForProteins(protein, parentProtein);
 
             parentProtein = parentProtein.getContext().getParentProtein();
-
+            if (parentProtein == null) {
+                break;
+            }
 
         }
     }

@@ -8,6 +8,8 @@ import javax.swing.JComponent;
 
 public class TestPaintAbs extends JComponent {
 
+    final private static long serialVersionUID = 1323L;
+
     @Override
     public Rectangle getBounds(Rectangle rv) {
         return new Rectangle(10, 10, 50, 50);
@@ -17,8 +19,7 @@ public class TestPaintAbs extends JComponent {
     public void paint(Graphics g) {
         Graphics2D g2d = (Graphics2D) g.create();
         g2d.setColor(Color.BLACK);
-        Rectangle r = new Rectangle(1, 1, 38, 38) {
-        };
+        Rectangle r = new Rectangle(1, 1, 38, 38);
 
         // g2d.setColor(new Color((float)0.5, (float)0.5, (float)0.5, (float)0.5));
         g2d.fill(r);
