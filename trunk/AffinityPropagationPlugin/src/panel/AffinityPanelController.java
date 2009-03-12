@@ -11,6 +11,8 @@ import giny.model.Edge;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
@@ -198,8 +200,8 @@ public class AffinityPanelController implements Serializable {
     public Integer getIterations() {
         try {
             return (Integer) iterationsField.getValue();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (NumberFormatException e) {
+            Messenger.error(e);
             return null;
         }
     }
@@ -208,8 +210,8 @@ public class AffinityPanelController implements Serializable {
 
         try {
             return Double.valueOf(preferencesField.getText());
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (NumberFormatException e) {
+            Messenger.error(e);
             return null;
         }
     }
@@ -222,7 +224,9 @@ public class AffinityPanelController implements Serializable {
     public Double getLambda() {
         try {
             return Double.valueOf(lambdaField.getText());
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException ex) {
+            //Logger.getLogger(AffinityPanelController.class.getName()).log(Level.SEVERE, null, ex);
+            Messenger.error(ex);
             return null;
         }
     }
@@ -231,8 +235,8 @@ public class AffinityPanelController implements Serializable {
 
         try {
             return Integer.valueOf(convitsField.getText());
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (NumberFormatException e) {
+            Messenger.error(e);
             return null;
         }
     }
