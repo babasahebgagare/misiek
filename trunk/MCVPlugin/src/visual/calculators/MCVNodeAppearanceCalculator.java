@@ -11,16 +11,21 @@ import viewmodel.structs.CytoAbstractPPINetwork;
 import logicmodel.structs.CytoProtein;
 import logicmodel.structs.Family;
 import logicmodel.structs.Protein;
+import main.PluginDataHandle;
 
 public class MCVNodeAppearanceCalculator extends NodeAppearanceCalculator {
 
     @Override
     public void calculateNodeAppearance(NodeAppearance appr, Node node, CyNetwork cyNetwork) {
         super.calculateNodeAppearance(appr, node, cyNetwork);
+        CytoDataHandle cdh = PluginDataHandle.getCytoDataHandle();
 
-        CytoAbstractPPINetwork cytoNetwork = CytoDataHandle.findNetworkByCytoID(cyNetwork.getIdentifier());
+        if (cdh == null) {
+            return;
+        }
+        CytoAbstractPPINetwork cytoNetwork = cdh.findNetworkByCytoID(cyNetwork.getIdentifier());
         if (cytoNetwork != null) {
-            CytoProtein cytoProtein = CytoDataHandle.getCytoProteinByIndex(node.getRootGraphIndex());
+            CytoProtein cytoProtein = cdh.getCytoProteinByIndex(node.getRootGraphIndex());
             if (cytoProtein != null) {
                 Protein protein = cytoProtein.getProtein();
                 if (protein != null) {

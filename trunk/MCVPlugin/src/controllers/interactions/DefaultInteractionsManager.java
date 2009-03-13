@@ -8,12 +8,14 @@ import viewmodel.controllers.CytoDataHandle;
 import viewmodel.structs.CytoAbstractPPINetwork;
 import logicmodel.structs.Interaction;
 import logicmodel.structs.PPINetwork;
+import main.PluginDataHandle;
 import viewmodel.controllers.CytoVisualHandle;
 
 public class DefaultInteractionsManager extends InteractionsManager {
 
     @Override
     public void loadInteractionsFromModel(CytoAbstractPPINetwork cytoNetwork, double treshold) {
+        CytoDataHandle cdh = PluginDataHandle.getCytoDataHandle();
 
         PPINetwork network = cytoNetwork.getNetwork();
         System.out.println(network.getInteractions().size());
@@ -21,14 +23,16 @@ public class DefaultInteractionsManager extends InteractionsManager {
         for (Interaction interaction : network.getInteractions().values()) {
 
             if (interaction.getProbability().doubleValue() >= treshold) {
-                CytoDataHandle.createCytoInteraction(interaction, cytoNetwork);
+                cdh.createCytoInteraction(interaction, cytoNetwork);
             }
         }
     }
 
     @Override
     public void deleteViewInteracions(CytoAbstractPPINetwork cytoNetwork) {
-        CytoDataHandle.deleteCytoscapeInteractions(cytoNetwork);
+        CytoDataHandle cdh = PluginDataHandle.getCytoDataHandle();
+
+        cdh.deleteCytoscapeInteractions(cytoNetwork);
         cytoNetwork.deleteCytoInteractions();
     }
 

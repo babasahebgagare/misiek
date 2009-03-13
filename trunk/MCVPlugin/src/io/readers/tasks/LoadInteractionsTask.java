@@ -9,11 +9,11 @@ import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import main.PluginDataHandle;
 import viewmodel.controllers.CytoDataHandle;
 import viewmodel.structs.CytoAbstractPPINetwork;
 import utils.IDCreator;
@@ -40,6 +40,9 @@ public class LoadInteractionsTask implements Task {
     }
 
     public void run() {
+
+        CytoDataHandle cdh = PluginDataHandle.getCytoDataHandle();
+
         try {
             myThread = Thread.currentThread();
             taskMonitor.setStatus("Ładowanie interakcji");
@@ -55,7 +58,7 @@ public class LoadInteractionsTask implements Task {
                 String EdgeID = IDCreator.createInteractionID(SourceID, TargetID);
                 Double Probability = Double.parseDouble(DefaultInteractionsParser.readWord(br));
                 if (Probability.doubleValue() >= treshold && cytoNetwork.containsCytoProtein(SourceID) && cytoNetwork.containsCytoProtein(TargetID)) {
-                    CytoDataHandle.createCytoInteraction(EdgeID, SourceID, TargetID, Probability, cytoNetwork);
+                    cdh.createCytoInteraction(EdgeID, SourceID, TargetID, Probability, cytoNetwork);
                 }
                 current = fis.getChannel().position();
                 float percent = current * 100 / (float) max;

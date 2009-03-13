@@ -12,6 +12,7 @@ import viewmodel.structs.CytoPPINetworkProjectionToDown;
 import viewmodel.structs.CytoPPINetworkProjectionToUp;
 import logicmodel.structs.CytoProtein;
 import logicmodel.structs.PPINetwork;
+import main.PluginDataHandle;
 import utils.Messenger;
 import visual.layout.Layouter;
 
@@ -52,9 +53,12 @@ public class CytoProjector {
     }
 
     public static Collection<CytoProtein> getSelectedProteins() {
+        @SuppressWarnings("unchecked")
         Set<CyNode> cyNodes = Cytoscape.getCurrentNetwork().getSelectedNodes();
+        CytoDataHandle cdh = PluginDataHandle.getCytoDataHandle();
+
         String PPINetworkCytoID = Cytoscape.getCurrentNetwork().getIdentifier();
-        CytoAbstractPPINetwork currCytoNetwork = CytoDataHandle.findNetworkByCytoID(PPINetworkCytoID);
+        CytoAbstractPPINetwork currCytoNetwork = cdh.findNetworkByCytoID(PPINetworkCytoID);
         Collection<CytoProtein> ret = new HashSet<CytoProtein>();
 
         if (currCytoNetwork != null) {

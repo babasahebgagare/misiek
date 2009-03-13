@@ -23,6 +23,7 @@ import logicmodel.controllers.ProjectorInfoCalculator;
 import viewmodel.structs.CytoAbstractPPINetwork;
 import logicmodel.structs.CytoProtein;
 import logicmodel.structs.PPINetwork;
+import main.PluginDataHandle;
 import viewmodel.controllers.CytoInteractionsConverter;
 import viewmodel.controllers.CytoVisualHandle;
 
@@ -103,8 +104,11 @@ public class DefaultUIController extends UIController {
     public Collection<CytoProtein> getSelectedProteins(CyNetwork cyNetwork) {
         @SuppressWarnings("unchecked")
         Set<CyNode> cyNodes = cyNetwork.getSelectedNodes();
+        CytoDataHandle cdh = PluginDataHandle.getCytoDataHandle();
+
+
         String PPINetworkCytoID = Cytoscape.getCurrentNetwork().getIdentifier();
-        CytoAbstractPPINetwork currCytoNetwork = CytoDataHandle.findNetworkByCytoID(PPINetworkCytoID);
+        CytoAbstractPPINetwork currCytoNetwork = cdh.findNetworkByCytoID(PPINetworkCytoID);
         Collection<CytoProtein> ret = new HashSet<CytoProtein>();
 
         if (currCytoNetwork != null) {
@@ -175,6 +179,7 @@ public class DefaultUIController extends UIController {
             int pointPosition = filepath.lastIndexOf(".");
             filepath = filepath.substring(0, pointPosition + 1);
 
+            PluginDataHandle.initPluginDataHandle();
             AbstractDataReader.getInstance().setFilepath(filepath);
             AbstractDataReader.getInstance().readSpacies();
             AbstractDataReader.getInstance().readTrees();
@@ -207,19 +212,23 @@ public class DefaultUIController extends UIController {
 
     @Override
     public void showLoadedInteractions(double treshold) {
+        CytoDataHandle cdh = PluginDataHandle.getCytoDataHandle();
+
         CyNetworkView cyNetworkView = Cytoscape.getCurrentNetworkView();
-        CytoAbstractPPINetwork cytoNetwork = CytoDataHandle.findNetworkByCytoID(cyNetworkView.getIdentifier());
+        CytoAbstractPPINetwork cytoNetwork = cdh.findNetworkByCytoID(cyNetworkView.getIdentifier());
 
         InteractionsManager.getInstance().loadAndShowInteractionsFromModel(cytoNetwork, treshold);
     }
 
     @Override
     public void loadInteractionsForNetwork(double treshold) {
+        CytoDataHandle cdh = PluginDataHandle.getCytoDataHandle();
+
         CyNetworkView cyNetworkView = Cytoscape.getCurrentNetworkView();
 
-        CytoAbstractPPINetwork cytoNetwork = CytoDataHandle.findNetworkByCytoID(cyNetworkView.getIdentifier());
+        CytoAbstractPPINetwork cytoNetwork = cdh.findNetworkByCytoID(cyNetworkView.getIdentifier());
 
-        CytoDataHandle.updateCytoInteractions(cytoNetwork, treshold);
+        cdh.updateCytoInteractions(cytoNetwork, treshold);
 
         CytoInteractionsConverter.convertCytoNetworkInteractions(cyNetworkView.getNetwork(), cytoNetwork.getCytoInteractions());
 

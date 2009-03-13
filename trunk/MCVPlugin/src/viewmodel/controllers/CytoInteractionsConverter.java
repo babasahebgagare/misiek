@@ -4,11 +4,14 @@ import cytoscape.CyNetwork;
 import cytoscape.Cytoscape;
 import giny.model.Edge;
 import java.util.Collection;
+import main.PluginDataHandle;
 import viewmodel.structs.CytoInteraction;
 
 public class CytoInteractionsConverter {
 
     public static void convertCytoNetworkInteractions(CyNetwork cyNetwork, Collection<CytoInteraction> cytoInteractions) {
+        CytoDataHandle cdh = PluginDataHandle.getCytoDataHandle();
+
         for (CytoInteraction cytoInteraction : cytoInteractions) {
             int rootID = Cytoscape.getRootGraph().createEdge(cytoInteraction.getSource().getIndex(), cytoInteraction.getTarget().getIndex());
 
@@ -16,7 +19,7 @@ public class CytoInteractionsConverter {
             edge.setIdentifier(cytoInteraction.getCytoID());
             cytoInteraction.setIndex(rootID);
             cyNetwork.addEdge(rootID);
-            CytoDataHandle.addCytoInteractionMapping(rootID, cytoInteraction);
+            cdh.addCytoInteractionMapping(rootID, cytoInteraction);
         }
     }
 }

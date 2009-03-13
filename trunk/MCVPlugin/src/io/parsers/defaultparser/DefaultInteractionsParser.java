@@ -1,15 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package io.parsers.defaultparser;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import main.PluginDataHandle;
 import viewmodel.controllers.CytoDataHandle;
 import viewmodel.structs.CytoAbstractPPINetwork;
 import utils.IDCreator;
-import utils.Messenger;
 
 /**
  *
@@ -60,6 +56,8 @@ public class DefaultInteractionsParser {
     }
 
     public static void readInteractions(BufferedReader br, CytoAbstractPPINetwork cytoNetwork, double treshold) throws IOException {
+        CytoDataHandle cdh = PluginDataHandle.getCytoDataHandle();
+
         while (br.ready()) {
 
             String SourceID = readWord(br);
@@ -69,7 +67,7 @@ public class DefaultInteractionsParser {
             Double Probability = Double.parseDouble(readWord(br));
 
             if (Probability.doubleValue() >= treshold && cytoNetwork.containsCytoProtein(SourceID) && cytoNetwork.containsCytoProtein(TargetID)) {
-                CytoDataHandle.createCytoInteraction(EdgeID, SourceID, TargetID, Probability, cytoNetwork);
+                cdh.createCytoInteraction(EdgeID, SourceID, TargetID, Probability, cytoNetwork);
             }
 
         }
