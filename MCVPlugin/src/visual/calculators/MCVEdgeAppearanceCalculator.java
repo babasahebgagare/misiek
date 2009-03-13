@@ -6,6 +6,7 @@ import cytoscape.visual.EdgeAppearanceCalculator;
 import cytoscape.visual.VisualPropertyType;
 import giny.model.Edge;
 import java.awt.Color;
+import main.PluginDataHandle;
 import viewmodel.controllers.CytoDataHandle;
 import viewmodel.structs.CytoAbstractPPINetwork;
 import viewmodel.structs.CytoInteraction;
@@ -16,10 +17,16 @@ public class MCVEdgeAppearanceCalculator extends EdgeAppearanceCalculator {
     public void calculateEdgeAppearance(EdgeAppearance appr, Edge edge, CyNetwork cyNetwork) {
         super.calculateEdgeAppearance(appr, edge, cyNetwork);
 
-        CytoAbstractPPINetwork cytoNetwork = CytoDataHandle.findNetworkByCytoID(cyNetwork.getIdentifier());
+        CytoDataHandle cdh = PluginDataHandle.getCytoDataHandle();
+
+        if (cdh == null) {
+            return;
+        }
+
+        CytoAbstractPPINetwork cytoNetwork = cdh.findNetworkByCytoID(cyNetwork.getIdentifier());
 
         if (cytoNetwork != null) {
-            CytoInteraction cytoInteraction = CytoDataHandle.getCytoInteractionByIndex(edge.getRootGraphIndex());
+            CytoInteraction cytoInteraction = cdh.getCytoInteractionByIndex(edge.getRootGraphIndex());
             double probability = cytoInteraction.getProbability().doubleValue();
 
             appr.set(VisualPropertyType.EDGE_LINE_WIDTH, new Float(probability * 5.0)); //TODO - BAD CONST
@@ -30,6 +37,6 @@ public class MCVEdgeAppearanceCalculator extends EdgeAppearanceCalculator {
     }
 
     /*private double calculateCytoInteractionWidth(double probability) {
-        return probability * probability * 5;
+    return probability * probability * 5;
     }*/
 }

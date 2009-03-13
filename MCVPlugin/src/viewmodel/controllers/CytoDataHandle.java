@@ -11,7 +11,6 @@ import mappers.IDMapper;
 import viewmodel.structs.CytoAbstractPPINetwork;
 import viewmodel.structs.CytoGroupNode;
 import viewmodel.structs.CytoInteraction;
-import viewmodel.structs.CytoObject;
 import viewmodel.structs.CytoPPINetwork;
 import logicmodel.structs.CytoProtein;
 import logicmodel.structs.CytoProteinProjection;
@@ -25,37 +24,37 @@ import utils.IDCreator;
 
 public class CytoDataHandle {
 
-    private static IDMapper networkIDMapper = new IDMapper();
-    private static Map<Integer, CytoProtein> cytoProteins = new HashMap<Integer, CytoProtein>();
-    private static Map<Integer, CytoInteraction> cytoInteractions = new HashMap<Integer, CytoInteraction>();
-    private static Map<String, CytoPPINetworkProjection> projections = new HashMap<String, CytoPPINetworkProjection>();
-    private static Map<String, CytoPPINetwork> cytoNetworks = new HashMap<String, CytoPPINetwork>();
+    private IDMapper networkIDMapper = new IDMapper();
+    private Map<Integer, CytoProtein> cytoProteins = new HashMap<Integer, CytoProtein>();
+    private Map<Integer, CytoInteraction> cytoInteractions = new HashMap<Integer, CytoInteraction>();
+    private Map<String, CytoPPINetworkProjection> projections = new HashMap<String, CytoPPINetworkProjection>();
+    private Map<String, CytoPPINetwork> cytoNetworks = new HashMap<String, CytoPPINetwork>();
 
-    public static void addCytoInteractionMapping(int index, CytoInteraction object) {
+    public void addCytoInteractionMapping(int index, CytoInteraction object) {
         cytoInteractions.put(Integer.valueOf(index), object);
     }
 
-    public static void deleteCytoInteractionMapping(int index) {
+    public void deleteCytoInteractionMapping(int index) {
         cytoInteractions.remove(Integer.valueOf(index));
     }
 
-    public static CytoInteraction getCytoInteractionByIndex(int index) {
+    public CytoInteraction getCytoInteractionByIndex(int index) {
         return cytoInteractions.get(Integer.valueOf(index));
     }
 
-    public static void addCytoProteinMapping(int index, CytoProtein object) {
+    public void addCytoProteinMapping(int index, CytoProtein object) {
         cytoProteins.put(Integer.valueOf(index), object);
     }
 
-    public static void deleteCytoProteinMapping(int index) {
+    public void deleteCytoProteinMapping(int index) {
         cytoProteins.remove(Integer.valueOf(index));
     }
 
-    public static CytoProtein getCytoProteinByIndex(int index) {
+    public CytoProtein getCytoProteinByIndex(int index) {
         return cytoProteins.get(Integer.valueOf(index));
     }
 
-    public static void createCytoInteraction(String EdgeID, String SourceID, String TargetID, Double Probability, CytoAbstractPPINetwork cytoNetwork) {
+    public void createCytoInteraction(String EdgeID, String SourceID, String TargetID, Double Probability, CytoAbstractPPINetwork cytoNetwork) {
 
         String SourceCytoID = IDCreator.createProteinProjectionID(SourceID, cytoNetwork);
         String TargetCytoID = IDCreator.createProteinProjectionID(TargetID, cytoNetwork);
@@ -68,7 +67,7 @@ public class CytoDataHandle {
         cytoNetwork.addCytoInteraction(cytoInteraction);
     }
 
-    public static void createCytoInteraction(Interaction interaction, CytoAbstractPPINetwork cytoNetwork) {
+    public void createCytoInteraction(Interaction interaction, CytoAbstractPPINetwork cytoNetwork) {
 
         String SourceCytoID = IDCreator.createProteinProjectionID(interaction.getSource().getID(), cytoNetwork);
         String TargetCytoID = IDCreator.createProteinProjectionID(interaction.getTarget().getID(), cytoNetwork);
@@ -84,7 +83,7 @@ public class CytoDataHandle {
         }
     }
 
-    public static void deleteCytoscapeInteractions(CytoAbstractPPINetwork cytoNetwork) {
+    public void deleteCytoscapeInteractions(CytoAbstractPPINetwork cytoNetwork) {
         CyNetwork cyNetwork = Cytoscape.getNetwork(cytoNetwork.getCytoID());
         CyNetworkView cyNetworkView = Cytoscape.getNetworkView(cytoNetwork.getCytoID());
 
@@ -97,42 +96,42 @@ public class CytoDataHandle {
 
     }
 
-    public static void deleteCytoNetwork(String CytoID) {
+    public void deleteCytoNetwork(String CytoID) {
         cytoNetworks.remove(CytoID);
         projections.remove(CytoID);
         networkIDMapper.deleteMapping(CytoID);
     }
 
-    public static void updateCytoInteractions(CytoAbstractPPINetwork cytoNetwork, double treshold) {
+    public void updateCytoInteractions(CytoAbstractPPINetwork cytoNetwork, double treshold) {
         deleteCytoscapeInteractions(cytoNetwork);
         cytoNetwork.deleteCytoInteractions();
         AbstractDataReader.getInstance().readInteractions(cytoNetwork, treshold);
     }
 
-    public static CytoGroupNode createCytoGroupNode(String groupNodeID, CytoProtein cytoProtein) {
+    public CytoGroupNode createCytoGroupNode(String groupNodeID, CytoProtein cytoProtein) {
         CytoGroupNode cytoGroupNode = new CytoGroupNode(groupNodeID, cytoProtein);
         return cytoGroupNode;
     }
 
-    public static CytoPPINetworkProjectionToDown createCytoProjectionToDown(String projectionID, CytoAbstractPPINetwork cytoMotherNetwork, PPINetwork network) {
+    public CytoPPINetworkProjectionToDown createCytoProjectionToDown(String projectionID, CytoAbstractPPINetwork cytoMotherNetwork, PPINetwork network) {
         CytoPPINetworkProjectionToDown projection = new CytoPPINetworkProjectionToDown(cytoMotherNetwork, network, projectionID);
         projections.put(projectionID, projection);
         return projection;
     }
 
-    public static CytoPPINetworkProjectionToUp createCytoProjectionToUp(String projectionID, CytoAbstractPPINetwork cytoMotherNetwork, PPINetwork network) {
+    public CytoPPINetworkProjectionToUp createCytoProjectionToUp(String projectionID, CytoAbstractPPINetwork cytoMotherNetwork, PPINetwork network) {
         CytoPPINetworkProjectionToUp projection = new CytoPPINetworkProjectionToUp(cytoMotherNetwork, network, projectionID);
         projections.put(projectionID, projection);
         return projection;
     }
 
-    public static CytoProteinProjection createCytoProteinProjection(String ProteinProjectionID, Protein proteinProject, CytoPPINetworkProjection projection, CytoProtein cytoMotherProtein) {
+    public CytoProteinProjection createCytoProteinProjection(String ProteinProjectionID, Protein proteinProject, CytoPPINetworkProjection projection, CytoProtein cytoMotherProtein) {
         CytoProteinProjection proteinProjection = new CytoProteinProjection(ProteinProjectionID, proteinProject, projection, cytoMotherProtein);
         projection.addCytoProtein(proteinProjection);
         return proteinProjection;
     }
 
-    public static CytoAbstractPPINetwork getCytoNetwork(String CytoID) {
+    public CytoAbstractPPINetwork getCytoNetwork(String CytoID) {
         CytoAbstractPPINetwork cytoNetwork = cytoNetworks.get(CytoID);
         if (cytoNetwork == null) {
             cytoNetwork = projections.get(CytoID);
@@ -140,36 +139,36 @@ public class CytoDataHandle {
         return cytoNetwork;
     }
 
-    public static IDMapper getNetworkIDMapper() {
+    public IDMapper getNetworkIDMapper() {
         return networkIDMapper;
     }
 
-    public static void setNetworkIDMapper(IDMapper networkIDMapper) {
-        CytoDataHandle.networkIDMapper = networkIDMapper;
+    public void setNetworkIDMapper(IDMapper networkIDMapper) {
+        this.networkIDMapper = networkIDMapper;
     }
 
-    public static CytoPPINetwork createCytoNetwork(String ID, PPINetwork network) {
+    public CytoPPINetwork createCytoNetwork(String ID, PPINetwork network) {
         CytoPPINetwork cytoNetwork = new CytoPPINetwork(network, ID);
         cytoNetworks.put(ID, cytoNetwork);
         return cytoNetwork;
     }
 
-    public static Map<String, CytoPPINetworkProjection> getProjections() {
+    public Map<String, CytoPPINetworkProjection> getProjections() {
         return projections;
     }
 
-    public static void setProjections(Map<String, CytoPPINetworkProjection> projections) {
-        CytoDataHandle.projections = projections;
+    public void setProjections(Map<String, CytoPPINetworkProjection> projections) {
+        this.projections = projections;
     }
 
-    public static CytoPPINetworkProjection findNetworkProjectionByCytoID(String CytoID) {
+    public CytoPPINetworkProjection findNetworkProjectionByCytoID(String CytoID) {
         String CytoPPINetworkID = networkIDMapper.getIDByCytoID(CytoID);
         CytoPPINetworkProjection ret = projections.get(CytoPPINetworkID);
 
         return ret;
     }
 
-    public static CytoAbstractPPINetwork findNetworkByCytoID(String CytoID) {
+    public CytoAbstractPPINetwork findNetworkByCytoID(String CytoID) {
         String CytoPPINetworkID = networkIDMapper.getIDByCytoID(CytoID);
 
         CytoAbstractPPINetwork ret = cytoNetworks.get(CytoPPINetworkID);
@@ -182,7 +181,7 @@ public class CytoDataHandle {
         return ret;
     }
 
-    public static void addNetworkIDMapping(String CytoID, String ID) {
+    public void addNetworkIDMapping(String CytoID, String ID) {
         networkIDMapper.addMapping(CytoID, ID);
     }
 }

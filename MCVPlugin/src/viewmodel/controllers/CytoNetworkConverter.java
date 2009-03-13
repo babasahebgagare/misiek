@@ -4,15 +4,18 @@ import controllers.interactions.InteractionsManager;
 import cytoscape.CyNetwork;
 import cytoscape.Cytoscape;
 import cytoscape.view.CyNetworkView;
+import main.PluginDataHandle;
 import viewmodel.structs.CytoAbstractPPINetwork;
 
 public class CytoNetworkConverter {
 
     public static void convertCytoNetwork(CytoAbstractPPINetwork cytoNetwork) {
+        CytoDataHandle cdh = PluginDataHandle.getCytoDataHandle();
+
         if (Cytoscape.getNetwork(cytoNetwork.getCytoID()) == Cytoscape.getNullNetwork()) {
             CyNetwork cyNetwork = Cytoscape.createNetwork(cytoNetwork.getID(), true);
             cytoNetwork.setCytoID(cyNetwork.getIdentifier());
-            CytoDataHandle.addNetworkIDMapping(cyNetwork.getIdentifier(), cytoNetwork.getID());
+            cdh.addNetworkIDMapping(cyNetwork.getIdentifier(), cytoNetwork.getID());
 
             CytoProteinsConverter.convertCytoNetworkProteins(cyNetwork, cytoNetwork.getCytoProteins());
             //CytoInteractionsConverter.convertCytoNetworkInteractions(cyNetwork, cytoNetwork.getCytoInteractions());
