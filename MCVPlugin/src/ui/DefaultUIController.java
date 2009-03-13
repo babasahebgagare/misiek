@@ -23,7 +23,6 @@ import logicmodel.controllers.ProjectorInfoCalculator;
 import viewmodel.structs.CytoAbstractPPINetwork;
 import logicmodel.structs.CytoProtein;
 import logicmodel.structs.PPINetwork;
-import utils.MemoLogger;
 import viewmodel.controllers.CytoInteractionsConverter;
 import viewmodel.controllers.CytoVisualHandle;
 
@@ -162,6 +161,7 @@ public class DefaultUIController extends UIController {
         PluginMenusHandle.getDoProjectionButton().setEnabled(false);
         PluginMenusHandle.getLoadDataButton().setEnabled(true);
         PluginMenusHandle.getLoadInteractionsForNetworkButton().setEnabled(false);
+        PluginMenusHandle.getDeleteAllDataButton().setEnabled(false);
     }
 
     @Override
@@ -178,14 +178,15 @@ public class DefaultUIController extends UIController {
             AbstractDataReader.getInstance().setFilepath(filepath);
             AbstractDataReader.getInstance().readSpacies();
             AbstractDataReader.getInstance().readTrees();
-            
+
             ProjectorInfoCalculator.calculateProjectorInfo();
             initDataView();
-            
+
             PluginMenusHandle.getLoadDataButton().setEnabled(true);
             PluginMenusHandle.getShowNetworkButton().setEnabled(true);
             PluginMenusHandle.getLoadAllInteractionsButton().setEnabled(true);
             PluginMenusHandle.getLoadDataButton().setEnabled(false);
+            PluginMenusHandle.getDeleteAllDataButton().setEnabled(true);
         }
 
     }
@@ -223,5 +224,9 @@ public class DefaultUIController extends UIController {
         CytoInteractionsConverter.convertCytoNetworkInteractions(cyNetworkView.getNetwork(), cytoNetwork.getCytoInteractions());
 
         CytoVisualHandle.applyVisualStyleForNetwork(cyNetworkView);
+    }
+
+    @Override
+    public void deleteAllData() {
     }
 }

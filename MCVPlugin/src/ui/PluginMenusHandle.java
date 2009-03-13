@@ -16,6 +16,7 @@ public class PluginMenusHandle {
     private static JButton loadAllInteractionsButton = null;
     private static JButton showLoadedInteractionsButton = null;
     private static JButton loadInteractionsForNetworkButton = null;
+    private static JButton deleteAllDataButton = null;
 
     public static JList getFamiliesList() {
         return familiesList;
@@ -87,5 +88,13 @@ public class PluginMenusHandle {
 
     public static void setLoadInteractionsForNetworkButton(JButton loadInteractionsForNetworkButton) {
         PluginMenusHandle.loadInteractionsForNetworkButton = loadInteractionsForNetworkButton;
+    }
+
+    public static JButton getDeleteAllDataButton() {
+        return deleteAllDataButton;
+    }
+
+    public static void setDeleteAllDataButton(JButton deleteAllDataButton) {
+        PluginMenusHandle.deleteAllDataButton = deleteAllDataButton;
     }
 }
