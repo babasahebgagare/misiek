@@ -34,4 +34,6 @@ public abstract class UIController {
     public abstract void showLoadedInteractions(double treshold);
 
     public abstract void loadInteractionsForNetwork(double treshold);
+
+    public abstract void deleteAllData();
 }
