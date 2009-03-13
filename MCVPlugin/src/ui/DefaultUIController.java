@@ -12,6 +12,7 @@ import java.io.File;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
@@ -57,10 +58,23 @@ public class DefaultUIController extends UIController {
         }
     }
 
+    private void deleteColorListDataView() {
+        PluginMenusHandle.getFamiliesList().setModel(new DefaultListModel());
+    }
+
+    private void deleteTreeDataView() {
+        PluginMenusHandle.getTree().setModel(null);
+    }
+
     private void initColorListDataView() {
         DataHandle dh = PluginDataHandle.getDataHandle();
         Collection<String> familiesNames = dh.getFamiliesKeys();
         PluginMenusHandle.getFamiliesList().setListData(familiesNames.toArray());
+    }
+
+    private void deleteDataView() {
+        deleteTreeDataView();
+        deleteColorListDataView();
     }
 
     private void initDataView() {
@@ -241,6 +255,7 @@ public class DefaultUIController extends UIController {
     @Override
     public void deleteAllData() {
         PluginDataHandle.refreshPluginDataHandle();
+        deleteDataView();
         PluginMenusHandle.getLoadDataButton().setEnabled(true);
         PluginMenusHandle.getDeleteAllDataButton().setEnabled(false);
     }
