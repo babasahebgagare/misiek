@@ -10,11 +10,15 @@ import MCL.ClusterSettingsDialog;
 import MCL.MCLCluster;
 import cytoscape.Cytoscape;
 import java.awt.Color;
+import java.net.URL;
 import java.util.Collection;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JColorChooser;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.tree.DefaultTreeCellRenderer;
 import logicmodel.controllers.DataHandle;
 import logicmodel.structs.CytoProtein;
 import logicmodel.structs.Family;
@@ -73,6 +77,15 @@ public class LeftPanel extends javax.swing.JPanel {
     }
 
     private void initSpeciesTree() {
+
+        Icon icon = PluginResources.getIcon("spec.jpg");
+        DefaultTreeCellRenderer renderer = (DefaultTreeCellRenderer) jTree1.getCellRenderer();
+
+        renderer.setOpenIcon(icon);
+        renderer.setClosedIcon(icon);
+        renderer.setLeafIcon(icon);
+        jTree1.setCellRenderer(renderer);
+
         jTree1.setModel(null);
     }
 

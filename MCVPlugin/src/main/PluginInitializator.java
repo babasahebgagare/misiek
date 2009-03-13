@@ -53,7 +53,8 @@ public class PluginInitializator {
     private static void initUI() {
         CytoPanelImp leftPanel = (CytoPanelImp) Cytoscape.getDesktop().getCytoPanel(SwingConstants.WEST);
 
-        leftPanel.add(ResourceBundle.getBundle("resources/ui").getString("TABNAME"), new LeftPanel());
+        LeftPanel myLeftPanel = new LeftPanel();
+        leftPanel.add(ResourceBundle.getBundle("resources/ui").getString("TABNAME"), myLeftPanel);
     }
 
     public static void initAll() {
