@@ -4,16 +4,18 @@ import io.parsers.*;
 import java.util.Collection;
 import java.util.HashSet;
 import logicmodel.controllers.DataHandle;
+import main.PluginDataHandle;
 
 public class DefaultSpaciesParser {
 
     public static void readSpaciesString(String treeString, String parent) {
+        DataHandle dh = PluginDataHandle.getDataHandle();
         ParserStruct struct = extractNodeName(treeString);
 
         if (parent == null) {
-            DataHandle.createRootPPINetwork(struct.getNodeName());
+            dh.createRootPPINetwork(struct.getNodeName());
         } else {
-            DataHandle.createPPINetwork(struct.getNodeName(), parent);
+            dh.createPPINetwork(struct.getNodeName(), parent);
         }
 
         if (struct.getSubNodes() == null) {

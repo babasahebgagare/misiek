@@ -58,7 +58,8 @@ public class DefaultUIController extends UIController {
     }
 
     private void initColorListDataView() {
-        Collection<String> familiesNames = DataHandle.getFamiliesKeys();
+        DataHandle dh = PluginDataHandle.getDataHandle();
+        Collection<String> familiesNames = dh.getFamiliesKeys();
         PluginMenusHandle.getFamiliesList().setListData(familiesNames.toArray());
     }
 
@@ -68,7 +69,8 @@ public class DefaultUIController extends UIController {
     }
 
     private void initTreeDataView() {
-        TreeNode root = createRecTreeModel(DataHandle.getRootNetwork());
+        DataHandle dh = PluginDataHandle.getDataHandle();
+        TreeNode root = createRecTreeModel(dh.getRootNetwork());
         TreeModel newModel = new DefaultTreeModel(root);
         PluginMenusHandle.getTree().setModel(newModel);
     }
@@ -90,11 +92,12 @@ public class DefaultUIController extends UIController {
 
     @Override
     public Collection<PPINetwork> getSelectedNetworks() {
+        DataHandle dh = PluginDataHandle.getDataHandle();
         Collection<PPINetwork> networks = new HashSet<PPINetwork>();
 
         for (TreePath path : PluginMenusHandle.getTree().getSelectionPaths()) {
             String PPINetworkID = ((TreeNode) path.getLastPathComponent()).getTitle();
-            networks.add(DataHandle.getNetworks().get(PPINetworkID));
+            networks.add(dh.getNetworks().get(PPINetworkID));
         }
 
         return networks;
@@ -237,5 +240,8 @@ public class DefaultUIController extends UIController {
 
     @Override
     public void deleteAllData() {
+        PluginDataHandle.refreshPluginDataHandle();
+        PluginMenusHandle.getLoadDataButton().setEnabled(true);
+        PluginMenusHandle.getDeleteAllDataButton().setEnabled(false);
     }
 }

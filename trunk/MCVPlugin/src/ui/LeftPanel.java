@@ -19,6 +19,7 @@ import logicmodel.controllers.DataHandle;
 import logicmodel.structs.CytoProtein;
 import logicmodel.structs.Family;
 import logicmodel.structs.PPINetwork;
+import main.PluginDataHandle;
 import utils.Messenger;
 import viewmodel.controllers.CytoProjector;
 
@@ -53,13 +54,15 @@ public class LeftPanel extends javax.swing.JPanel {
         jList1.addListSelectionListener(new ListSelectionListener() {
 
             public void valueChanged(ListSelectionEvent e) {
+                DataHandle dh = PluginDataHandle.getDataHandle();
+
                 if (!e.getValueIsAdjusting()) {
 
                     String FamilyID = (String) jList1.getSelectedValue();
                     if (FamilyID == null) {
                         return;
                     }
-                    Family family = DataHandle.getFamily(FamilyID);
+                    Family family = dh.getFamily(FamilyID);
                     Color color = family.getColor();
                     color = JColorChooser.showDialog(null, "Wybierz kolor dla rodziny białek: " + FamilyID, color);
                     family.setColor(color);

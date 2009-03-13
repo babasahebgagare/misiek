@@ -2,6 +2,7 @@ package io.parsers.rootparser;
 
 import io.parsers.defaultparser.*;
 import logicmodel.controllers.DataHandle;
+import main.PluginDataHandle;
 
 public class RootDataParser extends DefaultDataParser {
 
@@ -14,7 +15,8 @@ public class RootDataParser extends DefaultDataParser {
 
     @Override
     public void readSpaciesString(String treeString) {
-        DataHandle.createRootPPINetwork(rootFamilyName);
+        DataHandle dh = PluginDataHandle.getDataHandle();
+        dh.createRootPPINetwork(rootFamilyName);
         RootSpaciesParser.readSpaciesString(treeString, rootFamilyName);
     }
 }
