@@ -13,17 +13,17 @@ import logicmodel.structs.Protein;
 
 public class DataHandle {
 
-    private static Map<String, PPINetwork> networks = new HashMap<String, PPINetwork>();
-    private static Map<String, Family> families = new HashMap<String, Family>();
-    private static PPINetwork rootNetwork;
+    private Map<String, PPINetwork> networks = new HashMap<String, PPINetwork>();
+    private Map<String, Family> families = new HashMap<String, Family>();
+    private PPINetwork rootNetwork;
 
-    private static void addInteractionProbabilityAttribute(String cannonName, Double probability) {
+    private void addInteractionProbabilityAttribute(String cannonName, Double probability) {
         String attrName = "Probability";
         final CyAttributes edgeAttrs = Cytoscape.getEdgeAttributes();
         edgeAttrs.setAttribute(cannonName, attrName, probability);
     }
 
-    private static void createInteaction(String EdgeID, String SourceID, String TargetID, Double Probability, PPINetwork network) {
+    private void createInteaction(String EdgeID, String SourceID, String TargetID, Double Probability, PPINetwork network) {
         Protein source = network.getProtein(SourceID);
         Protein target = network.getProtein(TargetID);
         addInteractionProbabilityAttribute(EdgeID, Probability);
@@ -32,7 +32,7 @@ public class DataHandle {
         network.addInteraction(interaction);
     }
 
-    public static void createInteraction(String EdgeID, String SourceID, String TargetID, Double Probability) {
+    public void createInteraction(String EdgeID, String SourceID, String TargetID, Double Probability) {
         for (PPINetwork network : networks.values()) {
 
             if (network.containsProtein(TargetID) && network.containsProtein(SourceID)) {
@@ -41,26 +41,26 @@ public class DataHandle {
         }
     }
 
-    public static void createRootPPINetwork(String NetworkID) {
+    public void createRootPPINetwork(String NetworkID) {
         PPINetwork net = new PPINetwork(NetworkID, null);
         networks.put(NetworkID, net);
         rootNetwork = net;
     }
 
-    public static void createPPINetwork(String NetworkID, String ParentNetworkID) {
-        //   if (!networks.containsKey(NetworkID)) {
+    public void createPPINetwork(String NetworkID, String ParentNetworkID) {
+        //  if (!networks.containsKey(NetworkID)) {
         PPINetwork ParentNetwork = networks.get(ParentNetworkID);
         PPINetwork net = new PPINetwork(NetworkID, ParentNetwork);
         ParentNetwork.getContext().addChild(net);
         networks.put(NetworkID, net);
     }
 
-    public static void createFamily(String FamilyID, Color color) {
+    public void createFamily(String FamilyID, Color color) {
         Family fam = new Family(FamilyID, color);
         families.put(FamilyID, fam);
     }
 
-    public static void createProtein(String ProteinID, String ParentProteinID, String NetworkID, String FamilyID) {
+    public void createProtein(String ProteinID, String ParentProteinID, String NetworkID, String FamilyID) {
         if (ParentProteinID != null) {
             PPINetwork network = networks.get(NetworkID);
             PPINetwork ParentNetwork = network.getContext().getParentNetwork();
@@ -76,41 +76,41 @@ public class DataHandle {
         }
     }
 
-    public static void createRootProtein(String ProteinID, String NetworkID, String FamilyID) {
+    public void createRootProtein(String ProteinID, String NetworkID, String FamilyID) {
         PPINetwork network = networks.get(NetworkID);
         Family family = families.get(FamilyID);
         network.addRootProtein(ProteinID, family);
     }
 
-    public static Map<String, PPINetwork> getNetworks() {
+    public Map<String, PPINetwork> getNetworks() {
         return networks;
     }
 
-    public static void setNetworks(Map<String, PPINetwork> nets) {
+    public void setNetworks(Map<String, PPINetwork> nets) {
         networks = nets;
     }
 
-    public static Collection<Family> getFamilies() {
+    public Collection<Family> getFamilies() {
         return families.values();
     }
 
-    public static Family getFamily(String ID) {
+    public Family getFamily(String ID) {
         return families.get(ID);
     }
 
-    public static Collection<String> getFamiliesKeys() {
+    public Collection<String> getFamiliesKeys() {
         return families.keySet();
     }
 
-    public static void setFamilies(Map<String, Family> families) {
-        DataHandle.families = families;
+    public void setFamilies(Map<String, Family> families) {
+        this.families = families;
     }
 
-    public static PPINetwork getRootNetwork() {
+    public PPINetwork getRootNetwork() {
         return rootNetwork;
     }
 
-    public static void setRootNetwork(PPINetwork rootNetwork) {
-        DataHandle.rootNetwork = rootNetwork;
+    public void setRootNetwork(PPINetwork rootNetwork) {
+        this.rootNetwork = rootNetwork;
     }
 }

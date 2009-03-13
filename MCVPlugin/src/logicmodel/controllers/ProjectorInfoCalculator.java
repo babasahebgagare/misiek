@@ -6,6 +6,7 @@ import java.util.Map;
 import logicmodel.structs.PPINetwork;
 import logicmodel.controllers.DataHandle;
 import logicmodel.structs.Protein;
+import main.PluginDataHandle;
 import utils.MemoLogger;
 
 public class ProjectorInfoCalculator {
@@ -71,7 +72,8 @@ public class ProjectorInfoCalculator {
     }
 
     private static void calculateProteinsInfo() {
-        Collection<PPINetwork> networks = DataHandle.getNetworks().values();
+        DataHandle dh = PluginDataHandle.getDataHandle();
+        Collection<PPINetwork> networks = dh.getNetworks().values();
 
         for (PPINetwork network : networks) {
 
@@ -85,7 +87,8 @@ public class ProjectorInfoCalculator {
     }
 
     private static void calculateNetworkTreeInfo() {
-        Collection<PPINetwork> networks = DataHandle.getNetworks().values();
+        DataHandle dh = PluginDataHandle.getDataHandle();
+        Collection<PPINetwork> networks = dh.getNetworks().values();
 
         for (PPINetwork network : networks) {
             calculateInfoForNetwork(network);

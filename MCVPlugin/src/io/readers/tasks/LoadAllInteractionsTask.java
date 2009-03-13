@@ -14,6 +14,7 @@ import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import logicmodel.controllers.DataHandle;
+import main.PluginDataHandle;
 import utils.IDCreator;
 import utils.MemoLogger;
 
@@ -39,6 +40,7 @@ public class LoadAllInteractionsTask implements Task {
     }
 
     public void run() {
+        DataHandle dh = PluginDataHandle.getDataHandle();
         try {
             myThread = Thread.currentThread();
             taskMonitor.setStatus("Ładowanie interakcji");
@@ -56,7 +58,7 @@ public class LoadAllInteractionsTask implements Task {
                 Double Probability = Double.parseDouble(DefaultInteractionsParser.readWord(br));
                 if (Probability.doubleValue() >= treshold) {
                     created++;
-                    DataHandle.createInteraction(EdgeID, SourceID, TargetID, Probability);
+                    dh.createInteraction(EdgeID, SourceID, TargetID, Probability);
                 }
                 current = fis.getChannel().position();
                 float percent = current * 100 / (float) max;

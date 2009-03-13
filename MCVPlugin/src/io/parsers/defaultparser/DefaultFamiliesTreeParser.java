@@ -5,18 +5,20 @@ import java.awt.Color;
 import java.util.Collection;
 import java.util.HashSet;
 import logicmodel.controllers.DataHandle;
+import main.PluginDataHandle;
 import utils.ColorGenerator;
 
 public class DefaultFamiliesTreeParser {
 
     public static void readAllTreeString(String treeString) {
+        DataHandle dh = PluginDataHandle.getDataHandle();
         int lastIndex = treeString.lastIndexOf(")");
         String FamilyName = treeString.substring(lastIndex + 1).trim();
         String tree = treeString.substring(1, lastIndex).trim();
 
         Color color = ColorGenerator.generateColor(FamilyName);
 
-        DataHandle.createFamily(FamilyName, color);
+        dh.createFamily(FamilyName, color);
         readTreeSpaciesString(tree, FamilyName, null);
 
     }
@@ -81,6 +83,7 @@ public class DefaultFamiliesTreeParser {
     }
 
     private static void readTreeSpaciesString(String tree, String FamilyName, String parent) {
+        DataHandle dh = PluginDataHandle.getDataHandle();
         Collection<String> spaciesInfo = readTreeSpaciesCollection(tree);
         for (String sp : spaciesInfo) {
             ParserStruct struct = extractSpaciesName(sp);
@@ -93,11 +96,11 @@ public class DefaultFamiliesTreeParser {
                         String proteinName = subNode.substring(lastBracket + 1);
                         String spaciesCollection = subNode.substring(1, lastBracket);
 
-                        DataHandle.createProtein(proteinName, parent, struct.getNodeName(), FamilyName);
+                        dh.createProtein(proteinName, parent, struct.getNodeName(), FamilyName);
                         readTreeSpaciesString(spaciesCollection, FamilyName, proteinName);
                     } else {
                         String proteinName = subNode;
-                        DataHandle.createProtein(proteinName, parent, struct.getNodeName(), FamilyName);
+                        dh.createProtein(proteinName, parent, struct.getNodeName(), FamilyName);
                     }
                 }
             }
