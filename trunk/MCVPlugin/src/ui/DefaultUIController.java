@@ -34,7 +34,7 @@ public class DefaultUIController extends UIController {
         Collection<Integer> nodes = new HashSet<Integer>();
 
         for (int i = 0; i < edgesID.length; i++) {
-            Edge edge = (Edge) Cytoscape.getRootGraph().getEdge(edgesID[i]);
+            Edge edge = Cytoscape.getRootGraph().getEdge(edgesID[i]);
             nodes.add(Integer.valueOf(edge.getSource().getRootGraphIndex()));
             nodes.add(Integer.valueOf(edge.getTarget().getRootGraphIndex()));
         }
@@ -81,7 +81,7 @@ public class DefaultUIController extends UIController {
             nodes.add(Integer.valueOf(nodesID[i]));
         }
         for (int i = 0; i < edgesID.length; i++) {
-            Edge edge = (Edge) Cytoscape.getRootGraph().getEdge(edgesID[i]);
+            Edge edge = Cytoscape.getRootGraph().getEdge(edgesID[i]);
             nodes.remove(Integer.valueOf(edge.getSource().getRootGraphIndex()));
             nodes.remove(Integer.valueOf(edge.getTarget().getRootGraphIndex()));
         }
@@ -102,6 +102,7 @@ public class DefaultUIController extends UIController {
 
     @Override
     public Collection<CytoProtein> getSelectedProteins(CyNetwork cyNetwork) {
+        @SuppressWarnings("unchecked")
         Set<CyNode> cyNodes = cyNetwork.getSelectedNodes();
         String PPINetworkCytoID = Cytoscape.getCurrentNetwork().getIdentifier();
         CytoAbstractPPINetwork currCytoNetwork = CytoDataHandle.findNetworkByCytoID(PPINetworkCytoID);
@@ -129,6 +130,7 @@ public class DefaultUIController extends UIController {
     @Override
     public void selectUnconnectedNodes(CyNetwork cyNetwork) {
         Collection<Integer> nodesID = connectedNodesIDs(cyNetwork);
+        @SuppressWarnings("unchecked")
         Collection<Integer> selected = new HashSet<Integer>(cyNetwork.getSelectedNodes());
 
         cyNetwork.unselectAllNodes();
@@ -172,15 +174,14 @@ public class DefaultUIController extends UIController {
             String filepath = file.getAbsolutePath();
             int pointPosition = filepath.lastIndexOf(".");
             filepath = filepath.substring(0, pointPosition + 1);
+
             AbstractDataReader.getInstance().setFilepath(filepath);
-
             AbstractDataReader.getInstance().readSpacies();
-            MemoLogger.log("Drzewo gatunkow wczytane");
-
             AbstractDataReader.getInstance().readTrees();
-            MemoLogger.log("Drzewo rodzin wczytane");
+            
             ProjectorInfoCalculator.calculateProjectorInfo();
             initDataView();
+            
             PluginMenusHandle.getLoadDataButton().setEnabled(true);
             PluginMenusHandle.getShowNetworkButton().setEnabled(true);
             PluginMenusHandle.getLoadAllInteractionsButton().setEnabled(true);
