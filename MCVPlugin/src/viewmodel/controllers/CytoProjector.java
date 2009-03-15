@@ -58,7 +58,7 @@ public class CytoProjector {
         CytoDataHandle cdh = PluginDataHandle.getCytoDataHandle();
 
         String PPINetworkCytoID = Cytoscape.getCurrentNetwork().getIdentifier();
-        CytoAbstractPPINetwork currCytoNetwork = cdh.findNetworkByCytoID(PPINetworkCytoID);
+        CytoAbstractPPINetwork currCytoNetwork = cdh.tryFindNetworkByCytoID(PPINetworkCytoID);
         Collection<CytoProtein> ret = new HashSet<CytoProtein>();
 
         if (currCytoNetwork != null) {

@@ -23,7 +23,7 @@ public class MCVEdgeAppearanceCalculator extends EdgeAppearanceCalculator {
             return;
         }
 
-        CytoAbstractPPINetwork cytoNetwork = cdh.findNetworkByCytoID(cyNetwork.getIdentifier());
+        CytoAbstractPPINetwork cytoNetwork = cdh.tryFindNetworkByCytoID(cyNetwork.getIdentifier());
 
         if (cytoNetwork != null) {
             CytoInteraction cytoInteraction = cdh.getCytoInteractionByIndex(edge.getRootGraphIndex());

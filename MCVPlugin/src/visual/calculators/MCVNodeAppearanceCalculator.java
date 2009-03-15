@@ -23,7 +23,7 @@ public class MCVNodeAppearanceCalculator extends NodeAppearanceCalculator {
         if (cdh == null) {
             return;
         }
-        CytoAbstractPPINetwork cytoNetwork = cdh.findNetworkByCytoID(cyNetwork.getIdentifier());
+        CytoAbstractPPINetwork cytoNetwork = cdh.tryFindNetworkByCytoID(cyNetwork.getIdentifier());
         if (cytoNetwork != null) {
             CytoProtein cytoProtein = cdh.getCytoProteinByIndex(node.getRootGraphIndex());
             if (cytoProtein != null) {

@@ -13,6 +13,7 @@ import javax.swing.SwingConstants;
 import ui.LeftPanel;
 import utils.MemoLogger;
 import viewmodel.controllers.CytoDataHandle;
+import viewmodel.structs.CytoAbstractPPINetwork;
 import visual.calculators.MCVEdgeAppearanceCalculator;
 import visual.calculators.MCVNodeAppearanceCalculator;
 
@@ -41,19 +42,23 @@ public class PluginInitializator {
                 String PropertyName = evt.getPropertyName();
 
                 if (PropertyName.equals("NETWORK_VIEW_CREATED")) {
-                    System.out.println("new" + ((DingNetworkView) evt.getNewValue()).getIdentifier());
                     MemoLogger.log("Network view created: " + evt.getNewValue().toString());
                 } else if (PropertyName.equals("NETWORK_VIEW_DESTROYED")) {
                     String networkName = ((DingNetworkView) evt.getNewValue()).getTitle();
-                    String networkID = ((DingNetworkView) evt.getNewValue()).getIdentifier();
-
-                    CytoDataHandle cdh = PluginDataHandle.getCytoDataHandle();
-                    cdh.cytoNetworkViewDeleted(networkID, networkName);
-
                     MemoLogger.log("Network view destroyed: " + networkName);
                 } else if (PropertyName.equals(Cytoscape.NETWORK_CREATED)) {
                     MemoLogger.log("Network created: " + evt.getNewValue().toString());
                 } else if (PropertyName.equals(Cytoscape.NETWORK_DESTROYED)) {
+                    System.out.println(evt.getNewValue().toString());
+
+                    //  String networkName = ((DingNetworkView) evt.getNewValue()).getTitle();
+                    String networkID = evt.getNewValue().toString();
+                    //   System.out.println("DELETED: " + networkName + " " + networkID);
+                    CytoDataHandle cdh = PluginDataHandle.getCytoDataHandle();
+                    CytoAbstractPPINetwork netOrNull = cdh.tryFindNetworkByCytoID(networkID);
+                    if (netOrNull != null) {
+                        cdh.cytoNetworkViewDeleted(networkID, netOrNull.getID());
+                    }
                     MemoLogger.log("Network deleted: " + evt.getNewValue().toString());
                 } else if (PropertyName.equals(Cytoscape.NETWORK_LOADED)) {
                     MemoLogger.log("Network loaded: " + evt.getNewValue().toString());
