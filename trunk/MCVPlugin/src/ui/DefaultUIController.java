@@ -125,7 +125,7 @@ public class DefaultUIController extends UIController {
 
 
         String PPINetworkCytoID = Cytoscape.getCurrentNetwork().getIdentifier();
-        CytoAbstractPPINetwork currCytoNetwork = cdh.findNetworkByCytoID(PPINetworkCytoID);
+        CytoAbstractPPINetwork currCytoNetwork = cdh.tryFindNetworkByCytoID(PPINetworkCytoID);
         Collection<CytoProtein> ret = new HashSet<CytoProtein>();
 
         if (currCytoNetwork != null) {
@@ -232,7 +232,7 @@ public class DefaultUIController extends UIController {
         CytoDataHandle cdh = PluginDataHandle.getCytoDataHandle();
 
         CyNetworkView cyNetworkView = Cytoscape.getCurrentNetworkView();
-        CytoAbstractPPINetwork cytoNetwork = cdh.findNetworkByCytoID(cyNetworkView.getIdentifier());
+        CytoAbstractPPINetwork cytoNetwork = cdh.tryFindNetworkByCytoID(cyNetworkView.getIdentifier());
 
         InteractionsManager.getInstance().loadAndShowInteractionsFromModel(cytoNetwork, treshold);
     }
@@ -243,7 +243,7 @@ public class DefaultUIController extends UIController {
 
         CyNetworkView cyNetworkView = Cytoscape.getCurrentNetworkView();
 
-        CytoAbstractPPINetwork cytoNetwork = cdh.findNetworkByCytoID(cyNetworkView.getIdentifier());
+        CytoAbstractPPINetwork cytoNetwork = cdh.tryFindNetworkByCytoID(cyNetworkView.getIdentifier());
 
         cdh.updateCytoInteractions(cytoNetwork, treshold);
 

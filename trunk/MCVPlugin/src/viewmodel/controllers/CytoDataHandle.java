@@ -212,14 +212,14 @@ public class CytoDataHandle {
         this.projections = projections;
     }
 
-    public CytoPPINetworkProjection findNetworkProjectionByCytoID(String CytoID) {
+    public CytoPPINetworkProjection tryFindNetworkProjectionByCytoID(String CytoID) {
         String CytoPPINetworkID = networkIDMapper.getIDByCytoID(CytoID);
         CytoPPINetworkProjection ret = projections.get(CytoPPINetworkID);
 
         return ret;
     }
 
-    public CytoAbstractPPINetwork findNetworkByCytoID(String CytoID) {
+    public CytoAbstractPPINetwork tryFindNetworkByCytoID(String CytoID) {
         String CytoPPINetworkID = networkIDMapper.getIDByCytoID(CytoID);
 
         CytoAbstractPPINetwork ret = cytoNetworks.get(CytoPPINetworkID);
