@@ -1,5 +1,6 @@
 package panel;
 
+import algorithm.smart.Cluster;
 import cyto.CytoAffinityClustering;
 import cyto.CytoClusterAlgorithm;
 import cyto.CytoClusterTask;
@@ -32,6 +33,7 @@ public class AffinityPanelController implements Serializable {
     private JSpinner iterationsField = null;
     private JTextField preferencesField = null;
     private AffinityStatsPanelController psc = null;
+    private boolean cancelDialog = false;
 
     public AffinityPanelController(AffinityStatsPanelController psc) {
         this.psc = psc;
@@ -87,7 +89,32 @@ public class AffinityPanelController implements Serializable {
     }
 
     private boolean validateNodeNameAttr(String nodeNameAttr) {
-        return (nodeNameAttr != null && !nodeNameAttr.equals(""));
+        if (nodeNameAttr == null || nodeNameAttr.equals("")) {
+            return false;
+        }
+        String[] names = Cytoscape.getNodeAttributes().getAttributeNames();
+
+        boolean exist = false;
+        for (String name : names) {
+            if (name.equals(nodeNameAttr)) {
+                exist = true;
+                break;
+            }
+        }
+
+        if (exist) {
+            ClusterNodeNameAttrExistDialog dialog = new ClusterNodeNameAttrExistDialog(Cytoscape.getDesktop(), true);
+            dialog.setTitle("Warning!");
+            dialog.setVisible(true);
+            if (dialog.getReturnStatus() == ClusterNodeNameAttrExistDialog.RET_OK) {
+                return true;
+            } else {
+                cancelDialog = true;
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private boolean validatePreferences(Double preferences) {
@@ -116,7 +143,11 @@ public class AffinityPanelController implements Serializable {
             return false;
         }
         if (!validateNodeNameAttr(nodeNameAttr)) {
-            Messenger.message("Node name attribure is not valid!");
+            if (cancelDialog == true) {
+                cancelDialog = false;
+            } else {
+                Messenger.message("Node name attribure is not valid!");
+            }
             return false;
         }
         return true;
