@@ -11,14 +11,12 @@ import giny.model.Edge;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import utils.Messenger;
-import utils.Stats;
+import utils.MathStats;
 
 /**
  *
@@ -168,7 +166,7 @@ public class AffinityPanelController implements Serializable {
             }
         }
 
-        Double median = Stats.median(probs);
+        Double median = MathStats.median(probs);
         setPreferences(median);
     }
 

@@ -76,6 +76,13 @@ public class DefaultLayouter extends Layouter {
     }
 
     private static void setProteinViewPosition(NodeView proteinView, NodeView nodeView, int i, int count) {
+        if (proteinView == null) {
+            System.out.println("NULL PROTEIN VIEW");
+        }
+        if (nodeView == null) {
+            System.out.println("NODE VIEW NULL");
+        }
+
         if (count == 1) {
             proteinView.setXPosition(nodeView.getXPosition());
             proteinView.setYPosition(nodeView.getYPosition());

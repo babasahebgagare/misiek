@@ -13,6 +13,24 @@ public class IDCreator {
         return SourceID + "-" + TargetID;
     }
 
+    public static String createNetCytoNetworkID(String ID) {
+        System.out.println(ID);
+        if (!CytoUtil.cytoNetworkExist(ID)) {
+            return ID;
+        }
+        boolean ok = false;
+        int sufix = 1;
+        while (!ok) {
+            String tmpID = ID.concat("_" + String.valueOf(sufix));
+            if (!CytoUtil.cytoNetworkExist(tmpID)) {
+                ok = true;
+                return tmpID;
+            }
+            sufix++;
+        }
+        return ID;
+    }
+
     public static String createNetworkProjectionID(PPINetwork networkTarget, CytoAbstractPPINetwork cytoNetworkSource) {
         networkID++;
         return "PROJ_" + cytoNetworkSource.getID() + "_ON_" + networkTarget.getID() + "_" + String.valueOf(networkID);
