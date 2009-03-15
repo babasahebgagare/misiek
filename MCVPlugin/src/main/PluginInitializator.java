@@ -1,6 +1,7 @@
 package main;
 
 import cytoscape.Cytoscape;
+import cytoscape.ding.DingNetworkView;
 import cytoscape.view.cytopanels.CytoPanelImp;
 import cytoscape.visual.CalculatorCatalog;
 import cytoscape.visual.VisualMappingManager;
@@ -11,6 +12,7 @@ import java.util.ResourceBundle;
 import javax.swing.SwingConstants;
 import ui.LeftPanel;
 import utils.MemoLogger;
+import viewmodel.controllers.CytoDataHandle;
 import visual.calculators.MCVEdgeAppearanceCalculator;
 import visual.calculators.MCVNodeAppearanceCalculator;
 
@@ -37,7 +39,19 @@ public class PluginInitializator {
 
             public void propertyChange(PropertyChangeEvent evt) {
                 String PropertyName = evt.getPropertyName();
-                if (PropertyName.equals(Cytoscape.NETWORK_CREATED)) {
+
+                if (PropertyName.equals("NETWORK_VIEW_CREATED")) {
+                    System.out.println("new" + ((DingNetworkView) evt.getNewValue()).getIdentifier());
+                    MemoLogger.log("Network view created: " + evt.getNewValue().toString());
+                } else if (PropertyName.equals("NETWORK_VIEW_DESTROYED")) {
+                    String networkName = ((DingNetworkView) evt.getNewValue()).getTitle();
+                    String networkID = ((DingNetworkView) evt.getNewValue()).getIdentifier();
+
+                    CytoDataHandle cdh = PluginDataHandle.getCytoDataHandle();
+                    cdh.cytoNetworkViewDeleted(networkID, networkName);
+
+                    MemoLogger.log("Network view destroyed: " + networkName);
+                } else if (PropertyName.equals(Cytoscape.NETWORK_CREATED)) {
                     MemoLogger.log("Network created: " + evt.getNewValue().toString());
                 } else if (PropertyName.equals(Cytoscape.NETWORK_DESTROYED)) {
                     MemoLogger.log("Network deleted: " + evt.getNewValue().toString());

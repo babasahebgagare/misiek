@@ -10,10 +10,8 @@ import MCL.ClusterSettingsDialog;
 import MCL.MCLCluster;
 import cytoscape.Cytoscape;
 import java.awt.Color;
-import java.net.URL;
 import java.util.Collection;
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JColorChooser;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
@@ -25,6 +23,7 @@ import logicmodel.structs.Family;
 import logicmodel.structs.PPINetwork;
 import main.PluginDataHandle;
 import utils.Messenger;
+import utils.Stats;
 import viewmodel.controllers.CytoProjector;
 
 /**
@@ -121,6 +120,7 @@ public class LeftPanel extends javax.swing.JPanel {
         jSpinner1 = new javax.swing.JSpinner();
         jButton6 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -316,6 +316,13 @@ public class LeftPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton12.setText("Test");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -328,7 +335,9 @@ public class LeftPanel extends javax.swing.JPanel {
                     .addComponent(jButton6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jButton10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
+                        .addGap(36, 36, 36)
+                        .addComponent(jButton12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                         .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -344,7 +353,8 @@ public class LeftPanel extends javax.swing.JPanel {
                 .addGap(11, 11, 11)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jSpinner1, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
-                    .addComponent(jButton10))
+                    .addComponent(jButton10)
+                    .addComponent(jButton12))
                 .addContainerGap())
         );
 
@@ -441,10 +451,15 @@ private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     UIController.getInstance().deleteAllData();
 }//GEN-LAST:event_jButton11ActionPerformed
 
+private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+    Stats.printStats();
+}//GEN-LAST:event_jButton12ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

@@ -9,9 +9,9 @@ public class Messenger {
         System.out.println(message);
         JOptionPane.showMessageDialog(Cytoscape.getDesktop(), message);
     }
-    
+
     public static void error(Exception ex) {
         System.out.println(ex.getMessage());
-        JOptionPane.showMessageDialog(Cytoscape.getDesktop(), ex.getMessage());     
+        JOptionPane.showMessageDialog(Cytoscape.getDesktop(), ex.getMessage());
     }
 }

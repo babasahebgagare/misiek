@@ -5,8 +5,11 @@ import cytoscape.CyEdge;
 import cytoscape.CyNetwork;
 import cytoscape.Cytoscape;
 import cytoscape.view.CyNetworkView;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import mappers.IDMapper;
 import viewmodel.structs.CytoAbstractPPINetwork;
 import viewmodel.structs.CytoGroupNode;
@@ -29,6 +32,54 @@ public class CytoDataHandle {
     private Map<Integer, CytoInteraction> cytoInteractions = new HashMap<Integer, CytoInteraction>();
     private Map<String, CytoPPINetworkProjection> projections = new HashMap<String, CytoPPINetworkProjection>();
     private Map<String, CytoPPINetwork> cytoNetworks = new HashMap<String, CytoPPINetwork>();
+
+    public void deleteAllCytoInteractionsByNetwork(CytoAbstractPPINetwork cytoNetwork) {
+        for (CytoInteraction interaction : cytoNetwork.getCytoInteractions()) {
+            cytoInteractions.remove(interaction.getCytoID());
+        }
+    }
+
+    public void deleteAllCytoProteinsByNetwork(CytoAbstractPPINetwork cytoNetwork) {
+        for (CytoProtein protein : cytoNetwork.getCytoProteins()) {
+            cytoInteractions.remove(protein.getCytoID());
+        }
+    }
+
+    public void cytoNetworkViewDeleted(String networkID, String networkName) {
+        System.out.println("DELETING --------------- " + networkID + " " + networkName);
+        if (cytoNetworks.containsKey(networkName)) {
+            System.out.println("YEAH cyto");
+            CytoAbstractPPINetwork net = cytoNetworks.get(networkName);
+            deleteAllCytoInteractionsByNetwork(net);
+            deleteAllCytoProteinsByNetwork(net);
+            cytoNetworks.remove(networkName);
+        }
+        if (projections.containsKey(networkName)) {
+            CytoAbstractPPINetwork net = projections.get(networkName);
+            deleteAllCytoInteractionsByNetwork(net);
+            deleteAllCytoProteinsByNetwork(net);
+
+            projections.remove(networkName);
+        }
+    }
+
+    public Collection<CytoInteraction> getCytoInteractions() {
+        return cytoInteractions.values();
+    }
+
+    public Set<CytoAbstractPPINetwork> getCytoPPINetworks() {
+
+        Set<CytoAbstractPPINetwork> res = new HashSet<CytoAbstractPPINetwork>();
+        for (CytoPPINetworkProjection proj : projections.values()) {
+            res.add(proj);
+        }
+
+        for (CytoPPINetwork net : cytoNetworks.values()) {
+            res.add(net);
+        }
+
+        return res;
+    }
 
     public void addCytoInteractionMapping(int index, CytoInteraction object) {
         cytoInteractions.put(Integer.valueOf(index), object);

@@ -7,7 +7,7 @@ import java.util.Vector;
  *
  * @author misiek (mw219725@gmail.com)
  */
-public class Stats {
+public class MathStats {
 
     public static Double median(Vector<Double> vector) {
         // Clone the input vector
