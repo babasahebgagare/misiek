@@ -35,13 +35,15 @@ public class CytoDataHandle {
 
     public void deleteAllCytoInteractionsByNetwork(CytoAbstractPPINetwork cytoNetwork) {
         for (CytoInteraction interaction : cytoNetwork.getCytoInteractions()) {
-            cytoInteractions.remove(interaction.getCytoID());
+            Integer cytoIndex = Integer.valueOf(interaction.getIndex());
+            cytoInteractions.remove(cytoIndex);
         }
     }
 
     public void deleteAllCytoProteinsByNetwork(CytoAbstractPPINetwork cytoNetwork) {
         for (CytoProtein protein : cytoNetwork.getCytoProteins()) {
-            cytoInteractions.remove(protein.getCytoID());
+            Integer cytoIndex = Integer.valueOf(protein.getIndex());
+            cytoInteractions.remove(cytoIndex);
         }
     }
 
