@@ -11,7 +11,12 @@
 
     <property name="cytoscape-plugins" value="${cytoscape-path}/plugins" />
 
-    <target name="compile-plugin" description="Compile Cytoscape plugin">
+    <target name="clean-plugin" description="Cleaning">
+        <ant antfile="${project-name}/build.xml" inheritall="false" target="clean" />
+        <ant antfile="${affinity-name}/build.xml" inheritall="false" target="clean" />
+    </target>
+
+    <target name="compile-plugin" depends="clean-plugin" description="Compile Cytoscape plugin">
         <ant antfile="${project-name}/build.xml" inheritall="false" target="jar" />
         <ant antfile="${affinity-name}/build.xml" inheritall="false" target="jar" />
     </target>

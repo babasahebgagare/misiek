@@ -1,9 +1,4 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
  * ClusterNodeNameAttrExistDialog.java
  *
  * Created on 2009-03-15, 22:37:35
@@ -121,26 +116,6 @@ public class ClusterNodeNameAttrExistDialog extends javax.swing.JDialog {
         setVisible(false);
         dispose();
     }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(final String[] args) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-
-            public void run() {
-                ClusterNodeNameAttrExistDialog dialog = new ClusterNodeNameAttrExistDialog(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-
-                    public void windowClosing(final java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JLabel jLabel1;
