@@ -33,9 +33,9 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
     private double lambda;
     private Integer convits = null;
     private AffinityPropagationAlgorithm<String> af = new SmartPropagationAlgorithm();
-    CyAttributes nodesAttributes = Cytoscape.getNodeAttributes();
-    HashMap<String, Integer> nodeMapping = new HashMap<String, Integer>();
-    HashMap<Integer, String> idMapping = new HashMap<Integer, String>();
+    private CyAttributes nodesAttributes = Cytoscape.getNodeAttributes();
+    private Map<String, Integer> nodeMapping = new HashMap<String, Integer>();
+    private Map<Integer, String> idMapping = new HashMap<Integer, String>();
 
     public CytoAffinityClustering(final String nodeNameAttr, final String edgeNameAttr, final double lambda, final double preferences, final int iterations) {
         this.nodeNameAttr = nodeNameAttr;
