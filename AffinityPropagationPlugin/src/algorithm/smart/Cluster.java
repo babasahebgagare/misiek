@@ -18,7 +18,7 @@ public class Cluster<T> implements Comparable<Cluster<T>> {
     private String name;
     private Collection<T> elements = new HashSet<T>();
 
-    public Cluster(String name) {
+    public Cluster(final String name) {
         this.name = name;
     }
 
@@ -30,7 +30,7 @@ public class Cluster<T> implements Comparable<Cluster<T>> {
         return elements.size();
     }
 
-    public void add(T element) {
+    public void add(final T element) {
         elements.add(element);
     }
 
@@ -38,7 +38,7 @@ public class Cluster<T> implements Comparable<Cluster<T>> {
         return elements;
     }
 
-    public int compareTo(Cluster<T> cluster) {
+    public int compareTo(final Cluster<T> cluster) {
         if (cluster == null) {
             return -1;
         }
@@ -53,7 +53,7 @@ public class Cluster<T> implements Comparable<Cluster<T>> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (!obj.getClass().equals(this.getClass())) {
             return false;
         } else {

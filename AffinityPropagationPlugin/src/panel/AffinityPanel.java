@@ -12,7 +12,7 @@ public class AffinityPanel extends javax.swing.JPanel {
     /** Creates new form AffinityPanel
      * @param pc
      */
-    public AffinityPanel(AffinityPanelController pc) {
+    public AffinityPanel(final AffinityPanelController pc) {
         this.pc = pc;
         initComponents();
         pc.setCovitsField(jTextField5);

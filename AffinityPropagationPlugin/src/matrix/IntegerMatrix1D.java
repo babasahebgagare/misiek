@@ -2,7 +2,7 @@ package matrix;
 
 public class IntegerMatrix1D extends Matrix1D<Integer> {
 
-    public IntegerMatrix1D(int N) {
+    public IntegerMatrix1D(final int N) {
         super(N);
         this.setVector(new Integer[N]);
         for (int i = 0; i < N; i++) {
@@ -10,7 +10,7 @@ public class IntegerMatrix1D extends Matrix1D<Integer> {
         }
     }
 
-    public static IntegerMatrix1D range(int r) {
+    public static IntegerMatrix1D range(final int r) {
         IntegerMatrix1D res = new IntegerMatrix1D(r);
         res.setVector(new Integer[r]);
         for (int i = 0; i < r; i++) {

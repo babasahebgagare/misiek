@@ -35,7 +35,7 @@ public class AffinityPanelController implements Serializable {
     private AffinityStatsPanelController psc = null;
     private boolean cancelDialog = false;
 
-    public AffinityPanelController(AffinityStatsPanelController psc) {
+    public AffinityPanelController(final AffinityStatsPanelController psc) {
         this.psc = psc;
     }
 
@@ -72,23 +72,23 @@ public class AffinityPanelController implements Serializable {
         psc.addClusteringStat(network, lambda, preferences, clusters, iterations, nodeNameAttr);
     }
 
-    private boolean validateConvits(Integer convits) {
+    private boolean validateConvits(final Integer convits) {
         return true;
     }
 
-    private boolean validateEdgeNameAttr(String edgeNameAttr) {
+    private boolean validateEdgeNameAttr(final String edgeNameAttr) {
         return (edgeNameAttr != null && !edgeNameAttr.equals(""));
     }
 
-    private boolean validateIterations(Integer iterations) {
+    private boolean validateIterations(final Integer iterations) {
         return (iterations != null && iterations > 0);
     }
 
-    private boolean validateLambda(Double lambda) {
+    private boolean validateLambda(final Double lambda) {
         return (lambda != null && lambda < 1.0 && lambda > 0.0);
     }
 
-    private boolean validateNodeNameAttr(String nodeNameAttr) {
+    private boolean validateNodeNameAttr(final String nodeNameAttr) {
         if (nodeNameAttr == null || nodeNameAttr.equals("")) {
             return false;
         }
@@ -117,11 +117,11 @@ public class AffinityPanelController implements Serializable {
         return true;
     }
 
-    private boolean validatePreferences(Double preferences) {
+    private boolean validatePreferences(final Double preferences) {
         return (preferences != null && preferences > 0.0);
     }
 
-    private boolean validateValues(Double lambda, Double preferences, Integer iterations, Integer convits, String nodeNameAttr, String edgeNameAttr) {
+    private boolean validateValues(final Double lambda, final Double preferences, final Integer iterations, final Integer convits, final String nodeNameAttr, final String edgeNameAttr) {
         if (!validateLambda(lambda)) {
             Messenger.message("Lambda is not valid!");
             return false;
@@ -245,7 +245,7 @@ public class AffinityPanelController implements Serializable {
         }
     }
 
-    public void setPreferences(Double p) {
+    public void setPreferences(final Double p) {
 
         preferencesField.setText(String.valueOf(p));
     }
@@ -282,7 +282,7 @@ public class AffinityPanelController implements Serializable {
         return convitsField;
     }
 
-    public void setCovitsField(JTextField covitsField) {
+    public void setCovitsField(final JTextField covitsField) {
         this.convitsField = covitsField;
     }
 
@@ -290,7 +290,7 @@ public class AffinityPanelController implements Serializable {
         return convitsField;
     }
 
-    public void setConvitsField(JTextField convitsField) {
+    public void setConvitsField(final JTextField convitsField) {
         this.convitsField = convitsField;
     }
 
@@ -298,7 +298,7 @@ public class AffinityPanelController implements Serializable {
         return edgeAttrField;
     }
 
-    public void setEdgeAttrField(JComboBox edgeAttrField) {
+    public void setEdgeAttrField(final JComboBox edgeAttrField) {
         this.edgeAttrField = edgeAttrField;
     }
 
@@ -306,7 +306,7 @@ public class AffinityPanelController implements Serializable {
         return iterationsField;
     }
 
-    public void setIterationsField(JSpinner iterationsField) {
+    public void setIterationsField(final JSpinner iterationsField) {
         this.iterationsField = iterationsField;
     }
 
@@ -314,7 +314,7 @@ public class AffinityPanelController implements Serializable {
         return lambdaField;
     }
 
-    public void setLambdaField(JTextField lambdaField) {
+    public void setLambdaField(final JTextField lambdaField) {
         this.lambdaField = lambdaField;
     }
 
@@ -322,7 +322,7 @@ public class AffinityPanelController implements Serializable {
         return nodeAttrField;
     }
 
-    public void setNodeAttrField(JTextField nodeAttr) {
+    public void setNodeAttrField(final JTextField nodeAttr) {
         this.nodeAttrField = nodeAttr;
     }
 
@@ -330,7 +330,7 @@ public class AffinityPanelController implements Serializable {
         return preferencesField;
     }
 
-    public void setPreferencesField(JTextField preferencesField) {
+    public void setPreferencesField(final JTextField preferencesField) {
         this.preferencesField = preferencesField;
     }
 }

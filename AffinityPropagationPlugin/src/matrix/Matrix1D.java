@@ -5,16 +5,16 @@ public abstract class Matrix1D<T> implements Matrix1DInterface<T> {
     private T[] vector;
     private int N;
 
-    public void setValue(int i, T t) {
+    public void setValue(final int i, final T t) {
         this.vector[i] = t;
     }
 
-    public T getValue(int i) {
+    public T getValue(final int i) {
         return this.vector[i];
     }
 
     @SuppressWarnings("unchecked")
-    public void setVector(T[] v) {
+    public void setVector(final T[] v) {
         this.N = v.length;
         this.vector = (T[]) new Object[this.N];
         for (int i = 0; i < this.size(); i++) {
@@ -23,13 +23,13 @@ public abstract class Matrix1D<T> implements Matrix1DInterface<T> {
     }
 
     @SuppressWarnings("unchecked")
-    public Matrix1D(int N) {
+    public Matrix1D(final int N) {
         this.N = N;
         this.vector = (T[]) new Object[this.N];
     }
 
     @SuppressWarnings("unchecked")
-    public Matrix1D(T[] v) {
+    public Matrix1D(final T[] v) {
         this.N = v.length;
         this.vector = (T[]) new Object[this.N];
         for (int i = 0; i < this.size(); i++) {
@@ -42,11 +42,11 @@ public abstract class Matrix1D<T> implements Matrix1DInterface<T> {
         return N;
     }
 
-    public T get(int i) {
+    public T get(final int i) {
         return vector[i];
     }
 
-    public void set(int i, T t) {
+    public void set(final int i, final T t) {
         vector[i] = t;
     }
 

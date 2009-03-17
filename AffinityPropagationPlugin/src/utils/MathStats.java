@@ -9,7 +9,7 @@ import java.util.Vector;
  */
 public class MathStats {
 
-    public static Double median(Vector<Double> vector) {
+    public static Double median(final Vector<Double> vector) {
         // Clone the input vector
         Double[] vectorCopy = new Double[vector.size()];
         int i = 0;

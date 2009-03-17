@@ -5,7 +5,7 @@ public class IterationData {
     private int iter;
     private int clusters;
 
-    public IterationData(int iter, int clusters) {
+    public IterationData(final int iter, final int clusters) {
         this.iter = iter;
         this.clusters = clusters;
     }
@@ -14,7 +14,7 @@ public class IterationData {
         return clusters;
     }
 
-    public void setClusters(int clusters) {
+    public void setClusters(final int clusters) {
         this.clusters = clusters;
     }
 
@@ -22,7 +22,7 @@ public class IterationData {
         return iter;
     }
 
-    public void setIter(int iter) {
+    public void setIter(final int iter) {
         this.iter = iter;
     }
 }

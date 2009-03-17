@@ -17,7 +17,7 @@ public class SiblingData {
     private double s;
     private String examplarName;
 
-    public SiblingData(double s, String examplarName) {
+    public SiblingData(final double s, final String examplarName) {
         this.a = 0;
         this.s = s;
         this.r = 0;
@@ -30,7 +30,7 @@ public class SiblingData {
         return a;
     }
 
-    public void setA(double a) {
+    public void setA(final double a) {
         this.a = a;
     }
 
@@ -38,7 +38,7 @@ public class SiblingData {
         return examplarName;
     }
 
-    public void setExamplarName(String examplarName) {
+    public void setExamplarName(final String examplarName) {
         this.examplarName = examplarName;
     }
 
@@ -46,7 +46,7 @@ public class SiblingData {
         return r;
     }
 
-    public void setR(double r) {
+    public void setR(final double r) {
         this.r = r;
     }
 
@@ -54,7 +54,7 @@ public class SiblingData {
         return s;
     }
 
-    public void setS(double s) {
+    public void setS(final double s) {
         this.s = s;
     }
 
@@ -62,7 +62,7 @@ public class SiblingData {
         return aold;
     }
 
-    public void setAold(double aold) {
+    public void setAold(final double aold) {
         this.aold = aold;
     }
 
@@ -70,7 +70,7 @@ public class SiblingData {
         return rold;
     }
 
-    public void setRold(double rold) {
+    public void setRold(final double rold) {
         this.rold = rold;
     }
 
