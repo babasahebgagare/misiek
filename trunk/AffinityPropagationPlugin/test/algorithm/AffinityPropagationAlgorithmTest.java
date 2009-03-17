@@ -30,7 +30,7 @@ public class AffinityPropagationAlgorithmTest {
 
     @Test
     public void testDoCluster() {
-        double[][] sim = {{-2, -3, -3, - 1}, {-3, -1, -1, -1}, {-300, -2, 0, -4}, {-300, -1, -1, 0}};
+        double[][] sim = {{-2, -3, -3, -1}, {-3, -1, -1, -1}, {-300, -2, 0, -4}, {-300, -1, -1, 0}};
         MatrixPropagationAlgorithm instance = new MatrixPropagationAlgorithm();
         instance.setLambda(0.5);
         instance.setN(4);

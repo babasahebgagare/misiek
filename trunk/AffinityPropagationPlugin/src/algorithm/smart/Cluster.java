@@ -6,7 +6,6 @@ package algorithm.smart;
 
 import java.util.Collection;
 import java.util.HashSet;
-import utils.Messenger;
 
 /**
  *

@@ -1,6 +1,5 @@
 package panel;
 
-import algorithm.smart.Cluster;
 import cyto.CytoAffinityClustering;
 import cyto.CytoClusterAlgorithm;
 import cyto.CytoClusterTask;
@@ -143,7 +142,7 @@ public class AffinityPanelController implements Serializable {
             return false;
         }
         if (!validateNodeNameAttr(nodeNameAttr)) {
-            if (cancelDialog == true) {
+            if (cancelDialog) {
                 cancelDialog = false;
             } else {
                 Messenger.message("Node name attribure is not valid!");
