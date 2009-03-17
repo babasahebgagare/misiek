@@ -11,11 +11,11 @@ public class MyBundle {
 
     private static Locale locale = null;
 
-    public static void setLocale(String lang) {
+    public static void setLocale(final String lang) {
         locale = new Locale(lang);
     }
 
-    public static String getMessage(String bundle) {
+    public static String getMessage(final String bundle) {
         if (locale == null) {
             return ResourceBundle.getBundle("resources/lang").getString(bundle);
         }

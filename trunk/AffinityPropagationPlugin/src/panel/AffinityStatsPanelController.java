@@ -19,11 +19,11 @@ public class AffinityStatsPanelController implements Serializable {
         return panel;
     }
 
-    public void setStatsTable(JTable statsTable) {
+    public void setStatsTable(final JTable statsTable) {
         this.statsTable = statsTable;
     }
 
-    public void addClusteringStat(String network, Double lambda, Double preferences, Integer clusters, Integer iterations, String clusterID) {
+    public void addClusteringStat(final String network, final Double lambda, final Double preferences, final Integer clusters, final Integer iterations, final String clusterID) {
         DefaultTableModel model = (DefaultTableModel) statsTable.getModel();
         model.addRow(new Object[]{network, iterations, preferences, lambda, clusters, clusterID});
     }

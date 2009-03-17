@@ -9,7 +9,7 @@ public abstract class AffinityPropagationAlgorithm<T> extends AbstractClusterAlg
     protected Integer convits = null;
     protected ActionListener iteractionListener = null;
 
-    public void addIterationListener(ActionListener listener) {
+    public void addIterationListener(final ActionListener listener) {
         this.iteractionListener = listener;
     }
 
@@ -27,7 +27,7 @@ public abstract class AffinityPropagationAlgorithm<T> extends AbstractClusterAlg
         return lambda;
     }
 
-    public void setLambda(double lambda) {
+    public void setLambda(final double lambda) {
         this.lambda = lambda;
     }
 
@@ -35,7 +35,7 @@ public abstract class AffinityPropagationAlgorithm<T> extends AbstractClusterAlg
         return iterations;
     }
 
-    public void setIterations(int iterations) {
+    public void setIterations(final int iterations) {
         this.iterations = iterations;
     }
 
@@ -43,7 +43,7 @@ public abstract class AffinityPropagationAlgorithm<T> extends AbstractClusterAlg
         return convits;
     }
 
-    public void setConvits(Integer convits) {
+    public void setConvits(final Integer convits) {
         this.convits = convits;
     }
 }

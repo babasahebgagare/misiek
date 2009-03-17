@@ -19,7 +19,7 @@ public class ExamplarsCollection {
     public ExamplarsCollection() {
     }
 
-    public ExamplarsCollection(Integer convits) {
+    public ExamplarsCollection(final Integer convits) {
         this.convits = convits;
     }
 
@@ -27,7 +27,7 @@ public class ExamplarsCollection {
         return examplars.size();
     }
 
-    public void setSimilarity(String from, String to, double sim) {
+    public void setSimilarity(final String from, final String to, final double sim) {
         Examplar exfrom = examplars.get(from);
         if (exfrom == null) {
             exfrom = new Examplar(from, convits);
@@ -52,7 +52,7 @@ public class ExamplarsCollection {
         return examplars;
     }
 
-    public void setExamplars(Map<String, Examplar> examplars) {
+    public void setExamplars(final Map<String, Examplar> examplars) {
         this.examplars = examplars;
     }
 }

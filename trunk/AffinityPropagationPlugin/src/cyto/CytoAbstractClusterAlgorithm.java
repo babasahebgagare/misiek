@@ -44,7 +44,7 @@ public abstract class CytoAbstractClusterAlgorithm implements CytoClusterAlgorit
                 Tunable.NOINPUT));
     }
 
-    public void updateSettings(boolean force) {
+    public void updateSettings(final boolean force) {
         Tunable t = clusterProperties.get("debug");
         if ((t != null) && (t.valueChanged() || force)) {
             debug = ((Boolean) t.getValue()).booleanValue();
@@ -79,7 +79,7 @@ public abstract class CytoAbstractClusterAlgorithm implements CytoClusterAlgorit
         return pcs;
     }
 
-    void setMyThread(Thread currentThread) {
+    void setMyThread(final Thread currentThread) {
         myThread = currentThread;
     }
 }

@@ -2,7 +2,7 @@ package matrix;
 
 public class DoubleMatrix1D extends Matrix1D<Double> implements DoubleMatrix1DInterface {
 
-    public DoubleMatrix1D(Double[] vector) {
+    public DoubleMatrix1D(final Double[] vector) {
         super(vector.length);
         this.setVector(new Double[this.size()]);
         for (int i = 0; i < this.size(); i++) {
@@ -10,11 +10,11 @@ public class DoubleMatrix1D extends Matrix1D<Double> implements DoubleMatrix1DIn
         }
     }
 
-    public DoubleMatrix1D(int N) {
+    public DoubleMatrix1D(final int N) {
         super(N);
     }
 
-    public DoubleMatrix1D(int N, double t) {
+    public DoubleMatrix1D(final int N, final double t) {
         super(N);
         this.setVector(new Double[N]);
         for (int i = 0; i < N; i++) {
@@ -22,11 +22,11 @@ public class DoubleMatrix1D extends Matrix1D<Double> implements DoubleMatrix1DIn
         }
     }
 
-    public void set(int i, double t) {
+    public void set(final int i, final double t) {
         super.set(i, Double.valueOf(t));
     }
 
-    public IntegerMatrix1D findG(double x) {
+    public IntegerMatrix1D findG(final double x) {
         int count = 0;
         for (int i = 0; i < this.size(); i++) {
             if (this.getValue(i).doubleValue() > x) {

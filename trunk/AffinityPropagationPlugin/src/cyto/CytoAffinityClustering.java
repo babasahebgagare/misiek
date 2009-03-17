@@ -38,7 +38,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
     HashMap<String, Integer> nodeMapping = new HashMap<String, Integer>();
     HashMap<Integer, String> idMapping = new HashMap<Integer, String>();
 
-    public CytoAffinityClustering(String nodeNameAttr, String edgeNameAttr, double lambda, double preferences, int iterations) {
+    public CytoAffinityClustering(final String nodeNameAttr, final String edgeNameAttr, final double lambda, final double preferences, final int iterations) {
         this.nodeNameAttr = nodeNameAttr;
         this.edgeNameAttr = edgeNameAttr;
         this.lambda = lambda;
@@ -48,7 +48,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
 
     }
 
-    public CytoAffinityClustering(String nodeNameAttr, String edgeNameAttr, double lambda, double preferences, int iterations, Integer convits) {
+    public CytoAffinityClustering(final String nodeNameAttr, final String edgeNameAttr, final double lambda, final double preferences, final int iterations, final Integer convits) {
         this.nodeNameAttr = nodeNameAttr;
         this.edgeNameAttr = edgeNameAttr;
         this.lambda = lambda;
@@ -77,7 +77,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
     }
 
     @Override
-    public void doCluster(TaskMonitor monitor) {
+    public void doCluster(final TaskMonitor monitor) {
         super.setMyThread(Thread.currentThread());
         PriorityQueue<Cluster<String>> clusterprior = new PriorityQueue<Cluster<String>>();
 
@@ -115,7 +115,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
         }
     }
 
-    private Set<String> selectConnectedNodes(List<CyEdge> edges, List<CyNode> nodes) {
+    private Set<String> selectConnectedNodes(final List<CyEdge> edges, final List<CyNode> nodes) {
         Set<String> nodesNames = new TreeSet<String>();
 
 
@@ -176,7 +176,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
 
     }
 
-    public void createIteractionListener(TaskMonitor monitor) {
+    public void createIteractionListener(final TaskMonitor monitor) {
         af.addIterationListener(new IterationListener(monitor, iterations));
     }
 }

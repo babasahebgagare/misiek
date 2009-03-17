@@ -59,7 +59,7 @@ public class CytoClusterTask implements Task {
      *
      * @param cluster The CyClusterAlgorithm to apply.
      */
-    public CytoClusterTask(CytoClusterAlgorithm cluster) {
+    public CytoClusterTask(final CytoClusterAlgorithm cluster) {
         this.cluster = cluster;
     }
 
@@ -67,7 +67,7 @@ public class CytoClusterTask implements Task {
      * Sets the task monitor to be used for the cluster.
      * @param monitor
      */
-    public void setTaskMonitor(TaskMonitor monitor) {
+    public void setTaskMonitor(final TaskMonitor monitor) {
         this.monitor = monitor;
     }
 

@@ -20,7 +20,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
         return examplars;
     }
 
-    public void setExamplars(ExamplarsCollection examplars) {
+    public void setExamplars(final ExamplarsCollection examplars) {
         this.examplars = examplars;
     }
 
@@ -58,7 +58,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
         return res;
     }
 
-    private Map<String, Cluster<String>> computeAssigments(Collection<Examplar> centers) {
+    private Map<String, Cluster<String>> computeAssigments(final Collection<Examplar> centers) {
         Map<String, Cluster<String>> ret = new HashMap<String, Cluster<String>>();
 
         for (Examplar center : centers) {
@@ -121,7 +121,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
         return ret;
     }
 
-    private double computeEqPom(String name) {
+    private double computeEqPom(final String name) {
         double sum = 0;
         for (Examplar examplar : examplars.getExamplars().values()) {
             if (!examplar.getName().equals(name)) {
@@ -136,7 +136,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
         return sum;
     }
 
-    private double computeMaxPom(Collection<SiblingData> siblings, String examplarName) {
+    private double computeMaxPom(final Collection<SiblingData> siblings, final String examplarName) {
         double max = -INF;
         for (SiblingData sibling : siblings) {
             if (!sibling.getExamplarName().equals(examplarName)) {
@@ -149,7 +149,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
         return max;
     }
 
-    private double computeNotEqPom(String examplarName, String siblingName) {
+    private double computeNotEqPom(final String examplarName, final String siblingName) {
         SiblingData sib = examplars.getExamplars().get(siblingName).getSiblingMap().get(siblingName);
         double rkk = sib.getR();
 
@@ -199,7 +199,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
     }
 
     @Override
-    public void setSimilarities(String from, String to, Double sim) {
+    public void setSimilarities(final String from, final String to, final Double sim) {
         examplars.setSimilarity(from, to, sim);
     }
 
@@ -256,7 +256,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
     }
 
     @Override
-    public void setN(int N) {
+    public void setN(final int N) {
     }
     /*
     private Collection<Examplar> refine(Map<String, Cluster<String>> assigments) {

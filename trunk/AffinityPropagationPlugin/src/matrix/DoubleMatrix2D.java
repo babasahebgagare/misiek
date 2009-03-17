@@ -9,7 +9,7 @@ public class DoubleMatrix2D implements java.io.Serializable {
     private double[][] matrix;
     private int N,  M;
 
-    public DoubleMatrix2D(int M, double[] v) {
+    public DoubleMatrix2D(final int M, final double[] v) {
         this.N = v.length;
         this.M = M;
         this.matrix = new double[N][M];
@@ -20,7 +20,7 @@ public class DoubleMatrix2D implements java.io.Serializable {
         }
     }
 
-    public DoubleMatrix2D(int N, int M, double[][] m) {
+    public DoubleMatrix2D(final int N, final int M, final double[][] m) {
         this.N = N;
         this.M = M;
         this.matrix = new double[N][M];
@@ -31,20 +31,20 @@ public class DoubleMatrix2D implements java.io.Serializable {
         }
     }
 
-    public DoubleMatrix2D(int N, int M, double v) {
+    public DoubleMatrix2D(final int N, final int M, final double v) {
         this.N = N;
         this.M = M;
         this.matrix = new double[N][M];
         setValues(v);
     }
 
-    private DoubleMatrix2D(int N, int M) {
+    private DoubleMatrix2D(final int N, final int M) {
         this.N = N;
         this.M = M;
         this.matrix = new double[N][M];
     }
 
-    private DoubleMatrix2D(DoubleMatrix2D m) {
+    private DoubleMatrix2D(final DoubleMatrix2D m) {
         this.N = m.N;
         this.M = m.M;
         this.matrix = new double[N][M];
@@ -86,28 +86,28 @@ public class DoubleMatrix2D implements java.io.Serializable {
         return res;
     }
 
-    public void set(int i, int j, double v) {
+    public void set(final int i, final int j, final double v) {
         matrix[i][j] = v;
     }
 
-    public double get(int i, int j) {
+    public double get(final int i, final int j) {
         return matrix[i][j];
     }
 
-    public double[] getVector(int i) {
+    public double[] getVector(final int i) {
         return matrix[i];
     }
 
     /*   public double[][] get() {
     return matrix;
     }*/
-    public void set(int n, int m, double[][] matrix) {
+    public void set(final int n, final int m, final double[][] matrix) {
         this.N = n;
         this.M = m;
         set(matrix);
     }
 
-    public void set(double[][] matrix) {
+    public void set(final double[][] matrix) {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
                 this.matrix[i][j] = matrix[i][j];
@@ -115,7 +115,7 @@ public class DoubleMatrix2D implements java.io.Serializable {
         }
     }
 
-    public void setValues(double v) {
+    public void setValues(final double v) {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
                 matrix[i][j] = v;
@@ -123,7 +123,7 @@ public class DoubleMatrix2D implements java.io.Serializable {
         }
     }
 
-    public void plusTo(DoubleMatrix2D m) {
+    public void plusTo(final DoubleMatrix2D m) {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
                 matrix[i][j] += m.get(i, j);
@@ -131,7 +131,7 @@ public class DoubleMatrix2D implements java.io.Serializable {
         }
     }
 
-    public DoubleMatrix2D plus(DoubleMatrix2D m) {
+    public DoubleMatrix2D plus(final DoubleMatrix2D m) {
         DoubleMatrix2D result = new DoubleMatrix2D(N, M);
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
@@ -141,7 +141,7 @@ public class DoubleMatrix2D implements java.io.Serializable {
         return result;
     }
 
-    public void minusTo(DoubleMatrix2D m) {
+    public void minusTo(final DoubleMatrix2D m) {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
                 matrix[i][j] -= m.get(i, j);
@@ -149,7 +149,7 @@ public class DoubleMatrix2D implements java.io.Serializable {
         }
     }
 
-    public DoubleMatrix2D minus(DoubleMatrix2D m) {
+    public DoubleMatrix2D minus(final DoubleMatrix2D m) {
         DoubleMatrix2D result = new DoubleMatrix2D(N, M);
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
@@ -159,7 +159,7 @@ public class DoubleMatrix2D implements java.io.Serializable {
         return result;
     }
 
-    public DoubleMatrix2D mul(double c) {
+    public DoubleMatrix2D mul(final double c) {
         DoubleMatrix2D result = new DoubleMatrix2D(N, M);
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
@@ -169,7 +169,7 @@ public class DoubleMatrix2D implements java.io.Serializable {
         return result;
     }
 
-    public void plusTo(double[][] m) {
+    public void plusTo(final double[][] m) {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
                 matrix[i][j] = m[i][j];
@@ -177,7 +177,7 @@ public class DoubleMatrix2D implements java.io.Serializable {
         }
     }
 
-    public void mulTo(double c) {
+    public void mulTo(final double c) {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
                 matrix[i][j] *= c;
@@ -193,7 +193,7 @@ public class DoubleMatrix2D implements java.io.Serializable {
         return M;
     }
 
-    public void setM(int M) {
+    public void setM(final int M) {
         this.M = M;
     }
 
@@ -201,7 +201,7 @@ public class DoubleMatrix2D implements java.io.Serializable {
         return N;
     }
 
-    public void setN(int N) {
+    public void setN(final int N) {
         this.N = N;
     }
 
@@ -236,7 +236,7 @@ public class DoubleMatrix2D implements java.io.Serializable {
         return res;
     }
 
-    public DoubleMatrix2D max(double v) {
+    public DoubleMatrix2D max(final double v) {
         DoubleMatrix2D res = new DoubleMatrix2D(this);
 
         for (int i = 0; i < N; i++) {
@@ -249,7 +249,7 @@ public class DoubleMatrix2D implements java.io.Serializable {
         return res;
     }
 
-    public DoubleMatrix2D getColumns(IntegerMatrix1D indexes) {
+    public DoubleMatrix2D getColumns(final IntegerMatrix1D indexes) {
         DoubleMatrix2D res = new DoubleMatrix2D(this.N, indexes.size());
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < indexes.size(); j++) {
@@ -260,7 +260,7 @@ public class DoubleMatrix2D implements java.io.Serializable {
         return res;
     }
 
-    public DoubleMatrix1D getColumn(int j) {
+    public DoubleMatrix1D getColumn(final int j) {
         DoubleMatrix1D res = new DoubleMatrix1D(N);
         for (int i = 0; i < N; i++) {
             res.set(i, this.matrix[i][j]);
@@ -269,7 +269,7 @@ public class DoubleMatrix2D implements java.io.Serializable {
         return res;
     }
 
-    public DoubleMatrix1D getRow(int i) {
+    public DoubleMatrix1D getRow(final int i) {
         DoubleMatrix1D res = new DoubleMatrix1D(M);
         for (int j = 0; j < M; j++) {
             res.set(j, this.matrix[i][j]);
@@ -278,7 +278,7 @@ public class DoubleMatrix2D implements java.io.Serializable {
         return res;
     }
 
-    public DoubleMatrix2D min(double v) {
+    public DoubleMatrix2D min(final double v) {
         DoubleMatrix2D res = new DoubleMatrix2D(this);
 
         for (int i = 0; i < N; i++) {

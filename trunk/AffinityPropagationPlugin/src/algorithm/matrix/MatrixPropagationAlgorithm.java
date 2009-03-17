@@ -140,11 +140,11 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
         return N;
     }
 
-    public void setN(int N) {
+    public void setN(final int N) {
         this.N = N;
     }
 
-    public IntegerMatrix1D idx(IntegerMatrix1D C, IntegerMatrix1D I) {
+    public IntegerMatrix1D idx(final IntegerMatrix1D C, final IntegerMatrix1D I) {
 
         IntegerMatrix1D res = new IntegerMatrix1D(C.size());
 
@@ -155,7 +155,7 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
         return res;
     }
 
-    public IntegerMatrix1D tmp(IntegerMatrix1D C, IntegerMatrix1D I) throws CloneNotSupportedException {
+    public IntegerMatrix1D tmp(final IntegerMatrix1D C, final IntegerMatrix1D I) throws CloneNotSupportedException {
         IntegerMatrix1D res = C.copy();
         for (int i = 0; i < I.size(); i++) {
             res.set(I.get(i), Integer.valueOf(i));
@@ -164,7 +164,7 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
         return res;
     }
 
-    public void setSimilarities(double[][] similarities) {
+    public void setSimilarities(final double[][] similarities) {
         N = similarities.length;
         this.S = new DoubleMatrix2D(N, N, similarities);
     }
@@ -189,7 +189,7 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
     }
 
     @Override
-    public void setSimilarities(String x, String y, Double sim) {
+    public void setSimilarities(final String x, final String y, final Double sim) {
 
         int i = Integer.valueOf(x);
         int j = Integer.valueOf(y);

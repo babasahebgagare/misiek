@@ -10,12 +10,12 @@ public class IterationListener implements ActionListener {
     TaskMonitor monitor;
     int n;
 
-    public IterationListener(TaskMonitor monitor, int iterations) {
+    public IterationListener(final TaskMonitor monitor, final int iterations) {
         this.monitor = monitor;
         this.n = iterations;
     }
 
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(final ActionEvent e) {
         IterationData data = (IterationData) e.getSource();
         Integer iter = data.getIter();
         monitor.setPercentCompleted(iter * 100 / n);

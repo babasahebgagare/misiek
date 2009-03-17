@@ -18,7 +18,7 @@ public class AffinityStatsPanel extends javax.swing.JPanel {
         initComponents();
     }
 
-    public AffinityStatsPanel(AffinityStatsPanelController psc) {
+    public AffinityStatsPanel(final AffinityStatsPanelController psc) {
         this.psc = psc;
         initComponents();
         psc.setStatsTable(jTable1);

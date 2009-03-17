@@ -15,7 +15,7 @@ public class Examplar {
     private Vector<Boolean> imcenter = null;
     private Integer convits = null;
 
-    public Examplar(String name, Integer convits) {
+    public Examplar(final String name, final Integer convits) {
         this.name = name;
         this.convits = convits;
         if (convits != null) {
@@ -23,7 +23,7 @@ public class Examplar {
         }
     }
 
-    public void createSibling(double s, String siblingName) {
+    public void createSibling(final double s, final String siblingName) {
         SiblingData sibling = new SiblingData(s, siblingName);
         siblingMap.put(siblingName, sibling);
     }
@@ -47,7 +47,7 @@ public class Examplar {
         return name;
     }
 
-    public void setImCenter(Boolean c, int iteration) {
+    public void setImCenter(final Boolean c, final int iteration) {
         if (convits != null) {
 
             imcenter.add(0, c);

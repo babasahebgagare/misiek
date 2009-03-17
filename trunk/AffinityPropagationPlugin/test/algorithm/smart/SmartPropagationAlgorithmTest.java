@@ -48,7 +48,7 @@ public class SmartPropagationAlgorithmTest {
         System.out.println(instance.getExamplars().toString());
     }
 
-    private void loadData(SmartPropagationAlgorithm instance) {
+    private void loadData(final SmartPropagationAlgorithm instance) {
         instance.setSimilarities("1", "1", -2.);
         instance.setSimilarities("1", "2", -3.);
         instance.setSimilarities("1", "3", -3.);

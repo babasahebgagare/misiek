@@ -8,7 +8,6 @@
  *
  * Created on 2009-03-15, 22:37:35
  */
-
 package panel;
 
 /**
@@ -16,18 +15,22 @@ package panel;
  * @author misiek
  */
 public class ClusterNodeNameAttrExistDialog extends javax.swing.JDialog {
-    /** A return status code - returned if Cancel button has been pressed */
+
+    /** A return status code - returned if Cancel button has been pressed. */
     public static final int RET_CANCEL = 0;
-    /** A return status code - returned if OK button has been pressed */
+    /** A return status code - returned if OK button has been pressed. */
     public static final int RET_OK = 1;
 
-    /** Creates new form ClusterNodeNameAttrExistDialog */
-    public ClusterNodeNameAttrExistDialog(java.awt.Frame parent, boolean modal) {
+    /** Creates new form ClusterNodeNameAttrExistDialog.
+     * @param parent
+     * @param modal
+     */
+    public ClusterNodeNameAttrExistDialog(final java.awt.Frame parent, final boolean modal) {
         super(parent, modal);
         initComponents();
     }
 
-    /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */
+    /** @return the return status of this dialog - one of RET_OK or RET_CANCEL. */
     public int getReturnStatus() {
         return returnStatus;
     }
@@ -113,21 +116,23 @@ public class ClusterNodeNameAttrExistDialog extends javax.swing.JDialog {
         doClose(RET_CANCEL);
     }//GEN-LAST:event_closeDialog
 
-    private void doClose(int retStatus) {
+    private void doClose(final int retStatus) {
         returnStatus = retStatus;
         setVisible(false);
         dispose();
     }
 
     /**
-    * @param args the command line arguments
-    */
-    public static void main(String args[]) {
+     * @param args the command line arguments
+     */
+    public static void main(final String[] args) {
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
                 ClusterNodeNameAttrExistDialog dialog = new ClusterNodeNameAttrExistDialog(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    public void windowClosing(java.awt.event.WindowEvent e) {
+
+                    public void windowClosing(final java.awt.event.WindowEvent e) {
                         System.exit(0);
                     }
                 });
@@ -141,6 +146,5 @@ public class ClusterNodeNameAttrExistDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton okButton;
     // End of variables declaration//GEN-END:variables
-
     private int returnStatus = RET_CANCEL;
 }
