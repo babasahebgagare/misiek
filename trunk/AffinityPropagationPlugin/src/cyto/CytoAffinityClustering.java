@@ -167,7 +167,6 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
             if (!sourceID.equals(targetID)) {
                 Double probOrNull = edgesAttributes.getDoubleAttribute(id, edgeNameAttr);
                 if (probOrNull != null) {
-                    System.out.println(probOrNull);
                     af.setSimilarities(sourceIndex.toString(), targetIndex.toString(), Math.log(probOrNull));
                     af.setSimilarities(targetIndex.toString(), sourceIndex.toString(), Math.log(probOrNull));
                 }
