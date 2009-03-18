@@ -2,551 +2,77 @@
 <project>
     <name>Cytoscape Plugins</name>
     <description>These plugins have been submitted to Cytoscape by their authors,
-	
-Rev 05-21-2004
-    </text>
-</license>
-<release_date>2007-07-17</release_date>
-<authorlist>
-    <author>
-        <name>Allan Kuchinsky and Aditya Vailaya,</name>
-        <institution>Agilent Labs</institution>
-    </author>
-    <author>
-        <name>Michael Creech,</name>
-        <institution>Blue Oak Software</institution>
-    </author>
-</authorlist>
-<url>http://chianti.ucsd.edu/cyto_web/plugins/pluginjardownload.php?id=18</url>
-<filetype>jar</filetype>
-</plugin>
-<plugin>
-    <uniqueID>103</uniqueID>
-    <name>AgilentLiteratureSearch</name>
-    <description>Creates a CyNetwork based on searching the scientific literature.</description>
-    <category>Network Inference</category>
-    <pluginVersion>2.68</pluginVersion>
-    <cytoscapeVersions>
-        <version>2.6</version>
-    </cytoscapeVersions>
-    <license>
-        <text>AGILENT TECHNOLOGIES, INC. SOFTWARE LICENSE AGREEMENT
-
-Rev 05-21-2004
-        </text>
-    </license>
-    <release_date>2008-03-28</release_date>
-    <authorlist>
-        <author>
-            <name>Allan Kuchinsky and Aditya Vailaya</name>
-            <institution>Agilent Labs</institution>
-        </author>
-        <author>
-            <name>Michael Creech</name>
-            <institution>Blue Oak Software</institution>
-        </author>
-    </authorlist>
-    <url>http://chianti.ucsd.edu/cyto_web/plugins/pluginjardownload.php?id=100</url>
-    <filetype>jar</filetype>
-</plugin>
-<plugin>
-    <uniqueID>103</uniqueID>
-    <name>AgilentLiteratureSearch</name>
-    <description>Creates a CyNetwork based on searching the scientific literature.</description>
-    <category>Network Inference</category>
-    <pluginVersion>2.69</pluginVersion>
-    <cytoscapeVersions>
-        <version>2.6</version>
-    </cytoscapeVersions>
-    <license>
-        <text>AGILENT TECHNOLOGIES, INC. SOFTWARE LICENSE AGREEMENT
-
-Rev 05-21-2004
-        </text>
-    </license>
-    <release_date>2008-09-08</release_date>
-    <authorlist>
-        <author>
-            <name>Allan Kuchinsky and Aditya Vailaya</name>
-            <institution>Agilent Labs</institution>
-        </author>
-        <author>
-            <name>Michael Creech</name>
-            <institution>Blue Oak Software</institution>
-        </author>
-    </authorlist>
-    <url>http://chianti.ucsd.edu/cyto_web/plugins/pluginjardownload.php?id=137</url>
-    <filetype>jar</filetype>
-</plugin>
-<plugin>
-    <uniqueID>120</uniqueID>
-    <name>APID2NET</name>
-    <description>Plugin designed to visualize, explore and analyze the proteins and interactions retrieved from the &lt;b&gt;unified interactome&lt;/b&gt; platform APID (which integrates BIND, BioGrid, DIP, HPRD, IncAct and MINT). The retrieved data include the &lt;b&gt;annotations and attributes associated&lt;/b&gt; to the network: GO terms, InterPro domains, experimental methods that validate each interaction, PubMed IDs, UniProt IDs. The tool provides interactive graphical representation of the &lt;b&gt;protein-protein interaction&lt;/b&gt; (PPI) networks within Cytoscape, plus new automatic tools to find &lt;b&gt;hubs&lt;/b&gt; and &lt;b&gt;concurrent attributes&lt;/b&gt; (functional and structural) along the protein pairs of a given network.</description>
-    <category>Analysis</category>
-    <pluginVersion>1.5</pluginVersion>
-    <cytoscapeVersions>
-        <version>2.5</version>
-    </cytoscapeVersions>
-    <license>
-        <text>All rights reserved. Reproduction, distribution, public communication and transformation without prior permission of the authors and institution is forbidden.</text>
-    </license>
-    <release_date>2007-11-16</release_date>
-    <authorlist>
-        <author>
-            <name>Hernandez-Toro J, Prieto C, De Las Rivas J.</name>
-            <institution>Bioinformatics and Functional Genomic Research Group, Cancer Research Center, (CIC-IMBCC,CSIC/USAL) Salama</institution>
-        </author>
-    </authorlist>
-    <url>http://chianti.ucsd.edu/cyto_web/plugins/pluginjardownload.php?id=45</url>
-    <filetype>jar</filetype>
-</plugin>
-<plugin>
-    <uniqueID>120</uniqueID>
-    <name>APID2NET</name>
-    <description>Plugin designed to visualize, explore and analyze the proteins and interactions retrieved from the &lt;b&gt;unified interactome&lt;/b&gt; platform APID (which integrates BIND, BioGrid, DIP, HPRD, IncAct and MINT). The retrieved data include the &lt;b&gt;annotations and attributes associated&lt;/b&gt; to the network: GO terms, InterPro domains, experimental methods that validate each interaction, PubMed IDs, UniProt IDs. The tool provides interactive graphical representation of the &lt;b&gt;protein-protein interaction&lt;/b&gt; (PPI) networks within Cytoscape, plus new automatic tools to find &lt;b&gt;hubs&lt;/b&gt; and &lt;b&gt;concurrent attributes&lt;/b&gt; (functional and structural) along the protein pairs of a given network.</description>
-    <category>Analysis</category>
-    <pluginVersion>1.51</pluginVersion>
-    <cytoscapeVersions>
-        <version>2.5</version>
-    </cytoscapeVersions>
-    <license>
-        <text>All rights reserved. Reproduction, distribution, public communication and transformation without prior permission of the authors and institution is forbidden.</text>
-    </license>
-    <release_date>2007-12-20</release_date>
-    <authorlist>
-        <author>
-            <name>Hernandez-Toro J, Prieto C, De Las Rivas J. Bioinformatics and Functional Genomic Research Group, Cancer Research Center, (CIC-IMBCC,CSIC/USAL)</name>
-            <institution/>
-        </author>
-    </authorlist>
-    <url>http://chianti.ucsd.edu/cyto_web/plugins/pluginjardownload.php?id=58</url>
-    <filetype>jar</filetype>
-</plugin>
-<plugin>
-    <uniqueID>120</uniqueID>
-    <name>APID2NET</name>
-    <description>Plugin designed to visualize, explore and analyze the proteins and interactions retrieved from the &lt;b&gt;unified interactome&lt;/b&gt; platform APID (which integrates BIND, BioGrid, DIP, HPRD, IncAct and MINT). The retrieved data include the &lt;b&gt;annotations and attributes associated&lt;/b&gt; to the network: GO terms, InterPro domains, experimental methods that validate each interaction, PubMed IDs, UniProt IDs. The tool provides interactive graphical representation of the &lt;b&gt;protein-protein interaction&lt;/b&gt; (PPI) networks within Cytoscape, plus new automatic tools to find &lt;b&gt;hubs&lt;/b&gt; and &lt;b&gt;concurrent attributes&lt;/b&gt; (functional and structural) along the protein pairs of a given network.</description>
-    <category>Analysis</category>
-    <pluginVersion>1.52</pluginVersion>
-    <cytoscapeVersions>
-        <version>2.6</version>
-    </cytoscapeVersions>
-    <license>
-        <text>All rights reserved. Reproduction, distribution, public communication and transformation without prior permission of the authors and institution is forbidden.</text>
-    </license>
-    <release_date>2008-05-14</release_date>
-    <authorlist>
-        <author>
-            <name>Hernandez-Toro J, Prieto C, De Las Rivas J. Bioinformatics and Functional Genomic Research Group, Cancer Research Center, (CIC-IMBCC,CSIC/USAL)</name>
-            <institution/>
-        </author>
-    </authorlist>
-    <url>http://chianti.ucsd.edu/cyto_web/plugins/pluginjardownload.php?id=121</url>
-    <filetype>jar</filetype>
-</plugin>
-<plugin>
-    <uniqueID>149</uniqueID>
-    <name>batchTool</name>
-    <description>This plugin provides a simple proof-of-concept scripting capability for Cytoscape</description>
-    <category>Other</category>
-    <pluginVersion>0.5</pluginVersion>
-    <cytoscapeVersions>
-        <version>2.6</version>
-    </cytoscapeVersions>
-    <release_date>2008-03-18</release_date>
-    <authorlist>
-        <author>
-            <name>John "Scooter" Morris</name>
-            <institution>UCSF</institution>
-        </author>
-    </authorlist>
-    <url>http://chianti.ucsd.edu/cyto_web/plugins/pluginjardownload.php?id=102</url>
-    <filetype>jar</filetype>
-</plugin>
-<plugin>
-    <uniqueID>149</uniqueID>
-    <name>batchTool</name>
-    <description>This plugin provides a simple proof-of-concept scripting capability for Cytoscape</description>
-    <category>Other</category>
-    <pluginVersion>1.0</pluginVersion>
-    <cytoscapeVersions>
-        <version>2.6</version>
-    </cytoscapeVersions>
-    <release_date>2008-09-18</release_date>
-    <authorlist>
-        <author>
-            <name>John \"Scooter\" Morris</name>
-            <institution>UCSF</institution>
-        </author>
-    </authorlist>
-    <url>http://chianti.ucsd.edu/cyto_web/plugins/pluginjardownload.php?id=151</url>
-    <filetype>jar</filetype>
-</plugin>
-<plugin>
-    <uniqueID>104</uniqueID>
-    <name>BiNGO</name>
-    <description>BiNGO is a tool to determine which  Gene Ontology  (GO) categories are statistically overrepresented in a set of genes or a subgraph of a biological network.</description>
-    <category>Functional Enrichment</category>
-    <pluginVersion>2.1</pluginVersion>
-    <cytoscapeVersions>
-        <version>2.3</version>
-        <version>2.4</version>
-        <version>2.5</version>
-    </cytoscapeVersions>
-    <release_date>2007-08-29</release_date>
-    <authorlist>
-        <author>
-            <name>Steven Maere</name>
-            <institution>VIB</institution>
-        </author>
-        <author>
-            <name>Martin Kuiper</name>
-            <institution>VIB</institution>
-        </author>
-    </authorlist>
-    <url>http://chianti.ucsd.edu/cyto_web/plugins/pluginjardownload.php?id=46</url>
-    <filetype>jar</filetype>
-</plugin>
-<plugin>
-    <uniqueID>104</uniqueID>
-    <name>BiNGO</name>
-    <description>BiNGO is a tool to determine which  Gene Ontology  (GO) categories are statistically overrepresented in a set of genes or a subgraph of a biological network.</description>
-    <category>Functional Enrichment</category>
-    <pluginVersion>2.3</pluginVersion>
-    <cytoscapeVersions>
-        <version>2.6</version>
-    </cytoscapeVersions>
-    <release_date>2008-08-05</release_date>
-    <authorlist>
-        <author>
-            <name>Steven Maere</name>
-            <institution>VIB</institution>
-        </author>
-        <author>
-            <name>Martin Kuiper</name>
-            <institution>VIB</institution>
-        </author>
-    </authorlist>
-    <url>http://chianti.ucsd.edu/cyto_web/plugins/pluginjardownload.php?id=131</url>
-    <filetype>jar</filetype>
-</plugin>
-<plugin>
-    <uniqueID>118</uniqueID>
-    <name>BiNoM</name>
-    <description>BiNoM is a Cytoscape plugin, developed to facilitate the manipulation of biological networks represented in standard systems biology formats and to carry out studies on the network structure. &lt;ul&gt;&lt;li&gt;Import of BioPAX, SBML and CellDesigner formats&lt;li&gt;Export to BioPAX, SBML and CellDesigner formats after user manipulations&lt;li&gt;Conversion between standards (CellDesigner-&amp;gt;BioPAX, BioPAX-&amp;gt;SBML)&lt;li&gt;Full support of BioPAX information (reaction network, interaction network, pathway structure, references), concept of BioPAX index and network interfaces&lt;li&gt;Browsing, editing, extracting parts, merging BioPAX files with network graph interface&lt;li&gt;Structural analysis of the networks (strongly connected components, path and cycle analysis, network clustering, etc.)&lt;li&gt;Support of generating network modular view&lt;li&gt;BioPAX network query system: allows to work with huge BioPAX files (such as whole Reactome or NetPath)&lt;li&gt;Some general purpose utilities not yet implemented in Cytoscape (clipboard operations, network updating, etc.) &lt;/ul&gt;</description>
-    <category>Network and Attribute I/O</category>
-    <pluginVersion>1.0</pluginVersion>
-    <cytoscapeVersions>
-        <version>2.5</version>
-    </cytoscapeVersions>
-    <license>
-        <text>LGPL</text>
-    </license>
-    <release_date>2007-09-01</release_date>
-    <authorlist>
-        <author>
-            <name>Andrei Zinovyev</name>
-            <institution>Institut Curie</institution>
-        </author>
-        <author>
-            <name>Eric Viara</name>
-            <institution>Institut Curie</institution>
-        </author>
-        <author>
-            <name>Laurence Calzone</name>
-            <institution>Institut Curie</institution>
-        </author>
-        <author>
-            <name>Emmanuel Barillot</name>
-            <institution>Institut Curie</institution>
-        </author>
-    </authorlist>
-    <url>http://chianti.ucsd.edu/cyto_web/plugins/pluginjardownload.php?id=43</url>
-    <filetype>jar</filetype>
-</plugin>
-<plugin>
-    <uniqueID>131</uniqueID>
-    <name>BiomartClient</name>
-    <description>&lt;p&gt;Web Service client module for Biomart (&lt;a href="http://www.biomart.org/"&gt;http://www.biomart.org/&lt;/a&gt;).&lt;/p&gt;&lt;p&gt;&lt;strong&gt;&lt;font color="red"&gt;Now GUI is integrated and you do not have to install UI plugin for this version.&lt;/font&gt;&lt;/strong&gt;</description>
-    <category>Network and Attribute I/O</category>
-    <pluginVersion>0.80</pluginVersion>
-    <cytoscapeVersions>
-        <version>2.6</version>
-    </cytoscapeVersions>
-    <release_date>2008-10-16</release_date>
-    <authorlist>
-        <author>
-            <name>Keiichiro Ono</name>
-            <institution>UCSD Bioengineering</institution>
-        </author>
-    </authorlist>
-    <url>http://chianti.ucsd.edu/cyto_web/plugins/pluginjardownload.php?id=172</url>
-    <filetype>jar</filetype>
-</plugin>
-<plugin>
-    <uniqueID>159</uniqueID>
-    <name>BioNetBuilder</name>
-    <description>Accesses BIND,BioGrid,DIP,HPRD,KEGG,IntAct,MINT,MPPI, and Prolinks as well as interolog networks derived from these sources for all species represented in NCBI HomoloGene.</description>
-    <category>Network and Attribute I/O</category>
-    <pluginVersion>2.0</pluginVersion>
-    <cytoscapeVersions>
-        <version>2.6</version>
-    </cytoscapeVersions>
-    <release_date>2008-06-18</release_date>
-    <authorlist>
-        <author>
-            <name>Jay Konieczka</name>
-            <institution> University of Arizona</institution>
-        </author>
-        <author>
-            <name> Kevin Drew</name>
-            <institution> Courant Institute, NYU.</institution>
-        </author>
-    </authorlist>
-    <url>http://chianti.ucsd.edu/cyto_web/plugins/pluginjardownload.php?id=134</url>
-    <filetype>jar</filetype>
-</plugin>
-<plugin>
-    <uniqueID>164</uniqueID>
-    <name>BioQualiPlugin</name>
-    <description>BioQuali analyses regulatory networks and expression datasets by checking a global consistency between the regulatory model and the expression data.  It diagnoses a regulatory network searching for the regulations that are not consistent with the expression data, and it outputs a set of genes which predicted expression is decided in order to explain the expression data provided.&lt;br&gt;The BioQuali Cytoscape Plugin proposes the user to visualize this analysis automatically and in few minutes no matter the size of the network.</description>
-    <category>Analysis</category>
-    <pluginVersion>1.0</pluginVersion>
-    <cytoscapeVersions>
-        <version>2.6</version>
-    </cytoscapeVersions>
-    <release_date>2008-09-17</release_date>
-    <authorlist>
-        <author>
-            <name>Annabel Bourdé</name>
-            <institution>Centre INRIA Rennes Bretagne Atlantique, IRISA</institution>
-        </author>
-        <author>
-            <name>Carito Guziolowski</name>
-            <institution>Centre INRIA Rennes Bretagne Atlantique, IRISA</institution>
-        </author>
-    </authorlist>
-    <url>http://chianti.ucsd.edu/cyto_web/plugins/pluginjardownload.php?id=141</url>
-    <filetype>zip</filetype>
-</plugin>
-<plugin>
-    <uniqueID>164</uniqueID>
-    <name>BioQualiPlugin</name>
-    <description>BioQuali analyses regulatory networks and expression datasets by checking a global consistency between the regulatory model and the expression data.  It diagnoses a regulatory network searching for the regulations that are not consistent with the expression data, and it outputs a set of genes which predicted expression is decided in order to explain the expression data provided.&lt;br&gt;The BioQuali Cytoscape Plugin proposes the user to visualize this analysis automatically and in few minutes no matter the size of the network.</description>
-    <category>Analysis</category>
-    <pluginVersion>1.1</pluginVersion>
-    <cytoscapeVersions>
-        <version>2.6</version>
-    </cytoscapeVersions>
-    <release_date>2009-02-01</release_date>
-    <authorlist>
-        <author>
-            <name>Annabel Bourde and Carito Guziolowski</name>
-            <institution> IRISA</institution>
-        </author>
-    </authorlist>
-    <url>http://chianti.ucsd.edu/cyto_web/plugins/pluginjardownload.php?id=189</url>
-    <filetype>jar</filetype>
-</plugin>
-<plugin>
-    <uniqueID>115</uniqueID>
-    <name>BubbleRouter</name>
-    <description>The Bubble Router Plugin allows users to layout a network incrementally and in a semi-automated way. Bubble Router arranges specific nodes in user-drawn regions based on a selected attribute value. Bubble Router works with any node attribute file.</description>
-    <category>Functional Enrichment</category>
-    <pluginVersion>1.0</pluginVersion>
-    <cytoscapeVersions>
-        <version>2.5</version>
-    </cytoscapeVersions>
-    <release_date>2007-08-28</release_date>
-    <authorlist>
-        <author>
-            <name>Alexander Pico, Kristina Hanspers, Nathan Salomonis</name>
-            <institution>The Gladstone Institutes</institution>
-        </author>
-        <author>
-            <name> Allan Kuchinsky</name>
-            <institution>Agilent Technologies</institution>
-        </author>
-    </authorlist>
-    <url>http://chianti.ucsd.edu/cyto_web/plugins/pluginjardownload.php?id=33</url>
-    <filetype>jar</filetype>
-</plugin>
-<plugin>
-    <uniqueID>115</uniqueID>
-    <name>BubbleRouter</name>
-    <description>The Bubble Router Plugin allows users to layout a network incrementally and in a semi-automated way. Bubble Router arranges specific nodes in user-drawn regions based on a selected attribute value. Bubble Router works with any node attribute file.</description>
-    <category>Functional Enrichment</category>
-    <pluginVersion>1.1</pluginVersion>
-    <cytoscapeVersions>
-        <version>2.6</version>
-    </cytoscapeVersions>
-    <release_date>2008-03-12</release_date>
-    <authorlist>
-        <author>
-            <name>Alexander Pico, Kristina Hanspers, Nathan Salomonis</name>
-            <institution>The Gladstone Institutes</institution>
-        </author>
-        <author>
-            <name> Allan Kuchinsky</name>
-            <institution>Agilent Technologies</institution>
-        </author>
-    </authorlist>
-    <url>http://chianti.ucsd.edu/cyto_web/plugins/pluginjardownload.php?id=87</url>
-    <filetype>jar</filetype>
-</plugin>
-<plugin>
-    <uniqueID>116</uniqueID>
-    <name>CABIN</name>
-    <description>CABIN allows exploratory analysis and integration of multiple interaction networks obtained from experimental techniques, inference algorithms and/or bioinformatics datasources.</description>
-    <category>Analysis</category>
-    <pluginVersion>2.1</pluginVersion>
-    <cytoscapeVersions>
-        <version>2.5</version>
-    </cytoscapeVersions>
-    <license>
-        <text>---- CABIN TERMS OF USE ----
- 
-We reserve the right to publish a description of the overall protein-protein interaction datasets, and the methods used to obtain the contents of the dataset.
-        </text>
-    </license>
-    <release_date>2007-08-03</release_date>
-    <authorlist>
-        <author>
-            <name>Mudita Singhal,</name>
-            <institution>Pacific Northwest National Laboratory</institution>
-        </author>
-    </authorlist>
-    <url>http://chianti.ucsd.edu/cyto_web/plugins/pluginjardownload.php?id=36</url>
-    <filetype>jar</filetype>
-</plugin>
-<plugin>
-    <uniqueID>157</uniqueID>
-    <name>CentiScaPe</name>
-    <description>CentiScaPe computes specific centrality parameters describing the network topology. The centrality parameters aid the users to find the most significant nodes in a complex network. The plugin computation generates both numerical and graphical output making easy to find the key nodes also in large networks. Network topological quantification can be combined with other numerical node attributes to provide biologically meaningful node identification and functional classification.</description>
-    <category>Analysis</category>
-    <pluginVersion>1.0</pluginVersion>
-    <cytoscapeVersions>
-        <version>2.6</version>
-    </cytoscapeVersions>
-    <release_date>2008-05-19</release_date>
-    <authorlist>
-        <author>
-            <name>Giovanni Scardoni, Michele Petterlini</name>
-            <institution>Center for Biomedical Computing (CBMC), University of Verona</institution>
-        </author>
-        <author>
-            <name>Carlo Laudanna</name>
-            <institution>CBMC, Department of Pathology, University of Verona</institution>
-        </author>
-    </authorlist>
-    <url>http://chianti.ucsd.edu/cyto_web/plugins/pluginjardownload.php?id=128</url>
-    <filetype>zip</filetype>
-</plugin>
-<plugin>
-    <uniqueID>177</uniqueID>
-    <name>ClueGO</name>
-    <description>ClueGO is a Cytoscape plug-in that visualizes the non-redundant biological terms for large clusters of genes in a functionally grouped network and it can be used in combination with GOlorize. The identifiers can be uploaded from a text file or interactively from a network of Cytoscape. The type of identifiers supported can be easely extended by the user. ClueGO performs single cluster analysis and comparison of clusters. From the ontology sources used, the terms are selected by different filter criteria. The related terms which share similar associated genes can be fused to reduce redundancy. The ClueGO network is created with kappa statistics and reflects the relationships between the terms based on the similarity of their associated genes. On the network, the node colour can be switched between functional groups and clusters distribution. ClueGO charts are underlying the specificity and the common aspects of the biological role. The significance of the terms and groups is automatically calculated. ClueGO is easy updatable with the newest files from Gene Ontology and KEGG.</description>
-    <category>Functional Enrichment</category>
-    <pluginVersion>1.1</pluginVersion>
-    <cytoscapeVersions>
-        <version>2.6</version>
-    </cytoscapeVersions>
-    <license>
-        <text>COMMERCIAL USE
-
-
-Entire Agreement. This Agreement constitutes the entire agreement between you and Agilent, and supersedes any previous communications, representations or agreements between the parties, whether oral or written, regarding transactions hereunder except for a specific warranty issued by Agilent with regard to this product. Your additional or different terms and conditions will not apply. This Agreement may not be changed except by an amendment signed by an authorized representative of each party.
-        </text>
-    </license>
-    <release_date>2008-07-28</release_date>
-    <authorlist>
-        <author>
-            <name>Robert Kincaid and Allan Kuchinsky</name>
-            <institution>Agilent Labs</institution>
-        </author>
-        <author>
-            <name>Michael Creech</name>
-            <institution>Blue Oak Software</institution>
-        </author>
-    </authorlist>
-    <url>http://chianti.ucsd.edu/cyto_web/plugins/pluginjardownload.php?id=130</url>
-    <filetype>jar</filetype>
-</plugin>
-</pluginlist>
-<themes>
-    <theme>
-        <uniqueID>1</uniqueID>
-        <name>Cytoscape Tutorial Theme</name>
-        <description>This collection of plugins provides all the functionality</description>
-        <cytoscapeVersions>
-            <version>2.6</version>
-        </cytoscapeVersions>
-        <themeVersion>1</themeVersion>
-        <pluginlist>
-            <plugin>
-                <uniqueID>136</uniqueID>
-                <name>NatureProtocolsWorkflow</name>
-                <description>Groups all of the plugins required for the Nature Protocols workflow.</description>
-                <category>Other</category>
-                <pluginVersion>1.0</pluginVersion>
-                <cytoscapeVersions>
-                    <version>2.5</version>
-                    <version>2.6</version>
-                </cytoscapeVersions>
-                <release_date>2007-11-12</release_date>
-                <authorlist>
-                    <author>
-                        <name>Allan Kuchinsky</name>
-                        <institution>Agilent Technologies</institution>
-                    </author>
-                </authorlist>
-                <url>http://chianti.ucsd.edu/cyto_web/plugins/pluginjardownload.php?id=66</url>
-                <filetype>jar</filetype>
-            </plugin>
-            <plugin>
-                <uniqueID>111</uniqueID>
-                <pluginVersion>1.3</pluginVersion>
-            </plugin>
-            <plugin>
-                <uniqueID>103</uniqueID>
-                <pluginVersion>2.55</pluginVersion>
-            </plugin>
-            <plugin>
-                <uniqueID>104</uniqueID>
-                <pluginVersion>2.1</pluginVersion>
-            </plugin>
-            <plugin>
-                <uniqueID>101</uniqueID>
-                <pluginVersion>2.2</pluginVersion>
-            </plugin>
-        </pluginlist>
-    </theme>
-    <theme>
-        <uniqueID>2</uniqueID>
-        <name>WebServiceClientPack</name>
-        <description>This bundle of plugins provides access to several different external data sources for importing network and attribute data.  Data sources include NCBI, Biomart, IntAct and Pathway Commons.  Please contact the individual plugin authors with any questions.</description>
-        <cytoscapeVersions>
-            <version>2.6</version>
-        </cytoscapeVersions>
-        <themeVersion>1.2</themeVersion>
-        <pluginlist>
-            <plugin>
-                <uniqueID>125</uniqueID>
-                <pluginVersion>0.65</pluginVersion>
-            </plugin>
-            <plugin>
-                <uniqueID>131</uniqueID>
-                <pluginVersion>0.80</pluginVersion>
-            </plugin>
-            <plugin>
-                <uniqueID>138</uniqueID>
-                <pluginVersion>0.70</pluginVersion>
-            </plugin>
-            <plugin>
-                <uniqueID>139</uniqueID>
-                <pluginVersion>0.52</pluginVersion>
-            </plugin>
-        </pluginlist>
-    </theme>
-</themes>
+		they may have their own licensing requirements.  Please contact the plugin authors with any questions.
+    </description>
+    <url>http://cytoscape.org</url>
+    <pluginlist>
+        <plugin>
+            <uniqueID>1691</uniqueID>
+            <name>AffinityPropagationPlugin</name>
+            <description>AffinityPropagationPlugin</description>
+            <category>Other</category>
+            <pluginVersion>1.0</pluginVersion>
+            <cytoscapeVersions>
+                <version>2.6.2</version>
+            </cytoscapeVersions>
+            <release_date>2009-03-01</release_date>
+            <authorlist>
+                <author>
+                    <name>Michal Woznak</name>
+                    <institution>UW</institution>
+                </author>
+            </authorlist>
+            <url>http://localhost:8084/WebApplication1/AffinityPropagationPlugin.jar</url>
+            <filetype>jar</filetype>
+        </plugin>
+    </pluginlist>
+    <themes>
+        <theme>
+            <uniqueID>1</uniqueID>
+            <name>Cytoscape Tutorial Theme</name>
+            <description>This collection of plugins provides all the functionality</description>
+            <cytoscapeVersions>
+                <version>2.6</version>
+            </cytoscapeVersions>
+            <themeVersion>1</themeVersion>
+            <pluginlist>
+                <plugin>
+                    <uniqueID>136</uniqueID>
+                    <name>NatureProtocolsWorkflow</name>
+                    <description>Groups all of the plugins required for the Nature Protocols workflow.</description>
+                    <category>Other</category>
+                    <pluginVersion>1.0</pluginVersion>
+                    <cytoscapeVersions>
+                        <version>2.5</version>
+                        <version>2.6</version>
+                    </cytoscapeVersions>
+                    <release_date>2007-11-12</release_date>
+                    <authorlist>
+                        <author>
+                            <name>Allan Kuchinsky</name>
+                            <institution>Agilent Technologies</institution>
+                        </author>
+                    </authorlist>
+                    <url>http://chianti.ucsd.edu/cyto_web/plugins/pluginjardownload.php?id=66</url>
+                    <filetype>jar</filetype>
+                </plugin>
+                <plugin>
+                    <uniqueID>111</uniqueID>
+                    <pluginVersion>1.3</pluginVersion>
+                </plugin>
+                <plugin>
+                    <uniqueID>103</uniqueID>
+                    <pluginVersion>2.55</pluginVersion>
+                </plugin>
+                <plugin>
+                    <uniqueID>104</uniqueID>
+                    <pluginVersion>2.1</pluginVersion>
+                </plugin>
+                <plugin>
+                    <uniqueID>101</uniqueID>
+                    <pluginVersion>2.2</pluginVersion>
+                </plugin>
+            </pluginlist>
+        </theme>
+    </themes>
 </project>
