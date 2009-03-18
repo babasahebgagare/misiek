@@ -165,9 +165,12 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
             Integer targetIndex = nodeMapping.get(targetID);
 
             if (!sourceID.equals(targetID)) {
-                Double prob = edgesAttributes.getDoubleAttribute(id, edgeNameAttr);
-                af.setSimilarities(sourceIndex.toString(), targetIndex.toString(), Math.log(prob));
-                af.setSimilarities(targetIndex.toString(), sourceIndex.toString(), Math.log(prob));
+                Double probOrNull = edgesAttributes.getDoubleAttribute(id, edgeNameAttr);
+                if (probOrNull != null) {
+                    System.out.println(probOrNull);
+                    af.setSimilarities(sourceIndex.toString(), targetIndex.toString(), Math.log(probOrNull));
+                    af.setSimilarities(targetIndex.toString(), sourceIndex.toString(), Math.log(probOrNull));
+                }
             //                af.setSimilarity(sourceID, targetID, Math.log(prob));
             //                af.setSimilarity(targetID, sourceID, Math.log(prob));
             }
