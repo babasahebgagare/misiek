@@ -10,21 +10,29 @@ pluginName=AffinityPropagationPlugin
 
 # Description used to give users information about the plugin such as what it does.
 # Html tags are encouraged for formatting purposes.
-pluginDescription=Information about the plugin that will be displayed to users.<br>Please use html tags for all formatting and do not add newlines.<p>
+pluginDescription=
+<p>Usage:</p>
+1. Create / load network with Double attribute - probability of edge
+2. Refresh and set parameters
+3. Click Start
+4. Select from menu: Layout -> Cytoscape Layouts -> Group attributes layout -> edge_attribute
+
+<p>Contact: </p>
+mw219725@gmail.com
 
 # Plugin version number, this must be two numbers separated by a decimlal.  Ex. 0.2, 14.03
 pluginVersion=1.0
 
 # Compatible Cytoscape version. If there are more than one version, seperate by ",".
-cytoscapeVersion=2.6.1
+cytoscapeVersion=2.6.2
 
 # Category, use one of the categories listed on the http://cytoscape.org/plugins2.php site
-pluginCategory=Analysis
+pluginCategory=Scripting/Communication
 
 # -- The following properties are OPTIONAL -- #
 
 # URL to a website that gives more information about your plugin, Ex. http://my-lab-site.org
-projectURL=http://students.mimuw.edu.pl/~mw219725
+projectURL=http://code.google.com/p/misiek/
 
 # List of authors.  Note each author and institution pair are separated by a : (colon)
 # each additional author institution pair must be separated from other pairs bye a ; (semicolon)
