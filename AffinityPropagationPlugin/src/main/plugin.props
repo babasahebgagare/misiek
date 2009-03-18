@@ -19,7 +19,7 @@ pluginVersion=1.0
 cytoscapeVersion=2.6.1
 
 # Category, use one of the categories listed on the http://cytoscape.org/plugins2.php site
-pluginCategory=Scripting/Communication
+pluginCategory=Analysis
 
 # -- The following properties are OPTIONAL -- #
 
@@ -31,7 +31,7 @@ projectURL=http://students.mimuw.edu.pl/~mw219725
 pluginAuthorsInstitutions=Michal Wozniak
 
 # Date this plugin/plugin version was released
-releaseDate=March 1, 2009
+releaseDate=March 19, 2009
 
 # If this plugin is never meant to be downloaded except as part of a plugin (not common) add this property.  Default is "no"
 themeOnly=no
