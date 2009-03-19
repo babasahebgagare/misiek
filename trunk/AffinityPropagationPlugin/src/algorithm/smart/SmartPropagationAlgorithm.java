@@ -28,7 +28,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
         for (Examplar examplar : examplars.getExamplars().values()) {
             Collection<SiblingData> siblings = examplar.getSiblingMap().values();
             for (SiblingData sibling : siblings) {
-                sibling.setA(sibling.getA() * getLambda() + (1 - getLambda()) * sibling.getAold());
+                sibling.setA(sibling.getA() * (1 - getLambda()) + getLambda() * sibling.getAold());
             }
         }
     }
@@ -37,7 +37,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
         for (Examplar examplar : examplars.getExamplars().values()) {
             Collection<SiblingData> siblings = examplar.getSiblingMap().values();
             for (SiblingData sibling : siblings) {
-                sibling.setR(sibling.getR() * getLambda() + (1 - getLambda()) * sibling.getRold());
+                sibling.setR(sibling.getR() * (1 - getLambda()) + getLambda() * sibling.getRold());
             }
         }
     }
@@ -220,11 +220,14 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
     @Override
     public Map<String, Cluster<String>> doClusterAssoc() {
         int iterations = getIterations();
+
 //        iteractionListener.actionPerformed(new ActionEvent(new IterationData(1, examplars.size()), 0, "ITERATION"));
         for (iteration = 0; iteration < iterations; iteration++) {
 
             copyResponsibilies();
             computeResponsibilities();
+            System.out.println("FIRTST" + examplars.toString());
+
             avgResponsibilies();
             copyAvailabilities();
             computeAvailabilities();
@@ -232,14 +235,17 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
 
             if (iteration + 1 != iterations) {
                 Collection<Examplar> centers = computeCenters();
-     //           iteractionListener.actionPerformed(new ActionEvent(new IterationData(iteration + 2, centers.size()), 0, "ITERATION"));
+            //           iteractionListener.actionPerformed(new ActionEvent(new IterationData(iteration + 2, centers.size()), 0, "ITERATION"));
             }
             convergence = checkConvergence();
             if (convergence) {
                 break;
             }
         }
+
+
         Collection<Examplar> centers = computeCenters();
+
         Map<String, Cluster<String>> assigments = computeAssigments(centers);
         // centers = refine(assigments);
 
