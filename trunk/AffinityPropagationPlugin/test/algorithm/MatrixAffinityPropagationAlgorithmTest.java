@@ -1,15 +1,17 @@
 package algorithm;
 
+import algorithm.abs.AffinityPropagationAlgorithm;
 import algorithm.matrix.MatrixPropagationAlgorithm;
+import algorithm.smart.SmartPropagationAlgorithm;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class AffinityPropagationAlgorithmTest {
+public class MatrixAffinityPropagationAlgorithmTest {
 
-    public AffinityPropagationAlgorithmTest() {
+    public MatrixAffinityPropagationAlgorithmTest() {
     }
 
     @BeforeClass
@@ -34,7 +36,7 @@ public class AffinityPropagationAlgorithmTest {
         double inf = -100;
 
         double[][] sim = {{p, 0, inf, 0}, {0, p, 0, inf}, {inf, 0, p, 0}, {0, inf, p, 0}};
-        MatrixPropagationAlgorithm instance = new MatrixPropagationAlgorithm();
+        AffinityPropagationAlgorithm instance = new MatrixPropagationAlgorithm();
         instance.setLambda(0.5);
         instance.setN(4);
         instance.setIterations(4);
