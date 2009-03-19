@@ -29,12 +29,35 @@ public class SmartAffinityPropagationAlgorithmTest {
     public void tearDown() {
     }
 
+    @SuppressWarnings("unchecked")
+    public void setSimilarities(double[][] sim, AffinityPropagationAlgorithm instance, Double inf) {
+        int N = sim.length;
+        if (N == 0) {
+            return;
+        }
+        if (N != sim[0].length) {
+            return;
+        }
+
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                String from = String.valueOf(i);
+                String to = String.valueOf(j);
+                Double prob = Double.valueOf(sim[i][j]);
+                if (!prob.equals(inf)) {
+                    instance.setSimilarities(from, to, prob);
+                }
+            }
+        }
+
+    }
+
     @Test
     public void testDoCluster() {
         double p = Math.log(0.2);
         double inf = -100;
 
-        double[][] sim = {{p, 0, inf, 0}, {0, p, 0, inf}, {inf, 0, p, 0}, {0, inf, p, 0}};
+        double[][] sim = {{p, 0, inf, 0}, {0, p, 0, inf}, {inf, 0, p, 0}, {0, inf, 0, p}};
         AffinityPropagationAlgorithm instance = new SmartPropagationAlgorithm();
         instance.setLambda(0.5);
         instance.setN(4);
@@ -42,7 +65,7 @@ public class SmartAffinityPropagationAlgorithmTest {
         instance.setConvits(null);
         instance.init();
 
-        instance.setSimilarities(sim);
+        setSimilarities(sim, instance, inf);
         instance.doCluster();
     }
 }
