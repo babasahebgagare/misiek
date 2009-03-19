@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Vector;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import utils.Messenger;
@@ -31,8 +32,12 @@ public class AffinityPanelController implements Serializable {
     private JComboBox edgeAttrField = null;
     private JSpinner iterationsField = null;
     private JTextField preferencesField = null;
+    private JRadioButton matrixImplementation = null;
+    private JRadioButton smartImplementation = null;
     private AffinityStatsPanelController psc = null;
     private boolean cancelDialog = false;
+    public final static int MATRIX_IMPLEMENTATION = 0;
+    public final static int SMART_IMPLEMENTATION = 1;
 
     public AffinityPanelController(final AffinityStatsPanelController psc) {
         this.psc = psc;
@@ -52,6 +57,7 @@ public class AffinityPanelController implements Serializable {
         Integer convits = getConvits();
         String nodeNameAttr = getNodeAttr();
         String edgeNameAttr = getEdgeAttr();
+        int implementation = getImplementation();
 
         if (!validateValues(lambda, preferences, iterations, convits, nodeNameAttr, edgeNameAttr)) {
             return;
@@ -59,9 +65,9 @@ public class AffinityPanelController implements Serializable {
         Double logpreferences = Math.log(preferences);
 
         if (convits != null) {
-            algorithm = new CytoAffinityClustering(nodeNameAttr, edgeNameAttr, lambda.doubleValue(), logpreferences.doubleValue(), iterations.intValue(), convits);
+            algorithm = new CytoAffinityClustering(implementation, nodeNameAttr, edgeNameAttr, lambda.doubleValue(), logpreferences.doubleValue(), iterations.intValue(), convits);
         } else {
-            algorithm = new CytoAffinityClustering(nodeNameAttr, edgeNameAttr, lambda.doubleValue(), logpreferences.doubleValue(), iterations.intValue());
+            algorithm = new CytoAffinityClustering(implementation, nodeNameAttr, edgeNameAttr, lambda.doubleValue(), logpreferences.doubleValue(), iterations.intValue());
         }
         TaskManager.executeTask(new CytoClusterTask(algorithm),
                 CytoClusterTask.getDefaultTaskConfig());
@@ -69,6 +75,14 @@ public class AffinityPanelController implements Serializable {
         Integer clusters = algorithm.getClustersNumber();
         String network = Cytoscape.getCurrentNetwork().getTitle();
         psc.addClusteringStat(network, lambda, preferences, clusters, iterations, nodeNameAttr);
+    }
+
+    private int getImplementation() {
+        if (matrixImplementation.isSelected()) {
+            return AffinityPanelController.MATRIX_IMPLEMENTATION;
+        } else {
+            return AffinityPanelController.SMART_IMPLEMENTATION;
+        }
     }
 
     private boolean validateConvits(final Integer convits) {
@@ -331,5 +345,21 @@ public class AffinityPanelController implements Serializable {
 
     public void setPreferencesField(final JTextField preferencesField) {
         this.preferencesField = preferencesField;
+    }
+
+    public JRadioButton getMatrixImplementation() {
+        return matrixImplementation;
+    }
+
+    public void setMatrixImplementation(JRadioButton matrixImplementation) {
+        this.matrixImplementation = matrixImplementation;
+    }
+
+    public JRadioButton getSmartImplementation() {
+        return smartImplementation;
+    }
+
+    public void setSmartImplementation(JRadioButton smartImplementation) {
+        this.smartImplementation = smartImplementation;
     }
 }
