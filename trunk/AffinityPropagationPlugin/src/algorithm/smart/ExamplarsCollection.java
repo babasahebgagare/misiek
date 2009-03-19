@@ -4,6 +4,8 @@
  */
 package algorithm.smart;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,5 +56,70 @@ public class ExamplarsCollection {
 
     public void setExamplars(final Map<String, Examplar> examplars) {
         this.examplars = examplars;
+    }
+
+    private String valuesToString(String kind) {
+        int N = examplars.size();
+        StringBuffer res = new StringBuffer();
+        Double[][] matrix = new Double[N][N];
+        Map<String, Integer> mapper = new HashMap<String, Integer>();
+
+        String[] examplarsPom = new String[N];
+        int pos = 0;
+        for (Examplar examplar : examplars.values()) {
+            examplarsPom[pos] = (examplar.getName());
+            pos++;
+        }
+        Arrays.sort(examplarsPom);
+
+        for (int i = 0; i < N; i++) {
+            mapper.put(examplarsPom[i], Integer.valueOf(i));
+        }
+
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                matrix[i][j] = Double.valueOf(-100000);
+            }
+        }
+
+        for (Examplar examplar : examplars.values()) {
+            Collection<SiblingData> sibling = examplar.getSiblingMap().values();
+            for (SiblingData data : sibling) {
+                Integer row = mapper.get(examplar.getName());
+                Integer col = mapper.get(data.getExamplarName());
+
+                Double value = null;
+                if (kind.equals("R")) {
+                    value = data.getR();
+                } else if (kind.equals("S")) {
+                    value = data.getS();
+                } else {
+                    value = data.getA();
+                }
+                matrix[row][col] = value;
+            }
+        }
+
+        for (int i = 0; i < N; i++) {
+
+            for (int j = 0; j < N; j++) {
+                res.append(matrix[i][j] + " ");
+            }
+            res.append("\n");
+        }
+
+        return res.toString();
+    }
+
+    public String responsiblitiesToString() {
+        return valuesToString("R");
+    }
+
+    public String availibilitiesToString() {
+        return valuesToString("A");
+    }
+
+    public String similaritiesToString() {
+        return valuesToString("S");
     }
 }
