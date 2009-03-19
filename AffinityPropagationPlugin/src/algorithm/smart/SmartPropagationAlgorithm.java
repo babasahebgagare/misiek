@@ -220,7 +220,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
     @Override
     public Map<String, Cluster<String>> doClusterAssoc() {
         int iterations = getIterations();
-        iteractionListener.actionPerformed(new ActionEvent(new IterationData(1, examplars.size()), 0, "ITERATION"));
+//        iteractionListener.actionPerformed(new ActionEvent(new IterationData(1, examplars.size()), 0, "ITERATION"));
         for (iteration = 0; iteration < iterations; iteration++) {
 
             copyResponsibilies();
@@ -232,7 +232,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
 
             if (iteration + 1 != iterations) {
                 Collection<Examplar> centers = computeCenters();
-                iteractionListener.actionPerformed(new ActionEvent(new IterationData(iteration + 2, centers.size()), 0, "ITERATION"));
+     //           iteractionListener.actionPerformed(new ActionEvent(new IterationData(iteration + 2, centers.size()), 0, "ITERATION"));
             }
             convergence = checkConvergence();
             if (convergence) {
@@ -258,19 +258,24 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
     @Override
     public void setN(final int N) {
     }
-    /*
-    private Collection<Examplar> refine(Map<String, Cluster<String>> assigments) {
-    Collection<Examplar> res = new HashSet<Examplar>();
 
-    for (Cluster<String> cluster : assigments.values()) {
-    Double
-    for (String examplar : cluster.getElements()) {
+    public void setSimilarities(double[][] sim) {
+        int N = sim.length;
+        if (N == 0) {
+            return;
+        }
+        if (N != sim[0].length) {
+            return;
+        }
 
-    Double sim
-    }
-    }
-    return res;
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                String from = String.valueOf(i);
+                String to = String.valueOf(j);
+                Double prob = Double.valueOf(sim[i][j]);
+                this.setSimilarities(from, to, prob);
+            }
+        }
 
     }
-     * */
 }

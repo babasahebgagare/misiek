@@ -119,9 +119,12 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
             C = S.getColumns(I).maxrIndexes();
             System.out.println("C: " + C);
             C = tmp(C, I);
+            System.out.println("C: " + C);
 
+            
             //    System.out.println("C: " + C);
             idx = idx(C, I);
+            System.out.println("idx: " + idx);
 
             //    System.out.println("A: " + A);
             //   System.out.println("E: " + E);

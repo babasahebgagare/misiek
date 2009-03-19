@@ -46,4 +46,6 @@ public abstract class AffinityPropagationAlgorithm<T> extends AbstractClusterAlg
     public void setConvits(final Integer convits) {
         this.convits = convits;
     }
+
+    public abstract void setSimilarities(double[][] sim);
 }
