@@ -33,9 +33,9 @@ public class MatrixAffinityPropagationAlgorithmTest {
     @Test
     public void testDoCluster() {
         double p = Math.log(0.2);
-        double inf = -100;
+        double inf = -1100000;
 
-        double[][] sim = {{p, 0, inf, 0}, {0, p, 0, inf}, {inf, 0, p, 0}, {0, inf, p, 0}};
+        double[][] sim = {{p, 0, inf, 0}, {0, p, 0, inf}, {inf, 0, p, 0}, {0, inf, 0, p}};
         AffinityPropagationAlgorithm instance = new MatrixPropagationAlgorithm();
         instance.setLambda(0.5);
         instance.setN(4);
