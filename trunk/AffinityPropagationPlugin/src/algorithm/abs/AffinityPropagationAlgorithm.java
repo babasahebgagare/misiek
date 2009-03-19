@@ -7,10 +7,10 @@ public abstract class AffinityPropagationAlgorithm<T> extends AbstractClusterAlg
     private double lambda;
     private int iterations;
     protected Integer convits = null;
-    protected ActionListener iteractionListener = null;
+    protected ActionListener iteractionListenerOrNull = null;
 
     public void addIterationListener(final ActionListener listener) {
-        this.iteractionListener = listener;
+        this.iteractionListenerOrNull = listener;
     }
 
     @Override
