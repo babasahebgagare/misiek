@@ -99,7 +99,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
                 if (sibling.getExamplarName().equals(examplar.getName())) {
                     sibling.setA(computeEqPom(sibling.getExamplarName()));
                 } else {
-                    sibling.setA(computeNotEqPom(examplar.getName(), examplar.getName()));
+                    sibling.setA(computeNotEqPom(examplar.getName(), sibling.getExamplarName()));
                 }
             }
         }
@@ -223,16 +223,18 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
         if (iteractionListenerOrNull != null) {
             iteractionListenerOrNull.actionPerformed(new ActionEvent(new IterationData(1, examplars.size()), 0, "ITERATION"));
         }
+        System.out.println("SIM: " + examplars.similaritiesToString());
+
         for (iteration = 0; iteration < iterations; iteration++) {
 
             copyResponsibilies();
             computeResponsibilities();
-            System.out.println("RESP" + examplars.toString());
-
+            System.out.println("RESP: " + examplars.responsiblitiesToString());
             avgResponsibilies();
+
             copyAvailabilities();
             computeAvailabilities();
-            System.out.println("AVA" + examplars.toString());
+            System.out.println("AVA: " + examplars.availibilitiesToString());
             avgAvailabilities();
 
             if (iteration + 1 != iterations && iteractionListenerOrNull != null) {
