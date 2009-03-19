@@ -50,11 +50,12 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
         double[] pom = new double[N];
         Map<String, String> res = new HashMap<String, String>();
 
+        System.out.println("S" + S);
         for (int iter = 0; iter < iterations; iter++) {
             rold = R.copy();
 
             AS = A.plus(S);
-            //    System.out.println("AS" + AS);
+            System.out.println("AS" + AS);
             YI = AS.maxr();
             //     System.out.println("YI" + YI);
 
@@ -74,7 +75,7 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
             //          System.out.println("R" + R);
 
             for (int i = 0; i < N; i++) {
-                R.set(i, (int) YI.get(i,0), S.get(i, (int) YI.get(i,0)) - YI2.get(i, 1));
+                R.set(i, (int) YI.get(i, 0), S.get(i, (int) YI.get(i, 0)) - YI2.get(i, 1));
             }
 
             R = R.mul(1 - getLambda()).plus(rold.mul(getLambda()));
@@ -103,35 +104,35 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
             }
 
             A = A.mul((1 - getLambda())).plus(aold.mul(getLambda()));
-            //       System.out.println("A");
-            //          System.out.println(A);
-            iteractionListener.actionPerformed(new ActionEvent(new IterationData(iter + 1, 0), 0, "ITERATION"));
+        //       System.out.println("A");
+        //          System.out.println(A);
+        // iteractionListener.actionPerformed(new ActionEvent(new IterationData(iter + 1, 0), 0, "ITERATION"));
         }
 
-        //    System.out.println("S: " + S);
+        System.out.println("A: " + A);
+        System.out.println("R: " + R);
         E = R.plus(A);
         I = E.diag().findG(0);
 
-        C = S.getColumns(I).maxrIndexes();
-        try {
-            //    System.out.println("C: " + C);
+        System.out.println("I: " + I);
+        if (I.size() > 0) {
+            C = S.getColumns(I).maxrIndexes();
+            System.out.println("C: " + C);
             C = tmp(C, I);
-        } catch (CloneNotSupportedException ex) {
-            Logger.getLogger(MatrixPropagationAlgorithm.class.getName()).log(Level.SEVERE, null, ex);
+
+            //    System.out.println("C: " + C);
+            idx = idx(C, I);
+
+            //    System.out.println("A: " + A);
+            //   System.out.println("E: " + E);
+            //   System.out.println("I: " + I);
+            //  System.out.println("idx: " + idx);
+
+            //     ArrayList res= new ArrayList<Integer>();
+            for (int i = 0; i < idx.size(); i++) {
+                res.put(String.valueOf(i), String.valueOf(idx.getValue(i)));
+            }
         }
-        //    System.out.println("C: " + C);
-        idx = idx(C, I);
-
-        //    System.out.println("A: " + A);
-        //   System.out.println("E: " + E);
-        //   System.out.println("I: " + I);
-        //  System.out.println("idx: " + idx);
-
-        //     ArrayList res= new ArrayList<Integer>();
-        for (int i = 0; i < idx.size(); i++) {
-            res.put(String.valueOf(i), String.valueOf(idx.getValue(i)));
-        }
-
 
         return res;
     }
@@ -155,7 +156,7 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
         return res;
     }
 
-    public IntegerMatrix1D tmp(final IntegerMatrix1D C, final IntegerMatrix1D I) throws CloneNotSupportedException {
+    public IntegerMatrix1D tmp(final IntegerMatrix1D C, final IntegerMatrix1D I) {
         IntegerMatrix1D res = C.copy();
         for (int i = 0; i < I.size(); i++) {
             res.set(I.get(i), Integer.valueOf(i));
