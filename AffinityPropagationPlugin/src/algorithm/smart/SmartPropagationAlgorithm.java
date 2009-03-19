@@ -220,22 +220,24 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
     @Override
     public Map<String, Cluster<String>> doClusterAssoc() {
         int iterations = getIterations();
-
-//        iteractionListener.actionPerformed(new ActionEvent(new IterationData(1, examplars.size()), 0, "ITERATION"));
+        if (iteractionListenerOrNull != null) {
+            iteractionListenerOrNull.actionPerformed(new ActionEvent(new IterationData(1, examplars.size()), 0, "ITERATION"));
+        }
         for (iteration = 0; iteration < iterations; iteration++) {
 
             copyResponsibilies();
             computeResponsibilities();
-            System.out.println("FIRTST" + examplars.toString());
+            System.out.println("RESP" + examplars.toString());
 
             avgResponsibilies();
             copyAvailabilities();
             computeAvailabilities();
+            System.out.println("AVA" + examplars.toString());
             avgAvailabilities();
 
-            if (iteration + 1 != iterations) {
+            if (iteration + 1 != iterations && iteractionListenerOrNull != null) {
                 Collection<Examplar> centers = computeCenters();
-            //           iteractionListener.actionPerformed(new ActionEvent(new IterationData(iteration + 2, centers.size()), 0, "ITERATION"));
+                iteractionListenerOrNull.actionPerformed(new ActionEvent(new IterationData(iteration + 2, centers.size()), 0, "ITERATION"));
             }
             convergence = checkConvergence();
             if (convergence) {
@@ -246,6 +248,10 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
 
         Collection<Examplar> centers = computeCenters();
 
+        System.out.println("CENTERS: ");
+        for (Examplar ex : centers) {
+            System.out.println(ex.getName());
+        }
         Map<String, Cluster<String>> assigments = computeAssigments(centers);
         // centers = refine(assigments);
 

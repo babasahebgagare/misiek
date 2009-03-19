@@ -114,7 +114,7 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
         E = R.plus(A);
         I = E.diag().findG(0);
 
-        System.out.println("I: " + I);
+        System.out.println("centers: " + I);
         if (I.size() > 0) {
             C = S.getColumns(I).maxrIndexes();
             System.out.println("C: " + C);
