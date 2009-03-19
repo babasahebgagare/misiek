@@ -88,7 +88,7 @@ public class ExamplarsCollection {
                 Integer row = mapper.get(examplar.getName());
                 Integer col = mapper.get(data.getExamplarName());
 
-                Double value = null;
+                Double value;
                 if (kind.equals("R")) {
                     value = data.getR();
                 } else if (kind.equals("S")) {
