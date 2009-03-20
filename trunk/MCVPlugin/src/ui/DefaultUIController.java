@@ -22,7 +22,7 @@ import logicmodel.controllers.DataHandle;
 import logicmodel.controllers.NetworksConverter;
 import logicmodel.controllers.ProjectorInfoCalculator;
 import viewmodel.structs.CytoAbstractPPINetwork;
-import logicmodel.structs.CytoProtein;
+import viewmodel.structs.CytoProtein;
 import logicmodel.structs.PPINetwork;
 import main.PluginDataHandle;
 import viewmodel.controllers.CytoInteractionsConverter;

@@ -1,7 +1,7 @@
 package utils;
 
 import viewmodel.structs.CytoAbstractPPINetwork;
-import logicmodel.structs.CytoProtein;
+import viewmodel.structs.CytoProtein;
 import logicmodel.structs.PPINetwork;
 import logicmodel.structs.Protein;
 

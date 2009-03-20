@@ -4,7 +4,7 @@ import cytoscape.CyNetwork;
 import cytoscape.Cytoscape;
 import giny.model.Node;
 import java.util.Collection;
-import logicmodel.structs.CytoProtein;
+import viewmodel.structs.CytoProtein;
 import main.PluginDataHandle;
 
 class CytoProteinsConverter {

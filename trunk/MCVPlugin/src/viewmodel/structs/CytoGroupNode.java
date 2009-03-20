@@ -1,8 +1,5 @@
 package viewmodel.structs;
 
-import logicmodel.structs.CytoProteinProjection;
-import logicmodel.structs.CytoProtein;
-
 public class CytoGroupNode {
 
     private String ID;

@@ -2,7 +2,7 @@ package logicmodel.controllers;
 
 import java.util.Collection;
 import viewmodel.structs.CytoPPINetwork;
-import logicmodel.structs.CytoProtein;
+import viewmodel.structs.CytoProtein;
 import logicmodel.structs.Protein;
 import utils.IDCreator;
 

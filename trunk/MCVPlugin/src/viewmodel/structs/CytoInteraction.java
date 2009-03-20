@@ -1,7 +1,6 @@
 package viewmodel.structs;
 
 import logicmodel.structs.Interaction;
-import logicmodel.structs.CytoProtein;
 
 public class CytoInteraction extends CytoNetworkObject {
 

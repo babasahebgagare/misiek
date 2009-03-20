@@ -1,17 +1,17 @@
-package logicmodel.structs;
+package viewmodel.structs;
 
-import viewmodel.structs.CytoAbstractPPINetwork;
+import logicmodel.structs.Protein;
 
 public class CytoProteinProjection extends CytoProtein {
 
-    CytoProtein cytoMotherProtein;
+    private CytoProtein cytoMotherProtein;
 
     public CytoProteinProjection(String CytoID, Protein protein, CytoAbstractPPINetwork cytoNetwork, CytoProtein cytoMotherProtein) {
         super(CytoID, protein, cytoNetwork);
         this.cytoMotherProtein = cytoMotherProtein;
     }
 
-    public CytoProtein getCytoMotherProtein() {
+    public CytoProtein tryGetCytoMotherProtein() {
         return cytoMotherProtein;
     }
 
