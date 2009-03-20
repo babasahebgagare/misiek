@@ -1,7 +1,9 @@
 package algorithm;
 
 import algorithm.abs.AffinityPropagationAlgorithm;
+import algorithm.smart.Cluster;
 import algorithm.smart.SmartPropagationAlgorithm;
+import java.util.Map;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -56,16 +58,20 @@ public class SmartAffinityPropagationAlgorithmTest {
     public void testDoCluster() {
         double p = Math.log(0.2);
         double inf = -100;
-
-        double[][] sim = {{p, 0, inf, 0}, {0, p, 0, inf}, {inf, 0, p, 0}, {0, inf, 0, p}};
+        double[][] sim = {{p, 0, inf}, {0, p, 0}, {inf, 0, p}};
+//        double[][] sim = {{p, inf, inf, 0}, {inf, p, 0, inf}, {inf, 0, p, 0}, {0, inf, 0, p}};
         AffinityPropagationAlgorithm instance = new SmartPropagationAlgorithm();
         instance.setLambda(0.5);
-        instance.setN(4);
-        instance.setIterations(4);
+        instance.setN(3);
+        instance.setIterations(9);
         instance.setConvits(null);
         instance.init();
 
         setSimilarities(sim, instance, inf);
-        instance.doCluster();
+        @SuppressWarnings("unchecked")
+        Map<String, String> ass = instance.doCluster();
+        for(String val: ass.values()) {
+            System.out.println(val);
+        }
     }
 }
