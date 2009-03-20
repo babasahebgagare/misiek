@@ -50,12 +50,12 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
         double[] pom = new double[N];
         Map<String, String> res = new HashMap<String, String>();
 
-      //  System.out.println("S" + S);
+        //  System.out.println("S" + S);
         for (int iter = 0; iter < iterations; iter++) {
             rold = R.copy();
 
             AS = A.plus(S);
-          //  System.out.println("AS" + AS);
+            //  System.out.println("AS" + AS);
             YI = AS.maxr();
             //     System.out.println("YI" + YI);
 
@@ -110,21 +110,21 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
         }
 
         //System.out.println("A: " + A);
-      //  System.out.println("R: " + R);
+        //  System.out.println("R: " + R);
         E = R.plus(A);
         I = E.diag().findG(0);
 
-      //  System.out.println("centers: " + I);
+        //  System.out.println("centers: " + I);
         if (I.size() > 0) {
             C = S.getColumns(I).maxrIndexes();
-          //  System.out.println("C: " + C);
+            //  System.out.println("C: " + C);
             C = tmp(C, I);
-          //  System.out.println("C: " + C);
+            //  System.out.println("C: " + C);
 
-            
+
             //    System.out.println("C: " + C);
             idx = idx(C, I);
-        //    System.out.println("idx: " + idx);
+            //    System.out.println("idx: " + idx);
 
             //    System.out.println("A: " + A);
             //   System.out.println("E: " + E);
@@ -133,7 +133,11 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
 
             //     ArrayList res= new ArrayList<Integer>();
             for (int i = 0; i < idx.size(); i++) {
-                res.put(String.valueOf(i), String.valueOf(idx.getValue(i)));
+                Integer examplar = Integer.valueOf(i);
+                Integer center = idx.getValue(i);
+                if (S.get(examplar.intValue(), center.intValue()) > -inf) {
+                    res.put(String.valueOf(i), String.valueOf(idx.getValue(i)));
+                }
             }
         }
 
