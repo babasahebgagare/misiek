@@ -9,15 +9,12 @@ import cytoscape.CyNode;
 import cytoscape.Cytoscape;
 import cytoscape.data.CyAttributes;
 import cytoscape.task.TaskMonitor;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JPanel;
 import listeners.IterationListener;
 import panel.AffinityPanelController;
@@ -85,11 +82,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
 
         monitor.setStatus("Loading similarity matrix...");
 
-        try {
-            setParameters();
-        } catch (IOException ex) {
-            Logger.getLogger(CytoAffinityClustering.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        setParameters();
         monitor.setStatus("Clustering...");
         createIteractionListener(monitor);
 
@@ -102,7 +95,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
 
             int i = 0;
 
-            while (clusterprior.size() > 0 && clusterprior.peek().size() > 1) {
+            while (clusterprior.size() > 0) {
                 Cluster<String> cluster = clusterprior.poll();
                 for (String element : cluster.getElements()) {
                     String nodeID = idMapping.get(Integer.valueOf(element));
@@ -141,7 +134,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
         return nodesNames;
     }
 
-    private void setParameters() throws IOException {
+    private void setParameters() {
         @SuppressWarnings("unchecked")
         List<CyEdge> edges = Cytoscape.getCurrentNetwork().edgesList();
         @SuppressWarnings("unchecked")
@@ -157,7 +150,6 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
         af.init();
 
         int i = 0;
-        System.out.println("ALL SIZE: " + nodeNames.size());
 
         for (String name : nodeNames) {
             Integer it = Integer.valueOf(i);
