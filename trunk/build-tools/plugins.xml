@@ -7,11 +7,11 @@
     <url>http://cytoscape.org</url>
     <pluginlist>
         <plugin>
-            <uniqueID>1691</uniqueID>
+            <uniqueID>16</uniqueID>
             <name>AffinityPropagationPlugin</name>
             <description>AffinityPropagationPlugin</description>
-            <category>Other</category>
-            <pluginVersion>1.0</pluginVersion>
+            <category>Analysis</category>
+            <pluginVersion>1.1</pluginVersion>
             <cytoscapeVersions>
                 <version>2.6.2</version>
             </cytoscapeVersions>
