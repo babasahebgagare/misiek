@@ -1,7 +1,6 @@
-package logicmodel.structs;
+package viewmodel.structs;
 
-import viewmodel.structs.CytoNetworkObject;
-import viewmodel.structs.CytoAbstractPPINetwork;
+import logicmodel.structs.Protein;
 
 public class CytoProtein extends CytoNetworkObject {
 

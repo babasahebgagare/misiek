@@ -1,8 +1,6 @@
 package viewmodel.structs;
 
 import logicmodel.structs.PPINetwork;
-import logicmodel.structs.CytoProteinProjection;
-import logicmodel.structs.CytoProtein;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;

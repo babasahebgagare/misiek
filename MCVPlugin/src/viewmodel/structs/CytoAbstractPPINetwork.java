@@ -2,7 +2,6 @@ package viewmodel.structs;
 
 import logicmodel.structs.PPINetwork;
 import logicmodel.structs.Protein;
-import logicmodel.structs.CytoProtein;
 import java.util.Collection;
 import utils.IDCreator;
 

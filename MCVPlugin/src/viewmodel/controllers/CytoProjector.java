@@ -10,7 +10,7 @@ import viewmodel.structs.CytoAbstractPPINetwork;
 import viewmodel.structs.CytoPPINetworkProjection;
 import viewmodel.structs.CytoPPINetworkProjectionToDown;
 import viewmodel.structs.CytoPPINetworkProjectionToUp;
-import logicmodel.structs.CytoProtein;
+import viewmodel.structs.CytoProtein;
 import logicmodel.structs.PPINetwork;
 import main.PluginDataHandle;
 import utils.Messenger;

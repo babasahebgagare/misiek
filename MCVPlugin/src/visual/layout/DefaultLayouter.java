@@ -8,8 +8,8 @@ import java.util.Collection;
 import viewmodel.structs.CytoGroupNode;
 import viewmodel.structs.CytoPPINetworkProjectionToDown;
 import viewmodel.structs.CytoPPINetworkProjectionToUp;
-import logicmodel.structs.CytoProtein;
-import logicmodel.structs.CytoProteinProjection;
+import viewmodel.structs.CytoProtein;
+import viewmodel.structs.CytoProteinProjection;
 
 public class DefaultLayouter extends Layouter {
 
@@ -61,16 +61,18 @@ public class DefaultLayouter extends Layouter {
 
 
         for (CytoProteinProjection cytoProteinProjection : projection.getCytoProteinsProjections()) {
-            CytoProtein cytoMotherProtein = cytoProteinProjection.getCytoMotherProtein();
+            CytoProtein cytoMotherProteinOrNull = cytoProteinProjection.tryGetCytoMotherProtein();
 
-            CyNetworkView parentNetworkView = Cytoscape.getNetworkView(cytoMotherProtein.getCytoNetowork().getCytoID());
-            CyNode parentNode = Cytoscape.getCyNode(cytoMotherProtein.getCytoID());
-            NodeView nodeView = parentNetworkView.getNodeView(parentNode);
+            if (cytoMotherProteinOrNull != null) {
+                CyNetworkView parentNetworkView = Cytoscape.getNetworkView(cytoMotherProteinOrNull.getCytoNetowork().getCytoID());
+                CyNode parentNode = Cytoscape.getCyNode(cytoMotherProteinOrNull.getCytoID());
+                NodeView nodeView = parentNetworkView.getNodeView(parentNode);
 
-            CyNode node = Cytoscape.getCyNode(cytoProteinProjection.getCytoID());
-            NodeView proteinView = cyNetworkView.getNodeView(node);
-            proteinView.setXPosition(nodeView.getXPosition());
-            proteinView.setYPosition(nodeView.getYPosition());
+                CyNode node = Cytoscape.getCyNode(cytoProteinProjection.getCytoID());
+                NodeView proteinView = cyNetworkView.getNodeView(node);
+                proteinView.setXPosition(nodeView.getXPosition());
+                proteinView.setYPosition(nodeView.getYPosition());
+            }
         }
 
     }

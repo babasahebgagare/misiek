@@ -1,6 +1,5 @@
 package viewmodel.structs;
 
-import logicmodel.structs.CytoProtein;
 import java.util.Collection;
 import java.util.HashSet;
 

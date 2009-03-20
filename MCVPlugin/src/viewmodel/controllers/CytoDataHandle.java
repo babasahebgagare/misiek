@@ -15,8 +15,8 @@ import viewmodel.structs.CytoAbstractPPINetwork;
 import viewmodel.structs.CytoGroupNode;
 import viewmodel.structs.CytoInteraction;
 import viewmodel.structs.CytoPPINetwork;
-import logicmodel.structs.CytoProtein;
-import logicmodel.structs.CytoProteinProjection;
+import viewmodel.structs.CytoProtein;
+import viewmodel.structs.CytoProteinProjection;
 import logicmodel.structs.PPINetwork;
 import viewmodel.structs.CytoPPINetworkProjection;
 import viewmodel.structs.CytoPPINetworkProjectionToDown;
@@ -103,7 +103,7 @@ public class CytoDataHandle {
         cytoProteins.remove(Integer.valueOf(index));
     }
 
-    public CytoProtein getCytoProteinByIndex(int index) {
+    public CytoProtein tryGetCytoProteinByIndex(int index) {
         return cytoProteins.get(Integer.valueOf(index));
     }
 
