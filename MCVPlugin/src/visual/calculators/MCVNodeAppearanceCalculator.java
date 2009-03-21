@@ -54,11 +54,12 @@ public class MCVNodeAppearanceCalculator extends NodeAppearanceCalculator {
                             appr.set(VisualPropertyType.NODE_FILL_COLOR, manColorOrNull);
                         }
 
-
-
-
-                        Protein parent = protein.getContext().getParentProtein();
-                        appr.set(VisualPropertyType.NODE_TOOLTIP, "Rodzina: " + family.getFamilyID() + ", przodek: " + parent.getID());
+                        Protein parent = protein.getContext().tryGetParentProtein();
+                        if (parent != null) {
+                            appr.set(VisualPropertyType.NODE_TOOLTIP, "Rodzina: " + family.getFamilyID() + ", przodek: " + parent.getID());
+                        } else {
+                            appr.set(VisualPropertyType.NODE_TOOLTIP, "Rodzina: " + family.getFamilyID());
+                        }
                     } else {
                     }
                 } else {

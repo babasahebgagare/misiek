@@ -63,7 +63,7 @@ public class ProjectorInfoCalculator {
         while (parentProtein != null) {
             addProjectorInfoForProteins(protein, parentProtein);
 
-            parentProtein = parentProtein.getContext().getParentProtein();
+            parentProtein = parentProtein.getContext().tryGetParentProtein();
             if (parentProtein == null) {
                 break;
             }

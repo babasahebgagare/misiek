@@ -18,7 +18,7 @@ public class ProteinContext {
         this.network = Network;
     }
 
-    public Protein getParentProtein() {
+    public Protein tryGetParentProtein() {
         return parentProtein;
     }
 
