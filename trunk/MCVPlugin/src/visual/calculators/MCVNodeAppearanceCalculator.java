@@ -2,7 +2,6 @@ package visual.calculators;
 
 import cytoscape.CyNetwork;
 import cytoscape.Cytoscape;
-import cytoscape.visual.Appearance;
 import cytoscape.visual.NodeAppearance;
 import cytoscape.visual.NodeAppearanceCalculator;
 import cytoscape.visual.NodeShape;
@@ -34,8 +33,6 @@ public class MCVNodeAppearanceCalculator extends NodeAppearanceCalculator {
             if (cytoProteinOrNull != null) {
                 Protein protein = cytoProteinOrNull.getProtein();
                 Family family = protein.getFamily();
-
-
 
                 if (cytoProteinOrNull.getClass().equals(CytoProteinProjection.class)) {
                     CytoProteinProjection cytoProteinProjection = (CytoProteinProjection) cytoProteinOrNull;

@@ -9,17 +9,17 @@ public class PPINetworkContext {
     private Collection<PPINetwork> childrenNetworks;
     private NetworksHierarchy hierarchy;
 
-    public PPINetworkContext(PPINetwork ParentNetwork) {
+    public PPINetworkContext(PPINetwork ParentNetwork, PPINetwork thisNetwork) {
         this.parentNetwork = ParentNetwork;
         this.childrenNetworks = new HashSet<PPINetwork>();
-        this.hierarchy = new NetworksHierarchy();
+        this.hierarchy = new NetworksHierarchy(thisNetwork);
     }
 
     public void addChild(PPINetwork child) {
         childrenNetworks.add(child);
     }
 
-    public PPINetwork getParentNetwork() {
+    public PPINetwork tryGetParentNetwork() {
         return parentNetwork;
     }
 
