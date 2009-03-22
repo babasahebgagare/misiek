@@ -12,7 +12,7 @@ public class PPINetwork {
 
     public PPINetwork(String NetworkID, PPINetwork ParentNetwork) {
         ID = NetworkID;
-        context = new PPINetworkContext(ParentNetwork);
+        context = new PPINetworkContext(ParentNetwork, this);
     }
 
     public void addInteraction(Interaction interaction) {

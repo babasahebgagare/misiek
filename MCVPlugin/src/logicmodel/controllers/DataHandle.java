@@ -63,10 +63,10 @@ public class DataHandle {
     public void createProtein(String ProteinID, String ParentProteinID, String NetworkID, String FamilyID) {
         if (ParentProteinID != null) {
             PPINetwork network = networks.get(NetworkID);
-            PPINetwork ParentNetwork = network.getContext().getParentNetwork();
+            PPINetwork ParentNetwork = network.getContext().tryGetParentNetwork();
             Protein ParentProtein = ParentNetwork.getProteins().get(ParentProteinID);
-            while (ParentProtein == null && ParentNetwork.getContext().getParentNetwork() != null) {
-                ParentNetwork = ParentNetwork.getContext().getParentNetwork();
+            while (ParentProtein == null && ParentNetwork.getContext().tryGetParentNetwork() != null) {
+                ParentNetwork = ParentNetwork.getContext().tryGetParentNetwork();
                 ParentProtein = ParentNetwork.getProteins().get(ParentProteinID);
             }
             Family family = families.get(FamilyID);

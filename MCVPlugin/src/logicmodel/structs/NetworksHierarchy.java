@@ -2,20 +2,26 @@ package logicmodel.structs;
 
 import java.util.Collection;
 import java.util.HashSet;
-import logicmodel.structs.PPINetwork;
 
 public class NetworksHierarchy {
 
     private Collection<PPINetwork> networksAbove = new HashSet<PPINetwork>();
     private Collection<PPINetwork> networksBelow = new HashSet<PPINetwork>();
+    private PPINetwork thisNetwork;
 
     public enum NetworkPosition {
 
-        ABOVE, BELOW, NEIGHBOUR
+        ABOVE, BELOW, NEIGHBOUR, THIS_NETWORK
+    }
+
+    public NetworksHierarchy(PPINetwork thisNetwork) {
+        this.thisNetwork = thisNetwork;
     }
 
     public void addNetworkBelow(PPINetwork network) {
         networksBelow.add(network);
+
+
     }
 
     public void addNetworkAbove(PPINetwork network) {
@@ -43,6 +49,8 @@ public class NetworksHierarchy {
             return NetworkPosition.ABOVE;
         } else if (networksBelow.contains(network)) {
             return NetworkPosition.BELOW;
+        } else if (network == thisNetwork) {
+            return NetworkPosition.THIS_NETWORK;
         } else {
             return NetworkPosition.NEIGHBOUR;
         }

@@ -32,6 +32,9 @@ public class CytoProjector {
                 CytoNetworkConverter.convertCytoNetwork(up);
                 Layouter.getInstance().projectionToUpLayout(up);
                 break;
+            case THIS_NETWORK:
+                Messenger.message("YOU TRYING PROJECT ON THE SAME LEVEL");
+                break;
             case NEIGHBOUR:
                 Messenger.message("NEIGHBOUR");
                 break;

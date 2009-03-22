@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
 import logicmodel.structs.PPINetwork;
-import logicmodel.controllers.DataHandle;
 import logicmodel.structs.Protein;
 import main.PluginDataHandle;
 import utils.MemoLogger;
@@ -19,8 +18,10 @@ public class ProjectorInfoCalculator {
     }
 
     private static void addProjectorInfoForNetworks(PPINetwork downNetwork, PPINetwork upNetwork) {
-        downNetwork.getContext().getHierarchy().addNetworkAbove(upNetwork);
-        upNetwork.getContext().getHierarchy().addNetworkBelow(downNetwork);
+        if (downNetwork != upNetwork) {
+            downNetwork.getContext().getHierarchy().addNetworkAbove(upNetwork);
+            upNetwork.getContext().getHierarchy().addNetworkBelow(downNetwork);
+        }
     }
 
     private static void addProjectorInfoForProteins(Protein Down, Protein Up) {
@@ -43,28 +44,28 @@ public class ProjectorInfoCalculator {
     }
 
     private static void calculateInfoForNetwork(PPINetwork network) {
-        PPINetwork upNetwork = network;
+        PPINetwork upNetworkOrNull = network;
 
         MemoLogger.log("network search: " + network.getID());
-        while (upNetwork != null) {
-            addProjectorInfoForNetworks(network, upNetwork);
-            MemoLogger.log("netUp: " + upNetwork.getID());
+        while (upNetworkOrNull != null) {
+            addProjectorInfoForNetworks(network, upNetworkOrNull);
+            MemoLogger.log("netUp: " + upNetworkOrNull.getID());
 
-            upNetwork = upNetwork.getContext().getParentNetwork();
-            if (upNetwork == null) {
+            upNetworkOrNull = upNetworkOrNull.getContext().tryGetParentNetwork();
+            if (upNetworkOrNull == null) {
                 break;
             }
         }
     }
 
     private static void calculateProjectorInfoForProtein(Protein protein) {
-        Protein parentProtein = protein;
+        Protein parentProteinOrNull = protein;
 
-        while (parentProtein != null) {
-            addProjectorInfoForProteins(protein, parentProtein);
+        while (parentProteinOrNull != null) {
+            addProjectorInfoForProteins(protein, parentProteinOrNull);
 
-            parentProtein = parentProtein.getContext().tryGetParentProtein();
-            if (parentProtein == null) {
+            parentProteinOrNull = parentProteinOrNull.getContext().tryGetParentProtein();
+            if (parentProteinOrNull == null) {
                 break;
             }
 
