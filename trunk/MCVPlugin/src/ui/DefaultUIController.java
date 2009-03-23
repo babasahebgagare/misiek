@@ -232,9 +232,11 @@ public class DefaultUIController extends UIController {
         CytoDataHandle cdh = PluginDataHandle.getCytoDataHandle();
 
         CyNetworkView cyNetworkView = Cytoscape.getCurrentNetworkView();
-        CytoAbstractPPINetwork cytoNetwork = cdh.tryFindNetworkByCytoID(cyNetworkView.getIdentifier());
+        if (cyNetworkView != Cytoscape.getNullNetworkView()) {
+            CytoAbstractPPINetwork cytoNetwork = cdh.tryFindNetworkByCytoID(cyNetworkView.getIdentifier());
 
-        InteractionsManager.getInstance().loadAndShowInteractionsFromModel(cytoNetwork, treshold);
+            InteractionsManager.getInstance().loadAndShowInteractionsFromModel(cytoNetwork, treshold);
+        }
     }
 
     @Override

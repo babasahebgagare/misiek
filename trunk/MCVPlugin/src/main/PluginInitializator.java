@@ -2,22 +2,13 @@ package main;
 
 import cytolisteners.CytoListeners;
 import cytoscape.Cytoscape;
-import cytoscape.ding.DingNetworkView;
-import cytoscape.view.CyNetworkView;
 import cytoscape.view.cytopanels.CytoPanelImp;
 import cytoscape.visual.CalculatorCatalog;
 import cytoscape.visual.VisualMappingManager;
 import cytoscape.visual.VisualStyle;
-import giny.view.GraphViewChangeEvent;
-import giny.view.GraphViewChangeListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.ResourceBundle;
 import javax.swing.SwingConstants;
 import ui.LeftPanel;
-import utils.MemoLogger;
-import viewmodel.controllers.CytoDataHandle;
-import viewmodel.structs.CytoAbstractPPINetwork;
 import visual.calculators.MCVEdgeAppearanceCalculator;
 import visual.calculators.MCVNodeAppearanceCalculator;
 
