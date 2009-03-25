@@ -87,26 +87,6 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
     }
 
     @Override
-    public Map<String, Cluster<String>> doClusterAssoc() {
-        int iterations = getIterations();
-
-        for (int iter = 0; iter < iterations; iter++) {
-            copyResponsibilies();
-            computeResponsibilities();
-            avgResponsibilies();
-
-            copyAvailabilities();
-            computeAvailabilities();
-            avgAvailabilities();
-        }
-
-        computeCenters();
-        computeAssigments();
-
-        return assigments;
-    }
-
-    @Override
     public void setSimilarities(final String x, final String y, final Double sim) {
 
         int i = Integer.valueOf(x);
