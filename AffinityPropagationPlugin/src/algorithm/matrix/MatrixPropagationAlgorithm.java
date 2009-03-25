@@ -2,13 +2,9 @@ package algorithm.matrix;
 
 import algorithm.abs.AffinityPropagationAlgorithm;
 import algorithm.smart.Cluster;
-import algorithm.smart.IterationData;
-import java.awt.event.ActionEvent;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import matrix.DoubleMatrix1D;
 import matrix.DoubleMatrix2D;
 import matrix.IntegerMatrix1D;
@@ -50,29 +46,23 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
         double[] pom = new double[N];
         Map<String, String> res = new HashMap<String, String>();
 
-        //  System.out.println("S" + S);
         for (int iter = 0; iter < iterations; iter++) {
             rold = R.copy();
 
             AS = A.plus(S);
-            //  System.out.println("AS" + AS);
             YI = AS.maxr();
-            //     System.out.println("YI" + YI);
 
             for (int i = 0; i < N; i++) {
                 int y = (int) YI.get(i, 0);
                 AS.set(i, y, -inf);
             }
             YI2 = AS.maxr();
-            //       System.out.println("YI2" + YI2);
 
             for (int i = 0; i < N; i++) {
                 pom[i] = YI.get(i, 1);
             }
             DoubleMatrix2D Rep = new DoubleMatrix2D(N, pom);
-            //         System.out.println("Rep" + Rep);
             R = S.minus(Rep);
-            //          System.out.println("R" + R);
 
             for (int i = 0; i < N; i++) {
                 R.set(i, (int) YI.get(i, 0), S.get(i, (int) YI.get(i, 0)) - YI2.get(i, 1));
@@ -80,58 +70,29 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
 
             R = R.mul(1 - getLambda()).plus(rold.mul(getLambda()));
 
-
-            //          System.out.println("R" + R);
-
             aold = A.copy();
             rp = R.max(0);
             for (int i = 0; i < N; i++) {
                 rp.set(i, i, R.get(i, i));
             }
             A = (new DoubleMatrix2D(N, rp.sum().getVector(0))).transpose().minus(rp);
-            //        System.out.println("Rp" + Rp);
-            //        System.out.println("sum" + (new DoubleMatrix2D(N, Rp.sum().getMatrix()[0])).transpose());
-
-            //      System.out.println("A - " + A);
-
             dA = A.diag();
-
-            //      System.out.println("dA - " + dA);
-
+            
             A = A.min(0);
             for (int i = 0; i < N; i++) {
                 A.set(i, i, dA.get(i));
             }
 
             A = A.mul((1 - getLambda())).plus(aold.mul(getLambda()));
-        //       System.out.println("A");
-        //          System.out.println(A);
-        // iteractionListener.actionPerformed(new ActionEvent(new IterationData(iter + 1, 0), 0, "ITERATION"));
         }
 
-        //System.out.println("A: " + A);
-        //  System.out.println("R: " + R);
         E = R.plus(A);
         I = E.diag().findG(0);
 
-        //  System.out.println("centers: " + I);
         if (I.size() > 0) {
             C = S.getColumns(I).maxrIndexes();
-            //  System.out.println("C: " + C);
             C = tmp(C, I);
-            //  System.out.println("C: " + C);
-
-
-            //    System.out.println("C: " + C);
             idx = idx(C, I);
-            //    System.out.println("idx: " + idx);
-
-            //    System.out.println("A: " + A);
-            //   System.out.println("E: " + E);
-            //   System.out.println("I: " + I);
-            //  System.out.println("idx: " + idx);
-
-            //     ArrayList res= new ArrayList<Integer>();
             for (int i = 0; i < idx.size(); i++) {
                 Integer examplar = Integer.valueOf(i);
                 Integer center = idx.getValue(i);
