@@ -4,7 +4,6 @@ import algorithm.abs.AffinityPropagationAlgorithm;
 import algorithm.smart.Cluster;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 import matrix.DoubleMatrix1D;
 import matrix.DoubleMatrix2D;
 import matrix.IntegerMatrix1D;
@@ -39,71 +38,20 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
     public void halt() {
         // TODO
     }
-
+    /*
     @Override
     public Map<String, String> doCluster() {
-        int iterations = getIterations();
-        double[] pom = new double[N];
-        Map<String, String> res = new HashMap<String, String>();
+    final Map<String, Cluster<String>> help = doClusterAssoc();
+    final Map<String, String> res = new HashMap<String, String>();
 
-        for (int iter = 0; iter < iterations; iter++) {
-            rold = R.copy();
-
-            AS = A.plus(S);
-            YI = AS.maxr();
-
-            for (int i = 0; i < N; i++) {
-                int y = (int) YI.get(i, 0);
-                AS.set(i, y, -inf);
-            }
-            YI2 = AS.maxr();
-
-            for (int i = 0; i < N; i++) {
-                pom[i] = YI.get(i, 1);
-            }
-            DoubleMatrix2D Rep = new DoubleMatrix2D(N, pom);
-            R = S.minus(Rep);
-
-            for (int i = 0; i < N; i++) {
-                R.set(i, (int) YI.get(i, 0), S.get(i, (int) YI.get(i, 0)) - YI2.get(i, 1));
-            }
-
-            R = R.mul(1 - getLambda()).plus(rold.mul(getLambda()));
-
-            aold = A.copy();
-            rp = R.max(0);
-            for (int i = 0; i < N; i++) {
-                rp.set(i, i, R.get(i, i));
-            }
-            A = (new DoubleMatrix2D(N, rp.sum().getVector(0))).transpose().minus(rp);
-            dA = A.diag();
-            
-            A = A.min(0);
-            for (int i = 0; i < N; i++) {
-                A.set(i, i, dA.get(i));
-            }
-
-            A = A.mul((1 - getLambda())).plus(aold.mul(getLambda()));
-        }
-
-        E = R.plus(A);
-        I = E.diag().findG(0);
-
-        if (I.size() > 0) {
-            C = S.getColumns(I).maxrIndexes();
-            C = tmp(C, I);
-            idx = idx(C, I);
-            for (int i = 0; i < idx.size(); i++) {
-                Integer examplar = Integer.valueOf(i);
-                Integer center = idx.getValue(i);
-                if (S.get(examplar.intValue(), center.intValue()) > -inf) {
-                    res.put(String.valueOf(i), String.valueOf(idx.getValue(i)));
-                }
-            }
-        }
-
-        return res;
+    for (Entry<String, Cluster<String>> entry : help.entrySet()) {
+    for (String obj : entry.getValue().getElements()) {
+    res.put(obj, entry.getKey());
     }
+    }
+
+    return res;
+    }*/
 
     public int getN() {
         return N;
@@ -140,21 +88,22 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
 
     @Override
     public Map<String, Cluster<String>> doClusterAssoc() {
-        Map<String, String> map = doCluster();
-        Map<String, Cluster<String>> res = new HashMap<String, Cluster<String>>();
+        int iterations = getIterations();
 
-        for (String examplar : map.values()) {
-            Cluster<String> clust = new Cluster<String>(examplar);
-            clust.add(examplar);
-            res.put(examplar, clust);
+        for (int iter = 0; iter < iterations; iter++) {
+            copyResponsibilies();
+            computeResponsibilities();
+            avgResponsibilies();
+
+            copyAvailabilities();
+            computeAvailabilities();
+            avgAvailabilities();
         }
 
-        for (Entry<String, String> obj : map.entrySet()) {
-            Cluster<String> clust = res.get(obj.getValue());
-            clust.add(obj.getKey());
-        }
+        computeCenters();
+        computeAssigments();
 
-        return res;
+        return assigments;
     }
 
     @Override
@@ -163,5 +112,120 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
         int i = Integer.valueOf(x);
         int j = Integer.valueOf(y);
         S.set(i, j, sim.doubleValue());
+    }
+
+    @Override
+    protected void copyResponsibilies() {
+        rold = R.copy();
+    }
+
+    @Override
+    protected void computeResponsibilities() {
+        double[] pom = new double[N];
+        AS = A.plus(S);
+        YI = AS.maxr();
+
+        for (int i = 0; i < N; i++) {
+            int y = (int) YI.get(i, 0);
+            AS.set(i, y, -inf);
+        }
+        YI2 = AS.maxr();
+
+        for (int i = 0; i < N; i++) {
+            pom[i] = YI.get(i, 1);
+        }
+        DoubleMatrix2D Rep = new DoubleMatrix2D(N, pom);
+        R = S.minus(Rep);
+
+        for (int i = 0; i < N; i++) {
+            R.set(i, (int) YI.get(i, 0), S.get(i, (int) YI.get(i, 0)) - YI2.get(i, 1));
+        }
+
+    }
+
+    @Override
+    protected void avgResponsibilies() {
+        R = R.mul(1 - getLambda()).plus(rold.mul(getLambda()));
+    }
+
+    @Override
+    protected void copyAvailabilities() {
+        aold = A.copy();
+    }
+
+    @Override
+    protected void computeAvailabilities() {
+        rp = R.max(0);
+        for (int i = 0; i < N; i++) {
+            rp.set(i, i, R.get(i, i));
+        }
+        A = (new DoubleMatrix2D(N, rp.sum().getVector(0))).transpose().minus(rp);
+        dA = A.diag();
+
+        A = A.min(0);
+        for (int i = 0; i < N; i++) {
+            A.set(i, i, dA.get(i));
+        }
+    }
+
+    @Override
+    protected void avgAvailabilities() {
+        A = A.mul((1 - getLambda())).plus(aold.mul(getLambda()));
+    }
+
+    @Override
+    protected void computeCenters() {
+        E = R.plus(A);
+        I = E.diag().findG(0);
+    }
+    /*
+    @Override
+    protected void computeAssigments() {
+    for (int i = 0; i < idx.size(); i++) {
+    Integer examplar = Integer.valueOf(i);
+    Integer center = idx.getValue(i);
+    if (S.get(examplar.intValue(), center.intValue()) > -inf) {
+    res.put(String.valueOf(i), String.valueOf(idx.getValue(i)));
+    }
+    }
+
+    }
+     */
+
+    @Override
+    protected void computeAssigments() {
+
+        if (I.size() == 0) {
+            return;
+        }
+        C = S.getColumns(I).maxrIndexes();
+        C = tmp(C, I);
+        idx = idx(C, I);
+
+        Map<String, Cluster<String>> res = new HashMap<String, Cluster<String>>();
+
+        for (int i = 0; i < I.size(); i++) {
+            String clusterName = String.valueOf(I.get(i));
+            Cluster<String> clust = new Cluster<String>(clusterName);
+            clust.add(clusterName);
+            res.put(clusterName, clust);
+        }
+
+        for (int i = 0; i < idx.size(); i++) {
+
+            String examplar = String.valueOf(i);
+            String center = String.valueOf(idx.getValue(i));
+            if (!res.containsKey(examplar)) {
+                Cluster<String> cluster = res.get(center);
+                cluster.add(examplar);
+            }
+        }
+        assigments = res;
+
+    }
+
+    @Override
+    protected boolean checkConvergence() {
+        return false;
     }
 }

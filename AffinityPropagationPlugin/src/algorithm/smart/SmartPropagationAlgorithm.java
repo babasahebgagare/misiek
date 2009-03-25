@@ -1,12 +1,10 @@
 package algorithm.smart;
 
 import algorithm.abs.AffinityPropagationAlgorithm;
-import java.awt.event.ActionEvent;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Map.Entry;
 
 /** You have to set parameters and do init() befor clustering. */
 public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<String> {
@@ -14,7 +12,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
     private ExamplarsCollection examplars = null;
     private double INF = 1000000;
     private int iteration;
-    private boolean convergence;
+    private Collection<Examplar> centers;
 
     public ExamplarsCollection getExamplars() {
         return examplars;
@@ -24,7 +22,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
         this.examplars = examplars;
     }
 
-    private void avgAvailabilities() {
+    protected void avgAvailabilities() {
         for (Examplar examplar : examplars.getExamplars().values()) {
             Collection<SiblingData> siblings = examplar.getSiblingMap().values();
             for (SiblingData sibling : siblings) {
@@ -33,7 +31,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
         }
     }
 
-    private void avgResponsibilies() {
+    protected void avgResponsibilies() {
         for (Examplar examplar : examplars.getExamplars().values()) {
             Collection<SiblingData> siblings = examplar.getSiblingMap().values();
             for (SiblingData sibling : siblings) {
@@ -42,7 +40,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
         }
     }
 
-    private boolean checkConvergence() {
+    protected boolean checkConvergence() {
         if (convits == null) {
             return false;
         }
@@ -58,7 +56,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
         return res;
     }
 
-    private Map<String, Cluster<String>> computeAssigments(final Collection<Examplar> centers) {
+    protected void computeAssigments() {
         Map<String, Cluster<String>> ret = new HashMap<String, Cluster<String>>();
 
         for (Examplar center : centers) {
@@ -89,10 +87,10 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
                 }
             }
         }
-        return ret;
+        assigments = ret;
     }
 
-    private void computeAvailabilities() {
+    protected void computeAvailabilities() {
         for (Examplar examplar : examplars.getExamplars().values()) {
             Collection<SiblingData> siblings = examplar.getSiblingMap().values();
             for (SiblingData sibling : siblings) {
@@ -105,7 +103,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
         }
     }
 
-    private Collection<Examplar> computeCenters() {
+    protected void computeCenters() {
         Collection<Examplar> ret = new HashSet<Examplar>();
         for (Examplar examplar : examplars.getExamplars().values()) {
             SiblingData sibling = examplar.getSiblingMap().get(examplar.getName());
@@ -118,7 +116,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
             }
         }
 
-        return ret;
+        centers = ret;
     }
 
     private double computeEqPom(final String name) {
@@ -168,7 +166,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
         return ret;
     }
 
-    private void computeResponsibilities() {
+    protected void computeResponsibilities() {
         for (Examplar examplar : examplars.getExamplars().values()) {
             Collection<SiblingData> siblings = examplar.getSiblingMap().values();
             for (SiblingData sibling : siblings) {
@@ -180,7 +178,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
 
     }
 
-    private void copyAvailabilities() {
+    protected void copyAvailabilities() {
         for (Examplar examplar : examplars.getExamplars().values()) {
             Collection<SiblingData> siblings = examplar.getSiblingMap().values();
             for (SiblingData sibling : siblings) {
@@ -189,7 +187,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
         }
     }
 
-    private void copyResponsibilies() {
+    protected void copyResponsibilies() {
         for (Examplar examplar : examplars.getExamplars().values()) {
             Collection<SiblingData> siblings = examplar.getSiblingMap().values();
             for (SiblingData sibling : siblings) {
@@ -202,55 +200,21 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
     public void setSimilarities(final String from, final String to, final Double sim) {
         examplars.setSimilarity(from, to, sim);
     }
-
+    /*
     @Override
     public Map<String, String> doCluster() {
-        final Map<String, Cluster<String>> help = doClusterAssoc();
-        final Map<String, String> res = new HashMap<String, String>();
+    final Map<String, Cluster<String>> help = doClusterAssoc();
+    final Map<String, String> res = new HashMap<String, String>();
 
-        for (Entry<String, Cluster<String>> entry : help.entrySet()) {
-            for (String obj : entry.getValue().getElements()) {
-                res.put(obj, entry.getKey());
-            }
-        }
-
-        return res;
+    for (Entry<String, Cluster<String>> entry : help.entrySet()) {
+    for (String obj : entry.getValue().getElements()) {
+    res.put(obj, entry.getKey());
+    }
     }
 
-    @Override
-    public Map<String, Cluster<String>> doClusterAssoc() {
-        int iterations = getIterations();
-        if (iteractionListenerOrNull != null) {
-            iteractionListenerOrNull.actionPerformed(new ActionEvent(new IterationData(1, examplars.size()), 0, "ITERATION"));
-        }
-        
-        for (iteration = 0; iteration < iterations; iteration++) {
-
-            copyResponsibilies();
-            computeResponsibilities();
-            avgResponsibilies();
-
-            copyAvailabilities();
-            computeAvailabilities();
-            avgAvailabilities();
-
-            if (iteration + 1 != iterations && iteractionListenerOrNull != null) {
-                Collection<Examplar> centers = computeCenters();
-                iteractionListenerOrNull.actionPerformed(new ActionEvent(new IterationData(iteration + 2, centers.size()), 0, "ITERATION"));
-            }
-            convergence = checkConvergence();
-            if (convergence) {
-                break;
-            }
-        }
-
-
-        Collection<Examplar> centers = computeCenters();
-
-        Map<String, Cluster<String>> assigments = computeAssigments(centers);
-
-        return assigments;
+    return res;
     }
+     */
 
     @Override
     public void init() {
