@@ -6,7 +6,6 @@ import cytoscape.view.CyNetworkView;
 import ding.view.NodeContextMenuListener;
 import giny.view.GraphViewChangeEvent;
 import giny.view.GraphViewChangeListener;
-import giny.view.NodeView;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import main.PluginDataHandle;
@@ -27,13 +26,7 @@ public class CytoListeners {
 
             public void graphViewChanged(GraphViewChangeEvent event) {
                 if (event.getType() == GraphViewChangeEvent.NODES_SELECTED_TYPE) {
-                    for (CyNetworkView net : Cytoscape.getNetworkViewMap().values()) {
-                        NodeView v = net.getNodeView(1);
-                        if (v != null) {
-                            v.select();
-                        }
-                        net.updateView();
-                    }
+                    System.out.println("SELECTED");
                 } else if (event.getType() == GraphViewChangeEvent.NODES_UNSELECTED_TYPE) {
                     System.out.println("UNSELECTED");
                 } else {
