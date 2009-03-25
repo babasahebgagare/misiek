@@ -1,6 +1,8 @@
 package algorithm.abs;
 
 import algorithm.smart.Cluster;
+import algorithm.smart.IterationData;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
@@ -70,7 +72,7 @@ public abstract class AffinityPropagationAlgorithm<String> extends AbstractClust
     public Map<String, Cluster<String>> doClusterAssoc() {
         int iters = getIterations();
         if (iteractionListenerOrNull != null) {
-   //         iteractionListenerOrNull.actionPerformed(new ActionEvent(new IterationData(1, examplars.size()), 0, "ITERATION"));
+            iteractionListenerOrNull.actionPerformed(new ActionEvent(new IterationData(1, 0), 0, "ITERATION"));
         }
 
         for (int iteration = 0; iteration < iters; iteration++) {
@@ -85,7 +87,7 @@ public abstract class AffinityPropagationAlgorithm<String> extends AbstractClust
 
             if (iteration + 1 != iterations && iteractionListenerOrNull != null) {
                 computeCenters();
-      //          iteractionListenerOrNull.actionPerformed(new ActionEvent(new IterationData(iteration + 2, centers.size()), 0, "ITERATION"));
+                iteractionListenerOrNull.actionPerformed(new ActionEvent(new IterationData(iteration + 2, 0), 0, "ITERATION")); //TODO
             }
             convergence = checkConvergence();
             if (convergence) {
