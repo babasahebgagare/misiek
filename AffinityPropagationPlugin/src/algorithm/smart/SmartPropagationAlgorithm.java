@@ -68,7 +68,10 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
         for (Examplar ex : examplars.getExamplars().values()) {
             for (SiblingData sibling : ex.getSiblingMap().values()) {
                 if (!sibling.getExamplarName().equals(ex.getName())) {
-                    graph.addEdge(ex.getName(), sibling.getExamplarName(), sibling.getS());
+                    Double sim = sibling.getS();
+
+                    Double weight = Math.exp(-Math.exp(sim));
+                    graph.addEdge(ex.getName(), sibling.getExamplarName(), weight);
                 }
             }
         }
