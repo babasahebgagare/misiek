@@ -77,6 +77,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
 
     @Override
     public void doCluster(final TaskMonitor monitor) {
+        this.taskMonitor = monitor;
         super.setMyThread(Thread.currentThread());
         PriorityQueue<Cluster<String>> clusterprior = new PriorityQueue<Cluster<String>>();
 
