@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import prime.PrimeAlgorithm;
+import prime.PrimeGraph;
 
 /** You have to set parameters and do init() befor clustering. */
 public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<String> {
@@ -12,7 +14,6 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
     private ExamplarsCollection examplars = null;
     private double INF = 1000000;
     private int iteration;
-    private Collection<Examplar> centers;
 
     public ExamplarsCollection getExamplars() {
         return examplars;
@@ -57,37 +58,56 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
     }
 
     protected void computeAssigments() {
-        Map<String, Cluster<String>> ret = new HashMap<String, Cluster<String>>();
+        //     Map<String, Cluster<String>> ret = new HashMap<String, Cluster<String>>();
 
-        for (Examplar center : centers) {
-            Cluster<String> clust = new Cluster<String>(center.getName());
-            clust.add(center.getName());
-            ret.put(center.getName(), clust);
+        PrimeGraph graph = new PrimeGraph();
+
+        for (Examplar ex : examplars.getExamplars().values()) {
+            graph.addNode(ex.getName());
         }
 
-        for (Examplar examplar : examplars.getExamplars().values()) {
-            if (!ret.containsKey(examplar.getName())) {
-
-                String maxid = null;
-                double max = -INF;
-
-                for (Examplar center : centers) {
-                    SiblingData sibling = examplar.getSiblingMap().get(center.getName());
-                    if (sibling != null) {
-                        double sim = sibling.getS();
-                        if (sim > max) {
-                            max = sim;
-                            maxid = center.getName();
-                        }
-                    }
-                }
-                if (maxid != null) {
-                    Cluster<String> cluster = ret.get(maxid);
-                    cluster.add(examplar.getName());
+        for (Examplar ex : examplars.getExamplars().values()) {
+            for (SiblingData sibling : ex.getSiblingMap().values()) {
+                if (!sibling.getExamplarName().equals(ex.getName())) {
+                    graph.addEdge(ex.getName(), sibling.getExamplarName(), sibling.getS());
                 }
             }
         }
-        assigments = ret;
+
+        PrimeAlgorithm prime = new PrimeAlgorithm(graph, centers);
+
+        assigments = prime.run();
+    /*
+    for (String center : centers) {
+    Cluster<String> clust = new Cluster<String>(center);
+    clust.add(center);
+    ret.put(center, clust);
+    }
+
+    for (Examplar examplar : examplars.getExamplars().values()) {
+    if (!ret.containsKey(examplar.getName())) {
+
+    String maxid = null;
+    double max = -INF;
+
+    for (String center : centers) {
+    SiblingData sibling = examplar.getSiblingMap().get(center);
+    if (sibling != null) {
+    double sim = sibling.getS();
+    if (sim > max) {
+    max = sim;
+    maxid = center;
+    }
+    }
+    }
+    if (maxid != null) {
+    Cluster<String> cluster = ret.get(maxid);
+    cluster.add(examplar.getName());
+    }
+    }
+    }
+    assigments = ret;
+     */
     }
 
     protected void computeAvailabilities() {
@@ -104,12 +124,12 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
     }
 
     protected void computeCenters() {
-        Collection<Examplar> ret = new HashSet<Examplar>();
+        Collection<String> ret = new HashSet<String>();
         for (Examplar examplar : examplars.getExamplars().values()) {
             SiblingData sibling = examplar.getSiblingMap().get(examplar.getName());
             double e = sibling.getA() + sibling.getR();
             if (e > 0) {
-                ret.add(examplar);
+                ret.add(examplar.getName());
                 examplar.setImCenter(true, iteration);
             } else {
                 examplar.setImCenter(false, iteration);
@@ -248,4 +268,18 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
         }
 
     }
+    /*
+    @Override
+    protected void initObjectsNames() {
+    for (String exname : examplars.getExamplars().keySet()) {
+    objects.add(exname);
+    }
+    }
+
+    @Override
+    protected Double getSimilarity(String from, String to) {
+    Examplar fromex = examplars.getExamplars().get(from);
+    SiblingData sibling = fromex.getSiblingMap().get(to);
+    return sibling.getS();
+    }*/
 }
