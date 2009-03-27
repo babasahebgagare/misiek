@@ -3,6 +3,7 @@ package cyto;
 import cytoscape.layout.Tunable;
 import cytoscape.task.TaskMonitor;
 
+import cytoscape.task.ui.JTask;
 import java.beans.PropertyChangeSupport;
 import javax.swing.JPanel;
 
@@ -16,6 +17,7 @@ public abstract class CytoAbstractClusterAlgorithm implements CytoClusterAlgorit
     protected boolean debug = false;
     protected boolean canceled = false;
     private Thread myThread = null;
+    protected TaskMonitor taskMonitor = null;
 
     public CytoAbstractClusterAlgorithm() {
         pcs = new PropertyChangeSupport(new Object());
@@ -24,7 +26,10 @@ public abstract class CytoAbstractClusterAlgorithm implements CytoClusterAlgorit
 
     /************************************************************************
      * Abstract inteface -- override these methods!                         *
-     ***********************************************************************/
+     **********************************************************************
+     * @return 
+     */
+    
     public abstract String getShortName();
 
     public abstract String getName();
@@ -68,6 +73,7 @@ public abstract class CytoAbstractClusterAlgorithm implements CytoClusterAlgorit
         canceled = true;
         if (myThread != null) {
             myThread.interrupt();
+            ((JTask) taskMonitor).setDone();
         }
     }
 
