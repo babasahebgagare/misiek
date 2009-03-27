@@ -36,6 +36,7 @@ public class AffinityPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         radioImplementationGroup = new javax.swing.ButtonGroup();
+        weighetCentersGroup = new javax.swing.ButtonGroup();
         startButton = new javax.swing.JButton();
         parametersPanel = new javax.swing.JPanel();
         edgeAttrNameLabel = new javax.swing.JLabel();
@@ -51,9 +52,12 @@ public class AffinityPanel extends javax.swing.JPanel {
         convitsField = new javax.swing.JTextField();
         edgeAttrCombo = new javax.swing.JComboBox();
         refreshButton = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
+        implementationPanel = new javax.swing.JPanel();
         radioSibling = new javax.swing.JRadioButton();
         radioMatrix = new javax.swing.JRadioButton();
+        nearesCenterPanel = new javax.swing.JPanel();
+        weighetRadio = new javax.swing.JRadioButton();
+        unweighetRadio = new javax.swing.JRadioButton();
 
         startButton.setText("Start");
         startButton.setName("startButton"); // NOI18N
@@ -191,8 +195,8 @@ public class AffinityPanel extends javax.swing.JPanel {
             }
         });
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Choose implementation"));
-        jPanel2.setName("jPanel2"); // NOI18N
+        implementationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Choose implementation"));
+        implementationPanel.setName("implementationPanel"); // NOI18N
 
         radioImplementationGroup.add(radioSibling);
         radioSibling.setSelected(true);
@@ -204,51 +208,90 @@ public class AffinityPanel extends javax.swing.JPanel {
         radioMatrix.setText("Matrix");
         radioMatrix.setName("radioMatrix"); // NOI18N
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+        javax.swing.GroupLayout implementationPanelLayout = new javax.swing.GroupLayout(implementationPanel);
+        implementationPanel.setLayout(implementationPanelLayout);
+        implementationPanelLayout.setHorizontalGroup(
+            implementationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(implementationPanelLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
                 .addComponent(radioMatrix)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addComponent(radioSibling)
-                .addGap(47, 47, 47))
+                .addGap(43, 43, 43))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        implementationPanelLayout.setVerticalGroup(
+            implementationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(implementationPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(radioSibling)
-                    .addComponent(radioMatrix))
+                .addGroup(implementationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(radioMatrix)
+                    .addComponent(radioSibling))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        nearesCenterPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Searching nearest center"));
+        nearesCenterPanel.setName("nearesCenterPanel"); // NOI18N
+
+        weighetCentersGroup.add(weighetRadio);
+        weighetRadio.setText("Weighet edges");
+        weighetRadio.setName("weighetRadio"); // NOI18N
+
+        weighetCentersGroup.add(unweighetRadio);
+        unweighetRadio.setText("Unweighet edges");
+        unweighetRadio.setName("unweighetRadio"); // NOI18N
+        unweighetRadio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                unweighetRadioActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout nearesCenterPanelLayout = new javax.swing.GroupLayout(nearesCenterPanel);
+        nearesCenterPanel.setLayout(nearesCenterPanelLayout);
+        nearesCenterPanelLayout.setHorizontalGroup(
+            nearesCenterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, nearesCenterPanelLayout.createSequentialGroup()
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addComponent(weighetRadio)
+                .addGap(18, 18, 18)
+                .addComponent(unweighetRadio)
+                .addGap(13, 13, 13))
+        );
+        nearesCenterPanelLayout.setVerticalGroup(
+            nearesCenterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(nearesCenterPanelLayout.createSequentialGroup()
+                .addGroup(nearesCenterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(unweighetRadio)
+                    .addComponent(weighetRadio))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(parametersPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(implementationPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(nearesCenterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(startButton, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(parametersPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(parametersPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(implementationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(nearesCenterPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(refreshButton)
                     .addComponent(startButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -269,16 +312,21 @@ public class AffinityPanel extends javax.swing.JPanel {
         pc.refresh();
 }//GEN-LAST:event_refreshButtonActionPerformed
 
+    private void unweighetRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unweighetRadioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_unweighetRadioActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField convitsField;
     private javax.swing.JLabel convitsLabel;
     private javax.swing.JComboBox edgeAttrCombo;
     private javax.swing.JLabel edgeAttrNameLabel;
+    private javax.swing.JPanel implementationPanel;
     private javax.swing.JSpinner iterationsSpinner;
     private javax.swing.JLabel iteretionsLabel;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField labmbdaField;
     private javax.swing.JLabel lambdaLabel;
+    private javax.swing.JPanel nearesCenterPanel;
     private javax.swing.JTextField nodeAttrNameField;
     private javax.swing.JLabel nodeAttrNameLabel;
     private javax.swing.JPanel parametersPanel;
@@ -289,5 +337,8 @@ public class AffinityPanel extends javax.swing.JPanel {
     private javax.swing.JRadioButton radioSibling;
     private javax.swing.JButton refreshButton;
     private javax.swing.JButton startButton;
+    private javax.swing.JRadioButton unweighetRadio;
+    private javax.swing.ButtonGroup weighetCentersGroup;
+    private javax.swing.JRadioButton weighetRadio;
     // End of variables declaration//GEN-END:variables
 }
