@@ -40,6 +40,29 @@ public class AffinityStatsPanel extends javax.swing.JPanel {
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
+        statsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Network", "Iterations", "Preferences", "Lambda", "Clusters", "ClusterID"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.Integer.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         statsTable.setFocusCycleRoot(true);
         statsTable.setMaximumSize(new java.awt.Dimension(90, 0));
         statsTable.setName("statsTable"); // NOI18N

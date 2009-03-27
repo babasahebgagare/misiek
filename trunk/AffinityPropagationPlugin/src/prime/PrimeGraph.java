@@ -18,7 +18,7 @@ public class PrimeGraph {
 
     public void addEdge(String from, String to, Double sim) {
         PrimeNode nodeFrom = nodes.get(from);
-        nodeFrom.addEdge(to, -sim);
+        nodeFrom.addEdge(to, Double.valueOf(1));
     }
 
     public void addNode(String nodeName) {
