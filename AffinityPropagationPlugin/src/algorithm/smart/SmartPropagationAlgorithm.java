@@ -2,9 +2,7 @@ package algorithm.smart;
 
 import algorithm.abs.AffinityPropagationAlgorithm;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import prime.PrimeAlgorithm;
 import prime.PrimeGraph;
 
@@ -14,6 +12,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
     private ExamplarsCollection examplars = null;
     private double INF = 1000000;
     private int iteration;
+    protected Collection<String> centers;
 
     public ExamplarsCollection getExamplars() {
         return examplars;
@@ -267,6 +266,11 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
             }
         }
 
+    }
+
+    @Override
+    protected int getClustersNumber() {
+        return centers.size();
     }
     /*
     @Override

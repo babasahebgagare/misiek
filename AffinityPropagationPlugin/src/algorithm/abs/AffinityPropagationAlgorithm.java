@@ -17,8 +17,8 @@ public abstract class AffinityPropagationAlgorithm<String> extends AbstractClust
     protected Integer convits = null;
     protected ActionListener iteractionListenerOrNull = null;
     protected Map<String, Cluster<String>> assigments;
-    protected Collection<String> centers;
-    protected Collection<String> objects;
+    //   protected Collection<String> centers;
+//    protected Collection<String> objects;
 
     public void addIterationListener(final ActionListener listener) {
         this.iteractionListenerOrNull = listener;
@@ -90,7 +90,7 @@ public abstract class AffinityPropagationAlgorithm<String> extends AbstractClust
 
             if (iteration + 1 != iterations && iteractionListenerOrNull != null) {
                 computeCenters();
-                iteractionListenerOrNull.actionPerformed(new ActionEvent(new IterationData(iteration + 2, 0), 0, "ITERATION")); //TODO
+                iteractionListenerOrNull.actionPerformed(new ActionEvent(new IterationData(iteration + 2, getClustersNumber()), 0, "ITERATION")); //TODO
             }
             convergence = checkConvergence();
             if (convergence) {
@@ -126,5 +126,6 @@ public abstract class AffinityPropagationAlgorithm<String> extends AbstractClust
 
     protected abstract boolean checkConvergence();
 
+    protected abstract int getClustersNumber();
     //   protected abstract void initObjectsNames();
 }

@@ -3,7 +3,6 @@ package algorithm.matrix;
 import algorithm.abs.AffinityPropagationAlgorithm;
 import algorithm.smart.Cluster;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import matrix.DoubleMatrix1D;
 import matrix.DoubleMatrix2D;
@@ -156,14 +155,14 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
 
     @Override
     protected void computeCenters() {
-        centers = new HashSet<String>();
+        //   centers = new HashSet<String>();
         E = R.plus(A);
         I = E.diag().findG(0);
 
-        for (int i = 0; i < I.size(); i++) {
-            Integer center = I.get(i);
-            centers.add(String.valueOf(center));
-        }
+    //   for (int i = 0; i < I.size(); i++) {
+    //       Integer center = I.get(i);
+    //       centers.add(String.valueOf(center));
+    //   }
     }
     /*
     @Override
@@ -203,8 +202,10 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
             String examplar = String.valueOf(i);
             String center = String.valueOf(idx.getValue(i));
             if (!res.containsKey(examplar)) {
-                Cluster<String> cluster = res.get(center);
-                cluster.add(examplar);
+                if (S.get(i, idx.get(i).intValue()) > -inf) {
+                    Cluster<String> cluster = res.get(center);
+                    cluster.add(examplar);
+                }
             }
         }
         assigments = res;
@@ -214,6 +215,11 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
     @Override
     protected boolean checkConvergence() {
         return false;
+    }
+
+    @Override
+    protected int getClustersNumber() {
+        return I.size();
     }
     /*
     @Override
