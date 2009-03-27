@@ -4,6 +4,7 @@ import algorithm.smart.Cluster;
 import algorithm.smart.IterationData;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -16,6 +17,8 @@ public abstract class AffinityPropagationAlgorithm<String> extends AbstractClust
     protected Integer convits = null;
     protected ActionListener iteractionListenerOrNull = null;
     protected Map<String, Cluster<String>> assigments;
+    protected Collection<String> centers;
+    protected Collection<String> objects;
 
     public void addIterationListener(final ActionListener listener) {
         this.iteractionListenerOrNull = listener;
@@ -102,6 +105,7 @@ public abstract class AffinityPropagationAlgorithm<String> extends AbstractClust
         return assigments;
     }
 
+//    protected abstract Double getSimilarity(String from, String to);
     public abstract void setSimilarities(double[][] sim);
 
     protected abstract void copyResponsibilies();
@@ -121,4 +125,6 @@ public abstract class AffinityPropagationAlgorithm<String> extends AbstractClust
     protected abstract void computeAssigments();
 
     protected abstract boolean checkConvergence();
+
+    //   protected abstract void initObjectsNames();
 }

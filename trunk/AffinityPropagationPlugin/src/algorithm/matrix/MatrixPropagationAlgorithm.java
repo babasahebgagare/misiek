@@ -3,6 +3,7 @@ package algorithm.matrix;
 import algorithm.abs.AffinityPropagationAlgorithm;
 import algorithm.smart.Cluster;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import matrix.DoubleMatrix1D;
 import matrix.DoubleMatrix2D;
@@ -155,8 +156,14 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
 
     @Override
     protected void computeCenters() {
+        centers = new HashSet<String>();
         E = R.plus(A);
         I = E.diag().findG(0);
+
+        for (int i = 0; i < I.size(); i++) {
+            Integer center = I.get(i);
+            centers.add(String.valueOf(center));
+        }
     }
     /*
     @Override
@@ -208,4 +215,19 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
     protected boolean checkConvergence() {
         return false;
     }
+    /*
+    @Override
+    protected void initObjectsNames() {
+    for (int i = 0; i < N; i++) {
+    String ex = String.valueOf(i);
+    objects.add(ex);
+    }
+    }
+
+    @Override
+    protected Double trygetSimilarity(String from, String to) {
+    Integer fromint = Integer.valueOf(from);
+    Integer toint = Integer.valueOf(to);
+    return S.get(fromint.intValue(), toint.intValue());
+    }*/
 }
