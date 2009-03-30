@@ -23,6 +23,8 @@ public class AffinityPanel extends javax.swing.JPanel {
         pc.setPreferencesField(preferenceField);
         pc.setMatrixImplementation(radioMatrix);
         pc.setSmartImplementation(radioSibling);
+        pc.setWeighetMode(weighetRadio);
+        pc.setUnweighetMode(unweighetRadio);
         pc.initPanelFields();
     }
 
@@ -233,8 +235,16 @@ public class AffinityPanel extends javax.swing.JPanel {
         nearesCenterPanel.setName("nearesCenterPanel"); // NOI18N
 
         weighetCentersGroup.add(weighetRadio);
+        weighetRadio.setSelected(true);
         weighetRadio.setText("Weighet edges");
         weighetRadio.setName("weighetRadio"); // NOI18N
+        weighetRadio.addHierarchyBoundsListener(new java.awt.event.HierarchyBoundsListener() {
+            public void ancestorMoved(java.awt.event.HierarchyEvent evt) {
+                weighetRadioAncestorMoved(evt);
+            }
+            public void ancestorResized(java.awt.event.HierarchyEvent evt) {
+            }
+        });
 
         weighetCentersGroup.add(unweighetRadio);
         unweighetRadio.setText("Unweighet edges");
@@ -315,6 +325,10 @@ public class AffinityPanel extends javax.swing.JPanel {
     private void unweighetRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unweighetRadioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_unweighetRadioActionPerformed
+
+    private void weighetRadioAncestorMoved(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_weighetRadioAncestorMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_weighetRadioAncestorMoved
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField convitsField;

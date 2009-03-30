@@ -1,12 +1,13 @@
 package algorithm.matrix;
 
 import algorithm.abs.AffinityPropagationAlgorithm;
-import algorithm.smart.Cluster;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Collection;
+import java.util.HashSet;
 import matrix.DoubleMatrix1D;
 import matrix.DoubleMatrix2D;
 import matrix.IntegerMatrix1D;
+import prime.PrimeAlgorithm;
+import prime.PrimeGraph;
 
 public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<String> {
 
@@ -183,63 +184,64 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
         if (I.size() == 0) {
             return;
         }
-        /*    Collection<String> centers = new HashSet<String>();
+        Collection<String> centers = new HashSet<String>();
         PrimeGraph graph = new PrimeGraph();
 
         for (int i = 0; i < I.size(); i++) {
-        String center = String.valueOf(I.get(i));
-        centers.add(center);
+            String center = String.valueOf(I.get(i));
+            centers.add(center);
         }
 
         for (int i = 0; i < N; i++) {
-        String ex = String.valueOf(i);
-        graph.addNode(ex);
+            String ex = String.valueOf(i);
+            graph.addNode(ex);
         }
 
         for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
-        if (i != j && S.get(i, j) > -inf) {
-        String from = String.valueOf(i);
-        String to = String.valueOf(j);
-        graph.addEdge(from, to, Double.valueOf(S.get(i, j)));
-        }
-        }
+            for (int j = 0; j < N; j++) {
+                if (i != j && S.get(i, j) > -inf) {
+                    String from = String.valueOf(i);
+                    String to = String.valueOf(j);
+                    Double weight = computeWeight(S.get(i, j), connectingMode);
+                    graph.addEdge(from, to, weight);
+                }
+            }
         }
 
         PrimeAlgorithm prime = new PrimeAlgorithm(graph, centers);
 
         assigments = prime.run();
-         */
 
-        if (I.size() == 0) {
-            return;
-        }
-        C = S.getColumns(I).maxrIndexes();
-        C = tmp(C, I);
-        idx = idx(C, I);
+    /*
+    if (I.size() == 0) {
+    return;
+    }
+    C = S.getColumns(I).maxrIndexes();
+    C = tmp(C, I);
+    idx = idx(C, I);
 
-        Map<String, Cluster<String>> res = new HashMap<String, Cluster<String>>();
+    Map<String, Cluster<String>> res = new HashMap<String, Cluster<String>>();
 
-        for (int i = 0; i < I.size(); i++) {
-            String clusterName = String.valueOf(I.get(i));
-            Cluster<String> clust = new Cluster<String>(clusterName);
-            clust.add(clusterName);
-            res.put(clusterName, clust);
-        }
+    for (int i = 0; i < I.size(); i++) {
+    String clusterName = String.valueOf(I.get(i));
+    Cluster<String> clust = new Cluster<String>(clusterName);
+    clust.add(clusterName);
+    res.put(clusterName, clust);
+    }
 
-        for (int i = 0; i < idx.size(); i++) {
+    for (int i = 0; i < idx.size(); i++) {
 
-            String examplar = String.valueOf(i);
-            String center = String.valueOf(idx.getValue(i));
-            if (!res.containsKey(examplar)) {
-                if (S.get(i, idx.get(i).intValue()) > -inf) {
-                    Cluster<String> cluster = res.get(center);
-                    cluster.add(examplar);
-                }
-            }
-        }
-        assigments = res;
-
+    String examplar = String.valueOf(i);
+    String center = String.valueOf(idx.getValue(i));
+    if (!res.containsKey(examplar)) {
+    if (S.get(i, idx.get(i).intValue()) > -inf) {
+    Cluster<String> cluster = res.get(center);
+    cluster.add(examplar);
+    }
+    }
+    }
+    assigments = res;
+     */
     }
 
     @Override

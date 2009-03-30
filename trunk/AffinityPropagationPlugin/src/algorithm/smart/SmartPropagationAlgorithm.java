@@ -70,14 +70,14 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
                 if (!sibling.getExamplarName().equals(ex.getName())) {
                     Double sim = sibling.getS();
 
-                    Double weight = Math.exp(-Math.exp(sim));
+                    Double weight = computeWeight(sim, connectingMode);
+
                     graph.addEdge(ex.getName(), sibling.getExamplarName(), weight);
                 }
+
             }
         }
-
         PrimeAlgorithm prime = new PrimeAlgorithm(graph, centers);
-
         assigments = prime.run();
     /*
     for (String center : centers) {
@@ -121,6 +121,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
                 } else {
                     sibling.setA(computeNotEqPom(examplar.getName(), sibling.getExamplarName()));
                 }
+
             }
         }
     }
@@ -136,6 +137,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
             } else {
                 examplar.setImCenter(false, iteration);
             }
+
         }
 
         centers = ret;
@@ -148,8 +150,10 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
                 SiblingData sibling = examplar.getSiblingMap().get(name);
                 if (sibling != null) {
                     double r = sibling.getR();
-                    sum += Math.max(0, r);
+                    sum +=
+                            Math.max(0, r);
                 }
+
             }
         }
 
@@ -164,12 +168,14 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
                 if (pom > max) {
                     max = pom;
                 }
+
             }
         }
         return max;
     }
 
-    private double computeNotEqPom(final String examplarName, final String siblingName) {
+    private double computeNotEqPom(final String examplarName,
+            final String siblingName) {
         SiblingData sib = examplars.getExamplars().get(siblingName).getSiblingMap().get(siblingName);
         double rkk = sib.getR();
 
@@ -180,8 +186,10 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
                 SiblingData sibling = examplar.getSiblingMap().get(siblingName);
                 if (sibling != null) {
                     double rik = sibling.getR();
-                    sum += Math.max(0, rik);
+                    sum +=
+                            Math.max(0, rik);
                 }
+
             }
         }
         double ret = Math.min(0, rkk + sum);
@@ -206,6 +214,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
             for (SiblingData sibling : siblings) {
                 sibling.setAold(sibling.getA());
             }
+
         }
     }
 
@@ -215,11 +224,14 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
             for (SiblingData sibling : siblings) {
                 sibling.setRold(sibling.getR());
             }
+
         }
     }
 
     @Override
-    public void setSimilarities(final String from, final String to, final Double sim) {
+    public void setSimilarities(final String from,
+            final String to,
+            final Double sim) {
         examplars.setSimilarity(from, to, sim);
     }
     /*
@@ -256,17 +268,21 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
         if (N == 0) {
             return;
         }
+
         if (N != sim[0].length) {
             return;
         }
 
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
+        for (int i = 0; i <
+                N; i++) {
+            for (int j = 0; j <
+                    N; j++) {
                 String from = String.valueOf(i);
                 String to = String.valueOf(j);
                 Double prob = Double.valueOf(sim[i][j]);
                 this.setSimilarities(from, to, prob);
             }
+
         }
 
     }
@@ -275,6 +291,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
     protected int getClustersNumber() {
         return centers.size();
     }
+
     /*
     @Override
     protected void initObjectsNames() {
