@@ -4,7 +4,6 @@ import algorithm.smart.Cluster;
 import algorithm.smart.IterationData;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -13,12 +12,13 @@ public abstract class AffinityPropagationAlgorithm<String> extends AbstractClust
 
     private double lambda;
     private int iterations;
+    protected int connectingMode;
     protected boolean convergence;
     protected Integer convits = null;
     protected ActionListener iteractionListenerOrNull = null;
     protected Map<String, Cluster<String>> assigments;
-    //   protected Collection<String> centers;
-//    protected Collection<String> objects;
+    public final static int WEIGHET_MODE = 0;
+    public final static int UNWEIGHET_MODE = 1;
 
     public void addIterationListener(final ActionListener listener) {
         this.iteractionListenerOrNull = listener;
@@ -36,6 +36,10 @@ public abstract class AffinityPropagationAlgorithm<String> extends AbstractClust
 
     public double getLambda() {
         return lambda;
+    }
+
+    public void setConnectingMode(int connectingMode) {
+        this.connectingMode = connectingMode;
     }
 
     public void setLambda(final double lambda) {
@@ -128,4 +132,12 @@ public abstract class AffinityPropagationAlgorithm<String> extends AbstractClust
 
     protected abstract int getClustersNumber();
     //   protected abstract void initObjectsNames();
+
+    protected Double computeWeight(double sim, int connecingMode) {
+        if (connecingMode == AffinityPropagationAlgorithm.WEIGHET_MODE) {
+            return Math.exp(-Math.exp(sim));
+        } else {
+            return Double.valueOf(1);
+        }
+    }
 }
