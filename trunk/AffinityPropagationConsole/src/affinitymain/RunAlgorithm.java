@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package affinitymain;
 
 import algorithm.abs.AffinityPropagationAlgorithm;
@@ -19,6 +15,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import listeners.ConsoleIterationListener;
 
 /**
  *
@@ -44,6 +41,7 @@ public class RunAlgorithm {
         af.setIterations(iterations);
         af.setConvits(null);
         af.setConnectingMode(AffinityPropagationAlgorithm.WEIGHET_MODE);
+        af.init();
 
         Collection<InteractionData> ints = new HashSet<InteractionData>();
         FileInputStream fis = null;
@@ -76,17 +74,18 @@ public class RunAlgorithm {
                 Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    //    af.setN(ints.size());
-        for(InteractionData interactionData: ints) {
-            af.setSimilarities(interactionData.getFrom(), interactionData.getTo(), Math.log(interactionData.getSim()));
-            af.setSimilarities(interactionData.getTo(), interactionData.getFrom(), Math.log(interactionData.getSim()));
+        //    af.setN(ints.size());
+        for (InteractionData interactionData : ints) {
+            af.setSimilarities(interactionData.getFrom(), interactionData.getTo(), interactionData.getSim());
+            af.setSimilarities(interactionData.getTo(), interactionData.getFrom(), interactionData.getSim());
         }
         af.setConstPreferences(preferences);
     }
 
     public void run() {
-        af.init();
+        af.addIterationListener(new ConsoleIterationListener(iterations));
         Map<String, Cluster<String>> clusters = af.doClusterAssoc();
+        System.out.println(clusters.size());
         for (String clustName : clusters.keySet()) {
             System.out.println(clustName);
         }
