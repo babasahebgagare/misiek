@@ -110,6 +110,8 @@ public abstract class AffinityPropagationAlgorithm<String> extends AbstractClust
     }
 
 //    protected abstract Double getSimilarity(String from, String to);
+    public abstract void setConstPreferences(Double preferences);
+
     public abstract void setSimilarities(double[][] sim);
 
     protected abstract void copyResponsibilies();
