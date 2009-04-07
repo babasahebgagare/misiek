@@ -273,10 +273,8 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
             return;
         }
 
-        for (int i = 0; i <
-                N; i++) {
-            for (int j = 0; j <
-                    N; j++) {
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
                 String from = String.valueOf(i);
                 String to = String.valueOf(j);
                 Double prob = Double.valueOf(sim[i][j]);
@@ -292,18 +290,12 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
         return centers.size();
     }
 
-    /*
     @Override
-    protected void initObjectsNames() {
-    for (String exname : examplars.getExamplars().keySet()) {
-    objects.add(exname);
-    }
+    public void setConstPreferences(Double preferences) {
+        Collection<String> examplarsNames = examplars.getExamplars().keySet();
+        for (String exName : examplarsNames) {
+            setSimilarities(exName, exName, preferences);
+        }
     }
 
-    @Override
-    protected Double getSimilarity(String from, String to) {
-    Examplar fromex = examplars.getExamplars().get(from);
-    SiblingData sibling = fromex.getSiblingMap().get(to);
-    return sibling.getS();
-    }*/
 }

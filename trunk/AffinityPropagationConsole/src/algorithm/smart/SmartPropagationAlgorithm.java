@@ -292,6 +292,13 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
         return centers.size();
     }
 
+    @Override
+    public void setConstPreferences(Double preferences) {
+        Collection<String> examplarsNames = examplars.getExamplars().keySet();
+        for (String exName : examplarsNames) {
+            setSimilarities(exName, exName, preferences);
+        }
+    }
     /*
     @Override
     protected void initObjectsNames() {

@@ -253,6 +253,13 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
     protected int getClustersNumber() {
         return I.size();
     }
+
+    @Override
+    public void setConstPreferences(Double preferences) {
+        for (int i = 0; i < N; i++) {
+            S.set(i, i, preferences);
+        }
+    }
     /*
     @Override
     protected void initObjectsNames() {
