@@ -29,7 +29,7 @@ public class PrimeAlgorithm {
 
         while (edges.size() > 0) {
             PrimeEdge minEdge = edges.poll();
-            System.out.println(minEdge.getWeight());
+            //System.out.println(minEdge.getWeight());
 
             String nodeFromStr = minEdge.getFrom();
             String nodeToStr = minEdge.getTo();
