@@ -7,12 +7,12 @@ import prime.PrimeAlgorithm;
 import prime.PrimeGraph;
 
 /** You have to set parameters and do init() befor clustering. */
-public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<String> {
+public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
 
     private ExamplarsCollection examplars = null;
     private double INF = 1000000;
     private int iteration;
-    protected Collection<String> centers;
+    protected Collection<Integer> centers;
 
     public ExamplarsCollection getExamplars() {
         return examplars;
@@ -127,7 +127,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
     }
 
     protected void computeCenters() {
-        Collection<String> ret = new HashSet<String>();
+        Collection<Integer> ret = new HashSet<Integer>();
         for (Examplar examplar : examplars.getExamplars().values()) {
             SiblingData sibling = examplar.getSiblingMap().get(examplar.getName());
             double e = sibling.getA() + sibling.getR();
@@ -143,7 +143,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
         centers = ret;
     }
 
-    private double computeEqPom(final String name) {
+    private double computeEqPom(final Integer name) {
         double sum = 0;
         for (Examplar examplar : examplars.getExamplars().values()) {
             if (!examplar.getName().equals(name)) {
@@ -160,7 +160,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
         return sum;
     }
 
-    private double computeMaxPom(final Collection<SiblingData> siblings, final String examplarName) {
+    private double computeMaxPom(final Collection<SiblingData> siblings, final Integer examplarName) {
         double max = -INF;
         for (SiblingData sibling : siblings) {
             if (!sibling.getExamplarName().equals(examplarName)) {
@@ -174,8 +174,8 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
         return max;
     }
 
-    private double computeNotEqPom(final String examplarName,
-            final String siblingName) {
+    private double computeNotEqPom(final Integer examplarName,
+            final Integer siblingName) {
         SiblingData sib = examplars.getExamplars().get(siblingName).getSiblingMap().get(siblingName);
         double rkk = sib.getR();
 
@@ -228,9 +228,14 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
         }
     }
 
-    @Override
-    public void setSimilarities(final String from,
-            final String to,
+    /**
+     * 
+     * @param from
+     * @param to
+     * @param sim
+     */
+    public void setSimilarities(final Integer from,
+            final Integer to,
             final Double sim) {
         examplars.setSimilarity(from, to, sim);
     }
@@ -273,14 +278,9 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
             return;
         }
 
-        for (int i = 0; i <
-                N; i++) {
-            for (int j = 0; j <
-                    N; j++) {
-                String from = String.valueOf(i);
-                String to = String.valueOf(j);
-                Double prob = Double.valueOf(sim[i][j]);
-                this.setSimilarities(from, to, prob);
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                this.setSimilarities(i, j, sim[i][j]);
             }
 
         }
@@ -294,8 +294,8 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm<Stri
 
     @Override
     public void setConstPreferences(Double preferences) {
-        Collection<String> examplarsNames = examplars.getExamplars().keySet();
-        for (String exName : examplarsNames) {
+        Collection<Integer> examplarsNames = examplars.getExamplars().keySet();
+        for (Integer exName : examplarsNames) {
             setSimilarities(exName, exName, preferences);
         }
     }

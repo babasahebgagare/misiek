@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package algorithm.smart;
 
 /**
@@ -15,9 +11,9 @@ public class SiblingData {
     private double a;
     private double aold;
     private double s;
-    private String examplarName;
+    private Integer examplarName;
 
-    public SiblingData(final double s, final String examplarName) {
+    public SiblingData(final double s, final Integer examplarName) {
         this.a = 0;
         this.s = s;
         this.r = 0;
@@ -34,11 +30,11 @@ public class SiblingData {
         this.a = a;
     }
 
-    public String getExamplarName() {
+    public Integer getExamplarName() {
         return examplarName;
     }
 
-    public void setExamplarName(final String examplarName) {
+    public void setExamplarName(final Integer examplarName) {
         this.examplarName = examplarName;
     }
 

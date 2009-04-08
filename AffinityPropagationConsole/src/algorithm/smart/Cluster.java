@@ -10,14 +10,14 @@ import java.util.HashSet;
  */
 public class Cluster<T> implements Comparable<Cluster<T>> {
 
-    private String name;
+    private T name;
     private Collection<T> elements = new HashSet<T>();
 
-    public Cluster(final String name) {
+    public Cluster(final T name) {
         this.name = name;
     }
 
-    public String getName() {
+    public T getName() {
         return name;
     }
 

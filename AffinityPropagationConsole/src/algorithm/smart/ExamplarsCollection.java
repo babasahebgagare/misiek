@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package algorithm.smart;
 
 import java.util.Arrays;
@@ -15,7 +11,7 @@ import java.util.Map;
  */
 public class ExamplarsCollection {
 
-    Map<String, Examplar> examplars = new HashMap<String, Examplar>();
+    Map<Integer, Examplar> examplars = new HashMap<Integer, Examplar>();
     Integer convits = null;
 
     public ExamplarsCollection() {
@@ -29,7 +25,7 @@ public class ExamplarsCollection {
         return examplars.size();
     }
 
-    public void setSimilarity(final String from, final String to, final double sim) {
+    public void setSimilarity(final Integer from, final Integer to, final double sim) {
         Examplar exfrom = examplars.get(from);
         if (exfrom == null) {
             exfrom = new Examplar(from, convits);
@@ -41,7 +37,7 @@ public class ExamplarsCollection {
     @Override
     public String toString() {
         StringBuffer ret = new StringBuffer();
-        for (String key : examplars.keySet()) {
+        for (Integer key : examplars.keySet()) {
             ret.append(key);
             ret.append(": ");
             ret.append(examplars.get(key).toString());
@@ -50,11 +46,11 @@ public class ExamplarsCollection {
         return ret.toString();
     }
 
-    public Map<String, Examplar> getExamplars() {
+    public Map<Integer, Examplar> getExamplars() {
         return examplars;
     }
 
-    public void setExamplars(final Map<String, Examplar> examplars) {
+    public void setExamplars(final Map<Integer, Examplar> examplars) {
         this.examplars = examplars;
     }
 
@@ -62,9 +58,9 @@ public class ExamplarsCollection {
         int N = examplars.size();
         StringBuffer res = new StringBuffer();
         Double[][] matrix = new Double[N][N];
-        Map<String, Integer> mapper = new HashMap<String, Integer>();
+        Map<Integer, Integer> mapper = new HashMap<Integer, Integer>();
 
-        String[] examplarsPom = new String[N];
+        Integer[] examplarsPom = new Integer[N];
         int pos = 0;
         for (Examplar examplar : examplars.values()) {
             examplarsPom[pos] = (examplar.getName());
