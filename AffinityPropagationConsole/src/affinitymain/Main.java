@@ -1,8 +1,5 @@
 package affinitymain;
 
-import java.util.Collection;
-import java.util.HashSet;
-
 /**
  *
  * @author misiek
@@ -27,7 +24,7 @@ public class Main {
                 alg.run();
             } catch (Exception e) {
                 System.out.println(e.getStackTrace()[0]);
-                System.out.println("Error during read: java -jar AffinityPropagation.jar <input> <ouput> <lambda> <iterations> <preferences>");
+                System.out.println("Error during running: java -jar AffinityPropagation.jar <input> <ouput> <lambda> <iterations> <preferences>");
             }
         } else {
             System.out.println("Bad args count: java -jar AffinityPropagation.jar <input> <ouput> <lambda> <iterations> <preferences>");

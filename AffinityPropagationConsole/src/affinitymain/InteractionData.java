@@ -6,17 +6,17 @@ package affinitymain;
  */
 public class InteractionData {
 
-    private String from;
-    private String to;
+    private Integer from;
+    private Integer to;
     private Double sim;
 
-    public InteractionData(String from, String to, Double sim) {
+    public InteractionData(Integer from, Integer to, Double sim) {
         this.from = from;
         this.to = to;
         this.sim = sim;
     }
 
-    public String getFrom() {
+    public Integer getFrom() {
         return from;
     }
 
@@ -24,7 +24,7 @@ public class InteractionData {
         return sim;
     }
 
-    public String getTo() {
+    public Integer getTo() {
         return to;
     }
 }
