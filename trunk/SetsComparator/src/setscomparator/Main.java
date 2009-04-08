@@ -4,17 +4,11 @@
  */
 package setscomparator;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Collection;
+import java.util.Scanner;
 import java.util.TreeSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -57,34 +51,20 @@ public class Main {
     }
 
     private static void loadSet(String filename, Collection<Integer> set) {
-        FileInputStream fis = null;
-        BufferedInputStream bis = null;
-        DataInputStream dis = null;
-        BufferedReader br = null;
+        Scanner scanner = null;
         try {
 
             File inputSim = new File(filename);
-            fis = new FileInputStream(inputSim);
-            bis = new BufferedInputStream(fis);
-            dis = new DataInputStream(bis);
-            br = new BufferedReader(new InputStreamReader(dis));
+            scanner = new Scanner(inputSim);
 
-            while (br.ready()) {
-                String line = br.readLine();
-                Integer val = Integer.valueOf(line);
+            while (scanner.hasNextInt()) {
+                Integer val = Integer.valueOf(scanner.nextInt());
                 set.add(val);
             }
         } catch (IOException ex) {
             System.out.println("ERROR");
         } finally {
-            try {
-                br.close();
-                dis.close();
-                bis.close();
-                fis.close();
-            } catch (IOException ex) {
-                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            scanner.close();
         }
     }
 }

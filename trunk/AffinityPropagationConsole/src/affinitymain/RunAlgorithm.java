@@ -1,23 +1,18 @@
 package affinitymain;
 
 import algorithm.abs.AffinityPropagationAlgorithm;
-import algorithm.matrix.MatrixPropagationAlgorithm;
 import algorithm.smart.Cluster;
 import algorithm.smart.SmartPropagationAlgorithm;
-import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.DataInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import listeners.ConsoleIterationListener;
@@ -51,50 +46,33 @@ public class RunAlgorithm {
         af.setConnectingMode(AffinityPropagationAlgorithm.WEIGHET_MODE);
         af.addIterationListener(new ConsoleIterationListener(iterations));
 
-
         Collection<InteractionData> ints = new HashSet<InteractionData>();
-        FileInputStream fis = null;
-        BufferedInputStream bis = null;
-        DataInputStream dis = null;
-        BufferedReader br = null;
+
+        Scanner scanner = null;
+
         try {
-
             File inputSim = new File(inputpath);
-            fis = new FileInputStream(inputSim);
-            bis = new BufferedInputStream(fis);
-            dis = new DataInputStream(bis);
-            br = new BufferedReader(new InputStreamReader(dis));
+            scanner = new Scanner(inputSim);
 
-            while (br.ready()) {
-                String[] line = br.readLine().split(" ");
-                //   System.out.println(line.length);
-                if (line.length == 3) {
-                    nodeNames.add(line[0]);
-                    nodeNames.add(line[1]);
-                    ints.add(new InteractionData(line[0], line[1], Double.valueOf(line[2])));
-                } else {
-                    System.out.println("BLAD WCZYTYWANIA DANYCH");
-                    return;
-                }
+            while (scanner.hasNextInt()) {
+
+                Integer from = Integer.valueOf(scanner.nextInt());
+                Integer to = Integer.valueOf(scanner.nextInt());
+                String simStr = scanner.nextLine();
+                double sim = Double.parseDouble(simStr);
+                ints.add(new InteractionData(from, to, Double.valueOf(sim)));
             }
         } catch (IOException ex) {
             Logger.getLogger(RunAlgorithm.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try {
-                br.close();
-                dis.close();
-                bis.close();
-                fis.close();
-            } catch (IOException ex) {
-                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            scanner.close();
         }
         //    af.setN(ints.size());
-        af.setN(nodeNames.size()+1);
+        af.setN(nodeNames.size());
         af.init();
         for (InteractionData intData : ints) {
             //     System.out.println(intData.getFrom() + " " + intData.getTo() + " " + intData.getSim());
-            af.setSimilarities(intData.getFrom(), intData.getTo(), intData.getSim());
+            af.setSimilarities(String.valueOf(intData.getFrom()), String.valueOf(intData.getTo()), intData.getSim());
         }
         af.setConstPreferences(preferences);
     }
