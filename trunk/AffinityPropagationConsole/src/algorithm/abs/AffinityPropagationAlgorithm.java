@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public abstract class AffinityPropagationAlgorithm<String> extends AbstractClusterAlgorithm<String> {
+public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgorithm<Integer> {
 
     private double lambda;
     private int iterations;
@@ -16,7 +16,7 @@ public abstract class AffinityPropagationAlgorithm<String> extends AbstractClust
     protected boolean convergence;
     protected Integer convits = null;
     protected ActionListener iteractionListenerOrNull = null;
-    protected Map<String, Cluster<String>> assigments;
+    protected Map<Integer, Cluster<Integer>> assigments;
     public final static int WEIGHET_MODE = 0;
     public final static int UNWEIGHET_MODE = 1;
 
@@ -63,12 +63,12 @@ public abstract class AffinityPropagationAlgorithm<String> extends AbstractClust
     }
 
     @Override
-    public Map<String, String> doCluster() {
-        final Map<String, Cluster<String>> help = doClusterAssoc();
-        final Map<String, String> res = new HashMap<String, String>();
+    public Map<Integer, Integer> doCluster() {
+        final Map<Integer, Cluster<Integer>> help = doClusterAssoc();
+        final Map<Integer, Integer> res = new HashMap<Integer, Integer>();
 
-        for (Entry<String, Cluster<String>> entry : help.entrySet()) {
-            for (String obj : entry.getValue().getElements()) {
+        for (Entry<Integer, Cluster<Integer>> entry : help.entrySet()) {
+            for (Integer obj : entry.getValue().getElements()) {
                 res.put(obj, entry.getKey());
             }
         }
@@ -76,7 +76,7 @@ public abstract class AffinityPropagationAlgorithm<String> extends AbstractClust
         return res;
     }
 
-    public Map<String, Cluster<String>> doClusterAssoc() {
+    public Map<Integer, Cluster<Integer>> doClusterAssoc() {
         int iters = getIterations();
         if (iteractionListenerOrNull != null) {
             iteractionListenerOrNull.actionPerformed(new ActionEvent(new IterationData(1, 0), 0, "ITERATION"));

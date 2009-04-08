@@ -25,7 +25,7 @@ public class RunAlgorithm {
 
     private String inputpath;
     private String outpath;
-    private AffinityPropagationAlgorithm<String> af = new SmartPropagationAlgorithm();
+    private AffinityPropagationAlgorithm af = new SmartPropagationAlgorithm();
     private double lambda;
     private int iterations;
     private double preferences;
@@ -72,7 +72,7 @@ public class RunAlgorithm {
         af.init();
         for (InteractionData intData : ints) {
             //     System.out.println(intData.getFrom() + " " + intData.getTo() + " " + intData.getSim());
-            af.setSimilarities(String.valueOf(intData.getFrom()), String.valueOf(intData.getTo()), intData.getSim());
+            af.setSimilarities(intData.getFrom(), intData.getTo(), intData.getSim());
         }
         af.setConstPreferences(preferences);
     }
@@ -86,9 +86,9 @@ public class RunAlgorithm {
             fos = new FileOutputStream(outputCenters);
             bos = new BufferedOutputStream(fos);
             bw = new BufferedWriter(new OutputStreamWriter(bos));
-            Map<String, Cluster<String>> clusters = af.doClusterAssoc();
+            Map<Integer, Cluster<Integer>> clusters = af.doClusterAssoc();
             System.out.println(clusters.size());
-            for (String clustName : clusters.keySet()) {
+            for (Integer clustName : clusters.keySet()) {
                 bw.append(clustName + "\n");
             }
         } catch (IOException ex) {

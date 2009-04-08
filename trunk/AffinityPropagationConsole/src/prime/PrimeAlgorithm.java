@@ -15,24 +15,24 @@ public class PrimeAlgorithm {
 
     private PrimeGraph graph;
     private PriorityQueue<PrimeEdge> edges;
-    private Collection<String> sources;
+    private Collection<Integer> sources;
 
-    public PrimeAlgorithm(PrimeGraph graph, Collection<String> sources) {
+    public PrimeAlgorithm(PrimeGraph graph, Collection<Integer> sources) {
         this.graph = graph;
         this.sources = sources;
         this.edges = new PriorityQueue<PrimeEdge>();
         init(sources);
     }
 
-    public Map<String, Cluster<String>> run() {
-        Map<String, Cluster<String>> ret = new HashMap<String, Cluster<String>>();
+    public Map<Integer, Cluster<Integer>> run() {
+        Map<Integer, Cluster<Integer>> ret = new HashMap<Integer, Cluster<Integer>>();
 
         while (edges.size() > 0) {
             PrimeEdge minEdge = edges.poll();
             //System.out.println(minEdge.getWeight());
 
-            String nodeFromStr = minEdge.getFrom();
-            String nodeToStr = minEdge.getTo();
+            Integer nodeFromStr = minEdge.getFrom();
+            Integer nodeToStr = minEdge.getTo();
             Double weight = minEdge.getWeight();
 
             PrimeNode nodeFrom = graph.getNode(nodeFromStr);
@@ -42,15 +42,15 @@ public class PrimeAlgorithm {
                 nodeTo.setDistance(nodeFrom.getDistance() + weight);
                 nodeTo.setSourceName(nodeFrom.getSourceName());
 
-                for (Entry<String, Double> entryEdge : nodeTo.getEdges().entrySet()) {
+                for (Entry<Integer, Double> entryEdge : nodeTo.getEdges().entrySet()) {
                     PrimeEdge edge = new PrimeEdge(nodeFromStr, entryEdge.getKey(), entryEdge.getValue());
                     edges.add(edge);
                 }
             }
         }
 
-        for (String source : sources) {
-            Cluster<String> clust = new Cluster<String>(source);
+        for (Integer source : sources) {
+            Cluster<Integer> clust = new Cluster<Integer>(source);
             clust.add(source);
             ret.put(source, clust);
         //  current.addNode(node);
@@ -59,7 +59,7 @@ public class PrimeAlgorithm {
         for (PrimeNode node : graph.getNodes()) {
             if (node.getSourceName() != null) {
                 if (!sources.contains(node.getName())) {
-                    Cluster<String> cluster = ret.get(node.getSourceName());
+                    Cluster<Integer> cluster = ret.get(node.getSourceName());
                     cluster.add(node.getName());
                 }
             }
@@ -68,14 +68,14 @@ public class PrimeAlgorithm {
         return ret;
     }
 
-    private void init(Collection<String> sources) {
+    private void init(Collection<Integer> sources) {
         System.out.println("CENTERS: " + sources.size());
-        for (String source : sources) {
+        for (Integer source : sources) {
             PrimeNode node = graph.getNode(source);
             node.setDistance(Double.valueOf(0));
             node.setSourceName(source);
             //        current.addNode(node);
-            for (Entry<String, Double> entryEdge : node.getEdges().entrySet()) {
+            for (Entry<Integer, Double> entryEdge : node.getEdges().entrySet()) {
                 PrimeEdge edge = new PrimeEdge(source, entryEdge.getKey(), entryEdge.getValue());
                 edges.add(edge);
             }

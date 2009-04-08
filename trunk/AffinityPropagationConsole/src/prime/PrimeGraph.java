@@ -10,23 +10,23 @@ import java.util.TreeMap;
  */
 public class PrimeGraph {
 
-    private Map<String, PrimeNode> nodes;
+    private Map<Integer, PrimeNode> nodes;
 
     public PrimeGraph() {
-        this.nodes = new TreeMap<String, PrimeNode>();
+        this.nodes = new TreeMap<Integer, PrimeNode>();
     }
 
-    public void addEdge(String from, String to, Double sim) {
+    public void addEdge(Integer from, Integer to, Double sim) {
         PrimeNode nodeFrom = nodes.get(from);
         nodeFrom.addEdge(to, sim);
     }
 
-    public void addNode(String nodeName) {
+    public void addNode(Integer nodeName) {
         PrimeNode node = new PrimeNode(nodeName);
         this.nodes.put(nodeName, node);
     }
 
-    public PrimeNode getNode(String nodeName) {
+    public PrimeNode getNode(Integer nodeName) {
         return nodes.get(nodeName);
     }
 

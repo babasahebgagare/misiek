@@ -9,7 +9,7 @@ import matrix.IntegerMatrix1D;
 import prime.PrimeAlgorithm;
 import prime.PrimeGraph;
 
-public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<String> {
+public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
 
     private int N;
     private IntegerMatrix1D idx;
@@ -88,11 +88,11 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
     }
 
     @Override
-    public void setSimilarities(final String x, final String y, final Double sim) {
+    public void setSimilarities(final Integer x, final Integer y, final Double sim) {
 
-        int i = Integer.valueOf(x);
-        int j = Integer.valueOf(y);
-        S.set(i, j, sim.doubleValue());
+        //int i = Integer.valueOf(x);
+        //int j = Integer.valueOf(y);
+        S.set(x, y, sim.doubleValue());
     }
 
     @Override
@@ -184,26 +184,24 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
         if (I.size() == 0) {
             return;
         }
-        Collection<String> centers = new HashSet<String>();
+        Collection<Integer> centers = new HashSet<Integer>();
         PrimeGraph graph = new PrimeGraph();
 
         for (int i = 0; i < I.size(); i++) {
-            String center = String.valueOf(I.get(i));
-            centers.add(center);
+           // String center = String.valueOf();
+            centers.add(I.get(i));
         }
 
         for (int i = 0; i < N; i++) {
-            String ex = String.valueOf(i);
-            graph.addNode(ex);
+//            String ex = String.valueOf(i);
+            graph.addNode(Integer.valueOf(i));
         }
 
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
                 if (i != j && S.get(i, j) > -inf) {
-                    String from = String.valueOf(i);
-                    String to = String.valueOf(j);
                     Double weight = computeWeight(S.get(i, j), connectingMode);
-                    graph.addEdge(from, to, weight);
+                    graph.addEdge(i, j, weight);
                 }
             }
         }
