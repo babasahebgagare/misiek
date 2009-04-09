@@ -3,8 +3,7 @@ package algorithm.smart;
 import algorithm.abs.AffinityPropagationAlgorithm;
 import java.util.Collection;
 import java.util.HashSet;
-import prime.PrimeAlgorithm;
-import prime.PrimeGraph;
+import java.util.TreeSet;
 
 /** You have to set parameters and do init() befor clustering. */
 public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
@@ -54,62 +53,6 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
         }
 
         return res;
-    }
-
-    protected void computeAssigments() {
-        //     Map<String, Cluster<String>> ret = new HashMap<String, Cluster<String>>();
-
-        PrimeGraph graph = new PrimeGraph();
-
-        for (Examplar ex : examplars.getExamplars().values()) {
-            graph.addNode(ex.getName());
-        }
-
-        for (Examplar ex : examplars.getExamplars().values()) {
-            for (SiblingData sibling : ex.getSiblingMap().values()) {
-                if (!sibling.getExamplarName().equals(ex.getName())) {
-                    Double sim = sibling.getS();
-
-                    Double weight = computeWeight(sim, connectingMode);
-
-                    graph.addEdge(ex.getName(), sibling.getExamplarName(), weight);
-                }
-
-            }
-        }
-        PrimeAlgorithm prime = new PrimeAlgorithm(graph, centers);
-        assigments = prime.run();
-    /*
-    for (String center : centers) {
-    Cluster<String> clust = new Cluster<String>(center);
-    clust.add(center);
-    ret.put(center, clust);
-    }
-
-    for (Examplar examplar : examplars.getExamplars().values()) {
-    if (!ret.containsKey(examplar.getName())) {
-
-    String maxid = null;
-    double max = -INF;
-
-    for (String center : centers) {
-    SiblingData sibling = examplar.getSiblingMap().get(center);
-    if (sibling != null) {
-    double sim = sibling.getS();
-    if (sim > max) {
-    max = sim;
-    maxid = center;
-    }
-    }
-    }
-    if (maxid != null) {
-    Cluster<String> cluster = ret.get(maxid);
-    cluster.add(examplar.getName());
-    }
-    }
-    }
-    assigments = ret;
-     */
     }
 
     protected void computeAvailabilities() {
@@ -239,21 +182,6 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
             final Double sim) {
         examplars.setSimilarity(from, to, sim);
     }
-    /*
-    @Override
-    public Map<String, String> doCluster() {
-    final Map<String, Cluster<String>> help = doClusterAssoc();
-    final Map<String, String> res = new HashMap<String, String>();
-
-    for (Entry<String, Cluster<String>> entry : help.entrySet()) {
-    for (String obj : entry.getValue().getElements()) {
-    res.put(obj, entry.getKey());
-    }
-    }
-
-    return res;
-    }
-     */
 
     @Override
     public void init() {
@@ -299,6 +227,28 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
             setSimilarities(exName, exName, preferences);
         }
     }
+
+    @Override
+    protected Collection<Integer> getCenters() {
+        return new TreeSet<Integer>(centers);
+    }
+
+    @Override
+    protected Collection<Integer> getAllExamplars() {
+        return new TreeSet<Integer>(examplars.getExamplars().keySet());
+    }
+
+    @Override
+    protected Double tryGetSimilarity(Integer i, Integer j) {
+
+        Examplar ix = examplars.getExamplars().get(i);
+        SiblingData sibling = ix.getSiblingMap().get(j);
+        if (sibling == null) {
+            return null;
+        } else {
+            return sibling.getS();
+        }
+    }
     /*
     @Override
     protected void initObjectsNames() {
@@ -307,10 +257,5 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
     }
     }
 
-    @Override
-    protected Double getSimilarity(String from, String to) {
-    Examplar fromex = examplars.getExamplars().get(from);
-    SiblingData sibling = fromex.getSiblingMap().get(to);
-    return sibling.getS();
     }*/
 }
