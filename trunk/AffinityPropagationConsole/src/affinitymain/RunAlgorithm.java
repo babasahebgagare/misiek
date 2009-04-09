@@ -30,20 +30,22 @@ public class RunAlgorithm {
     private int iterations;
     private double preferences;
     private Collection<String> nodeNames = new HashSet<String>();
+    private String kind;
 
-    public RunAlgorithm(String inputpath, String outpath, double lambda, int iterations, double preferences) {
+    public RunAlgorithm(String inputpath, String outpath, double lambda, int iterations, double preferences, String kind) {
         this.inputpath = inputpath;
         this.outpath = outpath;
         this.lambda = lambda;
         this.iterations = iterations;
         this.preferences = preferences;
+        this.kind = kind;
     }
 
     public void setParemeters() {
         af.setLambda(lambda);
         af.setIterations(iterations);
         af.setConvits(null);
-        af.setConnectingMode(AffinityPropagationAlgorithm.WEIGHET_MODE);
+        af.setConnectingMode(AffinityPropagationAlgorithm.UNWEIGHET_MODE);
         af.addIterationListener(new ConsoleIterationListener(iterations));
 
         Collection<InteractionData> ints = new HashSet<InteractionData>();
@@ -86,11 +88,19 @@ public class RunAlgorithm {
             fos = new FileOutputStream(outputCenters);
             bos = new BufferedOutputStream(fos);
             bw = new BufferedWriter(new OutputStreamWriter(bos));
-            Map<Integer, Cluster<Integer>> clusters = af.doClusterAssoc();
-            System.out.println(clusters.size());
-            for (Integer clustName : clusters.keySet()) {
-                bw.append(clustName + "\n");
+            if (kind.equals("centers")) {
+                Map<Integer, Cluster<Integer>> clusters = af.doClusterAssoc();
+
+                for (Integer clustName : clusters.keySet()) {
+                    bw.append(clustName + "\n");
+                }
+            } else {
+                Map<Integer, Integer> clusters = af.doCluster();
+                for (int i = 1; i <= clusters.size(); i++) {
+                    bw.append(clusters.get(Integer.valueOf(i)) + "\n");
+                }
             }
+
         } catch (IOException ex) {
             Logger.getLogger(RunAlgorithm.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
