@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package setscomparator;
 
 import java.io.File;
@@ -23,48 +19,31 @@ public class Main {
         if (args.length == 2) {
             String first = String.valueOf(args[0]);
             String second = String.valueOf(args[1]);
+            Double jaccardIndex = Double.valueOf(0);
+            SetsReader reader = new SetsReader();
 
-            Collection<Integer> a = new TreeSet<Integer>();
-            Collection<Integer> b = new TreeSet<Integer>();
-
-            loadSet(first, a);
-            loadSet(second, b);
+            reader.setFilename(first);
+            Collection<Integer> a = reader.loadSet();
+            reader.setFilename(second);
+            Collection<Integer> b = reader.loadSet();
 
             if (a.equals(b)) {
                 System.out.println("IDENTICAL");
+                jaccardIndex = Double.valueOf(1);
             } else {
-                Collection<Integer> atmp = new TreeSet<Integer>(a);
-                Collection<Integer> btmp = new TreeSet<Integer>(b);
+                Collection<Integer> sum = new TreeSet<Integer>(a);
+                Collection<Integer> inter = new TreeSet<Integer>(a);
 
                 System.out.println("NOT IDENTICAL!!!");
                 System.out.println("A SIZE: " + a.size());
                 System.out.println("B SIZE: " + b.size());
-                atmp.removeAll(btmp);
-                System.out.println("A - B SIZE: " + atmp.size());
-                b.removeAll(a);
-                System.out.println("B - A SIZE: " + b.size());
+                sum.addAll(b);
+                inter.retainAll(b);
+                jaccardIndex = Double.valueOf((double) inter.size() / (double) sum.size());
             }
-
+            System.out.println("Jaccard index = " + jaccardIndex);
         } else {
             System.out.println("java -jar SetComparator.jar <first> <second>");
-        }
-    }
-
-    private static void loadSet(String filename, Collection<Integer> set) {
-        Scanner scanner = null;
-        try {
-
-            File inputSim = new File(filename);
-            scanner = new Scanner(inputSim);
-
-            while (scanner.hasNextInt()) {
-                Integer val = Integer.valueOf(scanner.nextInt());
-                set.add(val);
-            }
-        } catch (IOException ex) {
-            System.out.println("ERROR");
-        } finally {
-            scanner.close();
         }
     }
 }
