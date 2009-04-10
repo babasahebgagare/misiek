@@ -186,25 +186,26 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
             unclustered.remove(center);
         }
 
-  //      while (unclustered.size() != unclusteredHelp.size()) {
+        while (unclustered.size() != unclusteredHelp.size()) {
             unclusteredHelp = new TreeSet<Integer>(unclustered);
+            System.out.println("CLUSTERED: " + clustered.size());
             for (Integer examplar : unclusteredHelp) {
 
                 Integer maxidOrNull = null;
                 Double maxOrNull = null;
 
-                for (Entry<Integer, Integer> cluster : clustered.entrySet()) {
+                for (Entry<Integer, Integer> clusteredEx : clustered.entrySet()) {
 
-                    Double simOrNull = tryGetSimilarity(cluster.getKey(), examplar);
+                    Double simOrNull = tryGetSimilarity(examplar, clusteredEx.getKey());
                     if (simOrNull != null) {
                         if (maxOrNull != null) {
                             if (simOrNull > maxOrNull) {
                                 maxOrNull = simOrNull;
-                                maxidOrNull = cluster.getValue();
+                                maxidOrNull = clusteredEx.getValue();
                             }
                         } else {
                             maxOrNull = simOrNull;
-                            maxidOrNull = cluster.getValue();
+                            maxidOrNull = clusteredEx.getValue();
                         }
                     }
                 }
@@ -215,7 +216,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
                     unclustered.remove(examplar);
                 }
             }
-  //      }
+        }
 
         return ret;
     }
