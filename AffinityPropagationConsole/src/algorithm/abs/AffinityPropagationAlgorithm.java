@@ -170,8 +170,6 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
 
     protected abstract Collection<Integer> getAllExamplars();
 
-    protected abstract Double tryGetSimilarity(Integer i, Integer j);
-
     private Map<Integer, Cluster<Integer>> computeOriginalAssigments(Collection<Integer> examplars, Collection<Integer> centers) {
         Map<Integer, Cluster<Integer>> ret = new TreeMap<Integer, Cluster<Integer>>();
         Map<Integer, Integer> clustered = new TreeMap<Integer, Integer>();
