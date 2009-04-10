@@ -175,10 +175,12 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
     private Map<Integer, Cluster<Integer>> computeOriginalAssigments(Collection<Integer> examplars, Collection<Integer> centers) {
         Map<Integer, Cluster<Integer>> ret = new TreeMap<Integer, Cluster<Integer>>();
         Map<Integer, Integer> clustered = new TreeMap<Integer, Integer>();
+        Map<Integer, Integer> clusteredHelp = new TreeMap<Integer, Integer>();
         Collection<Integer> unclustered = new TreeSet<Integer>(examplars);
         Collection<Integer> unclusteredHelp = new TreeSet<Integer>(examplars);
 
         for (Integer center : centers) {
+            //   System.out.println("CENTER: " + center);
             Cluster<Integer> clust = new Cluster<Integer>(center);
             clust.add(center);
             ret.put(center, clust);
@@ -188,13 +190,14 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
 
         while (unclustered.size() != unclusteredHelp.size()) {
             unclusteredHelp = new TreeSet<Integer>(unclustered);
-            System.out.println("CLUSTERED: " + clustered.size());
+            clusteredHelp = new TreeMap<Integer, Integer>(clustered);
+            //  System.out.println("CLUSTERED: " + clustered.size());
             for (Integer examplar : unclusteredHelp) {
 
                 Integer maxidOrNull = null;
                 Double maxOrNull = null;
 
-                for (Entry<Integer, Integer> clusteredEx : clustered.entrySet()) {
+                for (final Entry<Integer, Integer> clusteredEx : clusteredHelp.entrySet()) {
 
                     Double simOrNull = tryGetSimilarity(examplar, clusteredEx.getKey());
                     if (simOrNull != null) {
