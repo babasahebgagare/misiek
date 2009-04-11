@@ -45,7 +45,7 @@ public class RunAlgorithm {
         af.setLambda(lambda);
         af.setIterations(iterations);
         af.setConvits(null);
-        af.setConnectingMode(AffinityPropagationAlgorithm.ORIGINAL_MODE);
+        af.setConnectingMode(AffinityPropagationAlgorithm.AffinityConnectingMethod.ORIGINAL);
         af.addIterationListener(new ConsoleIterationListener(iterations));
 
         Collection<InteractionData> ints = new HashSet<InteractionData>();
