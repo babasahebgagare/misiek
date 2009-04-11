@@ -17,6 +17,8 @@ public abstract class AbstractClusterAlgorithm<T> {
 
     public abstract void setSimilarities(T x, T y, Double sim);
 
+    protected abstract Double tryGetSimilarity(T x, T y);
+
     public abstract Map<T, T> doCluster();
 
     public abstract Map<T, Cluster<T>> doClusterAssoc();

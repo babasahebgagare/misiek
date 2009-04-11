@@ -6,29 +6,29 @@ package prime;
  */
 public class PrimeEdge implements Comparable<PrimeEdge> {
 
-    private String from;
-    private String to;
+    private Integer from;
+    private Integer to;
     private Double weight;
 
-    public PrimeEdge(String from, String to, Double weight) {
+    public PrimeEdge(Integer from, Integer to, Double weight) {
         this.from = from;
         this.to = to;
         this.weight = weight;
     }
 
-    public String getFrom() {
+    public Integer getFrom() {
         return from;
     }
 
-    public void setFrom(String from) {
+    public void setFrom(Integer from) {
         this.from = from;
     }
 
-    public String getTo() {
+    public Integer getTo() {
         return to;
     }
 
-    public void setTo(String to) {
+    public void setTo(Integer to) {
         this.to = to;
     }
 

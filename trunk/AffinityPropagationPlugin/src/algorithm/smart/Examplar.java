@@ -10,12 +10,12 @@ import java.util.Vector;
  */
 public class Examplar {
 
-    private Map<String, SiblingData> siblingMap = new HashMap<String, SiblingData>();
-    private String name;
+    private Map<Integer, SiblingData> siblingMap = new HashMap<Integer, SiblingData>();
+    private Integer name;
     private Vector<Boolean> imcenter = null;
     private Integer convits = null;
 
-    public Examplar(final String name, final Integer convits) {
+    public Examplar(final Integer name, final Integer convits) {
         this.name = name;
         this.convits = convits;
         if (convits != null) {
@@ -23,7 +23,7 @@ public class Examplar {
         }
     }
 
-    public void createSibling(final double s, final String siblingName) {
+    public void createSibling(final double s, final Integer siblingName) {
         SiblingData sibling = new SiblingData(s, siblingName);
         siblingMap.put(siblingName, sibling);
     }
@@ -32,18 +32,18 @@ public class Examplar {
     public String toString() {
         StringBuffer ret = new StringBuffer(name);
         ret.append(": ");
-        for (String key : siblingMap.keySet()) {
+        for (Integer key : siblingMap.keySet()) {
             ret.append(siblingMap.get(key).toString());
             ret.append("\n");
         }
         return ret.toString();
     }
 
-    public Map<String, SiblingData> getSiblingMap() {
+    public Map<Integer, SiblingData> getSiblingMap() {
         return siblingMap;
     }
 
-    public String getName() {
+    public Integer getName() {
         return name;
     }
 
