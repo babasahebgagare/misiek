@@ -236,7 +236,7 @@ public class AffinityPanel extends javax.swing.JPanel {
 
         weighetCentersGroup.add(weighetRadio);
         weighetRadio.setSelected(true);
-        weighetRadio.setText("Weighet edges");
+        weighetRadio.setText("Original method");
         weighetRadio.setName("weighetRadio"); // NOI18N
         weighetRadio.addHierarchyBoundsListener(new java.awt.event.HierarchyBoundsListener() {
             public void ancestorMoved(java.awt.event.HierarchyEvent evt) {
@@ -247,7 +247,7 @@ public class AffinityPanel extends javax.swing.JPanel {
         });
 
         weighetCentersGroup.add(unweighetRadio);
-        unweighetRadio.setText("Unweighet edges");
+        unweighetRadio.setText("Prime alg.");
         unweighetRadio.setName("unweighetRadio"); // NOI18N
         unweighetRadio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -259,19 +259,19 @@ public class AffinityPanel extends javax.swing.JPanel {
         nearesCenterPanel.setLayout(nearesCenterPanelLayout);
         nearesCenterPanelLayout.setHorizontalGroup(
             nearesCenterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, nearesCenterPanelLayout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
+            .addGroup(nearesCenterPanelLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(weighetRadio)
-                .addGap(18, 18, 18)
+                .addGap(35, 35, 35)
                 .addComponent(unweighetRadio)
-                .addGap(13, 13, 13))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         nearesCenterPanelLayout.setVerticalGroup(
             nearesCenterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(nearesCenterPanelLayout.createSequentialGroup()
                 .addGroup(nearesCenterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(unweighetRadio)
-                    .addComponent(weighetRadio))
+                    .addComponent(weighetRadio)
+                    .addComponent(unweighetRadio))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 

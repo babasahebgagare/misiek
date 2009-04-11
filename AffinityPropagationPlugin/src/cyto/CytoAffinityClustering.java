@@ -1,6 +1,7 @@
 package cyto;
 
 import algorithm.abs.AffinityPropagationAlgorithm;
+import algorithm.abs.AffinityPropagationAlgorithm.AffinityConnectingMethod;
 import algorithm.matrix.MatrixPropagationAlgorithm;
 import algorithm.smart.Cluster;
 import algorithm.smart.SmartPropagationAlgorithm;
@@ -28,7 +29,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
     private String nodeNameAttr;
     private String edgeNameAttr;
     private int iterations;
-    private int connectingMode;
+    private AffinityConnectingMethod connectingMode;
     private double preferences;
     private double lambda;
     private Integer convits = null;
@@ -37,7 +38,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
     private Map<String, Integer> nodeMapping = new HashMap<String, Integer>();
     private Map<Integer, String> idMapping = new HashMap<Integer, String>();
 
-    public CytoAffinityClustering(final int connectingMode, int implementation, final String nodeNameAttr, final String edgeNameAttr, final double lambda, final double preferences, final int iterations) {
+    public CytoAffinityClustering(final AffinityConnectingMethod connectingMode, int implementation, final String nodeNameAttr, final String edgeNameAttr, final double lambda, final double preferences, final int iterations) {
         this.nodeNameAttr = nodeNameAttr;
         this.edgeNameAttr = edgeNameAttr;
         this.lambda = lambda;
@@ -45,10 +46,10 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
         this.iterations = iterations;
         this.convits = null;
         this.connectingMode = connectingMode;
-        this.af = createAlgorithm(implementation, connectingMode);
+        this.af = createAlgorithm(implementation);
     }
 
-    public CytoAffinityClustering(final int connectingMode, final int implementation, final String nodeNameAttr, final String edgeNameAttr, final double lambda, final double preferences, final int iterations, final Integer convits) {
+    public CytoAffinityClustering(final AffinityConnectingMethod connectingMode, final int implementation, final String nodeNameAttr, final String edgeNameAttr, final double lambda, final double preferences, final int iterations, final Integer convits) {
         this.nodeNameAttr = nodeNameAttr;
         this.edgeNameAttr = edgeNameAttr;
         this.lambda = lambda;
@@ -56,7 +57,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
         this.iterations = iterations;
         this.convits = convits;
         this.connectingMode = connectingMode;
-        this.af = createAlgorithm(implementation, connectingMode);
+        this.af = createAlgorithm(implementation);
     }
 
     @Override
@@ -114,7 +115,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
         }
     }
 
-    private AffinityPropagationAlgorithm createAlgorithm(final int connectingMode, final int implementation) {
+    private AffinityPropagationAlgorithm createAlgorithm(final int implementation) {
         if (implementation == AffinityPanelController.MATRIX_IMPLEMENTATION) {
             return new MatrixPropagationAlgorithm();
         } else {

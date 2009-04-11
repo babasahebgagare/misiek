@@ -17,14 +17,16 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
 
     private double lambda;
     private int iterations;
-    protected int connectingMode;
+    protected AffinityConnectingMethod connectingMode;
     protected boolean convergence;
     protected Integer convits = null;
     protected ActionListener iteractionListenerOrNull = null;
     protected Map<Integer, Cluster<Integer>> assigments;
-    public final static int WEIGHET_MODE = 0;
-    public final static int UNWEIGHET_MODE = 1;
-    public final static int ORIGINAL_MODE = 2;
+
+    public enum AffinityConnectingMethod {
+
+        PRIME_ALG, ORIGINAL
+    }
 
     public void addIterationListener(final ActionListener listener) {
         this.iteractionListenerOrNull = listener;
@@ -44,7 +46,11 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
         return lambda;
     }
 
-    public void setConnectingMode(int connectingMode) {
+    /**
+     *
+     * @param connectingMode
+     */
+    public void setConnectingMode(AffinityConnectingMethod connectingMode) {
         this.connectingMode = connectingMode;
     }
 
@@ -123,10 +129,10 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
             return;
         }
 
-        if (connectingMode == AffinityPropagationAlgorithm.UNWEIGHET_MODE || connectingMode == AffinityPropagationAlgorithm.WEIGHET_MODE) {
+        if (connectingMode == AffinityConnectingMethod.PRIME_ALG) {
 
             assigments = computePrimeAssigments(examplars, centers);
-        } else if (connectingMode == AffinityPropagationAlgorithm.ORIGINAL_MODE) {
+        } else if (connectingMode == AffinityConnectingMethod.ORIGINAL) {
             assigments = computeOriginalAssigments(examplars, centers);
         } else {
             assigments = null;
@@ -158,12 +164,10 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
     protected abstract int getClustersNumber();
     //   protected abstract void initObjectsNames();
 
-    protected Double computeWeight(double sim, int connecingMode) {
-        if (connecingMode == AffinityPropagationAlgorithm.WEIGHET_MODE) {
-            return Math.exp(-Math.exp(sim));
-        } else {
-            return Double.valueOf(1);
-        }
+    protected Double computeWeight(double sim) {
+
+        return -sim;
+
     }
 
     protected abstract Collection<Integer> getCenters();
@@ -234,7 +238,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
                 if (!exFrom.equals(exTo)) {
                     Double simOrNull = tryGetSimilarity(exFrom, exTo);
                     if (simOrNull != null) {
-                        Double weight = computeWeight(simOrNull, connectingMode);
+                        Double weight = computeWeight(simOrNull);
                         graph.addEdge(exFrom, exTo, weight);
                     }
                 }

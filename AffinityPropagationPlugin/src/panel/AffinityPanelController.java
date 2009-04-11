@@ -1,6 +1,7 @@
 package panel;
 
 import algorithm.abs.AffinityPropagationAlgorithm;
+import algorithm.abs.AffinityPropagationAlgorithm.AffinityConnectingMethod;
 import cyto.CytoAffinityClustering;
 import cyto.CytoClusterAlgorithm;
 import cyto.CytoClusterTask;
@@ -61,7 +62,7 @@ public class AffinityPanelController implements Serializable {
         String nodeNameAttr = getNodeAttr();
         String edgeNameAttr = getEdgeAttr();
         int implementation = getImplementation();
-        int connectingMode = getConnectingMode();
+        AffinityConnectingMethod connectingMode = getConnectingMode();
 
         if (!validateValues(lambda, preferences, iterations, convits, nodeNameAttr, edgeNameAttr)) {
             return;
@@ -89,11 +90,11 @@ public class AffinityPanelController implements Serializable {
         this.unweighetModeRadio = unweighetRadio;
     }
 
-    private int getConnectingMode() {
+    private AffinityConnectingMethod getConnectingMode() {
         if (weighetModeRadio.isSelected()) {
-            return AffinityPropagationAlgorithm.WEIGHET_MODE;
+            return AffinityConnectingMethod.ORIGINAL;
         } else {
-            return AffinityPropagationAlgorithm.UNWEIGHET_MODE;
+            return AffinityConnectingMethod.PRIME_ALG;
         }
     }
 

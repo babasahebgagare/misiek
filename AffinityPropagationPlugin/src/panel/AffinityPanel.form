@@ -334,12 +334,12 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="22" max="32767" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="weighetRadio" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                   <Component id="unweighetRadio" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                  <EmptySpace pref="44" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -347,8 +347,8 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="unweighetRadio" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="weighetRadio" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="unweighetRadio" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="13" max="32767" attributes="0"/>
               </Group>
@@ -362,7 +362,7 @@
               <ComponentRef name="weighetCentersGroup"/>
             </Property>
             <Property name="selected" type="boolean" value="true"/>
-            <Property name="text" type="java.lang.String" value="Weighet edges"/>
+            <Property name="text" type="java.lang.String" value="Original method"/>
             <Property name="name" type="java.lang.String" value="weighetRadio" noResource="true"/>
           </Properties>
           <Events>
@@ -374,7 +374,7 @@
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="weighetCentersGroup"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Unweighet edges"/>
+            <Property name="text" type="java.lang.String" value="Prime alg."/>
             <Property name="name" type="java.lang.String" value="unweighetRadio" noResource="true"/>
           </Properties>
           <Events>
