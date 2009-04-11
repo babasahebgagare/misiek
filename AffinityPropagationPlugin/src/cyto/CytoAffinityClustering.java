@@ -32,7 +32,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
     private double preferences;
     private double lambda;
     private Integer convits = null;
-    private AffinityPropagationAlgorithm<String> af = null;
+    private AffinityPropagationAlgorithm af = null;
     private CyAttributes nodesAttributes = Cytoscape.getNodeAttributes();
     private Map<String, Integer> nodeMapping = new HashMap<String, Integer>();
     private Map<Integer, String> idMapping = new HashMap<Integer, String>();
@@ -82,7 +82,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
     public void doCluster(final TaskMonitor monitor) {
         this.taskMonitor = monitor;
         super.setMyThread(Thread.currentThread());
-        PriorityQueue<Cluster<String>> clusterprior = new PriorityQueue<Cluster<String>>();
+        PriorityQueue<Cluster<Integer>> clusterprior = new PriorityQueue<Cluster<Integer>>();
 
         monitor.setStatus("Loading similarity matrix...");
 
@@ -90,18 +90,18 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
         monitor.setStatus("Clustering...");
         createIteractionListener(monitor);
 
-        Map<String, Cluster<String>> clusters = af.doClusterAssoc();
+        Map<Integer, Cluster<Integer>> clusters = af.doClusterAssoc();
 
         if (!canceled) {
-            for (Cluster<String> cluster : clusters.values()) {
+            for (Cluster<Integer> cluster : clusters.values()) {
                 clusterprior.add(cluster);
             }
 
             int i = 0;
 
             while (clusterprior.size() > 0) {
-                Cluster<String> cluster = clusterprior.poll();
-                for (String element : cluster.getElements()) {
+                Cluster<Integer> cluster = clusterprior.poll();
+                for (Integer element : cluster.getElements()) {
                     String nodeID = idMapping.get(Integer.valueOf(element));
                     nodesAttributes.setAttribute(nodeID, nodeNameAttr, Integer.valueOf(i));
                 }
@@ -114,7 +114,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
         }
     }
 
-    private AffinityPropagationAlgorithm<String> createAlgorithm(final int connectingMode, final int implementation) {
+    private AffinityPropagationAlgorithm createAlgorithm(final int connectingMode, final int implementation) {
         if (implementation == AffinityPanelController.MATRIX_IMPLEMENTATION) {
             return new MatrixPropagationAlgorithm();
         } else {
@@ -160,7 +160,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
             Integer it = Integer.valueOf(i);
             idMapping.put(it, name);
             nodeMapping.put(name, it);
-            af.setSimilarities(it.toString(), it.toString(), preferences);
+            af.setSimilarities(it, it, preferences);
             i++;
         }
 
@@ -175,8 +175,8 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
             if (!sourceID.equals(targetID)) {
                 Double probOrNull = edgesAttributes.getDoubleAttribute(id, edgeNameAttr);
                 if (probOrNull != null) {
-                    af.setSimilarities(sourceIndex.toString(), targetIndex.toString(), Math.log(probOrNull));
-                    af.setSimilarities(targetIndex.toString(), sourceIndex.toString(), Math.log(probOrNull));
+                    af.setSimilarities(sourceIndex, targetIndex, Math.log(probOrNull));
+                    af.setSimilarities(targetIndex, sourceIndex, Math.log(probOrNull));
                 }
             //                af.setSimilarity(sourceID, targetID, Math.log(prob));
             //                af.setSimilarity(targetID, sourceID, Math.log(prob));

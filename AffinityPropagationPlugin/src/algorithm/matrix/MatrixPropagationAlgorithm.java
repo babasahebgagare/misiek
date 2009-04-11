@@ -2,14 +2,12 @@ package algorithm.matrix;
 
 import algorithm.abs.AffinityPropagationAlgorithm;
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.TreeSet;
 import matrix.DoubleMatrix1D;
 import matrix.DoubleMatrix2D;
 import matrix.IntegerMatrix1D;
-import prime.PrimeAlgorithm;
-import prime.PrimeGraph;
 
-public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<String> {
+public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
 
     private int N;
     private IntegerMatrix1D idx;
@@ -88,11 +86,11 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
     }
 
     @Override
-    public void setSimilarities(final String x, final String y, final Double sim) {
+    public void setSimilarities(final Integer x, final Integer y, final Double sim) {
 
-        int i = Integer.valueOf(x);
-        int j = Integer.valueOf(y);
-        S.set(i, j, sim.doubleValue());
+        //int i = Integer.valueOf(x);
+        //int j = Integer.valueOf(y);
+        S.set(x, y, sim.doubleValue());
     }
 
     @Override
@@ -156,92 +154,9 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
 
     @Override
     protected void computeCenters() {
-        //   centers = new HashSet<String>();
         E = R.plus(A);
         I = E.diag().findG(0);
 
-    //   for (int i = 0; i < I.size(); i++) {
-    //       Integer center = I.get(i);
-    //       centers.add(String.valueOf(center));
-    //   }
-    }
-    /*
-    @Override
-    protected void computeAssigments() {
-    for (int i = 0; i < idx.size(); i++) {
-    Integer examplar = Integer.valueOf(i);
-    Integer center = idx.getValue(i);
-    if (S.get(examplar.intValue(), center.intValue()) > -inf) {
-    res.put(String.valueOf(i), String.valueOf(idx.getValue(i)));
-    }
-    }
-
-    }
-     */
-
-    @Override
-    protected void computeAssigments() {
-        if (I.size() == 0) {
-            return;
-        }
-        Collection<String> centers = new HashSet<String>();
-        PrimeGraph graph = new PrimeGraph();
-
-        for (int i = 0; i < I.size(); i++) {
-            String center = String.valueOf(I.get(i));
-            centers.add(center);
-        }
-
-        for (int i = 0; i < N; i++) {
-            String ex = String.valueOf(i);
-            graph.addNode(ex);
-        }
-
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                if (i != j && S.get(i, j) > -inf) {
-                    String from = String.valueOf(i);
-                    String to = String.valueOf(j);
-                    Double weight = computeWeight(S.get(i, j), connectingMode);
-                    graph.addEdge(from, to, weight);
-                }
-            }
-        }
-
-        PrimeAlgorithm prime = new PrimeAlgorithm(graph, centers);
-
-        assigments = prime.run();
-
-    /*
-    if (I.size() == 0) {
-    return;
-    }
-    C = S.getColumns(I).maxrIndexes();
-    C = tmp(C, I);
-    idx = idx(C, I);
-
-    Map<String, Cluster<String>> res = new HashMap<String, Cluster<String>>();
-
-    for (int i = 0; i < I.size(); i++) {
-    String clusterName = String.valueOf(I.get(i));
-    Cluster<String> clust = new Cluster<String>(clusterName);
-    clust.add(clusterName);
-    res.put(clusterName, clust);
-    }
-
-    for (int i = 0; i < idx.size(); i++) {
-
-    String examplar = String.valueOf(i);
-    String center = String.valueOf(idx.getValue(i));
-    if (!res.containsKey(examplar)) {
-    if (S.get(i, idx.get(i).intValue()) > -inf) {
-    Cluster<String> cluster = res.get(center);
-    cluster.add(examplar);
-    }
-    }
-    }
-    assigments = res;
-     */
     }
 
     @Override
@@ -260,19 +175,34 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm<Str
             S.set(i, i, preferences);
         }
     }
-    /*
+
     @Override
-    protected void initObjectsNames() {
-    for (int i = 0; i < N; i++) {
-    String ex = String.valueOf(i);
-    objects.add(ex);
-    }
+    protected Collection<Integer> getCenters() {
+        Collection<Integer> res = new TreeSet<Integer>();
+        for (int i = 0; i < I.size(); i++) {
+            res.add(Integer.valueOf(I.get(i)));
+        }
+
+        return res;
     }
 
     @Override
-    protected Double trygetSimilarity(String from, String to) {
-    Integer fromint = Integer.valueOf(from);
-    Integer toint = Integer.valueOf(to);
-    return S.get(fromint.intValue(), toint.intValue());
-    }*/
+    protected Collection<Integer> getAllExamplars() {
+        Collection<Integer> res = new TreeSet<Integer>();
+        for (int i = 0; i < N; i++) {
+            res.add(Integer.valueOf(i));
+        }
+
+        return res;
+    }
+
+    @Override
+    protected Double tryGetSimilarity(Integer i, Integer j) {
+        double sim = S.get(i.intValue(), j.intValue());
+        if (sim > -inf) {
+            return sim;
+        } else {
+            return null;
+        }
+    }
 }

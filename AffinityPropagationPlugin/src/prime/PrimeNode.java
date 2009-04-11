@@ -10,28 +10,28 @@ import java.util.TreeMap;
 public class PrimeNode {
 
     private Double distance;
-    private String sourceName;
-    private String name;
-    private Map<String, Double> edges;
+    private Integer sourceName;
+    private Integer name;
+    private Map<Integer, Double> edges;
 
-    public PrimeNode(String nodename) {
+    public PrimeNode(Integer nodename) {
         this.name = nodename;
-        this.edges = new TreeMap<String, Double>();
+        this.edges = new TreeMap<Integer, Double>();
     }
 
     public int size() {
         return edges.size();
     }
 
-    public String getName() {
+    public Integer getName() {
         return name;
     }
 
-    public void addEdge(String edgeName, Double sim) {
+    public void addEdge(Integer edgeName, Double sim) {
         this.edges.put(edgeName, sim);
     }
 
-    public Double getEdgeWeight(String edgeName) {
+    public Double getEdgeWeight(Integer edgeName) {
         return edges.get(edgeName);
     }
 
@@ -43,15 +43,15 @@ public class PrimeNode {
         this.distance = distance;
     }
 
-    public String getSourceName() {
+    public Integer getSourceName() {
         return sourceName;
     }
 
-    public void setSourceName(String sourceName) {
+    public void setSourceName(Integer sourceName) {
         this.sourceName = sourceName;
     }
 
-    public Map<String, Double> getEdges() {
+    public Map<Integer, Double> getEdges() {
         return edges;
     }
 }
