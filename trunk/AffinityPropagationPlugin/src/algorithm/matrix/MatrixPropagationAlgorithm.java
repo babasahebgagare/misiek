@@ -10,19 +10,11 @@ import matrix.IntegerMatrix1D;
 public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
 
     private int N;
-    private IntegerMatrix1D idx;
-    private IntegerMatrix1D C;
     private DoubleMatrix2D A;
-    private DoubleMatrix2D E;
-    private DoubleMatrix1D dA;
     private IntegerMatrix1D I;
-    private DoubleMatrix2D AS;
     private DoubleMatrix2D R;
-    private DoubleMatrix2D rp;
     private DoubleMatrix2D aold;
     private DoubleMatrix2D rold;
-    private DoubleMatrix2D YI;
-    private DoubleMatrix2D YI2;
     private DoubleMatrix2D S;
     private double inf = 1100000.0;
 
@@ -37,20 +29,6 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
     public void halt() {
         // TODO
     }
-    /*
-    @Override
-    public Map<String, String> doCluster() {
-    final Map<String, Cluster<String>> help = doClusterAssoc();
-    final Map<String, String> res = new HashMap<String, String>();
-
-    for (Entry<String, Cluster<String>> entry : help.entrySet()) {
-    for (String obj : entry.getValue().getElements()) {
-    res.put(obj, entry.getKey());
-    }
-    }
-
-    return res;
-    }*/
 
     public int getN() {
         return N;
@@ -100,6 +78,10 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
 
     @Override
     protected void computeResponsibilities() {
+        DoubleMatrix2D YI2;
+        DoubleMatrix2D YI;
+        DoubleMatrix2D AS;
+
         double[] pom = new double[N];
         AS = A.plus(S);
         YI = AS.maxr();
@@ -134,6 +116,9 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
 
     @Override
     protected void computeAvailabilities() {
+        DoubleMatrix1D dA;
+        DoubleMatrix2D rp;
+
         rp = R.max(0);
         for (int i = 0; i < N; i++) {
             rp.set(i, i, R.get(i, i));
@@ -154,6 +139,7 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
 
     @Override
     protected void computeCenters() {
+        DoubleMatrix2D E;
         E = R.plus(A);
         I = E.diag().findG(0);
 

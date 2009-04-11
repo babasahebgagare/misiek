@@ -46,10 +46,6 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
         return lambda;
     }
 
-    /**
-     *
-     * @param connectingMode
-     */
     public void setConnectingMode(AffinityConnectingMethod connectingMode) {
         this.connectingMode = connectingMode;
     }
