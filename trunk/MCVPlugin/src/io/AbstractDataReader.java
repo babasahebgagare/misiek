@@ -1,6 +1,7 @@
 package io;
 
 import io.readers.tasks.TasksDataReader;
+import java.util.Map;
 import viewmodel.structs.CytoAbstractPPINetwork;
 
 public abstract class AbstractDataReader {
@@ -11,6 +12,8 @@ public abstract class AbstractDataReader {
     public static AbstractDataReader getInstance() {
         return reader;
     }
+
+    public abstract void readAllInteractions(Map<String, Double> tresholds);
 
     public abstract void readAllInteractions(double treshold);
 

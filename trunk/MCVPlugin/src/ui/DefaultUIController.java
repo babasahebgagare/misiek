@@ -11,6 +11,7 @@ import io.AbstractDataReader;
 import java.io.File;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
@@ -240,7 +241,7 @@ public class DefaultUIController extends UIController {
     }
 
     @Override
-    public void loadInteractionsForNetwork(double treshold) {
+    public void loadInteractionsForCurrentNetwork(double treshold) {
         CytoDataHandle cdh = PluginDataHandle.getCytoDataHandle();
 
         CyNetworkView cyNetworkView = Cytoscape.getCurrentNetworkView();
@@ -260,5 +261,11 @@ public class DefaultUIController extends UIController {
         deleteDataView();
         PluginMenusHandle.getLoadDataButton().setEnabled(true);
         PluginMenusHandle.getDeleteAllDataButton().setEnabled(false);
+    }
+
+    @Override
+    public void loadAllInteractions(Map<String, Double> tresholds) {
+        AbstractDataReader.getInstance().readAllInteractions(tresholds);
+        PluginMenusHandle.getShowLoadedInteractionsButton().setEnabled(true);
     }
 }

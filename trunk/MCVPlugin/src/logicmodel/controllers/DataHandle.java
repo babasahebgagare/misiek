@@ -17,6 +17,15 @@ public class DataHandle {
     private Map<String, Family> families = new HashMap<String, Family>();
     private PPINetwork rootNetwork;
 
+    public PPINetwork tryFindPPINetworkByProteinID(String sourceID) {
+        for (PPINetwork network : networks.values()) {
+            if (network.containsProtein(sourceID)) {
+                return network;
+            }
+        }
+        return null;
+    }
+
     private void addInteractionProbabilityAttribute(String cannonName, Double probability) {
         String attrName = "Probability";
         final CyAttributes edgeAttrs = Cytoscape.getEdgeAttributes();
