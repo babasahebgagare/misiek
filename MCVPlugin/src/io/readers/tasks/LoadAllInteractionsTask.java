@@ -11,9 +11,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import logicmodel.controllers.DataHandle;
+import logicmodel.structs.PPINetwork;
 import main.PluginDataHandle;
 import utils.IDCreator;
 import utils.MemoLogger;
@@ -22,7 +24,7 @@ public class LoadAllInteractionsTask implements Task {
 
     private TaskMonitor taskMonitor = null;
     private Thread myThread = null;
-    private double treshold;
+    private Map<String, Double> tresholds;
     private File file;
     private long max;
     private long current;
@@ -33,11 +35,18 @@ public class LoadAllInteractionsTask implements Task {
     private int created = 0;
     private int all = 0;
 
-    LoadAllInteractionsTask(String intpath, double treshold) {
-        this.treshold = treshold;
+    LoadAllInteractionsTask(String intpath, Map<String, Double> tresholds) {
+        this.tresholds = tresholds;
         this.file = new File(intpath);
         this.max = file.length();
     }
+    /*
+    LoadAllInteractionsTask(String intpath, double treshold) {
+    this.treshold = treshold;
+    this.file = new File(intpath);
+    this.max = file.length();
+    }
+     */
 
     public void run() {
         DataHandle dh = PluginDataHandle.getDataHandle();
@@ -55,10 +64,17 @@ public class LoadAllInteractionsTask implements Task {
                 String SourceID = DefaultInteractionsParser.readWord(br);
                 String TargetID = DefaultInteractionsParser.readWord(br);
                 String EdgeID = IDCreator.createInteractionID(SourceID, TargetID);
-                Double Probability = Double.parseDouble(DefaultInteractionsParser.readWord(br));
-                if (Probability.doubleValue() >= treshold) {
-                    created++;
-                    dh.createInteraction(EdgeID, SourceID, TargetID, Probability);
+                PPINetwork netOrNull = dh.tryFindPPINetworkByProteinID(SourceID);
+
+                if (netOrNull != null) {
+
+                    Double probability = Double.parseDouble(DefaultInteractionsParser.readWord(br));
+                    Double treshold = tresholds.get(netOrNull.getID());
+
+                    if (treshold == null || probability > treshold) {
+                        created++;
+                        dh.createInteraction(EdgeID, SourceID, TargetID, probability);
+                    }
                 }
                 current = fis.getChannel().position();
                 float percent = current * 100 / (float) max;
@@ -99,6 +115,6 @@ public class LoadAllInteractionsTask implements Task {
     }
 
     public String getTitle() {
-        return "Czytanie interakcji z odcięciem: " + treshold + " dla wszystkich sieci...";
+        return "Loading interactions with tresholds...";
     }
 }

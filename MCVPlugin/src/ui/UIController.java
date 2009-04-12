@@ -2,6 +2,7 @@ package ui;
 
 import cytoscape.CyNetwork;
 import java.util.Collection;
+import java.util.Map;
 import viewmodel.structs.CytoProtein;
 import logicmodel.structs.PPINetwork;
 
@@ -33,7 +34,9 @@ public abstract class UIController {
 
     public abstract void showLoadedInteractions(double treshold);
 
-    public abstract void loadInteractionsForNetwork(double treshold);
+    public abstract void loadInteractionsForCurrentNetwork(double treshold);
 
     public abstract void deleteAllData();
+
+    public abstract void loadAllInteractions(Map<String, Double> tresholds);
 }

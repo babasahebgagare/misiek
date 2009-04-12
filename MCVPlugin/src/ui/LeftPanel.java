@@ -13,6 +13,7 @@ import java.awt.Color;
 import java.util.Collection;
 import javax.swing.Icon;
 import javax.swing.JColorChooser;
+import javax.swing.JFrame;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -107,6 +108,7 @@ public class LeftPanel extends javax.swing.JPanel {
         loggerTextArea = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         familiesList = new javax.swing.JList();
+        jScrollPane4 = new javax.swing.JScrollPane();
         netsActionsPanel = new javax.swing.JPanel();
         projectButton = new javax.swing.JButton();
         showButton = new javax.swing.JButton();
@@ -179,8 +181,12 @@ public class LeftPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(attrPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE))
+                    .addGroup(attrPanelLayout.createSequentialGroup()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(attrPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         attrPanelLayout.setVerticalGroup(
@@ -189,9 +195,12 @@ public class LeftPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(attrPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(attrPanelLayout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         netsActionsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -329,9 +338,9 @@ public class LeftPanel extends javax.swing.JPanel {
                     .addComponent(loadInteractionsButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, intPanelLayout.createSequentialGroup()
                         .addComponent(mclButton)
-                        .addGap(36, 36, 36)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                         .addComponent(testButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(tresholdSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(showLoadedButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE))
                 .addContainerGap())
@@ -348,8 +357,8 @@ public class LeftPanel extends javax.swing.JPanel {
                 .addGap(11, 11, 11)
                 .addGroup(intPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(mclButton)
-                    .addComponent(testButton)
-                    .addComponent(tresholdSpinner, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
+                    .addComponent(tresholdSpinner, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+                    .addComponent(testButton))
                 .addContainerGap())
         );
 
@@ -379,11 +388,11 @@ public class LeftPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loadDataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadDataButtonActionPerformed
-    UIController.getInstance().loadData();
+        UIController.getInstance().loadData();
 }//GEN-LAST:event_loadDataButtonActionPerformed
 
     private void showButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showButtonActionPerformed
-    UIController.getInstance().showSelectedNetworks();
+        UIController.getInstance().showSelectedNetworks();
 }//GEN-LAST:event_showButtonActionPerformed
 
 private void projectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_projectButtonActionPerformed
@@ -405,16 +414,21 @@ private void loadIntForNetworkButtonActionPerformed(java.awt.event.ActionEvent e
     public void run() {*/
     double treshold = ((Integer) tresholdSpinner.getValue()).doubleValue() / 100.0;
 
-    UIController.getInstance().loadInteractionsForNetwork(treshold);
+    UIController.getInstance().loadInteractionsForCurrentNetwork(treshold);
 /*       }
 });
 thread.run();*/
 }//GEN-LAST:event_loadIntForNetworkButtonActionPerformed
 
 private void loadInteractionsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadInteractionsButtonActionPerformed
-
-    double treshold = ((Integer) tresholdSpinner.getValue()).doubleValue() / 100.0;
-    UIController.getInstance().loadAllInteractions(treshold);
+    JFrame frame = new JFrame("Set tresholds for loading interactions.");
+    InteractionsLoaderPanel intLoaderPanel = new InteractionsLoaderPanel(frame);
+    frame.add(intLoaderPanel);
+    frame.pack();
+    frame.setVisible(true);
+    frame.pack();
+    frame.setLocationRelativeTo(Cytoscape.getDesktop());
+    intLoaderPanel.setVisible(true);
 }//GEN-LAST:event_loadInteractionsButtonActionPerformed
 
 private void showLoadedButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showLoadedButtonActionPerformed
@@ -432,7 +446,6 @@ private void unselecUncunnectedButtonActionPerformed(java.awt.event.ActionEvent 
 }//GEN-LAST:event_unselecUncunnectedButtonActionPerformed
 
 private void deleteUnconnectedButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUnconnectedButtonActionPerformed
-    // UIController.getInstance().deleteUnconnectedNodesFromSelected(Cytoscape.getCurrentNetwork())
 }//GEN-LAST:event_deleteUnconnectedButtonActionPerformed
 
 private void mclButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mclButtonActionPerformed
@@ -461,6 +474,7 @@ private void testButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JButton loadDataButton;
     private javax.swing.JButton loadIntForNetworkButton;
     private javax.swing.JButton loadInteractionsButton;

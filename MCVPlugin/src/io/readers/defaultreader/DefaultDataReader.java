@@ -6,6 +6,7 @@ import io.parsers.DataParser;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Map;
 import viewmodel.structs.CytoAbstractPPINetwork;
 import utils.Messenger;
 
@@ -89,6 +90,11 @@ public class DefaultDataReader extends AbstractDataReader {
 
     @Override
     public void readAllInteractions(double treshold) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void readAllInteractions(Map<String, Double> tresholds) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }
