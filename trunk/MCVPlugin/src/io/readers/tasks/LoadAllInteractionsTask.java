@@ -80,33 +80,34 @@ public class LoadAllInteractionsTask implements Task {
                 float percent = current * 100 / (float) max;
                 taskMonitor.setPercentCompleted(Math.round(percent));
             }
-            br.close();
-            dis.close();
-            bis.close();
-            fis.close();
             MemoLogger.log("Załadowano: " + Math.round((double) created * 100 / (double) all) + "% powyżej progu");
             taskMonitor.setPercentCompleted(100);
         } catch (IOException ex) {
             Logger.getLogger(LoadAllInteractionsTask.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                br.close();
+                dis.close();
+                bis.close();
+                fis.close();
+
+            } catch (IOException ex) {
+                Logger.getLogger(LoadAllInteractionsTask.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
+    @SuppressWarnings("deprecation")
     public void halt() {
 
         System.out.println("zatrzymywanie działania");
 
         if (myThread != null) {
-            try {
-                myThread.interrupt();
-                br.close();
-                dis.close();
-                bis.close();
-                fis.close();
-                //TODO
-                ((JTask) taskMonitor).setDone();
-            } catch (IOException ex) {
-                Logger.getLogger(LoadAllInteractionsTask.class.getName()).log(Level.SEVERE, null, ex);
-            }
+
+            myThread.stop();
+            //TODO
+            ((JTask) taskMonitor).setDone();
+
         }
     }
 
