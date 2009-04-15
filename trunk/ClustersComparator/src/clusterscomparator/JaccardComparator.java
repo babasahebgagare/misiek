@@ -45,7 +45,7 @@ public class JaccardComparator {
             for (Integer j : range) {
 
                 if (i < j) {
-              //      System.out.println("BADAM: " + i + " " + j);
+                    //      System.out.println("BADAM: " + i + " " + j);
                     if (clustering1.get(i).equals(clustering1.get(j))) {
                         same1 = true;
                     } else {
