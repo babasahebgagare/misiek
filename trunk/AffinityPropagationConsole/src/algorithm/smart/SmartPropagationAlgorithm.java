@@ -10,7 +10,6 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
 
     private ExamplarsCollection examplars = null;
     private double INF = 1000000;
-    private int iteration;
     protected Collection<Integer> centers;
 
     public ExamplarsCollection getExamplars() {
@@ -76,10 +75,10 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
             double e = sibling.getA() + sibling.getR();
             if (e > 0) {
                 ret.add(examplar.getName());
-                examplar.setImCenter(true, iteration);
-            } else {
-                examplar.setImCenter(false, iteration);
-            }
+            //         examplar.setImCenter(true, iteration);
+            }// else {
+        //   examplar.setImCenter(false, iteration);
+        //}
 
         }
 

@@ -2,6 +2,7 @@ package algorithm.abs;
 
 import algorithm.smart.Cluster;
 import algorithm.smart.IterationData;
+import floyd.FloydWarshallAlgorithm;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collection;
@@ -23,9 +24,32 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
     protected ActionListener iteractionListenerOrNull = null;
     protected Map<Integer, Cluster<Integer>> assigments;
 
+    private Map<Integer, Cluster<Integer>> computeFloydAssigments(Collection<Integer> examplars, Collection<Integer> centers) {
+
+        FloydWarshallAlgorithm floyd = new FloydWarshallAlgorithm();
+
+        floyd.init(examplars, centers);
+
+        for (Integer exFrom : examplars) {
+            for (Integer exTo : examplars) {
+                if (!exFrom.equals(exTo)) {
+                    Double simOrNull = tryGetSimilarity(exFrom, exTo);
+                    if (simOrNull != null) {
+                        Double weight = computeWeight(simOrNull);
+                        floyd.addEdge(exFrom, exTo, weight);
+                    }
+                }
+            }
+        }
+
+
+        return floyd.run();
+
+    }
+
     public enum AffinityConnectingMethod {
 
-        PRIME_ALG, ORIGINAL
+        PRIME_ALG, FLOYD_ALG, ORIGINAL
     }
 
     public void addIterationListener(final ActionListener listener) {
@@ -130,6 +154,8 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
             assigments = computePrimeAssigments(examplars, centers);
         } else if (connectingMode == AffinityConnectingMethod.ORIGINAL) {
             assigments = computeOriginalAssigments(examplars, centers);
+        } else if (connectingMode == AffinityConnectingMethod.FLOYD_ALG) {
+            assigments = computeFloydAssigments(examplars, centers);
         } else {
             assigments = null;
         }
@@ -173,7 +199,6 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
     private Map<Integer, Cluster<Integer>> computeOriginalAssigments(Collection<Integer> examplars, Collection<Integer> centers) {
         Map<Integer, Cluster<Integer>> ret = new TreeMap<Integer, Cluster<Integer>>();
         Map<Integer, Integer> clustered = new TreeMap<Integer, Integer>();
-        Map<Integer, Integer> clusteredHelp = new TreeMap<Integer, Integer>();
         Collection<Integer> unclustered = new TreeSet<Integer>(examplars);
         Collection<Integer> unclusteredHelp = new TreeSet<Integer>(examplars);
 
@@ -188,7 +213,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
 
         while (unclustered.size() != unclusteredHelp.size()) {
             unclusteredHelp = new TreeSet<Integer>(unclustered);
-            clusteredHelp = new TreeMap<Integer, Integer>(clustered);
+            Map<Integer, Integer> clusteredHelp = new TreeMap<Integer, Integer>(clustered);
             //  System.out.println("CLUSTERED: " + clustered.size());
             for (Integer examplar : unclusteredHelp) {
 

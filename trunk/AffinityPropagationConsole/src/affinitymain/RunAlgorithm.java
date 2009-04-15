@@ -67,7 +67,9 @@ public class RunAlgorithm {
         } catch (IOException ex) {
             Logger.getLogger(RunAlgorithm.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            scanner.close();
+            if (scanner != null) {
+                scanner.close();
+            }
         }
         //    af.setN(ints.size());
         af.setN(nodeNames.size());

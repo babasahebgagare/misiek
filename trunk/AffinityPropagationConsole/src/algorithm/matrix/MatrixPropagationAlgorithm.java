@@ -11,10 +11,10 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
 
     private int N;
     private DoubleMatrix2D A;
-    private IntegerMatrix1D I;
+    private IntegerMatrix1D I = null;
     private DoubleMatrix2D R;
-    private DoubleMatrix2D aold;
-    private DoubleMatrix2D rold;
+    private DoubleMatrix2D aold = null;
+    private DoubleMatrix2D rold = null;
     private DoubleMatrix2D S;
     private double inf = 1100000.0;
 
