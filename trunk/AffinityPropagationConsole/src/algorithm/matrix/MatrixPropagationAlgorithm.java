@@ -1,8 +1,10 @@
 package algorithm.matrix;
 
 import algorithm.abs.AffinityPropagationAlgorithm;
+import algorithm.abs.ConvitsVector;
 import java.util.Collection;
 import java.util.TreeSet;
+import java.util.Vector;
 import matrix.DoubleMatrix1D;
 import matrix.DoubleMatrix2D;
 import matrix.IntegerMatrix1D;
@@ -146,11 +148,6 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
     }
 
     @Override
-    protected boolean checkConvergence() {
-        return false;
-    }
-
-    @Override
     protected int getClustersNumber() {
         return I.size();
     }
@@ -189,6 +186,31 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
             return sim;
         } else {
             return null;
+        }
+    }
+
+    @Override
+    protected void calculateCovergence() {
+
+        Vector<Integer> c = I.getVector();
+        for (int i = 0; i < N; i++) {
+            Integer ex = Integer.valueOf(i);
+            if (c.contains(ex)) {
+                convitsVectors.get(ex).addCovits(true);
+            } else {
+                convitsVectors.get(ex).addCovits(false);
+            }
+        }
+    }
+
+    @Override
+    protected void initConvergence() {
+        if (convits != null) {
+            for (int i = 0; i < N; i++) {
+                ConvitsVector vec = new ConvitsVector(convits.intValue());
+                vec.init();
+                convitsVectors.put(Integer.valueOf(i), vec);
+            }
         }
     }
 }

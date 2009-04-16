@@ -1,9 +1,19 @@
 package matrix;
 
+import java.util.Vector;
+
 public abstract class Matrix1D<T> implements Matrix1DInterface<T> {
 
     private T[] vector;
     private int N;
+
+    public Vector<T> getVector() {
+        Vector<T> res = new Vector<T>(N);
+        for (int i = 0; i < N; i++) {
+            res.add(i, vector[i]);
+        }
+        return res;
+    }
 
     public void setValue(final int i, final T t) {
         this.vector[i] = t;

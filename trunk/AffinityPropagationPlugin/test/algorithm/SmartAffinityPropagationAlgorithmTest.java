@@ -1,7 +1,7 @@
 package algorithm;
 
 import algorithm.abs.AffinityPropagationAlgorithm;
-import algorithm.smart.Cluster;
+import algorithm.abs.Cluster;
 import algorithm.smart.SmartPropagationAlgorithm;
 import java.util.Map;
 import org.junit.After;
@@ -43,8 +43,8 @@ public class SmartAffinityPropagationAlgorithmTest {
 
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-                String from = String.valueOf(i);
-                String to = String.valueOf(j);
+                Integer from = Integer.valueOf(i);
+                Integer to = Integer.valueOf(j);
                 Double prob = Double.valueOf(sim[i][j]);
                 if (!prob.equals(inf)) {
                     instance.setSimilarities(from, to, prob);
@@ -69,8 +69,8 @@ public class SmartAffinityPropagationAlgorithmTest {
 
         setSimilarities(sim, instance, inf);
         @SuppressWarnings("unchecked")
-        Map<String, String> ass = instance.doCluster();
-        for(String val: ass.values()) {
+        Map<Integer, Integer> ass = instance.doCluster();
+        for (Integer val : ass.values()) {
             System.out.println(val);
         }
     }

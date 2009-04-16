@@ -1,6 +1,6 @@
 package floyd;
 
-import algorithm.smart.Cluster;
+import algorithm.abs.Cluster;
 import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;

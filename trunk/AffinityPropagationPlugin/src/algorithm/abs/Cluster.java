@@ -1,4 +1,4 @@
-package algorithm.smart;
+package algorithm.abs;
 
 import java.util.Collection;
 import java.util.HashSet;

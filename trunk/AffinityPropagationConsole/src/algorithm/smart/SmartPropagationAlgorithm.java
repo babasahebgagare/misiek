@@ -1,6 +1,7 @@
 package algorithm.smart;
 
 import algorithm.abs.AffinityPropagationAlgorithm;
+import algorithm.abs.ConvitsVector;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.TreeSet;
@@ -36,22 +37,6 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
                 sibling.setR(sibling.getR() * (1 - getLambda()) + getLambda() * sibling.getRold());
             }
         }
-    }
-
-    protected boolean checkConvergence() {
-        if (convits == null) {
-            return false;
-        }
-        boolean res = true;
-
-        for (Examplar examplar : examplars.getExamplars().values()) {
-            if (examplar.changed()) {
-                res = false;
-                break;
-            }
-        }
-
-        return res;
     }
 
     protected void computeAvailabilities() {
@@ -171,7 +156,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
     }
 
     /**
-     * 
+     *
      * @param from
      * @param to
      * @param sim
@@ -248,13 +233,29 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
             return sibling.getS();
         }
     }
-    /*
+
     @Override
-    protected void initObjectsNames() {
-    for (String exname : examplars.getExamplars().keySet()) {
-    objects.add(exname);
-    }
+    protected void calculateCovergence() {
+        for (Integer ex : examplars.getExamplars().keySet()) {
+            System.out.println("GETTING: " + ex);
+            if (centers.contains(ex)) {
+                convitsVectors.get(ex).addCovits(true);
+            } else {
+                System.out.println("AU");
+                convitsVectors.get(ex).addCovits(false);
+            }
+        }
     }
 
-    }*/
+    @Override
+    protected void initConvergence() {
+        if (convits != null) {
+
+            for (Integer ex : examplars.getExamplars().keySet()) {
+                ConvitsVector vec = new ConvitsVector(convits.intValue());
+                vec.init();
+                convitsVectors.put(ex, vec);
+            }
+        }
+    }
 }
