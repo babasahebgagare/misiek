@@ -3,7 +3,7 @@ package cyto;
 import algorithm.abs.AffinityPropagationAlgorithm;
 import algorithm.abs.AffinityPropagationAlgorithm.AffinityConnectingMethod;
 import algorithm.matrix.MatrixPropagationAlgorithm;
-import algorithm.smart.Cluster;
+import algorithm.abs.Cluster;
 import algorithm.smart.SmartPropagationAlgorithm;
 import cytoscape.CyEdge;
 import cytoscape.CyNode;

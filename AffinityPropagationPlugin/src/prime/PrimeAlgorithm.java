@@ -1,6 +1,6 @@
 package prime;
 
-import algorithm.smart.Cluster;
+import algorithm.abs.Cluster;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;

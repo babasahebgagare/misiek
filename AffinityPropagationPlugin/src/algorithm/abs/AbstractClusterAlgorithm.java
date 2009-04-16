@@ -1,6 +1,6 @@
 package algorithm.abs;
 
-import algorithm.smart.Cluster;
+import algorithm.abs.Cluster;
 import java.util.Map;
 
 public abstract class AbstractClusterAlgorithm<T> {

@@ -1,8 +1,7 @@
 package algorithm.abs;
 
-import algorithm.smart.Cluster;
+import algorithm.abs.Cluster;
 import algorithm.smart.IterationData;
-import floyd.FloydWarshallAlgorithm;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collection;
@@ -19,37 +18,19 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
     private double lambda;
     private int iterations;
     protected AffinityConnectingMethod connectingMode;
-    protected boolean convergence;
+    protected int notConverged;
     protected Integer convits = null;
     protected ActionListener iteractionListenerOrNull = null;
     protected Map<Integer, Cluster<Integer>> assigments;
-
-    private Map<Integer, Cluster<Integer>> computeFloydAssigments(Collection<Integer> examplars, Collection<Integer> centers) {
-
-        FloydWarshallAlgorithm floyd = new FloydWarshallAlgorithm();
-
-        floyd.init(examplars, centers);
-
-        for (Integer exFrom : examplars) {
-            for (Integer exTo : examplars) {
-                if (!exFrom.equals(exTo)) {
-                    Double simOrNull = tryGetSimilarity(exFrom, exTo);
-                    if (simOrNull != null) {
-                        Double weight = computeWeight(simOrNull);
-                        floyd.addEdge(exFrom, exTo, weight);
-                    }
-                }
-            }
-        }
-
-
-        return floyd.run();
-
-    }
+    protected Map<Integer, ConvitsVector> convitsVectors = new TreeMap<Integer, ConvitsVector>();
 
     public enum AffinityConnectingMethod {
 
         PRIME_ALG, FLOYD_ALG, ORIGINAL
+    }
+
+    private Map<Integer, Cluster<Integer>> computeFloydAssigments(Collection<Integer> examplars, Collection<Integer> centers) {
+        return null;
     }
 
     public void addIterationListener(final ActionListener listener) {
@@ -113,6 +94,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
         if (iteractionListenerOrNull != null) {
             iteractionListenerOrNull.actionPerformed(new ActionEvent(new IterationData(1, 0), 0, "ITERATION"));
         }
+        initConvergence();
 
         for (int iteration = 0; iteration < iters; iteration++) {
 
@@ -126,10 +108,12 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
 
             if (iteration + 1 != iterations && iteractionListenerOrNull != null) {
                 computeCenters();
+                calculateCovergence();
+                notConverged = checkConvergence();
                 iteractionListenerOrNull.actionPerformed(new ActionEvent(new IterationData(iteration + 2, getClustersNumber()), 0, "ITERATION")); //TODO
             }
-            convergence = checkConvergence();
-            if (convergence) {
+
+            if (notConverged == 0) {
                 break;
             }
         }
@@ -181,7 +165,24 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
 
     protected abstract void computeCenters();
 
-    protected abstract boolean checkConvergence();
+    protected abstract void calculateCovergence();
+
+    protected abstract void initConvergence();
+
+    protected int checkConvergence() {
+        int not = 0;
+        if (convits == null) {
+            not = convitsVectors.size();
+        } else {
+
+            for (ConvitsVector vec : convitsVectors.values()) {
+                if (vec.checkConvits() == false) {
+                    not++;
+                }
+            }
+        }
+        return not;
+    }
 
     protected abstract int getClustersNumber();
     //   protected abstract void initObjectsNames();

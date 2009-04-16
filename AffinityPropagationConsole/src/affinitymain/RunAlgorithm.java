@@ -1,7 +1,7 @@
 package affinitymain;
 
 import algorithm.abs.AffinityPropagationAlgorithm;
-import algorithm.smart.Cluster;
+import algorithm.abs.Cluster;
 import algorithm.smart.SmartPropagationAlgorithm;
 import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;

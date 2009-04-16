@@ -1,6 +1,7 @@
 package algorithm.smart;
 
 import algorithm.abs.AffinityPropagationAlgorithm;
+import algorithm.abs.ConvitsVector;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.TreeSet;
@@ -10,7 +11,6 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
 
     private ExamplarsCollection examplars = null;
     private double INF = 1000000;
-    private int iteration;
     protected Collection<Integer> centers;
 
     public ExamplarsCollection getExamplars() {
@@ -39,22 +39,6 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
         }
     }
 
-    protected boolean checkConvergence() {
-        if (convits == null) {
-            return false;
-        }
-        boolean res = true;
-
-        for (Examplar examplar : examplars.getExamplars().values()) {
-            if (examplar.changed()) {
-                res = false;
-                break;
-            }
-        }
-
-        return res;
-    }
-
     protected void computeAvailabilities() {
         for (Examplar examplar : examplars.getExamplars().values()) {
             Collection<SiblingData> siblings = examplar.getSiblingMap().values();
@@ -76,10 +60,10 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
             double e = sibling.getA() + sibling.getR();
             if (e > 0) {
                 ret.add(examplar.getName());
-                examplar.setImCenter(true, iteration);
-            } else {
-                examplar.setImCenter(false, iteration);
-            }
+            //         examplar.setImCenter(true, iteration);
+            }// else {
+        //   examplar.setImCenter(false, iteration);
+        //}
 
         }
 
@@ -247,6 +231,31 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
             return null;
         } else {
             return sibling.getS();
+        }
+    }
+
+    @Override
+    protected void calculateCovergence() {
+        for (Integer ex : examplars.getExamplars().keySet()) {
+            System.out.println("GETTING: " + ex);
+            if (centers.contains(ex)) {
+                convitsVectors.get(ex).addCovits(true);
+            } else {
+                System.out.println("AU");
+                convitsVectors.get(ex).addCovits(false);
+            }
+        }
+    }
+
+    @Override
+    protected void initConvergence() {
+        if (convits != null) {
+
+            for (Integer ex : examplars.getExamplars().keySet()) {
+                ConvitsVector vec = new ConvitsVector(convits.intValue());
+                vec.init();
+                convitsVectors.put(ex, vec);
+            }
         }
     }
 }
