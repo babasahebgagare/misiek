@@ -108,14 +108,9 @@ public class LeftPanel extends javax.swing.JPanel {
         loggerTextArea = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         familiesList = new javax.swing.JList();
-        jScrollPane4 = new javax.swing.JScrollPane();
         netsActionsPanel = new javax.swing.JPanel();
         projectButton = new javax.swing.JButton();
         showButton = new javax.swing.JButton();
-        intActionsPanel = new javax.swing.JPanel();
-        selectConnectedButton = new javax.swing.JButton();
-        deleteUnconnectedButton = new javax.swing.JButton();
-        unselecUncunnectedButton = new javax.swing.JButton();
         intPanel = new javax.swing.JPanel();
         loadInteractionsButton = new javax.swing.JButton();
         loadIntForNetworkButton = new javax.swing.JButton();
@@ -181,12 +176,8 @@ public class LeftPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(attrPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
-                    .addGroup(attrPanelLayout.createSequentialGroup()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(attrPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE))))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE))
                 .addContainerGap())
         );
         attrPanelLayout.setVerticalGroup(
@@ -195,12 +186,9 @@ public class LeftPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(attrPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(attrPanelLayout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         netsActionsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -240,52 +228,6 @@ public class LeftPanel extends javax.swing.JPanel {
                     .addComponent(projectButton)
                     .addComponent(showButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        intActionsPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        selectConnectedButton.setText("Zaznacz tylko połączone białka");
-        selectConnectedButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                selectConnectedButtonActionPerformed(evt);
-            }
-        });
-
-        deleteUnconnectedButton.setText("Usuń niepołączone białka wśród zaznaczonych");
-        deleteUnconnectedButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteUnconnectedButtonActionPerformed(evt);
-            }
-        });
-
-        unselecUncunnectedButton.setText("Odznacz niepołączone białka");
-        unselecUncunnectedButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                unselecUncunnectedButtonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout intActionsPanelLayout = new javax.swing.GroupLayout(intActionsPanel);
-        intActionsPanel.setLayout(intActionsPanelLayout);
-        intActionsPanelLayout.setHorizontalGroup(
-            intActionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(intActionsPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(intActionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(selectConnectedButton, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
-                    .addComponent(unselecUncunnectedButton, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
-                    .addComponent(deleteUnconnectedButton, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        intActionsPanelLayout.setVerticalGroup(
-            intActionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(intActionsPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(deleteUnconnectedButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(unselecUncunnectedButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                .addComponent(selectConnectedButton))
         );
 
         intPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -369,7 +311,6 @@ public class LeftPanel extends javax.swing.JPanel {
             .addComponent(dataPanel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(netsActionsPanel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(intPanel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(intActionsPanel, 0, 279, Short.MAX_VALUE)
             .addComponent(attrPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -381,9 +322,8 @@ public class LeftPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(intPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(intActionsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(attrPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(attrPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -437,17 +377,6 @@ private void showLoadedButtonActionPerformed(java.awt.event.ActionEvent evt) {//
 
 }//GEN-LAST:event_showLoadedButtonActionPerformed
 
-private void selectConnectedButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectConnectedButtonActionPerformed
-    UIController.getInstance().selectConnectedNodes(Cytoscape.getCurrentNetwork());
-}//GEN-LAST:event_selectConnectedButtonActionPerformed
-
-private void unselecUncunnectedButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unselecUncunnectedButtonActionPerformed
-    UIController.getInstance().unselectUnConnectedNodes(Cytoscape.getCurrentNetwork());
-}//GEN-LAST:event_unselecUncunnectedButtonActionPerformed
-
-private void deleteUnconnectedButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUnconnectedButtonActionPerformed
-}//GEN-LAST:event_deleteUnconnectedButtonActionPerformed
-
 private void mclButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mclButtonActionPerformed
     ClusterAlgorithm algorithm = new MCLCluster();
 
@@ -467,14 +396,11 @@ private void testButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JPanel attrPanel;
     private javax.swing.JPanel dataPanel;
     private javax.swing.JButton deleteDataButton;
-    private javax.swing.JButton deleteUnconnectedButton;
     private javax.swing.JList familiesList;
-    private javax.swing.JPanel intActionsPanel;
     private javax.swing.JPanel intPanel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JButton loadDataButton;
     private javax.swing.JButton loadIntForNetworkButton;
     private javax.swing.JButton loadInteractionsButton;
@@ -482,12 +408,10 @@ private void testButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JButton mclButton;
     private javax.swing.JPanel netsActionsPanel;
     private javax.swing.JButton projectButton;
-    private javax.swing.JButton selectConnectedButton;
     private javax.swing.JButton showButton;
     private javax.swing.JButton showLoadedButton;
     private javax.swing.JTree spaciesTree;
     private javax.swing.JButton testButton;
     private javax.swing.JSpinner tresholdSpinner;
-    private javax.swing.JButton unselecUncunnectedButton;
     // End of variables declaration//GEN-END:variables
 }
