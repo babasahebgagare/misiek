@@ -18,6 +18,12 @@ echo "$toy_sim outO2.txt 0.5 100 100 -3 centers" > input
 /usr/local/bin/matlab <apcluster.m
 java -jar ClustersComparator.jar a outO2.txt a outC2.txt >> jacc
 
+echo "test 3..."
+java -jar AffinityPropagationConsole.jar $toy_sim outC3.txt 0.5 10 -10 clusters
+echo "$toy_sim outO3.txt 0.5 10 10 -10 centers" > input
+/usr/local/bin/matlab < ~/studia/matlab/apcluster.m
+java -jar ClustersComparator.jar a outO3.txt a outC3.txt >> jacc
+
 #echo "test 3..."
 #java -jar AffinityPropagationConsole.jar $travel_sim outC3.txt 0.5 100 -2000 clusters
 #echo "$travel_sim outO3.txt 0.5 100 100 -2000 centers" > input
