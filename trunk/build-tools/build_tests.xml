@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="MCVPlugin" default="run-plugin-console" basedir="../">
+    <description>Ant script</description>
+
+    <property name="local-pass-folder" value="D:" />
+    <property name="local-server-username-file" value="${local-pass-folder}/.user" />
+    <property name="local-server-password-file" value="${local-pass-folder}/.pass" />
+    <property name="clusters-comparator-name" value="ClustersComparator" />
+    <property name="sets-comparator-name" value="SetsComparator" />
+    <property name="server-name" value="students.mimuw.edu.pl" />
+
+    <property name="server-folder" value="./studia/matlab" />
+    <property name="affinity-console-name" value="AffinityPropagationConsole" />
+    <property name="clusters-comparator-name" value="ClustersComparator" />
+    <property name="sets-comparator-name" value="SetsComparator" />
+        
+    <property file="${affinity-console-name}/nbproject/project.properties"/>
+    <property file="${clusters-comparator-name}/nbproject/project.properties"/>
+    <property file="${sets-comparator-name}/nbproject/project.properties"/>
+
+    <target name="save-server-auth" unless="server-password">
+        <input addproperty="server-username" message="Enter server username: " />
+        <input addproperty="server-password" message="Enter server password: " />
+        <echo file="${local-server-username-file}" message="${server-username}" />
+        <echo file="${local-server-password-file}" message="${server-password}" />
+    </target>
+
+    <target name="delete-server-auth" unless="server-password" >
+        <loadfile property="server-username" srcfile="${local-server-username-file}" failonerror="false"/>
+        <loadfile property="server-password" srcfile="${local-server-password-file}" failonerror="false"/>
+        <antcall target="save-server-auth" />
+        <loadfile property="server-username" srcfile="${local-server-username-file}" failonerror="false"/>
+        <loadfile property="server-password" srcfile="${local-server-password-file}" failonerror="false" />
+    </target>
+
+    <target name="get-server-auth" unless="server-password" >
+        <loadfile property="server-username" srcfile="${local-server-username-file}" failonerror="false"/>
+        <loadfile property="server-password" srcfile="${local-server-password-file}" failonerror="false"/>
+        <antcall target="save-server-auth" />
+        <loadfile property="server-username" srcfile="${local-server-username-file}" failonerror="false"/>
+        <loadfile property="server-password" srcfile="${local-server-password-file}" failonerror="false" />
+    </target>
+
+    <target name="compile-affinity-console" description="Compile Cytoscape plugin">
+        <ant antfile="${affinity-console-name}/build.xml" inheritall="false" target="jar" />
+    </target>
+
+    <target name="compile-clusters-comparator" description="Compile Cytoscape plugin">
+        <ant antfile="${clusters-comparator-name}/build.xml" inheritall="false" target="jar" />
+    </target>
+
+    <target name="send-affinity-console" depends="get-server-auth" description="Copy to server">
+        <scp
+            trust="true"
+            host="${server-name}"
+            username="${server-username}"
+            password="${server-password}"
+            verbose="true"
+            file="${affinity-console-name}/dist/${affinity-console-name}.jar"
+            todir="${server-username}:${server-password}@${server-name}:${server-folder}"
+          />
+    </target>
+
+    <target name="send-affinity-matlab" depends="get-server-auth" description="Copy to server">
+        <scp
+            trust="true"
+            host="${server-name}"
+            username="${server-username}"
+            password="${server-password}"
+            verbose="true"
+            file="build-tools/tests/apcluster.m"
+            todir="${server-username}:${server-password}@${server-name}:${server-folder}"
+          />
+    </target>
+
+    <target name="send-affinity-tester" depends="get-server-auth" description="Copy to server">
+        <scp
+            trust="true"
+            host="${server-name}"
+            username="${server-username}"
+            password="${server-password}"
+            verbose="true"
+            file="build-tools/tests/test"
+            todir="${server-username}:${server-password}@${server-name}:${server-folder}"
+          />
+    </target>
+    
+    <target name="send-clusters-comparator" depends="get-server-auth" description="Copy to server">
+        <scp
+            trust="true"
+            host="${server-name}"
+            username="${server-username}"
+            password="${server-password}"
+            verbose="true"
+            file="${clusters-comparator-name}/dist/${clusters-comparator-name}.jar"
+            todir="${server-username}:${server-password}@${server-name}:${server-folder}"
+          />
+    </target>
+    
+    <target name="send-all" depends="send-clusters-comparator,send-affinity-tester,send-affinity-matlab,send-affinity-console" description="Send all...">
+    </target>
+
+</project>
