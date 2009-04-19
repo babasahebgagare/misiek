@@ -101,4 +101,25 @@
     <target name="send-all" depends="send-clusters-comparator,send-affinity-tester,send-affinity-matlab,send-affinity-console" description="Send all...">
     </target>
 
+    <target name="run-test" depends="get-server-auth" description="Run tests...">
+        <sshexec
+            port="22"
+                trust="true"
+                password="${server-password}"
+                username="${server-username}"
+                host="${server-name}"
+                command="${server-folder}/test"
+                verbose="true">
+        </sshexec>
+        <sshexec
+            port="22"
+                trust="true"
+                password="${server-password}"
+                username="${server-username}"
+                host="${server-name}"
+                command="cat ${server-folder}/jacc"
+                verbose="true">
+        </sshexec>
+    </target>
+
 </project>
