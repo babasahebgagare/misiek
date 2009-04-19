@@ -1,6 +1,5 @@
 package algorithm.abs;
 
-import algorithm.abs.Cluster;
 import algorithm.smart.IterationData;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -172,7 +171,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
     protected int checkConvergence() {
         int not = 0;
         if (convits == null) {
-            not = convitsVectors.size();
+            not = -1;
         } else {
 
             for (ConvitsVector vec : convitsVectors.values()) {
