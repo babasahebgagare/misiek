@@ -236,13 +236,13 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
 
     @Override
     protected void calculateCovergence() {
-        for (Integer ex : examplars.getExamplars().keySet()) {
-            System.out.println("GETTING: " + ex);
-            if (centers.contains(ex)) {
-                convitsVectors.get(ex).addCovits(true);
-            } else {
-                System.out.println("AU");
-                convitsVectors.get(ex).addCovits(false);
+        if (convits != null) {
+            for (Integer ex : examplars.getExamplars().keySet()) {
+                if (centers.contains(ex)) {
+                    convitsVectors.get(ex).addCovits(true);
+                } else {
+                    convitsVectors.get(ex).addCovits(false);
+                }
             }
         }
     }

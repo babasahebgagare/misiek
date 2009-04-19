@@ -191,14 +191,15 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
 
     @Override
     protected void calculateCovergence() {
-
-        Vector<Integer> c = I.getVector();
-        for (int i = 0; i < N; i++) {
-            Integer ex = Integer.valueOf(i);
-            if (c.contains(ex)) {
-                convitsVectors.get(ex).addCovits(true);
-            } else {
-                convitsVectors.get(ex).addCovits(false);
+        if (convits != null) {
+            Vector<Integer> c = I.getVector();
+            for (int i = 0; i < N; i++) {
+                Integer ex = Integer.valueOf(i);
+                if (c.contains(ex)) {
+                    convitsVectors.get(ex).addCovits(true);
+                } else {
+                    convitsVectors.get(ex).addCovits(false);
+                }
             }
         }
     }
