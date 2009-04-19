@@ -1,0 +1,30 @@
+#/bin/bash
+echo "Affinity propagation testing..."
+
+toy_sim='ToyProblemSimilarities.txt'
+travel_sim="TravelRoutingSimilarities.txt"
+
+echo "test 1..."
+java -jar AffinityPropagationConsole.jar $toy_sim outC1.txt 0.5 100 -15.5 clusters
+echo "$toy_sim outO1.txt 0.5 100 100 -15.5 centers" > input
+matlab <apcluster.m
+java -jar ClustersComparator.jar a outO1.txt a outC1.txt > jacc
+
+echo "test 2..."
+java -jar AffinityPropagationConsole.jar $toy_sim outC2.txt 0.5 100 -3 clusters
+echo "$toy_sim outO2.txt 0.5 100 100 -3 centers" > input
+matlab <apcluster.m
+java -jar ClustersComparator.jar a outO2.txt a outC2.txt >> jacc
+
+echo "test 3..."
+java -jar AffinityPropagationConsole.jar $travel_sim outC3.txt 0.5 100 -2000 clusters
+echo "$travel_sim outO3.txt 0.5 100 100 -2000 centers" > input
+matlab <apcluster.m
+java -jar ClustersComparator.jar a outO3.txt a outC3.txt >> jacc
+
+echo "test 4..."
+java -jar AffinityPropagationConsole.jar $travel_sim outC4.txt 0.5 100 -4000 clusters
+echo "$travel_sim outO4.txt 0.5 100 100 -4000 centers" > input
+matlab <apcluster.m
+java -jar ClustersComparator.jar a outO4.txt a outC4.txt >> jacc
+
