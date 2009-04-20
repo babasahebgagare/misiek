@@ -137,15 +137,14 @@ fileout = fopen(outputfile{:}, 'w')
 if K>0
     [tmp c]=max(S(:,I),[],2); c(I)=1:K; % Identify clusters
     % Refine the final set of exemplars and clusters and return results
+
+    for k=1:K ii=find(c==k); [y j]=max(sum(S(ii,ii),1)); I(k)=ii(j(1)); end; notI=reshape(setdiff(1:N,I),[],1);
+    [tmp c]=max(S(:,I),[],2); c(I)=1:K; tmpidx=I(c);
     clust = I(c)
     clust
     for j=1:size(clust), fprintf(fileout, '%d\n', clust(j)); end;
     fclose(fileout)
 
-    for k=1:K ii=find(c==k); [y j]=max(sum(S(ii,ii),1)); I(k)=ii(j(1)); end; notI=reshape(setdiff(1:N,I),[],1);
-    [tmp c]=max(S(:,I),[],2); c(I)=1:K; tmpidx=I(c);
-    c
-    tmpidx
 	tmpdpsim=sum(S(sub2ind([N N],notI,tmpidx(notI))));
 	tmpexpref=sum(dS(I));
 	tmpnetsim=tmpdpsim+tmpexpref;
