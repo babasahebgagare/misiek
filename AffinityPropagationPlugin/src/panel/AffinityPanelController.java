@@ -1,6 +1,5 @@
 package panel;
 
-import algorithm.abs.AffinityPropagationAlgorithm;
 import algorithm.abs.AffinityPropagationAlgorithm.AffinityConnectingMethod;
 import cyto.CytoAffinityClustering;
 import cyto.CytoClusterAlgorithm;
@@ -224,10 +223,10 @@ public class AffinityPanelController implements Serializable {
             String targetID = edge.getTarget().getIdentifier();
 
             if (!sourceID.equals(targetID)) {
-
                 Double prob = edgesAttributes.getDoubleAttribute(id, edgeNameAttr);
-                probs.add(prob);
-
+                if (prob != null) {
+                    probs.add(prob);
+                }
             }
         }
 
