@@ -102,15 +102,19 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
     @Override
     public Map<Integer, Integer> doCluster() {
         final Map<Integer, Cluster<Integer>> help = doClusterAssoc();
-        final Map<Integer, Integer> res = new HashMap<Integer, Integer>();
+        if (help != null) {
+            final Map<Integer, Integer> res = new HashMap<Integer, Integer>();
 
-        for (Entry<Integer, Cluster<Integer>> entry : help.entrySet()) {
-            for (Integer obj : entry.getValue().getElements()) {
-                res.put(obj, entry.getKey());
+            for (Entry<Integer, Cluster<Integer>> entry : help.entrySet()) {
+                for (Integer obj : entry.getValue().getElements()) {
+                    res.put(obj, entry.getKey());
+                }
             }
-        }
 
-        return res;
+            return res;
+        } else {
+            return null;
+        }
     }
 
     public Map<Integer, Cluster<Integer>> doClusterAssoc() {
@@ -142,13 +146,15 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
             }
         }
 
-
         computeCenters();
-        computeAssigments();
-        refineCenters();
-        computeAssigments();
-
-        return assigments;
+        if (getClustersNumber() != 0) {
+            computeAssigments();
+            refineCenters();
+            computeAssigments();
+            return assigments;
+        } else {
+            return null;
+        }
     }
 
     protected void computeAssigments() {

@@ -92,14 +92,17 @@ public class RunAlgorithm {
             bw = new BufferedWriter(new OutputStreamWriter(bos));
             if (kind.equals("centers")) {
                 Map<Integer, Cluster<Integer>> clusters = af.doClusterAssoc();
-
-                for (Integer clustName : clusters.keySet()) {
-                    bw.append(clustName + "\n");
+                if (clusters != null) {
+                    for (Integer clustName : clusters.keySet()) {
+                        bw.append(clustName + "\n");
+                    }
                 }
             } else {
                 Map<Integer, Integer> clusters = af.doCluster();
-                for (int i = 1; i <= clusters.size(); i++) {
-                    bw.append(clusters.get(Integer.valueOf(i)) + "\n");
+                if (clusters != null) {
+                    for (int i = 1; i <= clusters.size(); i++) {
+                        bw.append(clusters.get(Integer.valueOf(i)) + "\n");
+                    }
                 }
             }
 

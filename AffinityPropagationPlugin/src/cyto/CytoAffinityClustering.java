@@ -93,7 +93,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
 
         Map<Integer, Cluster<Integer>> clusters = af.doClusterAssoc();
 
-        if (!canceled) {
+        if (clusters != null) {
             for (Cluster<Integer> cluster : clusters.values()) {
                 clusterprior.add(cluster);
             }
