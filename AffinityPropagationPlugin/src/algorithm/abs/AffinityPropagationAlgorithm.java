@@ -22,6 +22,31 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
     protected ActionListener iteractionListenerOrNull = null;
     protected Map<Integer, Cluster<Integer>> assigments;
     protected Map<Integer, ConvitsVector> convitsVectors = new TreeMap<Integer, ConvitsVector>();
+    private Collection<Integer> refined = null;
+
+    private void refineCenters() {
+        Collection<Integer> refinedCenters = new TreeSet<Integer>();
+
+        for (Cluster<Integer> cluster : assigments.values()) {
+            Integer maxid = cluster.getName();
+            Double maxsum = null;
+            for (Integer curr : cluster.getElements()) {
+                Double sum = Double.valueOf(0);
+                for (Integer other : cluster.getElements()) {
+                    Double simOrNull = tryGetSimilarity(curr, other);
+                    if (simOrNull != null) {
+                        sum += simOrNull;
+                    }
+                }
+                if (maxsum == null || sum > maxsum) {
+                    maxsum = sum;
+                    maxid = curr;
+                }
+            }
+            refinedCenters.add(maxid);
+        }
+        refined = refinedCenters;
+    }
 
     public enum AffinityConnectingMethod {
 
@@ -120,13 +145,20 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
 
         computeCenters();
         computeAssigments();
+        refineCenters();
+        computeAssigments();
 
         return assigments;
     }
 
     protected void computeAssigments() {
         Collection<Integer> examplars = getAllExamplars();
-        Collection<Integer> centers = getCenters();
+        Collection<Integer> centers;
+        if (refined == null) {
+            centers = getCenters();
+        } else {
+            centers = refined;
+        }
         if (centers.size() == 0) {
             assigments = null;
             return;
