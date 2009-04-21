@@ -29,6 +29,46 @@ public class DoubleTransformingPanel extends javax.swing.JPanel {
     /** Creates new form TransformingPanel */
     public DoubleTransformingPanel() {
         initComponents();
+        refreshAttrList();
+    }
+    /*
+    private void addAttribute(String attr) {
+    CyAttributes edgesAttributes = Cytoscape.getEdgeAttributes();
+    String[] names = edgesAttributes.getAttributeNames();
+    String[] newnames = new String[names.length + 1];
+    for (int i = 0; i < names.length; i++) {
+    newnames[i] = String.valueOf(names);
+    }
+    newnames[names.length] = String.valueOf(attr);
+    }
+     */
+
+    private boolean isGoodAttr(String outputAttrName) {
+        if (outputAttrName == null) {
+            return false;
+        }
+        if (outputAttrName.equals("")) {
+            return false;
+        }
+        CyAttributes edgesAttributes = Cytoscape.getEdgeAttributes();
+        for (String attrName : edgesAttributes.getAttributeNames()) {
+            if (attrName.equals(outputAttrName)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private void refreshAttrList() {
+        inputAttrCombo.removeAllItems();
+        CyAttributes edgesAttributes = Cytoscape.getEdgeAttributes();
+        for (String attrName : edgesAttributes.getAttributeNames()) {
+            final byte cyType = edgesAttributes.getType(attrName);
+            if (cyType == CyAttributes.TYPE_FLOATING) {
+                inputAttrCombo.addItem(attrName);
+            }
+        }
     }
 
     private void tramsform(DoubleTransformingMethod method, String inputAttrName, String outputAttrName) {
@@ -59,7 +99,8 @@ public class DoubleTransformingPanel extends javax.swing.JPanel {
         } else if (plusMethodRadio.isSelected()) {
             Double arg;
             try {
-                arg = Double.valueOf(plusMethodArgField.getText());
+                String argStr = plusMethodArgField.getText();
+                arg = Double.valueOf(argStr);
             } catch (NumberFormatException e) {
                 arg = Double.valueOf(0);
             }
@@ -85,8 +126,8 @@ public class DoubleTransformingPanel extends javax.swing.JPanel {
         expMethodRadio = new javax.swing.JRadioButton();
         plusMethodRadio = new javax.swing.JRadioButton();
         minusMethodRadio = new javax.swing.JRadioButton();
-        plusMethodField = new javax.swing.JTextField();
-        plusMethodArgField = new javax.swing.JLabel();
+        plusMethodArgField = new javax.swing.JTextField();
+        plusMethodArgLabel = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         outputAttrLabel = new javax.swing.JLabel();
         inputAttrLabel = new javax.swing.JLabel();
@@ -136,35 +177,29 @@ public class DoubleTransformingPanel extends javax.swing.JPanel {
             }
         });
 
-        plusMethodField.setText("0");
-        plusMethodField.setEnabled(false);
-        plusMethodField.setName("plusMethodField"); // NOI18N
-
-        plusMethodArgField.setText("a:=");
+        plusMethodArgField.setText("0");
+        plusMethodArgField.setEnabled(false);
         plusMethodArgField.setName("plusMethodArgField"); // NOI18N
+
+        plusMethodArgLabel.setText("a:=");
+        plusMethodArgLabel.setName("plusMethodArgLabel"); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(logMethodRadio)
+                    .addComponent(expMethodRadio)
+                    .addComponent(minusMethodRadio)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(logMethodRadio))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(expMethodRadio))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(minusMethodRadio))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(plusMethodRadio)
                         .addGap(18, 18, 18)
-                        .addComponent(plusMethodArgField)
+                        .addComponent(plusMethodArgLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(plusMethodField, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(plusMethodArgField, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -178,8 +213,8 @@ public class DoubleTransformingPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(plusMethodRadio)
-                    .addComponent(plusMethodArgField)
-                    .addComponent(plusMethodField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(plusMethodArgLabel)
+                    .addComponent(plusMethodArgField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Attribute names settings"));
@@ -300,14 +335,7 @@ public class DoubleTransformingPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_logMethodRadioActionPerformed
 
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
-        inputAttrCombo.removeAllItems();
-        CyAttributes edgesAttributes = Cytoscape.getEdgeAttributes();
-        for (String attrName : edgesAttributes.getAttributeNames()) {
-            final byte cyType = edgesAttributes.getType(attrName);
-            if (cyType == CyAttributes.TYPE_FLOATING) {
-                inputAttrCombo.addItem(attrName);
-            }
-        }
+        refreshAttrList();
     }//GEN-LAST:event_refreshButtonActionPerformed
 
     private void transformButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transformButtonActionPerformed
@@ -315,9 +343,13 @@ public class DoubleTransformingPanel extends javax.swing.JPanel {
 
         String inputAttrName = (String) inputAttrCombo.getSelectedItem();
         String outputAttrName = outputAttrField.getText();
-
-        tramsform(method, inputAttrName, outputAttrName);
-
+        if (isGoodAttr(outputAttrName)) {
+            tramsform(method, inputAttrName, outputAttrName);
+        } else {
+            AttrNameExistDialog dial = new AttrNameExistDialog(Cytoscape.getDesktop(), true);
+            dial.pack();
+            dial.setVisible(true);
+        }
     }//GEN-LAST:event_transformButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -332,8 +364,8 @@ public class DoubleTransformingPanel extends javax.swing.JPanel {
     private javax.swing.JRadioButton minusMethodRadio;
     private javax.swing.JTextField outputAttrField;
     private javax.swing.JLabel outputAttrLabel;
-    private javax.swing.JLabel plusMethodArgField;
-    private javax.swing.JTextField plusMethodField;
+    private javax.swing.JTextField plusMethodArgField;
+    private javax.swing.JLabel plusMethodArgLabel;
     private javax.swing.JRadioButton plusMethodRadio;
     private javax.swing.JButton refreshButton;
     private javax.swing.JButton transformButton;
