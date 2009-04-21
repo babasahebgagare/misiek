@@ -12,15 +12,15 @@ cd ~/studia/matlab
 #/usr/local/bin/matlab <apcluster.m
 #java -jar ClustersComparator.jar a outO0.txt a outC0.txt >> jacc
 
-echo "test 1..."
+echo "test (Metoda Refine)..."
 java -jar AffinityPropagationConsole.jar $toy_sim outC1.txt 0.5 4 -15.5 clusters
 echo "$toy_sim outO1.txt 0.5 4 4 -15.5 centers" > input
 /usr/local/bin/matlab < ~/studia/matlab/apcluster.m
 java -jar ClustersComparator.jar a outO1.txt a outC1.txt > jacc
 
 echo "test 2..."
-java -jar AffinityPropagationConsole.jar $toy_sim outC2.txt 0.5 4 -3 clusters
-echo "$toy_sim outO2.txt 0.5 4 4 -3 centers" > input
+java -jar AffinityPropagationConsole.jar $toy_sim outC2.txt 0.5 1 -3 clusters
+echo "$toy_sim outO2.txt 0.5 1 1 -3 centers" > input
 /usr/local/bin/matlab <apcluster.m
 java -jar ClustersComparator.jar a outO2.txt a outC2.txt >> jacc
 

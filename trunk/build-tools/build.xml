@@ -5,25 +5,30 @@
 
     <property name="project-name" value="MCVPlugin" />
     <property name="affinity-name" value="AffinityPropagationPlugin" />
+    <property name="transforming-name" value="AttrTransformingPlugin" />
     
     <property file="${project-name}/nbproject/project.properties"/>
     <property file="${affinity-name}/nbproject/project.properties"/>
+    <property file="${transforming-name}/nbproject/project.properties"/>
 
     <property name="cytoscape-plugins" value="${cytoscape-path}/plugins" />
 
     <target name="clean-plugin" description="Cleaning">
         <ant antfile="${project-name}/build.xml" inheritall="false" target="clean" />
         <ant antfile="${affinity-name}/build.xml" inheritall="false" target="clean" />
+        <ant antfile="${transforming-name}/build.xml" inheritall="false" target="clean" />
     </target>
 
     <target name="compile-plugin" depends="clean-plugin" description="Compile Cytoscape plugin">
         <ant antfile="${project-name}/build.xml" inheritall="false" target="jar" />
         <ant antfile="${affinity-name}/build.xml" inheritall="false" target="jar" />
+        <ant antfile="${transforming-name}/build.xml" inheritall="false" target="jar" />
     </target>
 
     <target name="copy-plugin" description="Copy Cytoscape plugin">
         <copy file="${project-name}/dist/${project-name}.jar" todir="${cytoscape-plugins}" overwrite="true"/>
         <copy file="${affinity-name}/dist/${affinity-name}.jar" todir="${cytoscape-plugins}" overwrite="true"/>
+        <copy file="${transforming-name}/dist/${transforming-name}.jar" todir="${cytoscape-plugins}" overwrite="true"/>
     </target>
 
     <target name="run-plugin-windows" depends="compile-plugin,copy-plugin" description="Run Cytoscape with plugin">
