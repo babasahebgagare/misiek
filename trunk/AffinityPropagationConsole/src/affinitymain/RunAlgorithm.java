@@ -29,22 +29,24 @@ public class RunAlgorithm {
     private double lambda;
     private int iterations;
     private double preferences;
+    private Integer convits;
     private Collection<String> nodeNames = new HashSet<String>();
     private String kind;
 
-    public RunAlgorithm(String inputpath, String outpath, double lambda, int iterations, double preferences, String kind) {
+    public RunAlgorithm(String inputpath, String outpath, double lambda, int iterations, Integer convits, double preferences, String kind) {
         this.inputpath = inputpath;
         this.outpath = outpath;
         this.lambda = lambda;
         this.iterations = iterations;
         this.preferences = preferences;
         this.kind = kind;
+        this.convits = convits;
     }
 
     public void setParemeters() {
         af.setLambda(lambda);
         af.setIterations(iterations);
-        af.setConvits(null);
+        af.setConvits(convits);
         af.setConnectingMode(AffinityPropagationAlgorithm.AffinityConnectingMethod.ORIGINAL);
         af.addIterationListener(new ConsoleIterationListener(iterations));
 
