@@ -6,6 +6,7 @@ import cytoscape.view.cytopanels.CytoPanelImp;
 import java.awt.FlowLayout;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import panel.DoubleTransformingPanel;
 
 public class TransMain extends CytoscapePlugin {
 
@@ -13,11 +14,11 @@ public class TransMain extends CytoscapePlugin {
 
         CytoPanelImp leftPanel = (CytoPanelImp) Cytoscape.getDesktop().getCytoPanel(SwingConstants.WEST);
 
-        JPanel myAff = new JPanel();
+        JPanel myAff = new DoubleTransformingPanel();
         myAff.setLayout(new FlowLayout());
 
-        leftPanel.add("Affinity panel", myAff);
-        System.out.println("Affinity propagation");
+        leftPanel.add("Attributes transforming panel", myAff);
+        System.out.println("Attributes transforming panel");
     }
 }
 
