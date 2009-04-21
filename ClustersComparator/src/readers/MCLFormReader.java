@@ -28,7 +28,7 @@ public class MCLFormReader extends ClusteringReader {
 
             while (scanner.hasNextInt()) {
                 String line = scanner.nextLine();
-                String[] exs = line.split(" ");
+                String[] exs = line.split("\\s+");
 
                 for (String examplar : exs) {
                     Integer ex = Integer.valueOf(examplar);
