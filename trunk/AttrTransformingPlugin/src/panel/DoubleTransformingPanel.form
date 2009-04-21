@@ -52,26 +52,17 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="logMethodRadio" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="expMethodRadio" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="minusMethodRadio" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="logMethodRadio" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="expMethodRadio" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="minusMethodRadio" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="plusMethodRadio" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="plusMethodArgField" min="-2" max="-2" attributes="0"/>
+                          <Component id="plusMethodArgLabel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="plusMethodField" min="-2" pref="122" max="-2" attributes="0"/>
+                          <Component id="plusMethodArgField" min="-2" pref="122" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -89,8 +80,8 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="plusMethodRadio" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="plusMethodArgLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="plusMethodArgField" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="plusMethodField" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -146,17 +137,17 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="minusMethodRadioActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="plusMethodField">
+        <Component class="javax.swing.JTextField" name="plusMethodArgField">
           <Properties>
             <Property name="text" type="java.lang.String" value="0"/>
             <Property name="enabled" type="boolean" value="false"/>
-            <Property name="name" type="java.lang.String" value="plusMethodField" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="plusMethodArgField" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="plusMethodArgField">
+        <Component class="javax.swing.JLabel" name="plusMethodArgLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="a:="/>
-            <Property name="name" type="java.lang.String" value="plusMethodArgField" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="plusMethodArgLabel" noResource="true"/>
           </Properties>
         </Component>
       </SubComponents>
