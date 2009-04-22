@@ -1,6 +1,6 @@
 start = clock;
 %input = fopen('input', 'r');
-[inputfile, outputfile, lam, maxits, convits, p, k] =textread('./input', '%s %s %f %d %d %f %s', 1);
+[inputfile, outputfile, lam, maxits, convits, p, kind] =textread('./input', '%s %s %f %d %d %f %s', 1);
 plt = 0; details=0; nonoise = 1;
 %[lam, maxits, p, k] = textread('./input', '%f %d %f %s', 1);
 %fclose(input);
@@ -9,7 +9,7 @@ outputfile{:}
 lam
 maxits
 p
-k
+kind
 
 %maxits=5; convits=100; lam=0.5; plt=0; details=0; nonoise=1; p=-4500;
 i=1;
@@ -132,7 +132,7 @@ while ~dn
 end; % iterations
 I=find((diag(A)+diag(R))>0); K=length(I); % Identify exemplars
 
-fileout = fopen(outputfile{:}, 'w')
+fileout = fopen(outputfile{:}, 'w');
 
 if K>0
     [tmp c]=max(S(:,I),[],2); c(I)=1:K; % Identify clusters
@@ -140,8 +140,15 @@ if K>0
 
     for k=1:K ii=find(c==k); [y j]=max(sum(S(ii,ii),1)); I(k)=ii(j(1)); end; notI=reshape(setdiff(1:N,I),[],1);
     [tmp c]=max(S(:,I),[],2); c(I)=1:K; tmpidx=I(c);
-    clust = I(c)
-    clust
+
+    if strcmp(kind{:},'clusters')
+        kind
+        clust = I(c);
+    else
+        kind
+        clust = I
+    end;
+    %clust
     for j=1:size(clust), fprintf(fileout, '%d\n', clust(j)); end;
     fclose(fileout)
 
