@@ -121,7 +121,7 @@ public class LeftPanel extends javax.swing.JPanel {
 
         dataPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        loadDataButton.setText("Załaduj dane o białkach");
+        loadDataButton.setText("Load data");
         loadDataButton.setToolTipText("Ładuje dane z plików .spy, .trees, .int");
         loadDataButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,7 +129,7 @@ public class LeftPanel extends javax.swing.JPanel {
             }
         });
 
-        deleteDataButton.setText("Usuń dane");
+        deleteDataButton.setText("Delete data");
         deleteDataButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteDataButtonActionPerformed(evt);
@@ -193,7 +193,7 @@ public class LeftPanel extends javax.swing.JPanel {
 
         netsActionsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        projectButton.setText("Rzutuj");
+        projectButton.setText("Casting...");
         projectButton.setToolTipText("Rzutuje na zaznaczone sieci w drzewku");
         projectButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -201,7 +201,7 @@ public class LeftPanel extends javax.swing.JPanel {
             }
         });
 
-        showButton.setText("Wyświetl sieć");
+        showButton.setText("Show network");
         showButton.setToolTipText("Wyswietla zaznaczone sieci w drzewku");
         showButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -232,14 +232,14 @@ public class LeftPanel extends javax.swing.JPanel {
 
         intPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        loadInteractionsButton.setText("Załaduj interakcje do pamięci");
+        loadInteractionsButton.setText("Load interactions data");
         loadInteractionsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loadInteractionsButtonActionPerformed(evt);
             }
         });
 
-        loadIntForNetworkButton.setText("Załaduj interakcje dla sieci");
+        loadIntForNetworkButton.setText("Load interactions data for species");
         loadIntForNetworkButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loadIntForNetworkButtonActionPerformed(evt);
@@ -248,7 +248,7 @@ public class LeftPanel extends javax.swing.JPanel {
 
         tresholdSpinner.setName("TresholdSpinner"); // NOI18N
 
-        showLoadedButton.setText("Wyświetl załadowane interakcje");
+        showLoadedButton.setText("Show loaded interactions");
         showLoadedButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showLoadedButtonActionPerformed(evt);

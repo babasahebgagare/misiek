@@ -50,6 +50,8 @@ public class LoadAllInteractionsTask implements Task {
 
     public void run() {
         DataHandle dh = PluginDataHandle.getDataHandle();
+        float percent = 0;
+        float last_percent = 0;
         try {
             myThread = Thread.currentThread();
             taskMonitor.setStatus("Ładowanie interakcji");
@@ -77,8 +79,11 @@ public class LoadAllInteractionsTask implements Task {
                     }
                 }
                 current = fis.getChannel().position();
-                float percent = current * 100 / (float) max;
-                taskMonitor.setPercentCompleted(Math.round(percent));
+                percent = current * 100 / (float) max;
+                if (percent > last_percent + 1) {
+                    last_percent = percent;
+                    taskMonitor.setPercentCompleted(Math.round(percent));
+                }
             }
             MemoLogger.log("Załadowano: " + Math.round((double) created * 100 / (double) all) + "% powyżej progu");
             taskMonitor.setPercentCompleted(100);
