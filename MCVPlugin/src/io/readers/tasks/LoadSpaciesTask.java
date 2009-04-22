@@ -32,7 +32,7 @@ public class LoadSpaciesTask implements Task {
     public void run() {
         try {
             myThread = Thread.currentThread();
-            taskMonitor.setStatus("Ładowanie drzewa gatunków");
+            taskMonitor.setStatus("Gene tree is loading...");
             taskMonitor.setPercentCompleted(-1);
             fis = new FileInputStream(file);
             bis = new BufferedInputStream(fis);
@@ -52,7 +52,7 @@ public class LoadSpaciesTask implements Task {
 
     public void halt() {
 
-        System.out.println("zatrzymywanie działania");
+        System.out.println("Stopping...");
 
         if (myThread != null) {
             try {
@@ -73,6 +73,6 @@ public class LoadSpaciesTask implements Task {
     }
 
     public String getTitle() {
-        return "Wczytywanie drzewa gatunków";
+        return "Gene tree is loading...";
     }
 }
