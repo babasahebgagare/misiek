@@ -34,7 +34,7 @@ java -jar ClustersComparator.jar a outO3.txt a outC3.txt >> jacc
 
 echo "test 4..."
 java -jar AffinityPropagationConsole.jar $travel_sim outC4.txt 0.5 100 100 -2000 clusters
-echo "$travel_sim outO4.txt 0.5 100 100 -2000 centers" > input
+echo "$travel_sim outO4.txt 0.5 100 100 -2000 clusters" > input
 /usr/local/bin/matlab <apcluster.m
 java -jar ClustersComparator.jar a outO4.txt a outC4.txt >> jacc
 
