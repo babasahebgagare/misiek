@@ -21,7 +21,9 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
 
     private JFrame parentFrame = null;
 
-    /** Creates new form InteractionsLoaderPanel */
+    /** Creates new form InteractionsLoaderPanel
+     * @param parentFrame
+     */
     public InteractionsLoaderPanel(final JFrame parentFrame) {
         this.parentFrame = parentFrame;
         initComponents();
@@ -140,7 +142,6 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
             if (treshold_str != null && !treshold_str.equals("")) {
 
                 Double treshold = Double.valueOf(treshold_str);
-                System.out.println("Setting: " + treshold);
                 tresholds.put(species, treshold);
             }
         }
@@ -152,6 +153,7 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         parentFrame.dispose();
 }//GEN-LAST:event_cancelButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JTable intLoadingTable;
