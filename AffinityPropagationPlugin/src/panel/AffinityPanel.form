@@ -22,9 +22,6 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="parametersPanel" alignment="1" max="32767" attributes="1"/>
-          <Component id="implementationPanel" alignment="1" max="32767" attributes="1"/>
-          <Component id="nearesCenterPanel" alignment="0" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="refreshButton" min="-2" pref="135" max="-2" attributes="0"/>
@@ -32,17 +29,20 @@
               <Component id="startButton" pref="110" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
+          <Component id="implementationPanel" alignment="0" max="32767" attributes="1"/>
+          <Component id="nearesCenterPanel" alignment="0" max="32767" attributes="0"/>
+          <Component id="parametersPanel" alignment="1" max="32767" attributes="1"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="parametersPanel" min="-2" pref="181" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <Component id="parametersPanel" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="implementationPanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="nearesCenterPanel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="refreshButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="startButton" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -79,30 +79,36 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="iteretionsLabel" min="-2" max="-2" attributes="1"/>
-                              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="iteretionsLabel" min="-2" max="-2" attributes="1"/>
+                                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="nodeAttrNameLabel" pref="124" max="32767" attributes="1"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="edgeAttrNameLabel" min="-2" pref="113" max="-2" attributes="1"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="convitsLabel" pref="124" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="preferenceLabel" pref="124" max="32767" attributes="1"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="nodeAttrNameLabel" pref="124" max="32767" attributes="1"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="edgeAttrNameLabel" min="-2" pref="113" max="-2" attributes="1"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="convitsLabel" pref="124" max="32767" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="preferenceLabel" pref="124" max="32767" attributes="1"/>
+                              <Component id="lambdaLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="lambdaLabel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="transforminLabel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -121,6 +127,7 @@
                       </Group>
                       <Component id="preferenceField" pref="111" max="32767" attributes="0"/>
                       <Component id="labmbdaField" pref="111" max="32767" attributes="0"/>
+                      <Component id="transformingCheckbox" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -158,7 +165,12 @@
                       <Component id="labmbdaField" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lambdaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="5" max="32767" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="transforminLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="transformingCheckbox" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -223,13 +235,13 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lambdaLabel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Lambda"/>
+            <Property name="text" type="java.lang.String" value="Lambda:"/>
             <Property name="name" type="java.lang.String" value="lambdaLabel" noResource="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="convitsLabel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Convits"/>
+            <Property name="text" type="java.lang.String" value="Convits:"/>
             <Property name="name" type="java.lang.String" value="convitsLabel" noResource="true"/>
           </Properties>
         </Component>
@@ -250,6 +262,19 @@
               </StringArray>
             </Property>
             <Property name="name" type="java.lang.String" value="edgeAttrCombo" noResource="true"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="transforminLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Transforming:"/>
+            <Property name="name" type="java.lang.String" value="transforminLabel" noResource="true"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="transformingCheckbox">
+          <Properties>
+            <Property name="selected" type="boolean" value="true"/>
+            <Property name="text" type="java.lang.String" value="take log"/>
+            <Property name="name" type="java.lang.String" value="transformingCheckbox" noResource="true"/>
           </Properties>
         </Component>
       </SubComponents>
