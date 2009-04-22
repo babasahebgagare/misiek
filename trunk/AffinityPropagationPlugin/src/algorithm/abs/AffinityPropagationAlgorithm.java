@@ -29,18 +29,30 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
 
         for (Cluster<Integer> cluster : assigments.values()) {
             Integer maxid = cluster.getName();
+            Integer maxlevel = Integer.valueOf(0);
             Double maxsum = null;
             for (Integer curr : cluster.getElements()) {
                 Double sum = Double.valueOf(0);
+                Integer level = Integer.valueOf(0);
                 for (Integer other : cluster.getElements()) {
-                    Double simOrNull = tryGetSimilarity(curr, other);
+                    Double simOrNull = tryGetSimilarity(other, curr);
                     if (simOrNull != null) {
                         sum += simOrNull;
+                        level++;
                     }
                 }
-                if (maxsum == null || sum > maxsum) {
+                if (maxsum == null || level > maxlevel) {
                     maxsum = sum;
                     maxid = curr;
+                    maxlevel = level;
+                } else if (level.equals(maxlevel) && sum >= maxsum) {
+                    if (sum.equals(maxsum)) {
+                        maxid = Math.min(maxid.intValue(), curr.intValue());
+                    } else {
+                        maxid = curr;
+                    }
+                    maxlevel = level;
+                    maxsum = sum;
                 }
             }
             refinedCenters.add(maxid);
