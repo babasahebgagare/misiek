@@ -32,13 +32,14 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
     private AffinityConnectingMethod connectingMode;
     private double preferences;
     private double lambda;
+    private boolean log;
     private Integer convits = null;
     private AffinityPropagationAlgorithm af = null;
     private CyAttributes nodesAttributes = Cytoscape.getNodeAttributes();
     private Map<String, Integer> nodeMapping = new HashMap<String, Integer>();
     private Map<Integer, String> idMapping = new HashMap<Integer, String>();
 
-    public CytoAffinityClustering(final AffinityConnectingMethod connectingMode, int implementation, final String nodeNameAttr, final String edgeNameAttr, final double lambda, final double preferences, final int iterations) {
+    public CytoAffinityClustering(final AffinityConnectingMethod connectingMode, int implementation, final String nodeNameAttr, final String edgeNameAttr, final double lambda, final double preferences, final int iterations, final boolean log) {
         this.nodeNameAttr = nodeNameAttr;
         this.edgeNameAttr = edgeNameAttr;
         this.lambda = lambda;
@@ -46,10 +47,11 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
         this.iterations = iterations;
         this.convits = null;
         this.connectingMode = connectingMode;
+        this.log = log;
         this.af = createAlgorithm(implementation);
     }
 
-    public CytoAffinityClustering(final AffinityConnectingMethod connectingMode, final int implementation, final String nodeNameAttr, final String edgeNameAttr, final double lambda, final double preferences, final int iterations, final Integer convits) {
+    public CytoAffinityClustering(final AffinityConnectingMethod connectingMode, final int implementation, final String nodeNameAttr, final String edgeNameAttr, final double lambda, final double preferences, final int iterations, final Integer convits, final boolean log) {
         this.nodeNameAttr = nodeNameAttr;
         this.edgeNameAttr = edgeNameAttr;
         this.lambda = lambda;
@@ -57,6 +59,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
         this.iterations = iterations;
         this.convits = convits;
         this.connectingMode = connectingMode;
+        this.log = log;
         this.af = createAlgorithm(implementation);
     }
 
@@ -146,6 +149,10 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
         List<CyNode> nodes = Cytoscape.getCurrentNetwork().nodesList();
         Set<String> nodeNames = selectConnectedNodes(edges, nodes);
 
+        if (log) {
+            preferences = Math.log(preferences);
+        }
+
         CyAttributes edgesAttributes = Cytoscape.getEdgeAttributes();
 
         af.setLambda(lambda);
@@ -176,8 +183,14 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
             if (!sourceID.equals(targetID)) {
                 Double probOrNull = edgesAttributes.getDoubleAttribute(id, edgeNameAttr);
                 if (probOrNull != null) {
-                    af.setSimilarities(sourceIndex, targetIndex, Math.log(probOrNull));
-                    af.setSimilarities(targetIndex, sourceIndex, Math.log(probOrNull));
+                    Double sim;
+                    if (log) {
+                        sim = Math.log(probOrNull);
+                    } else {
+                        sim = probOrNull;
+                    }
+                    af.setSimilarities(sourceIndex, targetIndex, sim);
+                    af.setSimilarities(targetIndex, sourceIndex, sim);
                 }
             //                af.setSimilarity(sourceID, targetID, Math.log(prob));
             //                af.setSimilarity(targetID, sourceID, Math.log(prob));

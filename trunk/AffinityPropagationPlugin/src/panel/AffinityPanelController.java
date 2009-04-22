@@ -12,6 +12,7 @@ import giny.model.Edge;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Vector;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -37,6 +38,7 @@ public class AffinityPanelController implements Serializable {
     private JRadioButton smartImplementation = null;
     private JRadioButton weighetModeRadio = null;
     private JRadioButton unweighetModeRadio = null;
+    private JCheckBox transformingCheckbox = null;
     private AffinityStatsPanelController psc = null;
     private boolean cancelDialog = false;
     public final static int MATRIX_IMPLEMENTATION = 0;
@@ -61,17 +63,17 @@ public class AffinityPanelController implements Serializable {
         String nodeNameAttr = getNodeAttr();
         String edgeNameAttr = getEdgeAttr();
         int implementation = getImplementation();
+        boolean log = getLog();
         AffinityConnectingMethod connectingMode = getConnectingMode();
 
         if (!validateValues(lambda, preferences, iterations, convits, nodeNameAttr, edgeNameAttr)) {
             return;
         }
-        Double logpreferences = Math.log(preferences);
 
         if (convits != null) {
-            algorithm = new CytoAffinityClustering(connectingMode, implementation, nodeNameAttr, edgeNameAttr, lambda.doubleValue(), logpreferences.doubleValue(), iterations.intValue(), convits);
+            algorithm = new CytoAffinityClustering(connectingMode, implementation, nodeNameAttr, edgeNameAttr, lambda.doubleValue(), preferences.doubleValue(), iterations.intValue(), convits, log);
         } else {
-            algorithm = new CytoAffinityClustering(connectingMode, implementation, nodeNameAttr, edgeNameAttr, lambda.doubleValue(), logpreferences.doubleValue(), iterations.intValue());
+            algorithm = new CytoAffinityClustering(connectingMode, implementation, nodeNameAttr, edgeNameAttr, lambda.doubleValue(), preferences.doubleValue(), iterations.intValue(), log);
         }
         TaskManager.executeTask(new CytoClusterTask(algorithm),
                 CytoClusterTask.getDefaultTaskConfig());
@@ -79,6 +81,14 @@ public class AffinityPanelController implements Serializable {
         Integer clusters = algorithm.getClustersNumber();
         String network = Cytoscape.getCurrentNetwork().getTitle();
         psc.addClusteringStat(network, lambda, preferences, clusters, iterations, nodeNameAttr);
+    }
+
+    public JCheckBox getTransformingCheckbox() {
+        return transformingCheckbox;
+    }
+
+    void setLogCheckBox(JCheckBox transformingCheckbox) {
+        this.transformingCheckbox = transformingCheckbox;
     }
 
     void setWeighetMode(JRadioButton weighetRadio) {
@@ -103,6 +113,10 @@ public class AffinityPanelController implements Serializable {
         } else {
             return AffinityPanelController.SMART_IMPLEMENTATION;
         }
+    }
+
+    private boolean getLog() {
+        return transformingCheckbox.isSelected();
     }
 
     private boolean validateConvits(final Integer convits) {
