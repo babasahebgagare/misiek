@@ -35,7 +35,7 @@ public class LoadTreesTask implements Task {
     public void run() {
         try {
             myThread = Thread.currentThread();
-            taskMonitor.setStatus("Ładowanie białek");
+            taskMonitor.setStatus("Loading proteins data...");
             taskMonitor.setPercentCompleted(-1);
             fis = new FileInputStream(file);
             bis = new BufferedInputStream(fis);
@@ -68,7 +68,7 @@ public class LoadTreesTask implements Task {
 
     public void halt() {
 
-        System.out.println("zatrzymywanie działania");
+        System.out.println("Stopping...");
 
         if (myThread != null) {
             try {
@@ -89,6 +89,6 @@ public class LoadTreesTask implements Task {
     }
 
     public String getTitle() {
-        return "Wczytywanie drzew rodzin białek";
+        return "Loading proteins data...";
     }
 }

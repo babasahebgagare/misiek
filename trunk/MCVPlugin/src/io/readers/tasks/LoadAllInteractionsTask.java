@@ -54,7 +54,7 @@ public class LoadAllInteractionsTask implements Task {
         float last_percent = 0;
         try {
             myThread = Thread.currentThread();
-            taskMonitor.setStatus("Ładowanie interakcji");
+            taskMonitor.setStatus("Interactions loading...");
             taskMonitor.setPercentCompleted(-1);
             fis = new FileInputStream(file);
             bis = new BufferedInputStream(fis);
@@ -85,7 +85,7 @@ public class LoadAllInteractionsTask implements Task {
                     taskMonitor.setPercentCompleted(Math.round(percent));
                 }
             }
-            MemoLogger.log("Załadowano: " + Math.round((double) created * 100 / (double) all) + "% powyżej progu");
+            MemoLogger.log("Loaded: " + Math.round((double) created * 100 / (double) all) + "% up than treshold");
             taskMonitor.setPercentCompleted(100);
         } catch (IOException ex) {
             Logger.getLogger(LoadAllInteractionsTask.class.getName()).log(Level.SEVERE, null, ex);
@@ -105,7 +105,7 @@ public class LoadAllInteractionsTask implements Task {
     @SuppressWarnings("deprecation")
     public void halt() {
 
-        System.out.println("zatrzymywanie działania");
+        System.out.println("Stopping...");
 
         if (myThread != null) {
 
