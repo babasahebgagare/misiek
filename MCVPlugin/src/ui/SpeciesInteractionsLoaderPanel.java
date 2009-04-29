@@ -7,6 +7,7 @@ package ui;
 
 import java.io.File;
 import javax.swing.JFileChooser;
+import javax.swing.border.TitledBorder;
 
 /**
  *
@@ -23,7 +24,8 @@ public class SpeciesInteractionsLoaderPanel extends javax.swing.JPanel {
     public SpeciesInteractionsLoaderPanel(final String name) {
         initComponents();
         this.name = name;
-        this.speciesName.setText(name);
+        TitledBorder border = (TitledBorder) this.getBorder();
+        border.setTitle(name);
         this.tresholdField.setText("1.0");
     }
 
@@ -49,14 +51,12 @@ public class SpeciesInteractionsLoaderPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        speciesName = new javax.swing.JLabel();
         checkbox = new javax.swing.JCheckBox();
         tresholdField = new javax.swing.JTextField();
         openButton = new javax.swing.JButton();
-        pathButton = new javax.swing.JButton();
+        filepathLabel = new javax.swing.JLabel();
 
-        speciesName.setText("species name");
-        speciesName.setName("speciesName"); // NOI18N
+        setBorder(javax.swing.BorderFactory.createTitledBorder("species name"));
 
         checkbox.setName("checkbox"); // NOI18N
         checkbox.addActionListener(new java.awt.event.ActionListener() {
@@ -77,9 +77,8 @@ public class SpeciesInteractionsLoaderPanel extends javax.swing.JPanel {
             }
         });
 
-        pathButton.setText("Path");
-        pathButton.setEnabled(false);
-        pathButton.setName("pathButton"); // NOI18N
+        filepathLabel.setText("filepath");
+        filepathLabel.setName("filepathLabel"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -87,29 +86,24 @@ public class SpeciesInteractionsLoaderPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(speciesName)
-                .addGap(18, 18, 18)
                 .addComponent(checkbox)
-                .addGap(18, 18, 18)
-                .addComponent(tresholdField, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tresholdField, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(openButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(pathButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(openButton, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(filepathLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(tresholdField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(openButton)
-                        .addComponent(pathButton))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(speciesName)
-                        .addComponent(checkbox)))
+                        .addComponent(filepathLabel))
+                    .addComponent(checkbox))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -118,11 +112,11 @@ public class SpeciesInteractionsLoaderPanel extends javax.swing.JPanel {
         if (this.checkbox.isSelected()) {
             tresholdField.setEnabled(true);
             openButton.setEnabled(true);
-            pathButton.setEnabled(true);
+            filepathLabel.setEnabled(true);
         } else {
             tresholdField.setEnabled(false);
             openButton.setEnabled(false);
-            pathButton.setEnabled(false);
+            filepathLabel.setEnabled(false);
         }
     }//GEN-LAST:event_checkboxActionPerformed
 
@@ -133,15 +127,14 @@ public class SpeciesInteractionsLoaderPanel extends javax.swing.JPanel {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = fc.getSelectedFile();
             filepath = file.getAbsolutePath();
-            pathButton.setToolTipText(filepath);
+            filepathLabel.setText(filepath);
         }
     }//GEN-LAST:event_openButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox checkbox;
+    private javax.swing.JLabel filepathLabel;
     private javax.swing.JButton openButton;
-    private javax.swing.JButton pathButton;
-    private javax.swing.JLabel speciesName;
     private javax.swing.JTextField tresholdField;
     // End of variables declaration//GEN-END:variables
 }
