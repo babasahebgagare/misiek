@@ -5,9 +5,11 @@
  */
 package ui;
 
+import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import logicmodel.controllers.DataHandle;
 import main.PluginDataHandle;
+import ui.listeners.InteractionsLoadedListener;
 import ui.listeners.ProteinsLoadedListener;
 import ui.listeners.SpeciesLoadedListener;
 
@@ -20,6 +22,11 @@ public class DataLoaderPanel extends javax.swing.JPanel {
     InteractionsLoaderPanel intLoader;
     SpeciesTreeLoaderPanel speciesTree;
     GenesTreesLoaderPanel genesTree;
+    JFrame parentFrame;
+
+    public void setParentFrameOnTop() {
+        parentFrame.toFront();
+    }
 
     private void setEnableSpeciesTab(boolean b) {
         this.getTabbedPane().setEnabledAt(0, b);
@@ -33,15 +40,19 @@ public class DataLoaderPanel extends javax.swing.JPanel {
         this.getTabbedPane().setEnabledAt(2, b);
     }
 
-    /** Creates new form DataLoaderPanel */
-    public DataLoaderPanel() {
+    /** Creates new form DataLoaderPanel
+     * @param parentFrame
+     */
+    public DataLoaderPanel(JFrame parentFrame) {
+        this.parentFrame = parentFrame;
         initComponents();
 
-        intLoader = new InteractionsLoaderPanel();
+        InteractionsLoadedListener intlist = new InteractionsLoadedListener(this);
+        intLoader = new InteractionsLoaderPanel(intlist);
 
         ProteinsLoadedListener list = new ProteinsLoadedListener(this, intLoader);
         SpeciesLoadedListener list2 = new SpeciesLoadedListener(this);
-        
+
         speciesTree = new SpeciesTreeLoaderPanel(list2);
         genesTree = new GenesTreesLoaderPanel(list);
         intLoader.setName("Interactions loading...");
@@ -74,30 +85,29 @@ public class DataLoaderPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
         tabbedPane = new javax.swing.JTabbedPane();
 
         setBackground(new java.awt.Color(102, 255, 204));
 
-        jScrollPane1.setName("jScrollPane1"); // NOI18N
-
         tabbedPane.setBackground(new java.awt.Color(255, 255, 204));
         tabbedPane.setName("tabbedPane"); // NOI18N
-        jScrollPane1.setViewportView(tabbedPane);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(tabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(tabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane tabbedPane;
     // End of variables declaration//GEN-END:variables
 }

@@ -8,10 +8,27 @@ import cytoscape.task.util.TaskManager;
 import java.util.Map;
 import java.util.TreeMap;
 import logicmodel.controllers.DataHandle;
+import logicmodel.structs.PPINetwork;
 import main.PluginDataHandle;
 import viewmodel.structs.CytoAbstractPPINetwork;
 
 public class TasksDataReader extends AbstractDataReader {
+
+    @Override
+    public void readSpeciesInteractions(PPINetwork network, String filepath, Double treshold) {
+
+        Task task = new LoadSpeciesInteractionsTask(filepath, network, treshold);
+        JTaskConfig jTaskConfig = new JTaskConfig();
+
+        jTaskConfig.displayCancelButton(true);
+        jTaskConfig.setOwner(Cytoscape.getDesktop());
+        jTaskConfig.displayCloseButton(false);
+        jTaskConfig.displayStatus(true);
+        jTaskConfig.setAutoDispose(true);
+
+        TaskManager.executeTask(task, jTaskConfig);
+
+    }
 
     @Override
     public void readInteractions(CytoAbstractPPINetwork cytoNetwork, double treshold) {

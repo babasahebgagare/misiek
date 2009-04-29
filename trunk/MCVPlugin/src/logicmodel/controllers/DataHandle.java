@@ -49,7 +49,7 @@ public class DataHandle {
         edgeAttrs.setAttribute(cannonName, attrName, probability);
     }
 
-    private void createInteaction(String EdgeID, String SourceID, String TargetID, Double Probability, PPINetwork network) {
+    public void createInteraction(String EdgeID, String SourceID, String TargetID, Double Probability, PPINetwork network) {
         Protein source = network.getProtein(SourceID);
         Protein target = network.getProtein(TargetID);
         addInteractionProbabilityAttribute(EdgeID, Probability);
@@ -62,7 +62,7 @@ public class DataHandle {
         for (PPINetwork network : networks.values()) {
 
             if (network.containsProtein(TargetID) && network.containsProtein(SourceID)) {
-                createInteaction(EdgeID, SourceID, TargetID, Probability, network);
+                createInteraction(EdgeID, SourceID, TargetID, Probability, network);
             }
         }
     }

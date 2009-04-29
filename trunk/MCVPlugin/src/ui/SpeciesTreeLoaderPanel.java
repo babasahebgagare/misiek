@@ -21,8 +21,8 @@ import utils.JTreeModelSpeciesGenerator;
  */
 public class SpeciesTreeLoaderPanel extends javax.swing.JPanel {
 
-    String filepath;
-    SpeciesLoadedListener list;
+    private String filepath;
+    private SpeciesLoadedListener list;
 
     /** Creates new form SpeciesTreeLoaderPanel
      * @param list 
