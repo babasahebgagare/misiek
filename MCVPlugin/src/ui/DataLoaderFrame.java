@@ -15,7 +15,7 @@ import java.awt.FlowLayout;
 public class DataLoaderFrame extends javax.swing.JFrame {
 
     private void initPanel() {
-        DataLoaderPanel loaderpanel = new DataLoaderPanel();
+        DataLoaderPanel loaderpanel = new DataLoaderPanel(this);
         this.add(loaderpanel);
         this.setVisible(true);
         loaderpanel.setVisible(true);

@@ -23,6 +23,7 @@ public class ProteinsLoadedListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         this.panel.enableTabs();
         this.intPanel.initSpeciesList();
+        panel.setParentFrameOnTop();
         UIController.getInstance().refreshUIafterProteinsLoading();
     }
 }

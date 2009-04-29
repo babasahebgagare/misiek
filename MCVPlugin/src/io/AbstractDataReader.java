@@ -2,6 +2,7 @@ package io;
 
 import io.readers.tasks.TasksDataReader;
 import java.util.Map;
+import logicmodel.structs.PPINetwork;
 import viewmodel.structs.CytoAbstractPPINetwork;
 
 public abstract class AbstractDataReader {
@@ -12,6 +13,8 @@ public abstract class AbstractDataReader {
     public static AbstractDataReader getInstance() {
         return reader;
     }
+
+    public abstract void readSpeciesInteractions(PPINetwork network, String filepath, Double treshold);
 
     public abstract void readAllInteractions(Map<String, Double> tresholds);
 

@@ -8,6 +8,7 @@ package ui;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.border.TitledBorder;
+import main.PluginDataHandle;
 
 /**
  *
@@ -15,12 +16,21 @@ import javax.swing.border.TitledBorder;
  */
 public class SpeciesInteractionsLoaderPanel extends javax.swing.JPanel {
 
-    String name;
-    String filepath;
+    private String name;
+    private String filepath;
 
     /** Creates new form SpeciesInteractionsLoaderPanel
      * @param name
+     * @return 
      */
+    public boolean checked() {
+        return checkbox.isSelected();
+    }
+
+    public String tryGetFilepath() {
+        return filepath;
+    }
+
     public SpeciesInteractionsLoaderPanel(final String name) {
         initComponents();
         this.name = name;
@@ -40,6 +50,10 @@ public class SpeciesInteractionsLoaderPanel extends javax.swing.JPanel {
         } else {
             return null;
         }
+    }
+
+    public String getSpeciesName() {
+        return name;
     }
 
     /** This method is called from within the constructor to
@@ -113,20 +127,30 @@ public class SpeciesInteractionsLoaderPanel extends javax.swing.JPanel {
             tresholdField.setEnabled(true);
             openButton.setEnabled(true);
             filepathLabel.setEnabled(true);
+            if (filepath != null) {
+                PluginDataHandle.getLoadingDataHandle().addInteractionFilename(name, filepath);
+            }
         } else {
             tresholdField.setEnabled(false);
             openButton.setEnabled(false);
             filepathLabel.setEnabled(false);
+            if (filepath != null) {
+                PluginDataHandle.getLoadingDataHandle().deleteInteractionFilename(name, filepath);
+            }
         }
     }//GEN-LAST:event_checkboxActionPerformed
 
     private void openButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openButtonActionPerformed
         JFileChooser fc = new JFileChooser();
         int returnVal = fc.showOpenDialog(fc);
+        System.out.println("TUUU");
 
         if (returnVal == JFileChooser.APPROVE_OPTION) {
+            System.out.println("TAJJJ");
             File file = fc.getSelectedFile();
             filepath = file.getAbsolutePath();
+            System.out.println(filepath);
+            PluginDataHandle.getLoadingDataHandle().addInteractionFilename(name, filepath);
             filepathLabel.setText(filepath);
         }
     }//GEN-LAST:event_openButtonActionPerformed

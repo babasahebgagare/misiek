@@ -1,6 +1,7 @@
 package main;
 
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  *
@@ -10,7 +11,19 @@ public class LoadingDataHandle {
 
     private String speciesFilename;
     private String genesFilename;
-    private Map<String, String> interactionsFilenames;
+    private Map<String, String> interactionsFilenames = new TreeMap<String, String>();
+
+    public void addInteractionFilename(String speciesName, String filepath) {
+        System.out.println(speciesName);
+        System.out.println(filepath);
+        interactionsFilenames.put(speciesName, filepath);
+    }
+
+    public void deleteInteractionFilename(String speciesName, String filepath) {
+        if (interactionsFilenames.containsKey(speciesName)) {
+            interactionsFilenames.put(speciesName, filepath);
+        }
+    }
 
     public LoadingDataHandle() {
         deleteAll();
@@ -19,7 +32,7 @@ public class LoadingDataHandle {
     public void deleteAll() {
         speciesFilename = null;
         genesFilename = null;
-        interactionsFilenames = null;
+        interactionsFilenames = new TreeMap<String, String>();
     }
 
     public String getGenesFilename() {
