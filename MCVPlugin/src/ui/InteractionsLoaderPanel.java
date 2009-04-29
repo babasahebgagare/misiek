@@ -5,11 +5,7 @@
  */
 package ui;
 
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.Vector;
-import javax.swing.JFrame;
-import javax.swing.table.DefaultTableModel;
+import java.awt.GridLayout;
 import logicmodel.controllers.DataHandle;
 import main.PluginDataHandle;
 
@@ -19,14 +15,14 @@ import main.PluginDataHandle;
  */
 public class InteractionsLoaderPanel extends javax.swing.JPanel {
 
-    private JFrame parentFrame = null;
-
+    //private JFrame parentFrame = null;
     /** Creates new form InteractionsLoaderPanel
-     * @param parentFrame
      */
-    public InteractionsLoaderPanel(final JFrame parentFrame) {
-        this.parentFrame = parentFrame;
+    public InteractionsLoaderPanel() {
+        //       this.parentFrame = parentFrame;
         initComponents();
+        //    System.out.println("HEHEHE");
+        // initSpeciesList();
         initSpeciesList();
     }
 
@@ -43,10 +39,22 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        loadingPanel = new javax.swing.JPanel();
         loadButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        intLoadingTable = new javax.swing.JTable();
+
+        loadingPanel.setName("loadingPanel"); // NOI18N
+
+        javax.swing.GroupLayout loadingPanelLayout = new javax.swing.GroupLayout(loadingPanel);
+        loadingPanel.setLayout(loadingPanelLayout);
+        loadingPanelLayout.setHorizontalGroup(
+            loadingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 311, Short.MAX_VALUE)
+        );
+        loadingPanelLayout.setVerticalGroup(
+            loadingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 186, Short.MAX_VALUE)
+        );
 
         loadButton.setText("Load");
         loadButton.setName("loadButton"); // NOI18N
@@ -64,34 +72,6 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
             }
         });
 
-        jScrollPane1.setName("jScrollPane1"); // NOI18N
-
-        intLoadingTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Species name", "Treshold"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Double.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, true
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        intLoadingTable.setName("intLoadingTable"); // NOI18N
-        jScrollPane1.setViewportView(intLoadingTable);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -100,16 +80,17 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(loadButton, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                        .addComponent(loadButton, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(loadingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(loadingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(loadButton)
@@ -118,46 +99,59 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void initSpeciesList() {
+    /* private void initSpeciesList() {
+    DataHandle dh = PluginDataHandle.getDataHandle();
+    if (dh == null) {
+    return;
+    }
+
+    DefaultTableModel tableModel = (DefaultTableModel) intLoadingTable.getModel();
+    for (String species : dh.getNetworks().keySet()) {
+    tableModel.addRow(new Object[]{species, genereteTreshold(species)});
+    }
+    }*/
+    public void initSpeciesList() {
         DataHandle dh = PluginDataHandle.getDataHandle();
-        if (dh == null) {
+        if (!dh.isProteinsLoaded()) {
             return;
         }
 
-        DefaultTableModel tableModel = (DefaultTableModel) intLoadingTable.getModel();
+        loadingPanel.setLayout(new GridLayout(10, 1));
+
         for (String species : dh.getNetworks().keySet()) {
-            tableModel.addRow(new Object[]{species, genereteTreshold(species)});
+            SpeciesInteractionsLoaderPanel panel = new SpeciesInteractionsLoaderPanel(species);
+            System.out.println(species);
+            loadingPanel.add(panel);
         }
     }
 
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
-        DefaultTableModel model = (DefaultTableModel) intLoadingTable.getModel();
+        /*  DefaultTableModel model = (DefaultTableModel) intLoadingTable.getModel();
         Map<String, Double> tresholds = new TreeMap<String, Double>();
 
         for (int i = 0; i < model.getRowCount(); i++) {
-            @SuppressWarnings("unchecked")
-            Vector<Object> row = (Vector<Object>) model.getDataVector().get(i);
-            String species = String.valueOf(row.get(0));
-            String treshold_str = String.valueOf(row.get(1));
-            if (treshold_str != null && !treshold_str.equals("")) {
+        @SuppressWarnings("unchecked")
+        Vector<Object> row = (Vector<Object>) model.getDataVector().get(i);
+        String species = String.valueOf(row.get(0));
+        String treshold_str = String.valueOf(row.get(1));
+        if (treshold_str != null && !treshold_str.equals("")) {
 
-                Double treshold = Double.valueOf(treshold_str);
-                tresholds.put(species, treshold);
-            }
+        Double treshold = Double.valueOf(treshold_str);
+        tresholds.put(species, treshold);
         }
+        }*/
 
-        parentFrame.dispose();
-        UIController.getInstance().loadAllInteractions(tresholds);
+        //parentFrame.dispose();
+        //  UIController.getInstance().loadAllInteractions(tresholds);
 }//GEN-LAST:event_loadButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        parentFrame.dispose();
+        // parentFrame.dispose();
 }//GEN-LAST:event_cancelButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
-    private javax.swing.JTable intLoadingTable;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton loadButton;
+    private javax.swing.JPanel loadingPanel;
     // End of variables declaration//GEN-END:variables
 }

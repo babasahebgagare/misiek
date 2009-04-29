@@ -6,6 +6,7 @@ public class Main extends CytoscapePlugin {
 
     public Main() {
         PluginInitializator.initAll();
+        PluginDataHandle.initPluginDataHandle();
     }
 }
 

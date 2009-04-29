@@ -8,14 +8,11 @@ import cytoscape.dialogs.plugins.TreeNode;
 import cytoscape.view.CyNetworkView;
 import giny.model.Edge;
 import io.AbstractDataReader;
-import java.io.File;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import javax.swing.DefaultListModel;
-import javax.swing.JFileChooser;
-import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 import viewmodel.controllers.CytoDataHandle;
@@ -26,6 +23,7 @@ import viewmodel.structs.CytoAbstractPPINetwork;
 import viewmodel.structs.CytoProtein;
 import logicmodel.structs.PPINetwork;
 import main.PluginDataHandle;
+import utils.JTreeModelSpeciesGenerator;
 import viewmodel.controllers.CytoInteractionsConverter;
 import viewmodel.controllers.CytoVisualHandle;
 
@@ -41,22 +39,6 @@ public class DefaultUIController extends UIController {
             nodes.add(Integer.valueOf(edge.getTarget().getRootGraphIndex()));
         }
         return nodes;
-    }
-
-    private TreeNode createRecTreeModel(PPINetwork rootNetwork) {
-        if (rootNetwork == null) {
-            return null;
-        } else {
-            TreeNode ret = new TreeNode(rootNetwork.getID());
-
-            for (PPINetwork child : rootNetwork.getContext().getChildrenNetworks()) {
-                TreeNode childNode = createRecTreeModel(child);
-                if (childNode != null) {
-                    ret.addChild(childNode);
-                }
-            }
-            return ret;
-        }
     }
 
     private void deleteColorListDataView() {
@@ -84,9 +66,7 @@ public class DefaultUIController extends UIController {
     }
 
     private void initTreeDataView() {
-        DataHandle dh = PluginDataHandle.getDataHandle();
-        TreeNode root = createRecTreeModel(dh.getRootNetwork());
-        TreeModel newModel = new DefaultTreeModel(root);
+        TreeModel newModel = JTreeModelSpeciesGenerator.generateModel();
         PluginMenusHandle.getTree().setModel(newModel);
     }
 
@@ -188,30 +168,35 @@ public class DefaultUIController extends UIController {
 
     @Override
     public void loadData() {
-        JFileChooser fc = new JFileChooser();
-        int returnVal = fc.showOpenDialog(fc);
 
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = fc.getSelectedFile();
-            String filepath = file.getAbsolutePath();
-            int pointPosition = filepath.lastIndexOf(".");
-            filepath = filepath.substring(0, pointPosition + 1);
+        DataLoaderFrame dataloaderframe = new DataLoaderFrame();
+        dataloaderframe.pack();
+        dataloaderframe.setVisible(true);
+    /*
+    JFileChooser fc = new JFileChooser();
+    int returnVal = fc.showOpenDialog(fc);
 
-            PluginDataHandle.initPluginDataHandle();
-            AbstractDataReader.getInstance().setFilepath(filepath);
-            AbstractDataReader.getInstance().readSpacies();
-            AbstractDataReader.getInstance().readTrees();
+    if (returnVal == JFileChooser.APPROVE_OPTION) {
+    File file = fc.getSelectedFile();
+    String filepath = file.getAbsolutePath();
+    int pointPosition = filepath.lastIndexOf(".");
+    filepath = filepath.substring(0, pointPosition + 1);
 
-            ProjectorInfoCalculator.calculateProjectorInfo();
-            initDataView();
+    PluginDataHandle.initPluginDataHandle();
+    AbstractDataReader.getInstance().setFilepath(filepath);
+    AbstractDataReader.getInstance().readSpacies();
+    AbstractDataReader.getInstance().readTrees();
 
-            PluginMenusHandle.getLoadDataButton().setEnabled(true);
-            PluginMenusHandle.getShowNetworkButton().setEnabled(true);
-            PluginMenusHandle.getLoadAllInteractionsButton().setEnabled(true);
-            PluginMenusHandle.getLoadDataButton().setEnabled(false);
-            PluginMenusHandle.getDeleteAllDataButton().setEnabled(true);
-        }
+    ProjectorInfoCalculator.calculateProjectorInfo();
+    initDataView();
 
+    PluginMenusHandle.getLoadDataButton().setEnabled(true);
+    PluginMenusHandle.getShowNetworkButton().setEnabled(true);
+    PluginMenusHandle.getLoadAllInteractionsButton().setEnabled(true);
+    PluginMenusHandle.getLoadDataButton().setEnabled(false);
+    PluginMenusHandle.getDeleteAllDataButton().setEnabled(true);
+    }
+     */
     }
 
     @Override
@@ -261,11 +246,50 @@ public class DefaultUIController extends UIController {
         deleteDataView();
         PluginMenusHandle.getLoadDataButton().setEnabled(true);
         PluginMenusHandle.getDeleteAllDataButton().setEnabled(false);
+        PluginDataHandle.getLoadingDataHandle().deleteAll();
     }
 
     @Override
     public void loadAllInteractions(Map<String, Double> tresholds) {
         AbstractDataReader.getInstance().readAllInteractions(tresholds);
         PluginMenusHandle.getShowLoadedInteractionsButton().setEnabled(true);
+    }
+
+    @Override
+    public void loadSpeciesTreeData(String filepath) {
+        PluginDataHandle.initPluginDataHandle();
+        AbstractDataReader.getInstance().setFilepath(filepath);
+        AbstractDataReader.getInstance().readSpecies();
+
+        //ProjectorInfoCalculator.calculateProjectorInfo();
+        initDataView();
+
+    /* PluginMenusHandle.getLoadDataButton().setEnabled(true);
+    PluginMenusHandle.getShowNetworkButton().setEnabled(true);
+    PluginMenusHandle.getLoadAllInteractionsButton().setEnabled(true);
+    PluginMenusHandle.getLoadDataButton().setEnabled(false);
+    PluginMenusHandle.getDeleteAllDataButton().setEnabled(true);*/
+    }
+
+    @Override
+    public void loadGenesTreeData(String filepath) {
+        AbstractDataReader.getInstance().setFilepath(filepath);
+        AbstractDataReader.getInstance().readTrees();
+
+        ProjectorInfoCalculator.calculateProjectorInfo();
+        initDataView();
+    }
+
+    @Override
+    public void refreshUIafterProteinsLoading() {
+        PluginMenusHandle.getLoadDataButton().setEnabled(true);
+        PluginMenusHandle.getShowNetworkButton().setEnabled(true);
+        PluginMenusHandle.getLoadAllInteractionsButton().setEnabled(true);
+        PluginMenusHandle.getDeleteAllDataButton().setEnabled(true);
+    }
+
+    @Override
+    public void refreshUIafterSpeciesLoading() {
+        PluginMenusHandle.getDeleteAllDataButton().setEnabled(true);
     }
 }
