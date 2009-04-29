@@ -35,7 +35,7 @@ public abstract class AbstractDataReader {
         return filepath;
     }
 
-    public abstract void readSpacies();
+    public abstract void readSpecies();
 
     public abstract void readTrees();
 }

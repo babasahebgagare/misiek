@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import main.PluginDataHandle;
 
 public class LoadTreesTask implements Task {
 
@@ -55,6 +56,7 @@ public class LoadTreesTask implements Task {
                     taskMonitor.setPercentCompleted(Math.round(percent));
                 }
             }
+            PluginDataHandle.getDataHandle().setProteinsLoaded(true);
             taskMonitor.setPercentCompleted(100);
             br.close();
             dis.close();

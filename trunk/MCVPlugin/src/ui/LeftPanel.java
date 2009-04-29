@@ -361,14 +361,14 @@ thread.run();*/
 }//GEN-LAST:event_loadIntForNetworkButtonActionPerformed
 
 private void loadInteractionsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadInteractionsButtonActionPerformed
-    JFrame frame = new JFrame("Set tresholds for loading interactions.");
-    InteractionsLoaderPanel intLoaderPanel = new InteractionsLoaderPanel(frame);
+  /*  JFrame frame = new JFrame("Set tresholds for loading interactions.");
+    InteractionsLoaderPanel intLoaderPanel = new InteractionsLoaderPanel();
     frame.add(intLoaderPanel);
     frame.pack();
     frame.setVisible(true);
     frame.pack();
     frame.setLocationRelativeTo(Cytoscape.getDesktop());
-    intLoaderPanel.setVisible(true);
+    intLoaderPanel.setVisible(true);*/
 }//GEN-LAST:event_loadInteractionsButtonActionPerformed
 
 private void showLoadedButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showLoadedButtonActionPerformed

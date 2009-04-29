@@ -32,9 +32,9 @@ public class TasksDataReader extends AbstractDataReader {
 
     @Override
     public void readTrees() {
-        String treespath = getFilepath().concat("trees");
+        //     String treespath = getFilepath().concat("trees");
 
-        Task task = new LoadTreesTask(treespath);
+        Task task = new LoadTreesTask(getFilepath());
         JTaskConfig jTaskConfig = new JTaskConfig();
 
         jTaskConfig.displayCancelButton(false);
@@ -47,10 +47,10 @@ public class TasksDataReader extends AbstractDataReader {
     }
 
     @Override
-    public void readSpacies() {
-        String spspath = getFilepath().concat("spy");
+    public void readSpecies() {
+        //    String spspath = getFilepath().concat("spy");
 
-        Task task = new LoadSpaciesTask(spspath);
+        Task task = new LoadSpaciesTask(getFilepath());
         JTaskConfig jTaskConfig = new JTaskConfig();
 
         jTaskConfig.displayCancelButton(false);

@@ -39,4 +39,12 @@ public abstract class UIController {
     public abstract void deleteAllData();
 
     public abstract void loadAllInteractions(Map<String, Double> tresholds);
+
+    public abstract void loadSpeciesTreeData(String filepath);
+
+    public abstract void loadGenesTreeData(String filepath);
+
+    public abstract void refreshUIafterProteinsLoading();
+
+    public abstract void refreshUIafterSpeciesLoading();
 }

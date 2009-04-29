@@ -59,7 +59,7 @@ public class DefaultDataReader extends AbstractDataReader {
     }
 
     @Override
-    public void readSpacies() {
+    public void readSpecies() {
         String spaciespath = getFilepath().concat("spy");
         readSpacies(spaciespath);
     }
