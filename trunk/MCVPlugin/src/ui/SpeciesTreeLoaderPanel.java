@@ -83,7 +83,7 @@ public class SpeciesTreeLoaderPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         speciesTree = new javax.swing.JTree();
 
-        chooseFile.setText("Chose file");
+        chooseFile.setText("Choose file");
         chooseFile.setName("chooseFile"); // NOI18N
         chooseFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
