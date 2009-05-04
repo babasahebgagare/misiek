@@ -19,7 +19,8 @@ public class DefaultLayouter extends Layouter {
         Collection<CytoProtein> cytoProteins = cytoGroupNode.getContext().getInsideProteins();
 
         CytoProtein parentProtein = cytoGroupNode.getContext().getMotherProtein();
-        CyNetworkView parentNetworkView = Cytoscape.getNetworkView(parentProtein.getCytoNetowork().getCytoID());
+        String parentNetworkCytoID = parentProtein.getCytoNetowork().getCytoID();
+        CyNetworkView parentNetworkView = Cytoscape.getNetworkView(parentNetworkCytoID);
         CyNode parentNode = Cytoscape.getCyNode(parentProtein.getCytoID());
         NodeView nodeView = parentNetworkView.getNodeView(parentNode);
 
@@ -64,7 +65,8 @@ public class DefaultLayouter extends Layouter {
             CytoProtein cytoMotherProteinOrNull = cytoProteinProjection.tryGetCytoMotherProtein();
 
             if (cytoMotherProteinOrNull != null) {
-                CyNetworkView parentNetworkView = Cytoscape.getNetworkView(cytoMotherProteinOrNull.getCytoNetowork().getCytoID());
+                String motherNetworkCytoID = cytoMotherProteinOrNull.getCytoNetowork().getCytoID();
+                CyNetworkView parentNetworkView = Cytoscape.getNetworkView(motherNetworkCytoID);
                 CyNode parentNode = Cytoscape.getCyNode(cytoMotherProteinOrNull.getCytoID());
                 NodeView nodeView = parentNetworkView.getNodeView(parentNode);
 
@@ -78,13 +80,6 @@ public class DefaultLayouter extends Layouter {
     }
 
     private static void setProteinViewPosition(NodeView proteinView, NodeView nodeView, int i, int count) {
-        if (proteinView == null) {
-            System.out.println("NULL PROTEIN VIEW");
-        }
-        if (nodeView == null) {
-            System.out.println("NODE VIEW NULL");
-        }
-
         if (count == 1) {
             proteinView.setXPosition(nodeView.getXPosition());
             proteinView.setYPosition(nodeView.getYPosition());
