@@ -124,14 +124,19 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
 
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
         for (SpeciesInteractionsLoaderPanel speciesPanel : panels) {
+
+            String speciesName = speciesPanel.getSpeciesName();
             if (speciesPanel.checked()) {
                 String filename = speciesPanel.tryGetFilepath();
                 if (filename != null) {
                     Double treshold = speciesPanel.tryGetTreshold();
-                    String speciesName = speciesPanel.getSpeciesName();
+
+                    PluginDataHandle.getLoadedDataHandle().addInteractionData(speciesName, filename, treshold);
                     PPINetwork network = PluginDataHandle.getDataHandle().getNetworks().get(speciesName);
                     AbstractDataReader.getInstance().readSpeciesInteractions(network, filename, treshold);
                 }
+            } else {
+                PluginDataHandle.getLoadedDataHandle().deleteInteractionData(speciesName);
             }
         }
 

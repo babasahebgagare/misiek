@@ -7,18 +7,16 @@ import java.util.TreeMap;
  *
  * @author misiek (mw219725@gmail.com)
  */
-public class LoadingDataHandle {
+public class LoadedDataHandle {
 
-    private String speciesFilename;
-    private String genesFilename;
     private Map<String, String> interactionsFilenames = new TreeMap<String, String>();
     private Map<String, Double> interactionsTresholds = new TreeMap<String, Double>();
 
-    public String getSpeciesFilename(String speciesName) {
+    public String getSpeciesInteractionsFilename(String speciesName) {
         return interactionsFilenames.get(speciesName);
     }
 
-    public Double getSpeciesTreshold(String speciesName) {
+    public Double getSpeciesInteractionsTreshold(String speciesName) {
         return interactionsTresholds.get(speciesName);
     }
 
@@ -36,24 +34,15 @@ public class LoadingDataHandle {
         }
     }
 
-    public LoadingDataHandle() {
+    public LoadedDataHandle() {
         deleteAll();
     }
 
     public void deleteAll() {
-        speciesFilename = null;
-        genesFilename = null;
         interactionsFilenames = new TreeMap<String, String>();
         interactionsTresholds = new TreeMap<String, Double>();
     }
 
-    public String getGenesFilename() {
-        return genesFilename;
-    }
-
-    public void setGenesFilename(String genesFilename) {
-        this.genesFilename = genesFilename;
-    }
 
     public Map<String, String> getInteractionsFilenames() {
         return interactionsFilenames;
@@ -61,13 +50,5 @@ public class LoadingDataHandle {
 
     public void setInteractionsFilenames(Map<String, String> interactionsFilenames) {
         this.interactionsFilenames = interactionsFilenames;
-    }
-
-    public String getSpeciesFilename() {
-        return speciesFilename;
-    }
-
-    public void setSpeciesFilename(String speciesFilename) {
-        this.speciesFilename = speciesFilename;
     }
 }
