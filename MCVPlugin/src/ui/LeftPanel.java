@@ -11,18 +11,16 @@ import MCL.MCLCluster;
 import cytoscape.Cytoscape;
 import java.awt.Color;
 import java.util.Collection;
-import javax.swing.Icon;
 import javax.swing.JColorChooser;
-import javax.swing.JFrame;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.tree.DefaultTreeCellRenderer;
 import logicmodel.controllers.DataHandle;
 import viewmodel.structs.CytoProtein;
 import logicmodel.structs.Family;
 import logicmodel.structs.PPINetwork;
 import main.PluginDataHandle;
+import utils.JTreeModelSpeciesGenerator;
 import utils.Messenger;
 import utils.Stats;
 import viewmodel.controllers.CytoProjector;
@@ -78,14 +76,7 @@ public class LeftPanel extends javax.swing.JPanel {
 
     private void initSpeciesTree() {
 
-        Icon icon = PluginResources.getIcon("spec.jpg");
-        DefaultTreeCellRenderer renderer = (DefaultTreeCellRenderer) spaciesTree.getCellRenderer();
-
-        renderer.setOpenIcon(icon);
-        renderer.setClosedIcon(icon);
-        renderer.setLeafIcon(icon);
-        spaciesTree.setCellRenderer(renderer);
-
+        JTreeModelSpeciesGenerator.decorateJTree(spaciesTree);
         spaciesTree.setModel(null);
     }
 

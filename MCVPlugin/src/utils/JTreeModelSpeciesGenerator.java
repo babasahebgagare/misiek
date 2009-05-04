@@ -1,12 +1,15 @@
 package utils;
 
 import cytoscape.dialogs.plugins.TreeNode;
+import javax.swing.Icon;
+import javax.swing.JTree;
+import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
 import logicmodel.controllers.DataHandle;
 import logicmodel.structs.PPINetwork;
 import main.PluginDataHandle;
-import ui.PluginMenusHandle;
+import ui.PluginResources;
 
 /**
  *
@@ -14,7 +17,18 @@ import ui.PluginMenusHandle;
  */
 public class JTreeModelSpeciesGenerator {
 
+    public static void decorateJTree(JTree speciesTree) {
+        Icon icon = PluginResources.getIcon("spec.jpg");
+        DefaultTreeCellRenderer renderer = (DefaultTreeCellRenderer) speciesTree.getCellRenderer();
+
+        renderer.setOpenIcon(icon);
+        renderer.setClosedIcon(icon);
+        renderer.setLeafIcon(icon);
+        speciesTree.setCellRenderer(renderer);
+    }
+
     public static TreeModel generateModel() {
+
         DataHandle dh = PluginDataHandle.getDataHandle();
         TreeNode root = createRecTreeModel(dh.getRootNetwork());
         TreeModel newModel = new DefaultTreeModel(root);
