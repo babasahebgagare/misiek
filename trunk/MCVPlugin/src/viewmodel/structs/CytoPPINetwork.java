@@ -56,4 +56,9 @@ public class CytoPPINetwork extends CytoAbstractPPINetwork {
     public void deleteCytoInteractions() {
         interactions = new HashMap<String, CytoInteraction>();
     }
+
+    @Override
+    public CytoAbstractPPINetwork tryGetMother() {
+        return null;
+    }
 }

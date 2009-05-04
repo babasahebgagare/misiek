@@ -38,6 +38,8 @@ public abstract class CytoAbstractPPINetwork extends CytoObject {
 
     public abstract void addCytoInteraction(CytoInteraction cytoInteraction);
 
+    public abstract CytoAbstractPPINetwork tryGetMother();
+
     public CytoAbstractPPINetwork(PPINetwork network, String ID) {
         this.network = network;
         this.ID = ID;
