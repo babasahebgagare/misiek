@@ -13,7 +13,8 @@ public class CytoNetworkConverter {
         CytoDataHandle cdh = PluginDataHandle.getCytoDataHandle();
 
         if (Cytoscape.getNetwork(cytoNetwork.getCytoID()) == Cytoscape.getNullNetwork()) {
-            CyNetwork cyNetwork = Cytoscape.createNetwork(cytoNetwork.getID(), true);
+
+            CyNetwork cyNetwork = createCytoscapeNetwork(cytoNetwork);
             cytoNetwork.setCytoID(cyNetwork.getIdentifier());
             cdh.addNetworkIDMapping(cyNetwork.getIdentifier(), cytoNetwork.getID());
 
@@ -27,5 +28,20 @@ public class CytoNetworkConverter {
             CytoVisualHandle.applyCyLayoutAlgorithm(cyNetwork, cyNetworkView);
             CytoVisualHandle.setDefaultCenter(cyNetworkView);
         }
+    }
+
+    private static CyNetwork createCytoscapeNetwork(CytoAbstractPPINetwork cytoNetwork) {
+        CytoAbstractPPINetwork motherOrNull = cytoNetwork.tryGetMother();
+        if (motherOrNull != null) {
+            String parentID = cytoNetwork.getNetwork().getID();
+            System.out.println("PARENT:" + parentID);
+            CytoAbstractPPINetwork cytoParentOrNull = PluginDataHandle.getCytoDataHandle().getCytoNetwork(parentID);
+            if (cytoParentOrNull != null) {
+                CyNetwork parentNetwork = Cytoscape.getNetwork(cytoParentOrNull.getCytoID());
+                System.out.println("PARENT:" + parentID);
+                return Cytoscape.createNetwork(cytoNetwork.getID(), parentNetwork, true);
+            } 
+        }
+        return Cytoscape.createNetwork(cytoNetwork.getID(), true);
     }
 }
