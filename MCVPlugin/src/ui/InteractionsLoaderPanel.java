@@ -32,10 +32,6 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
         initSpeciesList();
     }
 
-    private Double genereteTreshold(String species) {
-        return Double.valueOf(0.5);
-    }
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

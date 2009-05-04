@@ -28,9 +28,9 @@ public class DataLoaderPanel extends javax.swing.JPanel {
         parentFrame.toFront();
     }
 
-    private void setEnableSpeciesTab(boolean b) {
+/*    private void setEnableSpeciesTab(boolean b) {
         this.getTabbedPane().setEnabledAt(0, b);
-    }
+    }*/
 
     private void setEnableProteinsTab(boolean b) {
         this.getTabbedPane().setEnabledAt(1, b);
