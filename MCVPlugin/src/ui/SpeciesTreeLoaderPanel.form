@@ -51,7 +51,7 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="chooseFile">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Chose file"/>
+        <Property name="text" type="java.lang.String" value="Choose file"/>
         <Property name="name" type="java.lang.String" value="chooseFile" noResource="true"/>
       </Properties>
       <Events>
