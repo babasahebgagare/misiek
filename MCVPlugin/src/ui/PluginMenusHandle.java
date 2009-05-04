@@ -10,13 +10,13 @@ public class PluginMenusHandle {
     private static JTextArea memo = null;
     private static JTree tree = null;
     private static JList familiesList = null;
-    private static JButton loadDataButton = null;
     private static JButton doProjectionButton = null;
     private static JButton showNetworkButton = null;
     private static JButton loadAllInteractionsButton = null;
     private static JButton showLoadedInteractionsButton = null;
     private static JButton loadInteractionsForNetworkButton = null;
-    private static JButton deleteAllDataButton = null;
+    private static JButton newDataButton = null;
+    private static JButton updateDataButton = null;
 
     public static JList getFamiliesList() {
         return familiesList;
@@ -40,14 +40,6 @@ public class PluginMenusHandle {
 
     public static void setMemo(JTextArea memo) {
         PluginMenusHandle.memo = memo;
-    }
-
-    public static JButton getLoadDataButton() {
-        return loadDataButton;
-    }
-
-    public static void setLoadDataButton(JButton loadDataButton) {
-        PluginMenusHandle.loadDataButton = loadDataButton;
     }
 
     public static JButton getDoProjectionButton() {
@@ -90,11 +82,19 @@ public class PluginMenusHandle {
         PluginMenusHandle.loadInteractionsForNetworkButton = loadInteractionsForNetworkButton;
     }
 
-    public static JButton getDeleteAllDataButton() {
-        return deleteAllDataButton;
+    public static JButton getNewDataButton() {
+        return newDataButton;
     }
 
-    public static void setDeleteAllDataButton(JButton deleteAllDataButton) {
-        PluginMenusHandle.deleteAllDataButton = deleteAllDataButton;
+    public static void setNewDataButton(JButton newDataButton) {
+        PluginMenusHandle.newDataButton = newDataButton;
+    }
+
+    public static JButton getUpdateDataButton() {
+        return updateDataButton;
+    }
+
+    public static void setUpdateDataButton(JButton updateDataButton) {
+        PluginMenusHandle.updateDataButton = updateDataButton;
     }
 }

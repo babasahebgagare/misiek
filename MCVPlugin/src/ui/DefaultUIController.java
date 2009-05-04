@@ -161,42 +161,9 @@ public class DefaultUIController extends UIController {
         PluginMenusHandle.getLoadAllInteractionsButton().setEnabled(false);
         PluginMenusHandle.getShowLoadedInteractionsButton().setEnabled(false);
         PluginMenusHandle.getDoProjectionButton().setEnabled(false);
-        PluginMenusHandle.getLoadDataButton().setEnabled(true);
+        PluginMenusHandle.getNewDataButton().setEnabled(true);
         PluginMenusHandle.getLoadInteractionsForNetworkButton().setEnabled(false);
-        PluginMenusHandle.getDeleteAllDataButton().setEnabled(false);
-    }
-
-    @Override
-    public void loadData() {
-
-        DataLoaderFrame dataloaderframe = new DataLoaderFrame();
-        dataloaderframe.pack();
-        dataloaderframe.setVisible(true);
-    /*
-    JFileChooser fc = new JFileChooser();
-    int returnVal = fc.showOpenDialog(fc);
-
-    if (returnVal == JFileChooser.APPROVE_OPTION) {
-    File file = fc.getSelectedFile();
-    String filepath = file.getAbsolutePath();
-    int pointPosition = filepath.lastIndexOf(".");
-    filepath = filepath.substring(0, pointPosition + 1);
-
-    PluginDataHandle.initPluginDataHandle();
-    AbstractDataReader.getInstance().setFilepath(filepath);
-    AbstractDataReader.getInstance().readSpacies();
-    AbstractDataReader.getInstance().readTrees();
-
-    ProjectorInfoCalculator.calculateProjectorInfo();
-    initDataView();
-
-    PluginMenusHandle.getLoadDataButton().setEnabled(true);
-    PluginMenusHandle.getShowNetworkButton().setEnabled(true);
-    PluginMenusHandle.getLoadAllInteractionsButton().setEnabled(true);
-    PluginMenusHandle.getLoadDataButton().setEnabled(false);
-    PluginMenusHandle.getDeleteAllDataButton().setEnabled(true);
-    }
-     */
+        PluginMenusHandle.getUpdateDataButton().setEnabled(false);
     }
 
     @Override
@@ -241,15 +208,6 @@ public class DefaultUIController extends UIController {
     }
 
     @Override
-    public void deleteAllData() {
-        PluginDataHandle.refreshPluginDataHandle();
-        deleteDataView();
-        PluginMenusHandle.getLoadDataButton().setEnabled(true);
-        PluginMenusHandle.getDeleteAllDataButton().setEnabled(false);
-        PluginDataHandle.getLoadingDataHandle().deleteAll();
-    }
-
-    @Override
     public void loadAllInteractions(Map<String, Double> tresholds) {
         AbstractDataReader.getInstance().readAllInteractions(tresholds);
         PluginMenusHandle.getShowLoadedInteractionsButton().setEnabled(true);
@@ -282,14 +240,37 @@ public class DefaultUIController extends UIController {
 
     @Override
     public void refreshUIafterProteinsLoading() {
-        PluginMenusHandle.getLoadDataButton().setEnabled(true);
+        PluginMenusHandle.getUpdateDataButton().setEnabled(true);
         PluginMenusHandle.getShowNetworkButton().setEnabled(true);
         PluginMenusHandle.getLoadAllInteractionsButton().setEnabled(true);
-        PluginMenusHandle.getDeleteAllDataButton().setEnabled(true);
+        PluginMenusHandle.getNewDataButton().setEnabled(true);
     }
 
     @Override
     public void refreshUIafterSpeciesLoading() {
-        PluginMenusHandle.getDeleteAllDataButton().setEnabled(true);
+        PluginMenusHandle.getNewDataButton().setEnabled(true);
+        PluginMenusHandle.getUpdateDataButton().setEnabled(true);
+    }
+
+    @Override
+    public void newData() {
+        deleteData();
+        DataLoaderFrame dataloaderframe = new DataLoaderFrame();
+        dataloaderframe.pack();
+        dataloaderframe.setVisible(true);
+    }
+
+    @Override
+    public void updateData() {
+        DataLoaderFrame dataloaderframe = new DataLoaderFrame();
+        dataloaderframe.pack();
+        dataloaderframe.setVisible(true);
+    }
+
+    @Override
+    public void deleteData() {
+        PluginDataHandle.refreshPluginDataHandle();
+        deleteDataView();
+        PluginDataHandle.getLoadingDataHandle().deleteAll();
     }
 }
