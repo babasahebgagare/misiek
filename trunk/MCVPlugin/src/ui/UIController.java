@@ -26,8 +26,6 @@ public abstract class UIController {
 
     public abstract void initButtonsState();
 
-    public abstract void loadData();
-
     public abstract void showSelectedNetworks();
 
     public abstract void loadAllInteractions(double treshold);
@@ -36,7 +34,11 @@ public abstract class UIController {
 
     public abstract void loadInteractionsForCurrentNetwork(double treshold);
 
-    public abstract void deleteAllData();
+    public abstract void newData();
+
+    public abstract void updateData();
+
+    public abstract void deleteData();
 
     public abstract void loadAllInteractions(Map<String, Double> tresholds);
 

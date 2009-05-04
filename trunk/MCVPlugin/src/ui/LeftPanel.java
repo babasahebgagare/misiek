@@ -41,14 +41,14 @@ public class LeftPanel extends javax.swing.JPanel {
         initSpeciesTree();
         PluginMenusHandle.setTree(spaciesTree);
         PluginMenusHandle.setMemo(loggerTextArea);
-        PluginMenusHandle.setLoadDataButton(loadDataButton);
+        PluginMenusHandle.setUpdateDataButton(updateDataButton);
         PluginMenusHandle.setDoProjectionButton(projectButton);
         PluginMenusHandle.setShowNetowrkButton(showButton);
         PluginMenusHandle.setFamiliesList(familiesList);
         PluginMenusHandle.setLoadAllInteractionsButton(loadInteractionsButton);
         PluginMenusHandle.setShowLoadedInteractionsButton(showLoadedButton);
         PluginMenusHandle.setLoadInteractionsForNetworkButton(loadIntForNetworkButton);
-        PluginMenusHandle.setDeleteAllDataButton(deleteDataButton);
+        PluginMenusHandle.setNewDataButton(newDataButton);
         UIController.getInstance().initButtonsState();
     }
 
@@ -99,8 +99,8 @@ public class LeftPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         dataPanel = new javax.swing.JPanel();
-        loadDataButton = new javax.swing.JButton();
-        deleteDataButton = new javax.swing.JButton();
+        updateDataButton = new javax.swing.JButton();
+        newDataButton = new javax.swing.JButton();
         attrPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         spaciesTree = new javax.swing.JTree();
@@ -121,18 +121,18 @@ public class LeftPanel extends javax.swing.JPanel {
 
         dataPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        loadDataButton.setText("Update data");
-        loadDataButton.setToolTipText("Ładuje dane z plików .spy, .trees, .int");
-        loadDataButton.addActionListener(new java.awt.event.ActionListener() {
+        updateDataButton.setText("Update data");
+        updateDataButton.setToolTipText("Ładuje dane z plików .spy, .trees, .int");
+        updateDataButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loadDataButtonActionPerformed(evt);
+                updateDataButtonActionPerformed(evt);
             }
         });
 
-        deleteDataButton.setText("New data");
-        deleteDataButton.addActionListener(new java.awt.event.ActionListener() {
+        newDataButton.setText("New data");
+        newDataButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteDataButtonActionPerformed(evt);
+                newDataButtonActionPerformed(evt);
             }
         });
 
@@ -143,17 +143,17 @@ public class LeftPanel extends javax.swing.JPanel {
             .addGroup(dataPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(dataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(deleteDataButton, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
-                    .addComponent(loadDataButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE))
+                    .addComponent(newDataButton, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
+                    .addComponent(updateDataButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE))
                 .addContainerGap())
         );
         dataPanelLayout.setVerticalGroup(
             dataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dataPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(deleteDataButton)
+                .addComponent(newDataButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(loadDataButton)
+                .addComponent(updateDataButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -327,9 +327,9 @@ public class LeftPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void loadDataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadDataButtonActionPerformed
-        UIController.getInstance().loadData();
-}//GEN-LAST:event_loadDataButtonActionPerformed
+    private void updateDataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateDataButtonActionPerformed
+        UIController.getInstance().updateData();
+}//GEN-LAST:event_updateDataButtonActionPerformed
 
     private void showButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showButtonActionPerformed
         UIController.getInstance().showSelectedNetworks();
@@ -361,7 +361,7 @@ thread.run();*/
 }//GEN-LAST:event_loadIntForNetworkButtonActionPerformed
 
 private void loadInteractionsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadInteractionsButtonActionPerformed
-  /*  JFrame frame = new JFrame("Set tresholds for loading interactions.");
+    /*  JFrame frame = new JFrame("Set tresholds for loading interactions.");
     InteractionsLoaderPanel intLoaderPanel = new InteractionsLoaderPanel();
     frame.add(intLoaderPanel);
     frame.pack();
@@ -384,9 +384,9 @@ private void mclButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     csd.actionPerformed(evt);
 }//GEN-LAST:event_mclButtonActionPerformed
 
-private void deleteDataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteDataButtonActionPerformed
-    UIController.getInstance().deleteAllData();
-}//GEN-LAST:event_deleteDataButtonActionPerformed
+private void newDataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newDataButtonActionPerformed
+    UIController.getInstance().newData();
+}//GEN-LAST:event_newDataButtonActionPerformed
 
 private void testButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testButtonActionPerformed
     Stats.printStats();
@@ -395,23 +395,23 @@ private void testButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel attrPanel;
     private javax.swing.JPanel dataPanel;
-    private javax.swing.JButton deleteDataButton;
     private javax.swing.JList familiesList;
     private javax.swing.JPanel intPanel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JButton loadDataButton;
     private javax.swing.JButton loadIntForNetworkButton;
     private javax.swing.JButton loadInteractionsButton;
     private javax.swing.JTextArea loggerTextArea;
     private javax.swing.JButton mclButton;
     private javax.swing.JPanel netsActionsPanel;
+    private javax.swing.JButton newDataButton;
     private javax.swing.JButton projectButton;
     private javax.swing.JButton showButton;
     private javax.swing.JButton showLoadedButton;
     private javax.swing.JTree spaciesTree;
     private javax.swing.JButton testButton;
     private javax.swing.JSpinner tresholdSpinner;
+    private javax.swing.JButton updateDataButton;
     // End of variables declaration//GEN-END:variables
 }
