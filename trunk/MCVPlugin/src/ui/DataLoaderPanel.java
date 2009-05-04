@@ -28,10 +28,20 @@ public class DataLoaderPanel extends javax.swing.JPanel {
         parentFrame.toFront();
     }
 
-/*    private void setEnableSpeciesTab(boolean b) {
-        this.getTabbedPane().setEnabledAt(0, b);
-    }*/
+    private void setActiveTab() {
+        DataHandle dh = PluginDataHandle.getDataHandle();
+        if (dh.isProteinsLoaded()) {
+            this.getTabbedPane().setSelectedIndex(2);
+        } else if (dh.speciesTreeLoaded()) {
+            this.getTabbedPane().setSelectedIndex(1);
+        } else {
+            this.getTabbedPane().setSelectedIndex(0);
+        }
+    }
 
+    /*    private void setEnableSpeciesTab(boolean b) {
+    this.getTabbedPane().setEnabledAt(0, b);
+    }*/
     private void setEnableProteinsTab(boolean b) {
         this.getTabbedPane().setEnabledAt(1, b);
     }
@@ -63,6 +73,7 @@ public class DataLoaderPanel extends javax.swing.JPanel {
         this.getTabbedPane().addTab(intLoader.getName(), intLoader);
 
         enableTabs();
+        setActiveTab();
     }
 
     public void enableTabs() {
