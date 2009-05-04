@@ -8,6 +8,7 @@ package ui;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.border.TitledBorder;
+import main.LoadedDataHandle;
 import main.PluginDataHandle;
 
 /**
@@ -37,6 +38,7 @@ public class SpeciesInteractionsLoaderPanel extends javax.swing.JPanel {
         TitledBorder border = (TitledBorder) this.getBorder();
         border.setTitle(name);
         this.tresholdField.setText("1.0");
+        setActualLoadedUIState();
     }
 
     public Double tryGetTreshold() {
@@ -127,30 +129,27 @@ public class SpeciesInteractionsLoaderPanel extends javax.swing.JPanel {
             tresholdField.setEnabled(true);
             openButton.setEnabled(true);
             filepathLabel.setEnabled(true);
-            if (filepath != null) {
-                PluginDataHandle.getLoadingDataHandle().addInteractionFilename(name, filepath);
-            }
+        /*     if (filepath != null) {
+        PluginDataHandle.getLoadingDataHandle().addInteractionFilename(name, filepath);
+        }*/
         } else {
             tresholdField.setEnabled(false);
             openButton.setEnabled(false);
             filepathLabel.setEnabled(false);
-            if (filepath != null) {
-                PluginDataHandle.getLoadingDataHandle().deleteInteractionFilename(name, filepath);
-            }
+        /*if (filepath != null) {
+        PluginDataHandle.getLoadingDataHandle().deleteInteractionFilename(name, filepath);
+        }*/
         }
     }//GEN-LAST:event_checkboxActionPerformed
 
     private void openButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openButtonActionPerformed
         JFileChooser fc = new JFileChooser();
         int returnVal = fc.showOpenDialog(fc);
-        System.out.println("TUUU");
 
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            System.out.println("TAJJJ");
             File file = fc.getSelectedFile();
             filepath = file.getAbsolutePath();
-            System.out.println(filepath);
-            PluginDataHandle.getLoadingDataHandle().addInteractionFilename(name, filepath);
+            //      PluginDataHandle.getLoadingDataHandle().addInteractionFilename(name, filepath);
             filepathLabel.setText(filepath);
         }
     }//GEN-LAST:event_openButtonActionPerformed
@@ -161,4 +160,25 @@ public class SpeciesInteractionsLoaderPanel extends javax.swing.JPanel {
     private javax.swing.JButton openButton;
     private javax.swing.JTextField tresholdField;
     // End of variables declaration//GEN-END:variables
+
+    private void setActualLoadedUIState() {
+        LoadedDataHandle ldh = PluginDataHandle.getLoadedDataHandle();
+        String filename = ldh.getSpeciesInteractionsFilename(name);
+        Double treshold = ldh.getSpeciesInteractionsTreshold(name);
+        if (filename == null) {
+            checkbox.setSelected(false);
+            tresholdField.setEnabled(false);
+            openButton.setEnabled(false);
+            filepathLabel.setEnabled(false);
+        } else {
+            checkbox.setSelected(true);
+            tresholdField.setEnabled(true);
+            openButton.setEnabled(true);
+            filepathLabel.setEnabled(true);
+            filepathLabel.setText(filename);
+            if (treshold != null) {
+                tresholdField.setText(String.valueOf(treshold));
+            }
+        }
+    }
 }

@@ -12,6 +12,15 @@ public class PluginDataHandle {
     private static DataHandle dataHandle = null;
     private static CytoDataHandle cytoDataHandle = null;
     private static LoadingDataHandle loadingDataHandle = new LoadingDataHandle();
+    private static LoadedDataHandle loadedDataHandle = new LoadedDataHandle();
+
+    public static LoadedDataHandle getLoadedDataHandle() {
+        return loadedDataHandle;
+    }
+
+    public static void setLoadedDataHandle(LoadedDataHandle loadedDataHandle) {
+        PluginDataHandle.loadedDataHandle = loadedDataHandle;
+    }
 
     public static LoadingDataHandle getLoadingDataHandle() {
         return loadingDataHandle;
@@ -27,6 +36,8 @@ public class PluginDataHandle {
 
     public static void initPluginDataHandle() {
         dataHandle = new DataHandle();
+        loadedDataHandle = new LoadedDataHandle();
+        loadingDataHandle = new LoadingDataHandle();
         cytoDataHandle = new CytoDataHandle();
     }
 
