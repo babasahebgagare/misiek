@@ -28,6 +28,12 @@ public class DataLoaderPanel extends javax.swing.JPanel {
         parentFrame.toFront();
     }
 
+    public void refreshStats() {
+        if (genesTree != null) {
+            genesTree.refreshStats();
+        }
+    }
+
     private void setActiveTab() {
         DataHandle dh = PluginDataHandle.getDataHandle();
         if (dh.isProteinsLoaded()) {
@@ -55,8 +61,6 @@ public class DataLoaderPanel extends javax.swing.JPanel {
      */
     public DataLoaderPanel(JFrame parentFrame) {
         this.parentFrame = parentFrame;
-        initComponents();
-
         InteractionsLoadedListener intlist = new InteractionsLoadedListener(this);
         intLoader = new InteractionsLoaderPanel(intlist);
 
@@ -68,6 +72,8 @@ public class DataLoaderPanel extends javax.swing.JPanel {
         intLoader.setName("Interactions loading...");
         speciesTree.setName("Species tree loading...");
         genesTree.setName("Proteins data loading...");
+
+        initComponents();
         this.getTabbedPane().addTab(speciesTree.getName(), speciesTree);
         this.getTabbedPane().addTab(genesTree.getName(), genesTree);
         this.getTabbedPane().addTab(intLoader.getName(), intLoader);

@@ -20,5 +20,6 @@ public class SpeciesLoadedListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         this.panel.enableTabs();
         UIController.getInstance().refreshUIafterSpeciesLoading();
+        panel.refreshStats();
     }
 }
