@@ -45,16 +45,16 @@ echo "$travel_sim outO5.txt 0.5 100 100 -4000 clusters" > input
 /usr/local/bin/matlab <apcluster.m
 java -jar ClustersComparator.jar a outO5.txt a outC5.txt >> jacc
 
-echo "test 6..."
-java -jar AffinityPropagationConsole.jar $faces_sim outC6.txt 0.5 100 100 -60 clusters
-echo "$faces_sim outO6.txt 0.5 100 100 -60 clusters" > input
-/usr/local/bin/matlab <apcluster.m
-java -jar ClustersComparator.jar a outO6.txt a outC6.txt >> jacc
+#echo "test 6..."
+#java -jar AffinityPropagationConsole.jar $faces_sim outC6.txt 0.5 100 100 -60 clusters
+#echo "$faces_sim outO6.txt 0.5 100 100 -60 clusters" > input
+#/usr/local/bin/matlab <apcluster.m
+#java -jar ClustersComparator.jar a outO6.txt a outC6.txt >> jacc
 
-echo "test 7..."
-java -jar AffinityPropagationConsole.jar $faces_sim outC7.txt 0.5 10 10 -50 clusters
-echo "$faces_sim outO7.txt 0.5 10 10 -50 clusters" > input
-/usr/local/bin/matlab <apcluster.m
-java -jar ClustersComparator.jar a outO7.txt a outC7.txt >> jacc
+#echo "test 7..."
+#java -jar AffinityPropagationConsole.jar $faces_sim outC7.txt 0.5 10 10 -50 clusters
+#echo "$faces_sim outO7.txt 0.5 10 10 -50 clusters" > input
+#/usr/local/bin/matlab <apcluster.m
+#java -jar ClustersComparator.jar a outO7.txt a outC7.txt >> jacc
 
 cat jacc
