@@ -46,7 +46,7 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         loadingPanel = new javax.swing.JPanel();
 
-        loadButton.setText("Load");
+        loadButton.setText("Update");
         loadButton.setName("loadButton"); // NOI18N
         loadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
