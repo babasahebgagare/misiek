@@ -12,6 +12,9 @@ public class JaccardComparator {
     private Map<Integer, Integer> clustering1;
     private Map<Integer, Integer> clustering2;
     private Set<Integer> range;
+    private Double jaccard;
+    private Double leftJaccard;
+    private Double rightJaccard;
 
     JaccardComparator(Map<Integer, Integer> clustering1, Map<Integer, Integer> clustering2) {
         this.clustering1 = clustering1;
@@ -33,7 +36,7 @@ public class JaccardComparator {
         this.range = range;
     }
 
-    public Double calculateJaccard() {
+    public void calculateJaccards() {
 
         Double N11 = Double.valueOf(0);
         Double N01 = Double.valueOf(0);
@@ -69,6 +72,20 @@ public class JaccardComparator {
                 }
             }
         }
-        return N11 / (N11 + N01 + N10);
+        jaccard = N11 / (N11 + N01 + N10);
+        leftJaccard = N11 / (N11 + N10);
+        rightJaccard = N11 / (N11 + N01);
+    }
+
+    public Double getJaccard() {
+        return jaccard;
+    }
+
+    public Double getLeftJaccard() {
+        return leftJaccard;
+    }
+
+    public Double getRightJaccard() {
+        return rightJaccard;
     }
 }

@@ -30,8 +30,8 @@ public class Main {
             Map<Integer, Integer> second = secondReader.readClustering();
             JaccardComparator comparator = new JaccardComparator(first, second);
             comparator.setRange(first.keySet());
-            Double jaccard = comparator.calculateJaccard();
-            System.out.println("JACCARD: " + jaccard);
+            comparator.calculateJaccards();
+            System.out.println("JACCARD: " + comparator.getJaccard() + " LEFT JACCARD: " + comparator.getLeftJaccard() + " RIGHT JACCARD: " + comparator.getRightJaccard());
         } else {
             System.out.println("java -jar ClustersComparator.jar <kind: a s m> <first> <kind: a s m> <second>");
         }
