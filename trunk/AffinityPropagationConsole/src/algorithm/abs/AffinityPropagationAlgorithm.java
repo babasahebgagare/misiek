@@ -12,7 +12,7 @@ import java.util.TreeSet;
 import prime.PrimeAlgorithm;
 import prime.PrimeGraph;
 
-public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgorithm<Integer> {
+public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgorithm<String> {
 
     private double lambda;
     private int iterations;
@@ -23,6 +23,21 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
     protected Map<Integer, Cluster<Integer>> assigments;
     protected Map<Integer, ConvitsVector> convitsVectors = new TreeMap<Integer, ConvitsVector>();
     private Collection<Integer> refined = null;
+    private int currentID = 0;
+    protected Map<String, Integer> idMapper = new TreeMap<String, Integer>();
+    protected Map<Integer, String> idRevMapper = new TreeMap<Integer, String>();
+
+    protected Integer getExamplarID(String name) {
+        if (idMapper.containsKey(name)) {
+            return idMapper.get(name);
+        } else {
+            Integer id = Integer.valueOf(currentID);
+            idMapper.put(name, id);
+            idRevMapper.put(id, name);
+            currentID++;
+            return id;
+        }
+    }
 
     private void refineCenters() {
         Collection<Integer> refinedCenters = new TreeSet<Integer>();
@@ -35,7 +50,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
                 Double sum = Double.valueOf(0);
                 Integer level = Integer.valueOf(0);
                 for (Integer other : cluster.getElements()) {
-                    Double simOrNull = tryGetSimilarity(other, curr);
+                    Double simOrNull = tryGetSimilarityInt(other, curr);
                     if (simOrNull != null) {
                         sum += simOrNull;
                         level++;
@@ -59,6 +74,10 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
         }
         refined = refinedCenters;
     }
+
+    protected abstract Double tryGetSimilarityInt(Integer other, Integer curr);
+
+    public abstract void setSimilarityInt(Integer other, Integer curr, Double sim);
 
     public enum AffinityConnectingMethod {
 
@@ -111,9 +130,8 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
         this.convits = convits;
     }
 
-    @Override
-    public Map<Integer, Integer> doCluster() {
-        final Map<Integer, Cluster<Integer>> help = doClusterAssoc();
+    public Map<Integer, Integer> doClusterInt() {
+        final Map<Integer, Cluster<Integer>> help = doClusterAssocInt();
         if (help != null) {
             final Map<Integer, Integer> res = new HashMap<Integer, Integer>();
 
@@ -129,7 +147,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
         }
     }
 
-    public Map<Integer, Cluster<Integer>> doClusterAssoc() {
+    public Map<Integer, Cluster<Integer>> doClusterAssocInt() {
         int iters = getIterations();
         if (iteractionListenerOrNull != null) {
             iteractionListenerOrNull.actionPerformed(new ActionEvent(new IterationData(1, 0), 0, "ITERATION"));
@@ -272,7 +290,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
 
                 for (final Entry<Integer, Integer> clusteredEx : clusteredHelp.entrySet()) {
 
-                    Double simOrNull = tryGetSimilarity(examplar, clusteredEx.getKey());
+                    Double simOrNull = tryGetSimilarityInt(examplar, clusteredEx.getKey());
                     if (simOrNull != null) {
                         if (maxOrNull != null) {
                             if (simOrNull > maxOrNull) {
@@ -308,7 +326,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
         for (Integer exFrom : examplars) {
             for (Integer exTo : examplars) {
                 if (!exFrom.equals(exTo)) {
-                    Double simOrNull = tryGetSimilarity(exFrom, exTo);
+                    Double simOrNull = tryGetSimilarityInt(exFrom, exTo);
                     if (simOrNull != null) {
                         Double weight = computeWeight(simOrNull);
                         graph.addEdge(exFrom, exTo, weight);
@@ -321,5 +339,40 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
 
         return prime.run();
 
+    }
+
+    @Override
+    public Map<String, String> doCluster() {
+        Map<Integer, Integer> resInt = doClusterInt();
+        Map<String, String> res = new TreeMap<String, String>();
+        if (resInt == null) {
+            return null;
+        }
+        for (Entry<Integer, Integer> entry : resInt.entrySet()) {
+            res.put(idRevMapper.get(entry.getKey()), idRevMapper.get(entry.getValue()));
+        }
+
+        return res;
+    }
+
+    @Override
+    public Map<String, Cluster<String>> doClusterAssoc() {
+        Map<String, Cluster<String>> res = new TreeMap<String, Cluster<String>>();
+        Map<Integer, Cluster<Integer>> resInt = doClusterAssocInt();
+        if (resInt == null) {
+            return null;
+        }
+
+        for (Entry<Integer, Cluster<Integer>> entry : resInt.entrySet()) {
+            Cluster<Integer> clusterInt = entry.getValue();
+            Cluster<String> cluster = new Cluster<String>(idRevMapper.get(clusterInt.getName()));
+            for (Integer ex : clusterInt.getElements()) {
+                cluster.add(idRevMapper.get(ex));
+            }
+
+            res.put(idRevMapper.get(entry.getKey()), cluster);
+        }
+
+        return res;
     }
 }
