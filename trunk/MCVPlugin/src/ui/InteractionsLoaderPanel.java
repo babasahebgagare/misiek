@@ -12,6 +12,7 @@ import java.util.Collection;
 import java.util.Vector;
 import logicmodel.controllers.DataHandle;
 import logicmodel.structs.PPINetwork;
+import main.LoadedDataHandle;
 import main.PluginDataHandle;
 import ui.listeners.InteractionsLoadedListener;
 
@@ -121,16 +122,16 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
         for (SpeciesInteractionsLoaderPanel speciesPanel : panels) {
 
             String speciesName = speciesPanel.getSpeciesName();
+            PPINetwork network = PluginDataHandle.getDataHandle().getNetworks().get(speciesName);
             if (speciesPanel.checked()) {
                 String filename = speciesPanel.tryGetFilepath();
                 if (filename != null) {
-                    Double treshold = speciesPanel.tryGetTreshold();
-
-                    PluginDataHandle.getLoadedDataHandle().addInteractionData(speciesName, filename, treshold);
-                    PPINetwork network = PluginDataHandle.getDataHandle().getNetworks().get(speciesName);
-                    AbstractDataReader.getInstance().readSpeciesInteractions(network, filename, treshold);
+                    Double oldTresholdOrNull = PluginDataHandle.getLoadedDataHandle().getSpeciesInteractionsTreshold(speciesName);
+                    Double tresholdOrNull = speciesPanel.tryGetTreshold();
+                    updateInteractionsDataForSpecies(network, speciesName, filename, tresholdOrNull, oldTresholdOrNull);
                 }
             } else {
+                network.deleteAllInteractions();
                 PluginDataHandle.getLoadedDataHandle().deleteInteractionData(speciesName);
             }
         }
@@ -143,4 +144,17 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
     private javax.swing.JButton loadButton;
     private javax.swing.JPanel loadingPanel;
     // End of variables declaration//GEN-END:variables
+
+    private void updateInteractionsDataForSpecies(PPINetwork network, String speciesName, String filename, Double tresholdOrNull, Double oldTresholdOrNull) {
+        LoadedDataHandle ldh = PluginDataHandle.getLoadedDataHandle();
+        if (ldh.loadedInteractions(speciesName)) {
+            ldh.deleteInteractionData(speciesName);
+            network.deleteAllInteractions();
+            ldh.addInteractionData(speciesName, filename, tresholdOrNull);
+            AbstractDataReader.getInstance().readSpeciesInteractions(network, filename, tresholdOrNull);
+        } else {
+            ldh.addInteractionData(speciesName, filename, tresholdOrNull);
+            AbstractDataReader.getInstance().readSpeciesInteractions(network, filename, tresholdOrNull);
+        }
+    }
 }

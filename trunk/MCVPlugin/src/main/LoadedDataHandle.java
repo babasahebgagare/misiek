@@ -43,12 +43,19 @@ public class LoadedDataHandle {
         interactionsTresholds = new TreeMap<String, Double>();
     }
 
-
     public Map<String, String> getInteractionsFilenames() {
         return interactionsFilenames;
     }
 
     public void setInteractionsFilenames(Map<String, String> interactionsFilenames) {
         this.interactionsFilenames = interactionsFilenames;
+    }
+
+    public boolean loadedInteractions(String speciesName) {
+        if (this.interactionsFilenames.get(speciesName) == null) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
