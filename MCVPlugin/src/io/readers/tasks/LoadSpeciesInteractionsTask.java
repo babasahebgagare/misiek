@@ -48,7 +48,7 @@ public class LoadSpeciesInteractionsTask implements Task {
         float last_percent = 0;
         try {
             myThread = Thread.currentThread();
-            taskMonitor.setStatus("Interactions loading...");
+            taskMonitor.setStatus("Interactions loading for: " + network.getID());
             taskMonitor.setPercentCompleted(-1);
             fis = new FileInputStream(file);
             bis = new BufferedInputStream(fis);
@@ -115,6 +115,6 @@ public class LoadSpeciesInteractionsTask implements Task {
     }
 
     public String getTitle() {
-        return "Loading interactions with tresholds...";
+        return "Loading interactions with tresholds: " + String.valueOf(treshold);
     }
 }
