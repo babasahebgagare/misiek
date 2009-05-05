@@ -129,9 +129,10 @@ public class SpeciesInteractionsLoaderPanel extends javax.swing.JPanel {
             tresholdField.setEnabled(true);
             openButton.setEnabled(true);
             filepathLabel.setEnabled(true);
-        /*     if (filepath != null) {
-        PluginDataHandle.getLoadingDataHandle().addInteractionFilename(name, filepath);
-        }*/
+        //   filepath = PluginDataHandle.getLoadingDataHandle().getSpeciesFilename(name);
+        //   if (filepath != null) {
+        //        filepathLabel.setText(filepath);
+        //    }
         } else {
             tresholdField.setEnabled(false);
             openButton.setEnabled(false);
@@ -174,6 +175,7 @@ public class SpeciesInteractionsLoaderPanel extends javax.swing.JPanel {
             checkbox.setSelected(true);
             tresholdField.setEnabled(true);
             openButton.setEnabled(true);
+            filepath = filename;
             filepathLabel.setEnabled(true);
             filepathLabel.setText(filename);
             if (treshold != null) {
