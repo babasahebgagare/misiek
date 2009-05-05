@@ -346,9 +346,9 @@ private void loadIntForNetworkButtonActionPerformed(java.awt.event.ActionEvent e
     double treshold = ((Integer) tresholdSpinner.getValue()).doubleValue() / 100.0;
 
     UIController.getInstance().loadInteractionsForCurrentNetwork(treshold);
-/*       }
-});
-thread.run();*/
+    /*       }
+    });
+    thread.run();*/
 }//GEN-LAST:event_loadIntForNetworkButtonActionPerformed
 
 private void loadInteractionsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadInteractionsButtonActionPerformed
@@ -376,7 +376,15 @@ private void mclButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 }//GEN-LAST:event_mclButtonActionPerformed
 
 private void newDataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newDataButtonActionPerformed
-    UIController.getInstance().newData();
+
+    if (PluginDataHandle.getDataHandle().speciesTreeLoaded()) {
+        NewDataWarningDialog dataWarning = new NewDataWarningDialog(Cytoscape.getDesktop(), true);
+        if (dataWarning.getReturnStatus() == NewDataWarningDialog.RET_OK) {
+            UIController.getInstance().newData();
+        }
+    } else {
+        UIController.getInstance().newData();
+    }
 }//GEN-LAST:event_newDataButtonActionPerformed
 
 private void testButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testButtonActionPerformed
