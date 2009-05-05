@@ -18,5 +18,6 @@ public class InteractionsLoadedListener implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         panel.setParentFrameOnTop();
+        panel.refreshStats();
     }
 }

@@ -115,7 +115,6 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
             panels.add(panel);
             loadingPanel.add(panel);
         }
-        list.actionPerformed(new ActionEvent(this, 3, "Interactions loaded"));
     }
 
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
@@ -135,6 +134,7 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
                 PluginDataHandle.getLoadedDataHandle().deleteInteractionData(speciesName);
             }
         }
+        list.actionPerformed(new ActionEvent(this, 3, "Interactions loaded"));
 
 }//GEN-LAST:event_loadButtonActionPerformed
 
