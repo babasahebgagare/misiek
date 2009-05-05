@@ -85,7 +85,32 @@
             todir="${server-username}:${server-password}@${server-name}:${server-folder}"
           />
     </target>
-    
+
+    <target name="send-mcl-tester" depends="get-server-auth" description="Copy to server">
+        <scp
+            trust="true"
+            host="${server-name}"
+            username="${server-username}"
+            password="${server-password}"
+            verbose="true"
+            file="build-tools/tests/MCLtest"
+            todir="${server-username}:${server-password}@${server-name}:${server-folder}"
+          />
+    </target>
+
+    <target name="send-my-tester" depends="get-server-auth" description="Copy to server">
+        <scp
+            trust="true"
+            host="${server-name}"
+            username="${server-username}"
+            password="${server-password}"
+            verbose="true"
+            file="build-tools/tests/mytest"
+            todir="${server-username}:${server-password}@${server-name}:${server-folder}"
+          />
+    </target>
+
+
     <target name="send-clusters-comparator" depends="get-server-auth" description="Copy to server">
         <scp
             trust="true"
@@ -98,7 +123,7 @@
           />
     </target>
     
-    <target name="send-all" depends="send-clusters-comparator,send-affinity-tester,send-affinity-matlab,send-affinity-console" description="Send all...">
+    <target name="send-all" depends="send-clusters-comparator,send-affinity-tester,send-mcl-tester,send-my-tester,send-affinity-matlab,send-affinity-console" description="Send all...">
     </target>
 
     <target name="run-test" depends="get-server-auth" description="Run tests...">
@@ -121,5 +146,45 @@
                 verbose="true">
         </sshexec>
     </target>
+    <target name="run-MCL-test" depends="get-server-auth" description="Run tests...">
+        <sshexec
+            port="22"
+                trust="true"
+                password="${server-password}"
+                username="${server-username}"
+                host="${server-name}"
+                command="${server-folder}/MCLtest"
+                verbose="true">
+        </sshexec>
+        <sshexec
+            port="22"
+                trust="true"
+                password="${server-password}"
+                username="${server-username}"
+                host="${server-name}"
+                command="cat ${server-folder}/MCLjacc"
+                verbose="true">
+        </sshexec>
+    </target>
 
+    <target name="run-my-test" depends="get-server-auth" description="Run tests...">
+        <sshexec
+            port="22"
+                trust="true"
+                password="${server-password}"
+                username="${server-username}"
+                host="${server-name}"
+                command="${server-folder}/mytest"
+                verbose="true">
+        </sshexec>
+        <sshexec
+            port="22"
+                trust="true"
+                password="${server-password}"
+                username="${server-username}"
+                host="${server-name}"
+                command="cat ${server-folder}/myjacc"
+                verbose="true">
+        </sshexec>
+    </target>
 </project>

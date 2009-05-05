@@ -1,0 +1,58 @@
+#/bin/bash
+echo "Affinity propagation testing..."
+
+toy_sim='ToyProblemSimilarities.txt'
+travel_sim="TravelRoutingSimilarities.txt"
+faces_sim='FaceClusteringSimilarities.txt'
+tests_folder='./tests/'
+mcl_path='/home/jsim/m/mw219725/studia/genomika/mcl-08-312/src/shmcl/mcl'
+
+cd ~/studia/matlab
+$mcl_path $toy_sim -I 1.0 --abc -o mcltest1m.out
+echo "$toy_sim mcltest1a.txt 0.5 20 20 -15 clusters" > input
+/usr/local/bin/matlab <apcluster.m
+java -jar ClustersComparator.jar m mcltest1m.out a mcltest1a.txt > MCLjacc
+
+cd ~/studia/matlab
+$mcl_path $toy_sim -I 2.0 --abc -o mcltest2m.out
+#echo "$toy_sim mcltest2a.txt 0.5 20 20 -15 clusters" > input
+#/usr/local/bin/matlab <apcluster.m
+java -jar ClustersComparator.jar m mcltest2m.out a mcltest1a.txt >> MCLjacc
+
+cd ~/studia/matlab
+$mcl_path $toy_sim -I 3.0 --abc -o mcltest3m.out
+#echo "$toy_sim mcltest3a.txt 0.5 20 20 -15 clusters" > input
+#/usr/local/bin/matlab <apcluster.m
+java -jar ClustersComparator.jar m mcltest3m.out a mcltest1a.txt >> MCLjacc
+
+cd ~/studia/matlab
+$mcl_path $toy_sim -I 4.0 --abc -o mcltest4m.out
+#echo "$toy_sim mcltest4a.txt 0.5 20 20 -15 clusters" > input
+#/usr/local/bin/matlab <apcluster.m
+java -jar ClustersComparator.jar m mcltest4m.out a mcltest1a.txt >> MCLjacc
+
+
+cd ~/studia/matlab
+$mcl_path $travel_sim -I 1.0 --abc -o mcltest11m.out
+echo "$travel_sim mcltest11a.txt 0.5 20 20 -4500 clusters" > input
+/usr/local/bin/matlab <apcluster.m
+java -jar ClustersComparator.jar m mcltest11m.out a mcltest11a.txt >> MCLjacc
+
+cd ~/studia/matlab
+$mcl_path $travel_sim -I 2.0 --abc -o mcltest12m.out
+#echo "$travel_sim mcltest12a.txt 0.5 20 20 -4500 clusters" > input
+#/usr/local/bin/matlab <apcluster.m
+java -jar ClustersComparator.jar m mcltest12m.out a mcltest11a.txt >> MCLjacc
+
+cd ~/studia/matlab
+$mcl_path $travel_sim -I 3.0 --abc -o mcltest13m.out
+#echo "$travel_sim mcltest10a.txt 0.5 20 20 -4500 clusters" > input
+#/usr/local/bin/matlab <apcluster.m
+java -jar ClustersComparator.jar m mcltest13m.out a mcltest11a.txt >> MCLjacc
+
+cd ~/studia/matlab
+$mcl_path $travel_sim -I 4.0 --abc -o mcltest14m.out
+#echo "$travel_sim mcltest10a.txt 0.5 20 20 -4500 clusters" > input
+#/usr/local/bin/matlab <apcluster.m
+java -jar ClustersComparator.jar m mcltest14m.out a mcltest11a.txt >> MCLjacc
+

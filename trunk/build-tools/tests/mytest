@@ -1,0 +1,20 @@
+#/bin/bash
+echo "Affinity propagation testing..."
+
+toy_sim='ToyProblemSimilarities.txt'
+travel_sim="TravelRoutingSimilarities.txt"
+myfu_sim="fu0.8log.int"
+faces_sim='FaceClusteringSimilarities.txt'
+tests_folder='./tests/'
+
+cd ~/studia/matlab
+
+echo "test 0..."
+java -jar AffinityPropagationConsole.jar $myfu_sim myfu1a.txt 0.5 10 10 -0.9 clusters
+echo "$travel_sim myfu1o.txt 0.5 10 10 -0.9 clusters" > input
+/usr/local/bin/matlab <apcluster.m
+java -jar ClustersComparator.jar a myfu1o.txt a myfu1a.txt > myjacc
+#java -jar SetsComparator.jar outO0.txt outC0.txt > myjacc
+
+
+cat myjacc
