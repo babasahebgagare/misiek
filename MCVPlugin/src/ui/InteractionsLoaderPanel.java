@@ -122,12 +122,9 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
         for (SpeciesInteractionsLoaderPanel speciesPanel : panels) {
 
             String speciesName = speciesPanel.getSpeciesName();
-            System.out.println("SPE: " + speciesName);
             PPINetwork network = PluginDataHandle.getDataHandle().getNetworks().get(speciesName);
             if (speciesPanel.checked()) {
-                System.out.println("SPE CHECK: " + speciesName);
                 String filename = speciesPanel.tryGetFilepath();
-                System.out.println("SPE CHECK FILENAME: " + filename);
                 if (filename != null) {
                     Double oldTresholdOrNull = PluginDataHandle.getLoadedDataHandle().getSpeciesInteractionsTreshold(speciesName);
                     Double tresholdOrNull = speciesPanel.tryGetTreshold();
