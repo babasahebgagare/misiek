@@ -15,6 +15,10 @@ public class PPINetwork {
         context = new PPINetworkContext(ParentNetwork, this);
     }
 
+    public void deleteAllInteractions() {
+        interactions = new HashMap<String, Interaction>();
+    }
+
     public void addInteraction(Interaction interaction) {
         interactions.put(interaction.getID(), interaction);
     }
