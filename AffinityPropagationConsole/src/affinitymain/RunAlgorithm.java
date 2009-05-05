@@ -12,6 +12,7 @@ import java.io.OutputStreamWriter;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -60,11 +61,12 @@ public class RunAlgorithm {
 
             while (scanner.hasNextInt()) {
 
-                Integer from = Integer.valueOf(scanner.nextInt());
-                Integer to = Integer.valueOf(scanner.nextInt());
-                String simStr = scanner.nextLine();
-                double sim = Double.parseDouble(simStr);
-                ints.add(new InteractionData(from, to, Double.valueOf(sim)));
+                String line = scanner.nextLine();
+                String[] tokens = line.split("\\s+");
+                String from = tokens[0];
+                String to = tokens[1];
+                Double sim = Double.parseDouble(tokens[2]);
+                ints.add(new InteractionData(from, to, sim));
             }
         } catch (IOException ex) {
             Logger.getLogger(RunAlgorithm.class.getName()).log(Level.SEVERE, null, ex);
@@ -78,7 +80,7 @@ public class RunAlgorithm {
         af.init();
         for (InteractionData intData : ints) {
             //     System.out.println(intData.getFrom() + " " + intData.getTo() + " " + intData.getSim());
-            af.setSimilarities(intData.getFrom(), intData.getTo(), intData.getSim());
+            af.setSimilarityInt(Integer.valueOf(intData.getFrom()), Integer.valueOf(intData.getTo()), intData.getSim());
         }
         af.setConstPreferences(preferences);
     }
@@ -93,17 +95,17 @@ public class RunAlgorithm {
             bos = new BufferedOutputStream(fos);
             bw = new BufferedWriter(new OutputStreamWriter(bos));
             if (kind.equals("centers")) {
-                Map<Integer, Cluster<Integer>> clusters = af.doClusterAssoc();
+                Map<Integer, Cluster<Integer>> clusters = af.doClusterAssocInt();
                 if (clusters != null) {
                     for (Integer clustName : clusters.keySet()) {
                         bw.append(clustName + "\n");
                     }
                 }
             } else {
-                Map<Integer, Integer> clusters = af.doCluster();
+                Map<Integer, Integer> clusters = af.doClusterInt();
                 if (clusters != null) {
-                    for (int i = 1; i <= clusters.size(); i++) {
-                        bw.append(clusters.get(Integer.valueOf(i)) + "\n");
+                    for (Entry<Integer, Integer> entry : clusters.entrySet()) {
+                        bw.append(entry.getKey() + " " + entry.getValue() + "\n");
                     }
                 }
             }
