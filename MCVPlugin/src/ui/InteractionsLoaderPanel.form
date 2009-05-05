@@ -38,7 +38,7 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="loadButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Load"/>
+        <Property name="text" type="java.lang.String" value="Update"/>
         <Property name="name" type="java.lang.String" value="loadButton" noResource="true"/>
       </Properties>
       <Events>
