@@ -189,14 +189,16 @@ public class DefaultUIController extends UIController {
     }
 
     @Override
-    public void showLoadedInteractions(double treshold) {
+    public void showLoadedInteractions() {
         CytoDataHandle cdh = PluginDataHandle.getCytoDataHandle();
 
         CyNetworkView cyNetworkView = Cytoscape.getCurrentNetworkView();
         if (cyNetworkView != Cytoscape.getNullNetworkView()) {
             CytoAbstractPPINetwork cytoNetwork = cdh.tryFindNetworkByCytoID(cyNetworkView.getIdentifier());
 
-            InteractionsManager.getInstance().loadAndShowInteractionsFromModel(cytoNetwork, treshold);
+            InteractionsManager.getInstance().loadAndShowInteractionsFromModel(cytoNetwork);
+        } else {
+            Messenger.message("You have to open some network view.");
         }
     }
 
@@ -251,6 +253,7 @@ public class DefaultUIController extends UIController {
         PluginMenusHandle.getShowNetworkButton().setEnabled(false);
         PluginMenusHandle.getNewDataButton().setEnabled(true);
         PluginMenusHandle.getDoProjectionButton().setEnabled(false);
+        PluginMenusHandle.getShowLoadedInteractionsButton().setEnabled(false);
     }
 
     @Override
@@ -258,6 +261,7 @@ public class DefaultUIController extends UIController {
         PluginMenusHandle.getUpdateDataButton().setEnabled(true);
         PluginMenusHandle.getShowNetworkButton().setEnabled(true);
         PluginMenusHandle.getNewDataButton().setEnabled(true);
+        PluginMenusHandle.getShowLoadedInteractionsButton().setEnabled(true);
     }
 
     @Override
