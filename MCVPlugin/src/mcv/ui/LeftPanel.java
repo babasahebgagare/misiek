@@ -23,7 +23,6 @@ import mcv.logicmodel.structs.PPINetwork;
 import mcv.main.PluginDataHandle;
 import mcv.utils.JTreeModelSpeciesGenerator;
 import mcv.utils.Messenger;
-import mcv.utils.Messenger2;
 import mcv.utils.Stats;
 import mcv.viewmodel.controllers.CytoProjector;
 
@@ -333,7 +332,7 @@ private void newDataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 
     if (PluginDataHandle.getDataHandle().speciesTreeLoaded()) {
         //int ret = JOptionPane.showConfirmDialog(Cytoscape.getDesktop(), "All loaded data would be removed, are you sure?");
-        int ret = Messenger.confirm("All loaded data would be removed, are you sure?");
+        int ret = Messenger.confirmWarning("All loaded data would be removed, are you sure?");
         if (ret == JOptionPane.OK_OPTION) {
             //NewDataWarningDialog dataWarning = new NewDataWarningDialog(Cytoscape.getDesktop(), true);
             //if (dataWarning.getReturnStatus() == NewDataWarningDialog.RET_OK) {

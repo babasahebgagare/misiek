@@ -15,8 +15,13 @@ public class Messenger {
         JOptionPane.showMessageDialog(Cytoscape.getDesktop(), ex.getMessage());
     }
 
-    public static int confirm(Object message) {
+    public static int confirmWarning(Object message) {
         System.out.println(message);
-        return JOptionPane.showConfirmDialog(Cytoscape.getDesktop(), message);
+        return JOptionPane.showConfirmDialog(Cytoscape.getDesktop(), message, "Warning.", JOptionPane.WARNING_MESSAGE);
+    }
+
+    public static int confirmInfo(Object message) {
+        System.out.println(message);
+        return JOptionPane.showConfirmDialog(Cytoscape.getDesktop(), message, "Info.", JOptionPane.INFORMATION_MESSAGE);
     }
 }

@@ -38,7 +38,7 @@ public class PluginInitializator {
         CytoPanelImp leftPanel = (CytoPanelImp) Cytoscape.getDesktop().getCytoPanel(SwingConstants.WEST);
 
         LeftPanel myLeftPanel = new LeftPanel();
-        leftPanel.add(ResourceBundle.getBundle("resources/ui").getString("TABNAME"), myLeftPanel);
+        leftPanel.add(ResourceBundle.getBundle("mcv/resources/ui").getString("TABNAME"), myLeftPanel);
     }
 
     public static void initAll() {
