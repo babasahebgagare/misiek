@@ -14,4 +14,9 @@ public class Messenger {
         System.out.println(ex.getMessage());
         JOptionPane.showMessageDialog(Cytoscape.getDesktop(), ex.getMessage());
     }
+
+    public static int confirm(Object message) {
+        System.out.println(message);
+        return JOptionPane.showConfirmDialog(Cytoscape.getDesktop(), message);
+    }
 }
