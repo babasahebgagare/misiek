@@ -33,12 +33,22 @@ public class Main {
             } else {
                 Collection<Integer> sum = new TreeSet<Integer>(a);
                 Collection<Integer> inter = new TreeSet<Integer>(a);
+                Collection<Integer> acopy = new TreeSet<Integer>(a);
+                Collection<Integer> bcopy = new TreeSet<Integer>(b);
 
                 System.out.println("NOT IDENTICAL!!!");
-                System.out.println("A SIZE: " + a.size());
-                System.out.println("B SIZE: " + b.size());
+                System.out.println(first + ":A SIZE: " + a.size());
+                System.out.println(second + ":B SIZE: " + b.size());
                 sum.addAll(b);
                 inter.retainAll(b);
+                acopy.removeAll(b);
+                bcopy.removeAll(a);
+                for (Integer ap : acopy) {
+                    System.out.println("A-B: " + ap);
+                }
+                for (Integer bp : bcopy) {
+                    System.out.println("B-A: " + bp);
+                }
                 jaccardIndex = Double.valueOf((double) inter.size() / (double) sum.size());
             }
             System.out.println("Jaccard index = " + jaccardIndex);
