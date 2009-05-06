@@ -24,6 +24,7 @@ import viewmodel.structs.CytoProtein;
 import logicmodel.structs.PPINetwork;
 import main.PluginDataHandle;
 import utils.JTreeModelSpeciesGenerator;
+import utils.Messenger;
 import viewmodel.controllers.CytoInteractionsConverter;
 import viewmodel.controllers.CytoVisualHandle;
 
@@ -175,7 +176,7 @@ public class DefaultUIController extends UIController {
             NetworksConverter.convertNetworks(networks);
             PluginMenusHandle.getDoProjectionButton().setEnabled(true);
         } else {
-            SelectNodesInTreeDialog info = new SelectNodesInTreeDialog(Cytoscape.getDesktop(), true);
+            Messenger.message("Select networks to show in species tree.");
         }
     }
 
@@ -227,11 +228,11 @@ public class DefaultUIController extends UIController {
         //ProjectorInfoCalculator.calculateProjectorInfo();
         initDataView();
 
-    /* PluginMenusHandle.getLoadDataButton().setEnabled(true);
-    PluginMenusHandle.getShowNetworkButton().setEnabled(true);
-    PluginMenusHandle.getLoadAllInteractionsButton().setEnabled(true);
-    PluginMenusHandle.getLoadDataButton().setEnabled(false);
-    PluginMenusHandle.getDeleteAllDataButton().setEnabled(true);*/
+        /* PluginMenusHandle.getLoadDataButton().setEnabled(true);
+        PluginMenusHandle.getShowNetworkButton().setEnabled(true);
+        PluginMenusHandle.getLoadAllInteractionsButton().setEnabled(true);
+        PluginMenusHandle.getLoadDataButton().setEnabled(false);
+        PluginMenusHandle.getDeleteAllDataButton().setEnabled(true);*/
     }
 
     @Override
@@ -247,6 +248,7 @@ public class DefaultUIController extends UIController {
         PluginMenusHandle.getUpdateDataButton().setEnabled(true);
         PluginMenusHandle.getShowNetworkButton().setEnabled(false);
         PluginMenusHandle.getNewDataButton().setEnabled(true);
+        PluginMenusHandle.getDoProjectionButton().setEnabled(false);
     }
 
     @Override

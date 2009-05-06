@@ -12,6 +12,7 @@ import cytoscape.Cytoscape;
 import java.awt.Color;
 import java.util.Collection;
 import javax.swing.JColorChooser;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -309,7 +310,7 @@ private void projectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     if (selectedProteins.size() > 0) {
         CytoProjector.projectSelected(selectedProteins, networks);
     } else {
-        Messenger.message("Musisz zaznaczyć białka do rzutowania!");
+        Messenger.message("You have to select proteins and target network!");
     }
 
 }//GEN-LAST:event_projectButtonActionPerformed
@@ -330,8 +331,11 @@ private void mclButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 private void newDataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newDataButtonActionPerformed
 
     if (PluginDataHandle.getDataHandle().speciesTreeLoaded()) {
-        NewDataWarningDialog dataWarning = new NewDataWarningDialog(Cytoscape.getDesktop(), true);
-        if (dataWarning.getReturnStatus() == NewDataWarningDialog.RET_OK) {
+        int ret = JOptionPane.showConfirmDialog(Cytoscape.getDesktop(), "All loaded data would be removed, are you sure?");
+        System.out.println("RET: " + ret);
+        if (ret == JOptionPane.OK_OPTION) {
+            //NewDataWarningDialog dataWarning = new NewDataWarningDialog(Cytoscape.getDesktop(), true);
+            //if (dataWarning.getReturnStatus() == NewDataWarningDialog.RET_OK) {
             UIController.getInstance().newData();
         }
     } else {
