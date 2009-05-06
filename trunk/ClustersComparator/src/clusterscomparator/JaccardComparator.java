@@ -48,13 +48,24 @@ public class JaccardComparator {
             for (Integer j : range) {
 
                 if (i < j) {
-                    //      System.out.println("BADAM: " + i + " " + j);
-                    if (clustering1.get(i).equals(clustering1.get(j))) {
+                    Integer cluster1I = clustering1.get(i);
+                    Integer cluster1J = clustering1.get(j);
+                    if (cluster1I == null && cluster1J == null) {
+                        same1 = true;
+                    } else if ((cluster1I != null && cluster1J == null) || (cluster1I == null && cluster1J != null)) {
+                        same1 = false;
+                    } else if (cluster1I.equals(cluster1J)) {
                         same1 = true;
                     } else {
                         same1 = false;
                     }
-                    if (clustering2.get(i).equals(clustering2.get(j))) {
+                    Integer cluster2I = clustering2.get(i);
+                    Integer cluster2J = clustering2.get(j);
+                    if (cluster2I == null && cluster2J == null) {
+                        same2 = true;
+                    } else if ((cluster2I != null && cluster2J == null) || (cluster2I == null && cluster2J != null)) {
+                        same2 = false;
+                    } else if (cluster2I.equals(cluster2J)) {
                         same2 = true;
                     } else {
                         same2 = false;
