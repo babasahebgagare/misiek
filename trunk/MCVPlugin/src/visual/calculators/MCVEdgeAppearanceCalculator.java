@@ -34,6 +34,7 @@ public class MCVEdgeAppearanceCalculator extends EdgeAppearanceCalculator {
             appr.set(VisualPropertyType.EDGE_COLOR, Color.GRAY);
 
         }
+        appr.applyBypass(edge);
     }
 
     /*private double calculateCytoInteractionWidth(double probability) {

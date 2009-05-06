@@ -75,6 +75,7 @@ public class MCVNodeAppearanceCalculator extends NodeAppearanceCalculator {
                 appr.set(VisualPropertyType.NODE_SHAPE, NodeShape.ROUND_RECT);
             }
         }
+        appr.applyBypass(node);
     }
 
     private Color tryGetManuallyChangedColor(NodeAppearance appr, Node node) {
