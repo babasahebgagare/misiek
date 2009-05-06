@@ -9,8 +9,10 @@ import mcv.io.AbstractDataReader;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Vector;
 import mcv.logicmodel.controllers.DataHandle;
+import mcv.logicmodel.structs.Interaction;
 import mcv.logicmodel.structs.PPINetwork;
 import mcv.main.LoadedDataHandle;
 import mcv.main.PluginDataHandle;
@@ -145,13 +147,42 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
     private javax.swing.JPanel loadingPanel;
     // End of variables declaration//GEN-END:variables
 
+    private void readAISpeciesInteractions(PPINetwork network, String filepath, Double treshold, Double oldTreshold) {
+
+        if (treshold == null && oldTreshold == null) {
+            return;
+        } else if (treshold == null && oldTreshold != null) {
+            network.deleteAllInteractions();
+            AbstractDataReader.getInstance().readSpeciesInteractions(network, filepath, treshold);
+        } else if (treshold != null && oldTreshold == null) {
+            network.deleteAllInteractions();
+            AbstractDataReader.getInstance().readSpeciesInteractions(network, filepath, treshold);
+        } else if (treshold < oldTreshold) {
+            network.deleteAllInteractions();
+            AbstractDataReader.getInstance().readSpeciesInteractions(network, filepath, treshold);
+        } else if (treshold > oldTreshold) {
+            Collection<Interaction> intBackup = new HashSet<Interaction>(network.getInteractions().values());
+            for (Interaction inter : intBackup) {
+                if (inter.getProbability() < treshold) {
+                    network.deleteInteraction(inter.getID());
+                }
+            }
+
+        } else {   // treshold == oldTreshold
+            return;
+        }
+    }
+
     private void updateInteractionsDataForSpecies(PPINetwork network, String speciesName, String filename, Double tresholdOrNull, Double oldTresholdOrNull) {
         LoadedDataHandle ldh = PluginDataHandle.getLoadedDataHandle();
         if (ldh.loadedInteractions(speciesName)) {
+            //Double oldTresholdOrNull = ldh.getSpeciesInteractionsTreshold(speciesName);
             ldh.deleteInteractionData(speciesName);
-            network.deleteAllInteractions();
+            // network.deleteAllInteractions();
+
             ldh.addInteractionData(speciesName, filename, tresholdOrNull);
-            AbstractDataReader.getInstance().readSpeciesInteractions(network, filename, tresholdOrNull);
+            readAISpeciesInteractions(network, filename, tresholdOrNull, oldTresholdOrNull);
+        //       AbstractDataReader.getInstance().readAISpeciesInteractions(network, filename, tresholdOrNull, oldTresholdOrNull);
         } else {
             ldh.addInteractionData(speciesName, filename, tresholdOrNull);
             AbstractDataReader.getInstance().readSpeciesInteractions(network, filename, tresholdOrNull);

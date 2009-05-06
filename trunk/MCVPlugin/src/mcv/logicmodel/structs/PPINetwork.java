@@ -37,6 +37,10 @@ public class PPINetwork {
         proteins.put(ProteinID, protein);
     }
 
+    public void deleteInteraction(String iD) {
+        interactions.remove(iD);
+    }
+
     public Protein getProtein(String ProteinID) {
         return proteins.get(ProteinID);
     }
