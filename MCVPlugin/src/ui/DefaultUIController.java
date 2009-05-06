@@ -58,6 +58,7 @@ public class DefaultUIController extends UIController {
     private void deleteDataView() {
         deleteTreeDataView();
         deleteColorListDataView();
+        refreshUIafterDeleteData();
     }
 
     private void initDataView() {
@@ -90,9 +91,12 @@ public class DefaultUIController extends UIController {
         DataHandle dh = PluginDataHandle.getDataHandle();
         Collection<PPINetwork> networks = new HashSet<PPINetwork>();
 
-        for (TreePath path : PluginMenusHandle.getTree().getSelectionPaths()) {
-            String PPINetworkID = ((TreeNode) path.getLastPathComponent()).getTitle();
-            networks.add(dh.getNetworks().get(PPINetworkID));
+        TreePath[] paths = PluginMenusHandle.getTree().getSelectionPaths();
+        if (paths != null) {
+            for (TreePath path : paths) {
+                String PPINetworkID = ((TreeNode) path.getLastPathComponent()).getTitle();
+                networks.add(dh.getNetworks().get(PPINetworkID));
+            }
         }
 
         return networks;
@@ -167,9 +171,12 @@ public class DefaultUIController extends UIController {
     @Override
     public void showSelectedNetworks() {
         Collection<PPINetwork> networks = UIController.getInstance().getSelectedNetworks();
-        NetworksConverter.convertNetworks(networks);
-
-        PluginMenusHandle.getDoProjectionButton().setEnabled(true);
+        if (networks.size() > 0) {
+            NetworksConverter.convertNetworks(networks);
+            PluginMenusHandle.getDoProjectionButton().setEnabled(true);
+        } else {
+            SelectNodesInTreeDialog info = new SelectNodesInTreeDialog(Cytoscape.getDesktop(), true);
+        }
     }
 
     @Override
@@ -234,6 +241,12 @@ public class DefaultUIController extends UIController {
 
         ProjectorInfoCalculator.calculateProjectorInfo();
         initDataView();
+    }
+
+    public void refreshUIafterDeleteData() {
+        PluginMenusHandle.getUpdateDataButton().setEnabled(true);
+        PluginMenusHandle.getShowNetworkButton().setEnabled(false);
+        PluginMenusHandle.getNewDataButton().setEnabled(true);
     }
 
     @Override
