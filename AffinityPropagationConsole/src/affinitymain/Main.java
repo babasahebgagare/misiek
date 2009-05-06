@@ -20,7 +20,7 @@ public class Main {
             Double preferences = Double.valueOf(args[5]);
             String kind = String.valueOf(args[6]);
 
-            RunAlgorithm alg = new RunAlgorithm(filepath, outpath, lambda, iterations, convits, preferences, kind);
+            RunAlgorithm alg = new RunAlgorithm(filepath, outpath, lambda, iterations, convits, preferences, kind, false);
 
             alg.setParemeters();
             alg.run();
