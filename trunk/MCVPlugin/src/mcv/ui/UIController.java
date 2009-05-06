@@ -30,7 +30,7 @@ public abstract class UIController {
 
     public abstract void loadAllInteractions(double treshold);
 
-    public abstract void showLoadedInteractions(double treshold);
+    public abstract void showLoadedInteractions();
 
     public abstract void loadInteractionsForCurrentNetwork(double treshold);
 

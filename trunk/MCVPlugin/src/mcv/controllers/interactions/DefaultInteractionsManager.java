@@ -14,7 +14,7 @@ import mcv.viewmodel.controllers.CytoVisualHandle;
 public class DefaultInteractionsManager extends InteractionsManager {
 
     @Override
-    public void loadInteractionsFromModel(CytoAbstractPPINetwork cytoNetwork, double treshold) {
+    public void loadInteractionsFromModel(CytoAbstractPPINetwork cytoNetwork) {
         CytoDataHandle cdh = PluginDataHandle.getCytoDataHandle();
 
         PPINetwork network = cytoNetwork.getNetwork();
@@ -22,9 +22,9 @@ public class DefaultInteractionsManager extends InteractionsManager {
 
         for (Interaction interaction : network.getInteractions().values()) {
 
-            if (interaction.getProbability().doubleValue() >= treshold) {
-                cdh.createCytoInteraction(interaction, cytoNetwork);
-            }
+            //     if (interaction.getProbability().doubleValue() >= treshold) {
+            cdh.createCytoInteraction(interaction, cytoNetwork);
+        //    }
         }
     }
 
@@ -46,9 +46,9 @@ public class DefaultInteractionsManager extends InteractionsManager {
     }
 
     @Override
-    public void loadAndShowInteractionsFromModel(CytoAbstractPPINetwork cytoNetwork, double treshold) {
+    public void loadAndShowInteractionsFromModel(CytoAbstractPPINetwork cytoNetwork) {
         deleteViewInteracions(cytoNetwork);
-        loadInteractionsFromModel(cytoNetwork, treshold);
+        loadInteractionsFromModel(cytoNetwork);
         showInteractions(cytoNetwork);
     }
 }

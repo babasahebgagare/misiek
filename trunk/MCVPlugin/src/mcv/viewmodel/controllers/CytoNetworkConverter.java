@@ -22,7 +22,7 @@ public class CytoNetworkConverter {
             //CytoInteractionsConverter.convertCytoNetworkInteractions(cyNetwork, cytoNetwork.getCytoInteractions());
 
             CyNetworkView cyNetworkView = Cytoscape.createNetworkView(cyNetwork);
-            InteractionsManager.getInstance().loadAndShowInteractionsFromModel(cytoNetwork, 0.0);
+            InteractionsManager.getInstance().loadAndShowInteractionsFromModel(cytoNetwork);
 
             CytoVisualHandle.applyVisualStyleForNetwork(cyNetworkView);
             CytoVisualHandle.applyCyLayoutAlgorithm(cyNetwork, cyNetworkView);

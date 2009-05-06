@@ -10,11 +10,11 @@ public abstract class InteractionsManager {
         return manager;
     }
 
-    public abstract void loadInteractionsFromModel(CytoAbstractPPINetwork cytoNetwork, double treshold);
+    public abstract void loadInteractionsFromModel(CytoAbstractPPINetwork cytoNetwork);
 
     public abstract void showInteractions(CytoAbstractPPINetwork cytoNetwork);
 
     public abstract void deleteViewInteracions(CytoAbstractPPINetwork cytoNetwork);
 
-    public abstract void loadAndShowInteractionsFromModel(CytoAbstractPPINetwork cytoNetwork, double treshold);
+    public abstract void loadAndShowInteractionsFromModel(CytoAbstractPPINetwork cytoNetwork);
 }

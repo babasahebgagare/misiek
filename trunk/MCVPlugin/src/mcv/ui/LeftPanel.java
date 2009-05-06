@@ -224,7 +224,7 @@ public class LeftPanel extends javax.swing.JPanel {
 
         tresholdSpinner.setName("TresholdSpinner"); // NOI18N
 
-        showLoadedButton.setText("Show loaded interactions");
+        showLoadedButton.setText("Refresh loaded interactions");
         showLoadedButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showLoadedButtonActionPerformed(evt);
@@ -318,8 +318,8 @@ private void projectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 }//GEN-LAST:event_projectButtonActionPerformed
 
 private void showLoadedButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showLoadedButtonActionPerformed
-    double treshold = ((Integer) tresholdSpinner.getValue()).doubleValue() / 100.0;
-    UIController.getInstance().showLoadedInteractions(treshold);
+//    double treshold = ((Integer) tresholdSpinner.getValue()).doubleValue() / 100.0;
+    UIController.getInstance().showLoadedInteractions();
 
 }//GEN-LAST:event_showLoadedButtonActionPerformed
 
