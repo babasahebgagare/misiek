@@ -9,6 +9,7 @@ import cytoscape.visual.VisualStyle;
 import java.util.ResourceBundle;
 import javax.swing.SwingConstants;
 import mcv.ui.LeftPanel;
+import mcv.ui.PluginMenusHandle;
 import mcv.visual.calculators.MCVEdgeAppearanceCalculator;
 import mcv.visual.calculators.MCVNodeAppearanceCalculator;
 
@@ -38,6 +39,7 @@ public class PluginInitializator {
         CytoPanelImp leftPanel = (CytoPanelImp) Cytoscape.getDesktop().getCytoPanel(SwingConstants.WEST);
 
         LeftPanel myLeftPanel = new LeftPanel();
+        PluginMenusHandle.setMcvPanel(myLeftPanel);
         leftPanel.add(ResourceBundle.getBundle("mcv/resources/ui").getString("TABNAME"), myLeftPanel);
     }
 

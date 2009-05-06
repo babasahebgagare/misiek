@@ -49,4 +49,6 @@ public abstract class UIController {
     public abstract void refreshUIafterProteinsLoading();
 
     public abstract void refreshUIafterSpeciesLoading();
+
+    public abstract void setMCVActiveTab();
 }
