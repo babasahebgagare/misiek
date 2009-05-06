@@ -15,7 +15,7 @@ import javax.swing.ImageIcon;
 public class PluginResources {
 
     public static Icon getIcon(String localpath) {
-        URL url = ClassLoader.getSystemResource("resources/" + localpath);
+        URL url = ClassLoader.getSystemResource("mcv/resources/" + localpath);
         return new ImageIcon(url);
     }
 }
