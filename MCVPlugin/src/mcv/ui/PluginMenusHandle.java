@@ -2,6 +2,7 @@ package mcv.ui;
 
 import javax.swing.JButton;
 import javax.swing.JList;
+import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTree;
 
@@ -15,6 +16,7 @@ public class PluginMenusHandle {
     private static JButton showLoadedInteractionsButton = null;
     private static JButton newDataButton = null;
     private static JButton updateDataButton = null;
+    private static JPanel mcvPanel = null;
 
     public static JList getFamiliesList() {
         return familiesList;
@@ -78,5 +80,13 @@ public class PluginMenusHandle {
 
     public static void setUpdateDataButton(JButton updateDataButton) {
         PluginMenusHandle.updateDataButton = updateDataButton;
+    }
+
+    public static JPanel getMcvPanel() {
+        return mcvPanel;
+    }
+
+    public static void setMcvPanel(JPanel mcvPanel) {
+        PluginMenusHandle.mcvPanel = mcvPanel;
     }
 }

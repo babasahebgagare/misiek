@@ -6,6 +6,7 @@ import cytoscape.CyNode;
 import cytoscape.Cytoscape;
 import cytoscape.dialogs.plugins.TreeNode;
 import cytoscape.view.CyNetworkView;
+import cytoscape.view.cytopanels.CytoPanel;
 import giny.model.Edge;
 import mcv.io.AbstractDataReader;
 import java.util.Collection;
@@ -13,6 +14,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import javax.swing.DefaultListModel;
+import javax.swing.SwingConstants;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 import mcv.viewmodel.controllers.CytoDataHandle;
@@ -284,5 +286,12 @@ public class DefaultUIController extends UIController {
         PluginDataHandle.refreshPluginDataHandle();
         deleteDataView();
         PluginDataHandle.getLoadingDataHandle().deleteAll();
+    }
+
+    @Override
+    public void setMCVActiveTab() {
+        CytoPanel panel = Cytoscape.getDesktop().getCytoPanel(SwingConstants.WEST);
+        int index = panel.indexOfComponent(PluginMenusHandle.getMcvPanel());
+        panel.setSelectedIndex(index);
     }
 }

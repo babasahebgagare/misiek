@@ -40,7 +40,7 @@ public class CytoNetworkConverter {
                 CyNetwork parentNetwork = Cytoscape.getNetwork(cytoParentOrNull.getCytoID());
                 System.out.println("PARENT:" + parentID);
                 return Cytoscape.createNetwork(cytoNetwork.getID(), parentNetwork, true);
-            } 
+            }
         }
         return Cytoscape.createNetwork(cytoNetwork.getID(), true);
     }
