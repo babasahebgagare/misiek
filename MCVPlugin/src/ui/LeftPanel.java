@@ -43,9 +43,7 @@ public class LeftPanel extends javax.swing.JPanel {
         PluginMenusHandle.setDoProjectionButton(projectButton);
         PluginMenusHandle.setShowNetowrkButton(showButton);
         PluginMenusHandle.setFamiliesList(familiesList);
-        PluginMenusHandle.setLoadAllInteractionsButton(loadInteractionsButton);
         PluginMenusHandle.setShowLoadedInteractionsButton(showLoadedButton);
-        PluginMenusHandle.setLoadInteractionsForNetworkButton(loadIntForNetworkButton);
         PluginMenusHandle.setNewDataButton(newDataButton);
         UIController.getInstance().initButtonsState();
     }
@@ -93,8 +91,6 @@ public class LeftPanel extends javax.swing.JPanel {
         updateDataButton = new javax.swing.JButton();
         newDataButton = new javax.swing.JButton();
         attrPanel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        spaciesTree = new javax.swing.JTree();
         jScrollPane2 = new javax.swing.JScrollPane();
         loggerTextArea = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -102,9 +98,9 @@ public class LeftPanel extends javax.swing.JPanel {
         netsActionsPanel = new javax.swing.JPanel();
         projectButton = new javax.swing.JButton();
         showButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        spaciesTree = new javax.swing.JTree();
         intPanel = new javax.swing.JPanel();
-        loadInteractionsButton = new javax.swing.JButton();
-        loadIntForNetworkButton = new javax.swing.JButton();
         tresholdSpinner = new javax.swing.JSpinner();
         showLoadedButton = new javax.swing.JButton();
         mclButton = new javax.swing.JButton();
@@ -133,24 +129,22 @@ public class LeftPanel extends javax.swing.JPanel {
             dataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dataPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(dataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(newDataButton, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
-                    .addComponent(updateDataButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE))
+                .addComponent(newDataButton, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(updateDataButton, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
                 .addContainerGap())
         );
         dataPanelLayout.setVerticalGroup(
             dataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dataPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(newDataButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(updateDataButton)
+                .addGroup(dataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(newDataButton)
+                    .addComponent(updateDataButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         attrPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jScrollPane1.setViewportView(spaciesTree);
 
         loggerTextArea.setEditable(false);
         loggerTextArea.setRows(5);
@@ -166,20 +160,18 @@ public class LeftPanel extends javax.swing.JPanel {
             .addGroup(attrPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(attrPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE))
                 .addContainerGap())
         );
         attrPanelLayout.setVerticalGroup(
             attrPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, attrPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(attrPanelLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         netsActionsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -200,15 +192,20 @@ public class LeftPanel extends javax.swing.JPanel {
             }
         });
 
+        jScrollPane1.setViewportView(spaciesTree);
+
         javax.swing.GroupLayout netsActionsPanelLayout = new javax.swing.GroupLayout(netsActionsPanel);
         netsActionsPanel.setLayout(netsActionsPanelLayout);
         netsActionsPanelLayout.setHorizontalGroup(
             netsActionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(netsActionsPanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, netsActionsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(projectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(showButton, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                .addGroup(netsActionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
+                    .addGroup(netsActionsPanelLayout.createSequentialGroup()
+                        .addComponent(projectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(showButton, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         netsActionsPanelLayout.setVerticalGroup(
@@ -216,26 +213,13 @@ public class LeftPanel extends javax.swing.JPanel {
             .addGroup(netsActionsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(netsActionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(projectButton)
-                    .addComponent(showButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(showButton)
+                    .addComponent(projectButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE))
         );
 
         intPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        loadInteractionsButton.setText("Load interactions data");
-        loadInteractionsButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loadInteractionsButtonActionPerformed(evt);
-            }
-        });
-
-        loadIntForNetworkButton.setText("Load interactions data for species");
-        loadIntForNetworkButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loadIntForNetworkButtonActionPerformed(evt);
-            }
-        });
 
         tresholdSpinner.setName("TresholdSpinner"); // NOI18N
 
@@ -267,8 +251,6 @@ public class LeftPanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, intPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(intPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(loadIntForNetworkButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
-                    .addComponent(loadInteractionsButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, intPanelLayout.createSequentialGroup()
                         .addComponent(mclButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
@@ -281,11 +263,6 @@ public class LeftPanel extends javax.swing.JPanel {
         intPanelLayout.setVerticalGroup(
             intPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(intPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(loadInteractionsButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(loadIntForNetworkButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(showLoadedButton)
                 .addGap(11, 11, 11)
                 .addGroup(intPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -300,9 +277,9 @@ public class LeftPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(dataPanel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(attrPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(intPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(netsActionsPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(intPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(attrPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -310,11 +287,10 @@ public class LeftPanel extends javax.swing.JPanel {
                 .addComponent(dataPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(netsActionsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(intPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(attrPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34))
+                .addGap(18, 18, 18)
+                .addComponent(attrPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -337,30 +313,6 @@ private void projectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     }
 
 }//GEN-LAST:event_projectButtonActionPerformed
-
-private void loadIntForNetworkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadIntForNetworkButtonActionPerformed
-
-    /*  Thread thread = new Thread(new Runnable() {
-
-    public void run() {*/
-    double treshold = ((Integer) tresholdSpinner.getValue()).doubleValue() / 100.0;
-
-    UIController.getInstance().loadInteractionsForCurrentNetwork(treshold);
-    /*       }
-    });
-    thread.run();*/
-}//GEN-LAST:event_loadIntForNetworkButtonActionPerformed
-
-private void loadInteractionsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadInteractionsButtonActionPerformed
-    /*  JFrame frame = new JFrame("Set tresholds for loading interactions.");
-    InteractionsLoaderPanel intLoaderPanel = new InteractionsLoaderPanel();
-    frame.add(intLoaderPanel);
-    frame.pack();
-    frame.setVisible(true);
-    frame.pack();
-    frame.setLocationRelativeTo(Cytoscape.getDesktop());
-    intLoaderPanel.setVisible(true);*/
-}//GEN-LAST:event_loadInteractionsButtonActionPerformed
 
 private void showLoadedButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showLoadedButtonActionPerformed
     double treshold = ((Integer) tresholdSpinner.getValue()).doubleValue() / 100.0;
@@ -399,8 +351,6 @@ private void testButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JButton loadIntForNetworkButton;
-    private javax.swing.JButton loadInteractionsButton;
     private javax.swing.JTextArea loggerTextArea;
     private javax.swing.JButton mclButton;
     private javax.swing.JPanel netsActionsPanel;

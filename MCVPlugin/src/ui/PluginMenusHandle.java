@@ -12,9 +12,7 @@ public class PluginMenusHandle {
     private static JList familiesList = null;
     private static JButton doProjectionButton = null;
     private static JButton showNetworkButton = null;
-    private static JButton loadAllInteractionsButton = null;
     private static JButton showLoadedInteractionsButton = null;
-    private static JButton loadInteractionsForNetworkButton = null;
     private static JButton newDataButton = null;
     private static JButton updateDataButton = null;
 
@@ -58,28 +56,12 @@ public class PluginMenusHandle {
         PluginMenusHandle.showNetworkButton = showNetworkButton;
     }
 
-    public static JButton getLoadAllInteractionsButton() {
-        return loadAllInteractionsButton;
-    }
-
-    public static void setLoadAllInteractionsButton(JButton loadAllInteractionsButton) {
-        PluginMenusHandle.loadAllInteractionsButton = loadAllInteractionsButton;
-    }
-
     public static JButton getShowLoadedInteractionsButton() {
         return showLoadedInteractionsButton;
     }
 
     public static void setShowLoadedInteractionsButton(JButton showLoadedInteractionsButton) {
         PluginMenusHandle.showLoadedInteractionsButton = showLoadedInteractionsButton;
-    }
-
-    public static JButton getLoadInteractionsForNetworkButton() {
-        return loadInteractionsForNetworkButton;
-    }
-
-    public static void setLoadInteractionsForNetworkButton(JButton loadInteractionsForNetworkButton) {
-        PluginMenusHandle.loadInteractionsForNetworkButton = loadInteractionsForNetworkButton;
     }
 
     public static JButton getNewDataButton() {
