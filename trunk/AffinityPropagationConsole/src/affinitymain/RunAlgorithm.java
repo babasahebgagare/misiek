@@ -33,8 +33,9 @@ public class RunAlgorithm {
     private Integer convits;
     private Collection<String> nodeNames = new HashSet<String>();
     private String kind;
+    private boolean takeLog;
 
-    public RunAlgorithm(String inputpath, String outpath, double lambda, int iterations, Integer convits, double preferences, String kind) {
+    public RunAlgorithm(String inputpath, String outpath, double lambda, int iterations, Integer convits, double preferences, String kind, boolean takeLog) {
         this.inputpath = inputpath;
         this.outpath = outpath;
         this.lambda = lambda;
@@ -42,6 +43,7 @@ public class RunAlgorithm {
         this.preferences = preferences;
         this.kind = kind;
         this.convits = convits;
+        this.takeLog = takeLog;
     }
 
     public void setParemeters() {
@@ -80,9 +82,30 @@ public class RunAlgorithm {
         af.init();
         for (InteractionData intData : ints) {
             //     System.out.println(intData.getFrom() + " " + intData.getTo() + " " + intData.getSim());
-            af.setSimilarityInt(Integer.valueOf(intData.getFrom()), Integer.valueOf(intData.getTo()), intData.getSim());
+            Double val;
+            if (takeLog) {
+                if (intData.getSim() > 0) {
+                    val = Math.log(intData.getSim());
+                } else {
+                    val = Double.valueOf(0);
+                }
+            } else {
+                val = intData.getSim();
+            }
+            af.setSimilarityInt(Integer.valueOf(intData.getFrom()), Integer.valueOf(intData.getTo()), val);
         }
-        af.setConstPreferences(preferences);
+        Double pref;
+        if (takeLog) {
+            if (preferences > 0) {
+                pref = Math.log(preferences);
+            } else {
+                pref = Double.valueOf(0);
+            }
+        } else {
+            pref = preferences;
+        }
+
+        af.setConstPreferences(pref);
     }
 
     public void run() {
