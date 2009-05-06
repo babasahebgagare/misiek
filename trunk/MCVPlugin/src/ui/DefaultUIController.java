@@ -158,11 +158,9 @@ public class DefaultUIController extends UIController {
     public void initButtonsState() {
         PluginMenusHandle.getShowNetworkButton().setEnabled(false);
         PluginMenusHandle.getDoProjectionButton().setEnabled(false);
-        PluginMenusHandle.getLoadAllInteractionsButton().setEnabled(false);
         PluginMenusHandle.getShowLoadedInteractionsButton().setEnabled(false);
         PluginMenusHandle.getDoProjectionButton().setEnabled(false);
         PluginMenusHandle.getNewDataButton().setEnabled(true);
-        PluginMenusHandle.getLoadInteractionsForNetworkButton().setEnabled(false);
         PluginMenusHandle.getUpdateDataButton().setEnabled(false);
     }
 
@@ -242,7 +240,6 @@ public class DefaultUIController extends UIController {
     public void refreshUIafterProteinsLoading() {
         PluginMenusHandle.getUpdateDataButton().setEnabled(true);
         PluginMenusHandle.getShowNetworkButton().setEnabled(true);
-        PluginMenusHandle.getLoadAllInteractionsButton().setEnabled(true);
         PluginMenusHandle.getNewDataButton().setEnabled(true);
     }
 
