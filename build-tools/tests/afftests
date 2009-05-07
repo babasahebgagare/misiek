@@ -1,0 +1,14 @@
+#/bin/bash
+echo "Affinity propagation testing..."
+
+my_sim='int-test'
+tests_folder='./tests/'
+
+cd ~/studia/matlab
+
+echo "test 0..."
+#java -jar AffinityPropagationConsole.jar $travel_sim outC0.txt 0.5 3 3 -4500 clusters
+echo "$my_sim my_out 0.5 30 30 -0.6 clusters" > input
+/usr/local/bin/matlab <apclusterSparse.m
+#java -jar ClustersComparator.jar a outO0.txt s outC0.txt > jacc
+#java -jar SetsComparator.jar outO0.txt outC0.txt > jacc
