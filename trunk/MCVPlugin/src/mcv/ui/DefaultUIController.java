@@ -232,11 +232,11 @@ public class DefaultUIController extends UIController {
         //ProjectorInfoCalculator.calculateProjectorInfo();
         initDataView();
 
-        /* PluginMenusHandle.getLoadDataButton().setEnabled(true);
-        PluginMenusHandle.getShowNetworkButton().setEnabled(true);
-        PluginMenusHandle.getLoadAllInteractionsButton().setEnabled(true);
-        PluginMenusHandle.getLoadDataButton().setEnabled(false);
-        PluginMenusHandle.getDeleteAllDataButton().setEnabled(true);*/
+    /* PluginMenusHandle.getLoadDataButton().setEnabled(true);
+    PluginMenusHandle.getShowNetworkButton().setEnabled(true);
+    PluginMenusHandle.getLoadAllInteractionsButton().setEnabled(true);
+    PluginMenusHandle.getLoadDataButton().setEnabled(false);
+    PluginMenusHandle.getDeleteAllDataButton().setEnabled(true);*/
     }
 
     @Override
@@ -249,11 +249,12 @@ public class DefaultUIController extends UIController {
     }
 
     public void refreshUIafterDeleteData() {
-        PluginMenusHandle.getUpdateDataButton().setEnabled(true);
+        PluginMenusHandle.getUpdateDataButton().setEnabled(false);
         PluginMenusHandle.getShowNetworkButton().setEnabled(false);
         PluginMenusHandle.getNewDataButton().setEnabled(true);
         PluginMenusHandle.getDoProjectionButton().setEnabled(false);
         PluginMenusHandle.getShowLoadedInteractionsButton().setEnabled(false);
+        PluginMenusHandle.getDeleteDataButton().setEnabled(false);
     }
 
     @Override
@@ -268,6 +269,7 @@ public class DefaultUIController extends UIController {
     public void refreshUIafterSpeciesLoading() {
         PluginMenusHandle.getNewDataButton().setEnabled(true);
         PluginMenusHandle.getUpdateDataButton().setEnabled(true);
+        PluginMenusHandle.getDeleteDataButton().setEnabled(true);
     }
 
     @Override
