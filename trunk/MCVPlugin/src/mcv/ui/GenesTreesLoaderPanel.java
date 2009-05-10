@@ -7,8 +7,10 @@ package mcv.ui;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
+import javax.help.CSH;
 import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
+import mcv.help.MCVHelpBroker;
 import mcv.logicmodel.controllers.DataHandle;
 import mcv.logicmodel.structs.PPINetwork;
 import mcv.main.PluginDataHandle;
@@ -90,6 +92,7 @@ public class GenesTreesLoaderPanel extends javax.swing.JPanel {
         loadButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         proteinsStatsTable = new javax.swing.JTable();
+        infoButton = new javax.swing.JButton();
 
         filenameLabel.setText("filename");
         filenameLabel.setName("filenameLabel"); // NOI18N
@@ -140,6 +143,15 @@ public class GenesTreesLoaderPanel extends javax.swing.JPanel {
         proteinsStatsTable.setName("proteinsStatsTable"); // NOI18N
         jScrollPane2.setViewportView(proteinsStatsTable);
 
+        infoButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/help.png"))); // NOI18N
+        infoButton.setText("File format info");
+        infoButton.setName("infoButton"); // NOI18N
+        infoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                infoButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -147,11 +159,13 @@ public class GenesTreesLoaderPanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(chooseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(chooseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(loadButton, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE))
+                        .addComponent(loadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(infoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(filenameLabel, javax.swing.GroupLayout.Alignment.LEADING))
                 .addContainerGap())
         );
@@ -161,7 +175,8 @@ public class GenesTreesLoaderPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(chooseButton)
-                    .addComponent(loadButton))
+                    .addComponent(loadButton)
+                    .addComponent(infoButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(filenameLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -192,9 +207,15 @@ public class GenesTreesLoaderPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_loadButtonActionPerformed
 
+    private void infoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_infoButtonActionPerformed
+        CSH.DisplayHelpFromSource csh = new CSH.DisplayHelpFromSource(MCVHelpBroker.getHelpBroker("Proteins trees file format"));
+        csh.actionPerformed(new ActionEvent(this, 120, "Proteins trees file format"));
+    }//GEN-LAST:event_infoButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton chooseButton;
     private javax.swing.JLabel filenameLabel;
+    private javax.swing.JButton infoButton;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton loadButton;
     private javax.swing.JTable proteinsStatsTable;

@@ -1,5 +1,6 @@
 package mcv.io.readers.tasks;
 
+import mcv.io.exceptions.SpeciesTreeFormatException;
 import mcv.io.parsers.DataParser;
 import cytoscape.task.Task;
 import cytoscape.task.TaskMonitor;
@@ -39,7 +40,12 @@ public class LoadSpaciesTask implements Task {
             dis = new DataInputStream(bis);
             br = new BufferedReader(new InputStreamReader(dis));
             String treeString = br.readLine();
-            DataParser.getInstance().readSpaciesString(treeString);
+            try {
+                DataParser.getInstance().readSpaciesString(treeString);
+            } catch (SpeciesTreeFormatException ex) {
+                System.out.println(ex);
+                Logger.getLogger(LoadSpaciesTask.class.getName()).log(Level.SEVERE, null, ex);
+            }
             taskMonitor.setPercentCompleted(100);
             br.close();
             dis.close();

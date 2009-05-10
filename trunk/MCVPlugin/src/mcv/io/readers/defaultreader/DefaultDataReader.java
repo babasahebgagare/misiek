@@ -1,7 +1,10 @@
 package mcv.io.readers.defaultreader;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import mcv.io.AbstractDataReader;
 import mcv.io.MCVBufferedReader;
+import mcv.io.exceptions.SpeciesTreeFormatException;
 import mcv.io.parsers.DataParser;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -13,12 +16,12 @@ import mcv.utils.Messenger;
 
 public class DefaultDataReader extends AbstractDataReader {
 
-    private void readSpacies(BufferedReader br) throws IOException {
+    private void readSpacies(BufferedReader br) throws IOException, SpeciesTreeFormatException {
         String treeString = br.readLine();
         DataParser.getInstance().readSpaciesString(treeString);
     }
 
-    private void readSpacies(String filepath) {
+    private void readSpacies(String filepath) throws SpeciesTreeFormatException {
         try {
             MCVBufferedReader mbr = new MCVBufferedReader(filepath);
             BufferedReader br = mbr.getBufferedReader();
@@ -61,13 +64,17 @@ public class DefaultDataReader extends AbstractDataReader {
 
     @Override
     public void readSpecies() {
-        String spaciespath = getFilepath().concat("spy");
-        readSpacies(spaciespath);
+        try {
+            String spaciespath = getFilepath();
+            readSpacies(spaciespath);
+        } catch (SpeciesTreeFormatException ex) {
+            Logger.getLogger(DefaultDataReader.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public void readTrees() {
-        String treepath = getFilepath().concat("trees");
+        String treepath = getFilepath();
         readTrees(treepath);
     }
 
