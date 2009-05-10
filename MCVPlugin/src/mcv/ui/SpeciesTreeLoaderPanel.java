@@ -84,6 +84,7 @@ public class SpeciesTreeLoaderPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         speciesTree = new javax.swing.JTree();
 
+        chooseFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/com.png"))); // NOI18N
         chooseFile.setText("Choose file");
         chooseFile.setName("chooseFile"); // NOI18N
         chooseFile.addActionListener(new java.awt.event.ActionListener() {
@@ -95,6 +96,7 @@ public class SpeciesTreeLoaderPanel extends javax.swing.JPanel {
         filenameLabel.setText("filename");
         filenameLabel.setName("filenameLabel"); // NOI18N
 
+        loadTreeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/save.png"))); // NOI18N
         loadTreeButton.setText("Load tree");
         loadTreeButton.setName("loadTreeButton"); // NOI18N
         loadTreeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -132,13 +134,13 @@ public class SpeciesTreeLoaderPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(chooseFile)
-                    .addComponent(loadTreeButton))
+                    .addComponent(chooseFile, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(loadTreeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(filenameLabel)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11))
+                .addGap(13, 13, 13))
         );
     }// </editor-fold>//GEN-END:initComponents
 

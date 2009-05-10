@@ -42,7 +42,7 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="filenameLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane2" pref="209" max="32767" attributes="0"/>
+              <Component id="jScrollPane2" pref="207" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -57,6 +57,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="chooseButton">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/mcv/resources/icons/com.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Choose file"/>
         <Property name="name" type="java.lang.String" value="chooseButton" noResource="true"/>
       </Properties>
@@ -66,6 +69,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="loadButton">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/mcv/resources/icons/save.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Load"/>
         <Property name="name" type="java.lang.String" value="loadButton" noResource="true"/>
       </Properties>

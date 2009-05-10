@@ -29,9 +29,9 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="tresholdField" min="-2" pref="46" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="openButton" min="-2" pref="61" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="filepathLabel" pref="192" max="32767" attributes="0"/>
+              <Component id="openButton" min="-2" pref="81" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="filepathLabel" pref="178" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -69,6 +69,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="openButton">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/mcv/resources/icons/com.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Open"/>
         <Property name="enabled" type="boolean" value="false"/>
         <Property name="name" type="java.lang.String" value="openButton" noResource="true"/>

@@ -94,6 +94,7 @@ public class GenesTreesLoaderPanel extends javax.swing.JPanel {
         filenameLabel.setText("filename");
         filenameLabel.setName("filenameLabel"); // NOI18N
 
+        chooseButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/com.png"))); // NOI18N
         chooseButton.setText("Choose file");
         chooseButton.setName("chooseButton"); // NOI18N
         chooseButton.addActionListener(new java.awt.event.ActionListener() {
@@ -102,6 +103,7 @@ public class GenesTreesLoaderPanel extends javax.swing.JPanel {
             }
         });
 
+        loadButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/save.png"))); // NOI18N
         loadButton.setText("Load");
         loadButton.setName("loadButton"); // NOI18N
         loadButton.addActionListener(new java.awt.event.ActionListener() {
@@ -163,7 +165,7 @@ public class GenesTreesLoaderPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(filenameLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
