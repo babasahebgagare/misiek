@@ -64,6 +64,7 @@ public class AffinityPanel extends javax.swing.JPanel {
         weighetRadio = new javax.swing.JRadioButton();
         unweighetRadio = new javax.swing.JRadioButton();
 
+        startButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/run.png"))); // NOI18N
         startButton.setText("Start");
         startButton.setName("startButton"); // NOI18N
         startButton.addActionListener(new java.awt.event.ActionListener() {
@@ -208,6 +209,7 @@ public class AffinityPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        refreshButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/refresh.png"))); // NOI18N
         refreshButton.setText("Refresh");
         refreshButton.setName("refreshButton"); // NOI18N
         refreshButton.addActionListener(new java.awt.event.ActionListener() {
