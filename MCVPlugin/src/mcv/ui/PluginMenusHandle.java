@@ -15,8 +15,17 @@ public class PluginMenusHandle {
     private static JButton showNetworkButton = null;
     private static JButton showLoadedInteractionsButton = null;
     private static JButton newDataButton = null;
+    private static JButton deleteDataButton = null;
     private static JButton updateDataButton = null;
     private static JPanel mcvPanel = null;
+
+    public static JButton getDeleteDataButton() {
+        return deleteDataButton;
+    }
+
+    public static void setDeleteDataButton(JButton deleteDataButton) {
+        PluginMenusHandle.deleteDataButton = deleteDataButton;
+    }
 
     public static JList getFamiliesList() {
         return familiesList;

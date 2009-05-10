@@ -49,6 +49,7 @@ public class LeftPanel extends javax.swing.JPanel {
         PluginMenusHandle.setFamiliesList(familiesList);
         PluginMenusHandle.setShowLoadedInteractionsButton(showLoadedButton);
         PluginMenusHandle.setNewDataButton(newDataButton);
+        PluginMenusHandle.setDeleteDataButton(deleteVataButton);
         UIController.getInstance().initButtonsState();
     }
 
@@ -94,6 +95,7 @@ public class LeftPanel extends javax.swing.JPanel {
         dataPanel = new javax.swing.JPanel();
         updateDataButton = new javax.swing.JButton();
         newDataButton = new javax.swing.JButton();
+        deleteVataButton = new javax.swing.JButton();
         attrPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         loggerTextArea = new javax.swing.JTextArea();
@@ -114,8 +116,9 @@ public class LeftPanel extends javax.swing.JPanel {
         dataPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         updateDataButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/update.png"))); // NOI18N
-        updateDataButton.setText("Update data");
+        updateDataButton.setText("Update");
         updateDataButton.setToolTipText("Ładuje dane z plików .spy, .trees, .int");
+        updateDataButton.setEnabled(false);
         updateDataButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateDataButtonActionPerformed(evt);
@@ -123,10 +126,19 @@ public class LeftPanel extends javax.swing.JPanel {
         });
 
         newDataButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/open.png"))); // NOI18N
-        newDataButton.setText("New data");
+        newDataButton.setText("New");
         newDataButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newDataButtonActionPerformed(evt);
+            }
+        });
+
+        deleteVataButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/clean.png"))); // NOI18N
+        deleteVataButton.setText("Clean");
+        deleteVataButton.setEnabled(false);
+        deleteVataButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteVataButtonActionPerformed(evt);
             }
         });
 
@@ -135,10 +147,12 @@ public class LeftPanel extends javax.swing.JPanel {
         dataPanelLayout.setHorizontalGroup(
             dataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dataPanelLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(newDataButton, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(newDataButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(updateDataButton, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                .addComponent(updateDataButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(deleteVataButton, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
                 .addContainerGap())
         );
         dataPanelLayout.setVerticalGroup(
@@ -146,8 +160,9 @@ public class LeftPanel extends javax.swing.JPanel {
             .addGroup(dataPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(dataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(newDataButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(updateDataButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(newDataButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(deleteVataButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -225,7 +240,7 @@ public class LeftPanel extends javax.swing.JPanel {
                     .addComponent(showButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(projectButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE))
         );
 
         intPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -304,10 +319,10 @@ public class LeftPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(dataPanel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(attrPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(netsActionsPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(intPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(dataPanel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(netsActionsPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -315,7 +330,7 @@ public class LeftPanel extends javax.swing.JPanel {
                 .addComponent(dataPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(netsActionsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(37, 37, 37)
                 .addComponent(intPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(attrPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -360,11 +375,8 @@ private void mclButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 private void newDataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newDataButtonActionPerformed
 
     if (PluginDataHandle.getDataHandle().speciesTreeLoaded()) {
-        //int ret = JOptionPane.showConfirmDialog(Cytoscape.getDesktop(), "All loaded data would be removed, are you sure?");
         int ret = Messenger.confirmWarning("All loaded data would be removed, are you sure?");
         if (ret == JOptionPane.OK_OPTION) {
-            //NewDataWarningDialog dataWarning = new NewDataWarningDialog(Cytoscape.getDesktop(), true);
-            //if (dataWarning.getReturnStatus() == NewDataWarningDialog.RET_OK) {
             UIController.getInstance().newData();
         }
     } else {
@@ -377,13 +389,23 @@ private void testButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 }//GEN-LAST:event_testButtonActionPerformed
 
 private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpButtonActionPerformed
-        CSH.DisplayHelpFromSource csh = new CSH.DisplayHelpFromSource(MCVHelpBroker.getHelpBroker("Introduction"));
-        csh.actionPerformed(new ActionEvent(this, 120, "Introduction"));
+    CSH.DisplayHelpFromSource csh = new CSH.DisplayHelpFromSource(MCVHelpBroker.getHelpBroker("Introduction"));
+    csh.actionPerformed(new ActionEvent(this, 120, "Introduction"));
 }//GEN-LAST:event_helpButtonActionPerformed
+
+private void deleteVataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteVataButtonActionPerformed
+    if (PluginDataHandle.getDataHandle().speciesTreeLoaded()) {
+        int ret = Messenger.confirmWarning("All loaded data would be removed, are you sure?");
+        if (ret == JOptionPane.OK_OPTION) {
+            UIController.getInstance().deleteData();
+        }
+    }
+}//GEN-LAST:event_deleteVataButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel attrPanel;
     private javax.swing.JPanel dataPanel;
+    private javax.swing.JButton deleteVataButton;
     private javax.swing.JList familiesList;
     private javax.swing.JButton helpButton;
     private javax.swing.JPanel intPanel;
