@@ -11,6 +11,8 @@ import java.awt.event.ActionEvent;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Vector;
+import javax.help.CSH;
+import mcv.help.MCVHelpBroker;
 import mcv.logicmodel.controllers.DataHandle;
 import mcv.logicmodel.structs.Interaction;
 import mcv.logicmodel.structs.PPINetwork;
@@ -47,6 +49,7 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
         loadButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         loadingPanel = new javax.swing.JPanel();
+        infoButton = new javax.swing.JButton();
 
         loadButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/update.png"))); // NOI18N
         loadButton.setText("Update");
@@ -74,6 +77,15 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
 
         jScrollPane1.setViewportView(loadingPanel);
 
+        infoButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/help.png"))); // NOI18N
+        infoButton.setText("File format info");
+        infoButton.setName("infoButton"); // NOI18N
+        infoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                infoButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -82,15 +94,19 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(loadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(infoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(138, 138, 138))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(loadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(loadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(infoButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -142,7 +158,13 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
 
 }//GEN-LAST:event_loadButtonActionPerformed
 
+    private void infoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_infoButtonActionPerformed
+        CSH.DisplayHelpFromSource csh = new CSH.DisplayHelpFromSource(MCVHelpBroker.getHelpBroker("Interactions file format"));
+        csh.actionPerformed(new ActionEvent(this, 120, "Interactions file format"));
+    }//GEN-LAST:event_infoButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton infoButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton loadButton;
     private javax.swing.JPanel loadingPanel;

@@ -1,6 +1,5 @@
 package mcv.io.parsers.rootparser;
 
-
 import java.util.Collection;
 import java.util.HashSet;
 import mcv.io.parsers.ParserStruct;
@@ -40,6 +39,7 @@ public class RootSpaciesParser {
 
     private static Collection<String> extractSubNodes(String substring) {
         Collection<String> ret = new HashSet<String>();
+        String speciesName;
 
         int count = 0;
         int lastIndex = 0;
@@ -50,12 +50,13 @@ public class RootSpaciesParser {
             } else if (substring.charAt(i) == ')') {
                 count--;
             } else if ((substring.charAt(i) == ',') && (count == 0)) {
-                ret.add(substring.substring(lastIndex, i));
-                lastIndex = i;
+                speciesName = substring.substring(lastIndex, i).trim();
+                ret.add(speciesName);
+                lastIndex = i + 1;
             }
         }
-
-        ret.add(substring.substring(lastIndex + 1, substring.length()));
+        speciesName = substring.substring(lastIndex, substring.length()).trim();
+        ret.add(speciesName);
 
         return ret;
     }

@@ -19,16 +19,17 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="filenameLabel" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="chooseFile" min="-2" pref="174" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="loadTreeButton" pref="192" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="chooseFile" min="-2" pref="111" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Component id="loadTreeButton" pref="122" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="helpButton" min="-2" pref="127" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="filenameLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="342" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jScrollPane1" pref="352" max="32767" attributes="0"/>
@@ -45,6 +46,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="chooseFile" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                   <Component id="loadTreeButton" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="helpButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="filenameLabel" min="-2" max="-2" attributes="0"/>
@@ -103,5 +105,17 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="helpButton">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/mcv/resources/icons/help.png"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="File format info"/>
+        <Property name="name" type="java.lang.String" value="helpButton" noResource="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="helpButtonActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>

@@ -2,13 +2,14 @@ package mcv.io.parsers.defaultparser;
 
 import java.util.Collection;
 import java.util.HashSet;
+import mcv.io.exceptions.SpeciesTreeFormatException;
 import mcv.io.parsers.ParserStruct;
 import mcv.logicmodel.controllers.DataHandle;
 import mcv.main.PluginDataHandle;
 
 public class DefaultSpaciesParser {
 
-    public static void readSpaciesString(String treeString, String parent) {
+    public static void readSpaciesString(String treeString, String parent) throws SpeciesTreeFormatException {
         DataHandle dh = PluginDataHandle.getDataHandle();
         ParserStruct struct = extractNodeName(treeString);
 
@@ -47,6 +48,7 @@ public class DefaultSpaciesParser {
 
         int count = 0;
         int lastIndex = 0;
+        System.out.println(substring);
 
         for (int i = 0; i < substring.length(); i++) {
             if (substring.charAt(i) == '(') {
@@ -54,12 +56,12 @@ public class DefaultSpaciesParser {
             } else if (substring.charAt(i) == ')') {
                 count--;
             } else if ((substring.charAt(i) == ',') && (count == 0)) {
-                ret.add(substring.substring(lastIndex, i));
-                lastIndex = i;
+                ret.add(substring.substring(lastIndex, i).trim());
+                lastIndex = i + 1;
             }
         }
 
-        ret.add(substring.substring(lastIndex + 1, substring.length()));
+        ret.add(substring.substring(lastIndex, substring.length()));
 
         return ret;
     }
