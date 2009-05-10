@@ -1,6 +1,6 @@
 start = clock;
 %input = fopen('input', 'r');
-[inputfile, outputfile, lam, maxits, convits, p, kind] =textread('./input', '%s %s %f %d %d %f %s', 1);
+[inputfile, outputfile, lam, maxits, convits, p, kind] =textread('./input2', '%s %s %f %d %d %f %s', 1);
 plt = 0; details=1; nonoise = 1;
 %[lam, maxits, p, k] = textread('./input', '%f %d %f %s', 1);
 %fclose(input);
@@ -152,13 +152,9 @@ while ~dn
     end;
 end;
 % Identify  exemplars
-p
 kind
 E=((A(M-N+1:M)+R(M-N+1:M))>0); K=sum(E);
 if K>0
-        p
-        K
-        E
     tmpidx=zeros(N,1); tmpidx(find(E))=find(E); % Identify clusters
     for j=find(E==0)'
         ss=s(ind1(ind1s(j):ind1e(j)),3);
@@ -168,9 +164,7 @@ if K>0
         tmpidx(j)=ii(ee(imx));
     end;
     EE=zeros(N,1);
-    p
-    K
-    for j=find(E)'
+   for j=find(E)'
        jj=find(tmpidx==j); mx=-Inf;
         ns=zeros(N,1); msk=zeros(N,1);
         for m=jj'
@@ -178,11 +172,10 @@ if K>0
             msk(mm)=msk(mm)+1;
             ns(mm)=ns(mm)+s(ind1(ind1s(m):ind1e(m)),3);
         end;
-        ii=jj(find(msk(jj)==length(jj)));
+       ii=jj(find(msk(jj)==length(jj)));
         [smx imx]=max(ns(ii));
         EE(ii(imx))=1;
     end;
-    p
     E=EE;
     tmpidx=zeros(N,1); tmpdpsim=0;
     tmpidx(find(E))=find(E); tmpexpref=sum(p(find(E)));
@@ -194,22 +187,36 @@ if K>0
         tmpidx(j)=ii(ee(imx));
         tmpdpsim=tmpdpsim+smx;
     end;
-    p
     tmpnetsim=tmpdpsim+tmpexpref;
 else
     tmpidx=nan*ones(N,1); tmpnetsim=nan; tmpexpref=nan;
 end;
+
+
+tmpidx
+fileout = fopen(outputfile{:}, 'w');
+    if strcmp(kind{:},'clusters')
+        kind
+        clust = tmpidx;
+    else
+        kind
+        clust = E;
+    end;
+    %clust
+    for j=1:size(clust), fprintf(fileout, '%d\n', clust(j)); end;
+    fclose(fileout)
+
 if details
     netsim(i+1)=tmpnetsim; netsim=netsim(1:i+1);
     dpsim(i+1)=tmpnetsim-tmpexpref; dpsim=dpsim(1:i+1);
     expref(i+1)=tmpexpref; expref=expref(1:i+1);
     idx(:,i+1)=tmpidx; idx=idx(:,1:i+1);
-    idx
-    tmpidx
 else
     netsim=tmpnetsim; dpsim=tmpnetsim-tmpexpref;
     expref=tmpexpref; idx=tmpidx;
 end;
+
+
 if plt||details
     fprintf('\nNumber of identified clusters: %d\n',K);
     fprintf('Fitness (net similarity): %f\n',tmpnetsim);

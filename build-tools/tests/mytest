@@ -22,19 +22,35 @@ mcl_path='/home/jsim/m/mw219725/studia/genomika/mcl-08-312/src/shmcl/mcl'
 cd ~/studia/matlab
 
 echo "test fu0.8log..."
-java -jar AffinityPropagationConsole.jar $myfu_sim_log myfu1a.txt 0.5 50 50 -0.9 clusters
-echo "$myfu_sim_log myfu1o.txt 0.5 50 50 -0.9 clusters" > input
+java -jar AffinityPropagationConsole.jar $myfu_sim_log myfu1i.txt 0.5 50 50 -0.9 clusters
+echo "$myfu_sim_log myfu1o.txt 0.5 50 50 -0.9 clusters" > input2
+/usr/local/bin/matlab <apclusterSparse.m
+echo "$myfu_sim_log myfu1a.txt 0.5 50 50 -0.9 clusters" > input
 /usr/local/bin/matlab <apcluster.m
 $mcl_path $myfu_sim -I 2.0 --abc -o myfu1m.txt
-#java -jar SetsComparator.jar myfu1o.txt myfu1a.txt > myjacc
 java -jar ClustersComparator.jar a myfu1o.txt s myfu1a.txt > myjacc
+java -jar ClustersComparator.jar m myfu1m.txt s myfu1a.txt >> myjacc
+java -jar ClustersComparator.jar m myfu1m.txt a myfu1o.txt >> myjacc
+java -jar ClustersComparator.jar a myfu1a.txt s myfu1i.txt >> myjacc
+java -jar ClustersComparator.jar a myfu1o.txt s myfu1i.txt >> myjacc
+java -jar ClustersComparator.jar m myfu1m.txt s myfu1i.txt >> myjacc
+
+exit
+
+echo "test fu0.8log..."
+java -jar AffinityPropagationConsole.jar $myfu_sim_log myfu1a.txt 0.5 50 50 -0.9 clusters
+echo "$myfu_sim_log myfu1o.txt 0.5 50 50 -0.9 clusters" > input
+/usr/local/bin/matlab <apclusterSparse.m
+$mcl_path $myfu_sim -I 2.0 --abc -o myfu1m.txt
+#java -jar SetsComparator.jar myfu1o.txt myfu1a.txt > myjacc
+java -jar ClustersComparator.jar a myfu1o.txt s myfu1a.txt >> myjacc
 java -jar ClustersComparator.jar m myfu1m.txt s myfu1a.txt >> myjacc
 java -jar ClustersComparator.jar m myfu1m.txt a myfu1o.txt >> myjacc
 
 echo "test bi0.8log..."
 java -jar AffinityPropagationConsole.jar $mybi_sim_log mybi1a.txt 0.5 50 50 -0.9 clusters
 echo "$mybi_sim_log mybi1o.txt 0.5 50 50 -0.9 clusters" > input
-/usr/local/bin/matlab <apcluster.m
+/usr/local/bin/matlab <apclusterSparse.m
 $mcl_path $mybi_sim -I 2.0 --abc -o mybi1m.txt
 #java -jar SetsComparator.jar mybi1o.txt mybi1a.txt > myjacc
 java -jar ClustersComparator.jar a mybi1o.txt s mybi1a.txt >> myjacc
@@ -44,7 +60,7 @@ java -jar ClustersComparator.jar m mybi1m.txt a mybi1o.txt >> myjacc
 echo "test ce0.8log..."
 java -jar AffinityPropagationConsole.jar $myce_sim_log myce1a.txt 0.5 50 50 -0.9 clusters
 echo "$myce_sim_log myce1o.txt 0.5 50 50 -0.9 clusters" > input
-/usr/local/bin/matlab <apcluster.m
+/usr/local/bin/matlab <apclusterSparse.m
 $mcl_path $myce_sim -I 2.0 --abc -o myce1m.txt
 #java -jar SetsComparator.jar myce1o.txt myce1a.txt > myjacc
 java -jar ClustersComparator.jar a myce1o.txt s myce1a.txt >> myjacc
@@ -54,7 +70,7 @@ java -jar ClustersComparator.jar m myce1m.txt a myce1o.txt >> myjacc
 echo "test dm0.8log..."
 java -jar AffinityPropagationConsole.jar $mydm_sim_log mydm1a.txt 0.5 50 50 -0.9 clusters
 echo "$mydm_sim_log mydm1o.txt 0.5 50 50 -0.9 clusters" > input
-/usr/local/bin/matlab <apcluster.m
+/usr/local/bin/matlab <apclusterSparse.m
 $mcl_path $mydm_sim -I 2.0 --abc -o mydm1m.txt
 #java -jar SetsComparator.jar mydm1o.txt mydm1a.txt > myjacc
 java -jar ClustersComparator.jar a mydm1o.txt s mydm1a.txt >> myjacc
@@ -65,7 +81,7 @@ java -jar ClustersComparator.jar m mydm1m.txt a mydm1o.txt >> myjacc
 echo "test sc0.8log..."
 java -jar AffinityPropagationConsole.jar $mysc_sim_log mysc1a.txt 0.5 50 50 -0.9 clusters
 echo "$mysc_sim_log mysc1o.txt 0.5 50 50 -0.9 clusters" > input
-/usr/local/bin/matlab <apcluster.m
+/usr/local/bin/matlab <apclusterSparse.m
 $mcl_path $mysc_sim -I 2.0 --abc -o mysc1m.txt
 #java -jar SetsComparator.jar mysc1o.txt mysc1a.txt > myjacc
 java -jar ClustersComparator.jar a mysc1o.txt s mysc1a.txt >> myjacc
@@ -75,7 +91,7 @@ java -jar ClustersComparator.jar m mysc1m.txt a mysc1o.txt >> myjacc
 echo "test ro0.8log..."
 java -jar AffinityPropagationConsole.jar $myro_sim_log myro1a.txt 0.5 50 50 -0.9 clusters
 echo "$myro_sim_log myro1o.txt 0.5 50 50 -0.9 clusters" > input
-/usr/local/bin/matlab <apcluster.m
+/usr/local/bin/matlab <apclusterSparse.m
 $mcl_path $myro_sim -I 2.0 --abc -o myro1m.txt
 #java -jar SetsComparator.jar myro1o.txt myro1a.txt > myjacc
 java -jar ClustersComparator.jar a myro1o.txt s myro1a.txt >> myjacc
