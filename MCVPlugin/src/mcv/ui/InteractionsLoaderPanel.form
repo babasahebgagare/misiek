@@ -92,8 +92,8 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Many files">
-                <Property name="tabTitle" type="java.lang.String" value="Many files"/>
+              <JTabbedPaneConstraints tabName="Many files (faster - recommended)">
+                <Property name="tabTitle" type="java.lang.String" value="Many files (faster - recommended)"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>

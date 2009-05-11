@@ -105,7 +105,7 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
 
         jScrollPane1.setViewportView(loadingPanel);
 
-        jTabbedPane1.addTab("Many files", jScrollPane1);
+        jTabbedPane1.addTab("Many files (faster - recommended)", jScrollPane1);
 
         jScrollPane3.setName("jScrollPane3"); // NOI18N
 
