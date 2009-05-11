@@ -81,7 +81,7 @@ public class TasksDataReader extends AbstractDataReader {
 
     @Override
     public void readAllInteractions(double treshold) {
-        String intpath = getFilepath().concat("int");
+        String intpath = getFilepath();
 
         DataHandle dh = PluginDataHandle.getDataHandle();
         Map<String, Double> tresholds = new TreeMap<String, Double>();
@@ -104,7 +104,7 @@ public class TasksDataReader extends AbstractDataReader {
 
     @Override
     public void readAllInteractions(Map<String, Double> tresholds) {
-        String intpath = getFilepath().concat("int");
+        String intpath = getFilepath();
 
         Task task = new LoadAllInteractionsTask(intpath, tresholds);
         JTaskConfig jTaskConfig = new JTaskConfig();

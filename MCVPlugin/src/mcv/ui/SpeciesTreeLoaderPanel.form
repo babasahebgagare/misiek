@@ -22,17 +22,17 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="chooseFile" min="-2" pref="111" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="loadTreeButton" pref="122" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="loadTreeButton" min="-2" pref="115" max="-2" attributes="0"/>
+                      <EmptySpace pref="113" max="32767" attributes="0"/>
                       <Component id="helpButton" min="-2" pref="127" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="filenameLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="342" max="32767" attributes="0"/>
+                      <EmptySpace pref="442" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jScrollPane1" pref="352" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="452" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -52,7 +52,7 @@
               <Component id="filenameLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="155" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

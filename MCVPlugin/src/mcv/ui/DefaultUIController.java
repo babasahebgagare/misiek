@@ -24,6 +24,7 @@ import mcv.logicmodel.controllers.ProjectorInfoCalculator;
 import mcv.viewmodel.structs.CytoAbstractPPINetwork;
 import mcv.viewmodel.structs.CytoProtein;
 import mcv.logicmodel.structs.PPINetwork;
+import mcv.main.LoadedDataHandle;
 import mcv.main.PluginDataHandle;
 import mcv.utils.JTreeModelSpeciesGenerator;
 import mcv.utils.Messenger;
@@ -225,7 +226,7 @@ public class DefaultUIController extends UIController {
 
     @Override
     public void loadSpeciesTreeData(String filepath) {
-        PluginDataHandle.initPluginDataHandle();
+        //PluginDataHandle.refreshPluginDataHandle();
         AbstractDataReader.getInstance().setFilepath(filepath);
         AbstractDataReader.getInstance().readSpecies();
 
@@ -299,5 +300,16 @@ public class DefaultUIController extends UIController {
         CytoPanel panel = Cytoscape.getDesktop().getCytoPanel(SwingConstants.WEST);
         int index = panel.indexOfComponent(PluginMenusHandle.getMcvPanel());
         panel.setSelectedIndex(index);
+    }
+
+    @Override
+    public void deleteAllInteractions() {
+        DataHandle dh = PluginDataHandle.getDataHandle();
+        LoadedDataHandle ldh = PluginDataHandle.getLoadedDataHandle();
+        ldh.deleteAll();
+        for (PPINetwork network : dh.getNetworks().values()) {
+            network.deleteAllInteractions();
+        }
+
     }
 }

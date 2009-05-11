@@ -31,10 +31,7 @@ public class PluginDataHandle {
     }
 
     public static void refreshPluginDataHandle() {
-        initPluginDataHandle();
-    }
-
-    public static void initPluginDataHandle() {
+        System.out.println("refresh");
         dataHandle = new DataHandle();
         loadedDataHandle = new LoadedDataHandle();
         loadingDataHandle = new LoadingDataHandle();
