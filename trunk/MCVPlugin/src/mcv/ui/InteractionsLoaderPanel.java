@@ -8,10 +8,14 @@ package mcv.ui;
 import mcv.io.AbstractDataReader;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.Vector;
 import javax.help.CSH;
+import javax.swing.JFileChooser;
 import mcv.help.MCVHelpBroker;
 import mcv.logicmodel.controllers.DataHandle;
 import mcv.logicmodel.structs.Interaction;
@@ -27,14 +31,16 @@ import mcv.ui.listeners.InteractionsLoadedListener;
 public class InteractionsLoaderPanel extends javax.swing.JPanel {
 
     Collection<SpeciesInteractionsLoaderPanel> panels = new Vector<SpeciesInteractionsLoaderPanel>();
+    Collection<OneFileSpeciesInteractionsLoaderPanel> oneFilePanels = new Vector<OneFileSpeciesInteractionsLoaderPanel>();
     InteractionsLoadedListener list;
+    String onefilepath;
 
     public InteractionsLoaderPanel(InteractionsLoadedListener list) {
         this.list = list;
         initComponents();
-        //    System.out.println("HEHEHE");
-        // initSpeciesList();
+        initSpeciesListForOneFile();
         initSpeciesList();
+        setActualUIState();
     }
 
     /** This method is called from within the constructor to
@@ -46,10 +52,21 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        jScrollPane2 = new javax.swing.JScrollPane();
         loadButton = new javax.swing.JButton();
+        infoButton = new javax.swing.JButton();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         loadingPanel = new javax.swing.JPanel();
-        infoButton = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        oneLodingPanel = new javax.swing.JPanel();
+        chooseOneFileButton = new javax.swing.JButton();
+        oneFileLoadingPanel = new javax.swing.JPanel();
+        oneFilenameLoabel = new javax.swing.JLabel();
+        cleanButton = new javax.swing.JButton();
+
+        jScrollPane2.setName("jScrollPane2"); // NOI18N
 
         loadButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/update.png"))); // NOI18N
         loadButton.setText("Update");
@@ -60,23 +77,6 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
             }
         });
 
-        jScrollPane1.setName("jScrollPane1"); // NOI18N
-
-        loadingPanel.setName("loadingPanel"); // NOI18N
-
-        javax.swing.GroupLayout loadingPanelLayout = new javax.swing.GroupLayout(loadingPanel);
-        loadingPanel.setLayout(loadingPanelLayout);
-        loadingPanelLayout.setHorizontalGroup(
-            loadingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 415, Short.MAX_VALUE)
-        );
-        loadingPanelLayout.setVerticalGroup(
-            loadingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 332, Short.MAX_VALUE)
-        );
-
-        jScrollPane1.setViewportView(loadingPanel);
-
         infoButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/help.png"))); // NOI18N
         infoButton.setText("File format info");
         infoButton.setName("infoButton"); // NOI18N
@@ -86,17 +86,108 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
             }
         });
 
+        jTabbedPane1.setName("jTabbedPane1"); // NOI18N
+
+        jScrollPane1.setName("jScrollPane1"); // NOI18N
+
+        loadingPanel.setName("loadingPanel"); // NOI18N
+
+        javax.swing.GroupLayout loadingPanelLayout = new javax.swing.GroupLayout(loadingPanel);
+        loadingPanel.setLayout(loadingPanelLayout);
+        loadingPanelLayout.setHorizontalGroup(
+            loadingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 535, Short.MAX_VALUE)
+        );
+        loadingPanelLayout.setVerticalGroup(
+            loadingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 463, Short.MAX_VALUE)
+        );
+
+        jScrollPane1.setViewportView(loadingPanel);
+
+        jTabbedPane1.addTab("Many files", jScrollPane1);
+
+        jScrollPane3.setName("jScrollPane3"); // NOI18N
+
+        oneLodingPanel.setName("oneLodingPanel"); // NOI18N
+
+        chooseOneFileButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/com.png"))); // NOI18N
+        chooseOneFileButton.setText("Choose file");
+        chooseOneFileButton.setName("chooseOneFileButton"); // NOI18N
+        chooseOneFileButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chooseOneFileButtonActionPerformed(evt);
+            }
+        });
+
+        oneFileLoadingPanel.setName("oneFileLoadingPanel"); // NOI18N
+
+        javax.swing.GroupLayout oneFileLoadingPanelLayout = new javax.swing.GroupLayout(oneFileLoadingPanel);
+        oneFileLoadingPanel.setLayout(oneFileLoadingPanelLayout);
+        oneFileLoadingPanelLayout.setHorizontalGroup(
+            oneFileLoadingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 525, Short.MAX_VALUE)
+        );
+        oneFileLoadingPanelLayout.setVerticalGroup(
+            oneFileLoadingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 410, Short.MAX_VALUE)
+        );
+
+        oneFilenameLoabel.setText("filename");
+        oneFilenameLoabel.setName("oneFilenameLoabel"); // NOI18N
+
+        javax.swing.GroupLayout oneLodingPanelLayout = new javax.swing.GroupLayout(oneLodingPanel);
+        oneLodingPanel.setLayout(oneLodingPanelLayout);
+        oneLodingPanelLayout.setHorizontalGroup(
+            oneLodingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(oneLodingPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(chooseOneFileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(oneFilenameLoabel)
+                .addGap(249, 249, 249))
+            .addGroup(oneLodingPanelLayout.createSequentialGroup()
+                .addComponent(oneFileLoadingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        oneLodingPanelLayout.setVerticalGroup(
+            oneLodingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(oneLodingPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(oneLodingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(chooseOneFileButton)
+                    .addComponent(oneFilenameLoabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(oneFileLoadingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jScrollPane3.setViewportView(oneLodingPanel);
+
+        jTabbedPane1.addTab("One file", jScrollPane3);
+
+        cleanButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/clean.png"))); // NOI18N
+        cleanButton.setText("Clean");
+        cleanButton.setName("cleanButton"); // NOI18N
+        cleanButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cleanButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(loadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(loadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(infoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(138, 138, 138))
+                .addComponent(cleanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 175, Short.MAX_VALUE)
+                .addComponent(infoButton)
+                .addContainerGap())
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 544, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -104,23 +195,99 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(loadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(infoButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE))
+                    .addComponent(infoButton)
+                    .addComponent(cleanButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    /* private void initSpeciesList() {
-    DataHandle dh = PluginDataHandle.getDataHandle();
-    if (dh == null) {
-    return;
+    public void initSpeciesListForOneFile() {
+        DataHandle dh = PluginDataHandle.getDataHandle();
+        if (!dh.isProteinsLoaded()) {
+            return;
+        }
+        oneFileLoadingPanel.setLayout(new GridLayout(dh.getNetworks().keySet().size(), 1));
+
+        for (String species : dh.getNetworks().keySet()) {
+            OneFileSpeciesInteractionsLoaderPanel panel = new OneFileSpeciesInteractionsLoaderPanel(species);
+            oneFilePanels.add(panel);
+            oneFileLoadingPanel.add(panel);
+        }
     }
 
-    DefaultTableModel tableModel = (DefaultTableModel) intLoadingTable.getModel();
-    for (String species : dh.getNetworks().keySet()) {
-    tableModel.addRow(new Object[]{species, genereteTreshold(species)});
+    private void refreshLoadingUI() {
+        oneFilenameLoabel.setText("filename");
+        refreshSpeciesList();
+        refreshSpeciesListForOneFile();
     }
-    }*/
+
+    private void refreshSpeciesList() {
+        DataHandle dh = PluginDataHandle.getDataHandle();
+        if (!dh.isProteinsLoaded()) {
+            return;
+        }
+
+        for (SpeciesInteractionsLoaderPanel panel : panels) {
+
+            panel.setActualLoadedUIState();
+        }
+    }
+
+    private void refreshSpeciesListForOneFile() {
+        DataHandle dh = PluginDataHandle.getDataHandle();
+        if (!dh.isProteinsLoaded()) {
+            return;
+        }
+
+        for (OneFileSpeciesInteractionsLoaderPanel panel : oneFilePanels) {
+
+            panel.setActualLoadedUIState();
+        }
+    }
+
+    private void setActualUIState() {
+        if (PluginDataHandle.getLoadedDataHandle().fromOneFileLoaded()) {
+            setOneFileTabEnabled();
+            setOneFileTabSelected();
+            onefilepath = PluginDataHandle.getLoadedDataHandle().getOneInteractionFilename();
+            oneFilenameLoabel.setText(onefilepath);
+        } else if (PluginDataHandle.getLoadedDataHandle().fromManyFilesLoaded()) {
+            setManyFilesTabEnabled();
+            setManyFilesTabSelected();
+        } else {
+            setBothTabEnabled();
+            setManyFilesTabSelected();
+        }
+    }
+
+    private void setManyFilesTabSelected() {
+        jTabbedPane1.setSelectedIndex(0);
+    }
+
+    private void setManyFilesTabEnabled() {
+        jTabbedPane1.setEnabledAt(0, true);
+        jTabbedPane1.setEnabledAt(1, false);
+    }
+
+    private void setOneFileTabEnabled() {
+        jTabbedPane1.setEnabledAt(0, false);
+        jTabbedPane1.setEnabledAt(1, true);
+    }
+
+    private void setBothTabEnabled() {
+        jTabbedPane1.setEnabledAt(0, true);
+        jTabbedPane1.setEnabledAt(1, true);
+    }
+
+    private void setOneFileTabSelected() {
+        jTabbedPane1.setSelectedIndex(1);
+    }
+
+    private boolean isManyFilesSelected() {
+        return jTabbedPane1.getSelectedIndex() == 0;
+    }
+
     public void initSpeciesList() {
         DataHandle dh = PluginDataHandle.getDataHandle();
         if (!dh.isProteinsLoaded()) {
@@ -131,31 +298,19 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
 
         for (String species : dh.getNetworks().keySet()) {
             SpeciesInteractionsLoaderPanel panel = new SpeciesInteractionsLoaderPanel(species);
-            System.out.println("species: " + species);
             panels.add(panel);
             loadingPanel.add(panel);
         }
     }
 
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
-        for (SpeciesInteractionsLoaderPanel speciesPanel : panels) {
-
-            String speciesName = speciesPanel.getSpeciesName();
-            PPINetwork network = PluginDataHandle.getDataHandle().getNetworks().get(speciesName);
-            if (speciesPanel.checked()) {
-                String filename = speciesPanel.tryGetFilepath();
-                if (filename != null) {
-                    Double oldTresholdOrNull = PluginDataHandle.getLoadedDataHandle().getSpeciesInteractionsTreshold(speciesName);
-                    Double tresholdOrNull = speciesPanel.tryGetTreshold();
-                    updateInteractionsDataForSpecies(network, speciesName, filename, tresholdOrNull, oldTresholdOrNull);
-                }
-            } else {
-                network.deleteAllInteractions();
-                PluginDataHandle.getLoadedDataHandle().deleteInteractionData(speciesName);
-            }
+        if (isManyFilesSelected()) {
+            updateFromManyFiles();
+            setManyFilesTabEnabled();
+        } else {
+            updateFromOneFile();
+            setOneFileTabEnabled();
         }
-        list.actionPerformed(new ActionEvent(this, 3, "Interactions loaded"));
-
 }//GEN-LAST:event_loadButtonActionPerformed
 
     private void infoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_infoButtonActionPerformed
@@ -163,11 +318,37 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
         csh.actionPerformed(new ActionEvent(this, 120, "Interactions file format"));
     }//GEN-LAST:event_infoButtonActionPerformed
 
+    private void cleanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cleanButtonActionPerformed
+        UIController.getInstance().deleteAllInteractions();
+        refreshLoadingUI();
+        setBothTabEnabled();
+    }//GEN-LAST:event_cleanButtonActionPerformed
+
+    private void chooseOneFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseOneFileButtonActionPerformed
+        JFileChooser fc = new JFileChooser();
+        int returnVal = fc.showOpenDialog(fc);
+
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile();
+            onefilepath = file.getAbsolutePath();
+            oneFilenameLoabel.setText(onefilepath);
+        }
+    }//GEN-LAST:event_chooseOneFileButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton chooseOneFileButton;
+    private javax.swing.JButton cleanButton;
     private javax.swing.JButton infoButton;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JButton loadButton;
     private javax.swing.JPanel loadingPanel;
+    private javax.swing.JPanel oneFileLoadingPanel;
+    private javax.swing.JLabel oneFilenameLoabel;
+    private javax.swing.JPanel oneLodingPanel;
     // End of variables declaration//GEN-END:variables
 
     private void readAISpeciesInteractions(PPINetwork network, String filepath, Double treshold, Double oldTreshold) {
@@ -193,6 +374,49 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
 
         } else {   // treshold == oldTreshold
             return;
+        }
+    }
+
+    private void updateFromManyFiles() {
+        for (SpeciesInteractionsLoaderPanel speciesPanel : panels) {
+
+            String speciesName = speciesPanel.getSpeciesName();
+            PPINetwork network = PluginDataHandle.getDataHandle().getNetworks().get(speciesName);
+            if (speciesPanel.checked()) {
+                String filename = speciesPanel.tryGetFilepath();
+                if (filename != null) {
+                    Double oldTresholdOrNull = PluginDataHandle.getLoadedDataHandle().getSpeciesInteractionsTreshold(speciesName);
+                    Double tresholdOrNull = speciesPanel.tryGetTreshold();
+                    updateInteractionsDataForSpecies(network, speciesName, filename, tresholdOrNull, oldTresholdOrNull);
+                }
+            } else {
+                network.deleteAllInteractions();
+                PluginDataHandle.getLoadedDataHandle().deleteInteractionData(speciesName);
+            }
+        }
+        list.actionPerformed(new ActionEvent(this, 3, "Interactions loaded"));
+    }
+
+    private void updateFromOneFile() {
+        if (onefilepath != null) {
+            Map<String, Double> tresholds = new TreeMap<String, Double>();
+            PluginDataHandle.getLoadedDataHandle().setOneInteractionFilename(onefilepath);
+            for (OneFileSpeciesInteractionsLoaderPanel oneFileSpeciesPanel : oneFilePanels) {
+
+                String speciesName = oneFileSpeciesPanel.getSpeciesName();
+                PPINetwork network = PluginDataHandle.getDataHandle().getNetworks().get(speciesName);
+                network.deleteAllInteractions();
+                PluginDataHandle.getLoadedDataHandle().deleteInteractionData(speciesName);
+                if (oneFileSpeciesPanel.checked()) {
+                    Double tresholdOrNull = oneFileSpeciesPanel.tryGetTreshold();
+                    tresholds.put(speciesName, tresholdOrNull);
+                    PluginDataHandle.getLoadedDataHandle().addInteractionOneFileData(speciesName, tresholdOrNull);
+                }
+            }
+            AbstractDataReader reader = AbstractDataReader.getInstance();
+            reader.setFilepath(onefilepath);
+            reader.readAllInteractions(tresholds);
+            list.actionPerformed(new ActionEvent(this, 3, "Interactions loaded"));
         }
     }
 

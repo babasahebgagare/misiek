@@ -51,4 +51,6 @@ public abstract class UIController {
     public abstract void refreshUIafterSpeciesLoading();
 
     public abstract void setMCVActiveTab();
+
+    public abstract void deleteAllInteractions();
 }

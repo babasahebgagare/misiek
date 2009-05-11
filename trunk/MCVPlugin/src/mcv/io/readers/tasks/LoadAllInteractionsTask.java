@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Map;
@@ -65,17 +66,18 @@ public class LoadAllInteractionsTask implements Task {
                 all++;
                 String SourceID = DefaultInteractionsParser.readWord(br);
                 String TargetID = DefaultInteractionsParser.readWord(br);
+                Double probability = Double.parseDouble(DefaultInteractionsParser.readWord(br));
                 String EdgeID = IDCreator.createInteractionID(SourceID, TargetID);
                 PPINetwork netOrNull = dh.tryFindPPINetworkByProteinID(SourceID);
 
                 if (netOrNull != null) {
+                    if (tresholds.containsKey(netOrNull.getID())) {
+                        Double treshold = tresholds.get(netOrNull.getID());
 
-                    Double probability = Double.parseDouble(DefaultInteractionsParser.readWord(br));
-                    Double treshold = tresholds.get(netOrNull.getID());
-
-                    if (treshold == null || probability > treshold) {
-                        created++;
-                        dh.createInteraction(EdgeID, SourceID, TargetID, probability);
+                        if (treshold == null || probability > treshold) {
+                            created++;
+                            dh.createInteraction(EdgeID, SourceID, TargetID, probability);
+                        }
                     }
                 }
                 current = fis.getChannel().position();

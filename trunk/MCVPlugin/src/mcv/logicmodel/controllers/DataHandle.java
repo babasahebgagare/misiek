@@ -16,7 +16,11 @@ public class DataHandle {
     private Map<String, PPINetwork> networks = new HashMap<String, PPINetwork>();
     private Map<String, Family> families = new HashMap<String, Family>();
     private PPINetwork rootNetwork;
-    private boolean proteinsLoaded = false;
+    private boolean proteinsLoaded;
+
+    public DataHandle() {
+        this.proteinsLoaded = false;
+    }
 
     public boolean speciesTreeLoaded() {
         if (rootNetwork != null) {
@@ -27,7 +31,7 @@ public class DataHandle {
     }
 
     public boolean isProteinsLoaded() {
-        return proteinsLoaded;
+        return this.proteinsLoaded;
     }
 
     public void setProteinsLoaded(boolean proteinsLoaded) {
