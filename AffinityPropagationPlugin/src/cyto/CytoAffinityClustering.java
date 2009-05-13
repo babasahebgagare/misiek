@@ -94,7 +94,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
         monitor.setStatus("Clustering...");
         createIteractionListener(monitor);
 
-        Map<Integer, Cluster<Integer>> clusters = af.doClusterAssoc();
+        Map<Integer, Cluster<Integer>> clusters = af.doClusterAssocInt();
 
         if (clusters != null) {
             for (Cluster<Integer> cluster : clusters.values()) {
@@ -168,7 +168,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
             Integer it = Integer.valueOf(i);
             idMapping.put(it, name);
             nodeMapping.put(name, it);
-            af.setSimilarities(it, it, preferences);
+            af.setSimilarityInt(it, it, preferences);
             i++;
         }
 
@@ -189,8 +189,8 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
                     } else {
                         sim = probOrNull;
                     }
-                    af.setSimilarities(sourceIndex, targetIndex, sim);
-                    af.setSimilarities(targetIndex, sourceIndex, sim);
+                    af.setSimilarityInt(sourceIndex, targetIndex, sim);
+                    af.setSimilarityInt(targetIndex, sourceIndex, sim);
                 }
             //                af.setSimilarity(sourceID, targetID, Math.log(prob));
             //                af.setSimilarity(targetID, sourceID, Math.log(prob));

@@ -1,8 +1,10 @@
 package algorithm.matrix;
 
 import algorithm.abs.AffinityPropagationAlgorithm;
+import algorithm.abs.Cluster;
 import algorithm.abs.ConvitsVector;
 import java.util.Collection;
+import java.util.Map;
 import java.util.TreeSet;
 import java.util.Vector;
 import matrix.DoubleMatrix1D;
@@ -66,10 +68,18 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
     }
 
     @Override
-    public void setSimilarities(final Integer x, final Integer y, final Double sim) {
+    public void setSimilarityInt(final Integer x, final Integer y, final Double sim) {
 
         //int i = Integer.valueOf(x);
         //int j = Integer.valueOf(y);
+        S.set(x, y, sim.doubleValue());
+    }
+
+    @Override
+    public void setSimilarity(final String from, final String to, final Double sim) {
+
+        Integer x = getExamplarID(from);
+        Integer y = getExamplarID(to);
         S.set(x, y, sim.doubleValue());
     }
 
@@ -179,9 +189,18 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
         return res;
     }
 
-    @Override
-    protected Double tryGetSimilarity(Integer i, Integer j) {
+    protected Double tryGetSimilarityInt(Integer i, Integer j) {
         double sim = S.get(i.intValue(), j.intValue());
+        if (sim > -inf) {
+            return sim;
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    protected Double tryGetSimilarity(String from, String to) {
+        double sim = S.get(idMapper.get(from), idMapper.get(to));
         if (sim > -inf) {
             return sim;
         } else {

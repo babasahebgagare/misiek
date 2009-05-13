@@ -161,10 +161,20 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
      * @param to
      * @param sim
      */
-    public void setSimilarities(final Integer from,
+    @Override
+    public void setSimilarityInt(final Integer from,
             final Integer to,
             final Double sim) {
         examplars.setSimilarity(from, to, sim);
+    }
+
+    @Override
+    public void setSimilarity(final String from,
+            final String to,
+            final Double sim) {
+        Integer i = getExamplarID(from);
+        Integer j = getExamplarID(to);
+        examplars.setSimilarity(i, j, sim);
     }
 
     @Override
@@ -192,7 +202,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
 
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-                this.setSimilarities(i, j, sim[i][j]);
+                this.setSimilarityInt(i, j, sim[i][j]);
             }
 
         }
@@ -208,7 +218,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
     public void setConstPreferences(Double preferences) {
         Collection<Integer> examplarsNames = examplars.getExamplars().keySet();
         for (Integer exName : examplarsNames) {
-            setSimilarities(exName, exName, preferences);
+            setSimilarityInt(exName, exName, preferences);
         }
     }
 
@@ -222,8 +232,22 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
         return new TreeSet<Integer>(examplars.getExamplars().keySet());
     }
 
+    protected Double tryGetSimilarityInt(Integer i, Integer j) {
+
+        Examplar ix = examplars.getExamplars().get(i);
+        SiblingData sibling = ix.getSiblingMap().get(j);
+        if (sibling == null) {
+            return null;
+        } else {
+            return sibling.getS();
+        }
+    }
+
     @Override
-    protected Double tryGetSimilarity(Integer i, Integer j) {
+    protected Double tryGetSimilarity(String from, String to) {
+
+        Integer i = idMapper.get(from);
+        Integer j = idMapper.get(to);
 
         Examplar ix = examplars.getExamplars().get(i);
         SiblingData sibling = ix.getSiblingMap().get(j);
