@@ -1,14 +1,14 @@
 package mcv.logicmodel.structs;
 
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.Map;
 import mcv.logicmodel.structs.Protein;
 
 public class ProjectorInfo {
 
-    private Map<String, Collection<Protein>> projectorMapUp = new HashMap<String, Collection<Protein>>();
-    private Map<String, Collection<Protein>> projectorMapDown = new HashMap<String, Collection<Protein>>();
+    private Map<String, Collection<Protein>> projectorMapUp = new TreeMap<String, Collection<Protein>>();
+    private Map<String, Collection<Protein>> projectorMapDown = new TreeMap<String, Collection<Protein>>();
 
     public ProjectorInfo() {
     }

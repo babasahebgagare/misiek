@@ -2,7 +2,7 @@ package prime;
 
 import algorithm.abs.Cluster;
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.PriorityQueue;
@@ -25,7 +25,7 @@ public class PrimeAlgorithm {
     }
 
     public Map<Integer, Cluster<Integer>> run() {
-        Map<Integer, Cluster<Integer>> ret = new HashMap<Integer, Cluster<Integer>>();
+        Map<Integer, Cluster<Integer>> ret = new TreeMap<Integer, Cluster<Integer>>();
 
         while (edges.size() > 0) {
             PrimeEdge minEdge = edges.poll();
