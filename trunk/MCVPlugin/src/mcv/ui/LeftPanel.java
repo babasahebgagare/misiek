@@ -5,9 +5,6 @@
  */
 package mcv.ui;
 
-import mcv.MCL.ClusterAlgorithm;
-import mcv.MCL.ClusterSettingsDialog;
-import mcv.MCL.MCLCluster;
 import cytoscape.Cytoscape;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -110,7 +107,6 @@ public class LeftPanel extends javax.swing.JPanel {
         tresholdSpinner = new javax.swing.JSpinner();
         showLoadedButton = new javax.swing.JButton();
         helpButton = new javax.swing.JButton();
-        mclButton = new javax.swing.JButton();
         testButton = new javax.swing.JButton();
 
         dataPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -179,11 +175,11 @@ public class LeftPanel extends javax.swing.JPanel {
         attrPanel.setLayout(attrPanelLayout);
         attrPanelLayout.setHorizontalGroup(
             attrPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(attrPanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, attrPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(attrPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE))
+                .addGroup(attrPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE))
                 .addContainerGap())
         );
         attrPanelLayout.setVerticalGroup(
@@ -191,8 +187,8 @@ public class LeftPanel extends javax.swing.JPanel {
             .addGroup(attrPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -289,13 +285,6 @@ public class LeftPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        mclButton.setText("MCL");
-        mclButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mclButtonActionPerformed(evt);
-            }
-        });
-
         testButton.setText("Test");
         testButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -307,16 +296,14 @@ public class LeftPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(attrPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(dataPanel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(netsActionsPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(intPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addComponent(attrPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(testButton, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
-                .addGap(28, 28, 28)
-                .addComponent(mclButton, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(84, 84, 84))
+                .addComponent(testButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(182, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -326,12 +313,10 @@ public class LeftPanel extends javax.swing.JPanel {
                 .addComponent(netsActionsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(intPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(mclButton)
-                    .addComponent(testButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(attrPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(testButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -363,13 +348,6 @@ private void showLoadedButtonActionPerformed(java.awt.event.ActionEvent evt) {//
     UIController.getInstance().showLoadedInteractions();
 
 }//GEN-LAST:event_showLoadedButtonActionPerformed
-
-private void mclButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mclButtonActionPerformed
-    ClusterAlgorithm algorithm = new MCLCluster();
-
-    ClusterSettingsDialog csd = new ClusterSettingsDialog(algorithm);
-    csd.actionPerformed(evt);
-}//GEN-LAST:event_mclButtonActionPerformed
 
 private void newDataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newDataButtonActionPerformed
 
@@ -412,7 +390,6 @@ private void deleteVataButtonActionPerformed(java.awt.event.ActionEvent evt) {//
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea loggerTextArea;
-    private javax.swing.JButton mclButton;
     private javax.swing.JPanel netsActionsPanel;
     private javax.swing.JButton newDataButton;
     private javax.swing.JButton projectButton;
