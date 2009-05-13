@@ -7,7 +7,7 @@ public class Messenger {
 
     public static void message(final Object message) {
         System.out.println(message);
-        JOptionPane.showMessageDialog(Cytoscape.getDesktop(), message);
+        JOptionPane.showMessageDialog(Cytoscape.getDesktop(), message, "Warning", JOptionPane.WARNING_MESSAGE);
     }
 
     public static void error(final Exception ex) {
