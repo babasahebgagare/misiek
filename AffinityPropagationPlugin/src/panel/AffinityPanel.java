@@ -54,6 +54,7 @@ public class AffinityPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
 
         parametersPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Set paremeters"));
+        parametersPanel.setMaximumSize(new java.awt.Dimension(270, 32767));
         parametersPanel.setName("parametersPanel"); // NOI18N
         parametersPanel.setPreferredSize(new java.awt.Dimension(270, 257));
 

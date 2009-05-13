@@ -40,6 +40,7 @@ public class AffinityChooseImplPanel extends javax.swing.JPanel {
         radioMatrix = new javax.swing.JRadioButton();
 
         implementationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Choose implementation"));
+        implementationPanel.setMaximumSize(new java.awt.Dimension(270, 32767));
         implementationPanel.setName("implementationPanel"); // NOI18N
         implementationPanel.setPreferredSize(new java.awt.Dimension(270, 56));
 

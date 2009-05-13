@@ -47,6 +47,7 @@ public class AffinityConnModePanel extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(270, 72));
 
         nearesCenterPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Searching nearest center"));
+        nearesCenterPanel.setMaximumSize(new java.awt.Dimension(270, 32767));
         nearesCenterPanel.setName("nearesCenterPanel"); // NOI18N
 
         weighetCentersGroup.add(weighetRadio);
@@ -85,7 +86,7 @@ public class AffinityConnModePanel extends javax.swing.JPanel {
                 .addGroup(nearesCenterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(nearesCenterPanelLayout.createSequentialGroup()
                         .addComponent(weighetRadio)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                         .addComponent(jCheckBox1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))

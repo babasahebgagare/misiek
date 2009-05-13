@@ -2,6 +2,9 @@
 
 <Form version="1.3" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <Properties>
+    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[270, 32767]"/>
+    </Property>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[270, 25]"/>
     </Property>
@@ -25,7 +28,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="refreshButton" min="-2" pref="111" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="startButton" pref="132" max="32767" attributes="0"/>
+              <Component id="startButton" pref="133" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
