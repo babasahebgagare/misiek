@@ -18,6 +18,7 @@ public class Main {
 
         if (args.length < 2) {
             showHelp();
+            return;
         }
 
         Map<String, String> map = CommandLineParser.parseTokens(args);
