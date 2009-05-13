@@ -1,6 +1,8 @@
 package affinitymain;
 
 import algorithm.abs.AffinityPropagationAlgorithm;
+import algorithm.abs.AffinityPropagationAlgorithm.AffinityConnectingMethod;
+import algorithm.abs.AffinityPropagationAlgorithm.AffinityGraphMode;
 import algorithm.abs.Cluster;
 import algorithm.smart.SmartPropagationAlgorithm;
 import java.io.BufferedOutputStream;
@@ -34,6 +36,9 @@ public class RunAlgorithm {
     private Collection<String> nodeNames = new HashSet<String>();
     private String kind;
     private boolean takeLog;
+    private Integer steps = null;
+    private AffinityGraphMode graphMode;
+    private AffinityConnectingMethod connMode;
 
     public RunAlgorithm(String inputpath, String outpath, double lambda, int iterations, Integer convits, double preferences, String kind, boolean takeLog) {
         this.inputpath = inputpath;
@@ -46,10 +51,25 @@ public class RunAlgorithm {
         this.takeLog = takeLog;
     }
 
+    public void setGraphMode(AffinityGraphMode graphMode) {
+        this.graphMode = graphMode;
+    }
+
+    public void setConnMode(AffinityConnectingMethod connMode) {
+        this.connMode = connMode;
+    }
+
+    public void setSteps(Integer steps) {
+        this.steps = steps;
+    }
+
     public void setParemeters() {
         af.setLambda(lambda);
         af.setIterations(iterations);
         af.setConvits(convits);
+        af.setSteps(steps);
+        af.setGraphMode(graphMode);
+        af.setConnectingMode(connMode);
         af.setConnectingMode(AffinityPropagationAlgorithm.AffinityConnectingMethod.ORIGINAL);
         af.addIterationListener(new ConsoleIterationListener(iterations));
 
