@@ -6,6 +6,7 @@ import cytoscape.CyNetwork;
 import cytoscape.Cytoscape;
 import cytoscape.view.CyNetworkView;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.TreeMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -28,10 +29,10 @@ import mcv.utils.IDCreator;
 public class CytoDataHandle {
 
     private IDMapper networkIDMapper = new IDMapper();
-    private Map<Integer, CytoProtein> cytoProteins = new TreeMap<Integer, CytoProtein>();
-    private Map<Integer, CytoInteraction> cytoInteractions = new TreeMap<Integer, CytoInteraction>();
-    private Map<String, CytoPPINetworkProjection> projections = new TreeMap<String, CytoPPINetworkProjection>();
-    private Map<String, CytoPPINetwork> cytoNetworks = new TreeMap<String, CytoPPINetwork>();
+    private Map<Integer, CytoProtein> cytoProteins = new HashMap<Integer, CytoProtein>();
+    private Map<Integer, CytoInteraction> cytoInteractions = new HashMap<Integer, CytoInteraction>();
+    private Map<String, CytoPPINetworkProjection> projections = new HashMap<String, CytoPPINetworkProjection>();
+    private Map<String, CytoPPINetwork> cytoNetworks = new HashMap<String, CytoPPINetwork>();
 
     public void deleteAllCytoInteractionsByNetwork(CytoAbstractPPINetwork cytoNetwork) {
         for (CytoInteraction interaction : cytoNetwork.getCytoInteractions()) {
@@ -224,6 +225,9 @@ public class CytoDataHandle {
     public CytoAbstractPPINetwork tryFindNetworkByCytoID(String CytoID) {
         String CytoPPINetworkID = networkIDMapper.getIDByCytoID(CytoID);
 
+        if (CytoPPINetworkID == null) {
+            return null;
+        }
         CytoAbstractPPINetwork ret = cytoNetworks.get(CytoPPINetworkID);
 
         if (ret == null) {

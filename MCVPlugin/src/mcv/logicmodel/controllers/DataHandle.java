@@ -2,10 +2,10 @@ package mcv.logicmodel.controllers;
 
 import cytoscape.Cytoscape;
 import cytoscape.data.CyAttributes;
-import java.util.TreeMap;
 import java.util.Map;
 import java.awt.Color;
 import java.util.Collection;
+import java.util.HashMap;
 import mcv.logicmodel.structs.Family;
 import mcv.logicmodel.structs.Interaction;
 import mcv.logicmodel.structs.PPINetwork;
@@ -13,8 +13,8 @@ import mcv.logicmodel.structs.Protein;
 
 public class DataHandle {
 
-    private Map<String, PPINetwork> networks = new TreeMap<String, PPINetwork>();
-    private Map<String, Family> families = new TreeMap<String, Family>();
+    private Map<String, PPINetwork> networks = new HashMap<String, PPINetwork>();
+    private Map<String, Family> families = new HashMap<String, Family>();
     private PPINetwork rootNetwork;
     private boolean proteinsLoaded;
 
