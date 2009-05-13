@@ -32,6 +32,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
     private AffinityConnectingMethod connectingMode;
     private double preferences;
     private double lambda;
+    private boolean refine;
     private boolean log;
     private Integer convits = null;
     private AffinityPropagationAlgorithm af = null;
@@ -39,19 +40,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
     private Map<String, Integer> nodeMapping = new HashMap<String, Integer>();
     private Map<Integer, String> idMapping = new HashMap<Integer, String>();
 
-    public CytoAffinityClustering(final AffinityConnectingMethod connectingMode, int implementation, final String nodeNameAttr, final String edgeNameAttr, final double lambda, final double preferences, final int iterations, final boolean log) {
-        this.nodeNameAttr = nodeNameAttr;
-        this.edgeNameAttr = edgeNameAttr;
-        this.lambda = lambda;
-        this.preferences = preferences;
-        this.iterations = iterations;
-        this.convits = null;
-        this.connectingMode = connectingMode;
-        this.log = log;
-        this.af = createAlgorithm(implementation);
-    }
-
-    public CytoAffinityClustering(final AffinityConnectingMethod connectingMode, final int implementation, final String nodeNameAttr, final String edgeNameAttr, final double lambda, final double preferences, final int iterations, final Integer convits, final boolean log) {
+    public CytoAffinityClustering(final AffinityConnectingMethod connectingMode, final int implementation, final String nodeNameAttr, final String edgeNameAttr, final double lambda, final double preferences, final int iterations, final Integer convits, final boolean refine, final boolean log) {
         this.nodeNameAttr = nodeNameAttr;
         this.edgeNameAttr = edgeNameAttr;
         this.lambda = lambda;
@@ -59,6 +48,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
         this.iterations = iterations;
         this.convits = convits;
         this.connectingMode = connectingMode;
+        this.refine = refine;
         this.log = log;
         this.af = createAlgorithm(implementation);
     }
@@ -155,6 +145,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
 
         CyAttributes edgesAttributes = Cytoscape.getEdgeAttributes();
 
+        af.setRefine(refine);
         af.setLambda(lambda);
         af.setIterations(iterations);
         af.setConvits(convits);

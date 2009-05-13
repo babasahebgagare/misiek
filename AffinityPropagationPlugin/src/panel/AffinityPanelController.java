@@ -39,6 +39,7 @@ public class AffinityPanelController implements Serializable {
     private JRadioButton smartImplementation = null;
     private JRadioButton weighetModeRadio = null;
     private JRadioButton unweighetModeRadio = null;
+    private JCheckBox refineCheckBox = null;
     private JCheckBox transformingCheckbox = null;
     private AffinityStatsPanelController psc = null;
     private boolean cancelDialog = false;
@@ -64,6 +65,7 @@ public class AffinityPanelController implements Serializable {
         String nodeNameAttr = getNodeAttr();
         String edgeNameAttr = getEdgeAttr();
         int implementation = getImplementation();
+        boolean refine = getRefine();
         boolean log = getLog();
         AffinityConnectingMethod connectingMode = getConnectingMode();
 
@@ -71,11 +73,8 @@ public class AffinityPanelController implements Serializable {
             return;
         }
 
-        if (convits != null) {
-            algorithm = new CytoAffinityClustering(connectingMode, implementation, nodeNameAttr, edgeNameAttr, lambda.doubleValue(), preferences.doubleValue(), iterations.intValue(), convits, log);
-        } else {
-            algorithm = new CytoAffinityClustering(connectingMode, implementation, nodeNameAttr, edgeNameAttr, lambda.doubleValue(), preferences.doubleValue(), iterations.intValue(), log);
-        }
+        algorithm = new CytoAffinityClustering(connectingMode, implementation, nodeNameAttr, edgeNameAttr, lambda.doubleValue(), preferences.doubleValue(), iterations.intValue(), convits, refine, log);
+
         TaskManager.executeTask(new CytoClusterTask(algorithm),
                 CytoClusterTask.getDefaultTaskConfig());
 
@@ -90,6 +89,14 @@ public class AffinityPanelController implements Serializable {
 
     void setLogCheckBox(JCheckBox transformingCheckbox) {
         this.transformingCheckbox = transformingCheckbox;
+    }
+
+    void setRefineCheckBox(JCheckBox refineCheckBox) {
+        this.refineCheckBox = refineCheckBox;
+    }
+
+    public JCheckBox getRefineCheckBox() {
+        return refineCheckBox;
     }
 
     void setWeighetMode(JRadioButton weighetRadio) {
@@ -118,6 +125,10 @@ public class AffinityPanelController implements Serializable {
 
     private boolean getLog() {
         return transformingCheckbox.isSelected();
+    }
+
+    private boolean getRefine() {
+        return getRefineCheckBox().isSelected();
     }
 
     private boolean validateConvits(final Integer convits) {
