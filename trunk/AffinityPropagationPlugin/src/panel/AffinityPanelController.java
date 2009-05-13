@@ -2,7 +2,6 @@ package panel;
 
 import algorithm.abs.AffinityPropagationAlgorithm.AffinityConnectingMethod;
 import cyto.CytoAffinityClustering;
-import cyto.CytoClusterAlgorithm;
 import cyto.CytoClusterTask;
 import cytoscape.CyEdge;
 import cytoscape.Cytoscape;
@@ -38,8 +37,8 @@ public class AffinityPanelController implements Serializable {
     private JTextField stepsFiled = null;
     private JRadioButton matrixImplementation = null;
     private JRadioButton smartImplementation = null;
-    private JRadioButton weighetModeRadio = null;
-    private JRadioButton unweighetModeRadio = null;
+    private JRadioButton originalModeRadio = null;
+    private JRadioButton bsfModeRadio = null;
     private JCheckBox refineCheckBox = null;
     private JCheckBox transformingCheckbox = null;
     private AffinityStatsPanelController psc = null;
@@ -102,20 +101,20 @@ public class AffinityPanelController implements Serializable {
         return refineCheckBox;
     }
 
-    void setWeighetMode(JRadioButton weighetRadio) {
-        this.weighetModeRadio = weighetRadio;
+    public void setBsfModeRadio(JRadioButton bsfModeRadio) {
+        this.bsfModeRadio = bsfModeRadio;
+    }
+
+    public void setOriginalModeRadio(JRadioButton originalModeRadio) {
+        this.originalModeRadio = originalModeRadio;
     }
 
     public void setStepsFiled(JTextField stepsFiled) {
         this.stepsFiled = stepsFiled;
     }
 
-    void setUnweighetMode(JRadioButton unweighetRadio) {
-        this.unweighetModeRadio = unweighetRadio;
-    }
-
     private AffinityConnectingMethod getConnectingMode() {
-        if (weighetModeRadio.isSelected()) {
+        if (originalModeRadio.isSelected()) {
             return AffinityConnectingMethod.ORIGINAL;
         } else {
             return AffinityConnectingMethod.PRIME_ALG;

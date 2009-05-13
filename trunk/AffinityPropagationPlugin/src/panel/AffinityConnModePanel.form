@@ -55,13 +55,13 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="weighetRadio" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="13" max="32767" attributes="0"/>
+                          <Component id="orgRadio" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="11" max="32767" attributes="0"/>
                           <Component id="stepsCheckbox" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="stepsField" min="-2" pref="71" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="unweighetRadio" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="BSFRadio" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -71,40 +71,41 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="weighetRadio" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="orgRadio" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="stepsField" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="stepsCheckbox" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="unweighetRadio" min="-2" max="-2" attributes="0"/>
+                  <Component id="BSFRadio" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JRadioButton" name="weighetRadio">
+        <Component class="javax.swing.JRadioButton" name="orgRadio">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="weighetCentersGroup"/>
             </Property>
             <Property name="selected" type="boolean" value="true"/>
             <Property name="text" type="java.lang.String" value="Original method"/>
-            <Property name="name" type="java.lang.String" value="weighetRadio" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="orgRadio" noResource="true"/>
           </Properties>
           <Events>
-            <EventHandler event="ancestorMoved" listener="java.awt.event.HierarchyBoundsListener" parameters="java.awt.event.HierarchyEvent" handler="weighetRadioAncestorMoved"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="orgRadioActionPerformed"/>
+            <EventHandler event="ancestorMoved" listener="java.awt.event.HierarchyBoundsListener" parameters="java.awt.event.HierarchyEvent" handler="orgRadioAncestorMoved"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="unweighetRadio">
+        <Component class="javax.swing.JRadioButton" name="BSFRadio">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="weighetCentersGroup"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Prime algorithm"/>
-            <Property name="name" type="java.lang.String" value="unweighetRadio" noResource="true"/>
+            <Property name="text" type="java.lang.String" value="Weighted BSF algorithm"/>
+            <Property name="name" type="java.lang.String" value="BSFRadio" noResource="true"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="unweighetRadioActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BSFRadioActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="stepsField">
@@ -115,7 +116,7 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="stepsCheckbox">
           <Properties>
-            <Property name="text" type="java.lang.String" value="steps"/>
+            <Property name="text" type="java.lang.String" value="depth"/>
             <Property name="name" type="java.lang.String" value="stepsCheckbox" noResource="true"/>
           </Properties>
           <Events>

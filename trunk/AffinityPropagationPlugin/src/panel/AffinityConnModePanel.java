@@ -1,9 +1,4 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
  * AffinityConnModePanel.java
  *
  * Created on 2009-05-13, 13:59:47
@@ -24,9 +19,9 @@ public class AffinityConnModePanel extends javax.swing.JPanel {
         initComponents();
 
         pc.setStepsFiled(stepsField);
-        pc.setWeighetMode(weighetRadio);
-        pc.setUnweighetMode(unweighetRadio);
-    //pc.initPanelFields();
+        pc.setOriginalModeRadio(orgRadio);
+        pc.setBsfModeRadio(BSFRadio);
+        //pc.initPanelFields();
     }
 
     /** This method is called from within the constructor to
@@ -40,8 +35,8 @@ public class AffinityConnModePanel extends javax.swing.JPanel {
 
         weighetCentersGroup = new javax.swing.ButtonGroup();
         nearesCenterPanel = new javax.swing.JPanel();
-        weighetRadio = new javax.swing.JRadioButton();
-        unweighetRadio = new javax.swing.JRadioButton();
+        orgRadio = new javax.swing.JRadioButton();
+        BSFRadio = new javax.swing.JRadioButton();
         stepsField = new javax.swing.JTextField();
         stepsCheckbox = new javax.swing.JCheckBox();
 
@@ -51,31 +46,36 @@ public class AffinityConnModePanel extends javax.swing.JPanel {
         nearesCenterPanel.setMaximumSize(new java.awt.Dimension(270, 32767));
         nearesCenterPanel.setName("nearesCenterPanel"); // NOI18N
 
-        weighetCentersGroup.add(weighetRadio);
-        weighetRadio.setSelected(true);
-        weighetRadio.setText("Original method");
-        weighetRadio.setName("weighetRadio"); // NOI18N
-        weighetRadio.addHierarchyBoundsListener(new java.awt.event.HierarchyBoundsListener() {
+        weighetCentersGroup.add(orgRadio);
+        orgRadio.setSelected(true);
+        orgRadio.setText("Original method");
+        orgRadio.setName("orgRadio"); // NOI18N
+        orgRadio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                orgRadioActionPerformed(evt);
+            }
+        });
+        orgRadio.addHierarchyBoundsListener(new java.awt.event.HierarchyBoundsListener() {
             public void ancestorMoved(java.awt.event.HierarchyEvent evt) {
-                weighetRadioAncestorMoved(evt);
+                orgRadioAncestorMoved(evt);
             }
             public void ancestorResized(java.awt.event.HierarchyEvent evt) {
             }
         });
 
-        weighetCentersGroup.add(unweighetRadio);
-        unweighetRadio.setText("Prime algorithm");
-        unweighetRadio.setName("unweighetRadio"); // NOI18N
-        unweighetRadio.addActionListener(new java.awt.event.ActionListener() {
+        weighetCentersGroup.add(BSFRadio);
+        BSFRadio.setText("Weighted BSF algorithm");
+        BSFRadio.setName("BSFRadio"); // NOI18N
+        BSFRadio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                unweighetRadioActionPerformed(evt);
+                BSFRadioActionPerformed(evt);
             }
         });
 
         stepsField.setEnabled(false);
         stepsField.setName("stepsField"); // NOI18N
 
-        stepsCheckbox.setText("steps");
+        stepsCheckbox.setText("depth");
         stepsCheckbox.setName("stepsCheckbox"); // NOI18N
         stepsCheckbox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,23 +91,23 @@ public class AffinityConnModePanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(nearesCenterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(nearesCenterPanelLayout.createSequentialGroup()
-                        .addComponent(weighetRadio)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                        .addComponent(orgRadio)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                         .addComponent(stepsCheckbox)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(stepsField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(unweighetRadio))
+                    .addComponent(BSFRadio))
                 .addContainerGap())
         );
         nearesCenterPanelLayout.setVerticalGroup(
             nearesCenterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(nearesCenterPanelLayout.createSequentialGroup()
                 .addGroup(nearesCenterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(weighetRadio)
+                    .addComponent(orgRadio)
                     .addComponent(stepsField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(stepsCheckbox))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(unweighetRadio))
+                .addComponent(BSFRadio))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -122,13 +122,25 @@ public class AffinityConnModePanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void weighetRadioAncestorMoved(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_weighetRadioAncestorMoved
+    private void orgRadioAncestorMoved(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_orgRadioAncestorMoved
         // TODO add your handling code here:
-}//GEN-LAST:event_weighetRadioAncestorMoved
+}//GEN-LAST:event_orgRadioAncestorMoved
 
-    private void unweighetRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unweighetRadioActionPerformed
-        // TODO add your handling code here:
-}//GEN-LAST:event_unweighetRadioActionPerformed
+    private void BSFRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSFRadioActionPerformed
+        checkBoxRefresh();
+}//GEN-LAST:event_BSFRadioActionPerformed
+
+    private void checkBoxRefresh() {
+        if (BSFRadio.isSelected()) {
+            stepsCheckbox.setEnabled(false);
+            stepsField.setEnabled(false);
+        } else {
+            stepsCheckbox.setEnabled(true);
+            if (stepsCheckbox.isSelected()) {
+                stepsField.setEnabled(true);
+            }
+        }
+    }
 
     private void stepsCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stepsCheckboxActionPerformed
         if (stepsCheckbox.isSelected()) {
@@ -138,12 +150,16 @@ public class AffinityConnModePanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_stepsCheckboxActionPerformed
 
+    private void orgRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orgRadioActionPerformed
+        checkBoxRefresh();
+    }//GEN-LAST:event_orgRadioActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton BSFRadio;
     private javax.swing.JPanel nearesCenterPanel;
+    private javax.swing.JRadioButton orgRadio;
     private javax.swing.JCheckBox stepsCheckbox;
     private javax.swing.JTextField stepsField;
-    private javax.swing.JRadioButton unweighetRadio;
     private javax.swing.ButtonGroup weighetCentersGroup;
-    private javax.swing.JRadioButton weighetRadio;
     // End of variables declaration//GEN-END:variables
 }
