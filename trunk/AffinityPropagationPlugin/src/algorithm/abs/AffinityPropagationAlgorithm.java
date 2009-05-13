@@ -16,6 +16,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
 
     private double lambda;
     private int iterations;
+    private boolean refine = true;
     protected AffinityConnectingMethod connectingMode;
     protected int notConverged;
     protected Integer convits = null;
@@ -26,6 +27,10 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
     private int currentID = 0;
     protected Map<String, Integer> idMapper = new TreeMap<String, Integer>();
     protected Map<Integer, String> idRevMapper = new TreeMap<Integer, String>();
+
+    public void setRefine(boolean refine) {
+        this.refine = refine;
+    }
 
     protected Integer getExamplarID(String name) {
         if (idMapper.containsKey(name)) {
@@ -40,7 +45,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
     }
 
     private void refineCenters() {
-      //  boolean debug = false;
+        //  boolean debug = false;
         Collection<Integer> refinedCenters = new TreeSet<Integer>();
 
         for (Cluster<Integer> cluster : assigments.values()) {
@@ -190,8 +195,10 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
         computeCenters();
         if (getClustersNumber() != 0) {
             computeAssigments();
-            refineCenters();
-            computeAssigments();
+            if (refine) {
+                refineCenters();
+                computeAssigments();
+            }
             return assigments;
         } else {
             return null;
