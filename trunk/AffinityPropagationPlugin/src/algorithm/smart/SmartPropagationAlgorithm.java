@@ -165,7 +165,12 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
     public void setSimilarityInt(final Integer from,
             final Integer to,
             final Double sim) {
-        examplars.setSimilarity(from, to, sim);
+        if (graphMode == AffinityGraphMode.DIRECTED) {
+            examplars.setSimilarity(from, to, sim);
+        } else {
+            examplars.setSimilarity(from, to, sim);
+            examplars.setSimilarity(to, from, sim);
+        }
     }
 
     @Override
@@ -174,7 +179,12 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
             final Double sim) {
         Integer i = getExamplarID(from);
         Integer j = getExamplarID(to);
-        examplars.setSimilarity(i, j, sim);
+        if (graphMode == AffinityGraphMode.DIRECTED) {
+            examplars.setSimilarity(i, j, sim);
+        } else {
+            examplars.setSimilarity(i, j, sim);
+            examplars.setSimilarity(j, i, sim);
+        }
     }
 
     @Override

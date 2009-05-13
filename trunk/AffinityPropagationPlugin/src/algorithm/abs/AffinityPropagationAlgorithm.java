@@ -14,11 +14,21 @@ import prime.PrimeGraph;
 
 public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgorithm<String> {
 
+    public enum AffinityConnectingMethod {
+
+        PRIME_ALG, FLOYD_ALG, ORIGINAL
+    }
+
+    public enum AffinityGraphMode {
+
+        DIRECTED, UNDIRECTED
+    }
     private double lambda;
     private int iterations;
     private boolean refine = true;
     private Integer steps = null;
-    protected AffinityConnectingMethod connectingMode;
+    protected AffinityConnectingMethod connectingMode = AffinityConnectingMethod.ORIGINAL;
+    protected AffinityGraphMode graphMode = AffinityGraphMode.DIRECTED;
     protected int notConverged;
     protected Integer convits = null;
     protected ActionListener iteractionListenerOrNull = null;
@@ -28,6 +38,10 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
     private int currentID = 0;
     protected Map<String, Integer> idMapper = new TreeMap<String, Integer>();
     protected Map<Integer, String> idRevMapper = new TreeMap<Integer, String>();
+
+    public void setGraphMode(AffinityGraphMode mode) {
+        this.graphMode = mode;
+    }
 
     public void setSteps(Integer steps) {
         this.steps = steps;
@@ -99,11 +113,6 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
     protected abstract Double tryGetSimilarityInt(Integer other, Integer curr);
 
     public abstract void setSimilarityInt(Integer other, Integer curr, Double sim);
-
-    public enum AffinityConnectingMethod {
-
-        PRIME_ALG, FLOYD_ALG, ORIGINAL
-    }
 
     private Map<Integer, Cluster<Integer>> computeFloydAssigments(Collection<Integer> examplars, Collection<Integer> centers) {
         return null;
