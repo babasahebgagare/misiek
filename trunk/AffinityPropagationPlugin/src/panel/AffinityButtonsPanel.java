@@ -34,6 +34,7 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
         refreshButton = new javax.swing.JButton();
         startButton = new javax.swing.JButton();
 
+        setMaximumSize(new java.awt.Dimension(270, 32767));
         setPreferredSize(new java.awt.Dimension(270, 25));
 
         refreshButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/refresh.png"))); // NOI18N
@@ -62,7 +63,7 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(startButton, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                .addComponent(startButton, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(

@@ -32,6 +32,7 @@ public class AffinityMainPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        setAlignmentX(10.0F);
         setMaximumSize(new java.awt.Dimension(283, 32767));
         setPreferredSize(new java.awt.Dimension(283, 144));
 

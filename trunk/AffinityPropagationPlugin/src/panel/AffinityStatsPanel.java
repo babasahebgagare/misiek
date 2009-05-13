@@ -100,11 +100,8 @@ public class AffinityStatsPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cleanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cleanButtonActionPerformed
-        statsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        int row = statsTable.getSelectedRow();
-        if (row != -1) {
-            statsTable.remove(row);
-        }
+
+        psc.deleteSelectedRow();
     }//GEN-LAST:event_cleanButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
