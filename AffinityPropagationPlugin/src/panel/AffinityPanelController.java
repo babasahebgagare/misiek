@@ -35,6 +35,7 @@ public class AffinityPanelController implements Serializable {
     private JComboBox edgeAttrField = null;
     private JSpinner iterationsField = null;
     private JTextField preferencesField = null;
+    private JTextField stepsFiled = null;
     private JRadioButton matrixImplementation = null;
     private JRadioButton smartImplementation = null;
     private JRadioButton weighetModeRadio = null;
@@ -56,7 +57,7 @@ public class AffinityPanelController implements Serializable {
     }
 
     void doCluster() {
-        CytoClusterAlgorithm algorithm;
+        CytoAffinityClustering algorithm;
 
         Double lambda = getLambda();
         Double preferences = getPreferences();
@@ -64,6 +65,7 @@ public class AffinityPanelController implements Serializable {
         Integer convits = getConvits();
         String nodeNameAttr = getNodeAttr();
         String edgeNameAttr = getEdgeAttr();
+        Integer steps = getStepsCount();
         int implementation = getImplementation();
         boolean refine = getRefine();
         boolean log = getLog();
@@ -74,6 +76,7 @@ public class AffinityPanelController implements Serializable {
         }
 
         algorithm = new CytoAffinityClustering(connectingMode, implementation, nodeNameAttr, edgeNameAttr, lambda.doubleValue(), preferences.doubleValue(), iterations.intValue(), convits, refine, log);
+        algorithm.setStepsCount(steps);
 
         TaskManager.executeTask(new CytoClusterTask(algorithm),
                 CytoClusterTask.getDefaultTaskConfig());
@@ -103,6 +106,10 @@ public class AffinityPanelController implements Serializable {
         this.weighetModeRadio = weighetRadio;
     }
 
+    public void setStepsFiled(JTextField stepsFiled) {
+        this.stepsFiled = stepsFiled;
+    }
+
     void setUnweighetMode(JRadioButton unweighetRadio) {
         this.unweighetModeRadio = unweighetRadio;
     }
@@ -129,6 +136,20 @@ public class AffinityPanelController implements Serializable {
 
     private boolean getRefine() {
         return getRefineCheckBox().isSelected();
+    }
+
+    private Integer getStepsCount() {
+        Integer steps;
+        try {
+            if (stepsFiled.isEnabled()) {
+                steps = Integer.valueOf(stepsFiled.getText());
+            } else {
+                steps = null;
+            }
+        } catch (NumberFormatException e) {
+            steps = null;
+        }
+        return steps;
     }
 
     private boolean validateConvits(final Integer convits) {

@@ -34,6 +34,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
     private double lambda;
     private boolean refine;
     private boolean log;
+    private Integer steps = null;
     private Integer convits = null;
     private AffinityPropagationAlgorithm af = null;
     private CyAttributes nodesAttributes = Cytoscape.getNodeAttributes();
@@ -51,6 +52,10 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
         this.refine = refine;
         this.log = log;
         this.af = createAlgorithm(implementation);
+    }
+
+    public void setStepsCount(Integer steps) {
+        this.steps = steps;
     }
 
     @Override
@@ -150,6 +155,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
         af.setIterations(iterations);
         af.setConvits(convits);
         af.setConnectingMode(connectingMode);
+        af.setSteps(steps);
         af.setN(nodeNames.size());
         af.init();
 

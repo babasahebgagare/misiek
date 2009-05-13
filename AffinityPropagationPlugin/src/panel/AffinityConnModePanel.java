@@ -23,6 +23,7 @@ public class AffinityConnModePanel extends javax.swing.JPanel {
         this.pc = pc;
         initComponents();
 
+        pc.setStepsFiled(stepsField);
         pc.setWeighetMode(weighetRadio);
         pc.setUnweighetMode(unweighetRadio);
     //pc.initPanelFields();
@@ -41,8 +42,8 @@ public class AffinityConnModePanel extends javax.swing.JPanel {
         nearesCenterPanel = new javax.swing.JPanel();
         weighetRadio = new javax.swing.JRadioButton();
         unweighetRadio = new javax.swing.JRadioButton();
-        jTextField1 = new javax.swing.JTextField();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        stepsField = new javax.swing.JTextField();
+        stepsCheckbox = new javax.swing.JCheckBox();
 
         setPreferredSize(new java.awt.Dimension(270, 72));
 
@@ -71,11 +72,16 @@ public class AffinityConnModePanel extends javax.swing.JPanel {
             }
         });
 
-        jTextField1.setText("1");
-        jTextField1.setName("jTextField1"); // NOI18N
+        stepsField.setEnabled(false);
+        stepsField.setName("stepsField"); // NOI18N
 
-        jCheckBox1.setText("steps");
-        jCheckBox1.setName("jCheckBox1"); // NOI18N
+        stepsCheckbox.setText("steps");
+        stepsCheckbox.setName("stepsCheckbox"); // NOI18N
+        stepsCheckbox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stepsCheckboxActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout nearesCenterPanelLayout = new javax.swing.GroupLayout(nearesCenterPanel);
         nearesCenterPanel.setLayout(nearesCenterPanelLayout);
@@ -87,9 +93,9 @@ public class AffinityConnModePanel extends javax.swing.JPanel {
                     .addGroup(nearesCenterPanelLayout.createSequentialGroup()
                         .addComponent(weighetRadio)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-                        .addComponent(jCheckBox1)
+                        .addComponent(stepsCheckbox)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(stepsField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(unweighetRadio))
                 .addContainerGap())
         );
@@ -98,8 +104,8 @@ public class AffinityConnModePanel extends javax.swing.JPanel {
             .addGroup(nearesCenterPanelLayout.createSequentialGroup()
                 .addGroup(nearesCenterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(weighetRadio)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox1))
+                    .addComponent(stepsField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stepsCheckbox))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(unweighetRadio))
         );
@@ -123,10 +129,19 @@ public class AffinityConnModePanel extends javax.swing.JPanel {
     private void unweighetRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unweighetRadioActionPerformed
         // TODO add your handling code here:
 }//GEN-LAST:event_unweighetRadioActionPerformed
+
+    private void stepsCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stepsCheckboxActionPerformed
+        if (stepsCheckbox.isSelected()) {
+            stepsField.setEnabled(true);
+        } else {
+            stepsField.setEnabled(false);
+        }
+    }//GEN-LAST:event_stepsCheckboxActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel nearesCenterPanel;
+    private javax.swing.JCheckBox stepsCheckbox;
+    private javax.swing.JTextField stepsField;
     private javax.swing.JRadioButton unweighetRadio;
     private javax.swing.ButtonGroup weighetCentersGroup;
     private javax.swing.JRadioButton weighetRadio;
