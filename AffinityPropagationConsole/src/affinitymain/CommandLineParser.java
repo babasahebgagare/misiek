@@ -17,7 +17,8 @@ public class CommandLineParser {
         Map<String, String> ret = new TreeMap<String, String>();
 
         for (String token : tokens) {
-            String[] attr = token.split("=");
+            System.out.println("TOKEN: " + token);
+            String[] attr = token.split("[=]");
             if (attr.length == 2) {
                 ret.put(attr[0], attr[1]);
             }
