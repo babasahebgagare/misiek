@@ -33,6 +33,7 @@ public class LoadSpeciesInteractionsTask implements Task {
     private BufferedReader br = null;
     private int created = 0;
     private int all = 0;
+    private int count = 0;
     private PPINetwork network;
 
     LoadSpeciesInteractionsTask(String filepath, PPINetwork network, Double treshold) {
@@ -67,6 +68,7 @@ public class LoadSpeciesInteractionsTask implements Task {
                     created++;
                     if (network.containsProtein(TargetID) && network.containsProtein(SourceID)) {
                         dh.createInteraction(EdgeID, SourceID, TargetID, probability, network);
+                        count++;
                     } else {
                         System.out.println("BLAD: " + TargetID + " " + SourceID);
                     }
@@ -77,6 +79,7 @@ public class LoadSpeciesInteractionsTask implements Task {
                 if (percent > last_percent + 1) {
                     last_percent = percent;
                     taskMonitor.setPercentCompleted(Math.round(percent));
+                    taskMonitor.setStatus("Interactions loading for: " + network.getID() + "  " + count);
                 }
             }
             MemoLogger.log("Loaded: " + Math.round((double) created * 100 / (double) all) + "% up than treshold");
