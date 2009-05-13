@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Vector;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
@@ -150,10 +151,9 @@ public class AffinityPanelController implements Serializable {
         }
 
         if (exist) {
-            ClusterNodeNameAttrExistDialog dialog = new ClusterNodeNameAttrExistDialog(Cytoscape.getDesktop(), true);
-            dialog.setTitle("Warning!");
-            dialog.setVisible(true);
-            if (dialog.getReturnStatus() == ClusterNodeNameAttrExistDialog.RET_OK) {
+            int ret = Messenger.confirmWarning("Clustering node name attribute already exist, overwrite?");
+
+            if (ret == JOptionPane.OK_OPTION) {
                 return true;
             } else {
                 cancelDialog = true;
