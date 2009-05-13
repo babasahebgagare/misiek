@@ -73,6 +73,18 @@
             todir="${server-username}:${server-password}@${server-name}:${server-folder}"
           />
     </target>
+    
+    <target name="send-affinity-sparse-matlab" depends="get-server-auth" description="Copy to server">
+        <scp
+            trust="true"
+            host="${server-name}"
+            username="${server-username}"
+            password="${server-password}"
+            verbose="true"
+            file="build-tools/tests/apclusterSparse.m"
+            todir="${server-username}:${server-password}@${server-name}:${server-folder}"
+          />
+    </target>
 
     <target name="send-affinity-tester" depends="get-server-auth" description="Copy to server">
         <scp

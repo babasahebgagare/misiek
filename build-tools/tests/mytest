@@ -22,6 +22,15 @@ mcl_path='/home/jsim/m/mw219725/studia/genomika/mcl-08-312/src/shmcl/mcl'
 cd ~/studia/matlab
 
 echo "test fu0.8log..."
+#java -jar AffinityPropagationConsole.jar $myfu_sim_log myfu1i.txt 0.5 50 50 -0.9 clusters
+echo "$myfu_sim_log myfu1o.txt 0.5 50 50 -0.9 clusters" > input
+/usr/local/bin/matlab <apclusterSparse.m
+#java -jar ClustersComparator.jar a myfu1o.txt a myfu1i.txt > myjacc
+#java -jar ClustersComparator.jar a myfu1i.txt a myfu1o.txt >> myjacc
+
+exit
+
+echo "test fu0.8log..."
 java -jar AffinityPropagationConsole.jar $myfu_sim_log myfu1i.txt 0.5 50 50 -0.9 clusters
 echo "$myfu_sim_log myfu1o.txt 0.5 50 50 -0.9 clusters" > input2
 /usr/local/bin/matlab <apclusterSparse.m

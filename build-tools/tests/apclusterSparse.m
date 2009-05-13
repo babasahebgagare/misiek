@@ -155,14 +155,23 @@ end;
 kind
 E=((A(M-N+1:M)+R(M-N+1:M))>0); K=sum(E);
 if K>0
+        E
     tmpidx=zeros(N,1); tmpidx(find(E))=find(E); % Identify clusters
     for j=find(E==0)'
         ss=s(ind1(ind1s(j):ind1e(j)),3);
         ii=s(ind1(ind1s(j):ind1e(j)),2);
-        ee=find(E(ii));
-        [smx imx]=max(ss(ee));
-        tmpidx(j)=ii(ee(imx));
+
+        eii = E(ii);
+        zii = find(eii==0);
+        if(length(eii) == length(zii))
+            tmpidx(j) = 0
+        else
+            ee=find(E(ii));
+            [smx imx]=max(ss(ee));
+            tmpidx(j)=ii(ee(imx));
+        end;
     end;
+    tmpidx
     EE=zeros(N,1);
    for j=find(E)'
        jj=find(tmpidx==j); mx=-Inf;
@@ -193,7 +202,6 @@ else
 end;
 
 
-tmpidx
 fileout = fopen(outputfile{:}, 'w');
     if strcmp(kind{:},'clusters')
         kind
