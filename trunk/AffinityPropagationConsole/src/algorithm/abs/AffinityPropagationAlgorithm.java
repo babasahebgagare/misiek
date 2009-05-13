@@ -17,6 +17,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
     private double lambda;
     private int iterations;
     private boolean refine = true;
+    private Integer steps = null;
     protected AffinityConnectingMethod connectingMode;
     protected int notConverged;
     protected Integer convits = null;
@@ -27,6 +28,10 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
     private int currentID = 0;
     protected Map<String, Integer> idMapper = new TreeMap<String, Integer>();
     protected Map<Integer, String> idRevMapper = new TreeMap<Integer, String>();
+
+    public void setSteps(Integer steps) {
+        this.steps = steps;
+    }
 
     public void setRefine(boolean refine) {
         this.refine = refine;
@@ -297,7 +302,13 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
             unclustered.remove(center);
         }
 
+        int step = 0;
+
         while (unclustered.size() != unclusteredHelp.size()) {
+            if (steps != null && step >= steps) {
+                return ret;
+            }
+            step++;
             unclusteredHelp = new TreeSet<Integer>(unclustered);
             Map<Integer, Integer> clusteredHelp = new TreeMap<Integer, Integer>(clustered);
             //  System.out.println("CLUSTERED: " + clustered.size());

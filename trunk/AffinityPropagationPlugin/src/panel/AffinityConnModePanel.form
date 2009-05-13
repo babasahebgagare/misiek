@@ -57,9 +57,9 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="weighetRadio" min="-2" max="-2" attributes="0"/>
                           <EmptySpace pref="13" max="32767" attributes="0"/>
-                          <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
+                          <Component id="stepsCheckbox" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jTextField1" min="-2" pref="71" max="-2" attributes="0"/>
+                          <Component id="stepsField" min="-2" pref="71" max="-2" attributes="0"/>
                       </Group>
                       <Component id="unweighetRadio" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -72,8 +72,8 @@
               <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="weighetRadio" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jCheckBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="stepsField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="stepsCheckbox" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="unweighetRadio" min="-2" max="-2" attributes="0"/>
@@ -107,17 +107,20 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="unweighetRadioActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField1">
+        <Component class="javax.swing.JTextField" name="stepsField">
           <Properties>
-            <Property name="text" type="java.lang.String" value="1"/>
-            <Property name="name" type="java.lang.String" value="jTextField1" noResource="true"/>
+            <Property name="enabled" type="boolean" value="false"/>
+            <Property name="name" type="java.lang.String" value="stepsField" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox1">
+        <Component class="javax.swing.JCheckBox" name="stepsCheckbox">
           <Properties>
             <Property name="text" type="java.lang.String" value="steps"/>
-            <Property name="name" type="java.lang.String" value="jCheckBox1" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="stepsCheckbox" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="stepsCheckboxActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
