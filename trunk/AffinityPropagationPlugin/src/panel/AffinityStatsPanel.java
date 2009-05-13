@@ -5,6 +5,8 @@
  */
 package panel;
 
+import javax.swing.ListSelectionModel;
+
 /**
  *
  * @author misiek
@@ -35,8 +37,7 @@ public class AffinityStatsPanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         statsTable = new javax.swing.JTable();
-
-        setPreferredSize(new java.awt.Dimension(279, 297));
+        cleanButton = new javax.swing.JButton();
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
@@ -64,9 +65,17 @@ public class AffinityStatsPanel extends javax.swing.JPanel {
             }
         });
         statsTable.setFocusCycleRoot(true);
-        statsTable.setMaximumSize(new java.awt.Dimension(90, 0));
         statsTable.setName("statsTable"); // NOI18N
         jScrollPane1.setViewportView(statsTable);
+
+        cleanButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/delete.png"))); // NOI18N
+        cleanButton.setText("Delete row");
+        cleanButton.setName("cleanButton"); // NOI18N
+        cleanButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cleanButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -74,18 +83,32 @@ public class AffinityStatsPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+                    .addComponent(cleanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cleanButton)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cleanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cleanButtonActionPerformed
+        statsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        int row = statsTable.getSelectedRow();
+        if (row != -1) {
+            statsTable.remove(row);
+        }
+    }//GEN-LAST:event_cleanButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cleanButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable statsTable;
     // End of variables declaration//GEN-END:variables
