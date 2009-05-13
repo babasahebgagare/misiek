@@ -2,6 +2,7 @@ package cyto;
 
 import algorithm.abs.AffinityPropagationAlgorithm;
 import algorithm.abs.AffinityPropagationAlgorithm.AffinityConnectingMethod;
+import algorithm.abs.AffinityPropagationAlgorithm.AffinityGraphMode;
 import algorithm.matrix.MatrixPropagationAlgorithm;
 import algorithm.abs.Cluster;
 import algorithm.smart.SmartPropagationAlgorithm;
@@ -34,6 +35,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
     private double lambda;
     private boolean refine;
     private boolean log;
+    private AffinityGraphMode graphMode = AffinityGraphMode.DIRECTED;
     private Integer steps = null;
     private Integer convits = null;
     private AffinityPropagationAlgorithm af = null;
@@ -52,6 +54,10 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
         this.refine = refine;
         this.log = log;
         this.af = createAlgorithm(implementation);
+    }
+
+    public void setGraphMode(AffinityGraphMode graphMode) {
+        this.graphMode = graphMode;
     }
 
     public void setStepsCount(Integer steps) {
@@ -155,6 +161,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
         af.setIterations(iterations);
         af.setConvits(convits);
         af.setConnectingMode(connectingMode);
+        af.setGraphMode(graphMode);
         af.setSteps(steps);
         af.setN(nodeNames.size());
         af.init();
@@ -187,10 +194,8 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
                         sim = probOrNull;
                     }
                     af.setSimilarityInt(sourceIndex, targetIndex, sim);
-                    af.setSimilarityInt(targetIndex, sourceIndex, sim);
+                //af.setSimilarityInt(targetIndex, sourceIndex, sim);
                 }
-            //                af.setSimilarity(sourceID, targetID, Math.log(prob));
-            //                af.setSimilarity(targetID, sourceID, Math.log(prob));
             }
         }
 

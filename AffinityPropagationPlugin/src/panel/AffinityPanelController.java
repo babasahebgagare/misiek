@@ -1,6 +1,7 @@
 package panel;
 
 import algorithm.abs.AffinityPropagationAlgorithm.AffinityConnectingMethod;
+import algorithm.abs.AffinityPropagationAlgorithm.AffinityGraphMode;
 import cyto.CytoAffinityClustering;
 import cyto.CytoClusterTask;
 import cytoscape.CyEdge;
@@ -39,6 +40,7 @@ public class AffinityPanelController implements Serializable {
     private JRadioButton smartImplementation = null;
     private JRadioButton originalModeRadio = null;
     private JRadioButton bsfModeRadio = null;
+    private JRadioButton directedModeRadio = null;
     private JCheckBox refineCheckBox = null;
     private JCheckBox transformingCheckbox = null;
     private AffinityStatsPanelController psc = null;
@@ -68,6 +70,7 @@ public class AffinityPanelController implements Serializable {
         int implementation = getImplementation();
         boolean refine = getRefine();
         boolean log = getLog();
+        AffinityGraphMode graphMode = getGraphMode();
         AffinityConnectingMethod connectingMode = getConnectingMode();
 
         if (!validateValues(lambda, preferences, iterations, convits, nodeNameAttr, edgeNameAttr)) {
@@ -76,6 +79,7 @@ public class AffinityPanelController implements Serializable {
 
         algorithm = new CytoAffinityClustering(connectingMode, implementation, nodeNameAttr, edgeNameAttr, lambda.doubleValue(), preferences.doubleValue(), iterations.intValue(), convits, refine, log);
         algorithm.setStepsCount(steps);
+        algorithm.setGraphMode(graphMode);
 
         TaskManager.executeTask(new CytoClusterTask(algorithm),
                 CytoClusterTask.getDefaultTaskConfig());
@@ -87,6 +91,10 @@ public class AffinityPanelController implements Serializable {
 
     public JCheckBox getTransformingCheckbox() {
         return transformingCheckbox;
+    }
+
+    void setDirecedGraphRadio(JRadioButton directedModeRadio) {
+        this.directedModeRadio = directedModeRadio;
     }
 
     void setLogCheckBox(JCheckBox transformingCheckbox) {
@@ -118,6 +126,14 @@ public class AffinityPanelController implements Serializable {
             return AffinityConnectingMethod.ORIGINAL;
         } else {
             return AffinityConnectingMethod.PRIME_ALG;
+        }
+    }
+
+    private AffinityGraphMode getGraphMode() {
+        if (directedModeRadio.isSelected()) {
+            return AffinityGraphMode.DIRECTED;
+        } else {
+            return AffinityGraphMode.UNDIRECTED;
         }
     }
 

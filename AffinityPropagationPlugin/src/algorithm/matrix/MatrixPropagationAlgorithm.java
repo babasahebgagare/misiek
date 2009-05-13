@@ -1,10 +1,8 @@
 package algorithm.matrix;
 
 import algorithm.abs.AffinityPropagationAlgorithm;
-import algorithm.abs.Cluster;
 import algorithm.abs.ConvitsVector;
 import java.util.Collection;
-import java.util.Map;
 import java.util.TreeSet;
 import java.util.Vector;
 import matrix.DoubleMatrix1D;
@@ -72,7 +70,12 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
 
         //int i = Integer.valueOf(x);
         //int j = Integer.valueOf(y);
-        S.set(x, y, sim.doubleValue());
+        if (graphMode == AffinityGraphMode.DIRECTED) {
+            S.set(x, y, sim.doubleValue());
+        } else {
+            S.set(x, y, sim.doubleValue());
+            S.set(y, x, sim.doubleValue());
+        }
     }
 
     @Override
@@ -80,7 +83,12 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
 
         Integer x = getExamplarID(from);
         Integer y = getExamplarID(to);
-        S.set(x, y, sim.doubleValue());
+        if (graphMode == AffinityGraphMode.DIRECTED) {
+            S.set(x, y, sim.doubleValue());
+        } else {
+            S.set(x, y, sim.doubleValue());
+            S.set(y, x, sim.doubleValue());
+        }
     }
 
     @Override
