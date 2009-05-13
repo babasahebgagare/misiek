@@ -4,7 +4,7 @@ import algorithm.smart.IterationData;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collection;
-import java.util.TreeMap;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
@@ -33,7 +33,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
     protected Integer convits = null;
     protected ActionListener iteractionListenerOrNull = null;
     protected Map<Integer, Cluster<Integer>> assigments;
-    protected Map<Integer, ConvitsVector> convitsVectors = new TreeMap<Integer, ConvitsVector>();
+    protected Map<Integer, ConvitsVector> convitsVectors = new HashMap<Integer, ConvitsVector>();
     private Collection<Integer> refined = null;
     private int currentID = 0;
     protected Map<String, Integer> idMapper = new TreeMap<String, Integer>();
@@ -297,7 +297,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
     protected abstract Collection<Integer> getAllExamplars();
 
     private Map<Integer, Cluster<Integer>> computeOriginalAssigments(Collection<Integer> examplars, Collection<Integer> centers) {
-        Map<Integer, Cluster<Integer>> ret = new TreeMap<Integer, Cluster<Integer>>();
+        Map<Integer, Cluster<Integer>> ret = new HashMap<Integer, Cluster<Integer>>();
         Map<Integer, Integer> clustered = new TreeMap<Integer, Integer>();
         Collection<Integer> unclustered = new TreeSet<Integer>(examplars);
         Collection<Integer> unclusteredHelp = new TreeSet<Integer>(examplars);
@@ -395,7 +395,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
 
     @Override
     public Map<String, Cluster<String>> doClusterAssoc() {
-        Map<String, Cluster<String>> res = new TreeMap<String, Cluster<String>>();
+        Map<String, Cluster<String>> res = new HashMap<String, Cluster<String>>();
         Map<Integer, Cluster<Integer>> resInt = doClusterAssocInt();
         if (resInt == null) {
             return null;
