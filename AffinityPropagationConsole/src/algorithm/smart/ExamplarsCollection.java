@@ -31,6 +31,11 @@ public class ExamplarsCollection {
             exfrom = new Examplar(from, convits);
             examplars.put(from, exfrom);
         }
+        Examplar exto = examplars.get(to);
+        if (exto == null) {
+            exto = new Examplar(to, convits);
+            examplars.put(to, exto);
+        }
         exfrom.createSibling(sim, to);
     }
 
