@@ -1,12 +1,13 @@
 package mcv.logicmodel.structs;
 
+import java.util.HashMap;
 import java.util.TreeMap;
 import java.util.Map;
 
 public class PPINetwork {
 
-    private Map<String, Protein> proteins = new TreeMap<String, Protein>();
-    private Map<String, Interaction> interactions = new TreeMap<String, Interaction>();
+    private Map<String, Protein> proteins = new HashMap<String, Protein>();
+    private Map<String, Interaction> interactions = new HashMap<String, Interaction>();
     private PPINetworkContext context = null;
     private String ID;
 
@@ -16,7 +17,7 @@ public class PPINetwork {
     }
 
     public void deleteAllInteractions() {
-        interactions = new TreeMap<String, Interaction>();
+        interactions = new HashMap<String, Interaction>();
     }
 
     public void addInteraction(Interaction interaction) {
