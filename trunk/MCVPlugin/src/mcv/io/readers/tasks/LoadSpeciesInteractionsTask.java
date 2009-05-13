@@ -118,6 +118,6 @@ public class LoadSpeciesInteractionsTask implements Task {
     }
 
     public String getTitle() {
-        return "Loading interactions with tresholds: " + String.valueOf(treshold);
+        return "Loading interactions with treshold: " + String.valueOf(treshold);
     }
 }
