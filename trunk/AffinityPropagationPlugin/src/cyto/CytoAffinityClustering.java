@@ -11,7 +11,7 @@ import cytoscape.CyNode;
 import cytoscape.Cytoscape;
 import cytoscape.data.CyAttributes;
 import cytoscape.task.TaskMonitor;
-import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
@@ -40,8 +40,8 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
     private Integer convits = null;
     private AffinityPropagationAlgorithm af = null;
     private CyAttributes nodesAttributes = Cytoscape.getNodeAttributes();
-    private Map<String, Integer> nodeMapping = new HashMap<String, Integer>();
-    private Map<Integer, String> idMapping = new HashMap<Integer, String>();
+    private Map<String, Integer> nodeMapping = new TreeMap<String, Integer>();
+    private Map<Integer, String> idMapping = new TreeMap<Integer, String>();
 
     public CytoAffinityClustering(final AffinityConnectingMethod connectingMode, final int implementation, final String nodeNameAttr, final String edgeNameAttr, final double lambda, final double preferences, final int iterations, final Integer convits, final boolean refine, final boolean log) {
         this.nodeNameAttr = nodeNameAttr;

@@ -2,14 +2,14 @@ package mcv.viewmodel.structs;
 
 import mcv.logicmodel.structs.PPINetwork;
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.HashSet;
 import java.util.Map;
 
 public class CytoPPINetworkProjection extends CytoAbstractPPINetwork {
 
-    private Map<String, CytoProteinProjection> proteins = new HashMap<String, CytoProteinProjection>();
-    private Map<String, CytoInteraction> interactions = new HashMap<String, CytoInteraction>();
+    private Map<String, CytoProteinProjection> proteins = new TreeMap<String, CytoProteinProjection>();
+    private Map<String, CytoInteraction> interactions = new TreeMap<String, CytoInteraction>();
     private CytoAbstractPPINetwork cytoMotherNetwork;
 
     public CytoPPINetworkProjection(CytoAbstractPPINetwork cytoMotherNetwork, PPINetwork network, String ID) {
@@ -73,7 +73,7 @@ public class CytoPPINetworkProjection extends CytoAbstractPPINetwork {
 
     @Override
     public void deleteCytoInteractions() {
-        interactions = new HashMap<String, CytoInteraction>();
+        interactions = new TreeMap<String, CytoInteraction>();
     }
 
     @Override

@@ -4,7 +4,7 @@ import algorithm.smart.IterationData;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
@@ -163,7 +163,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
     public Map<Integer, Integer> doClusterInt() {
         final Map<Integer, Cluster<Integer>> help = doClusterAssocInt();
         if (help != null) {
-            final Map<Integer, Integer> res = new HashMap<Integer, Integer>();
+            final Map<Integer, Integer> res = new TreeMap<Integer, Integer>();
 
             for (Entry<Integer, Cluster<Integer>> entry : help.entrySet()) {
                 for (Integer obj : entry.getValue().getElements()) {
