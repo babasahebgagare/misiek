@@ -2,6 +2,7 @@ package algorithm.smart;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.TreeMap;
 import java.util.Map;
 
@@ -11,7 +12,7 @@ import java.util.Map;
  */
 public class ExamplarsCollection {
 
-    Map<Integer, Examplar> examplars = new TreeMap<Integer, Examplar>();
+    Map<Integer, Examplar> examplars = new HashMap<Integer, Examplar>();
     Integer convits = null;
 
     public ExamplarsCollection() {
