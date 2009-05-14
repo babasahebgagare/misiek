@@ -31,7 +31,6 @@ public class LeftPanel extends javax.swing.JPanel {
         initComponents();
         initSpeciesTree();
         PluginMenusHandle.setTree(spaciesTree);
-        PluginMenusHandle.setMemo(loggerTextArea);
         PluginMenusHandle.setUpdateDataButton(updateDataButton);
         PluginMenusHandle.setDoProjectionButton(projectButton);
         PluginMenusHandle.setShowNetowrkButton(showButton);
@@ -76,15 +75,20 @@ public class LeftPanel extends javax.swing.JPanel {
         showLoadedButton = new javax.swing.JButton();
         helpButton = new javax.swing.JButton();
         testButton = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        loggerTextArea = new javax.swing.JTextArea();
+
+        setMaximumSize(new java.awt.Dimension(280, 32767));
+        setPreferredSize(new java.awt.Dimension(270, 305));
 
         dataPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        dataPanel.setPreferredSize(new java.awt.Dimension(268, 51));
 
         updateDataButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/update.png"))); // NOI18N
         updateDataButton.setText("Update");
         updateDataButton.setToolTipText("Ładuje dane z plików .spy, .trees, .int");
+        updateDataButton.setAlignmentY(0.0F);
         updateDataButton.setEnabled(false);
+        updateDataButton.setIconTextGap(2);
+        updateDataButton.setMargin(new java.awt.Insets(2, 5, 2, 14));
         updateDataButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateDataButtonActionPerformed(evt);
@@ -93,6 +97,7 @@ public class LeftPanel extends javax.swing.JPanel {
 
         newDataButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/open.png"))); // NOI18N
         newDataButton.setText("New");
+        newDataButton.setMargin(new java.awt.Insets(2, 5, 2, 14));
         newDataButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newDataButtonActionPerformed(evt);
@@ -102,6 +107,7 @@ public class LeftPanel extends javax.swing.JPanel {
         deleteVataButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/clean.png"))); // NOI18N
         deleteVataButton.setText("Clean");
         deleteVataButton.setEnabled(false);
+        deleteVataButton.setMargin(new java.awt.Insets(2, 5, 2, 14));
         deleteVataButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteVataButtonActionPerformed(evt);
@@ -113,12 +119,12 @@ public class LeftPanel extends javax.swing.JPanel {
         dataPanelLayout.setHorizontalGroup(
             dataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dataPanelLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
+                .addContainerGap()
                 .addComponent(newDataButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(updateDataButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(deleteVataButton, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(updateDataButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(deleteVataButton, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
                 .addContainerGap())
         );
         dataPanelLayout.setVerticalGroup(
@@ -133,6 +139,7 @@ public class LeftPanel extends javax.swing.JPanel {
         );
 
         netsActionsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        netsActionsPanel.setPreferredSize(new java.awt.Dimension(268, 160));
 
         projectButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/cast.png"))); // NOI18N
         projectButton.setText("Casting...");
@@ -158,14 +165,14 @@ public class LeftPanel extends javax.swing.JPanel {
         netsActionsPanel.setLayout(netsActionsPanelLayout);
         netsActionsPanelLayout.setHorizontalGroup(
             netsActionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, netsActionsPanelLayout.createSequentialGroup()
+            .addGroup(netsActionsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(netsActionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, netsActionsPanelLayout.createSequentialGroup()
-                        .addComponent(projectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(showButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(netsActionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+                    .addGroup(netsActionsPanelLayout.createSequentialGroup()
+                        .addComponent(projectButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(showButton, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         netsActionsPanelLayout.setVerticalGroup(
@@ -180,6 +187,7 @@ public class LeftPanel extends javax.swing.JPanel {
         );
 
         intPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        intPanel.setPreferredSize(new java.awt.Dimension(268, 82));
 
         tresholdSpinner.setName("TresholdSpinner"); // NOI18N
 
@@ -213,13 +221,13 @@ public class LeftPanel extends javax.swing.JPanel {
             .addGroup(intPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(intPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(showLoadedButton, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                    .addComponent(showLoadedButton, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
                     .addGroup(intPanelLayout.createSequentialGroup()
                         .addComponent(helpButton)
-                        .addGap(18, 18, 18)
+                        .addGap(35, 35, 35)
                         .addComponent(testButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                        .addComponent(tresholdSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(tresholdSpinner, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         intPanelLayout.setVerticalGroup(
@@ -235,21 +243,13 @@ public class LeftPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        loggerTextArea.setEditable(false);
-        loggerTextArea.setRows(5);
-        jScrollPane2.setViewportView(loggerTextArea);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(dataPanel, 0, 284, Short.MAX_VALUE)
-            .addComponent(netsActionsPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(intPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(netsActionsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+            .addComponent(dataPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+            .addComponent(intPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,10 +258,7 @@ public class LeftPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(netsActionsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(intPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(intPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -329,8 +326,6 @@ private void testButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JButton helpButton;
     private javax.swing.JPanel intPanel;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea loggerTextArea;
     private javax.swing.JPanel netsActionsPanel;
     private javax.swing.JButton newDataButton;
     private javax.swing.JButton projectButton;

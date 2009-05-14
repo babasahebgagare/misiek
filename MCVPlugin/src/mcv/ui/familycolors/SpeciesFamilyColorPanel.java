@@ -44,9 +44,16 @@ public class SpeciesFamilyColorPanel extends javax.swing.JPanel {
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
-        attrPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Species family name color"));
-        attrPanel.setName("attrPanel"); // NOI18N
+        setAlignmentX(0.0F);
+        setAlignmentY(0.0F);
+        setMaximumSize(new java.awt.Dimension(280, 32767));
+        setPreferredSize(new java.awt.Dimension(270, 169));
 
+        attrPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Colors of families"));
+        attrPanel.setName("attrPanel"); // NOI18N
+        attrPanel.setPreferredSize(new java.awt.Dimension(270, 169));
+
+        jScrollPane4.setBorder(null);
         jScrollPane4.setName("jScrollPane4"); // NOI18N
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -72,27 +79,22 @@ public class SpeciesFamilyColorPanel extends javax.swing.JPanel {
         attrPanel.setLayout(attrPanelLayout);
         attrPanelLayout.setHorizontalGroup(
             attrPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(attrPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
         );
         attrPanelLayout.setVerticalGroup(
             attrPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, attrPanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(attrPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(attrPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(attrPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(attrPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
