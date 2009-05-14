@@ -47,7 +47,7 @@ public class SmartAffinityPropagationAlgorithmTest {
                 Integer to = Integer.valueOf(j);
                 Double prob = Double.valueOf(sim[i][j]);
                 if (!prob.equals(inf)) {
-                    instance.setSimilarities(from, to, prob);
+                    instance.setSimilarityInt(from, to, prob);
                 }
             }
         }
@@ -69,7 +69,7 @@ public class SmartAffinityPropagationAlgorithmTest {
 
         setSimilarities(sim, instance, inf);
         @SuppressWarnings("unchecked")
-        Map<Integer, Integer> ass = instance.doCluster();
+        Map<Integer, Integer> ass = instance.doClusterInt();
         for (Integer val : ass.values()) {
             System.out.println(val);
         }
