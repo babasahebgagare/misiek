@@ -13,6 +13,7 @@ import mcv.ui.LeftPanel;
 import mcv.ui.MCVMainPanel;
 import mcv.ui.PluginMenusHandle;
 import mcv.ui.familycolors.SpeciesFamilyColorPanel;
+import mcv.ui.logs.LogsPanel;
 import mcv.visual.calculators.MCVEdgeAppearanceCalculator;
 import mcv.visual.calculators.MCVNodeAppearanceCalculator;
 import org.jdesktop.swingx.VerticalLayout;
@@ -44,10 +45,13 @@ public class PluginInitializator {
 
         LeftPanel myLeftPanel = new LeftPanel();
         JPanel myPanel = new MCVMainPanel();
+
+        JPanel logsPanel = new LogsPanel();
         SpeciesFamilyColorPanel families = new SpeciesFamilyColorPanel();
         myPanel.setLayout(new VerticalLayout());
         myPanel.add(myLeftPanel);
         myPanel.add(families);
+        myPanel.add(logsPanel);
 
         PluginMenusHandle.setMcvPanel(myLeftPanel);
         PluginMenusHandle.setFamiliesColorListPanel(families);
