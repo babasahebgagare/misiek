@@ -33,6 +33,7 @@ public class GenesTreesLoaderPanel extends javax.swing.JPanel {
         this.list = list;
         initComponents();
         initState();
+        proteinsStatsTable.setAutoCreateRowSorter(true);
     }
 
     public void initState() {

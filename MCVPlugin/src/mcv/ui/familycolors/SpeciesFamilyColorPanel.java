@@ -8,6 +8,7 @@ package mcv.ui.familycolors;
 import javax.swing.JButton;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -19,6 +20,14 @@ public class SpeciesFamilyColorPanel extends javax.swing.JPanel {
     public SpeciesFamilyColorPanel() {
         initComponents();
         tableButtonInit();
+   //     TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(jTable1.getModel());
+   //     sorter.setSortable(0, true);
+   //     sorter.setSortable(1, false);
+   //     System.out.println("OK");
+   //     jTable1.setRowSorter(sorter);
+
+    //    System.out.println("OK2");
+    //jTable1.setAutoCreateRowSorter(true);
     }
 
     public void clean() {
