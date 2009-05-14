@@ -46,7 +46,7 @@ public class DefaultUIController extends UIController {
     }
 
     private void deleteColorListDataView() {
-        PluginMenusHandle.getFamiliesList().setModel(new DefaultListModel());
+        PluginMenusHandle.getFamiliesColorListPanel().clean();
     }
 
     private void deleteTreeDataView() {
@@ -54,9 +54,9 @@ public class DefaultUIController extends UIController {
     }
 
     private void initColorListDataView() {
-        DataHandle dh = PluginDataHandle.getDataHandle();
-        Collection<String> familiesNames = dh.getFamiliesKeys();
-        PluginMenusHandle.getFamiliesList().setListData(familiesNames.toArray());
+//        DataHandle dh = PluginDataHandle.getDataHandle();
+//        Collection<String> familiesNames = dh.getFamiliesKeys();
+        PluginMenusHandle.getFamiliesColorListPanel().refresh();
     }
 
     private void deleteDataView() {
