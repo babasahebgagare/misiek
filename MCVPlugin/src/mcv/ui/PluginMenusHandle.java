@@ -10,7 +10,6 @@ public class PluginMenusHandle {
 
     private static JTextArea memo = null;
     private static JTree tree = null;
-    private static JList familiesList = null;
     private static JButton doProjectionButton = null;
     private static JButton showNetworkButton = null;
     private static JButton showLoadedInteractionsButton = null;
@@ -18,6 +17,11 @@ public class PluginMenusHandle {
     private static JButton deleteDataButton = null;
     private static JButton updateDataButton = null;
     private static JPanel mcvPanel = null;
+    private static SpeciesFamilyColorPanel familiesColorListPanel = null;
+
+    public static SpeciesFamilyColorPanel getFamiliesColorListPanel() {
+        return familiesColorListPanel;
+    }
 
     public static JButton getDeleteDataButton() {
         return deleteDataButton;
@@ -25,14 +29,6 @@ public class PluginMenusHandle {
 
     public static void setDeleteDataButton(JButton deleteDataButton) {
         PluginMenusHandle.deleteDataButton = deleteDataButton;
-    }
-
-    public static JList getFamiliesList() {
-        return familiesList;
-    }
-
-    public static void setFamiliesList(JList familiesList) {
-        PluginMenusHandle.familiesList = familiesList;
     }
 
     public static JTree getTree() {
@@ -97,5 +93,9 @@ public class PluginMenusHandle {
 
     public static void setMcvPanel(JPanel mcvPanel) {
         PluginMenusHandle.mcvPanel = mcvPanel;
+    }
+
+    public static void setFamiliesColorListPanel(SpeciesFamilyColorPanel familiesColorListPanel) {
+        PluginMenusHandle.familiesColorListPanel = familiesColorListPanel;
     }
 }
