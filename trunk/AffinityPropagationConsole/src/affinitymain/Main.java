@@ -40,9 +40,11 @@ public class Main {
         String kind = getOutputKind(map);
         AffinityGraphMode graphMode = getGraphMode(map);
         AffinityConnectingMethod connMode = getConnMode(map);
+        boolean takeLog = getTakeLog(map);
         Integer steps = getSteps(map);
 
-        RunAlgorithm alg = new RunAlgorithm(filepath, outpath, lambda, iterations, convits, preferences, kind, false);
+        RunAlgorithm alg = new RunAlgorithm(filepath, outpath, lambda, iterations, convits, preferences, kind);
+        alg.setTakeLog(takeLog);
         alg.setConnMode(connMode);
         alg.setGraphMode(graphMode);
         alg.setSteps(steps);
@@ -154,6 +156,17 @@ public class Main {
         }
     }
 
+    private static boolean getTakeLog(Map<String, String> map) {
+        String getLog = map.get("log");
+        if (getLog == null) {
+            return false;
+        } else if (getLog.equals("true")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     private static void showHelp() {
         System.out.println("Parameters: [parameterName=parameterValue]*");
         System.out.println("in: input similarities filepath");
@@ -164,6 +177,7 @@ public class Main {
         System.out.println("kind*: kind of output: (clusters / centers)");
         System.out.println("conn*: connecting mode II faze (org / prime)");
         System.out.println("dir*: graph directed edges (true / false)");
+        System.out.println("log*: get edges with log value (true / false)");
         System.out.println("* parameters are optional");
     }
 }
