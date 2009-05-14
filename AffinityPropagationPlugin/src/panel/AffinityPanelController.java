@@ -162,6 +162,7 @@ public class AffinityPanelController implements Serializable {
                 steps = null;
             }
         } catch (NumberFormatException e) {
+            System.out.println(e);
             steps = null;
         }
         return steps;
