@@ -3,7 +3,7 @@
  *
  * Created on 2009-04-27, 16:03:06
  */
-package mcv.ui;
+package mcv.ui.dataloading;
 
 import java.io.File;
 import javax.swing.JFileChooser;

@@ -2,7 +2,7 @@ package mcv.ui.listeners;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import mcv.ui.DataLoaderPanel;
+import mcv.ui.dataloading.DataLoaderPanel;
 
 /**
  *

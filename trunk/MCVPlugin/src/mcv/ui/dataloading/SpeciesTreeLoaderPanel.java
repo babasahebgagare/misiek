@@ -3,8 +3,9 @@
  *
  * Created on 2009-04-27, 22:44:30
  */
-package mcv.ui;
+package mcv.ui.dataloading;
 
+import mcv.ui.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import javax.help.CSH;

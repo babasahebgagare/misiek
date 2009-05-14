@@ -12,7 +12,7 @@ import javax.swing.SwingConstants;
 import mcv.ui.LeftPanel;
 import mcv.ui.MCVMainPanel;
 import mcv.ui.PluginMenusHandle;
-import mcv.ui.SpeciesFamilyColorPanel;
+import mcv.ui.familycolors.SpeciesFamilyColorPanel;
 import mcv.visual.calculators.MCVEdgeAppearanceCalculator;
 import mcv.visual.calculators.MCVNodeAppearanceCalculator;
 import org.jdesktop.swingx.VerticalLayout;
