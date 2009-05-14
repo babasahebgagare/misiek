@@ -36,8 +36,7 @@ class JTableButtonMouseListener implements MouseListener {
 
         button = (JButton) value;
 
-        buttonEvent =
-                (MouseEvent) SwingUtilities.convertMouseEvent(__table, e, button);
+        buttonEvent = SwingUtilities.convertMouseEvent(__table, e, button);
         button.dispatchEvent(buttonEvent);
         // This is necessary so that when a button is pressed and released
         // it gets rendered properly.  Otherwise, the button may still appear
