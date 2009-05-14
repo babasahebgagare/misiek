@@ -1,5 +1,6 @@
 package mcv.ui;
 
+import mcv.ui.dataloading.DataLoaderFrame;
 import mcv.controllers.interactions.InteractionsManager;
 import cytoscape.CyNetwork;
 import cytoscape.CyNode;

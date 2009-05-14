@@ -3,8 +3,10 @@
  *
  * Created on 2009-04-11, 22:30:19
  */
-package mcv.ui;
+package mcv.ui.dataloading;
 
+import mcv.ui.*;
+import mcv.ui.dataloading.OneFileSpeciesInteractionsLoaderPanel;
 import mcv.io.AbstractDataReader;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;

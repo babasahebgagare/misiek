@@ -1,5 +1,6 @@
 package mcv.ui;
 
+import mcv.ui.familycolors.SpeciesFamilyColorPanel;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JPanel;

@@ -3,7 +3,7 @@
  *
  * Created on 2009-04-27, 16:03:06
  */
-package mcv.ui;
+package mcv.ui.dataloading;
 
 import javax.swing.border.TitledBorder;
 import mcv.main.LoadedDataHandle;

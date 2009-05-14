@@ -1,4 +1,4 @@
-package mcv.ui;
+package mcv.ui.familycolors;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;

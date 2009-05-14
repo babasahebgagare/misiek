@@ -1,5 +1,6 @@
-package mcv.ui;
+package mcv.ui.familycolors;
 
+import mcv.ui.*;
 import cytoscape.Cytoscape;
 import cytoscape.view.CyNetworkView;
 import java.awt.Color;
