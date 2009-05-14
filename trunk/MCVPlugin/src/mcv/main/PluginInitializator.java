@@ -53,7 +53,7 @@ public class PluginInitializator {
         myPanel.add(families);
         myPanel.add(logsPanel);
 
-        PluginMenusHandle.setMcvPanel(myLeftPanel);
+        PluginMenusHandle.setMcvPanel(myPanel);
         PluginMenusHandle.setFamiliesColorListPanel(families);
         leftPanel.add(ResourceBundle.getBundle("mcv/resources/ui").getString("TABNAME"), myPanel);
     }
