@@ -40,7 +40,7 @@ public class RunAlgorithm {
     private AffinityGraphMode graphMode;
     private AffinityConnectingMethod connMode;
 
-    public RunAlgorithm(String inputpath, String outpath, double lambda, int iterations, Integer convits, double preferences, String kind, boolean takeLog) {
+    public RunAlgorithm(String inputpath, String outpath, double lambda, int iterations, Integer convits, double preferences, String kind) {
         this.inputpath = inputpath;
         this.outpath = outpath;
         this.lambda = lambda;
@@ -48,7 +48,6 @@ public class RunAlgorithm {
         this.preferences = preferences;
         this.kind = kind;
         this.convits = convits;
-        this.takeLog = takeLog;
     }
 
     public void setGraphMode(AffinityGraphMode graphMode) {
@@ -164,5 +163,9 @@ public class RunAlgorithm {
                 Logger.getLogger(RunAlgorithm.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+
+    void setTakeLog(boolean takeLog) {
+        this.takeLog = takeLog;
     }
 }
