@@ -293,7 +293,7 @@ private void showLoadedButtonActionPerformed(java.awt.event.ActionEvent evt) {//
 private void newDataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newDataButtonActionPerformed
 
     if (PluginDataHandle.getDataHandle().speciesTreeLoaded()) {
-        int ret = Messenger.confirmWarning("All loaded data would be removed, are you sure?");
+        int ret = Messenger.confirmWarning("All loaded data will be deleted, are you sure?");
         if (ret == JOptionPane.OK_OPTION) {
             UIController.getInstance().newData();
         }
@@ -309,7 +309,7 @@ private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 
 private void deleteVataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteVataButtonActionPerformed
     if (PluginDataHandle.getDataHandle().speciesTreeLoaded()) {
-        int ret = Messenger.confirmWarning("All loaded data would be removed, are you sure?");
+        int ret = Messenger.confirmWarning("All loaded data will be deleted, are you sure?");
         if (ret == JOptionPane.OK_OPTION) {
             UIController.getInstance().deleteData();
         }
