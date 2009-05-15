@@ -1,10 +1,23 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <title>Affinity propagation Plugin User Manual</title>
+        <title>Nearest center searching</title>
         <meta name="generator" content="DocBook XSL Stylesheets V1.70.1">
     </head>
     <body bgcolor="white">
-        <div class="article" lang="en">Affinity propagation User Manual</div>
+        <h1>Nearest center searching</h1>
+        <h2>Introduction</h2>
+        After I phase we have clusters centers, now we have to find for every node
+        nearest cluster center. <br>
+        I have implemented two methods of it.
+        <h2>Original authors method</h2>
+        For every node we are looking for siblings, if one of siblings nodes is
+        cluster center, we aggregate this nodes. But it is possible that some node
+        hasn't center in nearest sibling, so I have generalized this method on
+        any depth.
+        <h2>Weighted BSF method</h2>
+        This method looking from other side - starting from centers. Rightly it is
+        Prime algorithm, where centers are sourse, and for every node we searching
+        nearest path from sourse to this node.
     </body>
 </html>
