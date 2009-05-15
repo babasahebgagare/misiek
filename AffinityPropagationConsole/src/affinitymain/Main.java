@@ -41,6 +41,7 @@ public class Main {
         AffinityGraphMode graphMode = getGraphMode(map);
         AffinityConnectingMethod connMode = getConnMode(map);
         boolean takeLog = getTakeLog(map);
+        boolean refine = getRefine(map);
         Integer steps = getSteps(map);
 
         RunAlgorithm alg = new RunAlgorithm(filepath, outpath, lambda, iterations, convits, preferences, kind);
@@ -48,6 +49,7 @@ public class Main {
         alg.setConnMode(connMode);
         alg.setGraphMode(graphMode);
         alg.setSteps(steps);
+        alg.setRefine(refine);
 
         alg.setParemeters();
         alg.run();
@@ -143,6 +145,17 @@ public class Main {
         }
     }
 
+    private static boolean getRefine(Map<String, String> map) {
+        String ref = map.get("ref");
+        if (ref == null) {
+            return true;
+        } else if (ref.equals("false")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     private static Integer getSteps(Map<String, String> map) {
         String depthStr = map.get("dep");
         if (depthStr == null) {
@@ -169,15 +182,19 @@ public class Main {
 
     private static void showHelp() {
         System.out.println("Parameters: [parameterName=parameterValue]*");
+        System.out.println();
         System.out.println("in: input similarities filepath");
         System.out.println("lam: double lambda");
         System.out.println("p: double preferences");
         System.out.println("it: integer max iterations");
-        System.out.println("con*: integer convits");
-        System.out.println("kind*: kind of output: (clusters / centers)");
-        System.out.println("conn*: connecting mode II faze (org / prime)");
-        System.out.println("dir*: graph directed edges (true / false)");
-        System.out.println("log*: get edges with log value (true / false)");
+        System.out.println("con*: integer convits, default null");
+        System.out.println("kind*: kind of output: (@clusters / centers)");
+        System.out.println("conn*: connecting mode II faze (@org / prime)");
+        System.out.println("dir*: graph directed edges (@true / false)");
+        System.out.println("log*: get edges with log value (true / @false)");
+        System.out.println("ref*: clusters refine method after clustering (@true / false)");
+        System.out.println();
         System.out.println("* parameters are optional");
+        System.out.println("@ default options");
     }
 }

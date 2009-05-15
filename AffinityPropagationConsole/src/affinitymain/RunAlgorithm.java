@@ -36,6 +36,7 @@ public class RunAlgorithm {
     private Collection<String> nodeNames = new HashSet<String>();
     private String kind;
     private boolean takeLog;
+    private boolean refine;
     private Integer steps = null;
     private AffinityGraphMode graphMode;
     private AffinityConnectingMethod connMode;
@@ -48,6 +49,10 @@ public class RunAlgorithm {
         this.preferences = preferences;
         this.kind = kind;
         this.convits = convits;
+    }
+
+    public void setRefine(boolean refine) {
+        this.refine = refine;
     }
 
     public void setGraphMode(AffinityGraphMode graphMode) {
@@ -67,6 +72,7 @@ public class RunAlgorithm {
         af.setIterations(iterations);
         af.setConvits(convits);
         af.setSteps(steps);
+        af.setRefine(refine);
         af.setGraphMode(graphMode);
         af.setConnectingMode(connMode);
         af.setConnectingMode(AffinityPropagationAlgorithm.AffinityConnectingMethod.ORIGINAL);
