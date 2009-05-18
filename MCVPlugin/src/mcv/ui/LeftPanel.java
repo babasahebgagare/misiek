@@ -323,9 +323,9 @@ private void testButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     DataLoadingErrorsJPanel errorsPanel = new DataLoadingErrorsJPanel();
     JFrame frame = new JFrame("MCV plugin errors");
 
-    frame.setLocationRelativeTo(Cytoscape.getDesktop());
     frame.add(errorsPanel);
     frame.pack();
+    frame.setLocationRelativeTo(Cytoscape.getDesktop());
     frame.setVisible(true);
 }//GEN-LAST:event_testButtonActionPerformed
 
