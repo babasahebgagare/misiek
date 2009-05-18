@@ -12,6 +12,7 @@ import mcv.main.PluginDataHandle;
 import mcv.ui.listeners.InteractionsLoadedListener;
 import mcv.ui.listeners.ProteinsLoadedListener;
 import mcv.ui.listeners.SpeciesLoadedListener;
+import org.jdesktop.swingx.error.ErrorEvent;
 
 /**
  *
@@ -32,6 +33,11 @@ public class DataLoaderPanel extends javax.swing.JPanel {
         if (genesTree != null) {
             genesTree.refreshStats();
         }
+    }
+
+    public void showErrorOccuredLabel(ErrorEvent errorEvent) {
+        errorLabel.setText("Some errors occured, see log for more details: " + errorEvent);
+        
     }
 
     private void setActiveTab() {
@@ -63,12 +69,15 @@ public class DataLoaderPanel extends javax.swing.JPanel {
         this.parentFrame = parentFrame;
         InteractionsLoadedListener intlist = new InteractionsLoadedListener(this);
         intLoader = new InteractionsLoaderPanel(intlist);
+        intLoader.setLoaderPanel(this);
 
         ProteinsLoadedListener list = new ProteinsLoadedListener(this, intLoader);
         SpeciesLoadedListener list2 = new SpeciesLoadedListener(this);
 
         speciesTree = new SpeciesTreeLoaderPanel(list2);
+        speciesTree.setLoaderPanel(this);
         genesTree = new GenesTreesLoaderPanel(list);
+        genesTree.setLoaderPanel(this);
         intLoader.setName("Interactions loading...");
         speciesTree.setName("Species tree loading...");
         genesTree.setName("Proteins data loading...");
@@ -103,23 +112,60 @@ public class DataLoaderPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         tabbedPane = new javax.swing.JTabbedPane();
+        logButton = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        errorLabel = new javax.swing.JLabel();
 
         tabbedPane.setName("tabbedPane"); // NOI18N
+
+        logButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/stop2.png"))); // NOI18N
+        logButton.setText("Show log");
+        logButton.setName("logButton"); // NOI18N
+        logButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logButtonActionPerformed(evt);
+            }
+        });
+
+        jScrollPane3.setName("jScrollPane3"); // NOI18N
+
+        errorLabel.setBackground(new java.awt.Color(255, 0, 0));
+        errorLabel.setForeground(new java.awt.Color(255, 0, 0));
+        errorLabel.setName("errorLabel"); // NOI18N
+        jScrollPane3.setViewportView(errorLabel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(tabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(logButton)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(tabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(tabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                    .addComponent(logButton))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void logButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logButtonActionPerformed
+        DefaultLoadingController.showMCVLogsPanel();
+    }//GEN-LAST:event_logButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel errorLabel;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JButton logButton;
     private javax.swing.JTabbedPane tabbedPane;
     // End of variables declaration//GEN-END:variables
 }

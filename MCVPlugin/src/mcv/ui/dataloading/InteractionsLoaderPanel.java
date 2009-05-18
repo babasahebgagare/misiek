@@ -35,6 +35,7 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
     Collection<OneFileSpeciesInteractionsLoaderPanel> oneFilePanels = new Vector<OneFileSpeciesInteractionsLoaderPanel>();
     InteractionsLoadedListener list;
     String onefilepath;
+    DataLoaderPanel loaderPanel;
 
     public InteractionsLoaderPanel(InteractionsLoadedListener list) {
         this.list = list;
@@ -42,6 +43,10 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
         initSpeciesListForOneFile();
         initSpeciesList();
         setActualUIState();
+    }
+
+    public void setLoaderPanel(DataLoaderPanel loaderPanel) {
+        this.loaderPanel = loaderPanel;
     }
 
     /** This method is called from within the constructor to
@@ -353,7 +358,7 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void readAISpeciesInteractions(PPINetwork network, String filepath, Double treshold, Double oldTreshold) {
-        InteractionsLoadingErrorsListener errorListener = new InteractionsLoadingErrorsListener();
+        InteractionsLoadingErrorsListener errorListener = new InteractionsLoadingErrorsListener(loaderPanel);
 
         if (treshold == null && oldTreshold == null) {
             return;
@@ -401,7 +406,7 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
 
     private void updateFromOneFile() {
         if (onefilepath != null) {
-            InteractionsLoadingErrorsListener errorListener = new InteractionsLoadingErrorsListener();
+            InteractionsLoadingErrorsListener errorListener = new InteractionsLoadingErrorsListener(loaderPanel);
             Map<String, Double> tresholds = new TreeMap<String, Double>();
             PluginDataHandle.getLoadedDataHandle().setOneInteractionFilename(onefilepath);
             for (OneFileSpeciesInteractionsLoaderPanel oneFileSpeciesPanel : oneFilePanels) {
@@ -433,7 +438,7 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
             readAISpeciesInteractions(network, filename, tresholdOrNull, oldTresholdOrNull);
         //       AbstractDataReader.getInstance().readAISpeciesInteractions(network, filename, tresholdOrNull, oldTresholdOrNull);
         } else {
-            InteractionsLoadingErrorsListener errorListener = new InteractionsLoadingErrorsListener();
+            InteractionsLoadingErrorsListener errorListener = new InteractionsLoadingErrorsListener(loaderPanel);
             ldh.addInteractionData(speciesName, filename, tresholdOrNull);
             AbstractDataReader.getInstance().readSpeciesInteractions(network, filename, tresholdOrNull, errorListener);
         }

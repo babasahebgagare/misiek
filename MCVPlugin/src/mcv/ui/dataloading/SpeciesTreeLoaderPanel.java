@@ -27,6 +27,7 @@ public class SpeciesTreeLoaderPanel extends javax.swing.JPanel {
 
     private String filepath;
     private SpeciesLoadedListener list;
+    private DataLoaderPanel loaderPanel;
 
     /** Creates new form SpeciesTreeLoaderPanel
      * @param list 
@@ -35,7 +36,10 @@ public class SpeciesTreeLoaderPanel extends javax.swing.JPanel {
         this.list = list;
         initComponents();
         initState();
+    }
 
+    public void setLoaderPanel(DataLoaderPanel loaderPanel) {
+        this.loaderPanel = loaderPanel;
     }
 
     public void initState() {
@@ -156,7 +160,6 @@ public class SpeciesTreeLoaderPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(chooseFile, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -166,7 +169,10 @@ public class SpeciesTreeLoaderPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                         .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(filenameLabel)
-                    .addComponent(errorLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(errorLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -180,11 +186,15 @@ public class SpeciesTreeLoaderPanel extends javax.swing.JPanel {
                     .addComponent(cleanButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(filenameLabel)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(errorLabel)
-                .addGap(39, 39, 39))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(184, 184, 184)
+                        .addComponent(errorLabel)
+                        .addGap(39, 39, 39))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -204,7 +214,7 @@ public class SpeciesTreeLoaderPanel extends javax.swing.JPanel {
     private void loadTreeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadTreeButtonActionPerformed
         if (filepath != null) {
 
-            SpeciesLoadingErrorsListener errorListener = new SpeciesLoadingErrorsListener(this);
+            SpeciesLoadingErrorsListener errorListener = new SpeciesLoadingErrorsListener(loaderPanel);
             DefaultLoadingController.loadSpeciesTreeData(filepath, errorListener);
             setLoadedState();
             list.actionPerformed(new ActionEvent(this, 1, "Species loaded"));

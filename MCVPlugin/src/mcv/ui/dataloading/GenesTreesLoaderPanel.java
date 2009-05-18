@@ -26,6 +26,7 @@ public class GenesTreesLoaderPanel extends javax.swing.JPanel {
 
     String filepath;
     ProteinsLoadedListener list;
+    DataLoaderPanel loaderPanel;
 
     /** Creates new form GenesTreesLoaderPanel
      * @param list
@@ -35,6 +36,10 @@ public class GenesTreesLoaderPanel extends javax.swing.JPanel {
         initComponents();
         initState();
         proteinsStatsTable.setAutoCreateRowSorter(true);
+    }
+
+    public void setLoaderPanel(DataLoaderPanel loaderPanel) {
+        this.loaderPanel = loaderPanel;
     }
 
     public void initState() {
@@ -96,7 +101,6 @@ public class GenesTreesLoaderPanel extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         proteinsStatsTable = new javax.swing.JTable();
         infoButton = new javax.swing.JButton();
-        showLogButton = new javax.swing.JButton();
 
         filenameLabel.setText("filename");
         filenameLabel.setName("filenameLabel"); // NOI18N
@@ -156,9 +160,6 @@ public class GenesTreesLoaderPanel extends javax.swing.JPanel {
             }
         });
 
-        showLogButton.setText("Show log");
-        showLogButton.setName("showLogButton"); // NOI18N
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -173,8 +174,7 @@ public class GenesTreesLoaderPanel extends javax.swing.JPanel {
                         .addComponent(loadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
                         .addComponent(infoButton))
-                    .addComponent(filenameLabel)
-                    .addComponent(showLogButton, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(filenameLabel))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -188,10 +188,8 @@ public class GenesTreesLoaderPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(filenameLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(showLogButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -210,7 +208,7 @@ public class GenesTreesLoaderPanel extends javax.swing.JPanel {
 
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
         if (filepath != null) {
-            FamiliesLoadingErrorsListener errorListener = new FamiliesLoadingErrorsListener();
+            FamiliesLoadingErrorsListener errorListener = new FamiliesLoadingErrorsListener(loaderPanel);
             DefaultLoadingController.loadFamiliesTreeData(filepath, errorListener);
             setLoadedState();
             list.actionPerformed(new ActionEvent(this, 2, "Proteins tree loaded"));
@@ -230,6 +228,5 @@ public class GenesTreesLoaderPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton loadButton;
     private javax.swing.JTable proteinsStatsTable;
-    private javax.swing.JButton showLogButton;
     // End of variables declaration//GEN-END:variables
 }

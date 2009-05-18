@@ -16,7 +16,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jScrollPane2" alignment="1" pref="480" max="32767" attributes="0"/>
@@ -28,7 +28,6 @@
                       <Component id="infoButton" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="filenameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="showLogButton" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -46,10 +45,8 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="filenameLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane2" min="-2" pref="217" max="-2" attributes="0"/>
+              <Component id="jScrollPane2" pref="246" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="showLogButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -120,12 +117,6 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="infoButtonActionPerformed"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="showLogButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Show log"/>
-        <Property name="name" type="java.lang.String" value="showLogButton" noResource="true"/>
-      </Properties>
     </Component>
   </SubComponents>
 </Form>
