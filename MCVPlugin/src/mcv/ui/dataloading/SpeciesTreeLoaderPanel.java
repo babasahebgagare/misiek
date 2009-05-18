@@ -5,7 +5,6 @@
  */
 package mcv.ui.dataloading;
 
-import mcv.ui.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import javax.help.CSH;
@@ -15,6 +14,7 @@ import mcv.help.MCVHelpBroker;
 import mcv.io.listeners.SpeciesLoadingErrorsListener;
 import mcv.main.LoadedDataHandle;
 import mcv.main.PluginDataHandle;
+import mcv.ui.UIController;
 import mcv.ui.listeners.SpeciesLoadedListener;
 import mcv.utils.JTreeModelSpeciesGenerator;
 import org.jdesktop.swingx.error.ErrorEvent;
@@ -67,6 +67,12 @@ public class SpeciesTreeLoaderPanel extends javax.swing.JPanel {
         TreeModel treeModel = JTreeModelSpeciesGenerator.generateModel();
         speciesTree.setModel(treeModel);
         JTreeModelSpeciesGenerator.decorateJTree(speciesTree);
+        if (PluginDataHandle.getLoadedDataHandle().isProteinsLoaded()) {
+            cleanButton.setEnabled(false);
+        } else {
+            cleanButton.setEnabled(true);
+        }
+
         setFilenameLabel();
     }
 
@@ -74,6 +80,7 @@ public class SpeciesTreeLoaderPanel extends javax.swing.JPanel {
         speciesTree.setModel(null);
         loadTreeButton.setEnabled(true);
         chooseFile.setEnabled(true);
+        cleanButton.setEnabled(false);
         setFilenameLabel();
     }
 
@@ -136,6 +143,11 @@ public class SpeciesTreeLoaderPanel extends javax.swing.JPanel {
         cleanButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/clean.png"))); // NOI18N
         cleanButton.setText("Clean");
         cleanButton.setName("cleanButton"); // NOI18N
+        cleanButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cleanButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -203,6 +215,11 @@ public class SpeciesTreeLoaderPanel extends javax.swing.JPanel {
         CSH.DisplayHelpFromSource csh = new CSH.DisplayHelpFromSource(MCVHelpBroker.getHelpBroker("Species file format"));
         csh.actionPerformed(new ActionEvent(this, 120, "Species file format"));
     }//GEN-LAST:event_helpButtonActionPerformed
+
+    private void cleanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cleanButtonActionPerformed
+        UIController.getInstance().deleteData();
+        setUnloadedState();
+    }//GEN-LAST:event_cleanButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton chooseFile;

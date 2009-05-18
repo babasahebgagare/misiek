@@ -24,9 +24,7 @@
                       <Component id="chooseButton" min="-2" pref="111" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="loadButton" min="-2" pref="94" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="cleanButton" min="-2" pref="101" max="-2" attributes="0"/>
-                      <EmptySpace pref="35" max="32767" attributes="0"/>
+                      <EmptySpace pref="142" max="32767" attributes="0"/>
                       <Component id="infoButton" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="filenameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -44,7 +42,6 @@
                   <Component id="chooseButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="infoButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="loadButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cleanButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="filenameLabel" min="-2" max="-2" attributes="0"/>
@@ -129,18 +126,6 @@
         <Property name="text" type="java.lang.String" value="Show log"/>
         <Property name="name" type="java.lang.String" value="showLogButton" noResource="true"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="cleanButton">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/mcv/resources/icons/clean.png"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Clean"/>
-        <Property name="name" type="java.lang.String" value="cleanButton" noResource="true"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cleanButtonActionPerformed"/>
-      </Events>
     </Component>
   </SubComponents>
 </Form>

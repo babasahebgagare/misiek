@@ -7,7 +7,6 @@ package mcv.ui.dataloading;
 
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
-import mcv.logicmodel.controllers.DataHandle;
 import mcv.main.LoadedDataHandle;
 import mcv.main.PluginDataHandle;
 import mcv.ui.listeners.InteractionsLoadedListener;
