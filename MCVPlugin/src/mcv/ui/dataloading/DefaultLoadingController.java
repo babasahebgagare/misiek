@@ -1,5 +1,6 @@
-package mcv.ui;
+package mcv.ui.dataloading;
 
+import mcv.ui.*;
 import java.util.Map;
 import mcv.io.AbstractDataReader;
 import mcv.io.listeners.FamiliesLoadingErrorsListener;
