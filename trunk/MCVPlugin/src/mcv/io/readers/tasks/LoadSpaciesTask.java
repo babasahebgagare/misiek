@@ -7,6 +7,8 @@ import java.io.IOException;
 
 public class LoadSpaciesTask extends MCVLoadTask {
 
+    private int lineNumber = 0;
+
     public LoadSpaciesTask(String sppath) {
         super(sppath);
     }
@@ -23,7 +25,7 @@ public class LoadSpaciesTask extends MCVLoadTask {
             taskMonitor.setPercentCompleted(100);
             doneActionPerformed();
         } catch (SpeciesTreeFormatException ex) {
-            sendErrorEvent(ex);
+            sendErrorEvent(ex, "Line number: " + String.valueOf(lineNumber), "SpeciesTreeFormatException.run()");
         } catch (FileNotFoundException ex) {
             sendErrorEvent(ex);
         } catch (IOException ex) {
@@ -44,6 +46,7 @@ public class LoadSpaciesTask extends MCVLoadTask {
     private void reading() throws IOException, SpeciesTreeFormatException {
 
         String treeString = br.readLine();
+        lineNumber++;
         DataParser.getInstance().readSpeciesString(treeString);
     }
 }

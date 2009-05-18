@@ -43,10 +43,7 @@ public class DataLoadingErrorsJPanel extends javax.swing.JPanel {
 
         errorsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Error ID", "Date", "Error Message", "Additional Message", "Source"
@@ -124,7 +121,7 @@ public class DataLoadingErrorsJPanel extends javax.swing.JPanel {
         for (MCVLoggedError error : errors) {
             Integer id = error.getId();
             String message = error.getMessage();
-            String errorMessage = error.getException().getMessage();
+            String errorMessage = error.getException().toString();
             String source = error.getSource();
             String dateString = dateFormat.format(error.getDate());
 

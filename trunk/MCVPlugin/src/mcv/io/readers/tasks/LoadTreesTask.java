@@ -30,9 +30,9 @@ public class LoadTreesTask extends MCVLoadTask {
             doneActionPerformed();
 
         } catch (FamiliesTreeFormatException ex) {
-            sendErrorEvent(ex);
+            sendErrorEvent(ex, "FamiliesTreeFormatException", "LoadTreesTask.run()");
         } catch (FileNotFoundException ex) {
-            sendErrorEvent(ex);
+            sendErrorEvent(ex, "FileNotFoundException", "LoadTreesTask.run()");
         } catch (IOException ex) {
             sendErrorEvent(ex);
         } finally {

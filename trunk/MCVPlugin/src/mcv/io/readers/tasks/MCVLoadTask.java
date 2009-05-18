@@ -27,7 +27,7 @@ public abstract class MCVLoadTask implements Task {
     protected ErrorListener errorListener = null;
     protected ActionListener doneListener = null;
     protected TaskMonitor taskMonitor = null;
-    private String filepath;
+    protected String filepath;
     protected Thread myThread = null;
     protected long max;
     protected FileInputStream fis = null;
@@ -89,12 +89,11 @@ public abstract class MCVLoadTask implements Task {
     }
 
     protected void sendErrorEvent(Exception ex) {
-        if (errorListener != null) {
-            errorListener.errorOccured(new ErrorEvent(ex, this));
-        } else {
-            Messenger.error(ex);
-        }
-        MCVErrorsLogger.logMCVError(ex, "No message", "No source");
+        sendErrorEvent(ex, null, null);
+    }
+
+    protected void sendErrorEvent(Exception ex, String msg) {
+        sendErrorEvent(ex, msg, null);
     }
 
     protected void sendErrorEvent(Exception ex, String msg, String source) {

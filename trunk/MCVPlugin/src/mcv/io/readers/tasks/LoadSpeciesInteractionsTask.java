@@ -14,6 +14,7 @@ public class LoadSpeciesInteractionsTask extends MCVLoadTask {
 
     private Double treshold;
     private PPINetwork network;
+    private int lineNumber = 0;
 
     LoadSpeciesInteractionsTask(String filepath, PPINetwork network, Double treshold) {
         super(filepath);
@@ -34,7 +35,7 @@ public class LoadSpeciesInteractionsTask extends MCVLoadTask {
             taskMonitor.setPercentCompleted(100);
             doneActionPerformed();
         } catch (InteractionsFileFormatException ex) {
-            sendErrorEvent(ex);
+            sendErrorEvent(ex, "Line number: " + String.valueOf(lineNumber), "LoadSpeciesInteractionsTask.run()");
         } catch (FileNotFoundException ex) {
             sendErrorEvent(ex);
         } catch (IOException ex) {
@@ -55,7 +56,6 @@ public class LoadSpeciesInteractionsTask extends MCVLoadTask {
 
     private void reading() throws IOException, InteractionsFileFormatException {
         DataHandle dh = PluginDataHandle.getDataHandle();
-        int lineNumber = 0;
         int count = 0;
         float percent = 0;
         float last_percent = 0;
