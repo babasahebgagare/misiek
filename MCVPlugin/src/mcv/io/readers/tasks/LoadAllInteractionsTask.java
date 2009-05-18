@@ -1,7 +1,7 @@
 package mcv.io.readers.tasks;
 
 import mcv.io.exceptions.InteractionsFileFormatException;
-import mcv.io.parsers.defaultparser.DefaultInteractionsParser;
+import mcv.io.parsers.rootparser.RootInteractionsParser;
 import cytoscape.task.Task;
 import cytoscape.task.TaskMonitor;
 import cytoscape.task.ui.JTask;
@@ -67,7 +67,7 @@ public class LoadAllInteractionsTask implements Task {
                 all++;
                 InteractionParserStruct interaction = null;
                 try {
-                    interaction = DefaultInteractionsParser.readInteraction(br);
+                    interaction = RootInteractionsParser.readInteraction(br);
 
                     String SourceID = interaction.getFrom();
                     String TargetID = interaction.getTo();
