@@ -12,7 +12,7 @@ public class Messenger {
 
     public static void error(Exception ex) {
         System.out.println(ex.getMessage());
-        JOptionPane.showMessageDialog(Cytoscape.getDesktop(), ex.getMessage());
+        JOptionPane.showMessageDialog(Cytoscape.getDesktop(), ex.getMessage(), "Error.", JOptionPane.ERROR_MESSAGE);
     }
 
     public static int confirmWarning(Object message) {
