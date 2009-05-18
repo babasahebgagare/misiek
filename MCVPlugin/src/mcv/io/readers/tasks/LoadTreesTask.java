@@ -28,7 +28,7 @@ public class LoadTreesTask extends MCVLoadTask {
             PluginDataHandle.getLoadedDataHandle().setProteinsLoaded(true);
             taskMonitor.setPercentCompleted(100);
             doneActionPerformed();
-            
+
         } catch (FamiliesTreeFormatException ex) {
             sendErrorEvent(ex);
         } catch (FileNotFoundException ex) {
@@ -50,6 +50,9 @@ public class LoadTreesTask extends MCVLoadTask {
     }
 
     private void reading() throws IOException, FamiliesTreeFormatException {
+        float last_percent = 0;
+        float percent = 0;
+
         while (br.ready()) {
             String line;
             line = br.readLine();
@@ -59,8 +62,11 @@ public class LoadTreesTask extends MCVLoadTask {
                     DataParser.getInstance().readFamiliesTreeString(family);
                 }
                 current = fis.getChannel().position();
-                float percent = current * 100 / (float) max;
-                taskMonitor.setPercentCompleted(Math.round(percent));
+                percent = current * 100 / (float) max;
+                if (percent > last_percent + 1) {
+                    last_percent = percent;
+                    taskMonitor.setPercentCompleted(Math.round(percent));
+                }
             }
         }
     }

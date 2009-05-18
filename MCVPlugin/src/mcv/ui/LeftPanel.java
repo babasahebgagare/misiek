@@ -9,11 +9,13 @@ import cytoscape.Cytoscape;
 import java.awt.event.ActionEvent;
 import java.util.Collection;
 import javax.help.CSH;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import mcv.help.MCVHelpBroker;
 import mcv.viewmodel.structs.CytoProtein;
 import mcv.logicmodel.structs.PPINetwork;
 import mcv.main.PluginDataHandle;
+import mcv.ui.dataloading.DataLoadingErrorsJPanel;
 import mcv.utils.JTreeModelSpeciesGenerator;
 import mcv.utils.Messenger;
 import mcv.utils.Stats;
@@ -124,7 +126,7 @@ public class LeftPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(updateDataButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(deleteVataButton, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
+                .addComponent(deleteVataButton, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
                 .addContainerGap())
         );
         dataPanelLayout.setVerticalGroup(
@@ -168,11 +170,11 @@ public class LeftPanel extends javax.swing.JPanel {
             .addGroup(netsActionsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(netsActionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
                     .addGroup(netsActionsPanelLayout.createSequentialGroup()
                         .addComponent(projectButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(showButton, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)))
+                        .addComponent(showButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         netsActionsPanelLayout.setVerticalGroup(
@@ -221,13 +223,13 @@ public class LeftPanel extends javax.swing.JPanel {
             .addGroup(intPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(intPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(showLoadedButton, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+                    .addComponent(showLoadedButton, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
                     .addGroup(intPanelLayout.createSequentialGroup()
                         .addComponent(helpButton)
                         .addGap(35, 35, 35)
                         .addComponent(testButton)
                         .addGap(18, 18, 18)
-                        .addComponent(tresholdSpinner, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)))
+                        .addComponent(tresholdSpinner, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         intPanelLayout.setVerticalGroup(
@@ -247,9 +249,9 @@ public class LeftPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(netsActionsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
-            .addComponent(dataPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
-            .addComponent(intPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+            .addComponent(netsActionsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
+            .addComponent(dataPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
+            .addComponent(intPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -318,6 +320,13 @@ private void deleteVataButtonActionPerformed(java.awt.event.ActionEvent evt) {//
 
 private void testButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testButtonActionPerformed
     Stats.printStats();
+    DataLoadingErrorsJPanel errorsPanel = new DataLoadingErrorsJPanel();
+    JFrame frame = new JFrame("MCV plugin errors");
+
+    frame.setLocationRelativeTo(Cytoscape.getDesktop());
+    frame.add(errorsPanel);
+    frame.pack();
+    frame.setVisible(true);
 }//GEN-LAST:event_testButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
