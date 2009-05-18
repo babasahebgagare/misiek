@@ -3,6 +3,7 @@ package mcv.io.readers.tasks;
 import cytoscape.task.Task;
 import cytoscape.task.TaskMonitor;
 import cytoscape.task.ui.JTask;
+import errorsloger.MCVErrorsLogger;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedInputStream;
@@ -93,6 +94,16 @@ public abstract class MCVLoadTask implements Task {
         } else {
             Messenger.error(ex);
         }
+        MCVErrorsLogger.logMCVError(ex, "No message", "No source");
+    }
+
+    protected void sendErrorEvent(Exception ex, String msg, String source) {
+        if (errorListener != null) {
+            errorListener.errorOccured(new ErrorEvent(ex, this));
+        } else {
+            Messenger.error(ex);
+        }
+        MCVErrorsLogger.logMCVError(ex, msg, source);
     }
 
     protected void doneActionPerformed(Object source, int id, String command) {
