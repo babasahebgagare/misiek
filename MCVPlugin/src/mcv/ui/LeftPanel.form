@@ -24,9 +24,9 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="netsActionsPanel" alignment="0" pref="278" max="32767" attributes="3"/>
-          <Component id="dataPanel" alignment="0" pref="278" max="32767" attributes="3"/>
-          <Component id="intPanel" alignment="0" pref="278" max="32767" attributes="1"/>
+          <Component id="netsActionsPanel" alignment="0" pref="272" max="32767" attributes="3"/>
+          <Component id="dataPanel" alignment="0" pref="272" max="32767" attributes="3"/>
+          <Component id="intPanel" alignment="0" pref="272" max="32767" attributes="1"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -63,7 +63,7 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="updateDataButton" min="-2" pref="85" max="-2" attributes="1"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="deleteVataButton" pref="82" max="32767" attributes="1"/>
+                  <Component id="deleteVataButton" pref="76" max="32767" attributes="1"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -150,11 +150,11 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane1" alignment="0" pref="246" max="32767" attributes="1"/>
+                      <Component id="jScrollPane1" alignment="0" pref="240" max="32767" attributes="1"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="projectButton" min="-2" max="-2" attributes="1"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="showButton" pref="129" max="32767" attributes="1"/>
+                          <Component id="showButton" max="32767" attributes="1"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -231,13 +231,13 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="showLoadedButton" alignment="0" pref="254" max="32767" attributes="1"/>
+                      <Component id="showLoadedButton" alignment="0" pref="248" max="32767" attributes="1"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="helpButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                           <Component id="testButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="tresholdSpinner" pref="71" max="32767" attributes="1"/>
+                          <Component id="tresholdSpinner" pref="65" max="32767" attributes="1"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>

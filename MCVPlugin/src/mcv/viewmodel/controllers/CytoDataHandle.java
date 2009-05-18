@@ -1,13 +1,11 @@
 package mcv.viewmodel.controllers;
 
-import mcv.io.AbstractDataReader;
 import cytoscape.CyEdge;
 import cytoscape.CyNetwork;
 import cytoscape.Cytoscape;
 import cytoscape.view.CyNetworkView;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.TreeMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -155,12 +153,13 @@ public class CytoDataHandle {
         projections.remove(CytoID);
         networkIDMapper.deleteMapping(CytoID);
     }
-
+    /*
     public void updateCytoInteractions(CytoAbstractPPINetwork cytoNetwork, double treshold) {
-        deleteCytoscapeInteractions(cytoNetwork);
-        cytoNetwork.deleteCytoInteractions();
-        AbstractDataReader.getInstance().readInteractions(cytoNetwork, treshold);
+    deleteCytoscapeInteractions(cytoNetwork);
+    cytoNetwork.deleteCytoInteractions();
+    AbstractDataReader.getInstance().readInteractions(cytoNetwork, treshold);
     }
+     */
 
     public CytoGroupNode createCytoGroupNode(String groupNodeID, CytoProtein cytoProtein) {
         CytoGroupNode cytoGroupNode = new CytoGroupNode(groupNodeID, cytoProtein);

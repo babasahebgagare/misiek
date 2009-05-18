@@ -12,11 +12,12 @@ import javax.help.CSH;
 import javax.swing.JFileChooser;
 import javax.swing.tree.TreeModel;
 import mcv.help.MCVHelpBroker;
-import mcv.logicmodel.controllers.DataHandle;
+import mcv.io.listeners.SpeciesLoadingErrorsListener;
+import mcv.main.LoadedDataHandle;
 import mcv.main.PluginDataHandle;
-import mcv.ui.listeners.ProteinsLoadedListener;
 import mcv.ui.listeners.SpeciesLoadedListener;
 import mcv.utils.JTreeModelSpeciesGenerator;
+import org.jdesktop.swingx.error.ErrorEvent;
 
 /**
  *
@@ -38,12 +39,16 @@ public class SpeciesTreeLoaderPanel extends javax.swing.JPanel {
     }
 
     public void initState() {
-        DataHandle dh = PluginDataHandle.getDataHandle();
+        LoadedDataHandle dh = PluginDataHandle.getLoadedDataHandle();
         if (dh.speciesTreeLoaded()) {
             setLoadedState();
         } else {
             setUnloadedState();
         }
+    }
+
+    public void logSpeciesLoadingError(ErrorEvent errorEvent) {
+        errorLabel.setText(errorEvent.getThrowable().getMessage());
     }
 
     private void setFilenameLabel() {
@@ -87,6 +92,8 @@ public class SpeciesTreeLoaderPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         speciesTree = new javax.swing.JTree();
         helpButton = new javax.swing.JButton();
+        errorLabel = new javax.swing.JLabel();
+        cleanButton = new javax.swing.JButton();
 
         chooseFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/com.png"))); // NOI18N
         chooseFile.setText("Choose file");
@@ -123,6 +130,13 @@ public class SpeciesTreeLoaderPanel extends javax.swing.JPanel {
             }
         });
 
+        errorLabel.setForeground(new java.awt.Color(255, 0, 51));
+        errorLabel.setName("errorLabel"); // NOI18N
+
+        cleanButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/clean.png"))); // NOI18N
+        cleanButton.setText("Clean");
+        cleanButton.setName("cleanButton"); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -130,19 +144,18 @@ public class SpeciesTreeLoaderPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE)
-                        .addContainerGap())
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(chooseFile, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(loadTreeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
-                        .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(filenameLabel)
-                        .addContainerGap(442, Short.MAX_VALUE))))
+                        .addComponent(loadTreeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cleanButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                        .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(filenameLabel)
+                    .addComponent(errorLabel))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,12 +164,15 @@ public class SpeciesTreeLoaderPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(chooseFile, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(loadTreeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(helpButton))
+                    .addComponent(helpButton)
+                    .addComponent(cleanButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(filenameLabel)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(errorLabel)
+                .addGap(39, 39, 39))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -175,7 +191,9 @@ public class SpeciesTreeLoaderPanel extends javax.swing.JPanel {
 
     private void loadTreeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadTreeButtonActionPerformed
         if (filepath != null) {
-            UIController.getInstance().loadSpeciesTreeData(filepath);
+
+            SpeciesLoadingErrorsListener errorListener = new SpeciesLoadingErrorsListener(this);
+            DefaultLoadingController.loadSpeciesTreeData(filepath, errorListener);
             setLoadedState();
             list.actionPerformed(new ActionEvent(this, 1, "Species loaded"));
         }
@@ -188,6 +206,8 @@ public class SpeciesTreeLoaderPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton chooseFile;
+    private javax.swing.JButton cleanButton;
+    private javax.swing.JLabel errorLabel;
     private javax.swing.JLabel filenameLabel;
     private javax.swing.JButton helpButton;
     private javax.swing.JScrollPane jScrollPane1;

@@ -3,7 +3,7 @@ package mcv.io.parsers.rootparser;
 import java.awt.Color;
 import java.util.Collection;
 import java.util.HashSet;
-import mcv.io.parsers.ParserStruct;
+import mcv.io.parsers.SpeciesParserStruct;
 import mcv.logicmodel.controllers.DataHandle;
 import mcv.main.PluginDataHandle;
 import mcv.utils.ColorGenerator;
@@ -26,8 +26,8 @@ public class RootFamiliesTreeParser {
 
     }
 
-    private static ParserStruct extractSpaciesName(String treeString) {
-        ParserStruct struct = new ParserStruct();
+    private static SpeciesParserStruct extractSpaciesName(String treeString) {
+        SpeciesParserStruct struct = new SpeciesParserStruct();
 
         int lastBracket = treeString.lastIndexOf("]");
         if (lastBracket == -1) {
@@ -89,7 +89,7 @@ public class RootFamiliesTreeParser {
         DataHandle dh = PluginDataHandle.getDataHandle();
         Collection<String> spaciesInfo = readTreeSpaciesCollection(tree);
         for (String sp : spaciesInfo) {
-            ParserStruct struct = extractSpaciesName(sp);
+            SpeciesParserStruct struct = extractSpaciesName(sp);
 
             if (struct.getSubNodes() == null) {
             } else {

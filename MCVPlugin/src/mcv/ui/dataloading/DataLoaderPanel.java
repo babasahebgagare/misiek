@@ -8,6 +8,7 @@ package mcv.ui.dataloading;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import mcv.logicmodel.controllers.DataHandle;
+import mcv.main.LoadedDataHandle;
 import mcv.main.PluginDataHandle;
 import mcv.ui.listeners.InteractionsLoadedListener;
 import mcv.ui.listeners.ProteinsLoadedListener;
@@ -35,10 +36,10 @@ public class DataLoaderPanel extends javax.swing.JPanel {
     }
 
     private void setActiveTab() {
-        DataHandle dh = PluginDataHandle.getDataHandle();
-        if (dh.isProteinsLoaded()) {
+        LoadedDataHandle ldh = PluginDataHandle.getLoadedDataHandle();
+        if (ldh.isProteinsLoaded()) {
             this.getTabbedPane().setSelectedIndex(2);
-        } else if (dh.speciesTreeLoaded()) {
+        } else if (ldh.speciesTreeLoaded()) {
             this.getTabbedPane().setSelectedIndex(1);
         } else {
             this.getTabbedPane().setSelectedIndex(0);
@@ -84,9 +85,9 @@ public class DataLoaderPanel extends javax.swing.JPanel {
 
     public void enableTabs() {
 
-        DataHandle dh = PluginDataHandle.getDataHandle();
-        setEnableProteinsTab(dh.speciesTreeLoaded());
-        setEnableInteractionsTab(dh.isProteinsLoaded());
+        LoadedDataHandle ldh = PluginDataHandle.getLoadedDataHandle();
+        setEnableProteinsTab(ldh.speciesTreeLoaded());
+        setEnableInteractionsTab(ldh.isProteinsLoaded());
     }
 
     public JTabbedPane getTabbedPane() {
@@ -110,9 +111,7 @@ public class DataLoaderPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(tabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 554, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(tabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

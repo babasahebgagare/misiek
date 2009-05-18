@@ -14,10 +14,10 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import javax.swing.DefaultListModel;
 import javax.swing.SwingConstants;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
+import mcv.io.listeners.SpeciesLoadingErrorsListener;
 import mcv.viewmodel.controllers.CytoDataHandle;
 import mcv.logicmodel.controllers.DataHandle;
 import mcv.logicmodel.controllers.NetworksConverter;
@@ -29,8 +29,6 @@ import mcv.main.LoadedDataHandle;
 import mcv.main.PluginDataHandle;
 import mcv.utils.JTreeModelSpeciesGenerator;
 import mcv.utils.Messenger;
-import mcv.viewmodel.controllers.CytoInteractionsConverter;
-import mcv.viewmodel.controllers.CytoVisualHandle;
 
 public class DefaultUIController extends UIController {
 
@@ -63,10 +61,10 @@ public class DefaultUIController extends UIController {
     private void deleteDataView() {
         deleteTreeDataView();
         deleteColorListDataView();
-        refreshUIafterDeleteData();
+        PluginMenusHandle.refreshUIafterDeleteData();
     }
 
-    private void initDataView() {
+    public void initDataView() {
         initTreeDataView();
         initColorListDataView();
     }
@@ -164,16 +162,6 @@ public class DefaultUIController extends UIController {
     }
 
     @Override
-    public void initButtonsState() {
-        PluginMenusHandle.getShowNetworkButton().setEnabled(false);
-        PluginMenusHandle.getDoProjectionButton().setEnabled(false);
-        PluginMenusHandle.getShowLoadedInteractionsButton().setEnabled(false);
-        PluginMenusHandle.getDoProjectionButton().setEnabled(false);
-        PluginMenusHandle.getNewDataButton().setEnabled(true);
-        PluginMenusHandle.getUpdateDataButton().setEnabled(false);
-    }
-
-    @Override
     public void showSelectedNetworks() {
         Collection<PPINetwork> networks = UIController.getInstance().getSelectedNetworks();
         if (networks.size() > 0) {
@@ -182,12 +170,6 @@ public class DefaultUIController extends UIController {
         } else {
             Messenger.message("Select networks to show in species tree.");
         }
-    }
-
-    @Override
-    public void loadAllInteractions(double treshold) {
-        AbstractDataReader.getInstance().readAllInteractions(treshold);
-        PluginMenusHandle.getShowLoadedInteractionsButton().setEnabled(true);
     }
 
     @Override
@@ -202,76 +184,6 @@ public class DefaultUIController extends UIController {
         } else {
             Messenger.message("You have to open some network view.");
         }
-    }
-
-    @Override
-    public void loadInteractionsForCurrentNetwork(double treshold) {
-        CytoDataHandle cdh = PluginDataHandle.getCytoDataHandle();
-
-        CyNetworkView cyNetworkView = Cytoscape.getCurrentNetworkView();
-
-        CytoAbstractPPINetwork cytoNetwork = cdh.tryFindNetworkByCytoID(cyNetworkView.getIdentifier());
-
-        cdh.updateCytoInteractions(cytoNetwork, treshold);
-
-        CytoInteractionsConverter.convertCytoNetworkInteractions(cyNetworkView.getNetwork(), cytoNetwork.getCytoInteractions());
-
-        CytoVisualHandle.applyVisualStyleForNetwork(cyNetworkView);
-    }
-
-    @Override
-    public void loadAllInteractions(Map<String, Double> tresholds) {
-        AbstractDataReader.getInstance().readAllInteractions(tresholds);
-        PluginMenusHandle.getShowLoadedInteractionsButton().setEnabled(true);
-    }
-
-    @Override
-    public void loadSpeciesTreeData(String filepath) {
-        //PluginDataHandle.refreshPluginDataHandle();
-        AbstractDataReader.getInstance().setFilepath(filepath);
-        AbstractDataReader.getInstance().readSpecies();
-
-        //ProjectorInfoCalculator.calculateProjectorInfo();
-        initDataView();
-
-    /* PluginMenusHandle.getLoadDataButton().setEnabled(true);
-    PluginMenusHandle.getShowNetworkButton().setEnabled(true);
-    PluginMenusHandle.getLoadAllInteractionsButton().setEnabled(true);
-    PluginMenusHandle.getLoadDataButton().setEnabled(false);
-    PluginMenusHandle.getDeleteAllDataButton().setEnabled(true);*/
-    }
-
-    @Override
-    public void loadGenesTreeData(String filepath) {
-        AbstractDataReader.getInstance().setFilepath(filepath);
-        AbstractDataReader.getInstance().readTrees();
-
-        ProjectorInfoCalculator.calculateProjectorInfo();
-        initDataView();
-    }
-
-    public void refreshUIafterDeleteData() {
-        PluginMenusHandle.getUpdateDataButton().setEnabled(false);
-        PluginMenusHandle.getShowNetworkButton().setEnabled(false);
-        PluginMenusHandle.getNewDataButton().setEnabled(true);
-        PluginMenusHandle.getDoProjectionButton().setEnabled(false);
-        PluginMenusHandle.getShowLoadedInteractionsButton().setEnabled(false);
-        PluginMenusHandle.getDeleteDataButton().setEnabled(false);
-    }
-
-    @Override
-    public void refreshUIafterProteinsLoading() {
-        PluginMenusHandle.getUpdateDataButton().setEnabled(true);
-        PluginMenusHandle.getShowNetworkButton().setEnabled(true);
-        PluginMenusHandle.getNewDataButton().setEnabled(true);
-        PluginMenusHandle.getShowLoadedInteractionsButton().setEnabled(true);
-    }
-
-    @Override
-    public void refreshUIafterSpeciesLoading() {
-        PluginMenusHandle.getNewDataButton().setEnabled(true);
-        PluginMenusHandle.getUpdateDataButton().setEnabled(true);
-        PluginMenusHandle.getDeleteDataButton().setEnabled(true);
     }
 
     @Override
@@ -303,14 +215,4 @@ public class DefaultUIController extends UIController {
         panel.setSelectedIndex(index);
     }
 
-    @Override
-    public void deleteAllInteractions() {
-        DataHandle dh = PluginDataHandle.getDataHandle();
-        LoadedDataHandle ldh = PluginDataHandle.getLoadedDataHandle();
-        ldh.deleteAll();
-        for (PPINetwork network : dh.getNetworks().values()) {
-            network.deleteAllInteractions();
-        }
-
-    }
 }

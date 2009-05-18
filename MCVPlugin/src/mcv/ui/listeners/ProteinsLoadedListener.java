@@ -2,9 +2,9 @@ package mcv.ui.listeners;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import mcv.ui.PluginMenusHandle;
 import mcv.ui.dataloading.DataLoaderPanel;
 import mcv.ui.dataloading.InteractionsLoaderPanel;
-import mcv.ui.UIController;
 
 /**
  *
@@ -25,6 +25,6 @@ public class ProteinsLoadedListener implements ActionListener {
         this.intPanel.initSpeciesList();
         this.intPanel.initSpeciesListForOneFile();
         panel.setParentFrameOnTop();
-        UIController.getInstance().refreshUIafterProteinsLoading();
+        PluginMenusHandle.refreshUIafterProteinsLoading();
     }
 }

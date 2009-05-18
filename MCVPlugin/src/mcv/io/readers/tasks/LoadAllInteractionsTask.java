@@ -1,5 +1,6 @@
 package mcv.io.readers.tasks;
 
+import mcv.io.exceptions.InteractionsFileFormatException;
 import mcv.io.parsers.defaultparser.DefaultInteractionsParser;
 import cytoscape.task.Task;
 import cytoscape.task.TaskMonitor;
@@ -9,24 +10,25 @@ import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import mcv.io.parsers.InteractionParserStruct;
 import mcv.logicmodel.controllers.DataHandle;
 import mcv.logicmodel.structs.PPINetwork;
 import mcv.main.PluginDataHandle;
 import mcv.utils.IDCreator;
 import mcv.utils.MemoLogger;
+import org.jdesktop.swingx.error.ErrorListener;
 
 public class LoadAllInteractionsTask implements Task {
 
     private TaskMonitor taskMonitor = null;
     private Thread myThread = null;
     private Map<String, Double> tresholds;
-    private File file;
+    private String filepath;
     private long max;
     private long current;
     private FileInputStream fis = null;
@@ -35,19 +37,16 @@ public class LoadAllInteractionsTask implements Task {
     private BufferedReader br = null;
     private int created = 0;
     private int all = 0;
+    private ErrorListener errorListener = null;
 
     LoadAllInteractionsTask(String intpath, Map<String, Double> tresholds) {
         this.tresholds = tresholds;
-        this.file = new File(intpath);
-        this.max = file.length();
+        this.filepath = intpath;
     }
-    /*
-    LoadAllInteractionsTask(String intpath, double treshold) {
-    this.treshold = treshold;
-    this.file = new File(intpath);
-    this.max = file.length();
+
+    public void setErrorListener(ErrorListener errorListener) {
+        this.errorListener = errorListener;
     }
-     */
 
     public void run() {
         DataHandle dh = PluginDataHandle.getDataHandle();
@@ -57,6 +56,8 @@ public class LoadAllInteractionsTask implements Task {
             myThread = Thread.currentThread();
             taskMonitor.setStatus("Interactions loading...");
             taskMonitor.setPercentCompleted(-1);
+            File file = new File(filepath);
+            max = file.length();
             fis = new FileInputStream(file);
             bis = new BufferedInputStream(fis);
             dis = new DataInputStream(bis);
@@ -64,21 +65,27 @@ public class LoadAllInteractionsTask implements Task {
             taskMonitor.setPercentCompleted(0);
             while (br.ready()) {
                 all++;
-                String SourceID = DefaultInteractionsParser.readWord(br);
-                String TargetID = DefaultInteractionsParser.readWord(br);
-                Double probability = Double.parseDouble(DefaultInteractionsParser.readWord(br));
-                String EdgeID = IDCreator.createInteractionID(SourceID, TargetID);
-                PPINetwork netOrNull = dh.tryFindPPINetworkByProteinID(SourceID);
+                InteractionParserStruct interaction = null;
+                try {
+                    interaction = DefaultInteractionsParser.readInteraction(br);
 
-                if (netOrNull != null) {
-                    if (tresholds.containsKey(netOrNull.getID())) {
-                        Double treshold = tresholds.get(netOrNull.getID());
+                    String SourceID = interaction.getFrom();
+                    String TargetID = interaction.getTo();
+                    Double probability = interaction.getSim();
+                    String EdgeID = IDCreator.createInteractionID(SourceID, TargetID);
+                    PPINetwork netOrNull = dh.tryFindPPINetworkByProteinID(SourceID);
 
-                        if (treshold == null || probability > treshold) {
-                            created++;
-                            dh.createInteraction(EdgeID, SourceID, TargetID, probability);
+                    if (netOrNull != null) {
+                        if (tresholds.containsKey(netOrNull.getID())) {
+                            Double treshold = tresholds.get(netOrNull.getID());
+
+                            if (treshold == null || probability > treshold) {
+                                created++;
+                                dh.createInteraction(EdgeID, SourceID, TargetID, probability);
+                            }
                         }
                     }
+                } catch (InteractionsFileFormatException ex) {
                 }
                 current = fis.getChannel().position();
                 percent = current * 100 / (float) max;

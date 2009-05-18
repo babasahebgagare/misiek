@@ -99,4 +99,35 @@ public class PluginMenusHandle {
     public static void setFamiliesColorListPanel(SpeciesFamilyColorPanel familiesColorListPanel) {
         PluginMenusHandle.familiesColorListPanel = familiesColorListPanel;
     }
+
+    public static void initButtonsState() {
+        getShowNetworkButton().setEnabled(false);
+        getDoProjectionButton().setEnabled(false);
+        getShowLoadedInteractionsButton().setEnabled(false);
+        getDoProjectionButton().setEnabled(false);
+        getNewDataButton().setEnabled(true);
+        getUpdateDataButton().setEnabled(false);
+    }
+
+    public static void refreshUIafterDeleteData() {
+        PluginMenusHandle.getUpdateDataButton().setEnabled(false);
+        PluginMenusHandle.getShowNetworkButton().setEnabled(false);
+        PluginMenusHandle.getNewDataButton().setEnabled(true);
+        PluginMenusHandle.getDoProjectionButton().setEnabled(false);
+        PluginMenusHandle.getShowLoadedInteractionsButton().setEnabled(false);
+        PluginMenusHandle.getDeleteDataButton().setEnabled(false);
+    }
+
+    public static void refreshUIafterProteinsLoading() {
+        PluginMenusHandle.getUpdateDataButton().setEnabled(true);
+        PluginMenusHandle.getShowNetworkButton().setEnabled(true);
+        PluginMenusHandle.getNewDataButton().setEnabled(true);
+        PluginMenusHandle.getShowLoadedInteractionsButton().setEnabled(true);
+    }
+
+    public static void refreshUIafterSpeciesLoading() {
+        PluginMenusHandle.getNewDataButton().setEnabled(true);
+        PluginMenusHandle.getUpdateDataButton().setEnabled(true);
+        PluginMenusHandle.getDeleteDataButton().setEnabled(true);
+    }
 }

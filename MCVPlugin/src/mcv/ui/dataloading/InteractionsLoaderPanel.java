@@ -19,6 +19,7 @@ import java.util.Vector;
 import javax.help.CSH;
 import javax.swing.JFileChooser;
 import mcv.help.MCVHelpBroker;
+import mcv.io.listeners.InteractionsLoadingErrorsListener;
 import mcv.logicmodel.controllers.DataHandle;
 import mcv.logicmodel.structs.Interaction;
 import mcv.logicmodel.structs.PPINetwork;
@@ -54,7 +55,6 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
         jScrollPane2 = new javax.swing.JScrollPane();
         loadButton = new javax.swing.JButton();
         infoButton = new javax.swing.JButton();
@@ -205,8 +205,9 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     public void initSpeciesListForOneFile() {
+        LoadedDataHandle ldh = PluginDataHandle.getLoadedDataHandle();
         DataHandle dh = PluginDataHandle.getDataHandle();
-        if (!dh.isProteinsLoaded()) {
+        if (!ldh.isProteinsLoaded()) {
             return;
         }
         oneFileLoadingPanel.setLayout(new GridLayout(dh.getNetworks().keySet().size(), 1));
@@ -225,7 +226,7 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
     }
 
     private void refreshSpeciesList() {
-        DataHandle dh = PluginDataHandle.getDataHandle();
+        LoadedDataHandle dh = PluginDataHandle.getLoadedDataHandle();
         if (!dh.isProteinsLoaded()) {
             return;
         }
@@ -237,7 +238,7 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
     }
 
     private void refreshSpeciesListForOneFile() {
-        DataHandle dh = PluginDataHandle.getDataHandle();
+        LoadedDataHandle dh = PluginDataHandle.getLoadedDataHandle();
         if (!dh.isProteinsLoaded()) {
             return;
         }
@@ -291,8 +292,9 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
     }
 
     public void initSpeciesList() {
+        LoadedDataHandle ldh = PluginDataHandle.getLoadedDataHandle();
         DataHandle dh = PluginDataHandle.getDataHandle();
-        if (!dh.isProteinsLoaded()) {
+        if (!ldh.isProteinsLoaded()) {
             return;
         }
 
@@ -321,7 +323,7 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_infoButtonActionPerformed
 
     private void cleanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cleanButtonActionPerformed
-        UIController.getInstance().deleteAllInteractions();
+        DefaultLoadingController.deleteAllInteractions();
         refreshLoadingUI();
         setBothTabEnabled();
     }//GEN-LAST:event_cleanButtonActionPerformed
@@ -338,7 +340,6 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_chooseOneFileButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton chooseOneFileButton;
     private javax.swing.JButton cleanButton;
     private javax.swing.JButton infoButton;
@@ -354,18 +355,19 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void readAISpeciesInteractions(PPINetwork network, String filepath, Double treshold, Double oldTreshold) {
+        InteractionsLoadingErrorsListener errorListener = new InteractionsLoadingErrorsListener();
 
         if (treshold == null && oldTreshold == null) {
             return;
         } else if (treshold == null && oldTreshold != null) {
             network.deleteAllInteractions();
-            AbstractDataReader.getInstance().readSpeciesInteractions(network, filepath, treshold);
+            AbstractDataReader.getInstance().readSpeciesInteractions(network, filepath, treshold, errorListener);
         } else if (treshold != null && oldTreshold == null) {
             network.deleteAllInteractions();
-            AbstractDataReader.getInstance().readSpeciesInteractions(network, filepath, treshold);
+            AbstractDataReader.getInstance().readSpeciesInteractions(network, filepath, treshold, errorListener);
         } else if (treshold < oldTreshold) {
             network.deleteAllInteractions();
-            AbstractDataReader.getInstance().readSpeciesInteractions(network, filepath, treshold);
+            AbstractDataReader.getInstance().readSpeciesInteractions(network, filepath, treshold, errorListener);
         } else if (treshold > oldTreshold) {
             Collection<Interaction> intBackup = new HashSet<Interaction>(network.getInteractions().values());
             for (Interaction inter : intBackup) {
@@ -401,6 +403,7 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
 
     private void updateFromOneFile() {
         if (onefilepath != null) {
+            InteractionsLoadingErrorsListener errorListener = new InteractionsLoadingErrorsListener();
             Map<String, Double> tresholds = new TreeMap<String, Double>();
             PluginDataHandle.getLoadedDataHandle().setOneInteractionFilename(onefilepath);
             for (OneFileSpeciesInteractionsLoaderPanel oneFileSpeciesPanel : oneFilePanels) {
@@ -416,8 +419,7 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
                 }
             }
             AbstractDataReader reader = AbstractDataReader.getInstance();
-            reader.setFilepath(onefilepath);
-            reader.readAllInteractions(tresholds);
+            reader.readAllInteractions(onefilepath, tresholds, errorListener);
             list.actionPerformed(new ActionEvent(this, 3, "Interactions loaded"));
         }
     }
@@ -433,8 +435,9 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
             readAISpeciesInteractions(network, filename, tresholdOrNull, oldTresholdOrNull);
         //       AbstractDataReader.getInstance().readAISpeciesInteractions(network, filename, tresholdOrNull, oldTresholdOrNull);
         } else {
+            InteractionsLoadingErrorsListener errorListener = new InteractionsLoadingErrorsListener();
             ldh.addInteractionData(speciesName, filename, tresholdOrNull);
-            AbstractDataReader.getInstance().readSpeciesInteractions(network, filename, tresholdOrNull);
+            AbstractDataReader.getInstance().readSpeciesInteractions(network, filename, tresholdOrNull, errorListener);
         }
     }
 }

@@ -2,10 +2,8 @@ package mcv.io.parsers.defaultparser;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import mcv.main.PluginDataHandle;
-import mcv.viewmodel.controllers.CytoDataHandle;
-import mcv.viewmodel.structs.CytoAbstractPPINetwork;
-import mcv.utils.IDCreator;
+import mcv.io.exceptions.InteractionsFileFormatException;
+import mcv.io.parsers.InteractionParserStruct;
 
 /**
  *
@@ -13,63 +11,20 @@ import mcv.utils.IDCreator;
  */
 public class DefaultInteractionsParser {
 
-    public static void eatWhiteSpace(BufferedReader br) {
-        int ch;
+    public static InteractionParserStruct readInteraction(BufferedReader br) throws IOException, InteractionsFileFormatException {
+
+        String line = br.readLine();
+        String[] tokens = line.split("\\s+");
+        if (tokens.length != 3) {
+            throw new InteractionsFileFormatException(line, 0);
+        }
+        Double sim;
 
         try {
-            for (;;) {
-                br.mark(1);          // set mark in buffer
-                ch = br.read();      // read a char
-                if (ch < 1) // if EOF, quit
-                {
-                    break;
-                }
-                if (!java.lang.Character.isWhitespace((char) ch)) {
-                    br.reset();        // if non-WS, move back to mark & quit
-                    break;
-                }
-            }
-        } catch (IOException e) {
-            System.out.println(e);
+            sim = Double.valueOf(tokens[2]);
+        } catch (NumberFormatException e) {
+            throw new InteractionsFileFormatException(line, 0);
         }
-    }
-
-    public static String readWord(BufferedReader br) {
-        int ch;                        // input variable
-        StringBuffer myValue = new StringBuffer("");           // myValue is initially empty
-
-        eatWhiteSpace(br);               // eat leading white space
-
-        try {
-            for (;;) {
-                ch = br.read();      // read a char
-                if (ch < 1 || java.lang.Character.isWhitespace((char) ch)) {
-                    break;                   // break for eof or white space
-                }
-                myValue.append((char) ch);      // append it to myValue
-            }
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-
-        return myValue.toString();
-    }
-
-    public static void readInteractions(BufferedReader br, CytoAbstractPPINetwork cytoNetwork, double treshold) throws IOException {
-        CytoDataHandle cdh = PluginDataHandle.getCytoDataHandle();
-
-        while (br.ready()) {
-
-            String SourceID = readWord(br);
-            String TargetID = readWord(br);
-            String EdgeID = IDCreator.createInteractionID(SourceID, TargetID);
-
-            Double Probability = Double.parseDouble(readWord(br));
-
-            if (Probability.doubleValue() >= treshold && cytoNetwork.containsCytoProtein(SourceID) && cytoNetwork.containsCytoProtein(TargetID)) {
-                cdh.createCytoInteraction(EdgeID, SourceID, TargetID, Probability, cytoNetwork);
-            }
-
-        }
+        return new InteractionParserStruct(tokens[0], tokens[1], sim);
     }
 }

@@ -13,18 +13,22 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import mcv.io.exceptions.InteractionsFileFormatException;
+import mcv.io.parsers.InteractionParserStruct;
 import mcv.logicmodel.controllers.DataHandle;
 import mcv.logicmodel.structs.PPINetwork;
 import mcv.main.PluginDataHandle;
 import mcv.utils.IDCreator;
 import mcv.utils.MemoLogger;
+import org.jdesktop.swingx.error.ErrorEvent;
+import org.jdesktop.swingx.error.ErrorListener;
 
 public class LoadSpeciesInteractionsTask implements Task {
 
     private TaskMonitor taskMonitor = null;
     private Thread myThread = null;
     private Double treshold;
-    private File file;
+    private String filepath;
     private long max;
     private long current;
     private FileInputStream fis = null;
@@ -35,12 +39,16 @@ public class LoadSpeciesInteractionsTask implements Task {
     private int all = 0;
     private int count = 0;
     private PPINetwork network;
+    private ErrorListener errorListener = null;
 
     LoadSpeciesInteractionsTask(String filepath, PPINetwork network, Double treshold) {
         this.network = network;
         this.treshold = treshold;
-        this.file = new File(filepath);
-        this.max = file.length();
+        this.filepath = filepath;
+    }
+
+    public void setErrorListener(ErrorListener errorListener) {
+        this.errorListener = errorListener;
     }
 
     public void run() {
@@ -51,6 +59,8 @@ public class LoadSpeciesInteractionsTask implements Task {
             myThread = Thread.currentThread();
             taskMonitor.setStatus("Interactions loading for: " + network.getID());
             taskMonitor.setPercentCompleted(-1);
+            File file = new File(filepath);
+            this.max = file.length();
             fis = new FileInputStream(file);
             bis = new BufferedInputStream(fis);
             dis = new DataInputStream(bis);
@@ -58,22 +68,28 @@ public class LoadSpeciesInteractionsTask implements Task {
             taskMonitor.setPercentCompleted(0);
             while (br.ready()) {
                 all++;
-                String SourceID = DefaultInteractionsParser.readWord(br);
-                String TargetID = DefaultInteractionsParser.readWord(br);
-                String EdgeID = IDCreator.createInteractionID(SourceID, TargetID);
+                InteractionParserStruct interaction = null;
+                try {
+                    interaction = DefaultInteractionsParser.readInteraction(br);
 
-                Double probability = Double.parseDouble(DefaultInteractionsParser.readWord(br));
+                    String SourceID = interaction.getFrom();
+                    String TargetID = interaction.getTo();
+                    Double probability = interaction.getSim();
+                    String EdgeID = IDCreator.createInteractionID(SourceID, TargetID);
 
-                if (treshold == null || probability > treshold) {
-                    created++;
-                    if (network.containsProtein(TargetID) && network.containsProtein(SourceID)) {
-                        dh.createInteraction(EdgeID, SourceID, TargetID, probability, network);
-                        count++;
-                    } else {
-                        System.out.println("BLAD: " + TargetID + " " + SourceID);
+                    if (treshold == null || probability > treshold) {
+                        created++;
+                        if (network.containsProtein(TargetID) && network.containsProtein(SourceID)) {
+                            dh.createInteraction(EdgeID, SourceID, TargetID, probability, network);
+                            count++;
+                        } else {
+                            System.out.println("BLAD: " + TargetID + " " + SourceID);
+                        }
                     }
-                }
 
+                } catch (InteractionsFileFormatException e) {
+                    errorListener.errorOccured(new ErrorEvent(e, "1221221"));
+                }
                 current = fis.getChannel().position();
                 percent = current * 100 / (float) max;
                 if (percent > last_percent + 1) {

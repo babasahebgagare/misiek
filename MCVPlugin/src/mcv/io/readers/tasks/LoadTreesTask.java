@@ -1,5 +1,6 @@
 package mcv.io.readers.tasks;
 
+import mcv.io.exceptions.FamiliesTreeFormatException;
 import mcv.io.parsers.DataParser;
 import cytoscape.task.Task;
 import cytoscape.task.TaskMonitor;
@@ -13,13 +14,17 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import mcv.main.LoadedDataHandle;
 import mcv.main.PluginDataHandle;
+import org.jdesktop.swingx.error.ErrorEvent;
+import org.jdesktop.swingx.error.ErrorListener;
 
 public class LoadTreesTask implements Task {
 
     private TaskMonitor taskMonitor = null;
     private Thread myThread = null;
-    private File file;
+    private String filepath;
+    private ErrorListener errorListener = null;
     private long max;
     private long current;
     private FileInputStream fis = null;
@@ -28,9 +33,12 @@ public class LoadTreesTask implements Task {
     private BufferedReader br = null;
 
     public LoadTreesTask(String treespath) {
-        this.file = new File(treespath);
-        this.max = file.length();
+        this.filepath = treespath;
 
+    }
+
+    public void setErrorListener(ErrorListener errorListener) {
+        this.errorListener = errorListener;
     }
 
     public void run() {
@@ -38,6 +46,8 @@ public class LoadTreesTask implements Task {
             myThread = Thread.currentThread();
             taskMonitor.setStatus("Loading proteins data...");
             taskMonitor.setPercentCompleted(-1);
+            File file = new File(filepath);
+            max = file.length();
             fis = new FileInputStream(file);
             bis = new BufferedInputStream(fis);
             dis = new DataInputStream(bis);
@@ -49,21 +59,29 @@ public class LoadTreesTask implements Task {
                 if (line != null && !line.equals("")) {
                     String[] families = line.split(";");
                     for (String family : families) {
-                        DataParser.getInstance().readAllTreeString(family);
+                        try {
+                            DataParser.getInstance().readFamiliesTreeString(family);
+                        } catch (FamiliesTreeFormatException ex) {
+                            if (errorListener != null) {
+                                errorListener.errorOccured(new ErrorEvent(ex, this));
+                            }
+                        }
                     }
                     current = fis.getChannel().position();
                     float percent = current * 100 / (float) max;
                     taskMonitor.setPercentCompleted(Math.round(percent));
                 }
             }
-            PluginDataHandle.getDataHandle().setProteinsLoaded(true);
+            PluginDataHandle.getLoadedDataHandle().setProteinsLoaded(true);
             taskMonitor.setPercentCompleted(100);
             br.close();
             dis.close();
             bis.close();
             fis.close();
         } catch (IOException ex) {
-            Logger.getLogger(LoadTreesTask.class.getName()).log(Level.SEVERE, null, ex);
+            if (errorListener != null) {
+                errorListener.errorOccured(new ErrorEvent(ex, this));
+            }
         }
 
     }
