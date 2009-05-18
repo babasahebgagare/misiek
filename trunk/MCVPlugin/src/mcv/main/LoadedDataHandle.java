@@ -2,6 +2,7 @@ package mcv.main;
 
 import java.util.Map;
 import java.util.TreeMap;
+import mcv.logicmodel.controllers.DataHandle;
 
 /**
  *
@@ -13,6 +14,16 @@ public class LoadedDataHandle {
     private Map<String, Double> interactionsTresholds = new TreeMap<String, Double>();
     private String oneInteractionFilename;
     private boolean manyFilesLoaded;
+    private boolean proteinsLoaded;
+
+    public boolean speciesTreeLoaded() {
+        DataHandle dh = PluginDataHandle.getDataHandle();
+        if (dh.getRootNetwork() != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public void addInteractionOneFileData(String speciesName, Double tresholdOrNull) {
         interactionsTresholds.put(speciesName, tresholdOrNull);
@@ -66,7 +77,16 @@ public class LoadedDataHandle {
     }
 
     public LoadedDataHandle() {
+        this.proteinsLoaded = false;
         deleteAll();
+    }
+
+    public boolean isProteinsLoaded() {
+        return this.proteinsLoaded;
+    }
+
+    public void setProteinsLoaded(boolean proteinsLoaded) {
+        this.proteinsLoaded = proteinsLoaded;
     }
 
     public void deleteAll() {

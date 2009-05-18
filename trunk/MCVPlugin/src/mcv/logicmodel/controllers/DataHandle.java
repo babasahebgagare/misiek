@@ -16,27 +16,6 @@ public class DataHandle {
     private Map<String, PPINetwork> networks = new HashMap<String, PPINetwork>();
     private Map<String, Family> families = new HashMap<String, Family>();
     private PPINetwork rootNetwork;
-    private boolean proteinsLoaded;
-
-    public DataHandle() {
-        this.proteinsLoaded = false;
-    }
-
-    public boolean speciesTreeLoaded() {
-        if (rootNetwork != null) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public boolean isProteinsLoaded() {
-        return this.proteinsLoaded;
-    }
-
-    public void setProteinsLoaded(boolean proteinsLoaded) {
-        this.proteinsLoaded = proteinsLoaded;
-    }
 
     public PPINetwork tryFindPPINetworkByProteinID(String sourceID) {
         for (PPINetwork network : networks.values()) {

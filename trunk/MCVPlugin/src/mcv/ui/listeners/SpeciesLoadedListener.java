@@ -2,8 +2,8 @@ package mcv.ui.listeners;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import mcv.ui.PluginMenusHandle;
 import mcv.ui.dataloading.DataLoaderPanel;
-import mcv.ui.UIController;
 
 /**
  *
@@ -19,7 +19,7 @@ public class SpeciesLoadedListener implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         this.panel.enableTabs();
-        UIController.getInstance().refreshUIafterSpeciesLoading();
+        PluginMenusHandle.refreshUIafterSpeciesLoading();
         panel.refreshStats();
     }
 }

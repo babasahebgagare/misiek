@@ -37,7 +37,7 @@ public class LeftPanel extends javax.swing.JPanel {
         PluginMenusHandle.setShowLoadedInteractionsButton(showLoadedButton);
         PluginMenusHandle.setNewDataButton(newDataButton);
         PluginMenusHandle.setDeleteDataButton(deleteVataButton);
-        UIController.getInstance().initButtonsState();
+        PluginMenusHandle.initButtonsState();
     }
 
     /*
@@ -292,7 +292,7 @@ private void showLoadedButtonActionPerformed(java.awt.event.ActionEvent evt) {//
 
 private void newDataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newDataButtonActionPerformed
 
-    if (PluginDataHandle.getDataHandle().speciesTreeLoaded()) {
+    if (PluginDataHandle.getLoadedDataHandle().speciesTreeLoaded()) {
         int ret = Messenger.confirmWarning("All loaded data will be deleted, are you sure?");
         if (ret == JOptionPane.OK_OPTION) {
             UIController.getInstance().newData();
@@ -308,7 +308,7 @@ private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 }//GEN-LAST:event_helpButtonActionPerformed
 
 private void deleteVataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteVataButtonActionPerformed
-    if (PluginDataHandle.getDataHandle().speciesTreeLoaded()) {
+    if (PluginDataHandle.getLoadedDataHandle().speciesTreeLoaded()) {
         int ret = Messenger.confirmWarning("All loaded data will be deleted, are you sure?");
         if (ret == JOptionPane.OK_OPTION) {
             UIController.getInstance().deleteData();

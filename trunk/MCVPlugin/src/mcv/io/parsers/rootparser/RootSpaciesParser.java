@@ -2,15 +2,16 @@ package mcv.io.parsers.rootparser;
 
 import java.util.Collection;
 import java.util.HashSet;
-import mcv.io.parsers.ParserStruct;
+import mcv.io.exceptions.SpeciesTreeFormatException;
+import mcv.io.parsers.SpeciesParserStruct;
 import mcv.logicmodel.controllers.DataHandle;
 import mcv.main.PluginDataHandle;
 
 public class RootSpaciesParser {
 
-    public static void readSpaciesString(String treeString, String parent) {
+    public static void readSpaciesString(String treeString, String parent) throws SpeciesTreeFormatException {
         DataHandle dh = PluginDataHandle.getDataHandle();
-        ParserStruct struct = extractNodeName(treeString);
+        SpeciesParserStruct struct = extractNodeName(treeString);
         dh.createPPINetwork(struct.getNodeName(), parent);
 
         if (struct.getSubNodes() == null) {
@@ -19,11 +20,10 @@ public class RootSpaciesParser {
                 readSpaciesString(subNode, struct.getNodeName());
             }
         }
-
     }
 
-    private static ParserStruct extractNodeName(String treeString) {
-        ParserStruct struct = new ParserStruct();
+    private static SpeciesParserStruct extractNodeName(String treeString) throws SpeciesTreeFormatException {
+        SpeciesParserStruct struct = new SpeciesParserStruct();
 
         int lastBracket = treeString.lastIndexOf(")");
         if (lastBracket == -1) {
@@ -37,7 +37,7 @@ public class RootSpaciesParser {
         return struct;
     }
 
-    private static Collection<String> extractSubNodes(String substring) {
+    private static Collection<String> extractSubNodes(String substring) throws SpeciesTreeFormatException {
         Collection<String> ret = new HashSet<String>();
         String speciesName;
 
@@ -54,6 +54,9 @@ public class RootSpaciesParser {
                 ret.add(speciesName);
                 lastIndex = i + 1;
             }
+        }
+        if (count != 0) {
+            throw new SpeciesTreeFormatException("Parsing tree node, problem with brackets: " + substring, lastIndex);
         }
         speciesName = substring.substring(lastIndex, substring.length()).trim();
         ret.add(speciesName);

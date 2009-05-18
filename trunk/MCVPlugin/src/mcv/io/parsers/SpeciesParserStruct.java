@@ -2,7 +2,7 @@ package mcv.io.parsers;
 
 import java.util.Collection;
 
-public class ParserStruct {
+public class SpeciesParserStruct {
 
     private String nodeName;
     private Collection<String> subNodes;
