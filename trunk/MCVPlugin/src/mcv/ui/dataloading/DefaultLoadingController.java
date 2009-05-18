@@ -1,6 +1,8 @@
 package mcv.ui.dataloading;
 
+import cytoscape.Cytoscape;
 import java.util.Map;
+import javax.swing.JFrame;
 import mcv.io.AbstractDataReader;
 import mcv.io.listeners.FamiliesLoadingErrorsListener;
 import mcv.io.listeners.InteractionsLoadingErrorsListener;
@@ -50,5 +52,15 @@ public class DefaultLoadingController {
         AbstractDataReader.getInstance().readSpeciesTree(filepath, errorListener);
 
         UIController.getInstance().initDataView();
+    }
+
+    public static void showMCVLogsPanel() {
+        DataLoadingErrorsJPanel errorsPanel = new DataLoadingErrorsJPanel();
+        JFrame frame = new JFrame("MCV plugin errors");
+
+        frame.add(errorsPanel);
+        frame.pack();
+        frame.setLocationRelativeTo(Cytoscape.getDesktop());
+        frame.setVisible(true);
     }
 }

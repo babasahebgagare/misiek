@@ -1,5 +1,6 @@
 package mcv.io.listeners;
 
+import mcv.ui.dataloading.DataLoaderPanel;
 import org.jdesktop.swingx.error.ErrorEvent;
 import org.jdesktop.swingx.error.ErrorListener;
 
@@ -9,10 +10,14 @@ import org.jdesktop.swingx.error.ErrorListener;
  */
 public class InteractionsLoadingErrorsListener implements ErrorListener {
 
-    public InteractionsLoadingErrorsListener() {
+    DataLoaderPanel panel;
+
+    public InteractionsLoadingErrorsListener(DataLoaderPanel panel) {
+        this.panel = panel;
     }
 
     public void errorOccured(ErrorEvent errorEvent) {
         System.out.println(errorEvent.getSource());
+        panel.showErrorOccuredLabel(errorEvent);
     }
 }

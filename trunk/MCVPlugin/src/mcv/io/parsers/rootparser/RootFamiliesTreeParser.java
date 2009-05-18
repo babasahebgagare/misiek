@@ -3,6 +3,7 @@ package mcv.io.parsers.rootparser;
 import java.awt.Color;
 import java.util.Collection;
 import java.util.HashSet;
+import mcv.io.exceptions.FamiliesTreeFormatException;
 import mcv.io.parsers.SpeciesParserStruct;
 import mcv.logicmodel.controllers.DataHandle;
 import mcv.main.PluginDataHandle;
@@ -12,18 +13,21 @@ public class RootFamiliesTreeParser {
 
     private static String rootFamilyName = "ROOT";
 
-    public static void readAllTreeString(String treeString) {
-        DataHandle dh = PluginDataHandle.getDataHandle();
-        int lastIndex = treeString.lastIndexOf(")");
-        String FamilyName = treeString.substring(lastIndex + 1).trim();
-        String tree = treeString.substring(1, lastIndex).trim();
+    public static void readAllTreeString(String treeString) throws FamiliesTreeFormatException {
+        try {
+            DataHandle dh = PluginDataHandle.getDataHandle();
+            int lastIndex = treeString.lastIndexOf(")");
+            String FamilyName = treeString.substring(lastIndex + 1).trim();
+            String tree = treeString.substring(1, lastIndex).trim();
 
-        Color color = ColorGenerator.generateColor(FamilyName);
+            Color color = ColorGenerator.generateColor(FamilyName);
 
-        dh.createFamily(FamilyName, color);
-        dh.createProtein(FamilyName, null, rootFamilyName, FamilyName);
-        readTreeSpaciesString(tree, FamilyName, FamilyName);
-
+            dh.createFamily(FamilyName, color);
+            dh.createProtein(FamilyName, null, rootFamilyName, FamilyName);
+            readTreeSpaciesString(tree, FamilyName, FamilyName);
+        } catch (Exception e) {
+            throw new FamiliesTreeFormatException(e.toString(), 0);
+        }
     }
 
     private static SpeciesParserStruct extractSpaciesName(String treeString) {

@@ -1,6 +1,6 @@
 package mcv.io.listeners;
 
-import mcv.ui.dataloading.SpeciesTreeLoaderPanel;
+import mcv.ui.dataloading.DataLoaderPanel;
 import org.jdesktop.swingx.error.ErrorEvent;
 import org.jdesktop.swingx.error.ErrorListener;
 
@@ -10,14 +10,14 @@ import org.jdesktop.swingx.error.ErrorListener;
  */
 public class SpeciesLoadingErrorsListener implements ErrorListener {
 
-    SpeciesTreeLoaderPanel panel;
+    DataLoaderPanel panel;
 
-    public SpeciesLoadingErrorsListener(SpeciesTreeLoaderPanel panel) {
+    public SpeciesLoadingErrorsListener(DataLoaderPanel panel) {
         this.panel = panel;
     }
 
     public void errorOccured(ErrorEvent errorEvent) {
         System.out.println(errorEvent.toString());
-        panel.logSpeciesLoadingError(errorEvent);
+        panel.showErrorOccuredLabel(errorEvent);
     }
 }

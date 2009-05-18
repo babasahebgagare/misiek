@@ -9,13 +9,12 @@ import cytoscape.Cytoscape;
 import java.awt.event.ActionEvent;
 import java.util.Collection;
 import javax.help.CSH;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import mcv.help.MCVHelpBroker;
 import mcv.viewmodel.structs.CytoProtein;
 import mcv.logicmodel.structs.PPINetwork;
 import mcv.main.PluginDataHandle;
-import mcv.ui.dataloading.DataLoadingErrorsJPanel;
+import mcv.ui.dataloading.DefaultLoadingController;
 import mcv.utils.JTreeModelSpeciesGenerator;
 import mcv.utils.Messenger;
 import mcv.utils.Stats;
@@ -209,7 +208,9 @@ public class LeftPanel extends javax.swing.JPanel {
             }
         });
 
-        testButton.setText("Test");
+        testButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/stop2.png"))); // NOI18N
+        testButton.setText("Show log");
+        testButton.setMargin(new java.awt.Insets(2, 5, 2, 14));
         testButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 testButtonActionPerformed(evt);
@@ -226,10 +227,10 @@ public class LeftPanel extends javax.swing.JPanel {
                     .addComponent(showLoadedButton, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
                     .addGroup(intPanelLayout.createSequentialGroup()
                         .addComponent(helpButton)
-                        .addGap(35, 35, 35)
+                        .addGap(25, 25, 25)
                         .addComponent(testButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(tresholdSpinner, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tresholdSpinner, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         intPanelLayout.setVerticalGroup(
@@ -320,13 +321,7 @@ private void deleteVataButtonActionPerformed(java.awt.event.ActionEvent evt) {//
 
 private void testButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testButtonActionPerformed
     Stats.printStats();
-    DataLoadingErrorsJPanel errorsPanel = new DataLoadingErrorsJPanel();
-    JFrame frame = new JFrame("MCV plugin errors");
-
-    frame.add(errorsPanel);
-    frame.pack();
-    frame.setLocationRelativeTo(Cytoscape.getDesktop());
-    frame.setVisible(true);
+    DefaultLoadingController.showMCVLogsPanel();
 }//GEN-LAST:event_testButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
