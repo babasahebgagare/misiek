@@ -5,8 +5,6 @@
  */
 package mcv.ui.dataloading;
 
-import mcv.ui.*;
-import mcv.ui.dataloading.OneFileSpeciesInteractionsLoaderPanel;
 import mcv.io.AbstractDataReader;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;

@@ -5,7 +5,6 @@
  */
 package mcv.ui.dataloading;
 
-import mcv.ui.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import javax.help.CSH;
@@ -98,7 +97,6 @@ public class GenesTreesLoaderPanel extends javax.swing.JPanel {
         proteinsStatsTable = new javax.swing.JTable();
         infoButton = new javax.swing.JButton();
         showLogButton = new javax.swing.JButton();
-        cleanButton = new javax.swing.JButton();
 
         filenameLabel.setText("filename");
         filenameLabel.setName("filenameLabel"); // NOI18N
@@ -161,15 +159,6 @@ public class GenesTreesLoaderPanel extends javax.swing.JPanel {
         showLogButton.setText("Show log");
         showLogButton.setName("showLogButton"); // NOI18N
 
-        cleanButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/clean.png"))); // NOI18N
-        cleanButton.setText("Clean");
-        cleanButton.setName("cleanButton"); // NOI18N
-        cleanButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cleanButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -182,9 +171,7 @@ public class GenesTreesLoaderPanel extends javax.swing.JPanel {
                         .addComponent(chooseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(loadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cleanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
                         .addComponent(infoButton))
                     .addComponent(filenameLabel)
                     .addComponent(showLogButton, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -197,8 +184,7 @@ public class GenesTreesLoaderPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(chooseButton)
                     .addComponent(infoButton)
-                    .addComponent(loadButton)
-                    .addComponent(cleanButton))
+                    .addComponent(loadButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(filenameLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -237,13 +223,8 @@ public class GenesTreesLoaderPanel extends javax.swing.JPanel {
         csh.actionPerformed(new ActionEvent(this, 120, "Proteins trees file format"));
     }//GEN-LAST:event_infoButtonActionPerformed
 
-    private void cleanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cleanButtonActionPerformed
-        DefaultLoadingController.deleteFamiliesTrees();
-    }//GEN-LAST:event_cleanButtonActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton chooseButton;
-    private javax.swing.JButton cleanButton;
     private javax.swing.JLabel filenameLabel;
     private javax.swing.JButton infoButton;
     private javax.swing.JScrollPane jScrollPane2;

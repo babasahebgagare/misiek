@@ -1,6 +1,5 @@
 package mcv.ui.dataloading;
 
-import mcv.ui.*;
 import java.util.Map;
 import mcv.io.AbstractDataReader;
 import mcv.io.listeners.FamiliesLoadingErrorsListener;
@@ -11,6 +10,8 @@ import mcv.logicmodel.controllers.ProjectorInfoCalculator;
 import mcv.logicmodel.structs.PPINetwork;
 import mcv.main.LoadedDataHandle;
 import mcv.main.PluginDataHandle;
+import mcv.ui.PluginMenusHandle;
+import mcv.ui.UIController;
 
 /**
  *
@@ -28,8 +29,8 @@ public class DefaultLoadingController {
 
     }
 
-    public static void deleteFamiliesTrees() {
-        //   Plugin
+    public static void deleteSpeciesTree() {
+        UIController.getInstance().deleteData();
     }
 
     public static void loadFamiliesTreeData(String filepath, FamiliesLoadingErrorsListener errorListener) {

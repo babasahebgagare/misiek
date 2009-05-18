@@ -16,6 +16,16 @@ public class LoadedDataHandle {
     private boolean manyFilesLoaded;
     private boolean proteinsLoaded;
 
+    public boolean interactionsLoaded() {
+        if (oneInteractionFilename != null) {
+            return true;
+        } else if (interactionsFilenames.size() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public boolean speciesTreeLoaded() {
         DataHandle dh = PluginDataHandle.getDataHandle();
         if (dh.getRootNetwork() != null) {
