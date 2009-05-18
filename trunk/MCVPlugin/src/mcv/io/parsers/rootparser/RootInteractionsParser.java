@@ -1,7 +1,5 @@
 package mcv.io.parsers.rootparser;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import mcv.io.exceptions.InteractionsFileFormatException;
 import mcv.io.parsers.InteractionParserStruct;
 
@@ -11,9 +9,13 @@ import mcv.io.parsers.InteractionParserStruct;
  */
 public class RootInteractionsParser {
 
-    public static InteractionParserStruct readInteraction(BufferedReader br) throws IOException, InteractionsFileFormatException {
+    /**
+     * 
+     * @param line
+     * @return
+     */
+    public static InteractionParserStruct readInteraction(String line) throws InteractionsFileFormatException {
 
-        String line = br.readLine();
         String[] tokens = line.split("\\s+");
         if (tokens.length != 3) {
             throw new InteractionsFileFormatException(line, 0);
