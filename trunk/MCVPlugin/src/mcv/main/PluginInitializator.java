@@ -46,12 +46,12 @@ public class PluginInitializator {
         LeftPanel myLeftPanel = new LeftPanel();
         JPanel myPanel = new MCVMainPanel();
 
-        JPanel logsPanel = new LogsPanel();
+     //   JPanel logsPanel = new LogsPanel();
         SpeciesFamilyColorPanel families = new SpeciesFamilyColorPanel();
         myPanel.setLayout(new VerticalLayout());
         myPanel.add(myLeftPanel);
         myPanel.add(families);
-        myPanel.add(logsPanel);
+   //     myPanel.add(logsPanel);
 
         PluginMenusHandle.setMcvPanel(myPanel);
         PluginMenusHandle.setFamiliesColorListPanel(families);

@@ -234,10 +234,8 @@
                       <Component id="showLoadedButton" alignment="0" pref="248" max="32767" attributes="1"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="helpButton" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                          <EmptySpace pref="84" max="32767" attributes="0"/>
                           <Component id="testButton" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="tresholdSpinner" pref="53" max="32767" attributes="1"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -252,7 +250,6 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="helpButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="tresholdSpinner" alignment="3" pref="23" max="32767" attributes="0"/>
                       <Component id="testButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -261,11 +258,6 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JSpinner" name="tresholdSpinner">
-          <Properties>
-            <Property name="name" type="java.lang.String" value="TresholdSpinner" noResource="true"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JButton" name="showLoadedButton">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
