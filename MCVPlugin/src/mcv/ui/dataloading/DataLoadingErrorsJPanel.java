@@ -5,8 +5,8 @@
  */
 package mcv.ui.dataloading;
 
-import errorsloger.MCVErrorsLogger;
-import errorsloger.MCVLoggedError;
+import mcv.logs.errorsloger.MCVErrorsLogger;
+import mcv.logs.errorsloger.MCVLoggedError;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Collection;

@@ -3,7 +3,7 @@ package mcv.io.readers.tasks;
 import cytoscape.task.Task;
 import cytoscape.task.TaskMonitor;
 import cytoscape.task.ui.JTask;
-import errorsloger.MCVErrorsLogger;
+import mcv.logs.errorsloger.MCVErrorsLogger;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedInputStream;
