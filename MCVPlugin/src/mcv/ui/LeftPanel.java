@@ -72,7 +72,6 @@ public class LeftPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         spaciesTree = new javax.swing.JTree();
         intPanel = new javax.swing.JPanel();
-        tresholdSpinner = new javax.swing.JSpinner();
         showLoadedButton = new javax.swing.JButton();
         helpButton = new javax.swing.JButton();
         testButton = new javax.swing.JButton();
@@ -190,8 +189,6 @@ public class LeftPanel extends javax.swing.JPanel {
         intPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         intPanel.setPreferredSize(new java.awt.Dimension(268, 82));
 
-        tresholdSpinner.setName("TresholdSpinner"); // NOI18N
-
         showLoadedButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/refresh.png"))); // NOI18N
         showLoadedButton.setText("Refresh loaded interactions");
         showLoadedButton.addActionListener(new java.awt.event.ActionListener() {
@@ -227,10 +224,8 @@ public class LeftPanel extends javax.swing.JPanel {
                     .addComponent(showLoadedButton, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
                     .addGroup(intPanelLayout.createSequentialGroup()
                         .addComponent(helpButton)
-                        .addGap(25, 25, 25)
-                        .addComponent(testButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tresholdSpinner, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                        .addComponent(testButton)))
                 .addContainerGap())
         );
         intPanelLayout.setVerticalGroup(
@@ -241,7 +236,6 @@ public class LeftPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(intPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(helpButton)
-                    .addComponent(tresholdSpinner, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
                     .addComponent(testButton))
                 .addContainerGap())
         );
@@ -337,7 +331,6 @@ private void testButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JButton showLoadedButton;
     private javax.swing.JTree spaciesTree;
     private javax.swing.JButton testButton;
-    private javax.swing.JSpinner tresholdSpinner;
     private javax.swing.JButton updateDataButton;
     // End of variables declaration//GEN-END:variables
 }
