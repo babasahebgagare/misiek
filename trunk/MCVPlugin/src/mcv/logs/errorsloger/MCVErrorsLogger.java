@@ -1,4 +1,4 @@
-package errorsloger;
+package mcv.logs.errorsloger;
 
 import java.util.Collection;
 import java.util.Date;
