@@ -16,6 +16,6 @@ public class MemoLogger {
     }
 
     public static void log(String msg) {
-        PluginMenusHandle.getMemo().append(now() + ": " + msg + "\n");
+//        PluginMenusHandle.getMemo().append(now() + ": " + msg + "\n");
     }
 }
