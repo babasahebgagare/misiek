@@ -107,6 +107,8 @@ public class GenesTreesLoaderPanel extends javax.swing.JPanel {
 
         chooseButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/com.png"))); // NOI18N
         chooseButton.setText("Choose file");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("mcv/ui/resources/Loading"); // NOI18N
+        chooseButton.setToolTipText(bundle.getString("ChooseFileFamiliesTreeButton.ToolTip")); // NOI18N
         chooseButton.setName("chooseButton"); // NOI18N
         chooseButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,6 +118,7 @@ public class GenesTreesLoaderPanel extends javax.swing.JPanel {
 
         loadButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/save.png"))); // NOI18N
         loadButton.setText("Load");
+        loadButton.setToolTipText(bundle.getString("LoadFamiliesTreeButton.ToolTip")); // NOI18N
         loadButton.setName("loadButton"); // NOI18N
         loadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,6 +156,7 @@ public class GenesTreesLoaderPanel extends javax.swing.JPanel {
 
         infoButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/help.png"))); // NOI18N
         infoButton.setText("File format info");
+        infoButton.setToolTipText(bundle.getString("FileFormatInfoFamiliesButton.ToolTip")); // NOI18N
         infoButton.setName("infoButton"); // NOI18N
         infoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

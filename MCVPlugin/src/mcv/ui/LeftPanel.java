@@ -84,7 +84,8 @@ public class LeftPanel extends javax.swing.JPanel {
 
         updateDataButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/update.png"))); // NOI18N
         updateDataButton.setText("Update");
-        updateDataButton.setToolTipText("Ładuje dane z plików .spy, .trees, .int");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("mcv/ui/resources/LeftPanel"); // NOI18N
+        updateDataButton.setToolTipText(bundle.getString("UpdateButton.ToolTip")); // NOI18N
         updateDataButton.setAlignmentY(0.0F);
         updateDataButton.setEnabled(false);
         updateDataButton.setIconTextGap(2);
@@ -97,6 +98,7 @@ public class LeftPanel extends javax.swing.JPanel {
 
         newDataButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/open.png"))); // NOI18N
         newDataButton.setText("New");
+        newDataButton.setToolTipText(bundle.getString("NewButton.ToolTip")); // NOI18N
         newDataButton.setMargin(new java.awt.Insets(2, 5, 2, 14));
         newDataButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,6 +108,7 @@ public class LeftPanel extends javax.swing.JPanel {
 
         deleteVataButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/clean.png"))); // NOI18N
         deleteVataButton.setText("Clean");
+        deleteVataButton.setToolTipText(bundle.getString("CleanButton.ToolTip")); // NOI18N
         deleteVataButton.setEnabled(false);
         deleteVataButton.setMargin(new java.awt.Insets(2, 5, 2, 14));
         deleteVataButton.addActionListener(new java.awt.event.ActionListener() {
@@ -143,7 +146,7 @@ public class LeftPanel extends javax.swing.JPanel {
 
         projectButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/cast.png"))); // NOI18N
         projectButton.setText("Casting...");
-        projectButton.setToolTipText("Rzutuje na zaznaczone sieci w drzewku");
+        projectButton.setToolTipText(bundle.getString("CastingButton.ToolTip")); // NOI18N
         projectButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 projectButtonActionPerformed(evt);
@@ -152,7 +155,7 @@ public class LeftPanel extends javax.swing.JPanel {
 
         showButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/run.png"))); // NOI18N
         showButton.setText("Show network");
-        showButton.setToolTipText("Wyswietla zaznaczone sieci w drzewku");
+        showButton.setToolTipText(bundle.getString("ShowNetworkButton.ToolTip")); // NOI18N
         showButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showButtonActionPerformed(evt);
@@ -191,6 +194,7 @@ public class LeftPanel extends javax.swing.JPanel {
 
         showLoadedButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/refresh.png"))); // NOI18N
         showLoadedButton.setText("Refresh loaded interactions");
+        showLoadedButton.setToolTipText(bundle.getString("RefreshButton.ToolTip")); // NOI18N
         showLoadedButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showLoadedButtonActionPerformed(evt);
@@ -199,6 +203,7 @@ public class LeftPanel extends javax.swing.JPanel {
 
         helpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/help.png"))); // NOI18N
         helpButton.setText("Help");
+        helpButton.setToolTipText(bundle.getString("HelpButton.ToolTip")); // NOI18N
         helpButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 helpButtonActionPerformed(evt);
@@ -207,6 +212,7 @@ public class LeftPanel extends javax.swing.JPanel {
 
         testButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/stop2.png"))); // NOI18N
         testButton.setText("Show log");
+        testButton.setToolTipText(bundle.getString("ShowLogButton.ToopTip")); // NOI18N
         testButton.setMargin(new java.awt.Insets(2, 5, 2, 14));
         testButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

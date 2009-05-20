@@ -59,6 +59,9 @@
           <Image iconType="3" name="/mcv/resources/icons/update.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Update"/>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="mcv/ui/resources/Loading.properties" key="UpdateInteractionsButton.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
         <Property name="name" type="java.lang.String" value="loadButton" noResource="true"/>
       </Properties>
       <Events>
@@ -71,6 +74,9 @@
           <Image iconType="3" name="/mcv/resources/icons/help.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="File format info"/>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="mcv/ui/resources/Loading.properties" key="FileFormatInfoInteractionsButton.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
         <Property name="name" type="java.lang.String" value="infoButton" noResource="true"/>
       </Properties>
       <Events>
@@ -217,6 +223,9 @@
           <Image iconType="3" name="/mcv/resources/icons/clean.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Clean"/>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="mcv/ui/resources/Loading.properties" key="CleanInteractionsButton.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
         <Property name="name" type="java.lang.String" value="cleanButton" noResource="true"/>
       </Properties>
       <Events>

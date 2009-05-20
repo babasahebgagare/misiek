@@ -85,6 +85,8 @@ public class SpeciesInteractionsLoaderPanel extends javax.swing.JPanel {
 
         openButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/com.png"))); // NOI18N
         openButton.setText("Open");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("mcv/ui/resources/Loading"); // NOI18N
+        openButton.setToolTipText(bundle.getString("OpenInteractionsForSpeciesButton.ToolTip")); // NOI18N
         openButton.setEnabled(false);
         openButton.setName("openButton"); // NOI18N
         openButton.addActionListener(new java.awt.event.ActionListener() {

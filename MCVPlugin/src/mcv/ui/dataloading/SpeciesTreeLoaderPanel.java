@@ -108,6 +108,8 @@ public class SpeciesTreeLoaderPanel extends javax.swing.JPanel {
 
         chooseFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/com.png"))); // NOI18N
         chooseFile.setText("Choose file");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("mcv/ui/resources/Loading"); // NOI18N
+        chooseFile.setToolTipText(bundle.getString("ChooseFileFamiliesTreeButton.ToolTip")); // NOI18N
         chooseFile.setName("chooseFile"); // NOI18N
         chooseFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,6 +122,7 @@ public class SpeciesTreeLoaderPanel extends javax.swing.JPanel {
 
         loadTreeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/save.png"))); // NOI18N
         loadTreeButton.setText("Load tree");
+        loadTreeButton.setToolTipText(bundle.getString("LoadFamiliesTreesButton.ToolTip")); // NOI18N
         loadTreeButton.setName("loadTreeButton"); // NOI18N
         loadTreeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,6 +137,7 @@ public class SpeciesTreeLoaderPanel extends javax.swing.JPanel {
 
         helpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/help.png"))); // NOI18N
         helpButton.setText("File format info");
+        helpButton.setToolTipText(bundle.getString("FileFormatInfoSpecies.ToolTip")); // NOI18N
         helpButton.setName("helpButton"); // NOI18N
         helpButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,6 +150,7 @@ public class SpeciesTreeLoaderPanel extends javax.swing.JPanel {
 
         cleanButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/clean.png"))); // NOI18N
         cleanButton.setText("Clean");
+        cleanButton.setToolTipText(bundle.getString("CleanSpeciesTree.ToolTip")); // NOI18N
         cleanButton.setName("cleanButton"); // NOI18N
         cleanButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
