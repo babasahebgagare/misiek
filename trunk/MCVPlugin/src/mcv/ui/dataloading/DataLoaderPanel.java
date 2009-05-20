@@ -121,6 +121,8 @@ public class DataLoaderPanel extends javax.swing.JPanel {
 
         logButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/stop2.png"))); // NOI18N
         logButton.setText("Show log");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("mcv/ui/resources/Loading"); // NOI18N
+        logButton.setToolTipText(bundle.getString("ShowLogButton.ToolTip")); // NOI18N
         logButton.setName("logButton"); // NOI18N
         logButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,6 +138,7 @@ public class DataLoaderPanel extends javax.swing.JPanel {
         jScrollPane3.setViewportView(errorLabel);
 
         closeButton.setText("Close ");
+        closeButton.setToolTipText(bundle.getString("CloseButton.ToolTip")); // NOI18N
         closeButton.setName("closeButton"); // NOI18N
         closeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

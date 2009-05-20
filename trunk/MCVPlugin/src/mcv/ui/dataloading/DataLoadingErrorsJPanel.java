@@ -69,6 +69,8 @@ public class DataLoadingErrorsJPanel extends javax.swing.JPanel {
 
         cleanButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/clean.png"))); // NOI18N
         cleanButton.setText("Clean");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("mcv/ui/resources/Loading"); // NOI18N
+        cleanButton.setToolTipText(bundle.getString("CleanErrorsButton.ToolTip")); // NOI18N
         cleanButton.setName("cleanButton"); // NOI18N
         cleanButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

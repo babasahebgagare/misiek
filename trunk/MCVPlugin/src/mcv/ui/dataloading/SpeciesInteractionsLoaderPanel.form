@@ -73,6 +73,9 @@
           <Image iconType="3" name="/mcv/resources/icons/com.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Open"/>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="mcv/ui/resources/Loading.properties" key="OpenInteractionsForSpeciesButton.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
         <Property name="enabled" type="boolean" value="false"/>
         <Property name="name" type="java.lang.String" value="openButton" noResource="true"/>
       </Properties>

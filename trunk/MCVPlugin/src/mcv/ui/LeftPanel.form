@@ -89,7 +89,9 @@
               <Image iconType="3" name="/mcv/resources/icons/update.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Update"/>
-            <Property name="toolTipText" type="java.lang.String" value="&#x141;aduje dane z plik&#xf3;w .spy, .trees, .int"/>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="mcv/ui/resources/LeftPanel.properties" key="UpdateButton.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
             <Property name="alignmentY" type="float" value="0.0"/>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="iconTextGap" type="int" value="2"/>
@@ -107,6 +109,9 @@
               <Image iconType="3" name="/mcv/resources/icons/open.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="New"/>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="mcv/ui/resources/LeftPanel.properties" key="NewButton.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[2, 5, 2, 14]"/>
             </Property>
@@ -121,6 +126,9 @@
               <Image iconType="3" name="/mcv/resources/icons/clean.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Clean"/>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="mcv/ui/resources/LeftPanel.properties" key="CleanButton.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[2, 5, 2, 14]"/>
@@ -182,7 +190,9 @@
               <Image iconType="3" name="/mcv/resources/icons/cast.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Casting..."/>
-            <Property name="toolTipText" type="java.lang.String" value="Rzutuje na zaznaczone sieci w drzewku"/>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="mcv/ui/resources/LeftPanel.properties" key="CastingButton.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="projectButtonActionPerformed"/>
@@ -194,7 +204,9 @@
               <Image iconType="3" name="/mcv/resources/icons/run.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Show network"/>
-            <Property name="toolTipText" type="java.lang.String" value="Wyswietla zaznaczone sieci w drzewku"/>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="mcv/ui/resources/LeftPanel.properties" key="ShowNetworkButton.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="showButtonActionPerformed"/>
@@ -264,6 +276,9 @@
               <Image iconType="3" name="/mcv/resources/icons/refresh.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Refresh loaded interactions"/>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="mcv/ui/resources/LeftPanel.properties" key="RefreshButton.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="showLoadedButtonActionPerformed"/>
@@ -275,6 +290,9 @@
               <Image iconType="3" name="/mcv/resources/icons/help.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Help"/>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="mcv/ui/resources/LeftPanel.properties" key="HelpButton.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="helpButtonActionPerformed"/>
@@ -286,6 +304,9 @@
               <Image iconType="3" name="/mcv/resources/icons/stop2.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Show log"/>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="mcv/ui/resources/LeftPanel.properties" key="ShowLogButton.ToopTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[2, 5, 2, 14]"/>
             </Property>
