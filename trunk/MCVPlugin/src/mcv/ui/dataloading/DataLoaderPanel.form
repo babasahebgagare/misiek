@@ -21,7 +21,10 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane3" pref="437" max="32767" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="logButton" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="closeButton" max="32767" attributes="1"/>
+                  <Component id="logButton" alignment="0" max="32767" attributes="1"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -32,8 +35,12 @@
               <Component id="tabbedPane" min="-2" pref="453" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane3" pref="44" max="32767" attributes="1"/>
-                  <Component id="logButton" alignment="0" min="-2" max="-2" attributes="1"/>
+                  <Component id="jScrollPane3" pref="55" max="32767" attributes="1"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="logButton" min="-2" max="-2" attributes="1"/>
+                      <EmptySpace pref="7" max="32767" attributes="0"/>
+                      <Component id="closeButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -69,10 +76,10 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="errorLabel">
           <Properties>
-            <Property name="background" type="java.awt.Color" noResource="true" editor="org.netbeans.beaninfo.editors.ColorEditor">
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="ff" type="rgb"/>
             </Property>
-            <Property name="foreground" type="java.awt.Color" noResource="true" editor="org.netbeans.beaninfo.editors.ColorEditor">
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="ff" type="rgb"/>
             </Property>
             <Property name="name" type="java.lang.String" value="errorLabel" noResource="true"/>
@@ -80,5 +87,14 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="closeButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Close "/>
+        <Property name="name" type="java.lang.String" value="closeButton" noResource="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="closeButtonActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>

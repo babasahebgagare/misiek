@@ -37,7 +37,7 @@ public class DataLoaderPanel extends javax.swing.JPanel {
 
     public void showErrorOccuredLabel(ErrorEvent errorEvent) {
         errorLabel.setText("Some errors occured, see log for more details: " + errorEvent);
-        
+
     }
 
     private void setActiveTab() {
@@ -115,6 +115,7 @@ public class DataLoaderPanel extends javax.swing.JPanel {
         logButton = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         errorLabel = new javax.swing.JLabel();
+        closeButton = new javax.swing.JButton();
 
         tabbedPane.setName("tabbedPane"); // NOI18N
 
@@ -134,6 +135,14 @@ public class DataLoaderPanel extends javax.swing.JPanel {
         errorLabel.setName("errorLabel"); // NOI18N
         jScrollPane3.setViewportView(errorLabel);
 
+        closeButton.setText("Close ");
+        closeButton.setName("closeButton"); // NOI18N
+        closeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closeButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -143,7 +152,9 @@ public class DataLoaderPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(logButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(closeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(logButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -152,8 +163,11 @@ public class DataLoaderPanel extends javax.swing.JPanel {
                 .addComponent(tabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
-                    .addComponent(logButton))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(logButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                        .addComponent(closeButton)))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -162,7 +176,12 @@ public class DataLoaderPanel extends javax.swing.JPanel {
         DefaultLoadingController.showMCVLogsPanel();
     }//GEN-LAST:event_logButtonActionPerformed
 
+    private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
+        parentFrame.dispose();
+    }//GEN-LAST:event_closeButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton closeButton;
     private javax.swing.JLabel errorLabel;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JButton logButton;
