@@ -1,7 +1,6 @@
 package mcv.logicmodel.structs;
 
 import java.util.HashMap;
-import java.util.TreeMap;
 import java.util.Map;
 
 public class PPINetwork {
