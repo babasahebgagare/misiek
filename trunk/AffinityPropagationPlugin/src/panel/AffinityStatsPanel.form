@@ -109,6 +109,9 @@
           <Image iconType="3" name="/resources/icons/delete.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Delete row"/>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="panel/ui_properties.properties" key="DeleteRowButton.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
         <Property name="name" type="java.lang.String" value="cleanButton" noResource="true"/>
       </Properties>
       <Events>

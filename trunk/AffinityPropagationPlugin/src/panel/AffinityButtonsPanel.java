@@ -44,6 +44,8 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
 
         refreshButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/refresh.png"))); // NOI18N
         refreshButton.setText("Refresh");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("panel/ui_properties"); // NOI18N
+        refreshButton.setToolTipText(bundle.getString("RafreshButton.ToolTip")); // NOI18N
         refreshButton.setMargin(new java.awt.Insets(2, 6, 2, 14));
         refreshButton.setName("refreshButton"); // NOI18N
         refreshButton.addActionListener(new java.awt.event.ActionListener() {
@@ -54,6 +56,7 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
 
         startButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/run.png"))); // NOI18N
         startButton.setText("Start");
+        startButton.setToolTipText(bundle.getString("StartButton.ToolTip")); // NOI18N
         startButton.setMargin(new java.awt.Insets(2, 6, 2, 14));
         startButton.setName("startButton"); // NOI18N
         startButton.addActionListener(new java.awt.event.ActionListener() {
@@ -63,6 +66,7 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
         });
 
         helpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/help.png"))); // NOI18N
+        helpButton.setToolTipText(bundle.getString("HelpButton.ToolTip")); // NOI18N
         helpButton.setName("helpButton"); // NOI18N
         helpButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,7 +82,7 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(startButton, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+                .addComponent(startButton, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
