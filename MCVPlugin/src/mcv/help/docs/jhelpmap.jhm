@@ -3,8 +3,9 @@
 <!DOCTYPE map
   PUBLIC "-//Sun Microsystems Inc.//DTD JavaHelp Map Version 1.0//EN" "http://java.sun.com/products/javahelp/map_1_0.dtd">
 <map version="1.0">
-    <mapID target="Introduction" url="index.html"/>
-    <mapID target="Species file format" url="speciesFileFormat.html"/>
-    <mapID target="Interactions file format" url="interactionsFileFormat.html"/>
-    <mapID target="Proteins trees file format" url="proteinsTreesFileFormat.html"/>
+    <mapID target="Introduction" url="hIndex.html"/>
+    <mapID target="Species file format" url="hSpeciesFileFormat.html"/>
+    <mapID target="Interactions file format" url="hInteractionsFileFormat.html"/>
+    <mapID target="Proteins trees file format" url="hProteinsTreesFileFormat.html"/>
+    <mapID target="Example use case" url="hExampleUseCase.html"/>
 </map>

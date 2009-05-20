@@ -7,5 +7,6 @@
         <tocitem target="Species file format" text="Species file format"/>
         <tocitem target="Interactions file format" text="Interactions file format"/>
         <tocitem target="Proteins trees file format" text="Proteins trees file format"/>
+        <tocitem target="Example use case" text="Example use case"/>
     </tocitem>
 </toc>
