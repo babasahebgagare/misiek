@@ -96,7 +96,7 @@ public class AffinityPanel extends javax.swing.JPanel {
         lambdaLabel.setText("Lambda:");
         lambdaLabel.setName("lambdaLabel"); // NOI18N
 
-        convitsLabel.setText("Convits:");
+        convitsLabel.setText("Stop criterium:");
         convitsLabel.setName("convitsLabel"); // NOI18N
 
         convitsField.setText("3");
