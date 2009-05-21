@@ -47,6 +47,7 @@ public class AffinityPanelController implements Serializable {
     private boolean cancelDialog = false;
     public final static int MATRIX_IMPLEMENTATION = 0;
     public final static int SMART_IMPLEMENTATION = 1;
+    private boolean log = false;
 
     public AffinityPanelController(final AffinityStatsPanelController psc) {
         this.psc = psc;
@@ -69,7 +70,7 @@ public class AffinityPanelController implements Serializable {
         Integer steps = getStepsCount();
         int implementation = getImplementation();
         boolean refine = getRefine();
-        boolean log = getLog();
+        log = getLog();
         AffinityGraphMode graphMode = getGraphMode();
         AffinityConnectingMethod connectingMode = getConnectingMode();
 
@@ -213,7 +214,14 @@ public class AffinityPanelController implements Serializable {
     }
 
     private boolean validatePreferences(final Double preferences) {
-        return (preferences != null && preferences > 0.0);
+        if (preferences == null) {
+            return false;
+        }
+        if (log && preferences < 0.0) {
+            Messenger.message("Preferences are not valid, if you want take log!");
+            return false;
+        }
+        return true;
     }
 
     private boolean validateValues(final Double lambda, final Double preferences, final Integer iterations, final Integer convits, final String nodeNameAttr, final String edgeNameAttr) {
@@ -222,7 +230,7 @@ public class AffinityPanelController implements Serializable {
             return false;
         }
         if (!validatePreferences(preferences)) {
-            Messenger.message("Preferences are not valid!");
+            
             return false;
         }
         if (!validateIterations(iterations)) {
@@ -254,7 +262,7 @@ public class AffinityPanelController implements Serializable {
 
     public void refresh() {
         initEdgeAttrField();
-        refreshStats();
+        refreshPreferences();
     }
 
     public void initEdgeAttrField() {
@@ -264,11 +272,13 @@ public class AffinityPanelController implements Serializable {
             final byte cyType = edgesAttributes.getType(attrName);
             if (cyType == CyAttributes.TYPE_FLOATING) {
                 edgeAttrField.addItem(attrName);
+            } else if (cyType == CyAttributes.TYPE_STRING) {
+                edgeAttrField.addItem(attrName);
             }
         }
     }
 
-    public void refreshStats() {
+    public void refreshPreferences() {
         String edgeNameAttr = getEdgeAttr();
         if (!validateEdgeNameAttr(edgeNameAttr)) {
             return;
@@ -285,15 +295,30 @@ public class AffinityPanelController implements Serializable {
             String targetID = edge.getTarget().getIdentifier();
 
             if (!sourceID.equals(targetID)) {
-                Double prob = edgesAttributes.getDoubleAttribute(id, edgeNameAttr);
+                Double prob = tryGetDoubleAttribute(edgesAttributes, id, edgeNameAttr);
                 if (prob != null) {
+                    //System.out.println("adding to prob: " + prob);
                     probs.add(prob);
                 }
             }
         }
+        if (probs.size() > 0) {
+            Double median = MathStats.median(probs);
+            setPreferences(median);
+        }
 
-        Double median = MathStats.median(probs);
-        setPreferences(median);
+    }
+
+    private Double tryGetDoubleAttribute(CyAttributes edgesAttributes, String id, String edgeNameAttr) {
+        Object val = edgesAttributes.getAttribute(id, edgeNameAttr);
+        Double sim;
+        try {
+            sim = Double.valueOf(val.toString());
+        } catch (NumberFormatException e) {
+            //       Messenger.error(e);
+            sim = null;
+        }
+        return sim;
     }
 
     private void initIterationsField() {
@@ -336,6 +361,7 @@ public class AffinityPanelController implements Serializable {
             return Double.valueOf(preferencesField.getText());
         } catch (NumberFormatException e) {
             Messenger.error(e);
+            Messenger.message(preferencesField.getText());
             return null;
         }
     }

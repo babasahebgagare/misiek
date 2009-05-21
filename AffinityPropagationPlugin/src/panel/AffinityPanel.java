@@ -104,6 +104,11 @@ public class AffinityPanel extends javax.swing.JPanel {
 
         edgeAttrCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         edgeAttrCombo.setName("edgeAttrCombo"); // NOI18N
+        edgeAttrCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edgeAttrComboActionPerformed(evt);
+            }
+        });
 
         transforminLabel.setText("Transforming:");
         transforminLabel.setName("transforminLabel"); // NOI18N
@@ -225,6 +230,10 @@ public class AffinityPanel extends javax.swing.JPanel {
     private void preferenceFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_preferenceFieldActionPerformed
         // TODO add your handling code here:
 }//GEN-LAST:event_preferenceFieldActionPerformed
+
+    private void edgeAttrComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edgeAttrComboActionPerformed
+        pc.refreshPreferences();
+    }//GEN-LAST:event_edgeAttrComboActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField convitsField;

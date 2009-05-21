@@ -243,6 +243,9 @@
             </Property>
             <Property name="name" type="java.lang.String" value="edgeAttrCombo" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="edgeAttrComboActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="transforminLabel">
           <Properties>
