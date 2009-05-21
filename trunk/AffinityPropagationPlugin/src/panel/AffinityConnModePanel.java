@@ -43,6 +43,8 @@ public class AffinityConnModePanel extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(270, 72));
 
         nearesCenterPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Searching nearest center"));
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("panel/ui_properties"); // NOI18N
+        nearesCenterPanel.setToolTipText(bundle.getString("SearchNearestNodeCenterPanel.ToolTip")); // NOI18N
         nearesCenterPanel.setMaximumSize(new java.awt.Dimension(270, 32767));
         nearesCenterPanel.setName("nearesCenterPanel"); // NOI18N
 

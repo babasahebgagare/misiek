@@ -20,6 +20,7 @@ import java.util.TreeSet;
 import javax.swing.JPanel;
 import listeners.IterationListener;
 import panel.AffinityPanelController;
+import utils.Messenger;
 
 /**
  *
@@ -185,7 +186,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
             Integer targetIndex = nodeMapping.get(targetID);
 
             if (!sourceID.equals(targetID)) {
-                Double probOrNull = edgesAttributes.getDoubleAttribute(id, edgeNameAttr);
+                Double probOrNull = tryGetDoubleAttribute(edgesAttributes, id, edgeNameAttr);
                 if (probOrNull != null) {
                     Double sim;
                     if (log) {
@@ -203,5 +204,17 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
 
     public void createIteractionListener(final TaskMonitor monitor) {
         af.addIterationListener(new IterationListener(monitor, iterations));
+    }
+
+    private Double tryGetDoubleAttribute(CyAttributes edgesAttributes, String id, String edgeNameAttr) {
+        Object val = edgesAttributes.getAttribute(id, edgeNameAttr);
+        Double sim;
+        try {
+            sim = Double.valueOf(val.toString());
+        } catch (NumberFormatException e) {
+      //      Messenger.error(e);
+            sim = null;
+        }
+        return sim;
     }
 }
