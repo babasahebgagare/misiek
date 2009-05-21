@@ -137,6 +137,7 @@ public class DataLoaderPanel extends javax.swing.JPanel {
         errorLabel.setName("errorLabel"); // NOI18N
         jScrollPane3.setViewportView(errorLabel);
 
+        closeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/exit.png"))); // NOI18N
         closeButton.setText("Close ");
         closeButton.setToolTipText(bundle.getString("CloseButton.ToolTip")); // NOI18N
         closeButton.setName("closeButton"); // NOI18N
@@ -166,10 +167,10 @@ public class DataLoaderPanel extends javax.swing.JPanel {
                 .addComponent(tabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(logButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(closeButton)))
                 .addContainerGap())
         );
