@@ -1,8 +1,8 @@
 package mcv.visual.layout;
 
-import cytoscape.CyNode;
 import cytoscape.Cytoscape;
 import cytoscape.view.CyNetworkView;
+import giny.model.Node;
 import giny.view.NodeView;
 import java.util.Collection;
 import mcv.viewmodel.structs.CytoGroupNode;
@@ -21,8 +21,8 @@ public class DefaultLayouter extends Layouter {
         CytoProtein parentProtein = cytoGroupNode.getContext().getMotherProtein();
         String parentNetworkCytoID = parentProtein.getCytoNetwork().getCytoID();
         CyNetworkView parentNetworkView = Cytoscape.getNetworkView(parentNetworkCytoID);
-        CyNode parentNode = Cytoscape.getCyNode(parentProtein.getCytoID());
-        NodeView nodeView = parentNetworkView.getNodeView(parentNode);
+        Node parentNode = Cytoscape.getRootGraph().getNode(parentProtein.getIndex());
+        NodeView parentNodeView = parentNetworkView.getNodeView(parentNode);
 
 
         int i = 0;
@@ -30,10 +30,10 @@ public class DefaultLayouter extends Layouter {
 
         for (CytoProtein cytoProtein : cytoProteins) {
 
-            CyNode node = Cytoscape.getCyNode(cytoProtein.getCytoID());
+            Node node = Cytoscape.getRootGraph().getNode(cytoProtein.getIndex());
             NodeView proteinView = cyNetworkView.getNodeView(node);
 
-            setProteinViewPosition(proteinView, nodeView, i, count);
+            setProteinViewPosition(proteinView, parentNodeView, i, count);
             i++;
         }
     }
@@ -68,10 +68,10 @@ public class DefaultLayouter extends Layouter {
             if (cytoMotherProteinOrNull != null) {
                 String motherNetworkCytoID = cytoMotherProteinOrNull.getCytoNetwork().getCytoID();
                 CyNetworkView parentNetworkView = Cytoscape.getNetworkView(motherNetworkCytoID);
-                CyNode parentNode = Cytoscape.getCyNode(cytoMotherProteinOrNull.getCytoID());
+                Node parentNode = Cytoscape.getRootGraph().getNode(cytoMotherProteinOrNull.getIndex());
                 NodeView nodeView = parentNetworkView.getNodeView(parentNode);
 
-                CyNode node = Cytoscape.getCyNode(cytoProteinProjection.getCytoID());
+                Node node = Cytoscape.getRootGraph().getNode(cytoProteinProjection.getIndex());
                 NodeView proteinView = cyNetworkView.getNodeView(node);
                 proteinView.setXPosition(nodeView.getXPosition());
                 proteinView.setYPosition(nodeView.getYPosition());
@@ -80,16 +80,16 @@ public class DefaultLayouter extends Layouter {
 
     }
 
-    private static void setProteinViewPosition(NodeView proteinView, NodeView nodeView, int i, int count) {
+    private static void setProteinViewPosition(NodeView proteinView, NodeView parentNodeView, int i, int count) {
         if (count == 1) {
-            proteinView.setXPosition(nodeView.getXPosition());
-            proteinView.setYPosition(nodeView.getYPosition());
+            proteinView.setXPosition(parentNodeView.getXPosition());
+            proteinView.setYPosition(parentNodeView.getYPosition());
         } else {
             double arg = 2 * Math.PI * i / count;
             double x_offset = R * Math.cos(arg);
             double y_offset = R * Math.sin(arg);
-            proteinView.setXPosition(nodeView.getXPosition() + x_offset);
-            proteinView.setYPosition(nodeView.getYPosition() + y_offset);
+            proteinView.setXPosition(parentNodeView.getXPosition() + x_offset);
+            proteinView.setYPosition(parentNodeView.getYPosition() + y_offset);
         }
     }
 }
