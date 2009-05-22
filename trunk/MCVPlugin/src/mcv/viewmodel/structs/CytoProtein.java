@@ -8,7 +8,7 @@ public class CytoProtein extends CytoNetworkObject {
 
     public CytoProtein(String CytoID, Protein protein, CytoAbstractPPINetwork cytoNetwork) {
         this.setCytoID(CytoID);
-        this.setCytoNetowork(cytoNetwork);
+        this.setCytoNetwork(cytoNetwork);
         this.protein = protein;
     }
 

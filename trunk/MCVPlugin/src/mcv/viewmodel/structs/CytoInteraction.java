@@ -10,7 +10,7 @@ public class CytoInteraction extends CytoNetworkObject {
 
     public CytoInteraction(String CytoID, CytoProtein source, CytoProtein target, CytoAbstractPPINetwork cytoNetwork, Double probability, Interaction interaction) {
         this.setCytoID(CytoID);
-        this.setCytoNetowork(cytoNetwork);
+        this.setCytoNetwork(cytoNetwork);
         this.source = source;
         this.target = target;
         this.probability = probability;
