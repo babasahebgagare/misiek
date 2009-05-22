@@ -2,15 +2,15 @@ package mcv.viewmodel.structs;
 
 public class CytoNetworkObject extends CytoObject {
 
-    private CytoAbstractPPINetwork cytoNetowork;
+    private CytoAbstractPPINetwork cytoNetwork;
     private int index;
 
-    public CytoAbstractPPINetwork getCytoNetowork() {
-        return cytoNetowork;
+    public CytoAbstractPPINetwork getCytoNetwork() {
+        return cytoNetwork;
     }
 
-    public void setCytoNetowork(CytoAbstractPPINetwork cytoNetowork) {
-        this.cytoNetowork = cytoNetowork;
+    public void setCytoNetwork(CytoAbstractPPINetwork cytoNetwork) {
+        this.cytoNetwork = cytoNetwork;
     }
 
     public int getIndex() {

@@ -19,7 +19,7 @@ public class DefaultLayouter extends Layouter {
         Collection<CytoProtein> cytoProteins = cytoGroupNode.getContext().getInsideProteins();
 
         CytoProtein parentProtein = cytoGroupNode.getContext().getMotherProtein();
-        String parentNetworkCytoID = parentProtein.getCytoNetowork().getCytoID();
+        String parentNetworkCytoID = parentProtein.getCytoNetwork().getCytoID();
         CyNetworkView parentNetworkView = Cytoscape.getNetworkView(parentNetworkCytoID);
         CyNode parentNode = Cytoscape.getCyNode(parentProtein.getCytoID());
         NodeView nodeView = parentNetworkView.getNodeView(parentNode);
@@ -41,6 +41,7 @@ public class DefaultLayouter extends Layouter {
     @Override
     public void projectionToDownLayout(CytoPPINetworkProjectionToDown projection) {
         CyNetworkView cyNetworkView = Cytoscape.getNetworkView(projection.getCytoID());
+        System.out.println("getting net: " + cyNetworkView.getTitle());
         projectionToDownLayout(projection, cyNetworkView);
     }
 
@@ -65,7 +66,7 @@ public class DefaultLayouter extends Layouter {
             CytoProtein cytoMotherProteinOrNull = cytoProteinProjection.tryGetCytoMotherProtein();
 
             if (cytoMotherProteinOrNull != null) {
-                String motherNetworkCytoID = cytoMotherProteinOrNull.getCytoNetowork().getCytoID();
+                String motherNetworkCytoID = cytoMotherProteinOrNull.getCytoNetwork().getCytoID();
                 CyNetworkView parentNetworkView = Cytoscape.getNetworkView(motherNetworkCytoID);
                 CyNode parentNode = Cytoscape.getCyNode(cytoMotherProteinOrNull.getCytoID());
                 NodeView nodeView = parentNetworkView.getNodeView(parentNode);
