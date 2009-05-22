@@ -82,12 +82,12 @@ public class LoadAllInteractionsTask extends MCVLoadTask {
                     }
                 }
             }
-        }
-        current = fis.getChannel().position();
-        percent = current * 100 / (float) max;
-        if (percent > last_percent + 1) {
-            last_percent = percent;
-            taskMonitor.setPercentCompleted(Math.round(percent));
+            current = fis.getChannel().position();
+            percent = current * 100 / (float) max;
+            if (percent > last_percent + 1) {
+                last_percent = percent;
+                taskMonitor.setPercentCompleted(Math.round(percent));
+            }
         }
     }
 }

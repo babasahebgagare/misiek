@@ -13,6 +13,7 @@ public class RootInteractionsParser {
      * 
      * @param line
      * @return
+     * @throws InteractionsFileFormatException 
      */
     public static InteractionParserStruct readInteraction(String line) throws InteractionsFileFormatException {
 
