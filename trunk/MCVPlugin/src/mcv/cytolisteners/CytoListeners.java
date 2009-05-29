@@ -44,9 +44,9 @@ public class CytoListeners {
 
                 if (PropertyName.equals("NETWORK_VIEW_CREATED")) {
                     MemoLogger.log("Network view created: " + evt.getNewValue().toString());
-                    CyNetworkView cyNetworkView = (CyNetworkView) evt.getNewValue();
+                //    CyNetworkView cyNetworkView = (CyNetworkView) evt.getNewValue();
                //     createNetworkViewListener(cyNetworkView);
-                    cyNetworkView.addNodeContextMenuListener((NodeContextMenuListener) new NodePopupMenuListener());
+            //        cyNetworkView.addNodeContextMenuListener((NodeContextMenuListener) new NodePopupMenuListener());
                 } else if (PropertyName.equals("NETWORK_VIEW_DESTROYED")) {
                     String networkName = ((DingNetworkView) evt.getNewValue()).getTitle();
 
