@@ -19,7 +19,6 @@ public class SpeciesFamilyColorPanel extends javax.swing.JPanel {
     public SpeciesFamilyColorPanel() {
         initComponents();
         tableButtonInit();
-
     }
 
     public void clean() {

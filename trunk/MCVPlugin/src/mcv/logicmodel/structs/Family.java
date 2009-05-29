@@ -2,7 +2,7 @@ package mcv.logicmodel.structs;
 
 import java.awt.Color;
 
-public class Family {
+public class Family implements Comparable<Family> {
 
     private String familyID;
     private Color color;
@@ -34,5 +34,13 @@ public class Family {
 
     public void setColor(Float r, Float g, Float b) {
         this.color = new Color(r, g, b);
+    }
+
+    public int compareTo(Family fam) {
+        if (fam == null) {
+            return -1;
+        } else {
+            return this.getFamilyID().compareTo(fam.getFamilyID());
+        }
     }
 }
