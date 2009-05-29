@@ -22,14 +22,16 @@ class JTableButtonModel extends AbstractTableModel {
     private Object[][] __rows;
 
     public JTableButtonModel() {
+        createModel();
         DataHandle dh = PluginDataHandle.getDataHandle();
-        __rows = new Object[dh.getFamilies().size()][2];
-        int i = 0;
-        for (Family family : dh.getFamilies()) {
-            __rows[i][0] = family.getFamilyID();
+
+        for (int i = 0; i < __rows.length; i++) {
+            String familyID = (String) __rows[i][0];
+            Family fam = dh.getFamily(familyID);
             JButton button = new JButton();
             button.setBorderPainted(false);
-            button.setToolTipText(family.getFamilyID());
+            button.setToolTipText(familyID);
+            button.setBackground(fam.getColor());
             button.addMouseListener(new MouseListener() {
 
                 public void mouseClicked(MouseEvent e) {
@@ -70,9 +72,7 @@ class JTableButtonModel extends AbstractTableModel {
                     //   Messenger.message("ff");
                 }
             });
-            button.setBackground(family.getColor());
             __rows[i][1] = button;
-            i++;
         }
     }
     private String[] __columns = {"Family name", "Color"};
@@ -99,6 +99,17 @@ class JTableButtonModel extends AbstractTableModel {
 
     public Class getColumnClass(int column) {
         return getValueAt(0, column).getClass();
+    }
+
+    private void createModel() {
+        DataHandle dh = PluginDataHandle.getDataHandle();
+        __rows = new Object[dh.getFamilies().size()][2];
+        int i = 0;
+        for (Family fam : dh.getFamilies()) {
+            __rows[i][0] = fam.getFamilyID();
+            //        __rows[i][1] = fam.getColor();
+            i++;
+        }
     }
 }
 

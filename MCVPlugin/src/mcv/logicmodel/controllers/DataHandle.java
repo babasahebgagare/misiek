@@ -6,6 +6,7 @@ import java.util.Map;
 import java.awt.Color;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.TreeMap;
 import mcv.logicmodel.structs.Family;
 import mcv.logicmodel.structs.Interaction;
 import mcv.logicmodel.structs.PPINetwork;
@@ -14,7 +15,7 @@ import mcv.logicmodel.structs.Protein;
 public class DataHandle {
 
     private Map<String, PPINetwork> networks = new HashMap<String, PPINetwork>();
-    private Map<String, Family> families = new HashMap<String, Family>();
+    private Map<String, Family> families = new TreeMap<String, Family>();
     private PPINetwork rootNetwork;
 
     public PPINetwork tryFindPPINetworkByProteinID(String sourceID) {
