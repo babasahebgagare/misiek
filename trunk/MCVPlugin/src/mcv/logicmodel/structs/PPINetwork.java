@@ -27,14 +27,16 @@ public class PPINetwork {
         return proteins.containsKey(ProteinID);
     }
 
-    public void addProtein(String ProteinID, Protein ParentProtein, Family Family) {
+    public Protein addProtein(String ProteinID, Protein ParentProtein, Family Family) {
         Protein protein = new Protein(ProteinID, ParentProtein, this, Family);
         proteins.put(ProteinID, protein);
+        return protein;
     }
 
-    public void addRootProtein(String ProteinID, Family Family) {
+    public Protein addRootProtein(String ProteinID, Family Family) {
         Protein protein = new Protein(ProteinID, this, Family);
         proteins.put(ProteinID, protein);
+        return protein;
     }
 
     public void deleteInteraction(String iD) {

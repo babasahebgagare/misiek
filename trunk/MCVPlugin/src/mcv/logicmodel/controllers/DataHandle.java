@@ -70,26 +70,26 @@ public class DataHandle {
         families.put(FamilyID, fam);
     }
 
-    public void createProtein(String ProteinID, String ParentProteinID, String NetworkID, String FamilyID) {
-        if (ParentProteinID != null) {
+    public Protein createProtein(String ProteinID, String parentProteinID, String NetworkID, String FamilyID) {
+        Protein protein;
+        if (parentProteinID != null) {
             PPINetwork network = networks.get(NetworkID);
-            PPINetwork ParentNetwork = network.getContext().tryGetParentNetwork();
-            Protein ParentProtein = ParentNetwork.getProteins().get(ParentProteinID);
-            while (ParentProtein == null && ParentNetwork.getContext().tryGetParentNetwork() != null) {
-                ParentNetwork = ParentNetwork.getContext().tryGetParentNetwork();
-                ParentProtein = ParentNetwork.getProteins().get(ParentProteinID);
-            }
+            PPINetwork parentNetwork = network.getContext().tryGetParentNetwork();
+
+            Protein parentProtein = parentNetwork.getProtein(parentProteinID);
             Family family = families.get(FamilyID);
-            network.addProtein(ProteinID, ParentProtein, family);
+            protein = network.addProtein(ProteinID, parentProtein, family);
         } else {
-            createRootProtein(ProteinID, NetworkID, FamilyID);
+            protein = createRootProtein(ProteinID, NetworkID, FamilyID);
         }
+        return protein;
     }
 
-    public void createRootProtein(String ProteinID, String NetworkID, String FamilyID) {
+    public Protein createRootProtein(String ProteinID, String NetworkID, String FamilyID) {
         PPINetwork network = networks.get(NetworkID);
         Family family = families.get(FamilyID);
-        network.addRootProtein(ProteinID, family);
+        Protein protein = network.addRootProtein(ProteinID, family);
+        return protein;
     }
 
     public Map<String, PPINetwork> getNetworks() {
@@ -120,7 +120,25 @@ public class DataHandle {
         return rootNetwork;
     }
 
+    public PPINetwork getNetwork(String networkID) {
+        return networks.get(networkID);
+    }
+
     public void setRootNetwork(PPINetwork rootNetwork) {
         this.rootNetwork = rootNetwork;
     }
+    /*
+    private Protein findParentProtein(String ParentProteinID, PPINetwork network) throws FamiliesTreeFormatException {
+    try {
+    PPINetwork ParentNetwork = network.getContext().tryGetParentNetwork();
+    Protein ParentProtein = null;
+    while (ParentProtein == null && ParentNetwork != null) {
+    ParentProtein = ParentNetwork.getProteins().get(ParentProteinID);
+    ParentNetwork = ParentNetwork.getContext().tryGetParentNetwork();
+    }
+    return ParentProtein;
+    } catch (Exception e) {
+    throw new FamiliesTreeFormatException(ParentProteinID, 555);
+    }
+    }*/
 }
