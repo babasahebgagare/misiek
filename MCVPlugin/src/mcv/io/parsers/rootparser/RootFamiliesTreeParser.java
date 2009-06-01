@@ -6,6 +6,8 @@ import java.util.HashSet;
 import mcv.io.exceptions.FamiliesTreeFormatException;
 import mcv.io.parsers.SpeciesParserStruct;
 import mcv.logicmodel.controllers.DataHandle;
+import mcv.logicmodel.structs.PPINetwork;
+import mcv.logicmodel.structs.Protein;
 import mcv.main.PluginDataHandle;
 import mcv.utils.ColorGenerator;
 
@@ -67,6 +69,24 @@ public class RootFamiliesTreeParser {
         return ret;
     }
 
+    private static void helpCreateProtein(String proteinID, String parentProteinID, String networkID, String familyID) throws FamiliesTreeFormatException {
+        DataHandle dh = PluginDataHandle.getDataHandle();
+
+        PPINetwork network = dh.getNetwork(networkID);
+        PPINetwork parentNetwork = network.getContext().tryGetParentNetwork();
+        Protein parentProtein = parentNetwork.getProtein(parentProteinID);
+        if (parentProtein != null) {
+            dh.createProtein(proteinID, parentProteinID, networkID, familyID);
+        } else {
+            Protein newParentProtein = parentNetwork.getProtein(familyID);
+            if (newParentProtein == null) {
+                newParentProtein = dh.createProtein(familyID, parentProteinID, parentNetwork.getID(), familyID);
+            }
+            dh.createProtein(proteinID, newParentProtein.getID(), networkID, familyID);
+        }
+
+    }
+
     private static Collection<String> readTreeSpaciesCollection(String substring) {
 
         Collection<String> ret = new HashSet<String>();
@@ -89,7 +109,7 @@ public class RootFamiliesTreeParser {
         return ret;
     }
 
-    private static void readTreeSpaciesString(String tree, String FamilyName, String parent) {
+    private static void readTreeSpaciesString(String tree, String FamilyName, String parent) throws FamiliesTreeFormatException {
         DataHandle dh = PluginDataHandle.getDataHandle();
         Collection<String> spaciesInfo = readTreeSpaciesCollection(tree);
         for (String sp : spaciesInfo) {
@@ -103,15 +123,36 @@ public class RootFamiliesTreeParser {
                         String proteinName = subNode.substring(lastBracket + 1);
                         String spaciesCollection = subNode.substring(1, lastBracket);
 
-                        dh.createProtein(proteinName, parent, struct.getNodeName(), FamilyName);
+                        helpCreateProtein(proteinName, parent, struct.getNodeName(), FamilyName);
+                        //   dh.createProtein(proteinName, parent, struct.getNodeName(), FamilyName);
                         readTreeSpaciesString(spaciesCollection, FamilyName, proteinName);
                     } else {
                         String proteinName = subNode;
-                        dh.createProtein(proteinName, parent, struct.getNodeName(), FamilyName);
+                        helpCreateProtein(proteinName, parent, struct.getNodeName(), FamilyName);
+                    //      dh.createProtein(proteinName, parent, struct.getNodeName(), FamilyName);
                     }
                 }
             }
         }
     }
+
+    /*  private void createSubstituteRootProtein(String FamilyID, PPINetwork network, String proteinID, Protein realParentProtein) throws FamiliesTreeFormatException {
+    DataHandle dh = PluginDataHandle.getDataHandle();
+    System.out.println("create root subs protein");
+    if (realParentProtein == null) {
+    System.out.println("DUPAS");
+    }
+    try {
+    PPINetwork currentNetwork = network.getContext().tryGetParentNetwork();
+    while (currentNetwork != dh.rootNetwork) {
+    if (!currentNetwork.containsProtein(FamilyID)) {
+    createProtein(FamilyID, realParentProtein.getID(), currentNetwork.getID(), FamilyID);
+    }
+    currentNetwork = currentNetwork.getContext().tryGetParentNetwork();
+    }
+    } catch (Exception e) {
+    throw new FamiliesTreeFormatException(FamilyID, 11111);
+    }
+    }*/
 }
 
