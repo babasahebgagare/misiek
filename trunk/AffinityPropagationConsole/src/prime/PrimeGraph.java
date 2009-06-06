@@ -3,6 +3,7 @@ package prime;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  *
@@ -13,7 +14,7 @@ public class PrimeGraph {
     private Map<Integer, PrimeNode> nodes;
 
     public PrimeGraph() {
-        this.nodes = new HashMap<Integer, PrimeNode>();
+        this.nodes = new TreeMap<Integer, PrimeNode>();
     }
 
     public void addEdge(Integer from, Integer to, Double sim) {
