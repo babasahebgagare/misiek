@@ -8,7 +8,7 @@ import java.util.Vector;
  *
  * @author misiek
  */
-public class Examplar {
+public class Examplar implements Comparable<Examplar> {
 
     private Map<Integer, SiblingData> siblingMap = new HashMap<Integer, SiblingData>();
     private Integer name;
@@ -74,5 +74,11 @@ public class Examplar {
         }
 
         return res;
+    }
+
+    public int compareTo(Examplar ex) {
+
+        return this.getName().compareTo(ex.getName());
+
     }
 }

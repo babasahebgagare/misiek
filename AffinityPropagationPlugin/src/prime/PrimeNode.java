@@ -7,7 +7,7 @@ import java.util.TreeMap;
  *
  * @author misiek (mw219725@gmail.com)
  */
-public class PrimeNode {
+public class PrimeNode implements Comparable<PrimeNode> {
 
     private Double distance;
     private Integer sourceName;
@@ -53,5 +53,9 @@ public class PrimeNode {
 
     public Map<Integer, Double> getEdges() {
         return edges;
+    }
+
+    public int compareTo(PrimeNode node) {
+        return this.getName().compareTo(node.getName());
     }
 }
