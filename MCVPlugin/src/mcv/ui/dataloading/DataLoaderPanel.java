@@ -23,6 +23,7 @@ public class DataLoaderPanel extends javax.swing.JPanel {
     InteractionsLoaderPanel intLoader;
     SpeciesTreeLoaderPanel speciesTree;
     GenesTreesLoaderPanel genesTree;
+    ExperimentsLoaderPanel experimentsPanel;
     JFrame parentFrame;
 
     public void setParentFrameOnTop() {
@@ -62,6 +63,10 @@ public class DataLoaderPanel extends javax.swing.JPanel {
         this.getTabbedPane().setEnabledAt(2, b);
     }
 
+    private void setEnableExperimentsTab(boolean b) {
+        this.getTabbedPane().setEnabledAt(3, b);
+    }
+
     /** Creates new form DataLoaderPanel
      * @param parentFrame
      */
@@ -78,14 +83,18 @@ public class DataLoaderPanel extends javax.swing.JPanel {
         speciesTree.setLoaderPanel(this);
         genesTree = new GenesTreesLoaderPanel(list);
         genesTree.setLoaderPanel(this);
+        experimentsPanel = new ExperimentsLoaderPanel(this);
+
         intLoader.setName("Interactions loading...");
         speciesTree.setName("Species tree loading...");
         genesTree.setName("Proteins data loading...");
+        experimentsPanel.setName("Experiments loading...");
 
         initComponents();
         this.getTabbedPane().addTab(speciesTree.getName(), speciesTree);
         this.getTabbedPane().addTab(genesTree.getName(), genesTree);
         this.getTabbedPane().addTab(intLoader.getName(), intLoader);
+        this.getTabbedPane().addTab(experimentsPanel.getName(), experimentsPanel);
 
         enableTabs();
         setActiveTab();
@@ -96,6 +105,7 @@ public class DataLoaderPanel extends javax.swing.JPanel {
         LoadedDataHandle ldh = PluginDataHandle.getLoadedDataHandle();
         setEnableProteinsTab(ldh.speciesTreeLoaded());
         setEnableInteractionsTab(ldh.isProteinsLoaded());
+        setEnableExperimentsTab(ldh.speciesTreeLoaded());
     }
 
     public JTabbedPane getTabbedPane() {
