@@ -31,7 +31,7 @@ public class DefaultInteractionsManager extends InteractionsManager {
             }
         } else if (network instanceof PPINetworkExp) {
             PPINetworkExp networkExp = (PPINetworkExp) network;
-            for(ExpInteraction expInteraction:networkExp.getInteractions().values()) {
+            for (ExpInteraction expInteraction : networkExp.getInteractions().values()) {
                 cdh.createCytoExpInteraction(expInteraction, cytoNetwork);
             }
         }
@@ -50,7 +50,7 @@ public class DefaultInteractionsManager extends InteractionsManager {
         CyNetworkView cyNetworkView = Cytoscape.getNetworkView(cytoNetwork.getCytoID());
         CyNetwork cyNetwork = cyNetworkView.getNetwork();
 
-        CytoInteractionsConverter.convertCytoNetworkInteractions(cyNetwork, cytoNetwork.getCytoInteractions());
+        CytoInteractionsConverter.convertCytoNetworkInteractions(cyNetwork, cytoNetwork.getCytoInteractions(), cytoNetwork.getCytoExpInteractions());
         CytoVisualHandle.applyVisualStyleForNetwork(cyNetworkView);
     }
 

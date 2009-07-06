@@ -9,6 +9,7 @@ import java.awt.Color;
 import mcv.main.PluginDataHandle;
 import mcv.viewmodel.controllers.CytoDataHandle;
 import mcv.viewmodel.structs.CytoAbstractPPINetwork;
+import mcv.viewmodel.structs.CytoExpInteraction;
 import mcv.viewmodel.structs.CytoInteraction;
 
 public class MCVEdgeAppearanceCalculator extends EdgeAppearanceCalculator {
@@ -27,12 +28,21 @@ public class MCVEdgeAppearanceCalculator extends EdgeAppearanceCalculator {
 
         if (cytoNetwork != null) {
             CytoInteraction cytoInteraction = cdh.getCytoInteractionByIndex(edge.getRootGraphIndex());
-            double probability = cytoInteraction.getProbability().doubleValue();
+            if (cytoInteraction != null) {
+                double probability = cytoInteraction.getProbability().doubleValue();
 
-            appr.set(VisualPropertyType.EDGE_LINE_WIDTH, new Float(probability * 5.0)); //TODO - BAD CONST
-            appr.set(VisualPropertyType.EDGE_TOOLTIP, String.valueOf(probability));
-            appr.set(VisualPropertyType.EDGE_COLOR, Color.GRAY);
+                appr.set(VisualPropertyType.EDGE_LINE_WIDTH, new Float(probability * 5.0)); //TODO - BAD CONST
+                appr.set(VisualPropertyType.EDGE_TOOLTIP, String.valueOf(probability));
+                appr.set(VisualPropertyType.EDGE_COLOR, Color.GRAY);
+            }
 
+            CytoExpInteraction cytoExpInteraction = cdh.getCytoExpInteractionByIndex(edge.getRootGraphIndex());
+            if (cytoExpInteraction != null) {
+
+                appr.set(VisualPropertyType.EDGE_LINE_WIDTH, 20.0); //TODO - BAD CONST
+                appr.set(VisualPropertyType.EDGE_TOOLTIP, cytoExpInteraction.getExpID());
+                appr.set(VisualPropertyType.EDGE_COLOR, Color.GRAY);
+            }
         }
         appr.applyBypass(edge);
     }
