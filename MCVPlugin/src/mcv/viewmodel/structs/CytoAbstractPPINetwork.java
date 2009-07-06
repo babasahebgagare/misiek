@@ -3,10 +3,15 @@ package mcv.viewmodel.structs;
 import mcv.logicmodel.structs.SpeciesTreeNode;
 import mcv.logicmodel.structs.Protein;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import mcv.utils.IDCreator;
 
 public abstract class CytoAbstractPPINetwork extends CytoObject {
 
+    private Map<String, CytoProtein> proteins = new HashMap<String, CytoProtein>();
+    private Map<String, CytoInteraction> interactions = new HashMap<String, CytoInteraction>();
+    private Map<String, CytoExpInteraction> expInteractions = new HashMap<String, CytoExpInteraction>();
     private SpeciesTreeNode network;
     private String ID;
 
@@ -22,23 +27,61 @@ public abstract class CytoAbstractPPINetwork extends CytoObject {
         return getCytoProtein(cytoProteinID) != null;
     }
 
-    public abstract void addCytoProtein(CytoProtein cytoProtein);
+    public void deleteCytoExpInteraction(String ID) {
+        expInteractions.remove(ID);
+    }
 
-    public abstract void deleteCytoInteractions();
+    public void deleteCytoExpInteractions() {
+        expInteractions = new HashMap<String, CytoExpInteraction>();
+    }
 
-    public abstract void deleteCytoProtein(String ID);
+    public void addCytoExpInteraction(CytoExpInteraction cytoExpInteraction) {
+        expInteractions.put(cytoExpInteraction.getCytoID(), cytoExpInteraction);
+    }
 
-    public abstract void deleteCytoInteraction(String ID);
+    public Collection<CytoExpInteraction> getCytoExpInteractions() {
+        return expInteractions.values();
+    }
 
-    public abstract Collection<CytoProtein> getCytoProteins();
+    public CytoExpInteraction getCytoExpInteraction(String ID) {
+        return expInteractions.get(ID);
+    }
 
-    public abstract CytoProtein getCytoProtein(String ID);
+    public void deleteCytoInteraction(String ID) {
+        interactions.remove(ID);
+    }
 
-    public abstract Collection<CytoInteraction> getCytoInteractions();
+    public void deleteCytoInteractions() {
+        interactions = new HashMap<String, CytoInteraction>();
+    }
 
-    public abstract CytoInteraction getCytoInteraction(String ID);
+    public void addCytoInteraction(CytoInteraction cytoInteraction) {
+        interactions.put(cytoInteraction.getCytoID(), cytoInteraction);
+    }
 
-    public abstract void addCytoInteraction(CytoInteraction cytoInteraction);
+    public Collection<CytoInteraction> getCytoInteractions() {
+        return interactions.values();
+    }
+
+    public CytoInteraction getCytoInteraction(String ID) {
+        return interactions.get(ID);
+    }
+
+    public void addCytoProtein(CytoProtein cytoProtein) {
+        proteins.put(cytoProtein.getCytoID(), cytoProtein);
+    }
+
+    public Collection<CytoProtein> getCytoProteins() {
+        return proteins.values();
+    }
+
+    public CytoProtein getCytoProtein(String ID) {
+        return proteins.get(ID);
+    }
+
+    public void deleteCytoProtein(String ID) {
+        proteins.remove(ID);
+    }
 
     public abstract CytoAbstractPPINetwork tryGetMother();
 

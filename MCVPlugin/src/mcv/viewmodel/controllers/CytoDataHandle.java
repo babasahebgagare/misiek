@@ -15,7 +15,6 @@ import mcv.viewmodel.structs.CytoAbstractPPINetwork;
 import mcv.viewmodel.structs.CytoGroupNode;
 import mcv.viewmodel.structs.CytoInteraction;
 import mcv.viewmodel.structs.CytoPPINetwork;
-import mcv.viewmodel.structs.CytoPPINetworkExperiments;
 import mcv.viewmodel.structs.CytoProtein;
 import mcv.viewmodel.structs.CytoProteinProjection;
 import mcv.logicmodel.structs.SpeciesTreeNode;
@@ -25,23 +24,28 @@ import mcv.viewmodel.structs.CytoPPINetworkProjectionToUp;
 import mcv.logicmodel.structs.Interaction;
 import mcv.logicmodel.structs.Protein;
 import mcv.utils.IDCreator;
+import mcv.viewmodel.structs.CytoExpInteraction;
 
 public class CytoDataHandle {
 
     private IDMapper networkIDMapper = new IDMapper();
     private Map<Integer, CytoProtein> cytoProteins = new HashMap<Integer, CytoProtein>();
     private Map<Integer, CytoInteraction> cytoInteractions = new HashMap<Integer, CytoInteraction>();
+    private Map<Integer, CytoExpInteraction> cytoExpInteractions = new HashMap<Integer, CytoExpInteraction>();
     private Map<String, CytoAbstractPPINetwork> projections = new HashMap<String, CytoAbstractPPINetwork>();
     private Map<String, CytoAbstractPPINetwork> cytoNetworks = new HashMap<String, CytoAbstractPPINetwork>();
 
     public void createCytoExpInteraction(ExpInteraction expInteraction, CytoAbstractPPINetwork cytoNetwork) {
-        
-    }
 
-    public CytoPPINetworkExperiments createCytoNetworkExperiments(String newCytoNetworkID, SpeciesTreeNode network) {
-        CytoPPINetworkExperiments cytoNetwork = new CytoPPINetworkExperiments(network, newCytoNetworkID);
-        cytoNetworks.put(newCytoNetworkID, cytoNetwork);
-        return cytoNetwork;
+        String SourceCytoID = IDCreator.createProteinProjectionID(expInteraction.getSource(), cytoNetwork);
+        String TargetCytoID = IDCreator.createProteinProjectionID(expInteraction.getTarget(), cytoNetwork);
+        String EdgeCytoID = IDCreator.createInteractionProjectionID(expInteraction.getID(), cytoNetwork);
+
+        CytoProtein source = cytoNetwork.getCytoProtein(SourceCytoID);
+        CytoProtein target = cytoNetwork.getCytoProtein(TargetCytoID);
+
+        CytoExpInteraction cytoExpInteraction = new CytoExpInteraction(EdgeCytoID, expInteraction.getExpID(), source, target, cytoNetwork);
+        cytoNetwork.addCytoExpInteraction(cytoExpInteraction);
     }
 
     public void deleteAllCytoInteractionsByNetwork(CytoAbstractPPINetwork cytoNetwork) {
@@ -94,12 +98,24 @@ public class CytoDataHandle {
         return res;
     }
 
+    public void addCytoExpInteractionMapping(int index, CytoExpInteraction object) {
+        cytoExpInteractions.put(Integer.valueOf(index), object);
+    }
+
+    public void deleteCytoExpInteractionMapping(int index) {
+        cytoExpInteractions.remove(Integer.valueOf(index));
+    }
+
     public void addCytoInteractionMapping(int index, CytoInteraction object) {
         cytoInteractions.put(Integer.valueOf(index), object);
     }
 
     public void deleteCytoInteractionMapping(int index) {
         cytoInteractions.remove(Integer.valueOf(index));
+    }
+
+    public CytoExpInteraction getCytoExpInteractionByIndex(int index) {
+        return cytoExpInteractions.get(Integer.valueOf(index));
     }
 
     public CytoInteraction getCytoInteractionByIndex(int index) {

@@ -4,13 +4,13 @@ package mcv.viewmodel.structs;
  *
  * @author misiek (mw219725@gmail.com)
  */
-public class CytoInteractionExp extends CytoNetworkObject {
+public class CytoExpInteraction extends CytoNetworkObject {
 
     private String expID;
     private CytoProtein source;
     private CytoProtein target;
 
-    public CytoInteractionExp(String CytoID, String expID, CytoProtein source, CytoProtein target, CytoAbstractPPINetwork cytoNetwork) {
+    public CytoExpInteraction(String CytoID, String expID, CytoProtein source, CytoProtein target, CytoAbstractPPINetwork cytoNetwork) {
         this.setCytoID(CytoID);
         this.setCytoNetwork(cytoNetwork);
         this.expID = expID;

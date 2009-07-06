@@ -5,7 +5,6 @@ import mcv.viewmodel.structs.CytoPPINetwork;
 import mcv.logicmodel.structs.SpeciesTreeNode;
 import mcv.main.PluginDataHandle;
 import mcv.utils.IDCreator;
-import mcv.viewmodel.structs.CytoPPINetworkExperiments;
 
 public class NetworkConverter {
 
@@ -20,14 +19,14 @@ public class NetworkConverter {
         return cytoPPINetwork;
     }
 
-    static CytoPPINetworkExperiments convertPPINetworkExp(SpeciesTreeNode network) {
-        CytoDataHandle cdh = PluginDataHandle.getCytoDataHandle();
+    /*  static CytoPPINetworkExperiments convertPPINetworkExp(SpeciesTreeNode network) {
+    CytoDataHandle cdh = PluginDataHandle.getCytoDataHandle();
 
-        String newCytoNetworkID = IDCreator.createNetCytoNetworkID(network.getID());
+    String newCytoNetworkID = IDCreator.createNetCytoNetworkID(network.getID());
 
-        CytoPPINetworkExperiments cytoPPINetwork = cdh.createCytoNetworkExperiments(newCytoNetworkID, network);
+    CytoPPINetworkExperiments cytoPPINetwork = cdh.createCytoNetworkExperiments(newCytoNetworkID, network);
 
-        ProteinsConverter.convertNetworkProteins(cytoPPINetwork, network.getProteins().values());
-        return cytoPPINetwork;
-    }
+    ProteinsConverter.convertNetworkProteins(cytoPPINetwork, network.getProteins().values());
+    return cytoPPINetwork;
+    }*/
 }

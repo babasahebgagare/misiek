@@ -5,11 +5,12 @@ import cytoscape.Cytoscape;
 import giny.model.Edge;
 import java.util.Collection;
 import mcv.main.PluginDataHandle;
+import mcv.viewmodel.structs.CytoExpInteraction;
 import mcv.viewmodel.structs.CytoInteraction;
 
 public class CytoInteractionsConverter {
 
-    public static void convertCytoNetworkInteractions(CyNetwork cyNetwork, Collection<CytoInteraction> cytoInteractions) {
+    public static void convertCytoNetworkInteractions(CyNetwork cyNetwork, Collection<CytoInteraction> cytoInteractions, Collection<CytoExpInteraction> cytoExpInteractions) {
         CytoDataHandle cdh = PluginDataHandle.getCytoDataHandle();
 
         for (CytoInteraction cytoInteraction : cytoInteractions) {
@@ -20,6 +21,16 @@ public class CytoInteractionsConverter {
             cytoInteraction.setIndex(rootID);
             cyNetwork.addEdge(rootID);
             cdh.addCytoInteractionMapping(rootID, cytoInteraction);
+        }
+
+        for (CytoExpInteraction cytoExpInteraction : cytoExpInteractions) {
+            int rootID = Cytoscape.getRootGraph().createEdge(cytoExpInteraction.getSource().getIndex(), cytoExpInteraction.getTarget().getIndex());
+
+            Edge edge = Cytoscape.getRootGraph().getEdge(rootID);
+            edge.setIdentifier(cytoExpInteraction.getCytoID());
+            cytoExpInteraction.setIndex(rootID);
+            cyNetwork.addEdge(rootID);
+            cdh.addCytoExpInteractionMapping(rootID, cytoExpInteraction);
         }
     }
 }
