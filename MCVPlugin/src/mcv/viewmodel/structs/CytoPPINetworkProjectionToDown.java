@@ -1,6 +1,6 @@
 package mcv.viewmodel.structs;
 
-import mcv.logicmodel.structs.PPINetwork;
+import mcv.logicmodel.structs.SpeciesTreeNode;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +9,7 @@ public class CytoPPINetworkProjectionToDown extends CytoPPINetworkProjection {
 
     private Map<String, CytoGroupNode> cytoGroupNodes = new HashMap<String, CytoGroupNode>();
 
-    public CytoPPINetworkProjectionToDown(CytoAbstractPPINetwork cytoMotherNetwork, PPINetwork network, String ID) {
+    public CytoPPINetworkProjectionToDown(CytoAbstractPPINetwork cytoMotherNetwork, SpeciesTreeNode network, String ID) {
         super(cytoMotherNetwork, network, ID);
     }
 

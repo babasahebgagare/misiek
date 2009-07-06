@@ -20,7 +20,7 @@ import mcv.logicmodel.controllers.DataHandle;
 import mcv.logicmodel.controllers.NetworksConverter;
 import mcv.viewmodel.structs.CytoAbstractPPINetwork;
 import mcv.viewmodel.structs.CytoProtein;
-import mcv.logicmodel.structs.PPINetwork;
+import mcv.logicmodel.structs.SpeciesTreeNode;
 import mcv.main.PluginDataHandle;
 import mcv.utils.JTreeModelSpeciesGenerator;
 import mcv.utils.Messenger;
@@ -85,9 +85,9 @@ public class DefaultUIController extends UIController {
     }
 
     @Override
-    public Collection<PPINetwork> getSelectedNetworks() {
+    public Collection<SpeciesTreeNode> getSelectedNetworks() {
         DataHandle dh = PluginDataHandle.getDataHandle();
-        Collection<PPINetwork> networks = new HashSet<PPINetwork>();
+        Collection<SpeciesTreeNode> networks = new HashSet<SpeciesTreeNode>();
 
         TreePath[] paths = PluginMenusHandle.getTree().getSelectionPaths();
         if (paths != null) {
@@ -158,7 +158,7 @@ public class DefaultUIController extends UIController {
 
     @Override
     public void showSelectedNetworks() {
-        Collection<PPINetwork> networks = UIController.getInstance().getSelectedNetworks();
+        Collection<SpeciesTreeNode> networks = UIController.getInstance().getSelectedNetworks();
         if (networks.size() > 0) {
             NetworksConverter.convertNetworks(networks);
             PluginMenusHandle.getDoProjectionButton().setEnabled(true);
@@ -209,5 +209,4 @@ public class DefaultUIController extends UIController {
         int index = panel.indexOfComponent(PluginMenusHandle.getMcvPanel());
         panel.setSelectedIndex(index);
     }
-
 }

@@ -6,7 +6,7 @@ import java.util.HashSet;
 import mcv.io.exceptions.FamiliesTreeFormatException;
 import mcv.io.parsers.SpeciesParserStruct;
 import mcv.logicmodel.controllers.DataHandle;
-import mcv.logicmodel.structs.PPINetwork;
+import mcv.logicmodel.structs.SpeciesTreeNode;
 import mcv.logicmodel.structs.Protein;
 import mcv.main.PluginDataHandle;
 import mcv.utils.ColorGenerator;
@@ -72,8 +72,8 @@ public class RootFamiliesTreeParser {
     private static void helpCreateProtein(String proteinID, String parentProteinID, String networkID, String familyID) throws FamiliesTreeFormatException {
         DataHandle dh = PluginDataHandle.getDataHandle();
 
-        PPINetwork network = dh.getNetwork(networkID);
-        PPINetwork parentNetwork = network.getContext().tryGetParentNetwork();
+        SpeciesTreeNode network = dh.getNetwork(networkID);
+        SpeciesTreeNode parentNetwork = network.getContext().tryGetParentNetwork();
         Protein parentProtein = parentNetwork.getProtein(parentProteinID);
         if (parentProtein != null) {
             dh.createProtein(proteinID, parentProteinID, networkID, familyID);

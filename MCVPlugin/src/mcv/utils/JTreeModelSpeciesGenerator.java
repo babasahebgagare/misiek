@@ -7,7 +7,7 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
 import mcv.logicmodel.controllers.DataHandle;
-import mcv.logicmodel.structs.PPINetwork;
+import mcv.logicmodel.structs.SpeciesTreeNode;
 import mcv.main.PluginDataHandle;
 import mcv.ui.PluginResources;
 
@@ -35,13 +35,13 @@ public class JTreeModelSpeciesGenerator {
         return newModel;
     }
 
-    private static TreeNode createRecTreeModel(PPINetwork rootNetwork) {
+    private static TreeNode createRecTreeModel(SpeciesTreeNode rootNetwork) {
         if (rootNetwork == null) {
             return null;
         } else {
             TreeNode ret = new TreeNode(rootNetwork.getID());
 
-            for (PPINetwork child : rootNetwork.getContext().getChildrenNetworks()) {
+            for (SpeciesTreeNode child : rootNetwork.getContext().getChildrenNetworks()) {
                 TreeNode childNode = createRecTreeModel(child);
                 if (childNode != null) {
                     ret.addChild(childNode);

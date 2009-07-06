@@ -21,6 +21,7 @@ import mcv.io.listeners.InteractionsLoadingErrorsListener;
 import mcv.logicmodel.controllers.DataHandle;
 import mcv.logicmodel.structs.Interaction;
 import mcv.logicmodel.structs.PPINetwork;
+import mcv.logicmodel.structs.SpeciesTreeNode;
 import mcv.main.LoadedDataHandle;
 import mcv.main.PluginDataHandle;
 import mcv.ui.listeners.InteractionsLoadedListener;
@@ -392,7 +393,7 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
         for (SpeciesInteractionsLoaderPanel speciesPanel : panels) {
 
             String speciesName = speciesPanel.getSpeciesName();
-            PPINetwork network = PluginDataHandle.getDataHandle().getNetworks().get(speciesName);
+            PPINetwork network = PluginDataHandle.getDataHandle().getPPINetwork(speciesName);
             if (speciesPanel.checked()) {
                 String filename = speciesPanel.tryGetFilepath();
                 if (filename != null) {
@@ -416,7 +417,7 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
             for (OneFileSpeciesInteractionsLoaderPanel oneFileSpeciesPanel : oneFilePanels) {
 
                 String speciesName = oneFileSpeciesPanel.getSpeciesName();
-                PPINetwork network = PluginDataHandle.getDataHandle().getNetworks().get(speciesName);
+                SpeciesTreeNode network = PluginDataHandle.getDataHandle().getNetworks().get(speciesName);
                 network.deleteAllInteractions();
                 PluginDataHandle.getLoadedDataHandle().deleteInteractionData(speciesName);
                 if (oneFileSpeciesPanel.checked()) {

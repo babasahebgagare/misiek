@@ -3,7 +3,7 @@ package mcv.logicmodel.controllers;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
-import mcv.logicmodel.structs.PPINetwork;
+import mcv.logicmodel.structs.SpeciesTreeNode;
 import mcv.logicmodel.structs.Protein;
 import mcv.main.PluginDataHandle;
 import mcv.utils.MemoLogger;
@@ -17,7 +17,7 @@ public class ProjectorInfoCalculator {
 
     }
 
-    private static void addProjectorInfoForNetworks(PPINetwork downNetwork, PPINetwork upNetwork) {
+    private static void addProjectorInfoForNetworks(SpeciesTreeNode downNetwork, SpeciesTreeNode upNetwork) {
         if (downNetwork != upNetwork) {
             downNetwork.getContext().getHierarchy().addNetworkAbove(upNetwork);
             upNetwork.getContext().getHierarchy().addNetworkBelow(downNetwork);
@@ -26,8 +26,8 @@ public class ProjectorInfoCalculator {
 
     private static void addProjectorInfoForProteins(Protein Down, Protein Up) {
 
-        PPINetwork DownNetwork = Down.getContext().getNetwork();
-        PPINetwork UpNetwork = Up.getContext().getNetwork();
+        SpeciesTreeNode DownNetwork = Down.getContext().getNetwork();
+        SpeciesTreeNode UpNetwork = Up.getContext().getNetwork();
 
         Map<String, Collection<Protein>> UpMap = Down.getProjects().getProjectorMapUp();
         Map<String, Collection<Protein>> DownMap = Up.getProjects().getProjectorMapDown();
@@ -43,8 +43,8 @@ public class ProjectorInfoCalculator {
         DownMap.get(DownNetwork.getID()).add(Down);
     }
 
-    private static void calculateInfoForNetwork(PPINetwork network) {
-        PPINetwork upNetworkOrNull = network;
+    private static void calculateInfoForNetwork(SpeciesTreeNode network) {
+        SpeciesTreeNode upNetworkOrNull = network;
 
         MemoLogger.log("network search: " + network.getID());
         while (upNetworkOrNull != null) {
@@ -74,9 +74,9 @@ public class ProjectorInfoCalculator {
 
     private static void calculateProteinsInfo() {
         DataHandle dh = PluginDataHandle.getDataHandle();
-        Collection<PPINetwork> networks = dh.getNetworks().values();
+        Collection<SpeciesTreeNode> networks = dh.getNetworks().values();
 
-        for (PPINetwork network : networks) {
+        for (SpeciesTreeNode network : networks) {
 
             Collection<Protein> proteins = network.getProteins().values();
 
@@ -89,9 +89,9 @@ public class ProjectorInfoCalculator {
 
     private static void calculateNetworkTreeInfo() {
         DataHandle dh = PluginDataHandle.getDataHandle();
-        Collection<PPINetwork> networks = dh.getNetworks().values();
+        Collection<SpeciesTreeNode> networks = dh.getNetworks().values();
 
-        for (PPINetwork network : networks) {
+        for (SpeciesTreeNode network : networks) {
             calculateInfoForNetwork(network);
         }
     }

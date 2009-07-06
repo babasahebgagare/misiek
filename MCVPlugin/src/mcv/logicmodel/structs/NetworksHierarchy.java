@@ -5,46 +5,46 @@ import java.util.HashSet;
 
 public class NetworksHierarchy {
 
-    private Collection<PPINetwork> networksAbove = new HashSet<PPINetwork>();
-    private Collection<PPINetwork> networksBelow = new HashSet<PPINetwork>();
-    private PPINetwork thisNetwork;
+    private Collection<SpeciesTreeNode> networksAbove = new HashSet<SpeciesTreeNode>();
+    private Collection<SpeciesTreeNode> networksBelow = new HashSet<SpeciesTreeNode>();
+    private SpeciesTreeNode thisNetwork;
 
     public enum NetworkPosition {
 
         ABOVE, BELOW, NEIGHBOUR, THIS_NETWORK
     }
 
-    public NetworksHierarchy(PPINetwork thisNetwork) {
+    public NetworksHierarchy(SpeciesTreeNode thisNetwork) {
         this.thisNetwork = thisNetwork;
     }
 
-    public void addNetworkBelow(PPINetwork network) {
+    public void addNetworkBelow(SpeciesTreeNode network) {
         networksBelow.add(network);
 
 
     }
 
-    public void addNetworkAbove(PPINetwork network) {
+    public void addNetworkAbove(SpeciesTreeNode network) {
         networksAbove.add(network);
     }
 
-    public Collection<PPINetwork> getNetworksAbove() {
+    public Collection<SpeciesTreeNode> getNetworksAbove() {
         return networksAbove;
     }
 
-    public void setNetworksAbove(Collection<PPINetwork> networksAbove) {
+    public void setNetworksAbove(Collection<SpeciesTreeNode> networksAbove) {
         this.networksAbove = networksAbove;
     }
 
-    public Collection<PPINetwork> getNetworksBelow() {
+    public Collection<SpeciesTreeNode> getNetworksBelow() {
         return networksBelow;
     }
 
-    public void setNetworksBelow(Collection<PPINetwork> networksBelow) {
+    public void setNetworksBelow(Collection<SpeciesTreeNode> networksBelow) {
         this.networksBelow = networksBelow;
     }
 
-    public NetworkPosition getNetworkPosition(PPINetwork network) {
+    public NetworkPosition getNetworkPosition(SpeciesTreeNode network) {
         if (networksAbove.contains(network)) {
             return NetworkPosition.ABOVE;
         } else if (networksBelow.contains(network)) {

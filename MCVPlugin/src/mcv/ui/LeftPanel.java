@@ -12,7 +12,7 @@ import javax.help.CSH;
 import javax.swing.JOptionPane;
 import mcv.help.MCVHelpBroker;
 import mcv.viewmodel.structs.CytoProtein;
-import mcv.logicmodel.structs.PPINetwork;
+import mcv.logicmodel.structs.SpeciesTreeNode;
 import mcv.main.PluginDataHandle;
 import mcv.ui.dataloading.DefaultLoadingController;
 import mcv.utils.JTreeModelSpeciesGenerator;
@@ -275,7 +275,7 @@ public class LeftPanel extends javax.swing.JPanel {
 }//GEN-LAST:event_showButtonActionPerformed
 
 private void projectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_projectButtonActionPerformed
-    Collection<PPINetwork> networks = UIController.getInstance().getSelectedNetworks();
+    Collection<SpeciesTreeNode> networks = UIController.getInstance().getSelectedNetworks();
     Collection<CytoProtein> selectedProteins = UIController.getInstance().getSelectedProteins(Cytoscape.getCurrentNetwork());
 
     if (selectedProteins.size() > 0) {

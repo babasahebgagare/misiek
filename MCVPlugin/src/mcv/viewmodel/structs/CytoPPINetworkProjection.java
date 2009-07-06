@@ -1,6 +1,6 @@
 package mcv.viewmodel.structs;
 
-import mcv.logicmodel.structs.PPINetwork;
+import mcv.logicmodel.structs.SpeciesTreeNode;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -8,11 +8,11 @@ import java.util.Map;
 
 public class CytoPPINetworkProjection extends CytoAbstractPPINetwork {
 
-    private Map<String, CytoProteinProjection> proteins = new HashMap<String, CytoProteinProjection>();
+    private Map<String, CytoProtein> proteins = new HashMap<String, CytoProtein>();
     private Map<String, CytoInteraction> interactions = new HashMap<String, CytoInteraction>();
     private CytoAbstractPPINetwork cytoMotherNetwork;
 
-    public CytoPPINetworkProjection(CytoAbstractPPINetwork cytoMotherNetwork, PPINetwork network, String ID) {
+    public CytoPPINetworkProjection(CytoAbstractPPINetwork cytoMotherNetwork, SpeciesTreeNode network, String ID) {
         super(network, ID);
         this.cytoMotherNetwork = cytoMotherNetwork;
     }
@@ -25,15 +25,15 @@ public class CytoPPINetworkProjection extends CytoAbstractPPINetwork {
         interactions.put(cytoInteractionProjection.getCytoID(), cytoInteractionProjection);
     }
 
-    public Collection<CytoProteinProjection> getCytoProteinsProjections() {
+    public Collection<CytoProtein> getCytoProteinsProjections() {
         return proteins.values();
     }
 
     @Override
     public Collection<CytoProtein> getCytoProteins() {
         Collection<CytoProtein> ret = new HashSet<CytoProtein>();
-        for (CytoProteinProjection cytoProteinProjection : proteins.values()) {
-            ret.add(cytoProteinProjection);
+        for (CytoProtein cytoProtein : proteins.values()) {
+            ret.add(cytoProtein);
         }
         return ret;
     }
@@ -79,5 +79,10 @@ public class CytoPPINetworkProjection extends CytoAbstractPPINetwork {
     @Override
     public CytoAbstractPPINetwork tryGetMother() {
         return cytoMotherNetwork;
+    }
+
+    @Override
+    public void addCytoProtein(CytoProtein cytoProtein) {
+        proteins.put(cytoProtein.getCytoID(), cytoProtein);
     }
 }

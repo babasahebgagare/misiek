@@ -3,35 +3,35 @@ package mcv.logicmodel.structs;
 import java.util.Collection;
 import java.util.HashSet;
 
-public class PPINetworkContext {
+public class SpeciesTreeNodeContext {
 
-    private PPINetwork parentNetwork;
-    private Collection<PPINetwork> childrenNetworks;
+    private SpeciesTreeNode parentNetwork;
+    private Collection<SpeciesTreeNode> childrenNetworks;
     private NetworksHierarchy hierarchy;
 
-    public PPINetworkContext(PPINetwork ParentNetwork, PPINetwork thisNetwork) {
+    public SpeciesTreeNodeContext(SpeciesTreeNode ParentNetwork, SpeciesTreeNode thisNetwork) {
         this.parentNetwork = ParentNetwork;
-        this.childrenNetworks = new HashSet<PPINetwork>();
+        this.childrenNetworks = new HashSet<SpeciesTreeNode>();
         this.hierarchy = new NetworksHierarchy(thisNetwork);
     }
 
-    public void addChild(PPINetwork child) {
+    public void addChild(SpeciesTreeNode child) {
         childrenNetworks.add(child);
     }
 
-    public PPINetwork tryGetParentNetwork() {
+    public SpeciesTreeNode tryGetParentNetwork() {
         return parentNetwork;
     }
 
-    public void setParentNetwork(PPINetwork ParentNetwork) {
+    public void setParentNetwork(SpeciesTreeNode ParentNetwork) {
         this.parentNetwork = ParentNetwork;
     }
 
-    public Collection<PPINetwork> getChildrenNetworks() {
+    public Collection<SpeciesTreeNode> getChildrenNetworks() {
         return childrenNetworks;
     }
 
-    public void setChildrenNetworks(Collection<PPINetwork> ChildrenNetworks) {
+    public void setChildrenNetworks(Collection<SpeciesTreeNode> ChildrenNetworks) {
         this.childrenNetworks = ChildrenNetworks;
     }
 

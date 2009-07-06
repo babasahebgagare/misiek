@@ -8,14 +8,14 @@ import mcv.viewmodel.structs.CytoPPINetworkProjectionToDown;
 import mcv.viewmodel.structs.CytoPPINetworkProjectionToUp;
 import mcv.viewmodel.structs.CytoProtein;
 import mcv.viewmodel.structs.CytoProteinProjection;
-import mcv.logicmodel.structs.PPINetwork;
+import mcv.logicmodel.structs.SpeciesTreeNode;
 import mcv.logicmodel.structs.Protein;
 import mcv.main.PluginDataHandle;
 import mcv.utils.IDCreator;
 
 public class ProjectorNetwork {
 
-    public static CytoPPINetworkProjectionToDown projectProteinsToDownOnNetwork(Collection<CytoProtein> selectedProteins, PPINetwork networkTarget, CytoAbstractPPINetwork cytoNetworkSource) {
+    public static CytoPPINetworkProjectionToDown projectProteinsToDownOnNetwork(Collection<CytoProtein> selectedProteins, SpeciesTreeNode networkTarget, CytoAbstractPPINetwork cytoNetworkSource) {
         CytoDataHandle cdh = PluginDataHandle.getCytoDataHandle();
 
         String projectionID = IDCreator.createNetworkProjectionID(networkTarget, cytoNetworkSource);
@@ -29,7 +29,7 @@ public class ProjectorNetwork {
         return projection;
     }
 
-    public static CytoPPINetworkProjectionToUp projectProteinsToUpOnNetwork(Collection<CytoProtein> selectedProteins, PPINetwork networkTarget, CytoAbstractPPINetwork cytoNetworkSource) {
+    public static CytoPPINetworkProjectionToUp projectProteinsToUpOnNetwork(Collection<CytoProtein> selectedProteins, SpeciesTreeNode networkTarget, CytoAbstractPPINetwork cytoNetworkSource) {
         CytoDataHandle cdh = PluginDataHandle.getCytoDataHandle();
 
         String projectionID = IDCreator.createNetworkProjectionID(networkTarget, cytoNetworkSource);

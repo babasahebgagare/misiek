@@ -1,5 +1,6 @@
 package mcv.io;
 
+import mcv.io.listeners.ExperimentsLoadingErrorsListener;
 import mcv.io.readers.tasks.TasksDataReader;
 import java.util.Map;
 import mcv.io.listeners.FamiliesLoadingErrorsListener;
@@ -14,6 +15,8 @@ public abstract class AbstractDataReader {
     public static AbstractDataReader getInstance() {
         return reader;
     }
+
+    public abstract void readAllExperiments(String filepath, ExperimentsLoadingErrorsListener errorListener);
 
     public abstract void readSpeciesInteractions(PPINetwork network, String filepath, Double treshold, InteractionsLoadingErrorsListener errorListener);
 

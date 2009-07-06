@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import mcv.main.LoadedDataHandle;
 import mcv.main.PluginDataHandle;
+import mcv.ui.listeners.ExperimentsLoadedListener;
 import mcv.ui.listeners.InteractionsLoadedListener;
 import mcv.ui.listeners.ProteinsLoadedListener;
 import mcv.ui.listeners.SpeciesLoadedListener;
@@ -78,12 +79,13 @@ public class DataLoaderPanel extends javax.swing.JPanel {
 
         ProteinsLoadedListener list = new ProteinsLoadedListener(this, intLoader);
         SpeciesLoadedListener list2 = new SpeciesLoadedListener(this);
+        ExperimentsLoadedListener expList = new ExperimentsLoadedListener(this);
 
         speciesTree = new SpeciesTreeLoaderPanel(list2);
         speciesTree.setLoaderPanel(this);
         genesTree = new GenesTreesLoaderPanel(list);
         genesTree.setLoaderPanel(this);
-        experimentsPanel = new ExperimentsLoaderPanel(this);
+        experimentsPanel = new ExperimentsLoaderPanel(this, expList);
 
         intLoader.setName("Interactions loading...");
         speciesTree.setName("Species tree loading...");
@@ -105,7 +107,7 @@ public class DataLoaderPanel extends javax.swing.JPanel {
         LoadedDataHandle ldh = PluginDataHandle.getLoadedDataHandle();
         setEnableProteinsTab(ldh.speciesTreeLoaded());
         setEnableInteractionsTab(ldh.isProteinsLoaded());
-        setEnableExperimentsTab(ldh.speciesTreeLoaded());
+        setEnableExperimentsTab(ldh.isProteinsLoaded());
     }
 
     public JTabbedPane getTabbedPane() {

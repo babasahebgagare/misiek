@@ -9,14 +9,14 @@ public class Protein {
     private ProteinContext context;
     private ProjectorInfo projects;
 
-    public Protein(String ID, PPINetwork Network, Family fam) {
+    public Protein(String ID, SpeciesTreeNode Network, Family fam) {
         this.ID = ID;
         this.family = fam;
         this.context = new ProteinContext(Network, null);
         this.projects = new ProjectorInfo();
     }
 
-    public Protein(String ID, Protein ParentProtein, PPINetwork Network, Family fam) {
+    public Protein(String ID, Protein ParentProtein, SpeciesTreeNode Network, Family fam) {
         this.ID = ID;
         this.family = fam;
         this.context = new ProteinContext(Network, ParentProtein);
