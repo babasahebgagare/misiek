@@ -1,30 +1,29 @@
 package mcv.io.readers.tasks;
 
+import mcv.io.exceptions.ExperimentsFileFormatException;
 import mcv.io.exceptions.InteractionsFileFormatException;
-import mcv.io.parsers.rootparser.RootInteractionsParser;
 import java.io.IOException;
-import java.util.Map;
-import mcv.io.parsers.InteractionParserStruct;
+import mcv.io.parsers.ExperimentParserStruct;
+import mcv.io.parsers.rootparser.RootExperimentsParser;
 import mcv.logicmodel.controllers.DataHandle;
+import mcv.logicmodel.structs.PPINetworkExp;
 import mcv.logicmodel.structs.SpeciesTreeNode;
 import mcv.main.PluginDataHandle;
 import mcv.utils.IDCreator;
 
-public class LoadAllInteractionsTask extends MCVLoadTask {
+public class LoadAllExperimentsTask extends MCVLoadTask {
 
-    private Map<String, Double> tresholds;
     private long current;
     private int created = 0;
     private int all = 0;
 
-    LoadAllInteractionsTask(String intpath, Map<String, Double> tresholds) {
-        super(intpath);
-        this.tresholds = tresholds;
+    LoadAllExperimentsTask(String exppath) {
+        super(exppath);
     }
 
     public void run() {
         myThread = Thread.currentThread();
-        taskMonitor.setStatus("Interactions loading...");
+        taskMonitor.setStatus("Experiments loading...");
         taskMonitor.setPercentCompleted(-1);
 
         try {
@@ -36,7 +35,7 @@ public class LoadAllInteractionsTask extends MCVLoadTask {
             //MemoLogger.log("Loaded: " + Math.round((double) created * 100 / (double) all) + "% up than treshold");
             taskMonitor.setPercentCompleted(100);
             doneActionPerformed();
-        } catch (InteractionsFileFormatException ex) {
+        } catch (ExperimentsFileFormatException ex) {
             sendErrorEvent(ex);
         } catch (IOException ex) {
             sendErrorEvent(ex);
@@ -54,34 +53,29 @@ public class LoadAllInteractionsTask extends MCVLoadTask {
         return "Loading interactions with tresholds...";
     }
 
-    private void reading() throws IOException, InteractionsFileFormatException {
+    private void reading() throws IOException, ExperimentsFileFormatException {
         DataHandle dh = PluginDataHandle.getDataHandle();
         float percent = 0;
         float last_percent = 0;
         while (br.ready()) {
             all++;
-            InteractionParserStruct interaction = null;
+            ExperimentParserStruct interaction = null;
             String line = br.readLine();
 
-            interaction = RootInteractionsParser.readInteraction(line);
-            String SourceID = interaction.getFrom();
-            String TargetID = interaction.getTo();
-            Double probability = interaction.getSim();
+            interaction = RootExperimentsParser.readExperiment(line);
+            String speciesName = interaction.getSpeciesName();
 
-            SpeciesTreeNode netOrNull = dh.tryFindPPINetworkByProteinID(SourceID);
+            String expNetworkName = IDCreator.createExpNetworkID(speciesName);
+            PPINetworkExp netOrNull = dh.tryGetExpPPINetowrk(expNetworkName);
 
-            if (netOrNull != null) {
-                if (tresholds.containsKey(netOrNull.getID())) {
-                    Double treshold = tresholds.get(netOrNull.getID());
-
-                    if (treshold == null || probability > treshold) {
-                        String EdgeID = IDCreator.createInteractionID(SourceID, TargetID);
-
-                        dh.createInteraction(EdgeID, SourceID, TargetID, probability);
-                        created++;
-                    }
-                }
+            if (netOrNull == null) {
+                netOrNull = dh.createExpPPINetwork(speciesName, expNetworkName);
             }
+
+            String edgeID = IDCreator.createExpInteractionID(interaction);
+
+            dh.createInteractionExp(netOrNull, edgeID, interaction);
+            created++;
             current = fis.getChannel().position();
             percent = current * 100 / (float) max;
             if (percent > last_percent + 1) {

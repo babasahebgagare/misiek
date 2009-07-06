@@ -1,13 +1,22 @@
 package mcv.utils;
 
+import mcv.io.parsers.ExperimentParserStruct;
 import mcv.viewmodel.structs.CytoAbstractPPINetwork;
 import mcv.viewmodel.structs.CytoProtein;
-import mcv.logicmodel.structs.PPINetwork;
+import mcv.logicmodel.structs.SpeciesTreeNode;
 import mcv.logicmodel.structs.Protein;
 
 public class IDCreator {
 
     private static int networkID = 0;
+
+    public static String createExpInteractionID(ExperimentParserStruct interaction) {
+        return interaction.getFrom() + "_" + interaction.getTo() + "_" + interaction.getExpID();
+    }
+
+    public static String createExpNetworkID(String speciesName) {
+        return speciesName + "_EXP";
+    }
 
     public static String createInteractionID(String SourceID, String TargetID) {
         return SourceID + "-" + TargetID;
@@ -31,7 +40,7 @@ public class IDCreator {
         return ID;
     }
 
-    public static String createNetworkProjectionID(PPINetwork networkTarget, CytoAbstractPPINetwork cytoNetworkSource) {
+    public static String createNetworkProjectionID(SpeciesTreeNode networkTarget, CytoAbstractPPINetwork cytoNetworkSource) {
         networkID++;
         return "PROJ_" + cytoNetworkSource.getID() + "_ON_" + networkTarget.getID() + "_" + String.valueOf(networkID);
     }

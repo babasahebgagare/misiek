@@ -1,10 +1,10 @@
 package mcv.viewmodel.structs;
 
-import mcv.logicmodel.structs.PPINetwork;
+import mcv.logicmodel.structs.SpeciesTreeNode;
 
 public class CytoPPINetworkProjectionToUp extends CytoPPINetworkProjection {
 
-    public CytoPPINetworkProjectionToUp(CytoAbstractPPINetwork cytoMotherNetwork, PPINetwork network, String ID) {
+    public CytoPPINetworkProjectionToUp(CytoAbstractPPINetwork cytoMotherNetwork, SpeciesTreeNode network, String ID) {
         super(cytoMotherNetwork, network, ID);
     }
 }

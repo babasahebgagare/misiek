@@ -3,11 +3,14 @@ package mcv.controllers.interactions;
 import cytoscape.CyNetwork;
 import cytoscape.Cytoscape;
 import cytoscape.view.CyNetworkView;
+import mcv.logicmodel.structs.ExpInteraction;
 import mcv.viewmodel.controllers.CytoInteractionsConverter;
 import mcv.viewmodel.controllers.CytoDataHandle;
 import mcv.viewmodel.structs.CytoAbstractPPINetwork;
 import mcv.logicmodel.structs.Interaction;
 import mcv.logicmodel.structs.PPINetwork;
+import mcv.logicmodel.structs.PPINetworkExp;
+import mcv.logicmodel.structs.SpeciesTreeNode;
 import mcv.main.PluginDataHandle;
 import mcv.viewmodel.controllers.CytoVisualHandle;
 
@@ -17,14 +20,20 @@ public class DefaultInteractionsManager extends InteractionsManager {
     public void loadInteractionsFromModel(CytoAbstractPPINetwork cytoNetwork) {
         CytoDataHandle cdh = PluginDataHandle.getCytoDataHandle();
 
-        PPINetwork network = cytoNetwork.getNetwork();
-        System.out.println(network.getInteractions().size());
+        SpeciesTreeNode network = cytoNetwork.getNetwork();
+        //System.out.println(network.getInteractions().size());
+        if (network instanceof PPINetwork) {
 
-        for (Interaction interaction : network.getInteractions().values()) {
+            PPINetwork networkPPI = (PPINetwork) network;
 
-            //     if (interaction.getProbability().doubleValue() >= treshold) {
-            cdh.createCytoInteraction(interaction, cytoNetwork);
-        //    }
+            for (Interaction interaction : networkPPI.getInteractions().values()) {
+                cdh.createCytoInteraction(interaction, cytoNetwork);
+            }
+        } else if (network instanceof PPINetworkExp) {
+            PPINetworkExp networkExp = (PPINetworkExp) network;
+            for(ExpInteraction expInteraction:networkExp.getInteractions().values()) {
+                cdh.createCytoExpInteraction(expInteraction, cytoNetwork);
+            }
         }
     }
 

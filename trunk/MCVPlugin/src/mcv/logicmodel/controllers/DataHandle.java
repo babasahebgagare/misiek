@@ -7,24 +7,70 @@ import java.awt.Color;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.TreeMap;
+import mcv.io.parsers.ExperimentParserStruct;
+import mcv.logicmodel.structs.ExpInteraction;
 import mcv.logicmodel.structs.Family;
 import mcv.logicmodel.structs.Interaction;
 import mcv.logicmodel.structs.PPINetwork;
+import mcv.logicmodel.structs.PPINetworkExp;
+import mcv.logicmodel.structs.SpeciesTreeNode;
 import mcv.logicmodel.structs.Protein;
 
 public class DataHandle {
 
-    private Map<String, PPINetwork> networks = new HashMap<String, PPINetwork>();
+    private Map<String, SpeciesTreeNode> networks = new HashMap<String, SpeciesTreeNode>();
     private Map<String, Family> families = new TreeMap<String, Family>();
-    private PPINetwork rootNetwork;
+    private SpeciesTreeNode rootNetwork;
 
-    public PPINetwork tryFindPPINetworkByProteinID(String sourceID) {
-        for (PPINetwork network : networks.values()) {
+    public PPINetworkExp createExpPPINetwork(String speciesName, String expNetworkName) {
+        SpeciesTreeNode parentNetwork = networks.get(speciesName);
+        System.out.println("searching: " + speciesName);
+        if (parentNetwork == null) {
+            System.out.println("PARENT NULL");
+        }
+        PPINetworkExp net = new PPINetworkExp(expNetworkName, parentNetwork);
+        parentNetwork.getContext().addChild(net);
+        networks.put(expNetworkName, net);
+        return net;
+    }
+
+    public void createInteractionExp(PPINetworkExp netExp, String edgeID, ExperimentParserStruct interaction) {
+        Protein source = createProteinIfNeeded(netExp, interaction.getFrom(), interaction);
+        Protein target = createProteinIfNeeded(netExp, interaction.getTo(), interaction);
+        if (source != null && target != null) {
+            String expID = interaction.getExpID();
+            ExpInteraction expInteraction = new ExpInteraction(expID, source, target, edgeID, netExp);
+            netExp.addInteraction(expInteraction);
+        }
+    }
+
+    public PPINetwork getPPINetwork(String speciesName) {
+        SpeciesTreeNode node = networks.get(speciesName);
+        if (node == null) {
+            return null;
+        } else if (node instanceof PPINetwork) {
+            return (PPINetwork) node;
+        } else {
+            return null;
+        }
+    }
+
+    public SpeciesTreeNode tryFindPPINetworkByProteinID(String sourceID) {
+        for (SpeciesTreeNode network : networks.values()) {
             if (network.containsProtein(sourceID)) {
                 return network;
             }
         }
         return null;
+    }
+
+    public PPINetworkExp tryGetExpPPINetowrk(String expNetworkName) {
+        SpeciesTreeNode node = networks.get(expNetworkName);
+        if (node instanceof PPINetworkExp) {
+            return (PPINetworkExp) node;
+        } else {
+            return null;
+        }
     }
 
     private void addInteractionProbabilityAttribute(String cannonName, Double probability) {
@@ -43,10 +89,12 @@ public class DataHandle {
     }
 
     public void createInteraction(String EdgeID, String SourceID, String TargetID, Double Probability) {
-        for (PPINetwork network : networks.values()) {
+        for (SpeciesTreeNode network : networks.values()) {
 
-            if (network.containsProtein(TargetID) && network.containsProtein(SourceID)) {
-                createInteraction(EdgeID, SourceID, TargetID, Probability, network);
+            if (network instanceof PPINetwork) {
+                if (network.containsProtein(TargetID) && network.containsProtein(SourceID)) {
+                    createInteraction(EdgeID, SourceID, TargetID, Probability, (PPINetwork) network);
+                }
             }
         }
     }
@@ -59,7 +107,7 @@ public class DataHandle {
 
     public void createPPINetwork(String NetworkID, String ParentNetworkID) {
         //  if (!networks.containsKey(NetworkID)) {
-        PPINetwork ParentNetwork = networks.get(ParentNetworkID);
+        SpeciesTreeNode ParentNetwork = networks.get(ParentNetworkID);
         PPINetwork net = new PPINetwork(NetworkID, ParentNetwork);
         ParentNetwork.getContext().addChild(net);
         networks.put(NetworkID, net);
@@ -73,8 +121,8 @@ public class DataHandle {
     public Protein createProtein(String ProteinID, String parentProteinID, String NetworkID, String FamilyID) {
         Protein protein;
         if (parentProteinID != null) {
-            PPINetwork network = networks.get(NetworkID);
-            PPINetwork parentNetwork = network.getContext().tryGetParentNetwork();
+            SpeciesTreeNode network = networks.get(NetworkID);
+            SpeciesTreeNode parentNetwork = network.getContext().tryGetParentNetwork();
 
             Protein parentProtein = parentNetwork.getProtein(parentProteinID);
             Family family = families.get(FamilyID);
@@ -86,17 +134,17 @@ public class DataHandle {
     }
 
     public Protein createRootProtein(String ProteinID, String NetworkID, String FamilyID) {
-        PPINetwork network = networks.get(NetworkID);
+        SpeciesTreeNode network = networks.get(NetworkID);
         Family family = families.get(FamilyID);
         Protein protein = network.addRootProtein(ProteinID, family);
         return protein;
     }
 
-    public Map<String, PPINetwork> getNetworks() {
+    public Map<String, SpeciesTreeNode> getNetworks() {
         return networks;
     }
 
-    public void setNetworks(Map<String, PPINetwork> nets) {
+    public void setNetworks(Map<String, SpeciesTreeNode> nets) {
         networks = nets;
     }
 
@@ -116,16 +164,32 @@ public class DataHandle {
         this.families = families;
     }
 
-    public PPINetwork getRootNetwork() {
+    public SpeciesTreeNode getRootNetwork() {
         return rootNetwork;
     }
 
-    public PPINetwork getNetwork(String networkID) {
+    public SpeciesTreeNode getNetwork(String networkID) {
         return networks.get(networkID);
     }
 
-    public void setRootNetwork(PPINetwork rootNetwork) {
+    public void setRootNetwork(SpeciesTreeNode rootNetwork) {
         this.rootNetwork = rootNetwork;
+    }
+
+    private Protein createProteinIfNeeded(PPINetworkExp netExp, String proteinID, ExperimentParserStruct interaction) {
+        System.out.println("IF needed: " + proteinID);
+        if (netExp.containsProtein(proteinID)) {
+            return netExp.getProtein(proteinID);
+        } else {
+            PPINetwork network = this.getPPINetwork(interaction.getSpeciesName());
+            Protein proteinHelp = network.getProtein(proteinID);
+            if (proteinHelp != null) {
+                Protein protein = this.createProtein(proteinID, proteinID, netExp.getID(), proteinHelp.getFamily().getFamilyID());
+                return protein;
+            } else {
+                return null;
+            }
+        }
     }
     /*
     private Protein findParentProtein(String ParentProteinID, PPINetwork network) throws FamiliesTreeFormatException {

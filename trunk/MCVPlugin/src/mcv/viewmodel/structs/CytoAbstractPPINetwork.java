@@ -1,13 +1,13 @@
 package mcv.viewmodel.structs;
 
-import mcv.logicmodel.structs.PPINetwork;
+import mcv.logicmodel.structs.SpeciesTreeNode;
 import mcv.logicmodel.structs.Protein;
 import java.util.Collection;
 import mcv.utils.IDCreator;
 
 public abstract class CytoAbstractPPINetwork extends CytoObject {
 
-    private PPINetwork network;
+    private SpeciesTreeNode network;
     private String ID;
 
     public boolean containsCytoProtein(String SourceID) {
@@ -21,6 +21,8 @@ public abstract class CytoAbstractPPINetwork extends CytoObject {
 
         return getCytoProtein(cytoProteinID) != null;
     }
+
+    public abstract void addCytoProtein(CytoProtein cytoProtein);
 
     public abstract void deleteCytoInteractions();
 
@@ -40,7 +42,7 @@ public abstract class CytoAbstractPPINetwork extends CytoObject {
 
     public abstract CytoAbstractPPINetwork tryGetMother();
 
-    public CytoAbstractPPINetwork(PPINetwork network, String ID) {
+    public CytoAbstractPPINetwork(SpeciesTreeNode network, String ID) {
         this.network = network;
         this.ID = ID;
     }
@@ -53,11 +55,11 @@ public abstract class CytoAbstractPPINetwork extends CytoObject {
         this.ID = ID;
     }
 
-    public PPINetwork getNetwork() {
+    public SpeciesTreeNode getNetwork() {
         return network;
     }
 
-    public void setNetwork(PPINetwork network) {
+    public void setNetwork(SpeciesTreeNode network) {
         this.network = network;
     }
 }

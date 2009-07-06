@@ -1,25 +1,29 @@
 package mcv.viewmodel.structs;
 
-public class CytoInteraction extends CytoNetworkObject {
+/**
+ *
+ * @author misiek (mw219725@gmail.com)
+ */
+public class CytoInteractionExp extends CytoNetworkObject {
 
-    private Double probability;
+    private String expID;
     private CytoProtein source;
     private CytoProtein target;
 
-    public CytoInteraction(String CytoID, CytoProtein source, CytoProtein target, CytoAbstractPPINetwork cytoNetwork, Double probability) {
+    public CytoInteractionExp(String CytoID, String expID, CytoProtein source, CytoProtein target, CytoAbstractPPINetwork cytoNetwork) {
         this.setCytoID(CytoID);
         this.setCytoNetwork(cytoNetwork);
+        this.expID = expID;
         this.source = source;
         this.target = target;
-        this.probability = probability;
     }
 
-    public Double getProbability() {
-        return probability;
+    public String getExpID() {
+        return expID;
     }
 
-    public void setProbability(Double probability) {
-        this.probability = probability;
+    public void setExpID(String expID) {
+        this.expID = expID;
     }
 
     public CytoProtein getSource() {

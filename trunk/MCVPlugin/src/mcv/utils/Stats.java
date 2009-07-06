@@ -7,7 +7,7 @@ package mcv.utils;
 import cytoscape.CyNetwork;
 import cytoscape.Cytoscape;
 import cytoscape.view.CyNetworkView;
-import mcv.logicmodel.structs.PPINetwork;
+import mcv.logicmodel.structs.SpeciesTreeNode;
 import mcv.main.PluginDataHandle;
 import mcv.viewmodel.controllers.CytoDataHandle;
 import mcv.viewmodel.structs.CytoAbstractPPINetwork;
@@ -54,7 +54,7 @@ public class Stats {
 
     private static void printPlugin() {
         System.out.println("----PLUGIN----");
-        for (PPINetwork network : PluginDataHandle.getDataHandle().getNetworks().values()) {
+        for (SpeciesTreeNode network : PluginDataHandle.getDataHandle().getNetworks().values()) {
             System.out.println(network.getID());
         }
     }

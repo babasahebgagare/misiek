@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
 import mcv.help.MCVHelpBroker;
 import mcv.io.listeners.FamiliesLoadingErrorsListener;
 import mcv.logicmodel.controllers.DataHandle;
-import mcv.logicmodel.structs.PPINetwork;
+import mcv.logicmodel.structs.SpeciesTreeNode;
 import mcv.main.LoadedDataHandle;
 import mcv.main.PluginDataHandle;
 import mcv.ui.listeners.ProteinsLoadedListener;
@@ -56,10 +56,10 @@ public class GenesTreesLoaderPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) proteinsStatsTable.getModel();
         model.setRowCount(0);
         DataHandle dh = PluginDataHandle.getDataHandle();
-        for (PPINetwork network : dh.getNetworks().values()) {
+        for (SpeciesTreeNode network : dh.getNetworks().values()) {
             String networkID = network.getID();
             Integer proteinsCount = Integer.valueOf(network.getProteins().size());
-            Integer interactionsCount = Integer.valueOf(network.getInteractions().size());
+            Integer interactionsCount = Integer.valueOf(network.getInteractionsCount());
             model.addRow(new Object[]{networkID, proteinsCount, interactionsCount});
         }
     }

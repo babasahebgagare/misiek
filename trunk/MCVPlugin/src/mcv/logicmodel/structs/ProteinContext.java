@@ -2,19 +2,19 @@ package mcv.logicmodel.structs;
 
 public class ProteinContext {
 
-    private PPINetwork network;
+    private SpeciesTreeNode network;
     private Protein parentProtein;
 
-    public ProteinContext(PPINetwork Network, Protein ParentProtein) {
+    public ProteinContext(SpeciesTreeNode Network, Protein ParentProtein) {
         this.network = Network;
         this.parentProtein = ParentProtein;
     }
 
-    public PPINetwork getNetwork() {
+    public SpeciesTreeNode getNetwork() {
         return network;
     }
 
-    public void setNetwork(PPINetwork Network) {
+    public void setNetwork(SpeciesTreeNode Network) {
         this.network = Network;
     }
 

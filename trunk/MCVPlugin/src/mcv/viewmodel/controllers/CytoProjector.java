@@ -11,15 +11,15 @@ import mcv.viewmodel.structs.CytoPPINetworkProjection;
 import mcv.viewmodel.structs.CytoPPINetworkProjectionToDown;
 import mcv.viewmodel.structs.CytoPPINetworkProjectionToUp;
 import mcv.viewmodel.structs.CytoProtein;
-import mcv.logicmodel.structs.PPINetwork;
+import mcv.logicmodel.structs.SpeciesTreeNode;
 import mcv.main.PluginDataHandle;
 import mcv.utils.Messenger;
 import mcv.visual.layout.Layouter;
 
 public class CytoProjector {
 
-    private static CytoPPINetworkProjection projectNetwork(Collection<CytoProtein> selectedProteins, CytoAbstractPPINetwork motherCytoNetwork, PPINetwork network) {
-        PPINetwork motherNetwork = motherCytoNetwork.getNetwork();
+    private static CytoPPINetworkProjection projectNetwork(Collection<CytoProtein> selectedProteins, CytoAbstractPPINetwork motherCytoNetwork, SpeciesTreeNode network) {
+        SpeciesTreeNode motherNetwork = motherCytoNetwork.getNetwork();
 
         switch (network.getContext().getHierarchy().getNetworkPosition(motherNetwork)) {
             case ABOVE:
@@ -44,11 +44,11 @@ public class CytoProjector {
         return null;
     }
 
-    public static void projectSelected(Collection<CytoProtein> selectedProteins, Collection<PPINetwork> networks) {
+    public static void projectSelected(Collection<CytoProtein> selectedProteins, Collection<SpeciesTreeNode> networks) {
 
         CytoAbstractPPINetwork motherCytoNetwork = selectedProteins.iterator().next().getCytoNetwork();
 
-        for (PPINetwork network : networks) {
+        for (SpeciesTreeNode network : networks) {
             projectNetwork(selectedProteins, motherCytoNetwork, network);
 
 

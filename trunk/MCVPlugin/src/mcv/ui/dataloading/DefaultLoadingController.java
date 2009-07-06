@@ -4,12 +4,13 @@ import cytoscape.Cytoscape;
 import java.util.Map;
 import javax.swing.JFrame;
 import mcv.io.AbstractDataReader;
+import mcv.io.listeners.ExperimentsLoadingErrorsListener;
 import mcv.io.listeners.FamiliesLoadingErrorsListener;
 import mcv.io.listeners.InteractionsLoadingErrorsListener;
 import mcv.io.listeners.SpeciesLoadingErrorsListener;
 import mcv.logicmodel.controllers.DataHandle;
 import mcv.logicmodel.controllers.ProjectorInfoCalculator;
-import mcv.logicmodel.structs.PPINetwork;
+import mcv.logicmodel.structs.SpeciesTreeNode;
 import mcv.main.LoadedDataHandle;
 import mcv.main.PluginDataHandle;
 import mcv.ui.PluginMenusHandle;
@@ -25,7 +26,7 @@ public class DefaultLoadingController {
         DataHandle dh = PluginDataHandle.getDataHandle();
         LoadedDataHandle ldh = PluginDataHandle.getLoadedDataHandle();
         ldh.deleteAll();
-        for (PPINetwork network : dh.getNetworks().values()) {
+        for (SpeciesTreeNode network : dh.getNetworks().values()) {
             network.deleteAllInteractions();
         }
 
@@ -62,5 +63,10 @@ public class DefaultLoadingController {
         frame.pack();
         frame.setLocationRelativeTo(Cytoscape.getDesktop());
         frame.setVisible(true);
+    }
+
+    static void loadExperimentsData(String filepath, ExperimentsLoadingErrorsListener errorListener) {
+        AbstractDataReader.getInstance().readAllExperiments(filepath, errorListener);
+        //PluginMenusHandle.getShowLoadedInteractionsButton().setEnabled(true);
     }
 }

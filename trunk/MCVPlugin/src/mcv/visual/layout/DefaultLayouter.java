@@ -62,8 +62,8 @@ public class DefaultLayouter extends Layouter {
     private void projectionToUpLayout(CytoPPINetworkProjectionToUp projection, CyNetworkView cyNetworkView) {
 
 
-        for (CytoProteinProjection cytoProteinProjection : projection.getCytoProteinsProjections()) {
-            CytoProtein cytoMotherProteinOrNull = cytoProteinProjection.tryGetCytoMotherProtein();
+        for (CytoProtein cytoProteinProjection : projection.getCytoProteinsProjections()) {
+            CytoProtein cytoMotherProteinOrNull = ((CytoProteinProjection) cytoProteinProjection).tryGetCytoMotherProtein();
 
             if (cytoMotherProteinOrNull != null) {
                 String motherNetworkCytoID = cytoMotherProteinOrNull.getCytoNetwork().getCytoID();

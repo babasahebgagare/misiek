@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.Map;
 import mcv.io.listeners.SpeciesLoadingErrorsListener;
 import mcv.viewmodel.structs.CytoProtein;
-import mcv.logicmodel.structs.PPINetwork;
+import mcv.logicmodel.structs.SpeciesTreeNode;
 
 public abstract class UIController {
 
@@ -15,7 +15,7 @@ public abstract class UIController {
         return controller;
     }
 
-    public abstract Collection<PPINetwork> getSelectedNetworks();
+    public abstract Collection<SpeciesTreeNode> getSelectedNetworks();
 
     public abstract Collection<CytoProtein> getSelectedProteins(CyNetwork cyNetwork);
 
