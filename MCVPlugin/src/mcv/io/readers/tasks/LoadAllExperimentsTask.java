@@ -1,13 +1,11 @@
 package mcv.io.readers.tasks;
 
 import mcv.io.exceptions.ExperimentsFileFormatException;
-import mcv.io.exceptions.InteractionsFileFormatException;
 import java.io.IOException;
 import mcv.io.parsers.ExperimentParserStruct;
 import mcv.io.parsers.rootparser.RootExperimentsParser;
 import mcv.logicmodel.controllers.DataHandle;
 import mcv.logicmodel.structs.PPINetworkExp;
-import mcv.logicmodel.structs.SpeciesTreeNode;
 import mcv.main.PluginDataHandle;
 import mcv.utils.IDCreator;
 
@@ -23,7 +21,7 @@ public class LoadAllExperimentsTask extends MCVLoadTask {
 
     public void run() {
         myThread = Thread.currentThread();
-        taskMonitor.setStatus("Experiments loading...");
+        taskMonitor.setStatus("Loading experiments...");
         taskMonitor.setPercentCompleted(-1);
 
         try {
@@ -50,7 +48,7 @@ public class LoadAllExperimentsTask extends MCVLoadTask {
     }
 
     public String getTitle() {
-        return "Loading interactions with tresholds...";
+        return "Loading experiments...";
     }
 
     private void reading() throws IOException, ExperimentsFileFormatException {
@@ -59,10 +57,14 @@ public class LoadAllExperimentsTask extends MCVLoadTask {
         float last_percent = 0;
         while (br.ready()) {
             all++;
-            ExperimentParserStruct interaction = null;
+
             String line = br.readLine();
 
-            interaction = RootExperimentsParser.readExperiment(line);
+            ExperimentParserStruct interaction = RootExperimentsParser.readExperiment(line);
+            if (interaction.getFrom().compareTo(interaction.getTo()) < 0) {
+                continue;
+            }
+
             String speciesName = interaction.getSpeciesName();
 
             String expNetworkName = IDCreator.createExpNetworkID(speciesName);

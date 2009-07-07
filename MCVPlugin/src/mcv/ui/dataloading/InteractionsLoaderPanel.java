@@ -309,9 +309,11 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
         loadingPanel.setLayout(new GridLayout(dh.getNetworks().keySet().size(), 1));
 
         for (String species : dh.getNetworks().keySet()) {
-            SpeciesInteractionsLoaderPanel panel = new SpeciesInteractionsLoaderPanel(species);
-            panels.add(panel);
-            loadingPanel.add(panel);
+            if (!species.contains("EXP")) {
+                SpeciesInteractionsLoaderPanel panel = new SpeciesInteractionsLoaderPanel(species);
+                panels.add(panel);
+                loadingPanel.add(panel);
+            }
         }
     }
 

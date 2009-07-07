@@ -39,9 +39,9 @@ public class MCVEdgeAppearanceCalculator extends EdgeAppearanceCalculator {
             CytoExpInteraction cytoExpInteraction = cdh.getCytoExpInteractionByIndex(edge.getRootGraphIndex());
             if (cytoExpInteraction != null) {
 
-                appr.set(VisualPropertyType.EDGE_LINE_WIDTH, 20.0); //TODO - BAD CONST
-                appr.set(VisualPropertyType.EDGE_TOOLTIP, cytoExpInteraction.getExpID());
-                appr.set(VisualPropertyType.EDGE_COLOR, Color.GRAY);
+                appr.set(VisualPropertyType.EDGE_LINE_WIDTH, 5.0); //TODO - BAD CONST
+                appr.set(VisualPropertyType.EDGE_TOOLTIP, "Experiment ID: " + cytoExpInteraction.getExp().getExpID());
+                appr.set(VisualPropertyType.EDGE_COLOR, cytoExpInteraction.getExp().getColor());
             }
         }
         appr.applyBypass(edge);

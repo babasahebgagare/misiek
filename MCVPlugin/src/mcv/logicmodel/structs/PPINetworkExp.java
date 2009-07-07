@@ -22,7 +22,7 @@ public class PPINetworkExp extends SpeciesTreeNode {
     }
 
     public void addInteraction(ExpInteraction expInteraction) {
-        interactions.put(expInteraction.ID, expInteraction);
+        interactions.put(expInteraction.getID(), expInteraction);
     }
 
     @Override

@@ -9,18 +9,36 @@ import java.util.HashMap;
 import java.util.TreeMap;
 import mcv.io.parsers.ExperimentParserStruct;
 import mcv.logicmodel.structs.ExpInteraction;
+import mcv.logicmodel.structs.Experiment;
 import mcv.logicmodel.structs.Family;
 import mcv.logicmodel.structs.Interaction;
 import mcv.logicmodel.structs.PPINetwork;
 import mcv.logicmodel.structs.PPINetworkExp;
 import mcv.logicmodel.structs.SpeciesTreeNode;
 import mcv.logicmodel.structs.Protein;
+import mcv.utils.ColorGenerator;
 
 public class DataHandle {
 
     private Map<String, SpeciesTreeNode> networks = new HashMap<String, SpeciesTreeNode>();
     private Map<String, Family> families = new TreeMap<String, Family>();
+    private Map<String, Experiment> experiments = new TreeMap<String, Experiment>();
     private SpeciesTreeNode rootNetwork;
+
+    public boolean experimentExist(String expID) {
+        return experiments.containsKey(expID);
+    }
+
+    public Experiment getExperiment(String expID) {
+        return experiments.get(expID);
+    }
+
+    public Experiment createExperiment(String expID) {
+        Color color = ColorGenerator.generateColor(expID);
+        Experiment exp = new Experiment(expID, color);
+        experiments.put(expID, exp);
+        return exp;
+    }
 
     public PPINetworkExp createExpPPINetwork(String speciesName, String expNetworkName) {
         SpeciesTreeNode parentNetwork = networks.get(speciesName);
@@ -39,7 +57,11 @@ public class DataHandle {
         Protein target = createProteinIfNeeded(netExp, interaction.getTo(), interaction);
         if (source != null && target != null) {
             String expID = interaction.getExpID();
-            ExpInteraction expInteraction = new ExpInteraction(expID, source, target, edgeID, netExp);
+            Experiment exp = getExperiment(expID);
+            if (exp == null) {
+                exp = createExperiment(expID);
+            }
+            ExpInteraction expInteraction = new ExpInteraction(exp, source, target, edgeID, netExp);
             netExp.addInteraction(expInteraction);
         }
     }
@@ -177,7 +199,6 @@ public class DataHandle {
     }
 
     private Protein createProteinIfNeeded(PPINetworkExp netExp, String proteinID, ExperimentParserStruct interaction) {
-        System.out.println("IF needed: " + proteinID);
         if (netExp.containsProtein(proteinID)) {
             return netExp.getProtein(proteinID);
         } else {

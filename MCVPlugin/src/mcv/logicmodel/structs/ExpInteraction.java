@@ -6,14 +6,14 @@ package mcv.logicmodel.structs;
  */
 public class ExpInteraction {
 
-    String expID;
-    Protein source;
-    Protein target;
-    String ID;
-    SpeciesTreeNode network;
+    private Experiment exp;
+    private Protein source;
+    private Protein target;
+    private String ID;
+    private SpeciesTreeNode network;
 
-    public ExpInteraction(String expID, Protein source, Protein target, String ID, SpeciesTreeNode network) {
-        this.expID = expID;
+    public ExpInteraction(Experiment exp, Protein source, Protein target, String ID, SpeciesTreeNode network) {
+        this.exp = exp;
         this.source = source;
         this.target = target;
         this.ID = ID;
@@ -28,12 +28,12 @@ public class ExpInteraction {
         this.ID = ID;
     }
 
-    public String getExpID() {
-        return expID;
+    public Experiment getExperiment() {
+        return exp;
     }
 
-    public void setExpID(String expID) {
-        this.expID = expID;
+    public void setExperiment(Experiment exp) {
+        this.exp = exp;
     }
 
     public SpeciesTreeNode getNetwork() {
