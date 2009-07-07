@@ -11,6 +11,7 @@ public class LoadingDataHandle {
 
     private String speciesFilename;
     private String genesFilename;
+    private String expFilename;
     private Map<String, String> interactionsFilenames = new TreeMap<String, String>();
     private Map<String, Double> interactionsTresholds = new TreeMap<String, Double>();
 
@@ -49,6 +50,14 @@ public class LoadingDataHandle {
 
     public String getGenesFilename() {
         return genesFilename;
+    }
+
+    public String getExpFilename() {
+        return expFilename;
+    }
+
+    public void setExpFilename(String expFilename) {
+        this.expFilename = expFilename;
     }
 
     public void setGenesFilename(String genesFilename) {

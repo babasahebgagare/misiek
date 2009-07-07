@@ -44,8 +44,11 @@ public class CytoDataHandle {
         CytoProtein source = cytoNetwork.getCytoProtein(SourceCytoID);
         CytoProtein target = cytoNetwork.getCytoProtein(TargetCytoID);
 
-        CytoExpInteraction cytoExpInteraction = new CytoExpInteraction(EdgeCytoID, expInteraction.getExpID(), source, target, cytoNetwork);
-        cytoNetwork.addCytoExpInteraction(cytoExpInteraction);
+        if (source != null && target != null) {
+
+            CytoExpInteraction cytoExpInteraction = new CytoExpInteraction(EdgeCytoID, expInteraction.getExperiment(), source, target, cytoNetwork);
+            cytoNetwork.addCytoExpInteraction(cytoExpInteraction);
+        }
     }
 
     public void deleteAllCytoInteractionsByNetwork(CytoAbstractPPINetwork cytoNetwork) {

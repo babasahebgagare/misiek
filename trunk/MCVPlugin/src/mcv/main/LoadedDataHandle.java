@@ -13,6 +13,7 @@ public class LoadedDataHandle {
     private Map<String, String> interactionsFilenames = new TreeMap<String, String>();
     private Map<String, Double> interactionsTresholds = new TreeMap<String, Double>();
     private String oneInteractionFilename;
+    private String experimentsFilename;
     private boolean manyFilesLoaded;
     private boolean proteinsLoaded;
 
@@ -23,6 +24,14 @@ public class LoadedDataHandle {
             return true;
         } else {
             return false;
+        }
+    }
+
+    public boolean isExpLoaded() {
+        if (experimentsFilename == null) {
+            return false;
+        } else {
+            return true;
         }
     }
 
@@ -49,6 +58,18 @@ public class LoadedDataHandle {
         } else {
             return true;
         }
+    }
+
+    public void deleteExperimentsFilename() {
+        experimentsFilename = null;
+    }
+
+    public String getExperimentsFilename() {
+        return experimentsFilename;
+    }
+
+    public void setExperimentsFilename(String experimentsFilename) {
+        this.experimentsFilename = experimentsFilename;
     }
 
     public void deleteOneInteractionsFilename() {
@@ -103,6 +124,7 @@ public class LoadedDataHandle {
         interactionsFilenames = new TreeMap<String, String>();
         interactionsTresholds = new TreeMap<String, Double>();
         manyFilesLoaded = false;
+        experimentsFilename = null;
         oneInteractionFilename = null;
     }
 

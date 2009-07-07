@@ -16,6 +16,8 @@ import javax.help.CSH;
 import javax.swing.JFileChooser;
 import mcv.help.MCVHelpBroker;
 import mcv.io.listeners.ExperimentsLoadingErrorsListener;
+import mcv.main.LoadedDataHandle;
+import mcv.main.LoadedDataHandle;
 import mcv.main.PluginDataHandle;
 import mcv.ui.UIController;
 import mcv.ui.listeners.ExperimentsLoadedListener;
@@ -38,6 +40,17 @@ public class ExperimentsLoaderPanel extends javax.swing.JPanel {
         this.loaderPanel = loaderPanel;
         this.list = list;
         initComponents();
+        initState();
+    }
+
+    public void initState() {
+        LoadedDataHandle ldh = PluginDataHandle.getLoadedDataHandle();
+        if (ldh.isExpLoaded()) {
+            setLoadedState();
+        } else {
+            setUnloadedState();
+        }
+    //refreshStats();
     }
 
     /** This method is called from within the constructor to
@@ -144,7 +157,7 @@ public class ExperimentsLoaderPanel extends javax.swing.JPanel {
             File file = fc.getSelectedFile();
             filepath = file.getAbsolutePath();
             filenameLabel.setText(filepath);
-            PluginDataHandle.getLoadingDataHandle().setSpeciesFilename(filepath);
+            PluginDataHandle.getLoadingDataHandle().setExpFilename(filepath);
             loadTreeButton.setEnabled(true);
         }
 }//GEN-LAST:event_chooseFileActionPerformed
@@ -155,11 +168,14 @@ public class ExperimentsLoaderPanel extends javax.swing.JPanel {
             ExperimentsLoadingErrorsListener errorListener = new ExperimentsLoadingErrorsListener(loaderPanel);
             DefaultLoadingController.loadExperimentsData(filepath, errorListener);
             setLoadedState();
+            LoadedDataHandle ldh = PluginDataHandle.getLoadedDataHandle();
+            ldh.setExperimentsFilename(filepath);
+
             list.actionPerformed(new ActionEvent(this, 2, "Experiments loaded"));
-            //refreshStats();
+        //refreshStats();
 //            SpeciesLoadingErrorsListener errorListener = new SpeciesLoadingErrorsListener(loaderPanel);
-            //           DefaultLoadingController.loadSpeciesTreeData(filepath, errorListener);
-            setLoadedState();
+        //           DefaultLoadingController.loadSpeciesTreeData(filepath, errorListener);
+        // setLoadedState();
         //    list.actionPerformed(new ActionEvent(this, 1, "Species loaded"));
         }
 }//GEN-LAST:event_loadTreeButtonActionPerformed
@@ -183,7 +199,7 @@ public class ExperimentsLoaderPanel extends javax.swing.JPanel {
     }
 
     private void setFilenameLabel() {
-        String filename = PluginDataHandle.getLoadingDataHandle().getSpeciesFilename();
+        String filename = PluginDataHandle.getLoadingDataHandle().getExpFilename();
         if (filename != null) {
             filenameLabel.setText(filename);
             filepath = filename;
