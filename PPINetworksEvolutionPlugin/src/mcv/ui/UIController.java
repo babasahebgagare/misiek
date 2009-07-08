@@ -2,8 +2,6 @@ package mcv.ui;
 
 import cytoscape.CyNetwork;
 import java.util.Collection;
-import java.util.Map;
-import mcv.io.listeners.SpeciesLoadingErrorsListener;
 import mcv.viewmodel.structs.CytoProtein;
 import mcv.logicmodel.structs.SpeciesTreeNode;
 

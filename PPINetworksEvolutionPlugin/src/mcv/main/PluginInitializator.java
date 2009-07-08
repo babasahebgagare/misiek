@@ -13,7 +13,6 @@ import mcv.ui.LeftPanel;
 import mcv.ui.MCVMainPanel;
 import mcv.ui.PluginMenusHandle;
 import mcv.ui.familycolors.SpeciesFamilyColorPanel;
-import mcv.ui.logs.LogsPanel;
 import mcv.visual.calculators.MCVEdgeAppearanceCalculator;
 import mcv.visual.calculators.MCVNodeAppearanceCalculator;
 import org.jdesktop.swingx.VerticalLayout;
@@ -23,11 +22,11 @@ public class PluginInitializator {
     private static void initCommonVisualStyle() {
         VisualMappingManager vmm = Cytoscape.getVisualMappingManager();
         CalculatorCatalog catalog = vmm.getCalculatorCatalog();
-        VisualStyle MCVStyle = catalog.getVisualStyle("MCVStyle");
+        VisualStyle MCVStyle = catalog.getVisualStyle("PPINEStyle");
         if (MCVStyle == null) {
 
             MCVStyle = new VisualStyle(vmm.getVisualStyle());
-            MCVStyle.setName("MCVStyle");
+            MCVStyle.setName("PPINEStyle");
             MCVStyle.setNodeAppearanceCalculator(new MCVNodeAppearanceCalculator());
             MCVStyle.setEdgeAppearanceCalculator(new MCVEdgeAppearanceCalculator());
 
