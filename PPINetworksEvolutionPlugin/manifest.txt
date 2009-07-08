@@ -1,0 +1,2 @@
+Cytoscape-Plugin: main.Main
+Main-Class: main.Main
