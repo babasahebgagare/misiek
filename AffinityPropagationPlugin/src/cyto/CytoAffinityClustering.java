@@ -10,6 +10,8 @@ import cytoscape.CyEdge;
 import cytoscape.CyNode;
 import cytoscape.Cytoscape;
 import cytoscape.data.CyAttributes;
+import cytoscape.layout.CyLayoutAlgorithm;
+import cytoscape.layout.CyLayouts;
 import cytoscape.task.TaskMonitor;
 import java.util.TreeMap;
 import java.util.List;
@@ -20,7 +22,6 @@ import java.util.TreeSet;
 import javax.swing.JPanel;
 import listeners.IterationListener;
 import panel.AffinityPanelController;
-import utils.Messenger;
 
 /**
  *
@@ -113,7 +114,11 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
                 }
                 i++;
             }
-
+            for(CyLayoutAlgorithm layout : CyLayouts.getAllLayouts()) {
+                System.out.println(layout.getClass());
+                System.out.println("LAyout name: "+layout.getName());
+                layout.setLayoutAttribute(nodeNameAttr);
+            }
 
             clustersNumber = clusters.size();
             monitor.setPercentCompleted(100);
