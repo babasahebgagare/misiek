@@ -189,7 +189,7 @@
             <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/mcv/resources/icons/cast.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Casting..."/>
+            <Property name="text" type="java.lang.String" value="Projection"/>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
               <ResourceString bundle="mcv/ui/resources/LeftPanel.properties" key="CastingButton.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
             </Property>
