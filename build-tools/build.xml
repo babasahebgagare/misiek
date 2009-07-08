@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="MCVPlugin" default="run-plugin-console" basedir="../">
+<project name="ppine-Plugin" default="run-plugin-console" basedir="../">
     <description>Ant script</description>
 
-    <property name="project-name" value="MCVPlugin" />
+    <property name="project-name" value="ppine-tworksEvolutionPlugin" />
     <property name="affinity-name" value="AffinityPropagationPlugin" />
     <property name="affinity-console-name" value="AffinityPropagationConsole" />
     <property name="transforming-name" value="AttrTransformingPlugin" />
@@ -14,53 +14,53 @@
 
     <property name="cytoscape-plugins" value="${cytoscape-path}/plugins" />
 
-    <target name="clean-all-plugin" description="Cleaning">
+    <target name="clean-all-plugins" description="Cleaning">
         <ant antfile="${project-name}/build.xml" inheritall="false" target="clean" />
         <ant antfile="${affinity-name}/build.xml" inheritall="false" target="clean" />
         <ant antfile="${transforming-name}/build.xml" inheritall="false" target="clean" />
     </target>
 
-    <target name="compile-all-plugin" depends="clean-all-plugin" description="Compile Cytoscape plugin">
+    <target name="compile-all-plugins" depends="clean-all-plugins" description="Compile Cytoscape plugin">
         <ant antfile="${project-name}/build.xml" inheritall="false" target="jar" />
         <ant antfile="${affinity-name}/build.xml" inheritall="false" target="jar" />
         <ant antfile="${transforming-name}/build.xml" inheritall="false" target="jar" />
     </target>
 
-    <target name="copy-all-plugin" depends="compile-all-plugin" description="Copy Cytoscape plugin">
+    <target name="copy-all-plugins" depends="compile-all-plugins" description="Copy Cytoscape plugin">
         <copy file="${project-name}/dist/${project-name}.jar" todir="${cytoscape-plugins}" overwrite="true"/>
         <copy file="${affinity-name}/dist/${affinity-name}.jar" todir="${cytoscape-plugins}" overwrite="true"/>
         <copy file="${transforming-name}/dist/${transforming-name}.jar" todir="${cytoscape-plugins}" overwrite="true"/>
     </target>
 
-    <target name="clean-mcvplugin" description="Cleaning">
+    <target name="clean-ppine-plugin" description="Cleaning">
         <ant antfile="${project-name}/build.xml" inheritall="false" target="clean" />
     </target>
 
-    <target name="compile-mcvplugin" depends="clean-mcvplugin" description="Compile MCVPlugin">
+    <target name="compile-ppine-plugin" depends="clean-ppine-plugin" description="Compile ppine-Plugin">
         <ant antfile="${project-name}/build.xml" inheritall="false" target="jar" />
     </target>
 
-    <target name="copy-mcvplugin" depends="compile-mcvplugin" description="Copy MCVPlugin">
+    <target name="copy-ppine-plugin" depends="compile-ppine-plugin" description="Copy ppine-Plugin">
         <copy file="${project-name}/dist/${project-name}.jar" todir="${cytoscape-plugins}" overwrite="true"/>
     </target>
 
-    <target name="clean-affplugin" description="Cleaning">
+    <target name="clean-affinity-plugin" description="Cleaning">
         <ant antfile="${affinity-name}/build.xml" inheritall="false" target="clean" />
     </target>
 
-    <target name="compile-affplugin" depends="clean-affplugin" description="Compile Affinity Propagation Plugin">
+    <target name="compile-affinity-plugin" depends="clean-affinity-plugin" description="Compile Affinity Propagation Plugin">
         <ant antfile="${affinity-name}/build.xml" inheritall="false" target="jar" />
     </target>
 
-    <target name="copy-affplugin" depends="compile-affplugin" description="Copy Affinity Propagation plugin">
+    <target name="copy-affinity-plugin" depends="compile-affinity-plugin" description="Copy Affinity Propagation plugin">
         <copy file="${affinity-name}/dist/${affinity-name}.jar" todir="${cytoscape-plugins}" overwrite="true"/>
     </target>
 
-    <target name="clean-affconsole" description="Cleaning">
+    <target name="clean-affinity-console" description="Cleaning">
         <ant antfile="${affinity-console-name}/build.xml" inheritall="false" target="clean" />
     </target>
 
-    <target name="compile-affconsole" depends="clean-affconsole" description="Compile Affinity Propagation Console">
+    <target name="compile-affinity-console" depends="clean-affinity-console" description="Compile Affinity Propagation Console">
         <ant antfile="${affinity-console-name}/build.xml" inheritall="false" target="jar" />
     </target>
 
@@ -72,15 +72,15 @@
         <exec executable="${cytoscape-path}/cytoscape.sh" dir="${cytoscape-path}" />
     </target>
 
-    <target name="run-all-windows" depends="compile-all-plugin,copy-all-plugin" description="Run Cytoscape with plugin">
+    <target name="run-all-windows" depends="compile-all-plugins,copy-all-plugins" description="Run Cytoscape with plugin">
         <exec command="${cytoscape-path}/cytoscape.bat" dir="${cytoscape-path}"/>
     </target>
 
-    <target name="run-all-linux" depends="compile-all-plugin,copy-all-plugin" description="Run Cytoscape with plugin">
+    <target name="run-all-linux" depends="compile-all-plugins,copy-all-plugins" description="Run Cytoscape with plugin">
         <exec executable="${cytoscape-path}/cytoscape.sh" dir="${cytoscape-path}" />
     </target>
 
-    <target name="run-console" depends="compile-all-plugin,copy-all-plugin" description="Run Cytoscape with plugin in console">
+    <target name="run-console" depends="compile-all-plugins,copy-all-plugins" description="Run Cytoscape with plugin in console">
         <exec command="java -Dswing.aatext=true -Xss5M -Xmx1500M -jar cytoscape.jar cytoscape.CyMain -p plugins" dir="${cytoscape-path}" />
     </target>
 
