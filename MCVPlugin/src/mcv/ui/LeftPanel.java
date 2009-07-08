@@ -145,7 +145,7 @@ public class LeftPanel extends javax.swing.JPanel {
         netsActionsPanel.setPreferredSize(new java.awt.Dimension(268, 160));
 
         projectButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/cast.png"))); // NOI18N
-        projectButton.setText("Casting...");
+        projectButton.setText("Projection");
         projectButton.setToolTipText(bundle.getString("CastingButton.ToolTip")); // NOI18N
         projectButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
