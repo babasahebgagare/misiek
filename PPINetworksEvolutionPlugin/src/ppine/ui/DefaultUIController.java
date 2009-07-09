@@ -204,7 +204,7 @@ public class DefaultUIController extends UIController {
     }
 
     @Override
-    public void setMCVActiveTab() {
+    public void setPPINEActiveTab() {
         CytoPanel panel = Cytoscape.getDesktop().getCytoPanel(SwingConstants.WEST);
         int index = panel.indexOfComponent(PluginMenusHandle.getMcvPanel());
         panel.setSelectedIndex(index);

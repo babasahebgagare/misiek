@@ -24,9 +24,9 @@ public class CytoVisualHandle {
     }
 
     public static void applyVisualStyleForNetwork(CyNetworkView cyNetworkView) {
-        VisualStyle MCVStyle = Cytoscape.getVisualMappingManager().getCalculatorCatalog().getVisualStyle("PPINEStyle");
-        cyNetworkView.applyVizmapper(MCVStyle);
-        Cytoscape.getVisualMappingManager().setVisualStyle(MCVStyle);
+        VisualStyle PPINEStyle = Cytoscape.getVisualMappingManager().getCalculatorCatalog().getVisualStyle("PPINEStyle");
+        cyNetworkView.applyVizmapper(PPINEStyle);
+        Cytoscape.getVisualMappingManager().setVisualStyle(PPINEStyle);
     }
 
     public static void setDefaultCenter(final CyNetworkView cyNetworkView) {

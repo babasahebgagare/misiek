@@ -271,7 +271,7 @@ public class LeftPanel extends javax.swing.JPanel {
 
     private void showButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showButtonActionPerformed
         UIController.getInstance().showSelectedNetworks();
-        UIController.getInstance().setMCVActiveTab();
+        UIController.getInstance().setPPINEActiveTab();
 }//GEN-LAST:event_showButtonActionPerformed
 
 private void projectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_projectButtonActionPerformed
@@ -280,7 +280,7 @@ private void projectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 
     if (selectedProteins.size() > 0) {
         CytoProjector.projectSelected(selectedProteins, networks);
-        UIController.getInstance().setMCVActiveTab();
+        UIController.getInstance().setPPINEActiveTab();
     } else {
         Messenger.message("You have to select proteins and target network!");
     }
@@ -321,7 +321,7 @@ private void deleteVataButtonActionPerformed(java.awt.event.ActionEvent evt) {//
 
 private void testButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testButtonActionPerformed
     Stats.printStats();
-    DefaultLoadingController.showMCVLogsPanel();
+    DefaultLoadingController.showPPINELogsPanel();
 }//GEN-LAST:event_testButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

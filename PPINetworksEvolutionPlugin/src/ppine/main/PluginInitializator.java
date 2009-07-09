@@ -10,7 +10,7 @@ import java.util.ResourceBundle;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import ppine.ui.LeftPanel;
-import ppine.ui.MCVMainPanel;
+import ppine.ui.PPINEMainPanel;
 import ppine.ui.PluginMenusHandle;
 import ppine.ui.familycolors.SpeciesFamilyColorPanel;
 import ppine.visual.calculators.PPINEEdgeAppearanceCalculator;
@@ -22,15 +22,15 @@ public class PluginInitializator {
     private static void initCommonVisualStyle() {
         VisualMappingManager vmm = Cytoscape.getVisualMappingManager();
         CalculatorCatalog catalog = vmm.getCalculatorCatalog();
-        VisualStyle MCVStyle = catalog.getVisualStyle("PPINEStyle");
-        if (MCVStyle == null) {
+        VisualStyle PPINEStyle = catalog.getVisualStyle("PPINEStyle");
+        if (PPINEStyle == null) {
 
-            MCVStyle = new VisualStyle(vmm.getVisualStyle());
-            MCVStyle.setName("PPINEStyle");
-            MCVStyle.setNodeAppearanceCalculator(new PPINENodeAppearanceCalculator());
-            MCVStyle.setEdgeAppearanceCalculator(new PPINEEdgeAppearanceCalculator());
+            PPINEStyle = new VisualStyle(vmm.getVisualStyle());
+            PPINEStyle.setName("PPINEStyle");
+            PPINEStyle.setNodeAppearanceCalculator(new PPINENodeAppearanceCalculator());
+            PPINEStyle.setEdgeAppearanceCalculator(new PPINEEdgeAppearanceCalculator());
 
-            catalog.addVisualStyle(MCVStyle);
+            catalog.addVisualStyle(PPINEStyle);
         } else {
         }
     }
@@ -43,7 +43,7 @@ public class PluginInitializator {
         CytoPanelImp leftPanel = (CytoPanelImp) Cytoscape.getDesktop().getCytoPanel(SwingConstants.WEST);
 
         LeftPanel myLeftPanel = new LeftPanel();
-        JPanel myPanel = new MCVMainPanel();
+        JPanel myPanel = new PPINEMainPanel();
 
      //   JPanel logsPanel = new LogsPanel();
         SpeciesFamilyColorPanel families = new SpeciesFamilyColorPanel();
