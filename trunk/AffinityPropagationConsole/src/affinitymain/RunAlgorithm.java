@@ -86,7 +86,7 @@ public class RunAlgorithm {
             File inputSim = new File(inputpath);
             scanner = new Scanner(inputSim);
 
-            while (scanner.hasNextInt()) {
+            while (scanner.hasNextLine()) {
 
                 String line = scanner.nextLine();
                 String[] tokens = line.split("\\s+");
@@ -117,7 +117,8 @@ public class RunAlgorithm {
             } else {
                 val = intData.getSim();
             }
-            af.setSimilarityInt(Integer.valueOf(intData.getFrom()), Integer.valueOf(intData.getTo()), val);
+            af.setSimilarity(intData.getFrom(), intData.getTo(), val);
+        //af.setSimilarityInt(Integer.valueOf(intData.getFrom()), Integer.valueOf(intData.getTo()), val);
         }
         Double pref;
         if (takeLog) {
@@ -143,16 +144,18 @@ public class RunAlgorithm {
             bos = new BufferedOutputStream(fos);
             bw = new BufferedWriter(new OutputStreamWriter(bos));
             if (kind.equals("centers")) {
-                Map<Integer, Cluster<Integer>> clusters = af.doClusterAssocInt();
+                Map<String, Cluster<String>> clusters = af.doClusterAssoc();
+                //Map<Integer, Cluster<Integer>> clusters = af.doClusterAssocInt();
                 if (clusters != null) {
-                    for (Integer clustName : clusters.keySet()) {
+                    for (String clustName : clusters.keySet()) {
+                        //for (Integer clustName : clusters.keySet()) {
                         bw.append(clustName + "\n");
                     }
                 }
             } else {
-                Map<Integer, Integer> clusters = af.doClusterInt();
+                Map<String, String> clusters = af.doCluster();
                 if (clusters != null) {
-                    for (Entry<Integer, Integer> entry : clusters.entrySet()) {
+                    for (Entry<String, String> entry : clusters.entrySet()) {
                         bw.append(entry.getKey() + " " + entry.getValue() + "\n");
                     }
                 }

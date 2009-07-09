@@ -184,6 +184,7 @@ public class Main {
         System.out.println("Parameters: [parameterName=parameterValue]*");
         System.out.println();
         System.out.println("in: input similarities filepath");
+        System.out.println("out: output filepath");
         System.out.println("lam: double lambda");
         System.out.println("p: double preferences");
         System.out.println("it: integer max iterations");
