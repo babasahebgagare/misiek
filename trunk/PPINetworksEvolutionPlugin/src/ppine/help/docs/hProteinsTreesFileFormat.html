@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+        <title>Proteins tree file format</title>
+        <meta name="generator" content="DocBook XSL Stylesheets V1.70.1">
+    </head>
+    <body bgcolor="white">
+        <h1>Desctiprion</h1>
+        This is enriched standard recursive format. Input file contains n-lines.
+        Every line it is information about some protein tree family. Every line
+        has format: <br>
+        (speciesNode1, speciesNode2, ...)familyName; <br>
+        Where speciesNode has recursive format: <br>
+        speciesNode := [proteinNode1,proteinNode2, ...]speciesName <br>
+        Where proteinNode has recursice format: <br>
+        proteinNode := proteinName if proteins is a leaf, or: <br>
+        proteinNode := (speciesNode1, speciesNode2, ...)proteinName.
+        <h1>Example: </h1>
+([([ce_ce13562]ce,[dm_dm178]dm)bi_i1318]Bilateria,[sc_sc5512,sc_sc1833,sc_sc3895,sc_sc4997]sc)root_222;
+    </body>
+</html>
