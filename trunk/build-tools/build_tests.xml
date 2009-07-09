@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="MCVPlugin" default="run-plugin-console" basedir="../">
+<project name="PPINetworksEvolutionPlugin" default="run-plugin-console" basedir="../">
     <description>Ant script</description>
 
     <property name="local-pass-folder" value="D:" />
