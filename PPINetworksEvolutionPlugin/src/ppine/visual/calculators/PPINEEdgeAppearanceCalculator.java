@@ -39,7 +39,7 @@ public class PPINEEdgeAppearanceCalculator extends EdgeAppearanceCalculator {
             CytoExpInteraction cytoExpInteraction = cdh.getCytoExpInteractionByIndex(edge.getRootGraphIndex());
             if (cytoExpInteraction != null) {
 
-                appr.set(VisualPropertyType.EDGE_LINE_WIDTH, 5.0); //TODO - BAD CONST
+                appr.set(VisualPropertyType.EDGE_LINE_WIDTH, 4.0); //TODO - BAD CONST
                 appr.set(VisualPropertyType.EDGE_TOOLTIP, "Experiment ID: " + cytoExpInteraction.getExp().getExpID());
                 appr.set(VisualPropertyType.EDGE_COLOR, cytoExpInteraction.getExp().getColor());
             }

@@ -61,9 +61,9 @@ public class LoadAllExperimentsTask extends PPINELoadTask {
             String line = br.readLine();
 
             ExperimentParserStruct interaction = RootExperimentsParser.readExperiment(line);
-            if (interaction.getFrom().compareTo(interaction.getTo()) < 0) {
+            /*if (interaction.getFrom().compareTo(interaction.getTo()) < 0) {
                 continue;
-            }
+            }*/
 
             String speciesName = interaction.getSpeciesName();
 
