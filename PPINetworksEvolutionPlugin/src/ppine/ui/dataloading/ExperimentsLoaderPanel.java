@@ -14,7 +14,7 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 import javax.help.CSH;
 import javax.swing.JFileChooser;
-import ppine.help.MCVHelpBroker;
+import ppine.help.PPINEHelpBroker;
 import ppine.io.listeners.ExperimentsLoadingErrorsListener;
 import ppine.main.LoadedDataHandle;
 import ppine.main.LoadedDataHandle;
@@ -214,7 +214,7 @@ public class ExperimentsLoaderPanel extends javax.swing.JPanel {
 }//GEN-LAST:event_cleanButtonActionPerformed
 
     private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpButtonActionPerformed
-        CSH.DisplayHelpFromSource csh = new CSH.DisplayHelpFromSource(MCVHelpBroker.getHelpBroker("Species file format"));
+        CSH.DisplayHelpFromSource csh = new CSH.DisplayHelpFromSource(PPINEHelpBroker.getHelpBroker("Species file format"));
         csh.actionPerformed(new ActionEvent(this, 120, "Species file format"));
 }//GEN-LAST:event_helpButtonActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables

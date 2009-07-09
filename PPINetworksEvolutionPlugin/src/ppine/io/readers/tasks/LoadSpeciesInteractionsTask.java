@@ -10,7 +10,7 @@ import ppine.logicmodel.structs.PPINetwork;
 import ppine.main.PluginDataHandle;
 import ppine.utils.IDCreator;
 
-public class LoadSpeciesInteractionsTask extends MCVLoadTask {
+public class LoadSpeciesInteractionsTask extends PPINELoadTask {
 
     private Double treshold;
     private PPINetwork network;

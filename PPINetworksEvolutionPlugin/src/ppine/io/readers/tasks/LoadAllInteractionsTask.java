@@ -10,7 +10,7 @@ import ppine.logicmodel.structs.SpeciesTreeNode;
 import ppine.main.PluginDataHandle;
 import ppine.utils.IDCreator;
 
-public class LoadAllInteractionsTask extends MCVLoadTask {
+public class LoadAllInteractionsTask extends PPINELoadTask {
 
     private Map<String, Double> tresholds;
     private long current;

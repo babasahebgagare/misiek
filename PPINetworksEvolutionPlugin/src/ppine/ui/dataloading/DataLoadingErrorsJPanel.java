@@ -5,8 +5,8 @@
  */
 package ppine.ui.dataloading;
 
-import ppine.logs.errorsloger.MCVErrorsLogger;
-import ppine.logs.errorsloger.MCVLoggedError;
+import ppine.logs.errorsloger.PPINEErrorsLogger;
+import ppine.logs.errorsloger.PPINELoggedError;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
@@ -107,7 +107,7 @@ public class DataLoadingErrorsJPanel extends javax.swing.JPanel {
         for(int i=0; i<size; i++) {
             model.removeRow(0);
         }
-        MCVErrorsLogger.deleteAll();
+        PPINEErrorsLogger.deleteAll();
     }//GEN-LAST:event_cleanButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -119,8 +119,8 @@ public class DataLoadingErrorsJPanel extends javax.swing.JPanel {
     private void initTableState() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         DefaultTableModel model = (DefaultTableModel) errorsTable.getModel();
-        Collection<MCVLoggedError> errors = MCVErrorsLogger.getErrorsCollection();
-        for (MCVLoggedError error : errors) {
+        Collection<PPINELoggedError> errors = PPINEErrorsLogger.getErrorsCollection();
+        for (PPINELoggedError error : errors) {
             Integer id = error.getId();
             String message = error.getMessage();
             String errorMessage = error.getException().toString();

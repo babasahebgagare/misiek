@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.util.Collection;
 import javax.help.CSH;
 import javax.swing.JOptionPane;
-import ppine.help.MCVHelpBroker;
+import ppine.help.PPINEHelpBroker;
 import ppine.viewmodel.structs.CytoProtein;
 import ppine.logicmodel.structs.SpeciesTreeNode;
 import ppine.main.PluginDataHandle;
@@ -306,7 +306,7 @@ private void newDataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 }//GEN-LAST:event_newDataButtonActionPerformed
 
 private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpButtonActionPerformed
-    CSH.DisplayHelpFromSource csh = new CSH.DisplayHelpFromSource(MCVHelpBroker.getHelpBroker("Introduction"));
+    CSH.DisplayHelpFromSource csh = new CSH.DisplayHelpFromSource(PPINEHelpBroker.getHelpBroker("Introduction"));
     csh.actionPerformed(new ActionEvent(this, 120, "Introduction"));
 }//GEN-LAST:event_helpButtonActionPerformed
 

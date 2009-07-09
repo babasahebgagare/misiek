@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import ppine.main.PluginDataHandle;
 
-public class LoadTreesTask extends MCVLoadTask {
+public class LoadTreesTask extends PPINELoadTask {
 
     private long current;
 

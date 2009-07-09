@@ -10,7 +10,7 @@ import java.io.File;
 import javax.help.CSH;
 import javax.swing.JFileChooser;
 import javax.swing.tree.TreeModel;
-import ppine.help.MCVHelpBroker;
+import ppine.help.PPINEHelpBroker;
 import ppine.io.listeners.SpeciesLoadingErrorsListener;
 import ppine.main.LoadedDataHandle;
 import ppine.main.PluginDataHandle;
@@ -227,7 +227,7 @@ public class SpeciesTreeLoaderPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_loadTreeButtonActionPerformed
 
     private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpButtonActionPerformed
-        CSH.DisplayHelpFromSource csh = new CSH.DisplayHelpFromSource(MCVHelpBroker.getHelpBroker("Species file format"));
+        CSH.DisplayHelpFromSource csh = new CSH.DisplayHelpFromSource(PPINEHelpBroker.getHelpBroker("Species file format"));
         csh.actionPerformed(new ActionEvent(this, 120, "Species file format"));
     }//GEN-LAST:event_helpButtonActionPerformed
 

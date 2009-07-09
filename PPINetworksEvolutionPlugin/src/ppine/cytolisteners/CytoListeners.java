@@ -3,7 +3,6 @@ package ppine.cytolisteners;
 import cytoscape.Cytoscape;
 import cytoscape.ding.DingNetworkView;
 import cytoscape.view.CyNetworkView;
-import ding.view.NodeContextMenuListener;
 import giny.view.GraphViewChangeEvent;
 import giny.view.GraphViewChangeListener;
 import java.beans.PropertyChangeEvent;
@@ -12,7 +11,6 @@ import ppine.main.PluginDataHandle;
 import ppine.utils.MemoLogger;
 import ppine.viewmodel.controllers.CytoDataHandle;
 import ppine.viewmodel.structs.CytoAbstractPPINetwork;
-import ppine.visual.menus.NodePopupMenuListener;
 
 /**
  *
@@ -45,8 +43,8 @@ public class CytoListeners {
                 if (PropertyName.equals("NETWORK_VIEW_CREATED")) {
                     MemoLogger.log("Network view created: " + evt.getNewValue().toString());
                 //    CyNetworkView cyNetworkView = (CyNetworkView) evt.getNewValue();
-               //     createNetworkViewListener(cyNetworkView);
-            //        cyNetworkView.addNodeContextMenuListener((NodeContextMenuListener) new NodePopupMenuListener());
+                //     createNetworkViewListener(cyNetworkView);
+                //        cyNetworkView.addNodeContextMenuListener((NodeContextMenuListener) new NodePopupMenuListener());
                 } else if (PropertyName.equals("NETWORK_VIEW_DESTROYED")) {
                     String networkName = ((DingNetworkView) evt.getNewValue()).getTitle();
 
