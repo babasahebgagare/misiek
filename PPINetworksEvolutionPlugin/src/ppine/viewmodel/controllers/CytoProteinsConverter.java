@@ -1,11 +1,11 @@
-package mcv.viewmodel.controllers;
+package ppine.viewmodel.controllers;
 
 import cytoscape.CyNetwork;
 import cytoscape.Cytoscape;
 import giny.model.Node;
 import java.util.Collection;
-import mcv.viewmodel.structs.CytoProtein;
-import mcv.main.PluginDataHandle;
+import ppine.viewmodel.structs.CytoProtein;
+import ppine.main.PluginDataHandle;
 
 class CytoProteinsConverter {
 

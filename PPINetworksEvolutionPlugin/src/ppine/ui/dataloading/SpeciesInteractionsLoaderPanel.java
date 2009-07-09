@@ -3,13 +3,13 @@
  *
  * Created on 2009-04-27, 16:03:06
  */
-package mcv.ui.dataloading;
+package ppine.ui.dataloading;
 
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.border.TitledBorder;
-import mcv.main.LoadedDataHandle;
-import mcv.main.PluginDataHandle;
+import ppine.main.LoadedDataHandle;
+import ppine.main.PluginDataHandle;
 
 /**
  *
@@ -83,9 +83,9 @@ public class SpeciesInteractionsLoaderPanel extends javax.swing.JPanel {
         tresholdField.setEnabled(false);
         tresholdField.setName("tresholdField"); // NOI18N
 
-        openButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/com.png"))); // NOI18N
+        openButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/com.png"))); // NOI18N
         openButton.setText("Open");
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("mcv/ui/resources/Loading"); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("ppine/ui/resources/Loading"); // NOI18N
         openButton.setToolTipText(bundle.getString("OpenInteractionsForSpeciesButton.ToolTip")); // NOI18N
         openButton.setEnabled(false);
         openButton.setName("openButton"); // NOI18N

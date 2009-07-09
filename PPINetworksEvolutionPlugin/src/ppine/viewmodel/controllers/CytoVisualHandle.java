@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package mcv.viewmodel.controllers;
+package ppine.viewmodel.controllers;
 
 import cytoscape.CyNetwork;
 import cytoscape.Cytoscape;
@@ -24,7 +24,7 @@ public class CytoVisualHandle {
     }
 
     public static void applyVisualStyleForNetwork(CyNetworkView cyNetworkView) {
-        VisualStyle MCVStyle = Cytoscape.getVisualMappingManager().getCalculatorCatalog().getVisualStyle("MCVStyle");
+        VisualStyle MCVStyle = Cytoscape.getVisualMappingManager().getCalculatorCatalog().getVisualStyle("PPINEStyle");
         cyNetworkView.applyVizmapper(MCVStyle);
         Cytoscape.getVisualMappingManager().setVisualStyle(MCVStyle);
     }

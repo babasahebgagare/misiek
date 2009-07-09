@@ -3,20 +3,20 @@
  *
  * Created on 2009-04-27, 22:45:13
  */
-package mcv.ui.dataloading;
+package ppine.ui.dataloading;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
 import javax.help.CSH;
 import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
-import mcv.help.MCVHelpBroker;
-import mcv.io.listeners.FamiliesLoadingErrorsListener;
-import mcv.logicmodel.controllers.DataHandle;
-import mcv.logicmodel.structs.SpeciesTreeNode;
-import mcv.main.LoadedDataHandle;
-import mcv.main.PluginDataHandle;
-import mcv.ui.listeners.ProteinsLoadedListener;
+import ppine.help.MCVHelpBroker;
+import ppine.io.listeners.FamiliesLoadingErrorsListener;
+import ppine.logicmodel.controllers.DataHandle;
+import ppine.logicmodel.structs.SpeciesTreeNode;
+import ppine.main.LoadedDataHandle;
+import ppine.main.PluginDataHandle;
+import ppine.ui.listeners.ProteinsLoadedListener;
 
 /**
  *
@@ -105,9 +105,9 @@ public class GenesTreesLoaderPanel extends javax.swing.JPanel {
         filenameLabel.setText("filename");
         filenameLabel.setName("filenameLabel"); // NOI18N
 
-        chooseButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/com.png"))); // NOI18N
+        chooseButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/com.png"))); // NOI18N
         chooseButton.setText("Choose file");
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("mcv/ui/resources/Loading"); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("ppine/ui/resources/Loading"); // NOI18N
         chooseButton.setToolTipText(bundle.getString("ChooseFileFamiliesTreeButton.ToolTip")); // NOI18N
         chooseButton.setName("chooseButton"); // NOI18N
         chooseButton.addActionListener(new java.awt.event.ActionListener() {
@@ -116,7 +116,7 @@ public class GenesTreesLoaderPanel extends javax.swing.JPanel {
             }
         });
 
-        loadButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/save.png"))); // NOI18N
+        loadButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/save.png"))); // NOI18N
         loadButton.setText("Load");
         loadButton.setToolTipText(bundle.getString("LoadFamiliesTreeButton.ToolTip")); // NOI18N
         loadButton.setName("loadButton"); // NOI18N
@@ -154,7 +154,7 @@ public class GenesTreesLoaderPanel extends javax.swing.JPanel {
         proteinsStatsTable.setName("proteinsStatsTable"); // NOI18N
         jScrollPane2.setViewportView(proteinsStatsTable);
 
-        infoButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/help.png"))); // NOI18N
+        infoButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/help.png"))); // NOI18N
         infoButton.setText("File format info");
         infoButton.setToolTipText(bundle.getString("FileFormatInfoFamiliesButton.ToolTip")); // NOI18N
         infoButton.setName("infoButton"); // NOI18N

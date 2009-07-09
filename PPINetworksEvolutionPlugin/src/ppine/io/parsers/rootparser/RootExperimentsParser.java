@@ -2,12 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package mcv.io.parsers.rootparser;
+package ppine.io.parsers.rootparser;
 
-import mcv.io.exceptions.ExperimentsFileFormatException;
-import mcv.io.exceptions.InteractionsFileFormatException;
-import mcv.io.parsers.ExperimentParserStruct;
-import mcv.io.parsers.InteractionParserStruct;
+import ppine.io.exceptions.ExperimentsFileFormatException;
+import ppine.io.exceptions.InteractionsFileFormatException;
+import ppine.io.parsers.ExperimentParserStruct;
+import ppine.io.parsers.InteractionParserStruct;
 
 /**
  *

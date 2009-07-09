@@ -1,7 +1,7 @@
-package mcv.ui;
+package ppine.ui;
 
-import mcv.ui.dataloading.DataLoaderFrame;
-import mcv.controllers.interactions.InteractionsManager;
+import ppine.ui.dataloading.DataLoaderFrame;
+import ppine.controllers.interactions.InteractionsManager;
 import cytoscape.CyNetwork;
 import cytoscape.CyNode;
 import cytoscape.Cytoscape;
@@ -15,15 +15,15 @@ import java.util.Set;
 import javax.swing.SwingConstants;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
-import mcv.viewmodel.controllers.CytoDataHandle;
-import mcv.logicmodel.controllers.DataHandle;
-import mcv.logicmodel.controllers.NetworksConverter;
-import mcv.viewmodel.structs.CytoAbstractPPINetwork;
-import mcv.viewmodel.structs.CytoProtein;
-import mcv.logicmodel.structs.SpeciesTreeNode;
-import mcv.main.PluginDataHandle;
-import mcv.utils.JTreeModelSpeciesGenerator;
-import mcv.utils.Messenger;
+import ppine.viewmodel.controllers.CytoDataHandle;
+import ppine.logicmodel.controllers.DataHandle;
+import ppine.logicmodel.controllers.NetworksConverter;
+import ppine.viewmodel.structs.CytoAbstractPPINetwork;
+import ppine.viewmodel.structs.CytoProtein;
+import ppine.logicmodel.structs.SpeciesTreeNode;
+import ppine.main.PluginDataHandle;
+import ppine.utils.JTreeModelSpeciesGenerator;
+import ppine.utils.Messenger;
 
 public class DefaultUIController extends UIController {
 

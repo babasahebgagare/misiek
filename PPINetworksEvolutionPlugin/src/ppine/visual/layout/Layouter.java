@@ -1,7 +1,7 @@
-package mcv.visual.layout;
+package ppine.visual.layout;
 
-import mcv.viewmodel.structs.CytoPPINetworkProjectionToDown;
-import mcv.viewmodel.structs.CytoPPINetworkProjectionToUp;
+import ppine.viewmodel.structs.CytoPPINetworkProjectionToDown;
+import ppine.viewmodel.structs.CytoPPINetworkProjectionToUp;
 
 public abstract class Layouter {
 

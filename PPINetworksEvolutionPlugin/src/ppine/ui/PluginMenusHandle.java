@@ -1,6 +1,6 @@
-package mcv.ui;
+package ppine.ui;
 
-import mcv.ui.familycolors.SpeciesFamilyColorPanel;
+import ppine.ui.familycolors.SpeciesFamilyColorPanel;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JPanel;

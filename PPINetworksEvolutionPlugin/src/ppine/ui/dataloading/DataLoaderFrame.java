@@ -3,7 +3,7 @@
  *
  * Created on 2009-04-27, 22:47:20
  */
-package mcv.ui.dataloading;
+package ppine.ui.dataloading;
 
 import cytoscape.Cytoscape;
 import java.awt.FlowLayout;

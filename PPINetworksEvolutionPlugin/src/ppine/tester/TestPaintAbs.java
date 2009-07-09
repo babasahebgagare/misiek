@@ -1,4 +1,4 @@
-package mcv.tester;
+package ppine.tester;
 
 import java.awt.Color;
 import java.awt.Graphics;

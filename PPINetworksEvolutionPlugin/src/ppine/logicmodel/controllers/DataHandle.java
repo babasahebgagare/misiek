@@ -1,4 +1,4 @@
-package mcv.logicmodel.controllers;
+package ppine.logicmodel.controllers;
 
 import cytoscape.Cytoscape;
 import cytoscape.data.CyAttributes;
@@ -7,16 +7,16 @@ import java.awt.Color;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.TreeMap;
-import mcv.io.parsers.ExperimentParserStruct;
-import mcv.logicmodel.structs.ExpInteraction;
-import mcv.logicmodel.structs.Experiment;
-import mcv.logicmodel.structs.Family;
-import mcv.logicmodel.structs.Interaction;
-import mcv.logicmodel.structs.PPINetwork;
-import mcv.logicmodel.structs.PPINetworkExp;
-import mcv.logicmodel.structs.SpeciesTreeNode;
-import mcv.logicmodel.structs.Protein;
-import mcv.utils.ColorGenerator;
+import ppine.io.parsers.ExperimentParserStruct;
+import ppine.logicmodel.structs.ExpInteraction;
+import ppine.logicmodel.structs.Experiment;
+import ppine.logicmodel.structs.Family;
+import ppine.logicmodel.structs.Interaction;
+import ppine.logicmodel.structs.PPINetwork;
+import ppine.logicmodel.structs.PPINetworkExp;
+import ppine.logicmodel.structs.SpeciesTreeNode;
+import ppine.logicmodel.structs.Protein;
+import ppine.utils.ColorGenerator;
 
 public class DataHandle {
 

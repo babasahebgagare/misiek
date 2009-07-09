@@ -1,4 +1,4 @@
-package mcv.logicmodel.structs;
+package ppine.logicmodel.structs;
 
 public class ProteinContext {
 

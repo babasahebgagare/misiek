@@ -1,4 +1,4 @@
-package mcv.viewmodel.structs;
+package ppine.viewmodel.structs;
 
 import java.util.Collection;
 import java.util.HashSet;

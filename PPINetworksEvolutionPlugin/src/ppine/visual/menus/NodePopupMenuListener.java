@@ -1,4 +1,4 @@
-package mcv.visual.menus;
+package ppine.visual.menus;
 
 import ding.view.NodeContextMenuListener;
 import giny.view.NodeView;

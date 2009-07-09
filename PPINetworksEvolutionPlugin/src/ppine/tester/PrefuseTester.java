@@ -1,4 +1,4 @@
-package mcv.tester;
+package ppine.tester;
 
 public class PrefuseTester /*extends Display */ {
     /*

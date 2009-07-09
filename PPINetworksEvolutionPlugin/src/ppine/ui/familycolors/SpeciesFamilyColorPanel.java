@@ -3,7 +3,7 @@
  *
  * Created on 2009-05-14, 02:39:49
  */
-package mcv.ui.familycolors;
+package ppine.ui.familycolors;
 
 import javax.swing.JButton;
 import javax.swing.table.TableCellRenderer;

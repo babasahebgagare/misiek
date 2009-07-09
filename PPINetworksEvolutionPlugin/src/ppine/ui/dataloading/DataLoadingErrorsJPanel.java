@@ -3,10 +3,10 @@
  *
  * Created on 2009-05-18, 19:10:58
  */
-package mcv.ui.dataloading;
+package ppine.ui.dataloading;
 
-import mcv.logs.errorsloger.MCVErrorsLogger;
-import mcv.logs.errorsloger.MCVLoggedError;
+import ppine.logs.errorsloger.MCVErrorsLogger;
+import ppine.logs.errorsloger.MCVLoggedError;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
@@ -67,9 +67,9 @@ public class DataLoadingErrorsJPanel extends javax.swing.JPanel {
         errorsTable.setName("errorsTable"); // NOI18N
         jScrollPane1.setViewportView(errorsTable);
 
-        cleanButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/clean.png"))); // NOI18N
+        cleanButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/clean.png"))); // NOI18N
         cleanButton.setText("Clean");
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("mcv/ui/resources/Loading"); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("ppine/ui/resources/Loading"); // NOI18N
         cleanButton.setToolTipText(bundle.getString("CleanErrorsButton.ToolTip")); // NOI18N
         cleanButton.setName("cleanButton"); // NOI18N
         cleanButton.addActionListener(new java.awt.event.ActionListener() {

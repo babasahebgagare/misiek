@@ -1,6 +1,6 @@
-package mcv.main;
+package ppine.main;
 
-import mcv.cytolisteners.CytoListeners;
+import ppine.cytolisteners.CytoListeners;
 import cytoscape.Cytoscape;
 import cytoscape.view.cytopanels.CytoPanelImp;
 import cytoscape.visual.CalculatorCatalog;
@@ -9,12 +9,12 @@ import cytoscape.visual.VisualStyle;
 import java.util.ResourceBundle;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import mcv.ui.LeftPanel;
-import mcv.ui.MCVMainPanel;
-import mcv.ui.PluginMenusHandle;
-import mcv.ui.familycolors.SpeciesFamilyColorPanel;
-import mcv.visual.calculators.MCVEdgeAppearanceCalculator;
-import mcv.visual.calculators.MCVNodeAppearanceCalculator;
+import ppine.ui.LeftPanel;
+import ppine.ui.MCVMainPanel;
+import ppine.ui.PluginMenusHandle;
+import ppine.ui.familycolors.SpeciesFamilyColorPanel;
+import ppine.visual.calculators.MCVEdgeAppearanceCalculator;
+import ppine.visual.calculators.MCVNodeAppearanceCalculator;
 import org.jdesktop.swingx.VerticalLayout;
 
 public class PluginInitializator {
@@ -54,7 +54,7 @@ public class PluginInitializator {
 
         PluginMenusHandle.setMcvPanel(myPanel);
         PluginMenusHandle.setFamiliesColorListPanel(families);
-        leftPanel.add(ResourceBundle.getBundle("mcv/resources/ui").getString("TABNAME"), myPanel);
+        leftPanel.add(ResourceBundle.getBundle("ppine/resources/ui").getString("TABNAME"), myPanel);
     }
 
     public static void initAll() {

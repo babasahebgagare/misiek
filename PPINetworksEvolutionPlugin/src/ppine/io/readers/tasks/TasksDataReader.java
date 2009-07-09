@@ -1,15 +1,15 @@
-package mcv.io.readers.tasks;
+package ppine.io.readers.tasks;
 
-import mcv.io.AbstractDataReader;
+import ppine.io.AbstractDataReader;
 import cytoscape.Cytoscape;
 import cytoscape.task.ui.JTaskConfig;
 import cytoscape.task.util.TaskManager;
 import java.util.Map;
-import mcv.io.listeners.ExperimentsLoadingErrorsListener;
-import mcv.io.listeners.FamiliesLoadingErrorsListener;
-import mcv.io.listeners.InteractionsLoadingErrorsListener;
-import mcv.io.listeners.SpeciesLoadingErrorsListener;
-import mcv.logicmodel.structs.PPINetwork;
+import ppine.io.listeners.ExperimentsLoadingErrorsListener;
+import ppine.io.listeners.FamiliesLoadingErrorsListener;
+import ppine.io.listeners.InteractionsLoadingErrorsListener;
+import ppine.io.listeners.SpeciesLoadingErrorsListener;
+import ppine.logicmodel.structs.PPINetwork;
 
 public class TasksDataReader extends AbstractDataReader {
 

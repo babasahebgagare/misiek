@@ -1,4 +1,4 @@
-package mcv.viewmodel.structs;
+package ppine.viewmodel.structs;
 
 public class CytoNetworkObject extends CytoObject {
 

@@ -1,4 +1,4 @@
-package mcv.visual.renderers;
+package ppine.visual.renderers;
 
 import cytoscape.CyNode;
 import cytoscape.Cytoscape;
@@ -6,12 +6,12 @@ import cytoscape.view.CyNetworkView;
 import ding.view.DGraphView;
 import ding.view.DingCanvas;
 import giny.view.NodeView;
-import mcv.logicmodel.controllers.DataHandle;
-import mcv.viewmodel.structs.CytoPPINetworkProjection;
-import mcv.viewmodel.structs.CytoGroupNode;
+import ppine.logicmodel.controllers.DataHandle;
+import ppine.viewmodel.structs.CytoPPINetworkProjection;
+import ppine.viewmodel.structs.CytoGroupNode;
 
-import mcv.logicmodel.structs.Protein;
-import mcv.tester.GroupNodeView;
+import ppine.logicmodel.structs.Protein;
+import ppine.tester.GroupNodeView;
 
 public class MCVBackgroundRenderer {
 

@@ -3,9 +3,9 @@
  *
  * Created on 2009-04-11, 22:30:19
  */
-package mcv.ui.dataloading;
+package ppine.ui.dataloading;
 
-import mcv.io.AbstractDataReader;
+import ppine.io.AbstractDataReader;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.io.File;
@@ -16,15 +16,15 @@ import java.util.TreeMap;
 import java.util.Vector;
 import javax.help.CSH;
 import javax.swing.JFileChooser;
-import mcv.help.MCVHelpBroker;
-import mcv.io.listeners.InteractionsLoadingErrorsListener;
-import mcv.logicmodel.controllers.DataHandle;
-import mcv.logicmodel.structs.Interaction;
-import mcv.logicmodel.structs.PPINetwork;
-import mcv.logicmodel.structs.SpeciesTreeNode;
-import mcv.main.LoadedDataHandle;
-import mcv.main.PluginDataHandle;
-import mcv.ui.listeners.InteractionsLoadedListener;
+import ppine.help.MCVHelpBroker;
+import ppine.io.listeners.InteractionsLoadingErrorsListener;
+import ppine.logicmodel.controllers.DataHandle;
+import ppine.logicmodel.structs.Interaction;
+import ppine.logicmodel.structs.PPINetwork;
+import ppine.logicmodel.structs.SpeciesTreeNode;
+import ppine.main.LoadedDataHandle;
+import ppine.main.PluginDataHandle;
+import ppine.ui.listeners.InteractionsLoadedListener;
 
 /**
  *
@@ -74,9 +74,9 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
 
         jScrollPane2.setName("jScrollPane2"); // NOI18N
 
-        loadButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/update.png"))); // NOI18N
+        loadButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/update.png"))); // NOI18N
         loadButton.setText("Update");
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("mcv/ui/resources/Loading"); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("ppine/ui/resources/Loading"); // NOI18N
         loadButton.setToolTipText(bundle.getString("UpdateInteractionsButton.ToolTip")); // NOI18N
         loadButton.setName("loadButton"); // NOI18N
         loadButton.addActionListener(new java.awt.event.ActionListener() {
@@ -85,7 +85,7 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
             }
         });
 
-        infoButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/help.png"))); // NOI18N
+        infoButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/help.png"))); // NOI18N
         infoButton.setText("File format info");
         infoButton.setToolTipText(bundle.getString("FileFormatInfoInteractionsButton.ToolTip")); // NOI18N
         infoButton.setName("infoButton"); // NOI18N
@@ -120,7 +120,7 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
 
         oneLodingPanel.setName("oneLodingPanel"); // NOI18N
 
-        chooseOneFileButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/com.png"))); // NOI18N
+        chooseOneFileButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/com.png"))); // NOI18N
         chooseOneFileButton.setText("Choose file");
         chooseOneFileButton.setName("chooseOneFileButton"); // NOI18N
         chooseOneFileButton.addActionListener(new java.awt.event.ActionListener() {
@@ -175,7 +175,7 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("One file", jScrollPane3);
 
-        cleanButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/clean.png"))); // NOI18N
+        cleanButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/clean.png"))); // NOI18N
         cleanButton.setText("Clean");
         cleanButton.setToolTipText(bundle.getString("CleanInteractionsButton.ToolTip")); // NOI18N
         cleanButton.setName("cleanButton"); // NOI18N

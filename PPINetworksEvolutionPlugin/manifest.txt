@@ -1,2 +1,1 @@
-Cytoscape-Plugin: main.Main
-Main-Class: main.Main
+Cytoscape-Plugin: ppine.main.Main

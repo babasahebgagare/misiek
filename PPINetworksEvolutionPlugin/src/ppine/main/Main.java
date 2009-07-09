@@ -1,4 +1,4 @@
-package mcv.main;
+package ppine.main;
 
 import cytoscape.plugin.CytoscapePlugin;
 

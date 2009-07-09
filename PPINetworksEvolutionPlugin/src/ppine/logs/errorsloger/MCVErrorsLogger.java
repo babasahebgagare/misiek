@@ -1,4 +1,4 @@
-package mcv.logs.errorsloger;
+package ppine.logs.errorsloger;
 
 import java.util.Collection;
 import java.util.Date;

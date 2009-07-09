@@ -1,9 +1,9 @@
-package mcv.io.readers.tasks;
+package ppine.io.readers.tasks;
 
 import cytoscape.task.Task;
 import cytoscape.task.TaskMonitor;
 import cytoscape.task.ui.JTask;
-import mcv.logs.errorsloger.MCVErrorsLogger;
+import ppine.logs.errorsloger.MCVErrorsLogger;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedInputStream;
@@ -14,7 +14,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import mcv.utils.Messenger;
+import ppine.utils.Messenger;
 import org.jdesktop.swingx.error.ErrorEvent;
 import org.jdesktop.swingx.error.ErrorListener;
 

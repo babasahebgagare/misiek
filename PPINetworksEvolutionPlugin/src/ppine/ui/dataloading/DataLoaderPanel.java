@@ -3,16 +3,16 @@
  *
  * Created on 2009-04-27, 15:57:08
  */
-package mcv.ui.dataloading;
+package ppine.ui.dataloading;
 
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
-import mcv.main.LoadedDataHandle;
-import mcv.main.PluginDataHandle;
-import mcv.ui.listeners.ExperimentsLoadedListener;
-import mcv.ui.listeners.InteractionsLoadedListener;
-import mcv.ui.listeners.ProteinsLoadedListener;
-import mcv.ui.listeners.SpeciesLoadedListener;
+import ppine.main.LoadedDataHandle;
+import ppine.main.PluginDataHandle;
+import ppine.ui.listeners.ExperimentsLoadedListener;
+import ppine.ui.listeners.InteractionsLoadedListener;
+import ppine.ui.listeners.ProteinsLoadedListener;
+import ppine.ui.listeners.SpeciesLoadedListener;
 import org.jdesktop.swingx.error.ErrorEvent;
 
 /**
@@ -131,9 +131,9 @@ public class DataLoaderPanel extends javax.swing.JPanel {
 
         tabbedPane.setName("tabbedPane"); // NOI18N
 
-        logButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/stop2.png"))); // NOI18N
+        logButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/stop2.png"))); // NOI18N
         logButton.setText("Show log");
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("mcv/ui/resources/Loading"); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("ppine/ui/resources/Loading"); // NOI18N
         logButton.setToolTipText(bundle.getString("ShowLogButton.ToolTip")); // NOI18N
         logButton.setName("logButton"); // NOI18N
         logButton.addActionListener(new java.awt.event.ActionListener() {
@@ -149,7 +149,7 @@ public class DataLoaderPanel extends javax.swing.JPanel {
         errorLabel.setName("errorLabel"); // NOI18N
         jScrollPane3.setViewportView(errorLabel);
 
-        closeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/exit.png"))); // NOI18N
+        closeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/exit.png"))); // NOI18N
         closeButton.setText("Close ");
         closeButton.setToolTipText(bundle.getString("CloseButton.ToolTip")); // NOI18N
         closeButton.setName("closeButton"); // NOI18N

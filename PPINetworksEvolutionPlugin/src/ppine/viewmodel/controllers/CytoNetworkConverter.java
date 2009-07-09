@@ -1,11 +1,11 @@
-package mcv.viewmodel.controllers;
+package ppine.viewmodel.controllers;
 
-import mcv.controllers.interactions.InteractionsManager;
+import ppine.controllers.interactions.InteractionsManager;
 import cytoscape.CyNetwork;
 import cytoscape.Cytoscape;
 import cytoscape.view.CyNetworkView;
-import mcv.main.PluginDataHandle;
-import mcv.viewmodel.structs.CytoAbstractPPINetwork;
+import ppine.main.PluginDataHandle;
+import ppine.viewmodel.structs.CytoAbstractPPINetwork;
 
 public class CytoNetworkConverter {
 

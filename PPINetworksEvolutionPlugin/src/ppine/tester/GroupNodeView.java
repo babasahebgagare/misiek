@@ -1,4 +1,4 @@
-package mcv.tester;
+package ppine.tester;
 
 import ding.view.DGraphView;
 import java.awt.Color;

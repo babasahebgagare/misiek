@@ -1,6 +1,6 @@
-package mcv.ui.familycolors;
+package ppine.ui.familycolors;
 
-import mcv.ui.*;
+import ppine.ui.*;
 import cytoscape.Cytoscape;
 import cytoscape.view.CyNetworkView;
 import java.awt.Color;
@@ -9,9 +9,9 @@ import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.table.AbstractTableModel;
-import mcv.logicmodel.controllers.DataHandle;
-import mcv.logicmodel.structs.Family;
-import mcv.main.PluginDataHandle;
+import ppine.logicmodel.controllers.DataHandle;
+import ppine.logicmodel.structs.Family;
+import ppine.main.PluginDataHandle;
 
 /**
  *
