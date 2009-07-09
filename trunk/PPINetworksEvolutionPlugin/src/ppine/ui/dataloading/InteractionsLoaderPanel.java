@@ -16,7 +16,7 @@ import java.util.TreeMap;
 import java.util.Vector;
 import javax.help.CSH;
 import javax.swing.JFileChooser;
-import ppine.help.MCVHelpBroker;
+import ppine.help.PPINEHelpBroker;
 import ppine.io.listeners.InteractionsLoadingErrorsListener;
 import ppine.logicmodel.controllers.DataHandle;
 import ppine.logicmodel.structs.Interaction;
@@ -328,7 +328,7 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
 }//GEN-LAST:event_loadButtonActionPerformed
 
     private void infoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_infoButtonActionPerformed
-        CSH.DisplayHelpFromSource csh = new CSH.DisplayHelpFromSource(MCVHelpBroker.getHelpBroker("Interactions file format"));
+        CSH.DisplayHelpFromSource csh = new CSH.DisplayHelpFromSource(PPINEHelpBroker.getHelpBroker("Interactions file format"));
         csh.actionPerformed(new ActionEvent(this, 120, "Interactions file format"));
     }//GEN-LAST:event_infoButtonActionPerformed
 

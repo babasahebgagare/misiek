@@ -13,8 +13,8 @@ import ppine.ui.LeftPanel;
 import ppine.ui.MCVMainPanel;
 import ppine.ui.PluginMenusHandle;
 import ppine.ui.familycolors.SpeciesFamilyColorPanel;
-import ppine.visual.calculators.MCVEdgeAppearanceCalculator;
-import ppine.visual.calculators.MCVNodeAppearanceCalculator;
+import ppine.visual.calculators.PPINEEdgeAppearanceCalculator;
+import ppine.visual.calculators.PPINENodeAppearanceCalculator;
 import org.jdesktop.swingx.VerticalLayout;
 
 public class PluginInitializator {
@@ -27,8 +27,8 @@ public class PluginInitializator {
 
             MCVStyle = new VisualStyle(vmm.getVisualStyle());
             MCVStyle.setName("PPINEStyle");
-            MCVStyle.setNodeAppearanceCalculator(new MCVNodeAppearanceCalculator());
-            MCVStyle.setEdgeAppearanceCalculator(new MCVEdgeAppearanceCalculator());
+            MCVStyle.setNodeAppearanceCalculator(new PPINENodeAppearanceCalculator());
+            MCVStyle.setEdgeAppearanceCalculator(new PPINEEdgeAppearanceCalculator());
 
             catalog.addVisualStyle(MCVStyle);
         } else {

@@ -9,14 +9,14 @@ import java.util.Map;
  *
  * @author misiek (mw219725@gmail.com)
  */
-public class MCVErrorsLogger {
+public class PPINEErrorsLogger {
 
     private static Integer errorID = Integer.valueOf(0);
-    private static Map<Integer, MCVLoggedError> errors = new HashMap<Integer, MCVLoggedError>();
+    private static Map<Integer, PPINELoggedError> errors = new HashMap<Integer, PPINELoggedError>();
 
     public static void logMCVError(Exception e, String message, String source) {
         Date date = new Date();
-        MCVLoggedError loggedError = new MCVLoggedError(errorID, e, date, message, source);
+        PPINELoggedError loggedError = new PPINELoggedError(errorID, e, date, message, source);
         errors.put(errorID, loggedError);
         errorID++;
     }
@@ -26,15 +26,15 @@ public class MCVErrorsLogger {
     }
 
     public static void deleteAll() {
-        errors = new HashMap<Integer, MCVLoggedError>();
+        errors = new HashMap<Integer, PPINELoggedError>();
         errorID = 0;
     }
 
-    public static Map<Integer, MCVLoggedError> getErrors() {
+    public static Map<Integer, PPINELoggedError> getErrors() {
         return errors;
     }
 
-    public static Collection<MCVLoggedError> getErrorsCollection() {
+    public static Collection<PPINELoggedError> getErrorsCollection() {
         return errors.values();
     }
 }

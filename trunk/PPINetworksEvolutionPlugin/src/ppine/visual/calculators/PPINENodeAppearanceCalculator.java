@@ -16,7 +16,7 @@ import ppine.logicmodel.structs.Protein;
 import ppine.main.PluginDataHandle;
 import ppine.viewmodel.structs.CytoProteinProjection;
 
-public class MCVNodeAppearanceCalculator extends NodeAppearanceCalculator {
+public class PPINENodeAppearanceCalculator extends NodeAppearanceCalculator {
 
     @Override
     public void calculateNodeAppearance(NodeAppearance appr, Node node, CyNetwork cyNetwork) {

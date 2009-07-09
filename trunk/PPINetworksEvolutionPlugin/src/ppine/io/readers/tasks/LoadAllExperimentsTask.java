@@ -9,7 +9,7 @@ import ppine.logicmodel.structs.PPINetworkExp;
 import ppine.main.PluginDataHandle;
 import ppine.utils.IDCreator;
 
-public class LoadAllExperimentsTask extends MCVLoadTask {
+public class LoadAllExperimentsTask extends PPINELoadTask {
 
     private long current;
     private int created = 0;

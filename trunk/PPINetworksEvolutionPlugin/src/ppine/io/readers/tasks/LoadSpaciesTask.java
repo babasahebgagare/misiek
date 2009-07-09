@@ -5,7 +5,7 @@ import ppine.io.exceptions.SpeciesTreeFormatException;
 import ppine.io.parsers.DataParser;
 import java.io.IOException;
 
-public class LoadSpaciesTask extends MCVLoadTask {
+public class LoadSpaciesTask extends PPINELoadTask {
 
     private int lineNumber = 0;
 

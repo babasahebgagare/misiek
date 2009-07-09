@@ -3,7 +3,7 @@ package ppine.io.readers.tasks;
 import cytoscape.task.Task;
 import cytoscape.task.TaskMonitor;
 import cytoscape.task.ui.JTask;
-import ppine.logs.errorsloger.MCVErrorsLogger;
+import ppine.logs.errorsloger.PPINEErrorsLogger;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedInputStream;
@@ -22,7 +22,7 @@ import org.jdesktop.swingx.error.ErrorListener;
  *
  * @author misiek (mw219725@gmail.com)
  */
-public abstract class MCVLoadTask implements Task {
+public abstract class PPINELoadTask implements Task {
 
     protected ErrorListener errorListener = null;
     protected ActionListener doneListener = null;
@@ -35,7 +35,7 @@ public abstract class MCVLoadTask implements Task {
     private DataInputStream dis = null;
     protected BufferedReader br = null;
 
-    public MCVLoadTask(String filepath) {
+    public PPINELoadTask(String filepath) {
         this.filepath = filepath;
     }
 
@@ -102,7 +102,7 @@ public abstract class MCVLoadTask implements Task {
         } else {
             Messenger.error(ex);
         }
-        MCVErrorsLogger.logMCVError(ex, msg, source);
+        PPINEErrorsLogger.logMCVError(ex, msg, source);
     }
 
     protected void doneActionPerformed(Object source, int id, String command) {

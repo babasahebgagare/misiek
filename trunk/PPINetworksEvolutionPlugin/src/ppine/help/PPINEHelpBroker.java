@@ -9,7 +9,7 @@ import javax.help.HelpSet;
  *
  * @author misiek (mw219725@gmail.com)
  */
-public class MCVHelpBroker {
+public class PPINEHelpBroker {
 
     private static HelpBroker hb;
     private static HelpSet hs;
@@ -17,13 +17,13 @@ public class MCVHelpBroker {
 
 
     static {
-        new MCVHelpBroker();
+        new PPINEHelpBroker();
     }
 
     /**
      * Creates a new CyHelpBroker object.
      */
-    private MCVHelpBroker() {
+    private PPINEHelpBroker() {
         hb = null;
         hs = null;
 

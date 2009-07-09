@@ -12,7 +12,7 @@ import ppine.viewmodel.structs.CytoAbstractPPINetwork;
 import ppine.viewmodel.structs.CytoExpInteraction;
 import ppine.viewmodel.structs.CytoInteraction;
 
-public class MCVEdgeAppearanceCalculator extends EdgeAppearanceCalculator {
+public class PPINEEdgeAppearanceCalculator extends EdgeAppearanceCalculator {
 
     @Override
     public void calculateEdgeAppearance(EdgeAppearance appr, Edge edge, CyNetwork cyNetwork) {
