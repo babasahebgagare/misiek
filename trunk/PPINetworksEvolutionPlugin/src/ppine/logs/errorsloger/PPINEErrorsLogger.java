@@ -14,14 +14,14 @@ public class PPINEErrorsLogger {
     private static Integer errorID = Integer.valueOf(0);
     private static Map<Integer, PPINELoggedError> errors = new HashMap<Integer, PPINELoggedError>();
 
-    public static void logMCVError(Exception e, String message, String source) {
+    public static void logPPINEError(Exception e, String message, String source) {
         Date date = new Date();
         PPINELoggedError loggedError = new PPINELoggedError(errorID, e, date, message, source);
         errors.put(errorID, loggedError);
         errorID++;
     }
 
-    public static void deleteMCVErrorLogged(Integer id) {
+    public static void deletePPINEErrorLogged(Integer id) {
         errors.remove(id);
     }
 

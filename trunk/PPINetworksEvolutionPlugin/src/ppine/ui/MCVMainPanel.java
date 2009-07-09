@@ -4,7 +4,7 @@
  */
 
 /*
- * MCVMainPanel.java
+ * PPINEMainPanel.java
  *
  * Created on 2009-05-14, 02:44:46
  */
@@ -15,10 +15,10 @@ package ppine.ui;
  *
  * @author misiek
  */
-public class MCVMainPanel extends javax.swing.JPanel {
+public class PPINEMainPanel extends javax.swing.JPanel {
 
-    /** Creates new form MCVMainPanel */
-    public MCVMainPanel() {
+    /** Creates new form PPINEMainPanel */
+    public PPINEMainPanel() {
         initComponents();
     }
 

@@ -189,7 +189,7 @@ public class DataLoaderPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void logButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logButtonActionPerformed
-        DefaultLoadingController.showMCVLogsPanel();
+        DefaultLoadingController.showPPINELogsPanel();
     }//GEN-LAST:event_logButtonActionPerformed
 
     private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed

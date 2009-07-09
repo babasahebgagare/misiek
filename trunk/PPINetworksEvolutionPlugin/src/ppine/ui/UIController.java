@@ -34,7 +34,7 @@ public abstract class UIController {
 
     public abstract void deleteData();
 
-    public abstract void setMCVActiveTab();
+    public abstract void setPPINEActiveTab();
 
     public abstract void initDataView();
 }

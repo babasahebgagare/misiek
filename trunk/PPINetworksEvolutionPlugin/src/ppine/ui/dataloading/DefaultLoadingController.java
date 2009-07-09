@@ -55,9 +55,9 @@ public class DefaultLoadingController {
         UIController.getInstance().initDataView();
     }
 
-    public static void showMCVLogsPanel() {
+    public static void showPPINELogsPanel() {
         DataLoadingErrorsJPanel errorsPanel = new DataLoadingErrorsJPanel();
-        JFrame frame = new JFrame("MCV plugin errors");
+        JFrame frame = new JFrame("PPINE plugin errors");
 
         frame.add(errorsPanel);
         frame.pack();

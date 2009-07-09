@@ -17,7 +17,7 @@ public class PluginMenusHandle {
     private static JButton newDataButton = null;
     private static JButton deleteDataButton = null;
     private static JButton updateDataButton = null;
-    private static JPanel mcvPanel = null;
+    private static JPanel ppinePanel = null;
     private static SpeciesFamilyColorPanel familiesColorListPanel = null;
 
     public static SpeciesFamilyColorPanel getFamiliesColorListPanel() {
@@ -89,11 +89,11 @@ public class PluginMenusHandle {
     }
 
     public static JPanel getMcvPanel() {
-        return mcvPanel;
+        return ppinePanel;
     }
 
-    public static void setMcvPanel(JPanel mcvPanel) {
-        PluginMenusHandle.mcvPanel = mcvPanel;
+    public static void setMcvPanel(JPanel ppinePanel) {
+        PluginMenusHandle.ppinePanel = ppinePanel;
     }
 
     public static void setFamiliesColorListPanel(SpeciesFamilyColorPanel familiesColorListPanel) {

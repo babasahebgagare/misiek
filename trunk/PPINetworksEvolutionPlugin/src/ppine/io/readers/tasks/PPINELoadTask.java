@@ -102,7 +102,7 @@ public abstract class PPINELoadTask implements Task {
         } else {
             Messenger.error(ex);
         }
-        PPINEErrorsLogger.logMCVError(ex, msg, source);
+        PPINEErrorsLogger.logPPINEError(ex, msg, source);
     }
 
     protected void doneActionPerformed(Object source, int id, String command) {
