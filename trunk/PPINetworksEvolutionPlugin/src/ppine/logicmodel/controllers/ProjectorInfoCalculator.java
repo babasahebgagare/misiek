@@ -1,12 +1,12 @@
-package mcv.logicmodel.controllers;
+package ppine.logicmodel.controllers;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
-import mcv.logicmodel.structs.SpeciesTreeNode;
-import mcv.logicmodel.structs.Protein;
-import mcv.main.PluginDataHandle;
-import mcv.utils.MemoLogger;
+import ppine.logicmodel.structs.SpeciesTreeNode;
+import ppine.logicmodel.structs.Protein;
+import ppine.main.PluginDataHandle;
+import ppine.utils.MemoLogger;
 
 public class ProjectorInfoCalculator {
 

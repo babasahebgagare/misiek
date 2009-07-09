@@ -8,19 +8,19 @@
  *
  * Created on 2009-07-05, 20:49:40
  */
-package mcv.ui.dataloading;
+package ppine.ui.dataloading;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
 import javax.help.CSH;
 import javax.swing.JFileChooser;
-import mcv.help.MCVHelpBroker;
-import mcv.io.listeners.ExperimentsLoadingErrorsListener;
-import mcv.main.LoadedDataHandle;
-import mcv.main.LoadedDataHandle;
-import mcv.main.PluginDataHandle;
-import mcv.ui.UIController;
-import mcv.ui.listeners.ExperimentsLoadedListener;
+import ppine.help.MCVHelpBroker;
+import ppine.io.listeners.ExperimentsLoadingErrorsListener;
+import ppine.main.LoadedDataHandle;
+import ppine.main.LoadedDataHandle;
+import ppine.main.PluginDataHandle;
+import ppine.ui.UIController;
+import ppine.ui.listeners.ExperimentsLoadedListener;
 
 /**
  *
@@ -68,9 +68,9 @@ public class ExperimentsLoaderPanel extends javax.swing.JPanel {
         helpButton = new javax.swing.JButton();
         filenameLabel = new javax.swing.JLabel();
 
-        chooseFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/com.png"))); // NOI18N
+        chooseFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/com.png"))); // NOI18N
         chooseFile.setText("Choose file");
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("mcv/ui/resources/Loading"); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("ppine/ui/resources/Loading"); // NOI18N
         chooseFile.setToolTipText(bundle.getString("ChooseFileFamiliesTreeButton.ToolTip")); // NOI18N
         chooseFile.setName("chooseFile"); // NOI18N
         chooseFile.addActionListener(new java.awt.event.ActionListener() {
@@ -79,7 +79,7 @@ public class ExperimentsLoaderPanel extends javax.swing.JPanel {
             }
         });
 
-        loadTreeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/save.png"))); // NOI18N
+        loadTreeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/save.png"))); // NOI18N
         loadTreeButton.setText("Load");
         loadTreeButton.setToolTipText(bundle.getString("LoadFamiliesTreesButton.ToolTip")); // NOI18N
         loadTreeButton.setName("loadTreeButton"); // NOI18N
@@ -89,7 +89,7 @@ public class ExperimentsLoaderPanel extends javax.swing.JPanel {
             }
         });
 
-        cleanButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/clean.png"))); // NOI18N
+        cleanButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/clean.png"))); // NOI18N
         cleanButton.setText("Clean");
         cleanButton.setToolTipText(bundle.getString("CleanSpeciesTree.ToolTip")); // NOI18N
         cleanButton.setName("cleanButton"); // NOI18N
@@ -99,7 +99,7 @@ public class ExperimentsLoaderPanel extends javax.swing.JPanel {
             }
         });
 
-        helpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/help.png"))); // NOI18N
+        helpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/help.png"))); // NOI18N
         helpButton.setText("File format info");
         helpButton.setToolTipText(bundle.getString("FileFormatInfoSpecies.ToolTip")); // NOI18N
         helpButton.setName("helpButton"); // NOI18N

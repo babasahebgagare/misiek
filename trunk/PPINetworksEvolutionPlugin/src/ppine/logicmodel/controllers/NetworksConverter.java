@@ -1,9 +1,9 @@
-package mcv.logicmodel.controllers;
+package ppine.logicmodel.controllers;
 
-import mcv.viewmodel.controllers.CytoNetworkConverter;
+import ppine.viewmodel.controllers.CytoNetworkConverter;
 import java.util.Collection;
-import mcv.viewmodel.structs.CytoPPINetwork;
-import mcv.logicmodel.structs.SpeciesTreeNode;
+import ppine.viewmodel.structs.CytoPPINetwork;
+import ppine.logicmodel.structs.SpeciesTreeNode;
 
 public class NetworksConverter {
 

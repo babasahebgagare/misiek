@@ -1,18 +1,18 @@
-package mcv.controllers.interactions;
+package ppine.controllers.interactions;
 
 import cytoscape.CyNetwork;
 import cytoscape.Cytoscape;
 import cytoscape.view.CyNetworkView;
-import mcv.logicmodel.structs.ExpInteraction;
-import mcv.viewmodel.controllers.CytoInteractionsConverter;
-import mcv.viewmodel.controllers.CytoDataHandle;
-import mcv.viewmodel.structs.CytoAbstractPPINetwork;
-import mcv.logicmodel.structs.Interaction;
-import mcv.logicmodel.structs.PPINetwork;
-import mcv.logicmodel.structs.PPINetworkExp;
-import mcv.logicmodel.structs.SpeciesTreeNode;
-import mcv.main.PluginDataHandle;
-import mcv.viewmodel.controllers.CytoVisualHandle;
+import ppine.logicmodel.structs.ExpInteraction;
+import ppine.viewmodel.controllers.CytoInteractionsConverter;
+import ppine.viewmodel.controllers.CytoDataHandle;
+import ppine.viewmodel.structs.CytoAbstractPPINetwork;
+import ppine.logicmodel.structs.Interaction;
+import ppine.logicmodel.structs.PPINetwork;
+import ppine.logicmodel.structs.PPINetworkExp;
+import ppine.logicmodel.structs.SpeciesTreeNode;
+import ppine.main.PluginDataHandle;
+import ppine.viewmodel.controllers.CytoVisualHandle;
 
 public class DefaultInteractionsManager extends InteractionsManager {
 

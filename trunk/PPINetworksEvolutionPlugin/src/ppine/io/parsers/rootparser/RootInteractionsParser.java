@@ -1,7 +1,7 @@
-package mcv.io.parsers.rootparser;
+package ppine.io.parsers.rootparser;
 
-import mcv.io.exceptions.InteractionsFileFormatException;
-import mcv.io.parsers.InteractionParserStruct;
+import ppine.io.exceptions.InteractionsFileFormatException;
+import ppine.io.parsers.InteractionParserStruct;
 
 /**
  *

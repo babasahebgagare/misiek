@@ -1,4 +1,4 @@
-package mcv.utils;
+package ppine.utils;
 
 import cytoscape.Cytoscape;
 import javax.swing.JOptionPane;

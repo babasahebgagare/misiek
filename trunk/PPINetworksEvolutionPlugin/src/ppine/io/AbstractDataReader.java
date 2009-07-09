@@ -1,12 +1,12 @@
-package mcv.io;
+package ppine.io;
 
-import mcv.io.listeners.ExperimentsLoadingErrorsListener;
-import mcv.io.readers.tasks.TasksDataReader;
+import ppine.io.listeners.ExperimentsLoadingErrorsListener;
+import ppine.io.readers.tasks.TasksDataReader;
 import java.util.Map;
-import mcv.io.listeners.FamiliesLoadingErrorsListener;
-import mcv.io.listeners.InteractionsLoadingErrorsListener;
-import mcv.io.listeners.SpeciesLoadingErrorsListener;
-import mcv.logicmodel.structs.PPINetwork;
+import ppine.io.listeners.FamiliesLoadingErrorsListener;
+import ppine.io.listeners.InteractionsLoadingErrorsListener;
+import ppine.io.listeners.SpeciesLoadingErrorsListener;
+import ppine.logicmodel.structs.PPINetwork;
 
 public abstract class AbstractDataReader {
 

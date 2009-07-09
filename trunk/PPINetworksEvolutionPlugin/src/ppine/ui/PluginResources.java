@@ -1,4 +1,4 @@
-package mcv.ui;
+package ppine.ui;
 
 import java.net.URL;
 import javax.swing.Icon;
@@ -11,7 +11,7 @@ import javax.swing.ImageIcon;
 public class PluginResources {
 
     public static Icon getIcon(String localpath) {
-        URL url = ClassLoader.getSystemResource("mcv/resources/" + localpath);
+        URL url = ClassLoader.getSystemResource("ppine/resources/" + localpath);
         return new ImageIcon(url);
     }
 }

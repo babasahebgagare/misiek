@@ -1,4 +1,4 @@
-package mcv.tester;
+package ppine.tester;
 
 import cytoscape.Cytoscape;
 import cytoscape.view.CyNetworkView;
@@ -8,7 +8,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import mcv.utils.Messenger;
+import ppine.utils.Messenger;
 import java.awt.Color;
 import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;

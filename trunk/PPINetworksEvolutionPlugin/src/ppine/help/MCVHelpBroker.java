@@ -1,4 +1,4 @@
-package mcv.help;
+package ppine.help;
 
 import cytoscape.logger.CyLogger;
 import java.net.URL;
@@ -13,7 +13,7 @@ public class MCVHelpBroker {
 
     private static HelpBroker hb;
     private static HelpSet hs;
-    private static final String HELP_RESOURCE = "/mcv/help/docs/jhelpset.hs";
+    private static final String HELP_RESOURCE = "/ppine/help/docs/jhelpset.hs";
 
 
     static {

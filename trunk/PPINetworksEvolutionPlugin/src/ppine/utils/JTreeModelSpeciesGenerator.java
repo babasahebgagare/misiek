@@ -1,4 +1,4 @@
-package mcv.utils;
+package ppine.utils;
 
 import cytoscape.dialogs.plugins.TreeNode;
 import javax.swing.Icon;
@@ -6,10 +6,10 @@ import javax.swing.JTree;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
-import mcv.logicmodel.controllers.DataHandle;
-import mcv.logicmodel.structs.SpeciesTreeNode;
-import mcv.main.PluginDataHandle;
-import mcv.ui.PluginResources;
+import ppine.logicmodel.controllers.DataHandle;
+import ppine.logicmodel.structs.SpeciesTreeNode;
+import ppine.main.PluginDataHandle;
+import ppine.ui.PluginResources;
 
 /**
  *

@@ -1,11 +1,11 @@
-package mcv.viewmodel.structs;
+package ppine.viewmodel.structs;
 
-import mcv.logicmodel.structs.SpeciesTreeNode;
-import mcv.logicmodel.structs.Protein;
+import ppine.logicmodel.structs.SpeciesTreeNode;
+import ppine.logicmodel.structs.Protein;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import mcv.utils.IDCreator;
+import ppine.utils.IDCreator;
 
 public abstract class CytoAbstractPPINetwork extends CytoObject {
 

@@ -1,6 +1,6 @@
-package mcv.viewmodel.structs;
+package ppine.viewmodel.structs;
 
-import mcv.logicmodel.structs.Protein;
+import ppine.logicmodel.structs.Protein;
 
 public class CytoProteinProjection extends CytoProtein {
 

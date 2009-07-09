@@ -1,9 +1,9 @@
-package mcv.ui;
+package ppine.ui;
 
 import cytoscape.CyNetwork;
 import java.util.Collection;
-import mcv.viewmodel.structs.CytoProtein;
-import mcv.logicmodel.structs.SpeciesTreeNode;
+import ppine.viewmodel.structs.CytoProtein;
+import ppine.logicmodel.structs.SpeciesTreeNode;
 
 public abstract class UIController {
 

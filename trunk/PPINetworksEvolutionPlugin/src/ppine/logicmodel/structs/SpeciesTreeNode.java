@@ -1,4 +1,4 @@
-package mcv.logicmodel.structs;
+package ppine.logicmodel.structs;
 
 import java.util.Map;
 

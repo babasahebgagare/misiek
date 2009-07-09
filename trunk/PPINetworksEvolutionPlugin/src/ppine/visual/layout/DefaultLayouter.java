@@ -1,15 +1,15 @@
-package mcv.visual.layout;
+package ppine.visual.layout;
 
 import cytoscape.Cytoscape;
 import cytoscape.view.CyNetworkView;
 import giny.model.Node;
 import giny.view.NodeView;
 import java.util.Collection;
-import mcv.viewmodel.structs.CytoGroupNode;
-import mcv.viewmodel.structs.CytoPPINetworkProjectionToDown;
-import mcv.viewmodel.structs.CytoPPINetworkProjectionToUp;
-import mcv.viewmodel.structs.CytoProtein;
-import mcv.viewmodel.structs.CytoProteinProjection;
+import ppine.viewmodel.structs.CytoGroupNode;
+import ppine.viewmodel.structs.CytoPPINetworkProjectionToDown;
+import ppine.viewmodel.structs.CytoPPINetworkProjectionToUp;
+import ppine.viewmodel.structs.CytoProtein;
+import ppine.viewmodel.structs.CytoProteinProjection;
 
 public class DefaultLayouter extends Layouter {
 

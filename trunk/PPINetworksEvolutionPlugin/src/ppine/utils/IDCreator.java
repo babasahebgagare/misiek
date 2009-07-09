@@ -1,10 +1,10 @@
-package mcv.utils;
+package ppine.utils;
 
-import mcv.io.parsers.ExperimentParserStruct;
-import mcv.viewmodel.structs.CytoAbstractPPINetwork;
-import mcv.viewmodel.structs.CytoProtein;
-import mcv.logicmodel.structs.SpeciesTreeNode;
-import mcv.logicmodel.structs.Protein;
+import ppine.io.parsers.ExperimentParserStruct;
+import ppine.viewmodel.structs.CytoAbstractPPINetwork;
+import ppine.viewmodel.structs.CytoProtein;
+import ppine.logicmodel.structs.SpeciesTreeNode;
+import ppine.logicmodel.structs.Protein;
 
 public class IDCreator {
 

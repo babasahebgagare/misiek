@@ -1,8 +1,8 @@
-package mcv.utils;
+package ppine.utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import mcv.ui.PluginMenusHandle;
+import ppine.ui.PluginMenusHandle;
 
 public class MemoLogger {
 

@@ -1,6 +1,6 @@
-package mcv.logicmodel.structs;
+package ppine.logicmodel.structs;
 
-import mcv.logicmodel.structs.ProjectorInfo;
+import ppine.logicmodel.structs.ProjectorInfo;
 
 public class Protein {
 

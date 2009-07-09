@@ -1,10 +1,10 @@
-package mcv.logicmodel.controllers;
+package ppine.logicmodel.controllers;
 
 import java.util.Collection;
-import mcv.viewmodel.structs.CytoProtein;
-import mcv.logicmodel.structs.Protein;
-import mcv.utils.IDCreator;
-import mcv.viewmodel.structs.CytoAbstractPPINetwork;
+import ppine.viewmodel.structs.CytoProtein;
+import ppine.logicmodel.structs.Protein;
+import ppine.utils.IDCreator;
+import ppine.viewmodel.structs.CytoAbstractPPINetwork;
 
 public class ProteinsConverter {
 

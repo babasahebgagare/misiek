@@ -1,4 +1,4 @@
-package mcv.viewmodel.controllers;
+package ppine.viewmodel.controllers;
 
 import cytoscape.CyEdge;
 import cytoscape.CyNetwork;
@@ -9,22 +9,22 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import mcv.logicmodel.structs.ExpInteraction;
-import mcv.mappers.IDMapper;
-import mcv.viewmodel.structs.CytoAbstractPPINetwork;
-import mcv.viewmodel.structs.CytoGroupNode;
-import mcv.viewmodel.structs.CytoInteraction;
-import mcv.viewmodel.structs.CytoPPINetwork;
-import mcv.viewmodel.structs.CytoProtein;
-import mcv.viewmodel.structs.CytoProteinProjection;
-import mcv.logicmodel.structs.SpeciesTreeNode;
-import mcv.viewmodel.structs.CytoPPINetworkProjection;
-import mcv.viewmodel.structs.CytoPPINetworkProjectionToDown;
-import mcv.viewmodel.structs.CytoPPINetworkProjectionToUp;
-import mcv.logicmodel.structs.Interaction;
-import mcv.logicmodel.structs.Protein;
-import mcv.utils.IDCreator;
-import mcv.viewmodel.structs.CytoExpInteraction;
+import ppine.logicmodel.structs.ExpInteraction;
+import ppine.mappers.IDMapper;
+import ppine.viewmodel.structs.CytoAbstractPPINetwork;
+import ppine.viewmodel.structs.CytoGroupNode;
+import ppine.viewmodel.structs.CytoInteraction;
+import ppine.viewmodel.structs.CytoPPINetwork;
+import ppine.viewmodel.structs.CytoProtein;
+import ppine.viewmodel.structs.CytoProteinProjection;
+import ppine.logicmodel.structs.SpeciesTreeNode;
+import ppine.viewmodel.structs.CytoPPINetworkProjection;
+import ppine.viewmodel.structs.CytoPPINetworkProjectionToDown;
+import ppine.viewmodel.structs.CytoPPINetworkProjectionToUp;
+import ppine.logicmodel.structs.Interaction;
+import ppine.logicmodel.structs.Protein;
+import ppine.utils.IDCreator;
+import ppine.viewmodel.structs.CytoExpInteraction;
 
 public class CytoDataHandle {
 

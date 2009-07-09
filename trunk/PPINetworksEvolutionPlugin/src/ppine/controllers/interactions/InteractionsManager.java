@@ -1,6 +1,6 @@
-package mcv.controllers.interactions;
+package ppine.controllers.interactions;
 
-import mcv.viewmodel.structs.CytoAbstractPPINetwork;
+import ppine.viewmodel.structs.CytoAbstractPPINetwork;
 
 public abstract class InteractionsManager {
 

@@ -1,4 +1,4 @@
-package mcv.cytolisteners;
+package ppine.cytolisteners;
 
 import cytoscape.Cytoscape;
 import cytoscape.ding.DingNetworkView;
@@ -8,11 +8,11 @@ import giny.view.GraphViewChangeEvent;
 import giny.view.GraphViewChangeListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import mcv.main.PluginDataHandle;
-import mcv.utils.MemoLogger;
-import mcv.viewmodel.controllers.CytoDataHandle;
-import mcv.viewmodel.structs.CytoAbstractPPINetwork;
-import mcv.visual.menus.NodePopupMenuListener;
+import ppine.main.PluginDataHandle;
+import ppine.utils.MemoLogger;
+import ppine.viewmodel.controllers.CytoDataHandle;
+import ppine.viewmodel.structs.CytoAbstractPPINetwork;
+import ppine.visual.menus.NodePopupMenuListener;
 
 /**
  *

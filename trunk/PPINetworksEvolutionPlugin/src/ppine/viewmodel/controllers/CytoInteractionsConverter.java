@@ -1,12 +1,12 @@
-package mcv.viewmodel.controllers;
+package ppine.viewmodel.controllers;
 
 import cytoscape.CyNetwork;
 import cytoscape.Cytoscape;
 import giny.model.Edge;
 import java.util.Collection;
-import mcv.main.PluginDataHandle;
-import mcv.viewmodel.structs.CytoExpInteraction;
-import mcv.viewmodel.structs.CytoInteraction;
+import ppine.main.PluginDataHandle;
+import ppine.viewmodel.structs.CytoExpInteraction;
+import ppine.viewmodel.structs.CytoInteraction;
 
 public class CytoInteractionsConverter {
 

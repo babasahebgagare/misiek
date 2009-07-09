@@ -1,4 +1,4 @@
-package mcv.visual.calculators;
+package ppine.visual.calculators;
 
 import cytoscape.CyNetwork;
 import cytoscape.visual.EdgeAppearance;
@@ -6,11 +6,11 @@ import cytoscape.visual.EdgeAppearanceCalculator;
 import cytoscape.visual.VisualPropertyType;
 import giny.model.Edge;
 import java.awt.Color;
-import mcv.main.PluginDataHandle;
-import mcv.viewmodel.controllers.CytoDataHandle;
-import mcv.viewmodel.structs.CytoAbstractPPINetwork;
-import mcv.viewmodel.structs.CytoExpInteraction;
-import mcv.viewmodel.structs.CytoInteraction;
+import ppine.main.PluginDataHandle;
+import ppine.viewmodel.controllers.CytoDataHandle;
+import ppine.viewmodel.structs.CytoAbstractPPINetwork;
+import ppine.viewmodel.structs.CytoExpInteraction;
+import ppine.viewmodel.structs.CytoInteraction;
 
 public class MCVEdgeAppearanceCalculator extends EdgeAppearanceCalculator {
 

@@ -1,6 +1,6 @@
-package mcv.viewmodel.structs;
+package ppine.viewmodel.structs;
 
-import mcv.logicmodel.structs.SpeciesTreeNode;
+import ppine.logicmodel.structs.SpeciesTreeNode;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;

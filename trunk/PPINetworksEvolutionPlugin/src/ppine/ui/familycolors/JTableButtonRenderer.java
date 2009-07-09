@@ -1,4 +1,4 @@
-package mcv.ui.familycolors;
+package ppine.ui.familycolors;
 
 import java.awt.Component;
 import javax.swing.JTable;

@@ -1,17 +1,17 @@
-package mcv.logicmodel.controllers;
+package ppine.logicmodel.controllers;
 
 import java.util.Collection;
-import mcv.viewmodel.controllers.CytoDataHandle;
-import mcv.viewmodel.structs.CytoAbstractPPINetwork;
-import mcv.viewmodel.structs.CytoGroupNode;
-import mcv.viewmodel.structs.CytoPPINetworkProjectionToDown;
-import mcv.viewmodel.structs.CytoPPINetworkProjectionToUp;
-import mcv.viewmodel.structs.CytoProtein;
-import mcv.viewmodel.structs.CytoProteinProjection;
-import mcv.logicmodel.structs.SpeciesTreeNode;
-import mcv.logicmodel.structs.Protein;
-import mcv.main.PluginDataHandle;
-import mcv.utils.IDCreator;
+import ppine.viewmodel.controllers.CytoDataHandle;
+import ppine.viewmodel.structs.CytoAbstractPPINetwork;
+import ppine.viewmodel.structs.CytoGroupNode;
+import ppine.viewmodel.structs.CytoPPINetworkProjectionToDown;
+import ppine.viewmodel.structs.CytoPPINetworkProjectionToUp;
+import ppine.viewmodel.structs.CytoProtein;
+import ppine.viewmodel.structs.CytoProteinProjection;
+import ppine.logicmodel.structs.SpeciesTreeNode;
+import ppine.logicmodel.structs.Protein;
+import ppine.main.PluginDataHandle;
+import ppine.utils.IDCreator;
 
 public class ProjectorNetwork {
 

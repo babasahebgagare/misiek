@@ -1,6 +1,6 @@
-package mcv.viewmodel.structs;
+package ppine.viewmodel.structs;
 
-import mcv.logicmodel.structs.Experiment;
+import ppine.logicmodel.structs.Experiment;
 
 /**
  *

@@ -1,10 +1,10 @@
-package mcv.logicmodel.controllers;
+package ppine.logicmodel.controllers;
 
-import mcv.viewmodel.controllers.CytoDataHandle;
-import mcv.viewmodel.structs.CytoPPINetwork;
-import mcv.logicmodel.structs.SpeciesTreeNode;
-import mcv.main.PluginDataHandle;
-import mcv.utils.IDCreator;
+import ppine.viewmodel.controllers.CytoDataHandle;
+import ppine.viewmodel.structs.CytoPPINetwork;
+import ppine.logicmodel.structs.SpeciesTreeNode;
+import ppine.main.PluginDataHandle;
+import ppine.utils.IDCreator;
 
 public class NetworkConverter {
 

@@ -1,4 +1,4 @@
-package mcv.visual.calculators;
+package ppine.visual.calculators;
 
 import cytoscape.CyNetwork;
 import cytoscape.Cytoscape;
@@ -8,13 +8,13 @@ import cytoscape.visual.NodeShape;
 import cytoscape.visual.VisualPropertyType;
 import giny.model.Node;
 import java.awt.Color;
-import mcv.viewmodel.controllers.CytoDataHandle;
-import mcv.viewmodel.structs.CytoAbstractPPINetwork;
-import mcv.viewmodel.structs.CytoProtein;
-import mcv.logicmodel.structs.Family;
-import mcv.logicmodel.structs.Protein;
-import mcv.main.PluginDataHandle;
-import mcv.viewmodel.structs.CytoProteinProjection;
+import ppine.viewmodel.controllers.CytoDataHandle;
+import ppine.viewmodel.structs.CytoAbstractPPINetwork;
+import ppine.viewmodel.structs.CytoProtein;
+import ppine.logicmodel.structs.Family;
+import ppine.logicmodel.structs.Protein;
+import ppine.main.PluginDataHandle;
+import ppine.viewmodel.structs.CytoProteinProjection;
 
 public class MCVNodeAppearanceCalculator extends NodeAppearanceCalculator {
 

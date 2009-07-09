@@ -1,6 +1,6 @@
-package mcv.ui.logs;
+package ppine.ui.logs;
 
-import mcv.ui.PluginMenusHandle;
+import ppine.ui.PluginMenusHandle;
 
 /**
  *

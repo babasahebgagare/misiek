@@ -3,22 +3,22 @@
  *
  * Created on 23 wrzesień 2008, 20:25
  */
-package mcv.ui;
+package ppine.ui;
 
 import cytoscape.Cytoscape;
 import java.awt.event.ActionEvent;
 import java.util.Collection;
 import javax.help.CSH;
 import javax.swing.JOptionPane;
-import mcv.help.MCVHelpBroker;
-import mcv.viewmodel.structs.CytoProtein;
-import mcv.logicmodel.structs.SpeciesTreeNode;
-import mcv.main.PluginDataHandle;
-import mcv.ui.dataloading.DefaultLoadingController;
-import mcv.utils.JTreeModelSpeciesGenerator;
-import mcv.utils.Messenger;
-import mcv.utils.Stats;
-import mcv.viewmodel.controllers.CytoProjector;
+import ppine.help.MCVHelpBroker;
+import ppine.viewmodel.structs.CytoProtein;
+import ppine.logicmodel.structs.SpeciesTreeNode;
+import ppine.main.PluginDataHandle;
+import ppine.ui.dataloading.DefaultLoadingController;
+import ppine.utils.JTreeModelSpeciesGenerator;
+import ppine.utils.Messenger;
+import ppine.utils.Stats;
+import ppine.viewmodel.controllers.CytoProjector;
 
 /**
  *
@@ -82,9 +82,9 @@ public class LeftPanel extends javax.swing.JPanel {
         dataPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         dataPanel.setPreferredSize(new java.awt.Dimension(268, 51));
 
-        updateDataButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/update.png"))); // NOI18N
+        updateDataButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/update.png"))); // NOI18N
         updateDataButton.setText("Update");
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("mcv/ui/resources/LeftPanel"); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("ppine/ui/resources/LeftPanel"); // NOI18N
         updateDataButton.setToolTipText(bundle.getString("UpdateButton.ToolTip")); // NOI18N
         updateDataButton.setAlignmentY(0.0F);
         updateDataButton.setEnabled(false);
@@ -96,7 +96,7 @@ public class LeftPanel extends javax.swing.JPanel {
             }
         });
 
-        newDataButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/open.png"))); // NOI18N
+        newDataButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/open.png"))); // NOI18N
         newDataButton.setText("New");
         newDataButton.setToolTipText(bundle.getString("NewButton.ToolTip")); // NOI18N
         newDataButton.setMargin(new java.awt.Insets(2, 5, 2, 14));
@@ -106,7 +106,7 @@ public class LeftPanel extends javax.swing.JPanel {
             }
         });
 
-        deleteVataButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/clean.png"))); // NOI18N
+        deleteVataButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/clean.png"))); // NOI18N
         deleteVataButton.setText("Clean");
         deleteVataButton.setToolTipText(bundle.getString("CleanButton.ToolTip")); // NOI18N
         deleteVataButton.setEnabled(false);
@@ -144,7 +144,7 @@ public class LeftPanel extends javax.swing.JPanel {
         netsActionsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         netsActionsPanel.setPreferredSize(new java.awt.Dimension(268, 160));
 
-        projectButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/cast.png"))); // NOI18N
+        projectButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/cast.png"))); // NOI18N
         projectButton.setText("Projection");
         projectButton.setToolTipText(bundle.getString("CastingButton.ToolTip")); // NOI18N
         projectButton.addActionListener(new java.awt.event.ActionListener() {
@@ -153,7 +153,7 @@ public class LeftPanel extends javax.swing.JPanel {
             }
         });
 
-        showButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/run.png"))); // NOI18N
+        showButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/run.png"))); // NOI18N
         showButton.setText("Show network");
         showButton.setToolTipText(bundle.getString("ShowNetworkButton.ToolTip")); // NOI18N
         showButton.addActionListener(new java.awt.event.ActionListener() {
@@ -192,7 +192,7 @@ public class LeftPanel extends javax.swing.JPanel {
         intPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         intPanel.setPreferredSize(new java.awt.Dimension(268, 82));
 
-        showLoadedButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/refresh.png"))); // NOI18N
+        showLoadedButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/refresh.png"))); // NOI18N
         showLoadedButton.setText("Refresh loaded interactions");
         showLoadedButton.setToolTipText(bundle.getString("RefreshButton.ToolTip")); // NOI18N
         showLoadedButton.addActionListener(new java.awt.event.ActionListener() {
@@ -201,7 +201,7 @@ public class LeftPanel extends javax.swing.JPanel {
             }
         });
 
-        helpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/help.png"))); // NOI18N
+        helpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/help.png"))); // NOI18N
         helpButton.setText("Help");
         helpButton.setToolTipText(bundle.getString("HelpButton.ToolTip")); // NOI18N
         helpButton.addActionListener(new java.awt.event.ActionListener() {
@@ -210,7 +210,7 @@ public class LeftPanel extends javax.swing.JPanel {
             }
         });
 
-        testButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mcv/resources/icons/stop2.png"))); // NOI18N
+        testButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/stop2.png"))); // NOI18N
         testButton.setText("Show log");
         testButton.setToolTipText(bundle.getString("ShowLogButton.ToopTip")); // NOI18N
         testButton.setMargin(new java.awt.Insets(2, 5, 2, 14));

@@ -1,20 +1,20 @@
-package mcv.viewmodel.controllers;
+package ppine.viewmodel.controllers;
 
-import mcv.logicmodel.controllers.ProjectorNetwork;
+import ppine.logicmodel.controllers.ProjectorNetwork;
 import cytoscape.CyNode;
 import cytoscape.Cytoscape;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-import mcv.viewmodel.structs.CytoAbstractPPINetwork;
-import mcv.viewmodel.structs.CytoPPINetworkProjection;
-import mcv.viewmodel.structs.CytoPPINetworkProjectionToDown;
-import mcv.viewmodel.structs.CytoPPINetworkProjectionToUp;
-import mcv.viewmodel.structs.CytoProtein;
-import mcv.logicmodel.structs.SpeciesTreeNode;
-import mcv.main.PluginDataHandle;
-import mcv.utils.Messenger;
-import mcv.visual.layout.Layouter;
+import ppine.viewmodel.structs.CytoAbstractPPINetwork;
+import ppine.viewmodel.structs.CytoPPINetworkProjection;
+import ppine.viewmodel.structs.CytoPPINetworkProjectionToDown;
+import ppine.viewmodel.structs.CytoPPINetworkProjectionToUp;
+import ppine.viewmodel.structs.CytoProtein;
+import ppine.logicmodel.structs.SpeciesTreeNode;
+import ppine.main.PluginDataHandle;
+import ppine.utils.Messenger;
+import ppine.visual.layout.Layouter;
 
 public class CytoProjector {
 
