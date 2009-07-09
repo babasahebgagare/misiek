@@ -88,11 +88,11 @@ public class PluginMenusHandle {
         PluginMenusHandle.updateDataButton = updateDataButton;
     }
 
-    public static JPanel getMcvPanel() {
+    public static JPanel getPPINEPanel() {
         return ppinePanel;
     }
 
-    public static void setMcvPanel(JPanel ppinePanel) {
+    public static void setPPINEPanel(JPanel ppinePanel) {
         PluginMenusHandle.ppinePanel = ppinePanel;
     }
 

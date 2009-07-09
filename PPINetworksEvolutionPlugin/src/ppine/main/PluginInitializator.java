@@ -52,7 +52,7 @@ public class PluginInitializator {
         myPanel.add(families);
    //     myPanel.add(logsPanel);
 
-        PluginMenusHandle.setMcvPanel(myPanel);
+        PluginMenusHandle.setPPINEPanel(myPanel);
         PluginMenusHandle.setFamiliesColorListPanel(families);
         leftPanel.add(ResourceBundle.getBundle("ppine/resources/ui").getString("TABNAME"), myPanel);
     }
