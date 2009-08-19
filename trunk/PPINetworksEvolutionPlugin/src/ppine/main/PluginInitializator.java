@@ -16,6 +16,7 @@ import ppine.ui.familycolors.SpeciesFamilyColorPanel;
 import ppine.visual.calculators.PPINEEdgeAppearanceCalculator;
 import ppine.visual.calculators.PPINENodeAppearanceCalculator;
 import org.jdesktop.swingx.VerticalLayout;
+import ppine.ui.mips.MIPSPanel;
 
 public class PluginInitializator {
 
@@ -45,12 +46,14 @@ public class PluginInitializator {
         LeftPanel myLeftPanel = new LeftPanel();
         JPanel myPanel = new PPINEMainPanel();
 
-     //   JPanel logsPanel = new LogsPanel();
+        //   JPanel logsPanel = new LogsPanel();
         SpeciesFamilyColorPanel families = new SpeciesFamilyColorPanel();
+        MIPSPanel mipsPanel = new MIPSPanel();
         myPanel.setLayout(new VerticalLayout());
         myPanel.add(myLeftPanel);
         myPanel.add(families);
-   //     myPanel.add(logsPanel);
+        myPanel.add(mipsPanel);
+        //     myPanel.add(logsPanel);
 
         PluginMenusHandle.setPPINEPanel(myPanel);
         PluginMenusHandle.setFamiliesColorListPanel(families);
