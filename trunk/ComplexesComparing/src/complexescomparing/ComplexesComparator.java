@@ -30,7 +30,8 @@ public class ComplexesComparator {
         Collection<String> inter = getInter(myComplex, mipsComplex);
         Double jaccard = Double.valueOf((double) inter.size() / (double) sum.size());
         if (jaccard > 0.1) {
-            String msg = "COMPLEX: " + mipsComplex.getName() + " jaccard: " + jaccard;
+            String msg = mipsComplex.getName() + " & " + mipsComplex.getProteins().size() + " & " + myComplex.getProteins().size() + " & " + round(jaccard, 4) + " & " + mipsComplex.getName() + " & " + mipsComplex.getDesc() + " \\\\";
+            // String msg = "COMPLEX: " + mipsComplex.getName() + " jaccard: " + jaccard + "MIPS SIZE: " + mipsComplex.getProteins().size() + " COMP SIZE: " + myComplex.getProteins().size();
             Logger.log(msg);
 
             Collection<String> diff1 = getDiff(myComplex, mipsComplex);
@@ -42,6 +43,13 @@ public class ComplexesComparator {
         }
 
         return jaccard;
+    }
+
+    public static double round(double val, int places) {
+        long factor = (long) Math.pow(10, places);
+        val = val * factor;
+        long tmp = Math.round(val);
+        return (double) tmp / factor;
     }
 
     private Collection<String> getDiff(Complex myComplex, Complex mipsComplex) {
