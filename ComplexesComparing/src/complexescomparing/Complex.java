@@ -10,10 +10,24 @@ import java.util.TreeSet;
 public class Complex implements Comparable<Complex> {
 
     private String name;
+    private String desc;
     private Collection<String> proteins = new TreeSet<String>();
 
     public Complex(String name) {
         this.name = name;
+    }
+
+    public Complex(String name, String desc) {
+        this.name = name;
+        this.desc = desc;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public Collection<String> getProteins() {
