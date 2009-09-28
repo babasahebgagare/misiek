@@ -401,10 +401,10 @@ is divided into following sections:
         </pathconvert>
         <pathconvert pathsep=" " property="jar.classpath">
             <path path="${run.classpath.without.build.classes.dir}"/>
-            <chainedmapper>
+            <chaineceapper>
                 <flattenmapper/>
                 <globmapper from="*" to="lib/*"/>
-            </chainedmapper>
+            </chaineceapper>
         </pathconvert>
         <taskdef classname="org.netbeans.modules.java.j2seproject.copylibstask.CopyLibs" classpath="${libs.CopyLibs.classpath}" name="copylibs"/>
         <copylibs compress="${jar.compress}" jarfile="${dist.jar}" manifest="${manifest.file}" runtimeclasspath="${run.classpath.without.build.classes.dir}">
