@@ -25,8 +25,8 @@ public class AffinityMain extends CytoscapePlugin {
 
         JPanel myAff = new AffinityMainPanel();
         myAff.setLayout(new VerticalLayout());
-
-        JPanel chooseImplPanel = new AffinityChooseImplPanel(pc);
+        
+            JPanel chooseImplPanel = new AffinityChooseImplPanel(pc);
         JPanel connModePanel = new AffinityConnModePanel(pc);
         JPanel graphModePanel = new AffinityGraphModePanel(pc);
         JPanel actionButtonsPanel = new AffinityButtonsPanel(pc);
