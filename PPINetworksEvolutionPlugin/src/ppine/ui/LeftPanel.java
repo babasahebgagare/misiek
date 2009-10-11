@@ -84,8 +84,7 @@ public class LeftPanel extends javax.swing.JPanel {
 
         updateDataButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/update.png"))); // NOI18N
         updateDataButton.setText("Update");
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("ppine/ui/resources/LeftPanel"); // NOI18N
-        updateDataButton.setToolTipText(bundle.getString("UpdateButton.ToolTip")); // NOI18N
+        updateDataButton.setToolTipText("null");
         updateDataButton.setAlignmentY(0.0F);
         updateDataButton.setEnabled(false);
         updateDataButton.setIconTextGap(2);
@@ -98,7 +97,7 @@ public class LeftPanel extends javax.swing.JPanel {
 
         newDataButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/open.png"))); // NOI18N
         newDataButton.setText("New");
-        newDataButton.setToolTipText(bundle.getString("NewButton.ToolTip")); // NOI18N
+        newDataButton.setToolTipText("null");
         newDataButton.setMargin(new java.awt.Insets(2, 5, 2, 14));
         newDataButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,7 +107,7 @@ public class LeftPanel extends javax.swing.JPanel {
 
         deleteVataButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/clean.png"))); // NOI18N
         deleteVataButton.setText("Clean");
-        deleteVataButton.setToolTipText(bundle.getString("CleanButton.ToolTip")); // NOI18N
+        deleteVataButton.setToolTipText("null");
         deleteVataButton.setEnabled(false);
         deleteVataButton.setMargin(new java.awt.Insets(2, 5, 2, 14));
         deleteVataButton.addActionListener(new java.awt.event.ActionListener() {
@@ -127,7 +126,7 @@ public class LeftPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(updateDataButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(deleteVataButton, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+                .addComponent(deleteVataButton, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
                 .addContainerGap())
         );
         dataPanelLayout.setVerticalGroup(
@@ -145,8 +144,8 @@ public class LeftPanel extends javax.swing.JPanel {
         netsActionsPanel.setPreferredSize(new java.awt.Dimension(268, 160));
 
         projectButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/cast.png"))); // NOI18N
-        projectButton.setText("Projection");
-        projectButton.setToolTipText(bundle.getString("CastingButton.ToolTip")); // NOI18N
+        projectButton.setText("Mapping");
+        projectButton.setToolTipText("null");
         projectButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 projectButtonActionPerformed(evt);
@@ -155,7 +154,7 @@ public class LeftPanel extends javax.swing.JPanel {
 
         showButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/run.png"))); // NOI18N
         showButton.setText("Show network");
-        showButton.setToolTipText(bundle.getString("ShowNetworkButton.ToolTip")); // NOI18N
+        showButton.setToolTipText("null");
         showButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showButtonActionPerformed(evt);
@@ -171,11 +170,11 @@ public class LeftPanel extends javax.swing.JPanel {
             .addGroup(netsActionsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(netsActionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
                     .addGroup(netsActionsPanelLayout.createSequentialGroup()
                         .addComponent(projectButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(showButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(showButton, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         netsActionsPanelLayout.setVerticalGroup(
@@ -194,7 +193,7 @@ public class LeftPanel extends javax.swing.JPanel {
 
         showLoadedButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/refresh.png"))); // NOI18N
         showLoadedButton.setText("Refresh loaded interactions");
-        showLoadedButton.setToolTipText(bundle.getString("RefreshButton.ToolTip")); // NOI18N
+        showLoadedButton.setToolTipText("null");
         showLoadedButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showLoadedButtonActionPerformed(evt);
@@ -203,7 +202,7 @@ public class LeftPanel extends javax.swing.JPanel {
 
         helpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/help.png"))); // NOI18N
         helpButton.setText("Help");
-        helpButton.setToolTipText(bundle.getString("HelpButton.ToolTip")); // NOI18N
+        helpButton.setToolTipText("null");
         helpButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 helpButtonActionPerformed(evt);
@@ -212,7 +211,7 @@ public class LeftPanel extends javax.swing.JPanel {
 
         testButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/stop2.png"))); // NOI18N
         testButton.setText("Show log");
-        testButton.setToolTipText(bundle.getString("ShowLogButton.ToopTip")); // NOI18N
+        testButton.setToolTipText("null");
         testButton.setMargin(new java.awt.Insets(2, 5, 2, 14));
         testButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -227,10 +226,10 @@ public class LeftPanel extends javax.swing.JPanel {
             .addGroup(intPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(intPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(showLoadedButton, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
+                    .addComponent(showLoadedButton, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
                     .addGroup(intPanelLayout.createSequentialGroup()
                         .addComponent(helpButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
                         .addComponent(testButton)))
                 .addContainerGap())
         );
@@ -250,9 +249,9 @@ public class LeftPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(netsActionsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
-            .addComponent(dataPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
-            .addComponent(intPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
+            .addComponent(netsActionsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+            .addComponent(dataPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+            .addComponent(intPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
