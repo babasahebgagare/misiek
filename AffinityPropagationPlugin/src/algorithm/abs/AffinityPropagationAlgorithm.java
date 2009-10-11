@@ -68,13 +68,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
         Collection<Integer> refinedCenters = new TreeSet<Integer>();
 
         for (Cluster<Integer> cluster : assigments.values()) {
-            /*    if (cluster.getName().equals(650)) {
-            debug = true;
-            System.out.println("DEBUG TRUE: " + cluster.getName());
-            } else {
-            System.out.println("DEBUG FALSE: " + cluster.getName());
-            debug = false;
-            }*/
+
             Integer maxid = cluster.getName();
             Integer maxlevel = Integer.valueOf(0);
             Double maxsum = null;

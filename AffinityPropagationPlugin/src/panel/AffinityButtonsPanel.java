@@ -35,27 +35,15 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        refreshButton = new javax.swing.JButton();
         startButton = new javax.swing.JButton();
         helpButton = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(270, 32767));
         setPreferredSize(new java.awt.Dimension(270, 25));
 
-        refreshButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/refresh.png"))); // NOI18N
-        refreshButton.setText("Refresh");
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("panel/ui_properties"); // NOI18N
-        refreshButton.setToolTipText(bundle.getString("RafreshButton.ToolTip")); // NOI18N
-        refreshButton.setMargin(new java.awt.Insets(2, 6, 2, 14));
-        refreshButton.setName("refreshButton"); // NOI18N
-        refreshButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                refreshButtonActionPerformed(evt);
-            }
-        });
-
         startButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/run.png"))); // NOI18N
         startButton.setText("Start");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("panel/ui_properties"); // NOI18N
         startButton.setToolTipText(bundle.getString("StartButton.ToolTip")); // NOI18N
         startButton.setMargin(new java.awt.Insets(2, 6, 2, 14));
         startButton.setName("startButton"); // NOI18N
@@ -66,6 +54,7 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
         });
 
         helpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/help.png"))); // NOI18N
+        helpButton.setText("Help");
         helpButton.setToolTipText(bundle.getString("HelpButton.ToolTip")); // NOI18N
         helpButton.setName("helpButton"); // NOI18N
         helpButton.addActionListener(new java.awt.event.ActionListener() {
@@ -78,27 +67,21 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(startButton, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(startButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(98, 98, 98)
+                .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(refreshButton)
-                .addComponent(startButton))
-            .addComponent(helpButton)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(startButton)
+                    .addComponent(helpButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
-        pc.refresh();
-}//GEN-LAST:event_refreshButtonActionPerformed
 
     private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
 
@@ -112,7 +95,6 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton helpButton;
-    private javax.swing.JButton refreshButton;
     private javax.swing.JButton startButton;
     // End of variables declaration//GEN-END:variables
 }
