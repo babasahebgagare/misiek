@@ -24,11 +24,11 @@ public class CytoListeners {
 
             public void graphViewChanged(GraphViewChangeEvent event) {
                 if (event.getType() == GraphViewChangeEvent.NODES_SELECTED_TYPE) {
-                    System.out.println("SELECTED");
+//                    System.out.println("SELECTED");
                 } else if (event.getType() == GraphViewChangeEvent.NODES_UNSELECTED_TYPE) {
-                    System.out.println("UNSELECTED");
+//                    System.out.println("UNSELECTED");
                 } else {
-                    System.out.println("EVENT");
+//                    System.out.println("EVENT");
                 }
             }
         });
@@ -41,18 +41,18 @@ public class CytoListeners {
                 String PropertyName = evt.getPropertyName();
 
                 if (PropertyName.equals("NETWORK_VIEW_CREATED")) {
-                    MemoLogger.log("Network view created: " + evt.getNewValue().toString());
+                //    MemoLogger.log("Network view created: " + evt.getNewValue().toString());
                 //    CyNetworkView cyNetworkView = (CyNetworkView) evt.getNewValue();
                 //     createNetworkViewListener(cyNetworkView);
                 //        cyNetworkView.addNodeContextMenuListener((NodeContextMenuListener) new NodePopupMenuListener());
                 } else if (PropertyName.equals("NETWORK_VIEW_DESTROYED")) {
-                    String networkName = ((DingNetworkView) evt.getNewValue()).getTitle();
+                //    String networkName = ((DingNetworkView) evt.getNewValue()).getTitle();
 
-                    MemoLogger.log("Network view destroyed: " + networkName);
+               //     MemoLogger.log("Network view destroyed: " + networkName);
                 } else if (PropertyName.equals(Cytoscape.NETWORK_CREATED)) {
-                    MemoLogger.log("Network created: " + evt.getNewValue().toString());
+               //     MemoLogger.log("Network created: " + evt.getNewValue().toString());
                 } else if (PropertyName.equals(Cytoscape.NETWORK_DESTROYED)) {
-                    System.out.println(evt.getNewValue().toString());
+                    //  System.out.println(evt.getNewValue().toString());
 
                     //  String networkName = ((DingNetworkView) evt.getNewValue()).getTitle();
                     String networkID = evt.getNewValue().toString();
@@ -62,11 +62,11 @@ public class CytoListeners {
                     if (netOrNull != null) {
                         cdh.cytoNetworkViewDeleted(networkID, netOrNull.getID());
                     }
-                    MemoLogger.log("Network deleted: " + evt.getNewValue().toString());
+             //       MemoLogger.log("Network deleted: " + evt.getNewValue().toString());
                 } else if (PropertyName.equals(Cytoscape.NETWORK_LOADED)) {
-                    MemoLogger.log("Network loaded: " + evt.getNewValue().toString());
+             //       MemoLogger.log("Network loaded: " + evt.getNewValue().toString());
                 } else if (PropertyName.equals(Cytoscape.NETWORK_SAVED)) {
-                    MemoLogger.log("Network saved: " + evt.getNewValue().toString());
+             //       MemoLogger.log("Network saved: " + evt.getNewValue().toString());
                 }
             }
         });

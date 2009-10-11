@@ -66,9 +66,8 @@ public class CytoDataHandle {
     }
 
     public void cytoNetworkViewDeleted(String networkID, String networkName) {
-        System.out.println("DELETING --------------- " + networkID + " " + networkName);
+      //  System.out.println("DELETING --------------- " + networkID + " " + networkName);
         if (cytoNetworks.containsKey(networkName)) {
-            System.out.println("YEAH cyto");
             CytoAbstractPPINetwork net = cytoNetworks.get(networkName);
             deleteAllCytoInteractionsByNetwork(net);
             deleteAllCytoProteinsByNetwork(net);

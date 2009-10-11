@@ -16,6 +16,6 @@ public class ComplexesLogger {
 
     public static void log(Object msg) {
         textArea.append(msg.toString() + "\n");
-        System.out.println(msg.toString());
+        //System.out.println(msg.toString());
     }
 }

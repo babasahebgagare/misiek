@@ -42,10 +42,10 @@ public class DataHandle {
 
     public PPINetworkExp createExpPPINetwork(String speciesName, String expNetworkName) {
         SpeciesTreeNode parentNetwork = networks.get(speciesName);
-        System.out.println("searching: " + speciesName);
-        if (parentNetwork == null) {
-            System.out.println("PARENT NULL");
-        }
+        // System.out.println("searching: " + speciesName);
+       // if (parentNetwork == null) {
+       //     System.out.println("PARENT NULL");
+       // }
         PPINetworkExp net = new PPINetworkExp(expNetworkName, parentNetwork);
         parentNetwork.getContext().addChild(net);
         networks.put(expNetworkName, net);

@@ -135,24 +135,5 @@ public class RootFamiliesTreeParser {
             }
         }
     }
-
-    /*  private void createSubstituteRootProtein(String FamilyID, PPINetwork network, String proteinID, Protein realParentProtein) throws FamiliesTreeFormatException {
-    DataHandle dh = PluginDataHandle.getDataHandle();
-    System.out.println("create root subs protein");
-    if (realParentProtein == null) {
-    System.out.println("DUPAS");
-    }
-    try {
-    PPINetwork currentNetwork = network.getContext().tryGetParentNetwork();
-    while (currentNetwork != dh.rootNetwork) {
-    if (!currentNetwork.containsProtein(FamilyID)) {
-    createProtein(FamilyID, realParentProtein.getID(), currentNetwork.getID(), FamilyID);
-    }
-    currentNetwork = currentNetwork.getContext().tryGetParentNetwork();
-    }
-    } catch (Exception e) {
-    throw new FamiliesTreeFormatException(FamilyID, 11111);
-    }
-    }*/
 }
 

@@ -23,7 +23,7 @@ public class IDCreator {
     }
 
     public static String createNetCytoNetworkID(String ID) {
-        System.out.println(ID);
+       // System.out.println(ID);
         if (!CytoUtil.cytoNetworkExist(ID)) {
             return ID;
         }

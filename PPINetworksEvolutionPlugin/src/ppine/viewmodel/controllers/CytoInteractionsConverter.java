@@ -24,16 +24,6 @@ public class CytoInteractionsConverter {
         }
 
         for (CytoExpInteraction cytoExpInteraction : cytoExpInteractions) {
-            if (cytoExpInteraction == null) {
-                System.out.println("CYTO NULL");
-            }
-            if (cytoExpInteraction.getSource() == null) {
-                System.out.println("CYTO SOURCE NULL");
-            }
-
-            if (cytoExpInteraction.getTarget() == null) {
-                System.out.println("CYTO TARGET NULL");
-            }
             int rootID = Cytoscape.getRootGraph().createEdge(cytoExpInteraction.getSource().getIndex(), cytoExpInteraction.getTarget().getIndex());
 
             Edge edge = Cytoscape.getRootGraph().getEdge(rootID);
