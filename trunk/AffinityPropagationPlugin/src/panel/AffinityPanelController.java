@@ -308,6 +308,30 @@ public class AffinityPanelController implements Serializable {
 
     }
 
+    public static String getFormattedValue(Double value) {
+
+        long val = Math.round(value * 1000);
+        Double valHelp = Double.valueOf(val) / 1000;
+        String pom = String.valueOf(valHelp);
+        int dot = pom.indexOf(".");
+        String pocz = pom.substring(0, dot);
+        String kon = pom.substring(dot + 1);
+        if (kon.length() >= 3) {
+            kon = kon.substring(0, 3);
+        } else if (kon.length() == 0) {
+            kon = kon.concat("000");
+        } else if (kon.length() == 1) {
+            kon = kon.concat("00");
+        } else if (kon.length() == 2) {
+            kon = kon.concat("0");
+        }
+
+        String res = pocz.concat(".").concat(kon);
+
+        return res;
+
+    }
+
     private Double tryGetDoubleAttribute(CyAttributes edgesAttributes, String id, String edgeNameAttr) {
         Double sim;
         Object val = edgesAttributes.getAttribute(id, edgeNameAttr);
@@ -367,7 +391,8 @@ public class AffinityPanelController implements Serializable {
 
     public void setPreferences(final Double p) {
 
-        preferencesField.setText(String.valueOf(p));
+        String pStr = getFormattedValue(p);
+        preferencesField.setText(pStr);
     }
 
     public Double getLambda() {
