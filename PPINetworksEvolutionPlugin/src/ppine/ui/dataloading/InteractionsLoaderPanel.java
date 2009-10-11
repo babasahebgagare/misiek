@@ -63,21 +63,20 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
         loadButton = new javax.swing.JButton();
         infoButton = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        loadingPanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         oneLodingPanel = new javax.swing.JPanel();
         chooseOneFileButton = new javax.swing.JButton();
         oneFileLoadingPanel = new javax.swing.JPanel();
         oneFilenameLoabel = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        loadingPanel = new javax.swing.JPanel();
         cleanButton = new javax.swing.JButton();
 
         jScrollPane2.setName("jScrollPane2"); // NOI18N
 
         loadButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/update.png"))); // NOI18N
         loadButton.setText("Update");
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("ppine/ui/resources/Loading"); // NOI18N
-        loadButton.setToolTipText(bundle.getString("UpdateInteractionsButton.ToolTip")); // NOI18N
+        loadButton.setToolTipText("null");
         loadButton.setName("loadButton"); // NOI18N
         loadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,7 +86,7 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
 
         infoButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/help.png"))); // NOI18N
         infoButton.setText("File format info");
-        infoButton.setToolTipText(bundle.getString("FileFormatInfoInteractionsButton.ToolTip")); // NOI18N
+        infoButton.setToolTipText("null");
         infoButton.setName("infoButton"); // NOI18N
         infoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,25 +95,6 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
         });
 
         jTabbedPane1.setName("jTabbedPane1"); // NOI18N
-
-        jScrollPane1.setName("jScrollPane1"); // NOI18N
-
-        loadingPanel.setName("loadingPanel"); // NOI18N
-
-        javax.swing.GroupLayout loadingPanelLayout = new javax.swing.GroupLayout(loadingPanel);
-        loadingPanel.setLayout(loadingPanelLayout);
-        loadingPanelLayout.setHorizontalGroup(
-            loadingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 535, Short.MAX_VALUE)
-        );
-        loadingPanelLayout.setVerticalGroup(
-            loadingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 463, Short.MAX_VALUE)
-        );
-
-        jScrollPane1.setViewportView(loadingPanel);
-
-        jTabbedPane1.addTab("Many files (faster - recommended)", jScrollPane1);
 
         jScrollPane3.setName("jScrollPane3"); // NOI18N
 
@@ -139,7 +119,7 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
         );
         oneFileLoadingPanelLayout.setVerticalGroup(
             oneFileLoadingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 410, Short.MAX_VALUE)
+            .addGap(0, 412, Short.MAX_VALUE)
         );
 
         oneFilenameLoabel.setText("filename");
@@ -173,11 +153,30 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
 
         jScrollPane3.setViewportView(oneLodingPanel);
 
-        jTabbedPane1.addTab("One file", jScrollPane3);
+        jTabbedPane1.addTab("Single file", jScrollPane3);
+
+        jScrollPane1.setName("jScrollPane1"); // NOI18N
+
+        loadingPanel.setName("loadingPanel"); // NOI18N
+
+        javax.swing.GroupLayout loadingPanelLayout = new javax.swing.GroupLayout(loadingPanel);
+        loadingPanel.setLayout(loadingPanelLayout);
+        loadingPanelLayout.setHorizontalGroup(
+            loadingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 535, Short.MAX_VALUE)
+        );
+        loadingPanelLayout.setVerticalGroup(
+            loadingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 463, Short.MAX_VALUE)
+        );
+
+        jScrollPane1.setViewportView(loadingPanel);
+
+        jTabbedPane1.addTab("Separated files", jScrollPane1);
 
         cleanButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/clean.png"))); // NOI18N
         cleanButton.setText("Clean");
-        cleanButton.setToolTipText(bundle.getString("CleanInteractionsButton.ToolTip")); // NOI18N
+        cleanButton.setToolTipText("null");
         cleanButton.setName("cleanButton"); // NOI18N
         cleanButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -208,7 +207,7 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
                     .addComponent(infoButton)
                     .addComponent(cleanButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
