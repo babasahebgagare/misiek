@@ -33,10 +33,10 @@ public class CytoProjector {
                 Layouter.getInstance().projectionToUpLayout(up);
                 break;
             case THIS_NETWORK:
-                Messenger.message("YOU TRYING PROJECT ON THE SAME LEVEL");
+                Messenger.message("You can't map proteins on the same network");
                 break;
             case NEIGHBOUR:
-                Messenger.message("NEIGHBOUR");
+                Messenger.message("You can't map proteins on neighbour network");
                 break;
             default:
                 Messenger.message("DEFAULT");

@@ -84,7 +84,8 @@ public class LeftPanel extends javax.swing.JPanel {
 
         updateDataButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/update.png"))); // NOI18N
         updateDataButton.setText("Update");
-        updateDataButton.setToolTipText("null");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("ppine/ui/Bundle"); // NOI18N
+        updateDataButton.setToolTipText(bundle.getString("UpdateButton.ToolTip")); // NOI18N
         updateDataButton.setAlignmentY(0.0F);
         updateDataButton.setEnabled(false);
         updateDataButton.setIconTextGap(2);
@@ -97,7 +98,7 @@ public class LeftPanel extends javax.swing.JPanel {
 
         newDataButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/open.png"))); // NOI18N
         newDataButton.setText("New");
-        newDataButton.setToolTipText("null");
+        newDataButton.setToolTipText(bundle.getString("NewButton.ToolTip")); // NOI18N
         newDataButton.setMargin(new java.awt.Insets(2, 5, 2, 14));
         newDataButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,7 +108,7 @@ public class LeftPanel extends javax.swing.JPanel {
 
         deleteVataButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/clean.png"))); // NOI18N
         deleteVataButton.setText("Clean");
-        deleteVataButton.setToolTipText("null");
+        deleteVataButton.setToolTipText(bundle.getString("CleanButton.ToolTip")); // NOI18N
         deleteVataButton.setEnabled(false);
         deleteVataButton.setMargin(new java.awt.Insets(2, 5, 2, 14));
         deleteVataButton.addActionListener(new java.awt.event.ActionListener() {
@@ -145,7 +146,7 @@ public class LeftPanel extends javax.swing.JPanel {
 
         projectButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/cast.png"))); // NOI18N
         projectButton.setText("Mapping");
-        projectButton.setToolTipText("null");
+        projectButton.setToolTipText(bundle.getString("CastingButton.ToolTip")); // NOI18N
         projectButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 projectButtonActionPerformed(evt);
@@ -154,13 +155,14 @@ public class LeftPanel extends javax.swing.JPanel {
 
         showButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/run.png"))); // NOI18N
         showButton.setText("Show network");
-        showButton.setToolTipText("null");
+        showButton.setToolTipText(bundle.getString("ShowNetworkButton.ToolTip")); // NOI18N
         showButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showButtonActionPerformed(evt);
             }
         });
 
+        spaciesTree.setToolTipText("Tree of species networks");
         jScrollPane1.setViewportView(spaciesTree);
 
         javax.swing.GroupLayout netsActionsPanelLayout = new javax.swing.GroupLayout(netsActionsPanel);
@@ -172,8 +174,8 @@ public class LeftPanel extends javax.swing.JPanel {
                 .addGroup(netsActionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
                     .addGroup(netsActionsPanelLayout.createSequentialGroup()
-                        .addComponent(projectButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(projectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(showButton, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -193,7 +195,7 @@ public class LeftPanel extends javax.swing.JPanel {
 
         showLoadedButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/refresh.png"))); // NOI18N
         showLoadedButton.setText("Refresh loaded interactions");
-        showLoadedButton.setToolTipText("null");
+        showLoadedButton.setToolTipText(bundle.getString("RefreshButton.ToolTip")); // NOI18N
         showLoadedButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showLoadedButtonActionPerformed(evt);
@@ -202,7 +204,7 @@ public class LeftPanel extends javax.swing.JPanel {
 
         helpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/help.png"))); // NOI18N
         helpButton.setText("Help");
-        helpButton.setToolTipText("null");
+        helpButton.setToolTipText(bundle.getString("HelpButton.ToolTip")); // NOI18N
         helpButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 helpButtonActionPerformed(evt);
@@ -211,7 +213,7 @@ public class LeftPanel extends javax.swing.JPanel {
 
         testButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/stop2.png"))); // NOI18N
         testButton.setText("Show log");
-        testButton.setToolTipText("null");
+        testButton.setToolTipText(bundle.getString("ShowLogButton.ToopTip")); // NOI18N
         testButton.setMargin(new java.awt.Insets(2, 5, 2, 14));
         testButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -281,7 +283,7 @@ private void projectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         CytoProjector.projectSelected(selectedProteins, networks);
         UIController.getInstance().setPPINEActiveTab();
     } else {
-        Messenger.message("You have to select proteins and target network!");
+        Messenger.message("You have to select proteins and target network.");
     }
 
 }//GEN-LAST:event_projectButtonActionPerformed
