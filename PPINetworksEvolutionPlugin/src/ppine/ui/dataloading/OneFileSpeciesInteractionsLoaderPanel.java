@@ -64,12 +64,8 @@ public class OneFileSpeciesInteractionsLoaderPanel extends javax.swing.JPanel {
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("species name"));
 
+        checkbox.setSelected(true);
         checkbox.setName("checkbox"); // NOI18N
-        checkbox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkboxActionPerformed(evt);
-            }
-        });
 
         tresholdField.setEnabled(false);
         tresholdField.setName("tresholdField"); // NOI18N
@@ -95,14 +91,6 @@ public class OneFileSpeciesInteractionsLoaderPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void checkboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkboxActionPerformed
-        if (this.checkbox.isSelected()) {
-            tresholdField.setEnabled(true);
-        } else {
-            tresholdField.setEnabled(false);
-        }
-    }//GEN-LAST:event_checkboxActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox checkbox;
     private javax.swing.JTextField tresholdField;
@@ -112,8 +100,8 @@ public class OneFileSpeciesInteractionsLoaderPanel extends javax.swing.JPanel {
         LoadedDataHandle ldh = PluginDataHandle.getLoadedDataHandle();
         Double treshold = ldh.getSpeciesInteractionsTreshold(name);
         if (treshold == null) {
-            checkbox.setSelected(false);
-            tresholdField.setEnabled(false);
+            checkbox.setSelected(true);
+            tresholdField.setEnabled(true);
             tresholdField.setText("0.7");
         } else {
             checkbox.setSelected(true);
