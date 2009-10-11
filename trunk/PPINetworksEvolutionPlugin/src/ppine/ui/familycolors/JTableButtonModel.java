@@ -42,7 +42,7 @@ class JTableButtonModel extends AbstractTableModel {
                     DataHandle dh = PluginDataHandle.getDataHandle();
                     JButton button = (JButton) e.getSource();
                     String familyID = button.getToolTipText();
-                    System.out.println(familyID);
+                    //System.out.println(familyID);
                     if (familyID == null) {
                         return;
                     }

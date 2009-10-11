@@ -53,7 +53,7 @@ public abstract class PPINELoadTask implements Task {
 
     @SuppressWarnings("deprecation")
     public void halt() {
-        System.out.println("Stopping...");
+        //System.out.println("Stopping...");
 
         if (myThread != null) {
 

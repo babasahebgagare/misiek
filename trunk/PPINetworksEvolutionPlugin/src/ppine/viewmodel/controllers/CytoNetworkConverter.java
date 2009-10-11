@@ -34,11 +34,11 @@ public class CytoNetworkConverter {
         CytoAbstractPPINetwork motherOrNull = cytoNetwork.tryGetMother();
         if (motherOrNull != null) {
             String parentID = cytoNetwork.getNetwork().getID();
-            System.out.println("PARENT:" + parentID);
+            
             CytoAbstractPPINetwork cytoParentOrNull = PluginDataHandle.getCytoDataHandle().getCytoNetwork(parentID);
             if (cytoParentOrNull != null) {
                 CyNetwork parentNetwork = Cytoscape.getNetwork(cytoParentOrNull.getCytoID());
-                System.out.println("PARENT:" + parentID);
+            
                 return Cytoscape.createNetwork(cytoNetwork.getID(), parentNetwork, true);
             }
         }

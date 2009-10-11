@@ -41,7 +41,7 @@ public class DefaultLayouter extends Layouter {
     @Override
     public void projectionToDownLayout(CytoPPINetworkProjectionToDown projection) {
         CyNetworkView cyNetworkView = Cytoscape.getNetworkView(projection.getCytoID());
-        System.out.println("getting net: " + cyNetworkView.getTitle());
+        
         projectionToDownLayout(projection, cyNetworkView);
     }
 
