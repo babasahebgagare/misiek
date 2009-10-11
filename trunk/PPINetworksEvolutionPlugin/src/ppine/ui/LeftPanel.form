@@ -24,9 +24,9 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="netsActionsPanel" alignment="0" pref="272" max="32767" attributes="3"/>
-          <Component id="dataPanel" alignment="0" pref="272" max="32767" attributes="3"/>
-          <Component id="intPanel" alignment="0" pref="272" max="32767" attributes="1"/>
+          <Component id="netsActionsPanel" alignment="0" pref="270" max="32767" attributes="3"/>
+          <Component id="dataPanel" alignment="0" pref="270" max="32767" attributes="3"/>
+          <Component id="intPanel" alignment="0" pref="270" max="32767" attributes="1"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -63,7 +63,7 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="updateDataButton" min="-2" pref="85" max="-2" attributes="1"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="deleteVataButton" pref="76" max="32767" attributes="1"/>
+                  <Component id="deleteVataButton" pref="74" max="32767" attributes="1"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -86,11 +86,11 @@
         <Component class="javax.swing.JButton" name="updateDataButton">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/mcv/resources/icons/update.png"/>
+              <Image iconType="3" name="/ppine/resources/icons/update.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Update"/>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="mcv/ui/resources/LeftPanel.properties" key="UpdateButton.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+              <ResourceString bundle="" key="UpdateButton.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
             </Property>
             <Property name="alignmentY" type="float" value="0.0"/>
             <Property name="enabled" type="boolean" value="false"/>
@@ -106,11 +106,11 @@
         <Component class="javax.swing.JButton" name="newDataButton">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/mcv/resources/icons/open.png"/>
+              <Image iconType="3" name="/ppine/resources/icons/open.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="New"/>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="mcv/ui/resources/LeftPanel.properties" key="NewButton.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+              <ResourceString bundle="" key="NewButton.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
             </Property>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[2, 5, 2, 14]"/>
@@ -123,11 +123,11 @@
         <Component class="javax.swing.JButton" name="deleteVataButton">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/mcv/resources/icons/clean.png"/>
+              <Image iconType="3" name="/ppine/resources/icons/clean.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Clean"/>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="mcv/ui/resources/LeftPanel.properties" key="CleanButton.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+              <ResourceString bundle="" key="CleanButton.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
@@ -158,11 +158,11 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane1" alignment="0" pref="240" max="32767" attributes="1"/>
+                      <Component id="jScrollPane1" alignment="0" pref="238" max="32767" attributes="1"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="projectButton" min="-2" max="-2" attributes="1"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="showButton" max="32767" attributes="1"/>
+                          <Component id="showButton" pref="129" max="32767" attributes="1"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -187,11 +187,11 @@
         <Component class="javax.swing.JButton" name="projectButton">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/mcv/resources/icons/cast.png"/>
+              <Image iconType="3" name="/ppine/resources/icons/cast.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Projection"/>
+            <Property name="text" type="java.lang.String" value="Mapping"/>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="mcv/ui/resources/LeftPanel.properties" key="CastingButton.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+              <ResourceString bundle="" key="CastingButton.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
           <Events>
@@ -201,11 +201,11 @@
         <Component class="javax.swing.JButton" name="showButton">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/mcv/resources/icons/run.png"/>
+              <Image iconType="3" name="/ppine/resources/icons/run.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Show network"/>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="mcv/ui/resources/LeftPanel.properties" key="ShowNetworkButton.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+              <ResourceString bundle="" key="ShowNetworkButton.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
           <Events>
@@ -243,10 +243,10 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="showLoadedButton" alignment="0" pref="248" max="32767" attributes="1"/>
+                      <Component id="showLoadedButton" alignment="0" pref="246" max="32767" attributes="1"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="helpButton" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="84" max="32767" attributes="0"/>
+                          <EmptySpace pref="82" max="32767" attributes="0"/>
                           <Component id="testButton" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -273,11 +273,11 @@
         <Component class="javax.swing.JButton" name="showLoadedButton">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/mcv/resources/icons/refresh.png"/>
+              <Image iconType="3" name="/ppine/resources/icons/refresh.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Refresh loaded interactions"/>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="mcv/ui/resources/LeftPanel.properties" key="RefreshButton.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+              <ResourceString bundle="" key="RefreshButton.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
           <Events>
@@ -287,11 +287,11 @@
         <Component class="javax.swing.JButton" name="helpButton">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/mcv/resources/icons/help.png"/>
+              <Image iconType="3" name="/ppine/resources/icons/help.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Help"/>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="mcv/ui/resources/LeftPanel.properties" key="HelpButton.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+              <ResourceString bundle="" key="HelpButton.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
           <Events>
@@ -301,11 +301,11 @@
         <Component class="javax.swing.JButton" name="testButton">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/mcv/resources/icons/stop2.png"/>
+              <Image iconType="3" name="/ppine/resources/icons/stop2.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Show log"/>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="mcv/ui/resources/LeftPanel.properties" key="ShowLogButton.ToopTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+              <ResourceString bundle="" key="ShowLogButton.ToopTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
             </Property>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[2, 5, 2, 14]"/>
