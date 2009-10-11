@@ -32,7 +32,6 @@ public class AffinityStatsPanelController implements Serializable {
 
     void deleteSelectedRow() {
         int row = statsTable.getSelectedRow();
-        System.out.println(row);
         if (row != -1) {
             statsTable.removeAll();
             DefaultTableModel model = (DefaultTableModel) statsTable.getModel();

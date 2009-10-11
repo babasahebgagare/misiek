@@ -115,8 +115,6 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
                 i++;
             }
             for(CyLayoutAlgorithm layout : CyLayouts.getAllLayouts()) {
-                System.out.println(layout.getClass());
-                System.out.println("LAyout name: "+layout.getName());
                 layout.setLayoutAttribute(nodeNameAttr);
             }
 

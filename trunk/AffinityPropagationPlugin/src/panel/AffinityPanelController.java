@@ -163,7 +163,6 @@ public class AffinityPanelController implements Serializable {
                 steps = null;
             }
         } catch (NumberFormatException e) {
-            System.out.println(e);
             steps = null;
         }
         return steps;
@@ -218,7 +217,7 @@ public class AffinityPanelController implements Serializable {
             return false;
         }
         if (log && preferences < 0.0) {
-            Messenger.message("Preferences are not valid, if you want take log!");
+            Messenger.message("Preferences paremater is not valid, if you want take log.");
             return false;
         }
         return true;
@@ -226,30 +225,30 @@ public class AffinityPanelController implements Serializable {
 
     private boolean validateValues(final Double lambda, final Double preferences, final Integer iterations, final Integer convits, final String nodeNameAttr, final String edgeNameAttr) {
         if (!validateLambda(lambda)) {
-            Messenger.message("Lambda is not valid!");
+            Messenger.message("Lambda paremater is not valid!");
             return false;
         }
         if (!validatePreferences(preferences)) {
-            
+
             return false;
         }
         if (!validateIterations(iterations)) {
-            Messenger.message("Iteration number is not valid!");
+            Messenger.message("Iteration number paremater is not valid!");
             return false;
         }
         if (!validateConvits(convits)) {
-            Messenger.message("Convits are not valid!");
+            Messenger.message("Convits paremater is not valid!");
             return false;
         }
         if (!validateEdgeNameAttr(edgeNameAttr)) {
-            Messenger.message("Edge name attribute is not valid!");
+            Messenger.message("Edge name paremater is not valid!");
             return false;
         }
         if (!validateNodeNameAttr(nodeNameAttr)) {
             if (cancelDialog) {
                 cancelDialog = false;
             } else {
-                Messenger.message("Node name attribure is not valid!");
+                Messenger.message("Node name paremater is not valid!");
             }
             return false;
         }
@@ -260,12 +259,7 @@ public class AffinityPanelController implements Serializable {
         convitsField.setText("3");
     }
 
-    public void refresh() {
-        initEdgeAttrField();
-        refreshPreferences();
-    }
-
-    public void initEdgeAttrField() {
+    public void refreshEdgeAttrField() {
         edgeAttrField.removeAllItems();
         CyAttributes edgesAttributes = Cytoscape.getEdgeAttributes();
         for (String attrName : edgesAttributes.getAttributeNames()) {
@@ -295,10 +289,15 @@ public class AffinityPanelController implements Serializable {
             String targetID = edge.getTarget().getIdentifier();
 
             if (!sourceID.equals(targetID)) {
-                Double prob = tryGetDoubleAttribute(edgesAttributes, id, edgeNameAttr);
-                if (prob != null) {
-                    //System.out.println("adding to prob: " + prob);
-                    probs.add(prob);
+                try {
+                    Double prob = tryGetDoubleAttribute(edgesAttributes, id, edgeNameAttr);
+                    if (prob != null) {
+                        //System.out.println("adding to prob: " + prob);
+                        probs.add(prob);
+                    }
+                } catch (NullPointerException ne) {
+                    Messenger.message("Edges attribute: " + edgeNameAttr + " is not appropriate for this network.");
+                    break;
                 }
             }
         }
@@ -310,12 +309,12 @@ public class AffinityPanelController implements Serializable {
     }
 
     private Double tryGetDoubleAttribute(CyAttributes edgesAttributes, String id, String edgeNameAttr) {
-        Object val = edgesAttributes.getAttribute(id, edgeNameAttr);
         Double sim;
+        Object val = edgesAttributes.getAttribute(id, edgeNameAttr);
+
         try {
             sim = Double.valueOf(val.toString());
         } catch (NumberFormatException e) {
-            //       Messenger.error(e);
             sim = null;
         }
         return sim;
@@ -341,7 +340,7 @@ public class AffinityPanelController implements Serializable {
         initLambdaField();
         initConvitsField();
         initNodeAttrField();
-        initEdgeAttrField();
+        refreshEdgeAttrField();
         initIterationsField();
         initPreferencesField();
     }

@@ -69,7 +69,6 @@ public class PrimeAlgorithm {
     }
 
     private void init(Collection<Integer> sources) {
-        System.out.println("CENTERS: " + sources.size());
         for (Integer source : sources) {
             PrimeNode node = graph.getNode(source);
             node.setDistance(Double.valueOf(0));
