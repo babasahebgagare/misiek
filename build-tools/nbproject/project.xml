@@ -9,7 +9,7 @@
             <folders/>
             <ide-actions>
                 <action name="run">
-                    <target>run-plugin-console</target>
+                    <target>run-all-windows</target>
                 </action>
             </ide-actions>
             <view>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="ppine-Plugin" default="run-plugin-console" basedir="../">
+<project name="ppine-Plugin" default="run-all-windows" basedir="../">
     <description>Ant script</description>
 
     <property name="project-name" value="PPINetworksEvolutionPlugin" />
