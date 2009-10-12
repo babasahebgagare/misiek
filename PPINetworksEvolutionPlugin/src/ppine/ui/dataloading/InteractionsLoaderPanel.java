@@ -172,7 +172,7 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
 
         jScrollPane1.setViewportView(loadingPanel);
 
-        jTabbedPane1.addTab("Separated files", jScrollPane1);
+        jTabbedPane1.addTab("Multiple files", jScrollPane1);
 
         cleanButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/clean.png"))); // NOI18N
         cleanButton.setText("Clean");
@@ -267,22 +267,23 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
             setManyFilesTabSelected();
         } else {
             setBothTabEnabled();
-            setManyFilesTabSelected();
+            setOneFileTabSelected();
         }
     }
 
     private void setManyFilesTabSelected() {
-        jTabbedPane1.setSelectedIndex(0);
+        jTabbedPane1.setSelectedIndex(1);
     }
 
     private void setManyFilesTabEnabled() {
-        jTabbedPane1.setEnabledAt(0, true);
-        jTabbedPane1.setEnabledAt(1, false);
+
+        jTabbedPane1.setEnabledAt(0, false);
+        jTabbedPane1.setEnabledAt(1, true);
     }
 
     private void setOneFileTabEnabled() {
-        jTabbedPane1.setEnabledAt(0, false);
-        jTabbedPane1.setEnabledAt(1, true);
+        jTabbedPane1.setEnabledAt(0, true);
+        jTabbedPane1.setEnabledAt(1, false);
     }
 
     private void setBothTabEnabled() {
@@ -291,11 +292,12 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
     }
 
     private void setOneFileTabSelected() {
-        jTabbedPane1.setSelectedIndex(1);
+        jTabbedPane1.setSelectedIndex(0);
     }
 
     private boolean isManyFilesSelected() {
-        return jTabbedPane1.getSelectedIndex() == 0;
+        int index = jTabbedPane1.getSelectedIndex();
+        return (index == 1);
     }
 
     public void initSpeciesList() {
