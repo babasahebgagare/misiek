@@ -53,9 +53,9 @@ public class PPINENodeAppearanceCalculator extends NodeAppearanceCalculator {
 
                         Protein parent = protein.getContext().tryGetParentProtein();
                         if (parent != null) {
-                            appr.set(VisualPropertyType.NODE_TOOLTIP, "Rodzina: " + family.getFamilyID() + ", przodek: " + parent.getID());
+                            appr.set(VisualPropertyType.NODE_TOOLTIP, "Family: " + family.getFamilyID() + ", ancestor: " + parent.getID());
                         } else {
-                            appr.set(VisualPropertyType.NODE_TOOLTIP, "Rodzina: " + family.getFamilyID());
+                            appr.set(VisualPropertyType.NODE_TOOLTIP, "Family: " + family.getFamilyID());
                         }
                     } else {
                     }
