@@ -87,10 +87,10 @@ public class DataLoaderPanel extends javax.swing.JPanel {
         genesTree.setLoaderPanel(this);
         experimentsPanel = new ExperimentsLoaderPanel(this, expList);
 
-        intLoader.setName("Interactions loading...");
-        speciesTree.setName("Species tree loading...");
-        genesTree.setName("Proteins data loading...");
-        experimentsPanel.setName("Experiments loading...");
+        intLoader.setName("Interactions");
+        speciesTree.setName("Species tree");
+        genesTree.setName("Protein family trees");
+        experimentsPanel.setName("Experiments");
 
         initComponents();
         this.getTabbedPane().addTab(speciesTree.getName(), speciesTree);

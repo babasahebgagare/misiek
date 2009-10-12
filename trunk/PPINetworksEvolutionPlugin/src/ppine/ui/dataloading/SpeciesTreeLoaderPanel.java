@@ -108,8 +108,8 @@ public class SpeciesTreeLoaderPanel extends javax.swing.JPanel {
 
         chooseFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/com.png"))); // NOI18N
         chooseFile.setText("Choose file");
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("ppine/ui/resources/Loading"); // NOI18N
-        chooseFile.setToolTipText(bundle.getString("ChooseFileFamiliesTreeButton.ToolTip")); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("ppine/ui/dataloading/Bundle"); // NOI18N
+        chooseFile.setToolTipText(bundle.getString("ChooseFileFamiliesTreeButton.ToolTip_2")); // NOI18N
         chooseFile.setName("chooseFile"); // NOI18N
         chooseFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,7 +122,7 @@ public class SpeciesTreeLoaderPanel extends javax.swing.JPanel {
 
         loadTreeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/save.png"))); // NOI18N
         loadTreeButton.setText("Load tree");
-        loadTreeButton.setToolTipText(bundle.getString("LoadFamiliesTreesButton.ToolTip")); // NOI18N
+        loadTreeButton.setToolTipText(bundle.getString("LoadFamiliesTreesButton.ToolTip_1")); // NOI18N
         loadTreeButton.setName("loadTreeButton"); // NOI18N
         loadTreeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,7 +137,7 @@ public class SpeciesTreeLoaderPanel extends javax.swing.JPanel {
 
         helpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/help.png"))); // NOI18N
         helpButton.setText("File format info");
-        helpButton.setToolTipText(bundle.getString("FileFormatInfoSpecies.ToolTip")); // NOI18N
+        helpButton.setToolTipText(bundle.getString("FileFormatInfoSpecies.ToolTip_1")); // NOI18N
         helpButton.setName("helpButton"); // NOI18N
         helpButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,7 +150,7 @@ public class SpeciesTreeLoaderPanel extends javax.swing.JPanel {
 
         cleanButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/clean.png"))); // NOI18N
         cleanButton.setText("Clean");
-        cleanButton.setToolTipText(bundle.getString("CleanSpeciesTree.ToolTip")); // NOI18N
+        cleanButton.setToolTipText(bundle.getString("CleanSpeciesTree.ToolTip_1")); // NOI18N
         cleanButton.setName("cleanButton"); // NOI18N
         cleanButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -186,9 +186,9 @@ public class SpeciesTreeLoaderPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(chooseFile, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(loadTreeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(helpButton)
-                    .addComponent(cleanButton))
+                    .addComponent(cleanButton)
+                    .addComponent(loadTreeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(filenameLabel)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

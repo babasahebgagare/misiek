@@ -57,7 +57,7 @@ public class DefaultLoadingController {
 
     public static void showPPINELogsPanel() {
         DataLoadingErrorsJPanel errorsPanel = new DataLoadingErrorsJPanel();
-        JFrame frame = new JFrame("PPINE plugin errors");
+        JFrame frame = new JFrame("NetworkEvolutionPlugin errors");
 
         frame.add(errorsPanel);
         frame.pack();

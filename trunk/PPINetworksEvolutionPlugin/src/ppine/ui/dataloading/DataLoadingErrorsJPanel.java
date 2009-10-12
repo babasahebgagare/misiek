@@ -69,8 +69,7 @@ public class DataLoadingErrorsJPanel extends javax.swing.JPanel {
 
         cleanButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/clean.png"))); // NOI18N
         cleanButton.setText("Clean");
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("ppine/ui/resources/Loading"); // NOI18N
-        cleanButton.setToolTipText(bundle.getString("CleanErrorsButton.ToolTip")); // NOI18N
+        cleanButton.setToolTipText("null");
         cleanButton.setName("cleanButton"); // NOI18N
         cleanButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,7 +95,7 @@ public class DataLoadingErrorsJPanel extends javax.swing.JPanel {
                 .addComponent(cleanButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
