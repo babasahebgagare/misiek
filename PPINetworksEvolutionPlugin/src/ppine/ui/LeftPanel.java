@@ -123,11 +123,11 @@ public class LeftPanel extends javax.swing.JPanel {
             dataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dataPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(newDataButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(newDataButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(updateDataButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(deleteVataButton, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(deleteVataButton, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
                 .addContainerGap())
         );
         dataPanelLayout.setVerticalGroup(
@@ -136,8 +136,8 @@ public class LeftPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(dataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(newDataButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(updateDataButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(deleteVataButton))
+                    .addComponent(deleteVataButton)
+                    .addComponent(updateDataButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -196,7 +196,7 @@ public class LeftPanel extends javax.swing.JPanel {
         intPanel.setPreferredSize(new java.awt.Dimension(268, 82));
 
         showLoadedButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/refresh.png"))); // NOI18N
-        showLoadedButton.setText("Refresh loaded interactions");
+        showLoadedButton.setText("Refresh interactions");
         showLoadedButton.setToolTipText(bundle.getString("RefreshButton.ToolTip")); // NOI18N
         showLoadedButton.setMargin(new java.awt.Insets(2, 5, 2, 5));
         showLoadedButton.addActionListener(new java.awt.event.ActionListener() {
@@ -231,23 +231,22 @@ public class LeftPanel extends javax.swing.JPanel {
             intPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(intPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(intPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(showLoadedButton, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, intPanelLayout.createSequentialGroup()
-                        .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
-                        .addComponent(testButton)))
+                .addComponent(showLoadedButton)
+                .addGap(34, 34, 34)
+                .addGroup(intPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(helpButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(testButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         intPanelLayout.setVerticalGroup(
             intPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(intPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(showLoadedButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(intPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(helpButton)
-                    .addComponent(testButton))
+                    .addComponent(showLoadedButton)
+                    .addComponent(helpButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(testButton)
                 .addContainerGap())
         );
 
