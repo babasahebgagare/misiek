@@ -74,8 +74,8 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
 
         jScrollPane2.setName("jScrollPane2"); // NOI18N
 
-        loadButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/update.png"))); // NOI18N
-        loadButton.setText("Update");
+        loadButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/save.png"))); // NOI18N
+        loadButton.setText("Load");
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("ppine/ui/dataloading/Bundle"); // NOI18N
         loadButton.setToolTipText(bundle.getString("UpdateInteractionsButton.ToolTip")); // NOI18N
         loadButton.setName("loadButton"); // NOI18N
