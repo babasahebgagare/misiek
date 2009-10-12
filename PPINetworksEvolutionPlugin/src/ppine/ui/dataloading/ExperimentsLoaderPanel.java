@@ -70,8 +70,8 @@ public class ExperimentsLoaderPanel extends javax.swing.JPanel {
 
         chooseFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/com.png"))); // NOI18N
         chooseFile.setText("Choose file");
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("ppine/ui/resources/Loading"); // NOI18N
-        chooseFile.setToolTipText(bundle.getString("ChooseFileFamiliesTreeButton.ToolTip")); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("ppine/ui/dataloading/Bundle"); // NOI18N
+        chooseFile.setToolTipText(bundle.getString("ChooseFileFamiliesTreeButton.ToolTip_1")); // NOI18N
         chooseFile.setName("chooseFile"); // NOI18N
         chooseFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

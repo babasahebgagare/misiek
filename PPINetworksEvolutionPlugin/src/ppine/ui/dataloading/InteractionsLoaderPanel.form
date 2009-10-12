@@ -60,7 +60,7 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Update"/>
         <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="" key="UpdateInteractionsButton.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="ppine/ui/dataloading/Bundle.properties" key="UpdateInteractionsButton.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="name" type="java.lang.String" value="loadButton" noResource="true"/>
       </Properties>
@@ -75,7 +75,7 @@
         </Property>
         <Property name="text" type="java.lang.String" value="File format info"/>
         <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="" key="FileFormatInfoInteractionsButton.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="ppine/ui/dataloading/Bundle.properties" key="FileFormatInfoInteractionsButton.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="name" type="java.lang.String" value="infoButton" noResource="true"/>
       </Properties>
@@ -224,7 +224,7 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Clean"/>
         <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="" key="CleanInteractionsButton.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="ppine/ui/dataloading/Bundle.properties" key="CleanInteractionsButton.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="name" type="java.lang.String" value="cleanButton" noResource="true"/>
       </Properties>

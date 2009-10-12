@@ -107,7 +107,7 @@ public class GenesTreesLoaderPanel extends javax.swing.JPanel {
 
         chooseButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/com.png"))); // NOI18N
         chooseButton.setText("Choose file");
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("ppine/ui/resources/Loading"); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("ppine/ui/dataloading/Bundle"); // NOI18N
         chooseButton.setToolTipText(bundle.getString("ChooseFileFamiliesTreeButton.ToolTip")); // NOI18N
         chooseButton.setName("chooseButton"); // NOI18N
         chooseButton.addActionListener(new java.awt.event.ActionListener() {
@@ -192,7 +192,7 @@ public class GenesTreesLoaderPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(filenameLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents

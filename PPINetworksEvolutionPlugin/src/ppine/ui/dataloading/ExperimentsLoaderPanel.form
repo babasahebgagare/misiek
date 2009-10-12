@@ -61,11 +61,11 @@
     <Component class="javax.swing.JButton" name="chooseFile">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/mcv/resources/icons/com.png"/>
+          <Image iconType="3" name="/ppine/resources/icons/com.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Choose file"/>
         <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="mcv/ui/resources/Loading.properties" key="ChooseFileFamiliesTreeButton.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="ppine/ui/dataloading/Bundle.properties" key="ChooseFileFamiliesTreeButton.ToolTip_1" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="name" type="java.lang.String" value="chooseFile" noResource="true"/>
       </Properties>
@@ -76,11 +76,11 @@
     <Component class="javax.swing.JButton" name="loadTreeButton">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/mcv/resources/icons/save.png"/>
+          <Image iconType="3" name="/ppine/resources/icons/save.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Load"/>
         <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="mcv/ui/resources/Loading.properties" key="LoadFamiliesTreesButton.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="ppine/ui/dataloading/Bundle.properties" key="LoadFamiliesTreesButton.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="name" type="java.lang.String" value="loadTreeButton" noResource="true"/>
       </Properties>
@@ -91,11 +91,11 @@
     <Component class="javax.swing.JButton" name="cleanButton">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/mcv/resources/icons/clean.png"/>
+          <Image iconType="3" name="/ppine/resources/icons/clean.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Clean"/>
         <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="mcv/ui/resources/Loading.properties" key="CleanSpeciesTree.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="ppine/ui/dataloading/Bundle.properties" key="CleanSpeciesTree.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="name" type="java.lang.String" value="cleanButton" noResource="true"/>
       </Properties>
@@ -106,11 +106,11 @@
     <Component class="javax.swing.JButton" name="helpButton">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/mcv/resources/icons/help.png"/>
+          <Image iconType="3" name="/ppine/resources/icons/help.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="File format info"/>
         <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="mcv/ui/resources/Loading.properties" key="FileFormatInfoSpecies.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="ppine/ui/dataloading/Bundle.properties" key="FileFormatInfoSpecies.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="name" type="java.lang.String" value="helpButton" noResource="true"/>
       </Properties>

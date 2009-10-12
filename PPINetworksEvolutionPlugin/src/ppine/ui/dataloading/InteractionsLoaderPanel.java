@@ -76,7 +76,8 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
 
         loadButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/update.png"))); // NOI18N
         loadButton.setText("Update");
-        loadButton.setToolTipText("null");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("ppine/ui/dataloading/Bundle"); // NOI18N
+        loadButton.setToolTipText(bundle.getString("UpdateInteractionsButton.ToolTip")); // NOI18N
         loadButton.setName("loadButton"); // NOI18N
         loadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,7 +87,7 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
 
         infoButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/help.png"))); // NOI18N
         infoButton.setText("File format info");
-        infoButton.setToolTipText("null");
+        infoButton.setToolTipText(bundle.getString("FileFormatInfoInteractionsButton.ToolTip")); // NOI18N
         infoButton.setName("infoButton"); // NOI18N
         infoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -176,7 +177,7 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
 
         cleanButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ppine/resources/icons/clean.png"))); // NOI18N
         cleanButton.setText("Clean");
-        cleanButton.setToolTipText("null");
+        cleanButton.setToolTipText(bundle.getString("CleanInteractionsButton.ToolTip")); // NOI18N
         cleanButton.setName("cleanButton"); // NOI18N
         cleanButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
