@@ -41,7 +41,7 @@ public class AffinityMain extends CytoscapePlugin {
         myAff.add(actionButtonsPanel);
         myAff.add(stats);
 
-        leftPanel.add("AP plugin", myAff);
+        leftPanel.add("APGraphClustringPlugin", myAff);
         //System.out.println("Affinity propagation");
     }
 }
