@@ -1,23 +1,19 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <title>Nearest center searching</title>
+        <title>Assignment to the nearest center</title>
         <meta name="generator" content="DocBook XSL Stylesheets V1.70.1">
     </head>
     <body bgcolor="white">
-        <h1>Nearest center searching</h1>
-        <h2>Introduction</h2>
-        After I phase we have clusters centers, now we have to find for every node
-        nearest cluster center. <br>
-        I have implemented two methods of it.
-        <h2>Original authors method</h2>
-        For every node we are looking for siblings, if one of siblings nodes is
-        cluster center, we aggregate this nodes. But it is possible that some node
-        hasn't center in nearest sibling, so I have generalized this method on
-        any depth.
+        <h1>Assigning nodes to the nearest center</h1>
+
+        After the cluster centers are determined in the first phase of the algorithm, each node is assigned to the nearest center.<br>
+        Our implementation provides the following options.
+        <h2>Original method (follows the original AP implementations)</h2>
+        For every node we look for neighbors which are cluster centers and assign the node to the nearest one.
+
         <h2>Weighted BSF method</h2>
-        This method looking from other side - starting from centers. Rightly it is
-        Prime algorithm, where centers are sourse, and for every node we searching
-        nearest path from sourse to this node.
+        In the case of incomplete graphs (especially sparse graphs), it is possible that none of the node's neighbors will be a cluster center.<br>
+        When this option is selected, we look for shortest paths in the weighted network from nodes to cluster centers.
     </body>
 </html>

@@ -1,75 +1,77 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <title>Interactions file format</title>
+        <title>Network Evolution Plugin example</title>
         <meta name="generator" content="DocBook XSL Stylesheets V1.70.1">
     </head>
     <body bgcolor="white">
         <ol type="1">
             <li>
-                Download my example data in required formats from this page: <br>
-                <a href="https://students.mimuw.edu.pl/~mw219725/ppine_data/">https://students.mimuw.edu.pl/~mw219725/ppine_data/</a>
+                Download sample data in required formats from:
+                <a href="http://bioputer.mimuw.edu.pl/veppin">http://bioputer.mimuw.edu.pl/veppin</a>.<br>
                 <img src="exampleusecase/ppinedata.gif" width="861" height="345" alt="ppinedata"/>
             </li>
             <li>
-                Open loading panel by "New" button click.
+                Click "New" to open the data loading panel.<br>
                 <img src="exampleusecase/01.gif" width="901" height="596" alt="01"/>
             </li>
             <li>
-                Choose species tree data file, and click "Load" to load data.
+                Choose the species tree file, and click "Load".<br>
                 <img src="exampleusecase/02.gif" width="901" height="596" alt="01"/>
             </li>
             <li>
-                After it you should see loaded species tree.
+                You should see the loaded species tree.<br>
                 <img src="exampleusecase/03.gif" width="901" height="596" alt="01"/>
             </li>
             <li>
-                Change tab to "Proteins data loading" and do the same for proteins
+                Change tab to "Protein family trees" and do the same for protein family tree
                 data.
                 <img src="exampleusecase/04.gif" width="901" height="596" alt="01"/>
             </li>
             <li>
-                Change tab to "Interactions loading". Select species, and choose file
-                with interactions data for every selected species.
+                Change tab to "Interactions". Select the cutoff value and choose file
+                with interactions data for all species.<br>
+                <img src="exampleusecase/05.gif" width="901" height="596" alt="01"/>
+            </li>
+	     <li>
+                Alternatively go to "Separate interaction files". Select cutoff value for each species of interest and choose species-specific file.
                 <img src="exampleusecase/05.gif" width="901" height="596" alt="01"/>
             </li>
             <li>
-                Click "Update" button, now your interactions data are loading.
-                After loading click "Close" to close loading panel.
+                Click "Update" button to load your interaction data.<br>
+                Then click "Close".<br>
                 <img src="exampleusecase/06.gif" width="901" height="596" alt="01"/>
             </li>
             <li>
-                Select "Fungi" species on species tree, and click "Show network" button.
-                Fungi protein-protein network will be shown.
+                Select "Fungi" on species tree, and click the "Show network" button.
+                The fungi PPI network will be shown.<br>
                 <img src="exampleusecase/07.gif" width="901" height="596" alt="01"/>
             </li>
             <li>
-                Change tab to "Affinity panel". Click "Refresh", and after then click <br>
-                "Start" button to cluster Fungi network.
+                Change tab to the "Affinity panel". Click "Refresh" to load edge attributes. Then click <br>
+                the "Start" button to cluster the network.<br>
                 <img src="exampleusecase/08.gif" width="901" height="596" alt="01"/>
             </li>
             <li>
-                You will see that screen.
+                You should see a screen similar to the one below.<br>
                 <img src="exampleusecase/09.gif" width="901" height="596" alt="01"/>
             </li>
             <li>
-                Now you should layouting network by choosing one of Cytoscape Layouts.
-                Select Cytoscape Layouts -> Group Attributes Layout -> clusterid.
+                Now you can visualize the clustering results with an appropriate Cytoscape layout.
+                Select Cytoscape Layouts -> Group Attributes Layout -> clusterid.<br>
                 <img src="exampleusecase/10.gif" width="901" height="596" alt="01"/>
             </li>
             <li>
-                Select first cluster in left top corner.
+                Select one of the clusters.<br>
                 <img src="exampleusecase/11.gif" width="901" height="596" alt="01"/>
             </li>
             <li>
-                Select: sc, dm, ce from species tree and click "Casting".
+                Select: sc, dm, ce from species tree and click "Mapping".<br>
                 <img src="exampleusecase/12.gif" width="901" height="596" alt="01"/>
             </li>
             <li>
-                After all you will see that screen, there are projections of selected <br>
-                proteins module. You can see similar modules after projecting, it <br>
-                suggesting that this module of proteins is strongly conserved <br>
-                so probably this modules of proteins have the same roles in species. 
+                You should get three new network diagrams representing the mapping of the selected module onto the three selected interactomes.<br>
+	        The colors of the nodes and the layout makes it easy to visually compare the resulting subnetworks between themselves and with the original subnetwork in the Fungi interactome.
                 <img src="exampleusecase/13.gif" width="901" height="596" alt="01"/>
             </li>
         </ol>
