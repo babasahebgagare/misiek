@@ -1,16 +1,17 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <title>Interactions file format</title>
+        <title>Interaction data</title>
         <meta name="generator" content="DocBook XSL Stylesheets V1.70.1">
     </head>
     <body bgcolor="white">
-        <h1>Desctiprion</h1>
-        Standard representation - every line of input file has format:
-        <br>
+        <h1>Interaction data</h1>
+Interactions for each of the input species should be loaded in TAB delimited
+    format.<br>
+Each line should provide the following three fields for one particular interaction:<br>
         proteinLabel1 proteinLabel2 probability
         <br>
-        Where probability it is double number from 0 to 1.
+        Where the probability is a real number ranging from 0 to 1.
         <h1>Example: </h1>
 fu_i4	fu_i4	0.472474439929 <br>
 fu_i4	fu_i11	0.162217986867 <br>
@@ -24,5 +25,5 @@ fu_i12	fu_i14	0.117767359925 <br>
 fu_i14	fu_i14	0.129356058761 <br>
 fu_i11	fu_i15	0.140554013061 <br>
 fu_i12	fu_i15	0.140736274087 <br>
-    </body> 
+    </body>
 </html>

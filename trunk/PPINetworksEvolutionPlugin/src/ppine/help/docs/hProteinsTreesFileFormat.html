@@ -1,14 +1,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <title>Proteins tree file format</title>
+        <title>Protein family trees</title>
         <meta name="generator" content="DocBook XSL Stylesheets V1.70.1">
     </head>
     <body bgcolor="white">
-        <h1>Desctiprion</h1>
-        This is enriched standard recursive format. Input file contains n-lines.
-        Every line it is information about some protein tree family. Every line
-        has format: <br>
+        <h1>Protein family trees</h1>
+        Protein family trees should be provided in an enriched standard recursive format.
+        Each line in the file should describe one protein family tree as follows: <br>
         (speciesNode1, speciesNode2, ...)familyName; <br>
         Where speciesNode has recursive format: <br>
         speciesNode := [proteinNode1,proteinNode2, ...]speciesName <br>
