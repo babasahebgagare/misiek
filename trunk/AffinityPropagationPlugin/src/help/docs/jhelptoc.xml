@@ -9,5 +9,6 @@
         <tocitem target="Implementation" text="Implementation version" />
         <tocitem target="ConnectingMode" text="Connecting mode" />
         <tocitem target="NearestCenter" text="Nearest center" />
+        <tocitem target="License" text="License GPL v3.0" />
     </tocitem>
 </toc>

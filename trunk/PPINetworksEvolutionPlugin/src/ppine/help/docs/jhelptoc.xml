@@ -9,5 +9,6 @@
         <tocitem target="Proteins trees file format" text="Proteins trees file format"/>
         <tocitem target="Experiments file format" text="Experiments file format"/>
         <tocitem target="Example use case" text="Example use case"/>
+        <tocitem target="License" text="License GPL v3.0" />
     </tocitem>
 </toc>
