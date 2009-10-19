@@ -9,4 +9,5 @@
     <mapID target="AffinityAbout" url="haffinity_about.html"/>
     <mapID target="NearestCenter" url="hnearest_center.html"/>
     <mapID target="Parameters" url="hparameters.html"/>
+    <mapID target="License" url="hlicense.html"/>
 </map>
