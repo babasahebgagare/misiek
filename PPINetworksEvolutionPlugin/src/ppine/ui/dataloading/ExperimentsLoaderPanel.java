@@ -1,13 +1,34 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/* ===========================================================
+ * NetworkEvolutionPlugin : Cytoscape plugin for visualizing stages of
+ * protein networks evolution.
+ * ===========================================================
+ *
+ *
+ * Project Info:  http://bioputer.mimuw.edu.pl/veppin/
+ * Sources: http://code.google.com/p/misiek/
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>
+ *
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
+ * in the United States and other countries.]
+ *
+ * NetworkEvolutionPlugin  Copyright (C) 2008-2009
+ * Authors:  Michal Wozniak (code) (m.wozniak@mimuw.edu.pl)
+ *           Janusz Dutkowski (idea, data) (j.dutkowski@mimuw.edu.pl)
+ *           Jerzy Tiuryn (supervisor) (tiuryn@mimuw.edu.pl)
  */
 
-/*
- * ExperimentsLoadingPanel.java
- *
- * Created on 2009-07-05, 20:49:40
- */
 package ppine.ui.dataloading;
 
 import java.awt.event.ActionEvent;
@@ -17,15 +38,10 @@ import javax.swing.JFileChooser;
 import ppine.help.PPINEHelpBroker;
 import ppine.io.listeners.ExperimentsLoadingErrorsListener;
 import ppine.main.LoadedDataHandle;
-import ppine.main.LoadedDataHandle;
 import ppine.main.PluginDataHandle;
 import ppine.ui.UIController;
 import ppine.ui.listeners.ExperimentsLoadedListener;
 
-/**
- *
- * @author misiek
- */
 public class ExperimentsLoaderPanel extends javax.swing.JPanel {
 
     private String filepath;
