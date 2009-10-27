@@ -265,7 +265,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
     }
 
     @Override
-    public Collection<Integer> getCenters() {
+    public Collection<Integer> getCentersAlg() {
         return new TreeSet<Integer>(centers);
     }
 
