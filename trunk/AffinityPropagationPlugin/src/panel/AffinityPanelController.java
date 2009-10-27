@@ -287,7 +287,7 @@ public class AffinityPanelController implements Serializable {
     }
 
     private void initConvitsField() {
-        convitsField.setText("3");
+        convitsField.setText("100");
     }
 
     public void refreshEdgeAttrField() {
@@ -376,11 +376,11 @@ public class AffinityPanelController implements Serializable {
     }
 
     private void initIterationsField() {
-        iterationsField.setValue(Integer.valueOf(10));
+        iterationsField.setValue(Integer.valueOf(200));
     }
 
     private void initLambdaField() {
-        lambdaField.setText("0.5");
+        lambdaField.setText("0.9");
     }
 
     private void initNodeAttrField() {

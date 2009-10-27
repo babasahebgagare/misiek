@@ -28,8 +28,6 @@
  *           Janusz Dutkowski (idea) (j.dutkowski@mimuw.edu.pl)
  *           Jerzy Tiuryn (supervisor) (tiuryn@mimuw.edu.pl)
  */
-
-
 package cyto;
 
 import algorithm.abs.AffinityPropagationAlgorithm;
@@ -54,6 +52,7 @@ import java.util.TreeSet;
 import javax.swing.JPanel;
 import listeners.IterationListener;
 import panel.AffinityPanelController;
+import utils.Messenger;
 
 /**
  *
@@ -146,7 +145,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
                 }
                 i++;
             }
-            for(CyLayoutAlgorithm layout : CyLayouts.getAllLayouts()) {
+            for (CyLayoutAlgorithm layout : CyLayouts.getAllLayouts()) {
                 layout.setLayoutAttribute(nodeNameAttr);
             }
 
@@ -247,9 +246,17 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
         try {
             sim = Double.valueOf(val.toString());
         } catch (NumberFormatException e) {
-      //      Messenger.error(e);
+            //      Messenger.error(e);
             sim = null;
         }
         return sim;
+    }
+
+    public void showInfoAfterClustering() {
+        if (!af.didConvergence()) {
+            Messenger.messageInfo("Algorithm did not convergence after: " + (af.getCurrentIteration()-1) + " iterations");
+        } else {
+            Messenger.messageInfo("Algorithm has convergenced after: " + af.getCurrentIteration() + " iterations");
+        }
     }
 }
