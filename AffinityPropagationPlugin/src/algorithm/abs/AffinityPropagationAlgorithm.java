@@ -28,8 +28,6 @@
  *           Janusz Dutkowski (idea) (j.dutkowski@mimuw.edu.pl)
  *           Jerzy Tiuryn (supervisor) (tiuryn@mimuw.edu.pl)
  */
-
-
 package algorithm.abs;
 
 import algorithm.smart.IterationData;
@@ -59,9 +57,10 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
     private int iterations;
     private boolean refine = true;
     private Integer steps = null;
+    private int iteration = 0;
     protected AffinityConnectingMethod connectingMode = AffinityConnectingMethod.ORIGINAL;
     protected AffinityGraphMode graphMode = AffinityGraphMode.DIRECTED;
-    protected int notConverged;
+    protected int notConverged = 1;
     protected Integer convits = null;
     protected ActionListener iteractionListenerOrNull = null;
     protected Map<Integer, Cluster<Integer>> assigments;
@@ -70,6 +69,14 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
     private int currentID = 0;
     protected Map<String, Integer> idMapper = new TreeMap<String, Integer>();
     protected Map<Integer, String> idRevMapper = new TreeMap<Integer, String>();
+
+    public int getCurrentIteration() {
+        return iteration;
+    }
+
+    public boolean didConvergence() {
+        return (notConverged == 0);
+    }
 
     public void setGraphMode(AffinityGraphMode mode) {
         this.graphMode = mode;
@@ -210,7 +217,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
         }
         initConvergence();
 
-        for (int iteration = 0; iteration < iters; iteration++) {
+        for (iteration = 1; iteration <= iters; iteration++) {
 
             copyResponsibilies();
             computeResponsibilities();
@@ -220,11 +227,11 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
             computeAvailabilities();
             avgAvailabilities();
 
-            if (iteration + 1 != iterations && iteractionListenerOrNull != null) {
+            if (iteractionListenerOrNull != null) {
                 computeCenters();
                 calculateCovergence();
                 notConverged = checkConvergence();
-                iteractionListenerOrNull.actionPerformed(new ActionEvent(new IterationData(iteration + 2, getClustersNumber()), 0, "ITERATION")); //TODO
+                iteractionListenerOrNull.actionPerformed(new ActionEvent(new IterationData(iteration, getClustersNumber()), 0, "ITERATION")); //TODO
             }
 
             if (notConverged == 0) {

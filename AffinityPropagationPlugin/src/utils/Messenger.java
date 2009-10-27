@@ -28,7 +28,6 @@
  *           Janusz Dutkowski (idea) (j.dutkowski@mimuw.edu.pl)
  *           Jerzy Tiuryn (supervisor) (tiuryn@mimuw.edu.pl)
  */
-
 package utils;
 
 import cytoscape.Cytoscape;
@@ -39,6 +38,11 @@ public class Messenger {
     public static void message(final Object message) {
         System.out.println(message);
         JOptionPane.showMessageDialog(Cytoscape.getDesktop(), message, "Warning", JOptionPane.WARNING_MESSAGE);
+    }
+
+    public static void messageInfo(final Object message) {
+        System.out.println(message);
+        JOptionPane.showMessageDialog(Cytoscape.getDesktop(), message, "Info", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public static void error(final Exception ex) {

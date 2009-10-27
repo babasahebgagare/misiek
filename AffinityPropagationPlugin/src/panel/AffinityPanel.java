@@ -101,7 +101,7 @@ public class AffinityPanel extends javax.swing.JPanel {
         nodeAttrNameField.setName("nodeAttrNameField"); // NOI18N
 
         iterationsSpinner.setName("iterationsSpinner"); // NOI18N
-        iterationsSpinner.setValue(10);
+        iterationsSpinner.setValue(200);
 
         iteretionsLabel.setText("Number of iterations:");
         iteretionsLabel.setName("iteretionsLabel"); // NOI18N
@@ -118,7 +118,7 @@ public class AffinityPanel extends javax.swing.JPanel {
         preferenceLabel.setText("Preference:");
         preferenceLabel.setName("preferenceLabel"); // NOI18N
 
-        labmbdaField.setText("0.5");
+        labmbdaField.setText("0.9");
         labmbdaField.setName("labmbdaField"); // NOI18N
         labmbdaField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,7 +132,7 @@ public class AffinityPanel extends javax.swing.JPanel {
         convitsLabel.setText("Stop criterium:");
         convitsLabel.setName("convitsLabel"); // NOI18N
 
-        convitsField.setText("3");
+        convitsField.setText("100");
         convitsField.setName("convitsField"); // NOI18N
 
         edgeAttrCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
