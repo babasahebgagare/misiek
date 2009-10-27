@@ -40,7 +40,9 @@ import cytoscape.data.CyAttributes;
 import cytoscape.task.util.TaskManager;
 import giny.model.Edge;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
+import java.util.TreeSet;
 import java.util.Vector;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -74,12 +76,14 @@ public class AffinityPanelController implements Serializable {
     private JRadioButton directedModeRadio = null;
     private JCheckBox refineCheckBox = null;
     private JCheckBox transformingCheckbox = null;
+    private JComboBox centersAttrList = null;
     private AffinityStatsPanelController psc = null;
     private boolean cancelDialog = false;
     public final static int MATRIX_IMPLEMENTATION = 0;
     public final static int SMART_IMPLEMENTATION = 1;
     private boolean log = false;
     private CytoClusterTask cytoAlgorithmTask;
+    private Collection<String> centersAttr = new TreeSet<String>();
 
     public AffinityPanelController(final AffinityStatsPanelController psc) {
         this.psc = psc;
@@ -122,6 +126,10 @@ public class AffinityPanelController implements Serializable {
         Integer clusters = algorithm.getClustersNumber();
         String network = Cytoscape.getCurrentNetwork().getTitle();
         psc.addClusteringStat(network, lambda, preferences, clusters, iterations, nodeNameAttr);
+
+        String centerAttr = getCentersAttr();
+        centersAttr.add(centerAttr);
+        refreshCentersAttrList();
     }
 
     public JCheckBox getTransformingCheckbox() {
@@ -152,15 +160,23 @@ public class AffinityPanelController implements Serializable {
         this.originalModeRadio = originalModeRadio;
     }
 
+    public JComboBox getCentersAttrList() {
+        return centersAttrList;
+    }
+
+    public void setCentersAttrList(JComboBox centersAttrList) {
+        this.centersAttrList = centersAttrList;
+    }
+
     public void setStepsFiled(JTextField stepsFiled) {
         this.stepsFiled = stepsFiled;
     }
 
-    public void showCenters() {
-        cytoAlgorithmTask.showCenters();
+    public void showCenters(final String centersAttribute) {
+        cytoAlgorithmTask.showCenters(centersAttribute);
     }
 
-    private String getCentersAttr() {
+    public String getCentersAttr() {
         return centersAttrField.getText();
     }
 
@@ -216,6 +232,14 @@ public class AffinityPanelController implements Serializable {
             steps = null;
         }
         return steps;
+    }
+
+    private void refreshCentersAttrList() {
+        centersAttrList.removeAllItems();
+        for (String item : centersAttr) {
+            centersAttrList.addItem(item);
+            centersAttrList.setSelectedItem(item);
+        }
     }
 
     private boolean validateConvits(final Integer convits) {

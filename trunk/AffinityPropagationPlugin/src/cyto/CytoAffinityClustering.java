@@ -266,7 +266,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
         }
     }
 
-    public void showCenters() {
+    public void showCenters(final String centersAttribute) {
 
         CyNetworkView currentView = Cytoscape.getCurrentNetworkView();
         @SuppressWarnings("unchecked")
@@ -275,13 +275,15 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
         List<CyNode> nodes = Cytoscape.getCurrentNetwork().nodesList();
         Set<String> nodeNames = selectConnectedNodes(edges, nodes);
 
+        Cytoscape.getCurrentNetworkView().redrawGraph(false, true);
+
         for (String name : nodeNames) {
-            Integer v = nodesAttributes.getIntegerAttribute(name, centersNameAttr);
+            Integer v = nodesAttributes.getIntegerAttribute(name, centersAttribute);
             if (v != null) {
                 if (v == 1) {
                     CyNode node = Cytoscape.getCyNode(name);
                     NodeView nodeView = currentView.getNodeView(node.getRootGraphIndex());
-                    //double width = nodeView.getWidth();
+
                     nodeView.setShape(NodeShape.ELLIPSE.getGinyShape());
                 }
             }

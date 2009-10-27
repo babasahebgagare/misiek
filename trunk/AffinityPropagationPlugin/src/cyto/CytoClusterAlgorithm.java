@@ -53,7 +53,7 @@ public interface CytoClusterAlgorithm {
 
     public void saveCenters();
 
-    public void showCenters();
+    public void showCenters(final String centersAttribute);
 
     public void showInfoAfterClustering();
 
