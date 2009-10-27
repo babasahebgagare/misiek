@@ -28,7 +28,6 @@
  *           Janusz Dutkowski (idea) (j.dutkowski@mimuw.edu.pl)
  *           Jerzy Tiuryn (supervisor) (tiuryn@mimuw.edu.pl)
  */
-
 package panel;
 
 import algorithm.abs.AffinityPropagationAlgorithm.AffinityConnectingMethod;
@@ -79,6 +78,7 @@ public class AffinityPanelController implements Serializable {
     public final static int MATRIX_IMPLEMENTATION = 0;
     public final static int SMART_IMPLEMENTATION = 1;
     private boolean log = false;
+    private CytoClusterTask cytoAlgorithmTask;
 
     public AffinityPanelController(final AffinityStatsPanelController psc) {
         this.psc = psc;
@@ -112,8 +112,9 @@ public class AffinityPanelController implements Serializable {
         algorithm = new CytoAffinityClustering(connectingMode, implementation, nodeNameAttr, edgeNameAttr, lambda.doubleValue(), preferences.doubleValue(), iterations.intValue(), convits, refine, log);
         algorithm.setStepsCount(steps);
         algorithm.setGraphMode(graphMode);
+        cytoAlgorithmTask = new CytoClusterTask(algorithm);
 
-        TaskManager.executeTask(new CytoClusterTask(algorithm),
+        TaskManager.executeTask(cytoAlgorithmTask,
                 CytoClusterTask.getDefaultTaskConfig());
 
         Integer clusters = algorithm.getClustersNumber();
@@ -151,6 +152,10 @@ public class AffinityPanelController implements Serializable {
 
     public void setStepsFiled(JTextField stepsFiled) {
         this.stepsFiled = stepsFiled;
+    }
+
+    public void showCenters() {
+        cytoAlgorithmTask.showCenters();
     }
 
     private AffinityConnectingMethod getConnectingMode() {

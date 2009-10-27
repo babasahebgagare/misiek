@@ -37,12 +37,16 @@ import algorithm.matrix.MatrixPropagationAlgorithm;
 import algorithm.abs.Cluster;
 import algorithm.smart.SmartPropagationAlgorithm;
 import cytoscape.CyEdge;
+import cytoscape.CyNetwork;
 import cytoscape.CyNode;
 import cytoscape.Cytoscape;
 import cytoscape.data.CyAttributes;
 import cytoscape.layout.CyLayoutAlgorithm;
 import cytoscape.layout.CyLayouts;
 import cytoscape.task.TaskMonitor;
+import cytoscape.view.CyNetworkView;
+import giny.view.NodeView;
+import java.util.Collection;
 import java.util.TreeMap;
 import java.util.List;
 import java.util.Map;
@@ -254,9 +258,23 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
 
     public void showInfoAfterClustering() {
         if (!af.didConvergence()) {
-            Messenger.messageInfo("Algorithm did not convergence after: " + (af.getCurrentIteration()-1) + " iterations");
+            Messenger.messageInfo("Algorithm did not convergence after: " + (af.getCurrentIteration() - 1) + " iterations");
         } else {
             Messenger.messageInfo("Algorithm has convergenced after: " + af.getCurrentIteration() + " iterations");
+        }
+    }
+
+    public void showCenters() {
+        Collection<Integer> centers = af.getCenters();
+        CyNetworkView currentView = Cytoscape.getCurrentNetworkView();
+        //     CyNetwork currNet = Cytoscape.getCurrentNetwork();
+        for (Integer center : centers) {
+            String nodeStr = idMapping.get(center);
+            System.out.println(nodeStr);
+            CyNode node = Cytoscape.getCyNode(nodeStr);
+            NodeView nodeView = currentView.getNodeView(node.getRootGraphIndex());
+            double width = nodeView.getWidth();
+            nodeView.setWidth(width + 30.0);
         }
     }
 }

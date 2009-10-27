@@ -210,7 +210,7 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
     }
 
     @Override
-    protected Collection<Integer> getCenters() {
+    public Collection<Integer> getCenters() {
         Collection<Integer> res = new TreeSet<Integer>();
         for (int i = 0; i < I.size(); i++) {
             res.add(Integer.valueOf(I.get(i)));
