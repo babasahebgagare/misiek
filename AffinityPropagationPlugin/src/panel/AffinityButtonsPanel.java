@@ -44,6 +44,8 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
     public AffinityButtonsPanel(final AffinityPanelController pc) {
         this.pc = pc;
         initComponents();
+        centersAttrList.removeAllItems();
+        pc.setCentersAttrList(centersAttrList);
     }
 
     /** This method is called from within the constructor to
@@ -58,6 +60,7 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
         startButton = new javax.swing.JButton();
         helpButton = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        centersAttrList = new javax.swing.JComboBox();
 
         setMaximumSize(new java.awt.Dimension(270, 32767));
         setPreferredSize(new java.awt.Dimension(270, 25));
@@ -75,8 +78,8 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
         });
 
         helpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/help.png"))); // NOI18N
-        helpButton.setText("Help");
         helpButton.setToolTipText(bundle.getString("HelpButton.ToolTip")); // NOI18N
+        helpButton.setAlignmentY(0.0F);
         helpButton.setName("helpButton"); // NOI18N
         helpButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,7 +87,11 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/refresh.png"))); // NOI18N
         jButton1.setText("Show");
+        jButton1.setToolTipText("Refresh centers");
+        jButton1.setAlignmentY(0.0F);
+        jButton1.setMargin(new java.awt.Insets(2, 5, 2, 5));
         jButton1.setName("jButton1"); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,23 +99,33 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
             }
         });
 
+        centersAttrList.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        centersAttrList.setToolTipText("Select centers attribute");
+        centersAttrList.setName("centersAttrList"); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(startButton, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(startButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(centersAttrList, 0, 76, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-            .addComponent(startButton)
-            .addComponent(helpButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton1)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(centersAttrList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(startButton))
+                .addComponent(helpButton))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -123,10 +140,12 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_helpButtonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        pc.showCenters();
+        String centersAttribute = (String) centersAttrList.getSelectedItem();
+        pc.showCenters(centersAttribute);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox centersAttrList;
     private javax.swing.JButton helpButton;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton startButton;
