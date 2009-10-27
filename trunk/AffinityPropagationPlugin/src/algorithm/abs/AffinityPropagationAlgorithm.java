@@ -108,14 +108,15 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
 
         for (Cluster<Integer> cluster : assigments.values()) {
 
-            Integer maxid = cluster.getName();
+            int maxid = cluster.getName().intValue();
             Integer maxlevel = Integer.valueOf(0);
             Double maxsum = null;
             for (Integer curr : cluster.getElements()) {
+                int curr_int = curr.intValue();
                 Double sum = Double.valueOf(0);
                 Integer level = Integer.valueOf(0);
                 for (Integer other : cluster.getElements()) {
-                    Double simOrNull = tryGetSimilarityInt(other, curr);
+                    Double simOrNull = tryGetSimilarityInt(other, curr_int);
                     if (simOrNull != null) {
                         sum += simOrNull;
                         level++;
@@ -126,19 +127,19 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
                 }*/
                 if (maxsum == null || level > maxlevel) {
                     maxsum = sum;
-                    maxid = curr;
+                    maxid = curr_int;
                     maxlevel = level;
                 } else if (level.equals(maxlevel) && sum >= maxsum) {
                     if (sum.equals(maxsum)) {
-                        maxid = Math.min(maxid.intValue(), curr.intValue());
+                        maxid = Math.min(maxid, curr_int);
                     } else {
-                        maxid = curr;
+                        maxid = curr_int;
                     }
                     maxlevel = level;
                     maxsum = sum;
                 }
             }
-            refinedCenters.add(maxid);
+            refinedCenters.add(Integer.valueOf(maxid));
         }
         refined = refinedCenters;
     }
@@ -257,7 +258,9 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
         Collection<Integer> centers;
         if (refined == null) {
             centers = getCenters();
+            System.out.println("not refined...");
         } else {
+            System.out.println("refined!");
             centers = refined;
         }
         if (centers.size() == 0) {
@@ -325,7 +328,15 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
 
     }
 
-    public abstract Collection<Integer> getCenters();
+    public abstract Collection<Integer> getCentersAlg();
+    
+    public Collection<Integer> getCenters() {
+        if(refined == null) {
+            return getCentersAlg();
+        } else {
+            return refined;
+        }
+    }
 
     protected abstract Collection<Integer> getAllExamplars();
 
