@@ -325,7 +325,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
 
     }
 
-    protected abstract Collection<Integer> getCenters();
+    public abstract Collection<Integer> getCenters();
 
     protected abstract Collection<Integer> getAllExamplars();
 
@@ -410,6 +410,23 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
 
         return prime.run();
 
+    }
+
+    public Collection<String> getCentersStr() {
+        Collection<Integer> centersInt = getCenters();
+        Collection<String> centers = new TreeSet<String>();
+        System.out.println("CENTERS SIZE: " + centersInt.size());
+        for (Integer centerInt : centersInt) {
+            System.out.println("INT: " + centerInt);
+            String str = idRevMapper.get(centerInt);
+            if (str != null) {
+                centers.add(str);
+            } else {
+                System.out.println("NULL: " + centerInt);
+            }
+        //TODO
+        }
+        return centers;
     }
 
     @Override

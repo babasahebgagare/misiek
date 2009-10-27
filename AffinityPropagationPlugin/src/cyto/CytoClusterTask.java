@@ -73,6 +73,7 @@ public class CytoClusterTask implements Task {
     public void run() {
         cluster.doCluster(monitor);
         cluster.showInfoAfterClustering();
+     //   cluster.showCenters();
     }
 
     /**
@@ -107,5 +108,9 @@ public class CytoClusterTask implements Task {
         result.setOwner(Cytoscape.getDesktop());
 
         return result;
+    }
+
+    public void showCenters() {
+        cluster.showCenters();
     }
 }
