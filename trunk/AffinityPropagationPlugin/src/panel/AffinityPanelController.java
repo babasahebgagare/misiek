@@ -62,6 +62,7 @@ public class AffinityPanelController implements Serializable {
     private JTextField lambdaField = null;
     private JTextField convitsField = null;
     private JTextField nodeAttrField = null;
+    private JTextField centersAttrField = null;
     private JComboBox edgeAttrField = null;
     private JSpinner iterationsField = null;
     private JTextField preferencesField = null;
@@ -98,6 +99,7 @@ public class AffinityPanelController implements Serializable {
         Integer convits = getConvits();
         String nodeNameAttr = getNodeAttr();
         String edgeNameAttr = getEdgeAttr();
+        String centersNameAttr = getCentersAttr();
         Integer steps = getStepsCount();
         int implementation = getImplementation();
         boolean refine = getRefine();
@@ -105,11 +107,11 @@ public class AffinityPanelController implements Serializable {
         AffinityGraphMode graphMode = getGraphMode();
         AffinityConnectingMethod connectingMode = getConnectingMode();
 
-        if (!validateValues(lambda, preferences, iterations, convits, nodeNameAttr, edgeNameAttr)) {
+        if (!validateValues(lambda, preferences, iterations, convits, nodeNameAttr, edgeNameAttr, centersNameAttr)) {
             return;
         }
 
-        algorithm = new CytoAffinityClustering(connectingMode, implementation, nodeNameAttr, edgeNameAttr, lambda.doubleValue(), preferences.doubleValue(), iterations.intValue(), convits, refine, log);
+        algorithm = new CytoAffinityClustering(connectingMode, implementation, nodeNameAttr, edgeNameAttr, lambda.doubleValue(), preferences.doubleValue(), iterations.intValue(), convits, refine, log, centersNameAttr);
         algorithm.setStepsCount(steps);
         algorithm.setGraphMode(graphMode);
         cytoAlgorithmTask = new CytoClusterTask(algorithm);
@@ -158,6 +160,10 @@ public class AffinityPanelController implements Serializable {
         cytoAlgorithmTask.showCenters();
     }
 
+    private String getCentersAttr() {
+        return centersAttrField.getText();
+    }
+
     private AffinityConnectingMethod getConnectingMode() {
         if (originalModeRadio.isSelected()) {
             return AffinityConnectingMethod.ORIGINAL;
@@ -188,6 +194,14 @@ public class AffinityPanelController implements Serializable {
 
     private boolean getRefine() {
         return getRefineCheckBox().isSelected();
+    }
+
+    public JTextField getCentersAttrField() {
+        return centersAttrField;
+    }
+
+    public void setCentersAttrField(JTextField centersAttrField) {
+        this.centersAttrField = centersAttrField;
     }
 
     private Integer getStepsCount() {
@@ -248,6 +262,34 @@ public class AffinityPanelController implements Serializable {
         return true;
     }
 
+    private boolean validateCentersNameAttr(final String centersNameAttr) {
+        if (centersNameAttr == null || centersNameAttr.equals("")) {
+            return false;
+        }
+        String[] names = Cytoscape.getNodeAttributes().getAttributeNames();
+
+        boolean exist = false;
+        for (String name : names) {
+            if (name.equals(centersNameAttr)) {
+                exist = true;
+                break;
+            }
+        }
+
+        if (exist) {
+            int ret = Messenger.confirmWarning("Clustering centers name attribute already exist, overwrite?");
+
+            if (ret == JOptionPane.OK_OPTION) {
+                return true;
+            } else {
+                cancelDialog = true;
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     private boolean validatePreferences(final Double preferences) {
         if (preferences == null) {
             return false;
@@ -259,7 +301,7 @@ public class AffinityPanelController implements Serializable {
         return true;
     }
 
-    private boolean validateValues(final Double lambda, final Double preferences, final Integer iterations, final Integer convits, final String nodeNameAttr, final String edgeNameAttr) {
+    private boolean validateValues(final Double lambda, final Double preferences, final Integer iterations, final Integer convits, final String nodeNameAttr, final String edgeNameAttr, final String centersNameAttr) {
         if (!validateLambda(lambda)) {
             Messenger.message("Lambda paremater is not valid!");
             return false;
@@ -288,6 +330,15 @@ public class AffinityPanelController implements Serializable {
             }
             return false;
         }
+        if (!validateCentersNameAttr(centersNameAttr)) {
+            if (cancelDialog) {
+                cancelDialog = false;
+            } else {
+                Messenger.message("Node name paremater is not valid!");
+            }
+            return false;
+        }
+
         return true;
     }
 
@@ -389,11 +440,15 @@ public class AffinityPanelController implements Serializable {
     }
 
     private void initNodeAttrField() {
-        nodeAttrField.setText("clusterid");
+        nodeAttrField.setText("cluster_id");
     }
 
     private void initPreferencesField() {
         preferencesField.setText("0.2");
+    }
+
+    private void initCentersNameAttr() {
+        centersAttrField.setText("centers_id");
     }
 
     public void initPanelFields() {
@@ -403,6 +458,7 @@ public class AffinityPanelController implements Serializable {
         refreshEdgeAttrField();
         initIterationsField();
         initPreferencesField();
+        initCentersNameAttr();
     }
 
     public Integer getIterations() {
