@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <Properties>
+    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[270, 257]"/>
+    </Property>
+  </Properties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="true"/>
@@ -16,12 +21,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="parametersPanel" min="-2" pref="281" max="-2" attributes="1"/>
+          <Component id="parametersPanel" pref="276" max="32767" attributes="1"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="parametersPanel" min="-2" pref="259" max="-2" attributes="0"/>
+          <Component id="parametersPanel" min="-2" pref="257" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -45,10 +50,10 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="iteretionsLabel" min="-2" max="-2" attributes="1"/>
@@ -58,56 +63,35 @@
                                   <Component id="lambdaLabel" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="nodeAttrNameLabel" pref="122" max="32767" attributes="1"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="convitsLabel" alignment="1" pref="122" max="32767" attributes="0"/>
-                                      <Component id="preferenceLabel" alignment="1" pref="122" max="32767" attributes="1"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="edgeAttrNameLabel" min="-2" pref="113" max="-2" attributes="1"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="nodeAttrNameLabel" alignment="0" pref="129" max="32767" attributes="1"/>
+                              <Component id="convitsLabel" alignment="1" pref="129" max="32767" attributes="0"/>
+                              <Component id="preferenceLabel" alignment="1" pref="129" max="32767" attributes="1"/>
+                              <Component id="edgeAttrNameLabel" alignment="0" min="-2" pref="113" max="-2" attributes="1"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="edgeAttrCombo" pref="101" max="32767" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="refreshButton" min="-2" pref="27" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="iterationsSpinner" alignment="0" pref="134" max="32767" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="preferenceField" pref="101" max="32767" attributes="1"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="refreshButton1" min="-2" pref="27" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="nodeAttrNameField" alignment="0" min="-2" pref="134" max="-2" attributes="1"/>
-                              <Component id="centersNameAttrField" alignment="0" pref="134" max="32767" attributes="0"/>
-                              <Component id="convitsField" alignment="1" min="-2" pref="134" max="-2" attributes="1"/>
-                              <Component id="labmbdaField" alignment="1" pref="134" max="32767" attributes="0"/>
-                          </Group>
                       </Group>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="transforminLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="refineCheckBox" min="-2" max="-2" attributes="0"/>
+                      <Component id="transformingCheckbox" min="-2" max="-2" attributes="0"/>
+                      <Component id="centersNameAttrField" alignment="0" pref="111" max="32767" attributes="1"/>
                       <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                              <Component id="transforminLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace pref="93" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="transformingCheckbox" min="-2" max="-2" attributes="0"/>
-                              <Component id="refineCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="edgeAttrCombo" pref="78" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="refreshButton" min="-2" pref="27" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="convitsField" alignment="0" pref="111" max="32767" attributes="1"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="preferenceField" pref="78" max="32767" attributes="1"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="refreshButton1" min="-2" pref="27" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="nodeAttrNameField" alignment="0" pref="111" max="32767" attributes="1"/>
+                      <Component id="iterationsSpinner" alignment="0" pref="111" max="32767" attributes="1"/>
+                      <Component id="labmbdaField" alignment="0" pref="111" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -125,12 +109,17 @@
                       <Component id="nodeAttrNameField" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="nodeAttrNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="refreshButton" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                          <Component id="edgeAttrCombo" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="edgeAttrNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="edgeAttrCombo" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="edgeAttrNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="refreshButton" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -149,12 +138,12 @@
                           <Component id="preferenceField" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="preferenceLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="refreshButton1" min="-2" pref="23" max="-2" attributes="0"/>
+                      <Component id="refreshButton1" alignment="0" min="-2" pref="23" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="lambdaLabel" min="-2" max="-2" attributes="0"/>
-                      <Component id="labmbdaField" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="labmbdaField" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -169,6 +158,7 @@
                           <Component id="transformingCheckbox" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -245,7 +235,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="convitsField">
           <Properties>
-            <Property name="text" type="java.lang.String" value="100"/>
+            <Property name="text" type="java.lang.String" value="10"/>
             <Property name="name" type="java.lang.String" value="convitsField" noResource="true"/>
           </Properties>
         </Component>
