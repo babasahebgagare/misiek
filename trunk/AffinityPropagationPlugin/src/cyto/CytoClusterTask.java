@@ -28,8 +28,6 @@
  *           Janusz Dutkowski (idea) (j.dutkowski@mimuw.edu.pl)
  *           Jerzy Tiuryn (supervisor) (tiuryn@mimuw.edu.pl)
  */
-
-
 package cyto;
 
 import cytoscape.Cytoscape;
@@ -74,7 +72,7 @@ public class CytoClusterTask implements Task {
         cluster.doCluster(monitor);
         cluster.showInfoAfterClustering();
         cluster.saveCenters();
-     //   cluster.showCenters();
+        cluster.showCentersAfetrClustering();
     }
 
     /**

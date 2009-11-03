@@ -286,8 +286,8 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
                     double width = nodeView.getWidth();
                     double height = nodeView.getHeight();
 
-                    nodeView.setWidth(width + 15.0);
-                    nodeView.setHeight(height + 15.0);
+                    nodeView.setWidth(width + 20.0);
+                    nodeView.setHeight(height + 20.0);
                     nodeView.setShape(NodeShape.ELLIPSE.getGinyShape());
                 }
             }
@@ -303,5 +303,9 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
             String nodeStr = idMapping.get(center);
             nodesAttributes.setAttribute(nodeStr, centersNameAttr,"1");
         }
+    }
+
+    public void showCentersAfetrClustering() {
+        showCenters(centersNameAttr);
     }
 }
