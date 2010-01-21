@@ -1,6 +1,6 @@
 start = clock;
 %input = fopen('input', 'r');
-[inputfile, outputfile, lam, maxits, convits, p, kind] =textread('./input2', '%s %s %f %d %d %f %s', 1);
+[inputfile, outputfile, lam, maxits, convits, p, kind] =textread('./input', '%s %s %f %d %d %f %s', 1);
 plt = 0; details=1; nonoise = 1;
 %[lam, maxits, p, k] = textread('./input', '%f %d %f %s', 1);
 %fclose(input);

@@ -14,7 +14,7 @@
     <property name="affinity-console-name" value="AffinityPropagationConsole" />
     <property name="clusters-comparator-name" value="ClustersComparator" />
     <property name="sets-comparator-name" value="SetsComparator" />
-        
+
     <property file="${affinity-console-name}/nbproject/project.properties"/>
     <property file="${clusters-comparator-name}/nbproject/project.properties"/>
     <property file="${sets-comparator-name}/nbproject/project.properties"/>
@@ -59,7 +59,7 @@
             verbose="true"
             file="${affinity-console-name}/dist/${affinity-console-name}.jar"
             todir="${server-username}:${server-password}@${server-name}:${server-folder}"
-          />
+            />
     </target>
 
     <target name="send-affinity-matlab" depends="get-server-auth" description="Copy to server">
@@ -71,9 +71,9 @@
             verbose="true"
             file="build-tools/tests/apcluster.m"
             todir="${server-username}:${server-password}@${server-name}:${server-folder}"
-          />
+            />
     </target>
-    
+
     <target name="send-affinity-sparse-matlab" depends="get-server-auth" description="Copy to server">
         <scp
             trust="true"
@@ -83,7 +83,7 @@
             verbose="true"
             file="build-tools/tests/apclusterSparse.m"
             todir="${server-username}:${server-password}@${server-name}:${server-folder}"
-          />
+            />
     </target>
 
     <target name="send-affinity-tester" depends="get-server-auth" description="Copy to server">
@@ -95,7 +95,7 @@
             verbose="true"
             file="build-tools/tests/test"
             todir="${server-username}:${server-password}@${server-name}:${server-folder}"
-          />
+            />
     </target>
 
     <target name="send-mcl-tester" depends="get-server-auth" description="Copy to server">
@@ -107,7 +107,7 @@
             verbose="true"
             file="build-tools/tests/MCLtest"
             todir="${server-username}:${server-password}@${server-name}:${server-folder}"
-          />
+            />
     </target>
 
     <target name="send-my-tester" depends="get-server-auth" description="Copy to server">
@@ -119,7 +119,7 @@
             verbose="true"
             file="build-tools/tests/mytest"
             todir="${server-username}:${server-password}@${server-name}:${server-folder}"
-          />
+            />
     </target>
 
 
@@ -132,71 +132,106 @@
             verbose="true"
             file="${clusters-comparator-name}/dist/${clusters-comparator-name}.jar"
             todir="${server-username}:${server-password}@${server-name}:${server-folder}"
-          />
+            />
     </target>
-    
+
     <target name="send-all" depends="send-clusters-comparator,send-affinity-tester,send-mcl-tester,send-my-tester,send-affinity-matlab,send-affinity-console" description="Send all...">
     </target>
 
     <target name="run-test" depends="get-server-auth" description="Run tests...">
         <sshexec
             port="22"
-                trust="true"
-                password="${server-password}"
-                username="${server-username}"
-                host="${server-name}"
-                command="${server-folder}/test"
-                verbose="true">
+            trust="true"
+            password="${server-password}"
+            username="${server-username}"
+            host="${server-name}"
+            command="${server-folder}/test"
+            verbose="true">
         </sshexec>
         <sshexec
             port="22"
-                trust="true"
-                password="${server-password}"
-                username="${server-username}"
-                host="${server-name}"
-                command="cat ${server-folder}/jacc"
-                verbose="true">
+            trust="true"
+            password="${server-password}"
+            username="${server-username}"
+            host="${server-name}"
+            command="cat ${server-folder}/jacc"
+            verbose="true">
         </sshexec>
     </target>
     <target name="run-MCL-test" depends="get-server-auth" description="Run tests...">
         <sshexec
             port="22"
-                trust="true"
-                password="${server-password}"
-                username="${server-username}"
-                host="${server-name}"
-                command="${server-folder}/MCLtest"
-                verbose="true">
+            trust="true"
+            password="${server-password}"
+            username="${server-username}"
+            host="${server-name}"
+            command="${server-folder}/MCLtest"
+            verbose="true">
         </sshexec>
         <sshexec
             port="22"
-                trust="true"
-                password="${server-password}"
-                username="${server-username}"
-                host="${server-name}"
-                command="cat ${server-folder}/MCLjacc"
-                verbose="true">
+            trust="true"
+            password="${server-password}"
+            username="${server-username}"
+            host="${server-name}"
+            command="cat ${server-folder}/MCLjacc"
+            verbose="true">
         </sshexec>
     </target>
 
     <target name="run-my-test" depends="get-server-auth" description="Run tests...">
         <sshexec
             port="22"
-                trust="true"
-                password="${server-password}"
-                username="${server-username}"
-                host="${server-name}"
-                command="${server-folder}/mytest"
-                verbose="true">
+            trust="true"
+            password="${server-password}"
+            username="${server-username}"
+            host="${server-name}"
+            command="${server-folder}/mytest"
+            verbose="true">
         </sshexec>
         <sshexec
             port="22"
-                trust="true"
-                password="${server-password}"
-                username="${server-username}"
-                host="${server-name}"
-                command="cat ${server-folder}/myjacc"
-                verbose="true">
+            trust="true"
+            password="${server-password}"
+            username="${server-username}"
+            host="${server-name}"
+            command="cat ${server-folder}/myjacc"
+            verbose="true">
         </sshexec>
+    </target>
+
+    <target name="run-clique" depends="get-server-auth" description="Run tests...">
+        <sshexec
+            port="22"
+            trust="true"
+            password="${server-password}"
+            username="${server-username}"
+            host="${server-name}"
+            command="${server-folder}/run-clique"
+            verbose="true">
+        </sshexec>
+    </target>
+
+    <target name="send-run-clique" depends="get-server-auth" description="Run tests...">
+        <scp
+            trust="true"
+            password="${server-password}"
+            username="${server-username}"
+            host="${server-name}"
+            file="build-tools/tests/run-clique"
+            todir="${server-username}:${server-password}@${server-name}:${server-folder}"
+        />
+    </target>
+
+    <target name="send-clique" depends="get-server-auth" description="Run tests...">
+        <scp
+            trust="true"
+            host="${server-name}"
+            username="${server-username}"
+            password="${server-password}"
+            verbose="true"
+            file="build-tools/tests/clique.sim"
+            todir="${server-username}:${server-password}@${server-name}:${server-folder}"
+            />
     </target>
 </project>

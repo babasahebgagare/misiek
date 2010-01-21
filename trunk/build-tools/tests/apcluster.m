@@ -29,14 +29,15 @@ elseif size(s,1)==size(s,2)
     N=size(s,1);
 else error('s must have 3 columns or be square'); end;
 
+S
+
 if size(s,2)==3 && size(s,1)~=3,
     S=-Inf*ones(N,N,class(s)); 
     for j=1:size(s,1), S(s(j,1),s(j,2))=s(j,3); end;
 else S=s;
 end;
 
-for j=1:N, S(j,j) = p; end;
-S(2,2)
+S
 
 if S==S', symmetric=true; else symmetric=false; end;
 realmin_=realmin(class(s)); realmax_=realmax(class(s));
@@ -50,10 +51,14 @@ if ~nonoise
     randn('state',rns);
 end;
 
-% Place preferences on the diagonal of S
-%if length(p)==1 for i=1:N S(i,i)=p; end;
-%else for i=1:N S(i,i)=p(i); end;
-%end;
+ Place preferences on the diagonal of S
+if length(p)==1 for i=1:N S(i,i)=p; end;
+else for i=1:N S(i,i)=p(i); end;
+end;
+
+
+realmax_ = 1000;
+S
 
 % Numerical stability -- replace -INF with -realmax
 n=find(S<-realmax_); if ~isempty(n), warning('-INF similarities detected; changing to -REALMAX to ensure numerical stability'); S(n)=-realmax_; end; clear('n');
@@ -71,6 +76,8 @@ if details
 end;
 
 % Execute parallel affinity propagation updates
+S
+
 e=zeros(N,convits); dn=0; i=0;
 if symmetric, ST=S; else ST=S'; end; % saves memory if it's symmetric
 while ~dn
@@ -97,9 +104,14 @@ while ~dn
 		dA = A(jj,jj); A(:,jj) = min(A(:,jj),0); A(jj,jj) = dA;
 		A(:,jj) = (1-lam)*A(:,jj) + lam*old; % Damping
 	end;
-	
+       
+    A
+    R
+    diag(A)+diag(R)
     % Check for convergence
     E=((diag(A)+diag(R))>0); e(:,mod(i-1,convits)+1)=E; K=sum(E);
+    E
+    
     if i>=convits || i>=maxits,
         se=sum(e,2);
         unconverged=(sum((se==convits)+(se==0))~=N);
@@ -157,7 +169,7 @@ if K>0
         kind
         clust = I;
     end;
-    %clust
+    clust
     for j=1:size(clust), fprintf(fileout, '%d\n', clust(j)); end;
     fclose(fileout)
 
