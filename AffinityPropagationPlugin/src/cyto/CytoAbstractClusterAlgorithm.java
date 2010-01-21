@@ -43,7 +43,7 @@ import javax.swing.JPanel;
 public abstract class CytoAbstractClusterAlgorithm implements CytoClusterAlgorithm {
     // Common class values
 
-    protected Integer clustersNumber;
+//    protected Integer clustersNumber;
     protected CytoClusterProperties clusterProperties = null;
     protected PropertyChangeSupport pcs;
     protected boolean debug = false;
@@ -109,9 +109,8 @@ public abstract class CytoAbstractClusterAlgorithm implements CytoClusterAlgorit
         }
     }
 
-    public Integer getClustersNumber() {
-        return clustersNumber;
-    }
+    public abstract Integer getClustersNumber();
+    
 
     public PropertyChangeSupport getPropertyChangeSupport() {
         return pcs;

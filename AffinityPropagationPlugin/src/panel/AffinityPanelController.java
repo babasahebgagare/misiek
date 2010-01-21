@@ -31,7 +31,6 @@
 package panel;
 
 import algorithm.abs.AffinityPropagationAlgorithm.AffinityConnectingMethod;
-import algorithm.abs.AffinityPropagationAlgorithm.AffinityGraphMode;
 import cyto.CytoAffinityClustering;
 import cyto.CytoClusterTask;
 import cytoscape.CyEdge;
@@ -61,6 +60,10 @@ import utils.MathStats;
 public class AffinityPanelController implements Serializable {
 
     private final static long serialVersionUID = 7526471155622776147L;
+    private final String DEFAULT_PREFERENCE = "0.5";
+    private final String DEFAULT_CLUSTER_ID = "cluster_id";
+    private final String DEFAULT_CENTERS_ID = "centers_id";
+    private final String DEFAULT_LAMBDA = "0.9";
     private JTextField lambdaField = null;
     private JTextField convitsField = null;
     private JTextField nodeAttrField = null;
@@ -75,6 +78,7 @@ public class AffinityPanelController implements Serializable {
     private JRadioButton bsfModeRadio = null;
     private JRadioButton directedModeRadio = null;
     private JCheckBox refineCheckBox = null;
+    private JCheckBox noiseCheckBox = null;
     private JCheckBox transformingCheckbox = null;
     private JComboBox centersAttrList = null;
     private AffinityStatsPanelController psc = null;
@@ -84,6 +88,7 @@ public class AffinityPanelController implements Serializable {
     private boolean log = false;
     private CytoClusterTask cytoAlgorithmTask;
     private Collection<String> centersAttr = new TreeSet<String>();
+    private CytoAffinityClustering algorithm;
 
     public AffinityPanelController(final AffinityStatsPanelController psc) {
         this.psc = psc;
@@ -95,7 +100,6 @@ public class AffinityPanelController implements Serializable {
     }
 
     void doCluster() {
-        CytoAffinityClustering algorithm;
 
         Double lambda = getLambda();
         Double preferences = getPreferences();
@@ -107,23 +111,30 @@ public class AffinityPanelController implements Serializable {
         Integer steps = getStepsCount();
         int implementation = getImplementation();
         boolean refine = getRefine();
+        boolean noise = getNoise();
         log = getLog();
-        AffinityGraphMode graphMode = getGraphMode();
         AffinityConnectingMethod connectingMode = getConnectingMode();
 
         if (!validateValues(lambda, preferences, iterations, convits, nodeNameAttr, edgeNameAttr, centersNameAttr)) {
             return;
         }
 
-        algorithm = new CytoAffinityClustering(connectingMode, implementation, nodeNameAttr, edgeNameAttr, lambda.doubleValue(), preferences.doubleValue(), iterations.intValue(), convits, refine, log, centersNameAttr);
+        algorithm = new CytoAffinityClustering(connectingMode, implementation, nodeNameAttr, edgeNameAttr, lambda.doubleValue(), preferences.doubleValue(), iterations.intValue(), convits, refine, log, noise, centersNameAttr);
         algorithm.setStepsCount(steps);
-        algorithm.setGraphMode(graphMode);
+        algorithm.setAffinityPanelController(this);
         cytoAlgorithmTask = new CytoClusterTask(algorithm);
 
         TaskManager.executeTask(cytoAlgorithmTask,
                 CytoClusterTask.getDefaultTaskConfig());
+    }
 
+    public void clusteringCompleted() {
+        Double lambda = getLambda();
+        Double preferences = getPreferences();
+        Integer iterations = getIterations();
+        String nodeNameAttr = getNodeAttr();
         Integer clusters = algorithm.getClustersNumber();
+
         String network = Cytoscape.getCurrentNetwork().getTitle();
         psc.addClusteringStat(network, lambda, preferences, clusters, iterations, nodeNameAttr);
 
@@ -188,14 +199,6 @@ public class AffinityPanelController implements Serializable {
         }
     }
 
-    private AffinityGraphMode getGraphMode() {
-        if (directedModeRadio.isSelected()) {
-            return AffinityGraphMode.DIRECTED;
-        } else {
-            return AffinityGraphMode.UNDIRECTED;
-        }
-    }
-
     private int getImplementation() {
         if (matrixImplementation.isSelected()) {
             return AffinityPanelController.MATRIX_IMPLEMENTATION;
@@ -210,6 +213,11 @@ public class AffinityPanelController implements Serializable {
 
     private boolean getRefine() {
         return getRefineCheckBox().isSelected();
+    }
+
+    private boolean getNoise() {
+        return false;
+     //   return getNoiseCheckBox().isSelected();
     }
 
     public JTextField getCentersAttrField() {
@@ -372,6 +380,7 @@ public class AffinityPanelController implements Serializable {
 
     public void refreshEdgeAttrField() {
         edgeAttrField.removeAllItems();
+        edgeAttrField.addItem("DEFAULT");
         CyAttributes edgesAttributes = Cytoscape.getEdgeAttributes();
         for (String attrName : edgesAttributes.getAttributeNames()) {
             final byte cyType = edgesAttributes.getType(attrName);
@@ -460,19 +469,19 @@ public class AffinityPanelController implements Serializable {
     }
 
     private void initLambdaField() {
-        lambdaField.setText("0.9");
+        lambdaField.setText(DEFAULT_LAMBDA);
     }
 
     private void initNodeAttrField() {
-        nodeAttrField.setText("cluster_id");
+        nodeAttrField.setText(DEFAULT_CLUSTER_ID);
     }
 
     private void initPreferencesField() {
-        preferencesField.setText("0.2");
+        preferencesField.setText(DEFAULT_PREFERENCE);
     }
 
     private void initCentersNameAttr() {
-        centersAttrField.setText("centers_id");
+        centersAttrField.setText(DEFAULT_CENTERS_ID);
     }
 
     public void initPanelFields() {
@@ -609,5 +618,13 @@ public class AffinityPanelController implements Serializable {
 
     public void setSmartImplementation(JRadioButton smartImplementation) {
         this.smartImplementation = smartImplementation;
+    }
+
+    void setNoiseCheckBox(JCheckBox noiseCheckbox) {
+        this.noiseCheckBox = noiseCheckbox;
+    }
+
+    private JCheckBox getNoiseCheckBox() {
+        return noiseCheckBox;
     }
 }

@@ -36,6 +36,7 @@ import cytoscape.task.Task;
 import cytoscape.task.TaskMonitor;
 
 import cytoscape.task.ui.JTaskConfig;
+import panel.AffinityPanelController;
 
 /**
  * A wrapper for applying a cluster in a task. Use it something like
@@ -99,11 +100,11 @@ public class CytoClusterTask implements Task {
         JTaskConfig result = new JTaskConfig();
 
         result.displayCancelButton(true);
-        result.displayCloseButton(false);
+        result.displayCloseButton(true);
         result.displayStatus(true);
         result.displayTimeElapsed(false);
         result.setAutoDispose(true);
-        result.setModal(true);
+        result.setModal(false);
         result.setOwner(Cytoscape.getDesktop());
 
         return result;

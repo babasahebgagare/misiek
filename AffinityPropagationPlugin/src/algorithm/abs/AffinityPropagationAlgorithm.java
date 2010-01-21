@@ -37,6 +37,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Random;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import prime.PrimeAlgorithm;
@@ -49,17 +50,20 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
         PRIME_ALG, FLOYD_ALG, ORIGINAL
     }
 
-    public enum AffinityGraphMode {
+    /* public enum AffinityGraphMode {
 
-        DIRECTED, UNDIRECTED
-    }
+    DIRECTED, UNDIRECTED
+    }*/
+    private Random noiseGenerator = new Random();
+    private final double epsilon = 0.0000001;
     private double lambda;
     private int iterations;
     private boolean refine = true;
+    private boolean noise = true;
     private Integer steps = null;
     private int iteration = 0;
     protected AffinityConnectingMethod connectingMode = AffinityConnectingMethod.ORIGINAL;
-    protected AffinityGraphMode graphMode = AffinityGraphMode.DIRECTED;
+    //   protected AffinityGraphMode graphMode = AffinityGraphMode.DIRECTED;
     protected int notConverged = 1;
     protected Integer convits = null;
     protected ActionListener iteractionListenerOrNull = null;
@@ -78,8 +82,11 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
         return (notConverged == 0);
     }
 
-    public void setGraphMode(AffinityGraphMode mode) {
-        this.graphMode = mode;
+    /*    public void setGraphMode(AffinityGraphMode mode) {
+    this.graphMode = mode;
+    }*/
+    public void setNoise(boolean noise) {
+        this.noise = noise;
     }
 
     public void setSteps(Integer steps) {
@@ -217,6 +224,9 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
             iteractionListenerOrNull.actionPerformed(new ActionEvent(new IterationData(1, 0), 0, "ITERATION"));
         }
         initConvergence();
+        if (noise) {
+            generateNoise();
+        }
 
         for (iteration = 1; iteration <= iters; iteration++) {
 
@@ -258,9 +268,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
         Collection<Integer> centers;
         if (refined == null) {
             centers = getCenters();
-            System.out.println("not refined...");
         } else {
-            System.out.println("refined!");
             centers = refined;
         }
         if (centers.size() == 0) {
@@ -280,8 +288,14 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
         }
     }
 
+    protected Double generateNoiseHelp(Double sim) {
 
+        return sim + epsilon * noiseGenerator.nextDouble();
+    }
+
+    protected abstract void generateNoise();
 //    protected abstract Double getSimilarity(String from, String to);
+
     public abstract void setConstPreferences(Double preferences);
 
     public abstract void setSimilarities(double[][] sim);
@@ -319,7 +333,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
         return not;
     }
 
-    protected abstract int getClustersNumber();
+    public abstract int getClustersNumber();
     //   protected abstract void initObjectsNames();
 
     protected Double computeWeight(double sim) {
@@ -329,9 +343,9 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
     }
 
     public abstract Collection<Integer> getCentersAlg();
-    
+
     public Collection<Integer> getCenters() {
-        if(refined == null) {
+        if (refined == null) {
             return getCentersAlg();
         } else {
             return refined;
@@ -426,16 +440,14 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
     public Collection<String> getCentersStr() {
         Collection<Integer> centersInt = getCenters();
         Collection<String> centers = new TreeSet<String>();
-        System.out.println("CENTERS SIZE: " + centersInt.size());
         for (Integer centerInt : centersInt) {
-            System.out.println("INT: " + centerInt);
             String str = idRevMapper.get(centerInt);
             if (str != null) {
                 centers.add(str);
             } else {
-                System.out.println("NULL: " + centerInt);
+                //System.out.println("NULL: " + centerInt);
             }
-        //TODO
+            //TODO
         }
         return centers;
     }

@@ -32,7 +32,6 @@ package cyto;
 
 import algorithm.abs.AffinityPropagationAlgorithm;
 import algorithm.abs.AffinityPropagationAlgorithm.AffinityConnectingMethod;
-import algorithm.abs.AffinityPropagationAlgorithm.AffinityGraphMode;
 import algorithm.matrix.MatrixPropagationAlgorithm;
 import algorithm.abs.Cluster;
 import algorithm.smart.SmartPropagationAlgorithm;
@@ -64,6 +63,7 @@ import utils.Messenger;
  */
 public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
 
+    private final double DEFAULT_WEIGHT = -0.5;
     private String nodeNameAttr;
     private String edgeNameAttr;
     private String centersNameAttr;
@@ -73,15 +73,16 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
     private double lambda;
     private boolean refine;
     private boolean log;
-    private AffinityGraphMode graphMode = AffinityGraphMode.DIRECTED;
+    private boolean noise;
     private Integer steps = null;
     private Integer convits = null;
     private AffinityPropagationAlgorithm af = null;
     private CyAttributes nodesAttributes = Cytoscape.getNodeAttributes();
     private Map<String, Integer> nodeMapping = new TreeMap<String, Integer>();
     private Map<Integer, String> idMapping = new TreeMap<Integer, String>();
+    private AffinityPanelController psc;
 
-    public CytoAffinityClustering(final AffinityConnectingMethod connectingMode, final int implementation, final String nodeNameAttr, final String edgeNameAttr, final double lambda, final double preferences, final int iterations, final Integer convits, final boolean refine, final boolean log, final String centersNameAttr) {
+    public CytoAffinityClustering(final AffinityConnectingMethod connectingMode, final int implementation, final String nodeNameAttr, final String edgeNameAttr, final double lambda, final double preferences, final int iterations, final Integer convits, final boolean refine, final boolean log, final boolean noise, final String centersNameAttr) {
         this.nodeNameAttr = nodeNameAttr;
         this.edgeNameAttr = edgeNameAttr;
         this.centersNameAttr = centersNameAttr;
@@ -92,11 +93,8 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
         this.connectingMode = connectingMode;
         this.refine = refine;
         this.log = log;
+        this.noise = noise;
         this.af = createAlgorithm(implementation);
-    }
-
-    public void setGraphMode(AffinityGraphMode graphMode) {
-        this.graphMode = graphMode;
     }
 
     public void setStepsCount(Integer steps) {
@@ -154,10 +152,14 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
             for (CyLayoutAlgorithm layout : CyLayouts.getAllLayouts()) {
                 layout.setLayoutAttribute(nodeNameAttr);
             }
-
-            clustersNumber = clusters.size();
-            monitor.setPercentCompleted(100);
         }
+        //  clustersNumber = af.getClustersNumber();
+        monitor.setPercentCompleted(100);
+        psc.clusteringCompleted();
+    }
+
+    public void setAffinityPanelController(AffinityPanelController psc) {
+        this.psc = psc;
     }
 
     private AffinityPropagationAlgorithm createAlgorithm(final int implementation) {
@@ -202,8 +204,8 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
         af.setIterations(iterations);
         af.setConvits(convits);
         af.setConnectingMode(connectingMode);
-        af.setGraphMode(graphMode);
         af.setSteps(steps);
+        af.setNoise(noise);
         af.setN(nodeNames.size());
         af.init();
 
@@ -222,20 +224,30 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
             String id = edge.getIdentifier();
             String sourceID = edge.getSource().getIdentifier();
             String targetID = edge.getTarget().getIdentifier();
+            CyNode cyTarget = (CyNode) Cytoscape.getRootGraph().getNode(edge.getTarget().getRootGraphIndex());
+            CyNode cySource = (CyNode) Cytoscape.getRootGraph().getNode(edge.getSource().getRootGraphIndex());
             Integer sourceIndex = nodeMapping.get(sourceID);
             Integer targetIndex = nodeMapping.get(targetID);
 
             if (!sourceID.equals(targetID)) {
                 Double probOrNull = tryGetDoubleAttribute(edgesAttributes, id, edgeNameAttr);
+                Double sim;
                 if (probOrNull != null) {
-                    Double sim;
                     if (log) {
                         sim = Math.log(probOrNull);
                     } else {
                         sim = probOrNull;
                     }
+                } else {
+                    sim = DEFAULT_WEIGHT;
+                }
+
+                if (Cytoscape.getCurrentNetwork().getEdgeCount(cyTarget, cySource, true) == 0) {
                     af.setSimilarityInt(sourceIndex, targetIndex, sim);
-                //af.setSimilarityInt(targetIndex, sourceIndex, sim);
+                    af.setSimilarityInt(targetIndex, sourceIndex, sim);
+                } else {
+
+                    af.setSimilarityInt(sourceIndex, targetIndex, sim);
                 }
             }
         }
@@ -248,6 +260,9 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
 
     private Double tryGetDoubleAttribute(CyAttributes edgesAttributes, String id, String edgeNameAttr) {
         Object val = edgesAttributes.getAttribute(id, edgeNameAttr);
+        if (val == null) {
+            return null;
+        }
         Double sim;
         try {
             sim = Double.valueOf(val.toString());
@@ -297,15 +312,25 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
 
     public void saveCenters() {
         Collection<Integer> centers = af.getCenters();
-        //   CyNetworkView currentView = Cytoscape.getCurrentNetworkView();
-        //     CyNetwork currNet = Cytoscape.getCurrentNetwork();
+        @SuppressWarnings("unchecked")
+        List<CyNode> nodes = Cytoscape.getCurrentNetwork().nodesList();
+
+        for (CyNode node : nodes) {
+            nodesAttributes.setAttribute(node.getIdentifier(), centersNameAttr, "");
+        }
+
         for (Integer center : centers) {
             String nodeStr = idMapping.get(center);
-            nodesAttributes.setAttribute(nodeStr, centersNameAttr,"1");
+            nodesAttributes.setAttribute(nodeStr, centersNameAttr, "1");
         }
     }
 
     public void showCentersAfetrClustering() {
         showCenters(centersNameAttr);
+    }
+
+    @Override
+    public Integer getClustersNumber() {
+        return Integer.valueOf(af.getClustersNumber());
     }
 }

@@ -28,8 +28,6 @@
  *           Janusz Dutkowski (idea) (j.dutkowski@mimuw.edu.pl)
  *           Jerzy Tiuryn (supervisor) (tiuryn@mimuw.edu.pl)
  */
-
-
 package algorithm.smart;
 
 import algorithm.abs.AffinityPropagationAlgorithm;
@@ -90,12 +88,13 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
         for (Examplar examplar : examplars.getExamplars().values()) {
             SiblingData sibling = examplar.getSiblingMap().get(examplar.getName());
             double e = sibling.getA() + sibling.getR();
+        //    System.out.println(examplar.getName() + " "+e);
             if (e > 0) {
                 ret.add(examplar.getName());
-            //         examplar.setImCenter(true, iteration);
+                //         examplar.setImCenter(true, iteration);
             }// else {
-        //   examplar.setImCenter(false, iteration);
-        //}
+            //   examplar.setImCenter(false, iteration);
+            //}
 
         }
 
@@ -197,12 +196,12 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
     public void setSimilarityInt(final Integer from,
             final Integer to,
             final Double sim) {
-        if (graphMode == AffinityGraphMode.DIRECTED) {
-            examplars.setSimilarity(from, to, sim);
-        } else {
-            examplars.setSimilarity(from, to, sim);
-            examplars.setSimilarity(to, from, sim);
-        }
+        //     if (graphMode == AffinityGraphMode.DIRECTED) {
+        examplars.setSimilarity(from, to, sim);
+        //    } else {
+        //        examplars.setSimilarity(from, to, sim);
+        //        examplars.setSimilarity(to, from, sim);
+        //    }
     }
 
     @Override
@@ -211,12 +210,12 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
             final Double sim) {
         Integer i = getExamplarID(from);
         Integer j = getExamplarID(to);
-        if (graphMode == AffinityGraphMode.DIRECTED) {
-            examplars.setSimilarity(i, j, sim);
-        } else {
-            examplars.setSimilarity(i, j, sim);
-            examplars.setSimilarity(j, i, sim);
-        }
+        //      if (graphMode == AffinityGraphMode.DIRECTED) {
+        examplars.setSimilarity(i, j, sim);
+        //    } else {
+        //        examplars.setSimilarity(i, j, sim);
+        //        examplars.setSimilarity(j, i, sim);
+        //    }
     }
 
     @Override
@@ -252,7 +251,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
     }
 
     @Override
-    protected int getClustersNumber() {
+    public int getClustersNumber() {
         return centers.size();
     }
 
@@ -321,6 +320,18 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
                 ConvitsVector vec = new ConvitsVector(convits.intValue());
                 vec.init();
                 convitsVectors.put(ex, vec);
+            }
+        }
+    }
+
+    @Override
+    protected void generateNoise() {
+        for (Examplar examplar : examplars.getExamplars().values()) {
+            Collection<SiblingData> siblings = examplar.getSiblingMap().values();
+            for (SiblingData sibling : siblings) {
+                double s = sibling.getS();
+                s = generateNoiseHelp(s);
+                sibling.setS(s);
             }
         }
     }

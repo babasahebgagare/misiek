@@ -28,8 +28,6 @@
  *           Janusz Dutkowski (idea) (j.dutkowski@mimuw.edu.pl)
  *           Jerzy Tiuryn (supervisor) (tiuryn@mimuw.edu.pl)
  */
-
-
 package algorithm.matrix;
 
 import algorithm.abs.AffinityPropagationAlgorithm;
@@ -51,6 +49,7 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
     private DoubleMatrix2D rold = null;
     private DoubleMatrix2D S;
     private double inf = 1100000.0;
+    private int clustersNumber = 0;
 
     @Override
     public void init() {
@@ -102,12 +101,12 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
 
         //int i = Integer.valueOf(x);
         //int j = Integer.valueOf(y);
-        if (graphMode == AffinityGraphMode.DIRECTED) {
-            S.set(x, y, sim.doubleValue());
-        } else {
-            S.set(x, y, sim.doubleValue());
-            S.set(y, x, sim.doubleValue());
-        }
+        //   if (graphMode == AffinityGraphMode.DIRECTED) {
+        S.set(x, y, sim.doubleValue());
+        //   } else {
+        //       S.set(x, y, sim.doubleValue());
+        //       S.set(y, x, sim.doubleValue());
+        //   }
     }
 
     @Override
@@ -115,12 +114,12 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
 
         Integer x = getExamplarID(from);
         Integer y = getExamplarID(to);
-        if (graphMode == AffinityGraphMode.DIRECTED) {
-            S.set(x, y, sim.doubleValue());
-        } else {
-            S.set(x, y, sim.doubleValue());
-            S.set(y, x, sim.doubleValue());
-        }
+        //     if (graphMode == AffinityGraphMode.DIRECTED) {
+        S.set(x, y, sim.doubleValue());
+        //     } else {
+        //         S.set(x, y, sim.doubleValue());
+        //         S.set(y, x, sim.doubleValue());
+        //     }
     }
 
     @Override
@@ -159,6 +158,7 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
     @Override
     protected void avgResponsibilies() {
         R = R.mul(1 - getLambda()).plus(rold.mul(getLambda()));
+        // System.out.println("R: "+R.toString());
     }
 
     @Override
@@ -171,22 +171,28 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
         DoubleMatrix1D dA;
         DoubleMatrix2D rp;
 
+        //System.out.println("R: " + R.toString());
         rp = R.max(0);
         for (int i = 0; i < N; i++) {
             rp.set(i, i, R.get(i, i));
         }
+        // System.out.println("rp: "+rp.toString());
         A = (new DoubleMatrix2D(N, rp.sum().getVector(0))).transpose().minus(rp);
+        //  System.out.println("A-pom: "+A.toString());
         dA = A.diag();
 
         A = A.min(0);
         for (int i = 0; i < N; i++) {
             A.set(i, i, dA.get(i));
         }
+        // System.out.println("A-last: "+A.toString());
     }
 
     @Override
     protected void avgAvailabilities() {
+        //  System.out.println("Aold: "+aold.toString());
         A = A.mul((1 - getLambda())).plus(aold.mul(getLambda()));
+        // System.out.println("A: "+A.toString());
     }
 
     @Override
@@ -194,11 +200,11 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
         DoubleMatrix2D E;
         E = R.plus(A);
         I = E.diag().findG(0);
-
+        clustersNumber = I.size();
     }
 
     @Override
-    protected int getClustersNumber() {
+    public int getClustersNumber() {
         return I.size();
     }
 
@@ -265,11 +271,23 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
 
     @Override
     protected void initConvergence() {
+   //     System.out.println("S: " + S.toString());
         if (convits != null) {
             for (int i = 0; i < N; i++) {
                 ConvitsVector vec = new ConvitsVector(convits.intValue());
                 vec.init();
                 convitsVectors.put(Integer.valueOf(i), vec);
+            }
+        }
+    }
+
+    @Override
+    protected void generateNoise() {
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                double s = S.get(i, j);
+                s = generateNoiseHelp(s);
+                S.set(i, j, s);
             }
         }
     }

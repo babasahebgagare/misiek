@@ -60,7 +60,7 @@ public class AffinityMain extends CytoscapePlugin {
         
             JPanel chooseImplPanel = new AffinityChooseImplPanel(pc);
         JPanel connModePanel = new AffinityConnModePanel(pc);
-        JPanel graphModePanel = new AffinityGraphModePanel(pc);
+     //   JPanel graphModePanel = new AffinityGraphModePanel(pc);
         JPanel actionButtonsPanel = new AffinityButtonsPanel(pc);
 
         JPanel afpanel = pc.createAffinityPanel();
@@ -69,7 +69,7 @@ public class AffinityMain extends CytoscapePlugin {
         myAff.add(afpanel);
         myAff.add(chooseImplPanel);
         myAff.add(connModePanel);
-        myAff.add(graphModePanel);
+    //    myAff.add(graphModePanel);
         myAff.add(actionButtonsPanel);
         myAff.add(stats);
 
