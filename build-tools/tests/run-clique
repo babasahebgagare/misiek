@@ -1,0 +1,10 @@
+#/bin/bash
+echo "Affinity propagation testing..."
+
+cd ~/studia/matlab
+
+echo "clique.sim clique-out.txt 0.9 10 10 -0.6 clusters" > input
+/usr/local/bin/matlab < apcluster.m
+
+echo "clique.sim clique-out-sparse.txt 0.9 10 10 -0.6 clusters" > input
+/usr/local/bin/matlab < apclusterSparse.m
