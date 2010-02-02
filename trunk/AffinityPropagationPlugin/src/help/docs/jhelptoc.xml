@@ -6,6 +6,7 @@
     <tocitem target="Introduction" text="Affinity propagation Plugin Manual">
         <tocitem target="AffinityAbout" text="About Affinity Propagation algorithm" />
         <tocitem target="Parameters" text="Algorithm parameters" />
+        <tocitem target="Noise" text="Noise option" />
         <tocitem target="Implementation" text="Implementation version" />
         <tocitem target="ConnectingMode" text="Connecting mode" />
         <tocitem target="NearestCenter" text="Nearest center" />
