@@ -29,7 +29,6 @@ elseif size(s,1)==size(s,2)
     N=size(s,1);
 else error('s must have 3 columns or be square'); end;
 
-S
 
 if size(s,2)==3 && size(s,1)~=3,
     S=-Inf*ones(N,N,class(s)); 
@@ -37,7 +36,6 @@ if size(s,2)==3 && size(s,1)~=3,
 else S=s;
 end;
 
-S
 
 if S==S', symmetric=true; else symmetric=false; end;
 realmin_=realmin(class(s)); realmax_=realmax(class(s));
@@ -57,8 +55,7 @@ else for i=1:N S(i,i)=p(i); end;
 end;
 
 
-realmax_ = 1000;
-S
+%realmax_ = 1000;
 
 % Numerical stability -- replace -INF with -realmax
 n=find(S<-realmax_); if ~isempty(n), warning('-INF similarities detected; changing to -REALMAX to ensure numerical stability'); S(n)=-realmax_; end; clear('n');
@@ -76,7 +73,10 @@ if details
 end;
 
 % Execute parallel affinity propagation updates
-S
+
+
+%diag(A)
+%diag(R)
 
 e=zeros(N,convits); dn=0; i=0;
 if symmetric, ST=S; else ST=S'; end; % saves memory if it's symmetric
@@ -104,13 +104,14 @@ while ~dn
 		dA = A(jj,jj); A(:,jj) = min(A(:,jj),0); A(jj,jj) = dA;
 		A(:,jj) = (1-lam)*A(:,jj) + lam*old; % Damping
 	end;
-       
-    A
-    R
-    diag(A)+diag(R)
+                
+   % diag(A)
+   % diag(R)
+   % fprintf('A+R:');
+  %  diag(A) + diag(R)
+    
     % Check for convergence
     E=((diag(A)+diag(R))>0); e(:,mod(i-1,convits)+1)=E; K=sum(E);
-    E
     
     if i>=convits || i>=maxits,
         se=sum(e,2);

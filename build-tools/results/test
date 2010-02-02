@@ -1,0 +1,12 @@
+test_params.append(["ToyProblemSimilarities.sim", "ap1.out", "ac1.out", "0.5", "10", "10", "-15", "diff1.out", "clusters"]);
+test_params.append(["ToyProblemSimilarities.sim", "ap2.out", "ac2.out", "0.3", "10", "10", "-15", "diff2.out", "clusters"]);
+test_params.append(["ToyProblemSimilarities.sim", "ap3.out", "ac3.out", "0.8", "10", "10", "-15", "diff3.out", "clusters"]);
+test_params.append(["ToyProblemSimilarities.sim", "ap4.out", "ac4.out", "0.1", "100", "10", "-15", "diff4.out", "clusters"]);
+test_params.append(["ToyProblemSimilarities.sim", "ap5.out", "ac5.out", "0.5", "100", "10", "-15", "diff5.out", "clusters"]);
+test_params.append(["ToyProblemSimilarities.sim", "ap6.out", "ac6.out", "0.7", "100", "10", "-15", "diff6.out", "clusters"]);
+#test_params.append(["TravelRoutingSimilarities.sim", "apt1.out", "act1.out", "0.8", "10", "10", "-4500", "difft1.out", "clusters"]);
+#test_params.append(["TravelRoutingSimilarities.sim", "apt2.out", "act2.out", "0.8", "10", "10", "-4600", "difft2.out", "clusters"]);
+#test_params.append(["TravelRoutingSimilarities.sim", "apt3.out", "act3.out", "0.8", "10", "10", "-4700", "difft3.out", "clusters"]);
+#test_params.append(["TravelRoutingSimilarities.sim", "apt4.out", "act4.out", "0.8", "10", "10", "-4800", "difft4.out", "clusters"]);
+#test_params.append(["TravelRoutingSimilarities.sim", "apt5.out", "act5.out", "0.8", "10", "10", "-000", "difft5.out", "clusters"]);
+#test_params.append(["TravelRoutingSimilarities.sim", "apt6.out", "act6.out", "0.8", "10", "1", "-2000", "difft6.out", "clusters"]);
