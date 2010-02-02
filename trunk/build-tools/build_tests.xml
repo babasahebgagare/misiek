@@ -11,6 +11,7 @@
     <property name="server-name" value="students.mimuw.edu.pl" />
 
     <property name="server-folder" value="./studia/matlab" />
+    <property name="server-folder-comp" value="./studia/aff-comp" />
     <property name="affinity-console-name" value="AffinityPropagationConsole" />
     <property name="clusters-comparator-name" value="ClustersComparator" />
     <property name="sets-comparator-name" value="SetsComparator" />
@@ -58,7 +59,7 @@
             password="${server-password}"
             verbose="true"
             file="${affinity-console-name}/dist/${affinity-console-name}.jar"
-            todir="${server-username}:${server-password}@${server-name}:${server-folder}"
+            todir="${server-username}:${server-password}@${server-name}:${server-folder-comp}"
             />
     </target>
 
@@ -70,7 +71,7 @@
             password="${server-password}"
             verbose="true"
             file="build-tools/tests/apcluster.m"
-            todir="${server-username}:${server-password}@${server-name}:${server-folder}"
+            todir="${server-username}:${server-password}@${server-name}:${server-folder-comp}"
             />
     </target>
 
@@ -82,7 +83,7 @@
             password="${server-password}"
             verbose="true"
             file="build-tools/tests/apclusterSparse.m"
-            todir="${server-username}:${server-password}@${server-name}:${server-folder}"
+            todir="${server-username}:${server-password}@${server-name}:${server-folder-comp}"
             />
     </target>
 
@@ -145,16 +146,18 @@
             password="${server-password}"
             username="${server-username}"
             host="${server-name}"
-            command="${server-folder}/test"
+            command="${server-folder-comp}/run-test"
             verbose="true">
         </sshexec>
+    </target>
+    <target name="run-test-python" depends="get-server-auth" description="Run tests...">
         <sshexec
             port="22"
             trust="true"
             password="${server-password}"
             username="${server-username}"
             host="${server-name}"
-            command="cat ${server-folder}/jacc"
+            command="python ${server-folder-comp}/run-test-python.py"
             verbose="true">
         </sshexec>
     </target>
@@ -220,7 +223,7 @@
             host="${server-name}"
             file="build-tools/tests/run-clique"
             todir="${server-username}:${server-password}@${server-name}:${server-folder}"
-        />
+            />
     </target>
 
     <target name="send-clique" depends="get-server-auth" description="Run tests...">
@@ -232,6 +235,50 @@
             verbose="true"
             file="build-tools/tests/clique.sim"
             todir="${server-username}:${server-password}@${server-name}:${server-folder}"
+            />
+    </target>
+
+    <target name="send-toy-problem" depends="get-server-auth" description="Run tests...">
+        <scp
+            trust="true"
+            host="${server-name}"
+            username="${server-username}"
+            password="${server-password}"
+            verbose="true"
+            file="build-tools/tests/ToyProblemSimilarities.sim"
+            todir="${server-username}:${server-password}@${server-name}:${server-folder-comp}"
+            />
+    </target>
+        <target name="send-travel-problem" depends="get-server-auth" description="Run tests...">
+        <scp
+            trust="true"
+            host="${server-name}"
+            username="${server-username}"
+            password="${server-password}"
+            verbose="true"
+            file="build-tools/tests/TravelRoutingSimilarities.sim"
+            todir="${server-username}:${server-password}@${server-name}:${server-folder-comp}"
+            />
+    </target>
+
+    <target name="send-run-test" depends="get-server-auth" description="Run tests...">
+        <scp
+            trust="true"
+            password="${server-password}"
+            username="${server-username}"
+            host="${server-name}"
+            file="build-tools/tests/run-test"
+            todir="${server-username}:${server-password}@${server-name}:${server-folder-comp}"
+            />
+    </target>
+        <target name="send-run-test-python" depends="get-server-auth" description="Run tests...">
+        <scp
+            trust="true"
+            password="${server-password}"
+            username="${server-username}"
+            host="${server-name}"
+            file="build-tools/tests/run-test-python.py"
+            todir="${server-username}:${server-password}@${server-name}:${server-folder-comp}"
             />
     </target>
 </project>

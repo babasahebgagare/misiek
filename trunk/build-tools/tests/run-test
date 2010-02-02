@@ -1,0 +1,10 @@
+#/bin/bash
+echo "Affinity propagation testing..."
+
+cd ~/studia/aff-comp
+
+echo "ToyProblemSimilarities.sim ap-toy-1.out 0.5 10 10 -15 clusters" > input
+/usr/local/bin/matlab < apcluster.m &
+
+java -jar AffinityPropagationConsole.jar in=ToyProblemSimilarities.sim out=ac-toy-1.out lam=0.5 it=10 con=10 p=-15 clusters &
+

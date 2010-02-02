@@ -154,33 +154,32 @@ end;
 % Identify  exemplars
 kind
 E=((A(M-N+1:M)+R(M-N+1:M))>0); K=sum(E);
+E
 if K>0
-        find(E)
+        
     tmpidx=zeros(N,1); tmpidx(find(E))=find(E); % Identify clusters
     for j=find(E==0)'
         ss=s(ind1(ind1s(j):ind1e(j)),3);
         ii=s(ind1(ind1s(j):ind1e(j)),2);
-
-        eii = E(ii);
-        zii = find(eii==0);
-        if(length(eii) == length(zii))
-            tmpidx(j) = 0
-        else
-            ee=find(E(ii));
-            [smx imx]=max(ss(ee));
+        ee=find(E(ii));
+        [smx imx]=max(ss(ee));
+        if length(ii(ee(imx)))>0
             tmpidx(j)=ii(ee(imx));
+        else
+            tmpidx(j)=0;
         end;
     end;
+    tmpidx
     EE=zeros(N,1);
-   for j=find(E)'
-       jj=find(tmpidx==j); mx=-Inf;
+    for j=find(E)'
+        jj=find(tmpidx==j); mx=-Inf;
         ns=zeros(N,1); msk=zeros(N,1);
         for m=jj'
             mm=s(ind1(ind1s(m):ind1e(m)),2);
             msk(mm)=msk(mm)+1;
             ns(mm)=ns(mm)+s(ind1(ind1s(m):ind1e(m)),3);
         end;
-       ii=jj(find(msk(jj)==length(jj)));
+        ii=jj(find(msk(jj)==length(jj)));
         [smx imx]=max(ns(ii));
         EE(ii(imx))=1;
     end;
@@ -192,7 +191,11 @@ if K>0
         ii=s(ind1(ind1s(j):ind1e(j)),2);
         ee=find(E(ii));
         [smx imx]=max(ss(ee));
-        tmpidx(j)=ii(ee(imx));
+        if length(ii(ee(imx)))>0
+            tmpidx(j)=ii(ee(imx));
+        else
+            tmpidx(j)=0;
+        end;       
         tmpdpsim=tmpdpsim+smx;
     end;
     tmpnetsim=tmpdpsim+tmpexpref;
@@ -200,7 +203,8 @@ else
     tmpidx=nan*ones(N,1); tmpnetsim=nan; tmpexpref=nan;
 end;
 
-
+tmpidx
+        
 fileout = fopen(outputfile{:}, 'w');
     if strcmp(kind{:},'clusters')
         kind
