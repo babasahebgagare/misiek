@@ -48,7 +48,7 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
     private DoubleMatrix2D aold = null;
     private DoubleMatrix2D rold = null;
     private DoubleMatrix2D S;
-    private double inf = 1100000.0;
+    private double inf = 1000000000.0;
     private int clustersNumber = 0;
 
     @Override
@@ -102,6 +102,9 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
         //int i = Integer.valueOf(x);
         //int j = Integer.valueOf(y);
         //   if (graphMode == AffinityGraphMode.DIRECTED) {
+        if(x > N || y > N) {
+            System.out.println("ROZMIAR: "+N+ "query: "+x +" "+y);
+        }
         S.set(x, y, sim.doubleValue());
         //   } else {
         //       S.set(x, y, sim.doubleValue());
@@ -290,5 +293,10 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
                 S.set(i, j, s);
             }
         }
+    }
+
+    @Override
+    protected void showInfo() {
+
     }
 }

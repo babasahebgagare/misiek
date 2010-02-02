@@ -64,6 +64,7 @@ public class AffinityPanelController implements Serializable {
     private final String DEFAULT_CLUSTER_ID = "cluster_id";
     private final String DEFAULT_CENTERS_ID = "centers_id";
     private final String DEFAULT_LAMBDA = "0.9";
+    private final String DEFAULT = "DEFAULT";
     private JTextField lambdaField = null;
     private JTextField convitsField = null;
     private JTextField nodeAttrField = null;
@@ -113,13 +114,14 @@ public class AffinityPanelController implements Serializable {
         boolean refine = getRefine();
         boolean noise = getNoise();
         log = getLog();
+        System.out.println("pref: " + preferences);
         AffinityConnectingMethod connectingMode = getConnectingMode();
 
         if (!validateValues(lambda, preferences, iterations, convits, nodeNameAttr, edgeNameAttr, centersNameAttr)) {
             return;
         }
 
-        algorithm = new CytoAffinityClustering(connectingMode, implementation, nodeNameAttr, edgeNameAttr, lambda.doubleValue(), preferences.doubleValue(), iterations.intValue(), convits, refine, log, noise, centersNameAttr);
+        algorithm = new CytoAffinityClustering(connectingMode, implementation, nodeNameAttr, edgeNameAttr, lambda.doubleValue(), preferences, iterations.intValue(), convits, refine, log, noise, centersNameAttr);
         algorithm.setStepsCount(steps);
         algorithm.setAffinityPanelController(this);
         cytoAlgorithmTask = new CytoClusterTask(algorithm);
@@ -216,8 +218,8 @@ public class AffinityPanelController implements Serializable {
     }
 
     private boolean getNoise() {
-        return false;
-     //   return getNoiseCheckBox().isSelected();
+        //return false;
+        return getNoiseCheckBox().isSelected();
     }
 
     public JTextField getCentersAttrField() {
@@ -380,7 +382,7 @@ public class AffinityPanelController implements Serializable {
 
     public void refreshEdgeAttrField() {
         edgeAttrField.removeAllItems();
-        edgeAttrField.addItem("DEFAULT");
+        edgeAttrField.addItem(DEFAULT);
         CyAttributes edgesAttributes = Cytoscape.getEdgeAttributes();
         for (String attrName : edgesAttributes.getAttributeNames()) {
             final byte cyType = edgesAttributes.getType(attrName);
@@ -416,8 +418,10 @@ public class AffinityPanelController implements Serializable {
                         probs.add(prob);
                     }
                 } catch (NullPointerException ne) {
-                    Messenger.message("Edges attribute: " + edgeNameAttr + " is not appropriate for this network.");
-                    break;
+                    if (!edgeNameAttr.equals(DEFAULT)) {
+                        Messenger.message("Edges attribute: " + edgeNameAttr + " is not appropriate for this network.");
+                        break;
+                    }
                 }
             }
         }
