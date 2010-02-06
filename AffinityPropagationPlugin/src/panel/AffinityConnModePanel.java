@@ -151,10 +151,6 @@ public class AffinityConnModePanel extends javax.swing.JPanel {
         // TODO add your handling code here:
 }//GEN-LAST:event_orgRadioAncestorMoved
 
-    private void BSFRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSFRadioActionPerformed
-        checkBoxRefresh();
-}//GEN-LAST:event_BSFRadioActionPerformed
-
     private void checkBoxRefresh() {
         if (BSFRadio.isSelected()) {
             stepsCheckbox.setEnabled(false);
@@ -178,6 +174,10 @@ public class AffinityConnModePanel extends javax.swing.JPanel {
     private void orgRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orgRadioActionPerformed
         checkBoxRefresh();
     }//GEN-LAST:event_orgRadioActionPerformed
+
+    private void BSFRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSFRadioActionPerformed
+        checkBoxRefresh();
+}//GEN-LAST:event_BSFRadioActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton BSFRadio;

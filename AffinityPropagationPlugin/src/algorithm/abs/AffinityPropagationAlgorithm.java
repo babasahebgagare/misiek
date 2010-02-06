@@ -52,10 +52,9 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
         PRIME_ALG, FLOYD_ALG, ORIGINAL
     }
 
-    /* public enum AffinityGraphMode {
-
-    DIRECTED, UNDIRECTED
-    }*/
+    public enum AffinityGraphMode {
+        DIRECTED, UNDIRECTED
+    }
     private Random noiseGenerator = new Random();
     private final double epsilon = 0.0000001;
     private double lambda;
@@ -119,7 +118,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
 
         for (Cluster<Integer> cluster : assigments.values()) {
 
-            System.out.println("clust name: "+cluster.getName());
+            System.out.println("clust name: " + cluster.getName());
             int maxid = cluster.getName().intValue();
             Integer maxlevel = Integer.valueOf(0);
             Double maxsum = null;
@@ -234,7 +233,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
             generateNoise();
         }
 
-     //   showInfo();
+        //   showInfo();
 
         for (iteration = 1; iteration <= iters; iteration++) {
 
@@ -245,7 +244,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
             copyAvailabilities();
             computeAvailabilities();
             avgAvailabilities();
-         //   showInfo();
+            //   showInfo();
 
             if (iteractionListenerOrNull != null) {
                 computeCenters();
@@ -263,7 +262,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
         if (getClustersNumber() != 0) {
             computeAssigments();
             if (refine) {
-           //     System.out.println("REFINE...");
+                //     System.out.println("REFINE...");
                 refineCenters();
                 computeAssigments();
             }
@@ -383,7 +382,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
         int step = 0;
 
         while (unclustered.size() != unclusteredHelp.size()) {
-           // System.out.println("obrot...");
+            // System.out.println("obrot...");
             if (steps != null && step >= steps) {
                 return ret;
             }

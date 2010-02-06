@@ -28,8 +28,6 @@
  *           Janusz Dutkowski (idea) (j.dutkowski@mimuw.edu.pl)
  *           Jerzy Tiuryn (supervisor) (tiuryn@mimuw.edu.pl)
  */
-
-
 package main;
 
 import cytoscape.Cytoscape;
@@ -41,6 +39,7 @@ import org.jdesktop.swingx.VerticalLayout;
 import panel.AffinityButtonsPanel;
 import panel.AffinityChooseImplPanel;
 import panel.AffinityConnModePanel;
+import panel.AffinityGraphModePanel;
 import panel.AffinityMainPanel;
 import panel.AffinityPanelController;
 import panel.AffinityStatsPanelController;
@@ -56,10 +55,10 @@ public class AffinityMain extends CytoscapePlugin {
 
         JPanel myAff = new AffinityMainPanel();
         myAff.setLayout(new VerticalLayout());
-        
+
         JPanel chooseImplPanel = new AffinityChooseImplPanel(pc);
         JPanel connModePanel = new AffinityConnModePanel(pc);
-     //   JPanel graphModePanel = new AffinityGraphModePanel(pc);
+        JPanel graphModePanel = new AffinityGraphModePanel(pc);
         JPanel actionButtonsPanel = new AffinityButtonsPanel(pc);
 
         JPanel afpanel = pc.createAffinityPanel();
@@ -68,9 +67,9 @@ public class AffinityMain extends CytoscapePlugin {
         myAff.add(afpanel, 0);
         myAff.add(chooseImplPanel, 1);
         myAff.add(connModePanel, 2);
-    //    myAff.add(graphModePanel);
-        myAff.add(actionButtonsPanel, 3);
-        myAff.add(stats, 4);
+        myAff.add(graphModePanel, 3);
+        myAff.add(actionButtonsPanel, 4);
+        myAff.add(stats, 5);
 
         leftPanel.add("APGraphClustringPlugin", myAff);
         //System.out.println("Affinity propagation");

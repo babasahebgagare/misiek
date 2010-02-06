@@ -31,6 +31,7 @@
 package panel;
 
 import algorithm.abs.AffinityPropagationAlgorithm.AffinityConnectingMethod;
+import algorithm.abs.AffinityPropagationAlgorithm.AffinityGraphMode;
 import cyto.CytoAffinityClustering;
 import cyto.CytoClusterTask;
 import cytoscape.CyEdge;
@@ -102,6 +103,7 @@ public class AffinityPanelController implements Serializable {
 
     void doCluster() {
 
+        AffinityGraphMode graphMode = getGraphMode();
         Double lambda = getLambda();
         Double preferences = getPreferences();
         Integer iterations = getIterations();
@@ -123,6 +125,7 @@ public class AffinityPanelController implements Serializable {
 
         algorithm = new CytoAffinityClustering(connectingMode, implementation, nodeNameAttr, edgeNameAttr, lambda.doubleValue(), preferences, iterations.intValue(), convits, refine, log, noise, centersNameAttr);
         algorithm.setStepsCount(steps);
+        algorithm.setGraphMode(graphMode);
         algorithm.setAffinityPanelController(this);
         cytoAlgorithmTask = new CytoClusterTask(algorithm);
 
@@ -630,5 +633,13 @@ public class AffinityPanelController implements Serializable {
 
     private JCheckBox getNoiseCheckBox() {
         return noiseCheckBox;
+    }
+
+    private AffinityGraphMode getGraphMode() {
+        if (directedModeRadio.isSelected()) {
+            return AffinityGraphMode.DIRECTED;
+        } else {
+            return AffinityGraphMode.UNDIRECTED;
+        }
     }
 }

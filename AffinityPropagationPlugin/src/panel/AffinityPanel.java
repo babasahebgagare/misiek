@@ -50,6 +50,7 @@ public class AffinityPanel extends javax.swing.JPanel {
         pc.setNodeAttrField(nodeAttrNameField);
         pc.setIterationsField(iterationsSpinner);
         pc.setLambdaField(labmbdaField);
+       // pc.setDirecedGraphRadio();
         pc.setPreferencesField(preferenceField);
         pc.setRefineCheckBox(refineCheckBox);
         pc.setLogCheckBox(transformingCheckbox);
@@ -92,12 +93,12 @@ public class AffinityPanel extends javax.swing.JPanel {
         noiseCheckBox = new javax.swing.JCheckBox();
         jLabel3 = new javax.swing.JLabel();
 
-        setPreferredSize(new java.awt.Dimension(270, 287));
+        setPreferredSize(new java.awt.Dimension(270, 280));
 
         parametersPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Set paremeters"));
         parametersPanel.setMaximumSize(new java.awt.Dimension(270, 32767));
         parametersPanel.setName("parametersPanel"); // NOI18N
-        parametersPanel.setPreferredSize(new java.awt.Dimension(270, 287));
+        parametersPanel.setPreferredSize(new java.awt.Dimension(270, 280));
 
         edgeAttrNameLabel.setText("Edge weight attribute:");
         edgeAttrNameLabel.setName("edgeAttrNameLabel"); // NOI18N
