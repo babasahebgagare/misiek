@@ -32,6 +32,7 @@ package cyto;
 
 import algorithm.abs.AffinityPropagationAlgorithm;
 import algorithm.abs.AffinityPropagationAlgorithm.AffinityConnectingMethod;
+import algorithm.abs.AffinityPropagationAlgorithm.AffinityGraphMode;
 import algorithm.matrix.MatrixPropagationAlgorithm;
 import algorithm.abs.Cluster;
 import algorithm.smart.SmartPropagationAlgorithm;
@@ -69,6 +70,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
     private String centersNameAttr;
     private int iterations;
     private AffinityConnectingMethod connectingMode;
+    private AffinityGraphMode graphMode = AffinityGraphMode.DIRECTED;
     private double preferences;
     private double lambda;
     private boolean refine;
@@ -95,6 +97,10 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
         this.log = log;
         this.noise = noise;
         this.af = createAlgorithm(implementation);
+    }
+
+    public void setGraphMode(AffinityGraphMode graphMode) {
+        this.graphMode = graphMode;
     }
 
     public void setStepsCount(Integer steps) {
@@ -206,28 +212,13 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
         af.setN(nodeNames.size());
         af.init();
 
-
-
-        boolean integers = testNamesAsInteger(nodeNames);
-
-        if (!integers) {
-            System.out.println("not integers");
-            int i = 0;
-            for (String name : nodeNames) {
-                Integer it = Integer.valueOf(i);
-                idMapping.put(it, name);
-                nodeMapping.put(name, it);
-                //    af.setSimilarityInt(it, it, preferences);
-                i++;
-            }
-        } else {
-            System.out.println("integers");
-            for (String name : nodeNames) {
-                Integer it = Integer.valueOf(name);
-                idMapping.put(it, name);
-                nodeMapping.put(name, it);
-                //        af.setSimilarityInt(it, it, preferences);
-            }
+        int i = 0;
+        for (String name : nodeNames) {
+            Integer it = Integer.valueOf(i);
+            idMapping.put(it, name);
+            nodeMapping.put(name, it);
+            //    af.setSimilarityInt(it, it, preferences);
+            i++;
         }
 
         for (CyEdge edge : edges) {
@@ -258,8 +249,12 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
                 } else {
                     sim = DEFAULT_WEIGHT;
                 }
-
-                af.setSimilarityInt(sourceIndex, targetIndex, sim);
+                if (graphMode == AffinityGraphMode.DIRECTED) {
+                    af.setSimilarityInt(sourceIndex, targetIndex, sim);
+                } else {
+                    af.setSimilarityInt(sourceIndex, targetIndex, sim);
+                    af.setSimilarityInt(targetIndex, sourceIndex, sim);
+                }
                 // if (Cytoscape.getCurrentNetwork().getEdgeCount(cyTarget, cySource, true) == 0) {
                 //  System.out.println("two ways: " + sourceID + " " + targetID);
                 //af.setSimilarityInt(sourceIndex, targetIndex, sim);
