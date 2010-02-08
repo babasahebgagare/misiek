@@ -1,3 +1,33 @@
+/* ===========================================================
+ * APGraphClusteringPlugin : Java implementation of Affinity Propagation
+ * algorithm as Cytoscape plugin.
+ * ===========================================================
+ *
+ *
+ * Project Info:  http://bioputer.mimuw.edu.pl/veppin/
+ * Sources: http://code.google.com/p/misiek/
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>
+ *
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
+ * in the United States and other countries.]
+ *
+ * APGraphClusteringPlugin  Copyright (C) 2008-2009
+ * Authors:  Michal Wozniak (code) (m.wozniak@mimuw.edu.pl)
+ *           Janusz Dutkowski (idea) (j.dutkowski@mimuw.edu.pl)
+ *           Jerzy Tiuryn (supervisor) (tiuryn@mimuw.edu.pl)
+ */
 package algorithm.abs;
 
 import algorithm.smart.IterationData;
@@ -7,6 +37,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Random;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import prime.PrimeAlgorithm;
@@ -14,22 +45,28 @@ import prime.PrimeGraph;
 
 public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgorithm<String> {
 
+    protected abstract void showInfo();
+
     public enum AffinityConnectingMethod {
 
         PRIME_ALG, FLOYD_ALG, ORIGINAL
     }
 
-    public enum AffinityGraphMode {
+    /* public enum AffinityGraphMode {
 
-        DIRECTED, UNDIRECTED
-    }
+    DIRECTED, UNDIRECTED
+    }*/
+    private Random noiseGenerator = new Random();
+    private final double epsilon = 0.0000001;
     private double lambda;
     private int iterations;
     private boolean refine = true;
+    private boolean noise = true;
     private Integer steps = null;
+    private int iteration = 0;
     protected AffinityConnectingMethod connectingMode = AffinityConnectingMethod.ORIGINAL;
-    protected AffinityGraphMode graphMode = AffinityGraphMode.DIRECTED;
-    protected int notConverged;
+    //   protected AffinityGraphMode graphMode = AffinityGraphMode.DIRECTED;
+    protected int notConverged = 1;
     protected Integer convits = null;
     protected ActionListener iteractionListenerOrNull = null;
     protected Map<Integer, Cluster<Integer>> assigments;
@@ -39,8 +76,19 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
     protected Map<String, Integer> idMapper = new TreeMap<String, Integer>();
     protected Map<Integer, String> idRevMapper = new TreeMap<Integer, String>();
 
-    public void setGraphMode(AffinityGraphMode mode) {
-        this.graphMode = mode;
+    public int getCurrentIteration() {
+        return iteration;
+    }
+
+    public boolean didConvergence() {
+        return (notConverged == 0);
+    }
+
+    /*    public void setGraphMode(AffinityGraphMode mode) {
+    this.graphMode = mode;
+    }*/
+    public void setNoise(boolean noise) {
+        this.noise = noise;
     }
 
     public void setSteps(Integer steps) {
@@ -67,22 +115,21 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
         //  boolean debug = false;
         Collection<Integer> refinedCenters = new TreeSet<Integer>();
 
+        System.out.println("tutaj");
+
         for (Cluster<Integer> cluster : assigments.values()) {
-            /*    if (cluster.getName().equals(650)) {
-            debug = true;
-            System.out.println("DEBUG TRUE: " + cluster.getName());
-            } else {
-            System.out.println("DEBUG FALSE: " + cluster.getName());
-            debug = false;
-            }*/
-            Integer maxid = cluster.getName();
+
+            System.out.println("clust name: "+cluster.getName());
+            int maxid = cluster.getName().intValue();
             Integer maxlevel = Integer.valueOf(0);
             Double maxsum = null;
             for (Integer curr : cluster.getElements()) {
+                System.out.println(curr);
+                int curr_int = curr.intValue();
                 Double sum = Double.valueOf(0);
                 Integer level = Integer.valueOf(0);
                 for (Integer other : cluster.getElements()) {
-                    Double simOrNull = tryGetSimilarityInt(other, curr);
+                    Double simOrNull = tryGetSimilarityInt(other, curr_int);
                     if (simOrNull != null) {
                         sum += simOrNull;
                         level++;
@@ -93,19 +140,19 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
                 }*/
                 if (maxsum == null || level > maxlevel) {
                     maxsum = sum;
-                    maxid = curr;
+                    maxid = curr_int;
                     maxlevel = level;
                 } else if (level.equals(maxlevel) && sum >= maxsum) {
                     if (sum.equals(maxsum)) {
-                        maxid = Math.min(maxid.intValue(), curr.intValue());
+                        maxid = Math.min(maxid, curr_int);
                     } else {
-                        maxid = curr;
+                        maxid = curr_int;
                     }
                     maxlevel = level;
                     maxsum = sum;
                 }
             }
-            refinedCenters.add(maxid);
+            refinedCenters.add(Integer.valueOf(maxid));
         }
         refined = refinedCenters;
     }
@@ -183,8 +230,13 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
             iteractionListenerOrNull.actionPerformed(new ActionEvent(new IterationData(1, 0), 0, "ITERATION"));
         }
         initConvergence();
+        if (noise) {
+            generateNoise();
+        }
 
-        for (int iteration = 0; iteration < iters; iteration++) {
+     //   showInfo();
+
+        for (iteration = 1; iteration <= iters; iteration++) {
 
             copyResponsibilies();
             computeResponsibilities();
@@ -193,12 +245,13 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
             copyAvailabilities();
             computeAvailabilities();
             avgAvailabilities();
+            showInfo();
 
-            if (iteration + 1 != iterations && iteractionListenerOrNull != null) {
+            if (iteractionListenerOrNull != null) {
                 computeCenters();
                 calculateCovergence();
                 notConverged = checkConvergence();
-                iteractionListenerOrNull.actionPerformed(new ActionEvent(new IterationData(iteration + 2, getClustersNumber()), 0, "ITERATION")); //TODO
+                iteractionListenerOrNull.actionPerformed(new ActionEvent(new IterationData(iteration, getClustersNumber()), 0, "ITERATION")); //TODO
             }
 
             if (notConverged == 0) {
@@ -210,6 +263,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
         if (getClustersNumber() != 0) {
             computeAssigments();
             if (refine) {
+           //     System.out.println("REFINE...");
                 refineCenters();
                 computeAssigments();
             }
@@ -244,8 +298,14 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
         }
     }
 
+    protected Double generateNoiseHelp(Double sim) {
 
+        return sim + epsilon * noiseGenerator.nextDouble();
+    }
+
+    protected abstract void generateNoise();
 //    protected abstract Double getSimilarity(String from, String to);
+
     public abstract void setConstPreferences(Double preferences);
 
     public abstract void setSimilarities(double[][] sim);
@@ -283,7 +343,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
         return not;
     }
 
-    protected abstract int getClustersNumber();
+    public abstract int getClustersNumber();
     //   protected abstract void initObjectsNames();
 
     protected Double computeWeight(double sim) {
@@ -292,11 +352,20 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
 
     }
 
-    protected abstract Collection<Integer> getCenters();
+    public abstract Collection<Integer> getCentersAlg();
+
+    public Collection<Integer> getCenters() {
+        if (refined == null) {
+            return getCentersAlg();
+        } else {
+            return refined;
+        }
+    }
 
     protected abstract Collection<Integer> getAllExamplars();
 
     private Map<Integer, Cluster<Integer>> computeOriginalAssigments(Collection<Integer> examplars, Collection<Integer> centers) {
+        System.out.println("org method...");
         Map<Integer, Cluster<Integer>> ret = new HashMap<Integer, Cluster<Integer>>();
         Map<Integer, Integer> clustered = new TreeMap<Integer, Integer>();
         Collection<Integer> unclustered = new TreeSet<Integer>(examplars);
@@ -314,6 +383,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
         int step = 0;
 
         while (unclustered.size() != unclusteredHelp.size()) {
+           // System.out.println("obrot...");
             if (steps != null && step >= steps) {
                 return ret;
             }
@@ -377,6 +447,21 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
 
         return prime.run();
 
+    }
+
+    public Collection<String> getCentersStr() {
+        Collection<Integer> centersInt = getCenters();
+        Collection<String> centers = new TreeSet<String>();
+        for (Integer centerInt : centersInt) {
+            String str = idRevMapper.get(centerInt);
+            if (str != null) {
+                centers.add(str);
+            } else {
+                //System.out.println("NULL: " + centerInt);
+            }
+            //TODO
+        }
+        return centers;
     }
 
     @Override

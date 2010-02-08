@@ -1,7 +1,6 @@
 package affinitymain;
 
 import algorithm.abs.AffinityPropagationAlgorithm.AffinityConnectingMethod;
-import algorithm.abs.AffinityPropagationAlgorithm.AffinityGraphMode;
 import java.util.Map;
 
 /**
@@ -37,8 +36,8 @@ public class Main {
         }
         Integer convits = getConvits(map);
         Double preferences = getPreferences(map);
+        
         String kind = getOutputKind(map);
-        AffinityGraphMode graphMode = getGraphMode(map);
         AffinityConnectingMethod connMode = getConnMode(map);
         boolean takeLog = getTakeLog(map);
         boolean refine = getRefine(map);
@@ -47,7 +46,6 @@ public class Main {
         RunAlgorithm alg = new RunAlgorithm(filepath, outpath, lambda, iterations, convits, preferences, kind);
         alg.setTakeLog(takeLog);
         alg.setConnMode(connMode);
-        alg.setGraphMode(graphMode);
         alg.setSteps(steps);
         alg.setRefine(refine);
 
@@ -89,6 +87,7 @@ public class Main {
             return null;
         } else {
             try {
+                System.out.println("pref: " + Double.valueOf(lamStr));
                 return Double.valueOf(lamStr);
             } catch (NumberFormatException e) {
                 return null;
@@ -134,17 +133,6 @@ public class Main {
         return map.get("out");
     }
 
-    private static AffinityGraphMode getGraphMode(Map<String, String> map) {
-        String mode = map.get("dir");
-        if (mode == null || mode.equals("true")) {
-            System.out.println("dir");
-            return AffinityGraphMode.DIRECTED;
-        } else {
-            System.out.println("undir");
-            return AffinityGraphMode.UNDIRECTED;
-        }
-    }
-
     private static boolean getRefine(Map<String, String> map) {
         String ref = map.get("ref");
         if (ref == null) {
@@ -181,6 +169,7 @@ public class Main {
     }
 
     private static void showHelp() {
+        System.out.println("--------------HELP---------------");
         System.out.println("Parameters: [parameterName=parameterValue]*");
         System.out.println();
         System.out.println("in: input similarities filepath");
@@ -191,11 +180,11 @@ public class Main {
         System.out.println("con*: integer convits, default null");
         System.out.println("kind*: kind of output: (@clusters / centers)");
         System.out.println("conn*: connecting mode II faze (@org / prime)");
-        System.out.println("dir*: graph directed edges (@true / false)");
         System.out.println("log*: get edges with log value (true / @false)");
         System.out.println("ref*: clusters refine method after clustering (@true / false)");
         System.out.println();
         System.out.println("* parameters are optional");
         System.out.println("@ default options");
+        System.out.println("--------------HELP END-------------");
     }
 }
