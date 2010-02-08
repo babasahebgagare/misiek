@@ -2,8 +2,8 @@ package affinitymain;
 
 import algorithm.abs.AffinityPropagationAlgorithm;
 import algorithm.abs.AffinityPropagationAlgorithm.AffinityConnectingMethod;
-import algorithm.abs.AffinityPropagationAlgorithm.AffinityGraphMode;
 import algorithm.abs.Cluster;
+import algorithm.matrix.MatrixPropagationAlgorithm;
 import algorithm.smart.SmartPropagationAlgorithm;
 import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
@@ -38,7 +38,6 @@ public class RunAlgorithm {
     private boolean takeLog;
     private boolean refine;
     private Integer steps = null;
-    private AffinityGraphMode graphMode;
     private AffinityConnectingMethod connMode;
 
     public RunAlgorithm(String inputpath, String outpath, double lambda, int iterations, Integer convits, double preferences, String kind) {
@@ -55,10 +54,6 @@ public class RunAlgorithm {
         this.refine = refine;
     }
 
-    public void setGraphMode(AffinityGraphMode graphMode) {
-        this.graphMode = graphMode;
-    }
-
     public void setConnMode(AffinityConnectingMethod connMode) {
         this.connMode = connMode;
     }
@@ -73,7 +68,6 @@ public class RunAlgorithm {
         af.setConvits(convits);
         af.setSteps(steps);
         af.setRefine(refine);
-        af.setGraphMode(graphMode);
         af.setConnectingMode(connMode);
         af.setConnectingMode(AffinityPropagationAlgorithm.AffinityConnectingMethod.ORIGINAL);
         af.addIterationListener(new ConsoleIterationListener(iterations));
@@ -94,6 +88,8 @@ public class RunAlgorithm {
                 String to = tokens[1];
                 Double sim = Double.parseDouble(tokens[2]);
                 ints.add(new InteractionData(from, to, sim));
+                nodeNames.add(from);
+                nodeNames.add(to);
             }
         } catch (IOException ex) {
             Logger.getLogger(RunAlgorithm.class.getName()).log(Level.SEVERE, null, ex);
@@ -103,7 +99,8 @@ public class RunAlgorithm {
             }
         }
         //    af.setN(ints.size());
-        af.setN(nodeNames.size());
+        af.setN(nodeNames.size() + 1);
+
         af.init();
         for (InteractionData intData : ints) {
             //     System.out.println(intData.getFrom() + " " + intData.getTo() + " " + intData.getSim());
@@ -117,8 +114,11 @@ public class RunAlgorithm {
             } else {
                 val = intData.getSim();
             }
-            af.setSimilarity(intData.getFrom(), intData.getTo(), val);
-        //af.setSimilarityInt(Integer.valueOf(intData.getFrom()), Integer.valueOf(intData.getTo()), val);
+            Integer source = Integer.valueOf(intData.getFrom());
+            Integer target = Integer.valueOf(intData.getTo());
+            af.setSimilarityInt(source, target, val);
+            //   af.setSimilarityInt(target, source, val);
+            //af.setSimilarityInt(Integer.valueOf(intData.getFrom()), Integer.valueOf(intData.getTo()), val);
         }
         Double pref;
         if (takeLog) {
@@ -131,6 +131,7 @@ public class RunAlgorithm {
             pref = preferences;
         }
 
+        System.out.println("pref: " + pref);
         af.setConstPreferences(pref);
     }
 
@@ -143,22 +144,29 @@ public class RunAlgorithm {
             fos = new FileOutputStream(outputCenters);
             bos = new BufferedOutputStream(fos);
             bw = new BufferedWriter(new OutputStreamWriter(bos));
+            System.out.println(kind);
             if (kind.equals("centers")) {
-                Map<String, Cluster<String>> clusters = af.doClusterAssoc();
+                Map<Integer, Cluster<Integer>> clusters = af.doClusterAssocInt();
                 //Map<Integer, Cluster<Integer>> clusters = af.doClusterAssocInt();
                 if (clusters != null) {
-                    for (String clustName : clusters.keySet()) {
+                    for (Integer clustName : clusters.keySet()) {
                         //for (Integer clustName : clusters.keySet()) {
                         bw.append(clustName + "\n");
                     }
                 }
             } else {
+                Map<Integer, Integer> clusters = af.doClusterInt();
+                if (clusters != null) {
+                    for (Entry<Integer, Integer> entry : clusters.entrySet()) {
+                        bw.append(entry.getValue() + "\n");
+                    }
+                }/*
                 Map<String, String> clusters = af.doCluster();
                 if (clusters != null) {
-                    for (Entry<String, String> entry : clusters.entrySet()) {
-                        bw.append(entry.getKey() + " " + entry.getValue() + "\n");
-                    }
+                for (Entry<String, String> entry : clusters.entrySet()) {
+                bw.append(entry.getKey() + " " + entry.getValue() + "\n");
                 }
+                }*/
             }
 
         } catch (IOException ex) {

@@ -1,3 +1,33 @@
+/* ===========================================================
+ * APGraphClusteringPlugin : Java implementation of Affinity Propagation
+ * algorithm as Cytoscape plugin.
+ * ===========================================================
+ *
+ *
+ * Project Info:  http://bioputer.mimuw.edu.pl/veppin/
+ * Sources: http://code.google.com/p/misiek/
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>
+ *
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
+ * in the United States and other countries.]
+ *
+ * APGraphClusteringPlugin  Copyright (C) 2008-2009
+ * Authors:  Michal Wozniak (code) (m.wozniak@mimuw.edu.pl)
+ *           Janusz Dutkowski (idea) (j.dutkowski@mimuw.edu.pl)
+ *           Jerzy Tiuryn (supervisor) (tiuryn@mimuw.edu.pl)
+ */
 package algorithm.smart;
 
 import algorithm.abs.AffinityPropagationAlgorithm;
@@ -10,7 +40,7 @@ import java.util.TreeSet;
 public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
 
     private ExamplarsCollection examplars = null;
-    private double INF = 1000000;
+    private double INF = 100000000;
     protected Collection<Integer> centers;
 
     public ExamplarsCollection getExamplars() {
@@ -58,12 +88,13 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
         for (Examplar examplar : examplars.getExamplars().values()) {
             SiblingData sibling = examplar.getSiblingMap().get(examplar.getName());
             double e = sibling.getA() + sibling.getR();
+            //    System.out.println(examplar.getName() + " "+e);
             if (e > 0) {
                 ret.add(examplar.getName());
-            //         examplar.setImCenter(true, iteration);
+                //         examplar.setImCenter(true, iteration);
             }// else {
-        //   examplar.setImCenter(false, iteration);
-        //}
+            //   examplar.setImCenter(false, iteration);
+            //}
 
         }
 
@@ -165,13 +196,12 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
     public void setSimilarityInt(final Integer from,
             final Integer to,
             final Double sim) {
-
-        if (graphMode == AffinityGraphMode.DIRECTED) {
-            examplars.setSimilarity(from, to, sim);
-        } else {
-            examplars.setSimilarity(from, to, sim);
-            examplars.setSimilarity(to, from, sim);
-        }
+        //     if (graphMode == AffinityGraphMode.DIRECTED) {
+        examplars.setSimilarity(from, to, sim);
+        //    } else {
+        //        examplars.setSimilarity(from, to, sim);
+        //        examplars.setSimilarity(to, from, sim);
+        //    }
     }
 
     @Override
@@ -180,12 +210,12 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
             final Double sim) {
         Integer i = getExamplarID(from);
         Integer j = getExamplarID(to);
-        if (graphMode == AffinityGraphMode.DIRECTED) {
-            examplars.setSimilarity(i, j, sim);
-        } else {
-            examplars.setSimilarity(i, j, sim);
-            examplars.setSimilarity(j, i, sim);
-        }
+        //      if (graphMode == AffinityGraphMode.DIRECTED) {
+        examplars.setSimilarity(i, j, sim);
+        //    } else {
+        //        examplars.setSimilarity(i, j, sim);
+        //        examplars.setSimilarity(j, i, sim);
+        //    }
     }
 
     @Override
@@ -221,12 +251,13 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
     }
 
     @Override
-    protected int getClustersNumber() {
+    public int getClustersNumber() {
         return centers.size();
     }
 
     @Override
     public void setConstPreferences(Double preferences) {
+        
         Collection<Integer> examplarsNames = examplars.getExamplars().keySet();
         for (Integer exName : examplarsNames) {
             setSimilarityInt(exName, exName, preferences);
@@ -234,7 +265,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
     }
 
     @Override
-    protected Collection<Integer> getCenters() {
+    public Collection<Integer> getCentersAlg() {
         return new TreeSet<Integer>(centers);
     }
 
@@ -292,5 +323,56 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
                 convitsVectors.put(ex, vec);
             }
         }
+    }
+
+    @Override
+    protected void generateNoise() {
+        for (Examplar examplar : examplars.getExamplars().values()) {
+            Collection<SiblingData> siblings = examplar.getSiblingMap().values();
+            for (SiblingData sibling : siblings) {
+                double s = sibling.getS();
+                s = generateNoiseHelp(s);
+                sibling.setS(s);
+            }
+        }
+    }
+
+    @Override
+    protected void showInfo() {
+        System.out.println("SSSSS");
+        for (Examplar examplar : examplars.getExamplars().values()) {
+            Collection<SiblingData> siblings = examplar.getSiblingMap().values();
+            for (SiblingData sibling : siblings) {
+                if (sibling.getExamplarName().equals(examplar.getName())) {
+                    System.out.println(sibling.getS());
+                }
+            }
+        }
+        /*      System.out.println("EEEE");
+        for (Examplar examplar : examplars.getExamplars().values()) {
+        Collection<SiblingData> siblings = examplar.getSiblingMap().values();
+        for (SiblingData sibling : siblings) {
+        if (sibling.getExamplarName().equals(examplar.getName())) {
+        System.out.println(sibling.getA() + sibling.getR());
+        }
+        }
+        }
+        for (Examplar examplar : examplars.getExamplars().values()) {
+        Collection<SiblingData> siblings = examplar.getSiblingMap().values();
+        for (SiblingData sibling : siblings) {
+        if (sibling.getExamplarName().equals(examplar.getName())) {
+        System.out.println(sibling.getA());
+        }
+        }
+        }
+        System.out.println("RRRRRRRRRRRRRRR");
+        for (Examplar examplar : examplars.getExamplars().values()) {
+        Collection<SiblingData> siblings = examplar.getSiblingMap().values();
+        for (SiblingData sibling : siblings) {
+        if (sibling.getExamplarName().equals(examplar.getName())) {
+        System.out.println(sibling.getR());
+        }
+        }
+        }*/
     }
 }
