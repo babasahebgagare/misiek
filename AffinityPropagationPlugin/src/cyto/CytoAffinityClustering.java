@@ -141,23 +141,40 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
         Map<Integer, Cluster<Integer>> clusters = af.doClusterAssocInt();
 
         if (clusters != null) {
+            for (CyLayoutAlgorithm layout : CyLayouts.getAllLayouts()) {
+                layout.setLayoutAttribute(nodeNameAttr);
+            }
             for (Cluster<Integer> cluster : clusters.values()) {
                 clusterprior.add(cluster);
+            }
+            @SuppressWarnings("unchecked")
+            List<CyNode> nodes = Cytoscape.getCurrentNetwork().nodesList();
+            //    int strlen = String.valueOf(nodes.size()).length();
+
+
+            for (CyNode node : nodes) {
+                if (nodesAttributes.hasAttribute(node.getIdentifier(), nodeNameAttr)) {
+                    nodesAttributes.deleteAttribute(node.getIdentifier(), nodeNameAttr);
+                }
             }
 
             int i = 0;
 
             while (clusterprior.size() > 0) {
                 Cluster<Integer> cluster = clusterprior.poll();
+                /*    int strl = String.valueOf(i).length();
+                String id = "";
+                for (int j = strl; j < strlen; j++) {
+                id = id + "0";
+                }
+                id = id + String.valueOf(i);*/
                 for (Integer element : cluster.getElements()) {
                     String centerID = idMapping.get(cluster.getName());
                     String nodeID = idMapping.get(Integer.valueOf(element));
-                    nodesAttributes.setAttribute(nodeID, nodeNameAttr, centerID);
+                    nodesAttributes.setAttribute(nodeID, nodeNameAttr, Integer.valueOf(i));
+                    //nodesAttributes.setAttribute(nodeID, nodeNameAttr, id);
                 }
                 i++;
-            }
-            for (CyLayoutAlgorithm layout : CyLayouts.getAllLayouts()) {
-                layout.setLayoutAttribute(nodeNameAttr);
             }
         }
         //  clustersNumber = af.getClustersNumber();
@@ -185,9 +202,10 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
             String sourceID = edge.getSource().getIdentifier();
             String targetID = edge.getTarget().getIdentifier();
 
-            nodesNames.add(targetID);
-            nodesNames.add(sourceID);
-
+            if (!sourceID.equals(targetID)) {
+                nodesNames.add(targetID);
+                nodesNames.add(sourceID);
+            }
         }
 
         return nodesNames;
@@ -226,42 +244,39 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
             String id = edge.getIdentifier();
             String sourceID = edge.getSource().getIdentifier();
             String targetID = edge.getTarget().getIdentifier();
-            CyNode cyTarget = (CyNode) Cytoscape.getRootGraph().getNode(edge.getTarget().getRootGraphIndex());
-            CyNode cySource = (CyNode) Cytoscape.getRootGraph().getNode(edge.getSource().getRootGraphIndex());
-            Integer sourceIndex = nodeMapping.get(sourceID);
-            Integer targetIndex = nodeMapping.get(targetID);
-
-            debug = false;
-            if (sourceID.equals("1") && targetID.equals("58")) {
-                debug = true;
-            }
-
             if (!sourceID.equals(targetID)) {
+                //   CyNode cyTarget = (CyNode) Cytoscape.getRootGraph().getNode(edge.getTarget().getRootGraphIndex());
+                //   CyNode cySource = (CyNode) Cytoscape.getRootGraph().getNode(edge.getSource().getRootGraphIndex());
+                Integer sourceIndex = nodeMapping.get(sourceID);
+                Integer targetIndex = nodeMapping.get(targetID);
 
-                Double probOrNull = tryGetDoubleAttribute(edgesAttributes, id, edgeNameAttr);
-                Double sim;
-                if (probOrNull != null) {
-                    if (log) {
-                        sim = Math.log(probOrNull);
+                if (!sourceID.equals(targetID)) {
+
+                    Double probOrNull = tryGetDoubleAttribute(edgesAttributes, id, edgeNameAttr);
+                    Double sim;
+                    if (probOrNull != null) {
+                        if (log) {
+                            sim = Math.log(probOrNull);
+                        } else {
+                            sim = probOrNull;
+                        }
                     } else {
-                        sim = probOrNull;
+                        sim = DEFAULT_WEIGHT;
                     }
-                } else {
-                    sim = DEFAULT_WEIGHT;
+                    if (graphMode == AffinityGraphMode.DIRECTED) {
+                        af.setSimilarityInt(sourceIndex, targetIndex, sim);
+                    } else {
+                        af.setSimilarityInt(sourceIndex, targetIndex, sim);
+                        af.setSimilarityInt(targetIndex, sourceIndex, sim);
+                    }
+                    // if (Cytoscape.getCurrentNetwork().getEdgeCount(cyTarget, cySource, true) == 0) {
+                    //  System.out.println("two ways: " + sourceID + " " + targetID);
+                    //af.setSimilarityInt(sourceIndex, targetIndex, sim);
+                    // af.setSimilarityInt(targetIndex, sourceIndex, sim);
+                    // } else {
+                    //    System.out.println("one way");
+                    // }
                 }
-                if (graphMode == AffinityGraphMode.DIRECTED) {
-                    af.setSimilarityInt(sourceIndex, targetIndex, sim);
-                } else {
-                    af.setSimilarityInt(sourceIndex, targetIndex, sim);
-                    af.setSimilarityInt(targetIndex, sourceIndex, sim);
-                }
-                // if (Cytoscape.getCurrentNetwork().getEdgeCount(cyTarget, cySource, true) == 0) {
-                //  System.out.println("two ways: " + sourceID + " " + targetID);
-                //af.setSimilarityInt(sourceIndex, targetIndex, sim);
-                // af.setSimilarityInt(targetIndex, sourceIndex, sim);
-                // } else {
-                //    System.out.println("one way");
-                // }
             }
         }
 
@@ -296,9 +311,9 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
 
     public void showInfoAfterClustering() {
         if (!af.didConvergence()) {
-            Messenger.messageInfo("Algorithm did not convergence after: " + (af.getCurrentIteration() - 1) + " iterations");
+            Messenger.messageInfo("Algorithm did not converge after: " + (af.getCurrentIteration() - 1) + " iterations");
         } else {
-            Messenger.messageInfo("Algorithm has convergenced after: " + af.getCurrentIteration() + " iterations");
+            Messenger.messageInfo("Algorithm converged after: " + af.getCurrentIteration() + " iterations");
         }
     }
 

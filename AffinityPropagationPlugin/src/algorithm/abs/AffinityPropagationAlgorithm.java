@@ -53,6 +53,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
     }
 
     public enum AffinityGraphMode {
+
         DIRECTED, UNDIRECTED
     }
     private Random noiseGenerator = new Random();
@@ -65,7 +66,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
     private int iteration = 0;
     protected AffinityConnectingMethod connectingMode = AffinityConnectingMethod.ORIGINAL;
     //   protected AffinityGraphMode graphMode = AffinityGraphMode.DIRECTED;
-    protected int notConverged = 1;
+    protected boolean notConverged = true;
     protected Integer convits = null;
     protected ActionListener iteractionListenerOrNull = null;
     protected Map<Integer, Cluster<Integer>> assigments;
@@ -80,7 +81,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
     }
 
     public boolean didConvergence() {
-        return (notConverged == 0);
+        return (notConverged == false);
     }
 
     /*    public void setGraphMode(AffinityGraphMode mode) {
@@ -114,16 +115,12 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
         //  boolean debug = false;
         Collection<Integer> refinedCenters = new TreeSet<Integer>();
 
-        System.out.println("tutaj");
-
         for (Cluster<Integer> cluster : assigments.values()) {
 
-            System.out.println("clust name: " + cluster.getName());
             int maxid = cluster.getName().intValue();
             Integer maxlevel = Integer.valueOf(0);
             Double maxsum = null;
             for (Integer curr : cluster.getElements()) {
-                System.out.println(curr);
                 int curr_int = curr.intValue();
                 Double sum = Double.valueOf(0);
                 Integer level = Integer.valueOf(0);
@@ -246,14 +243,15 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
             avgAvailabilities();
             //   showInfo();
 
+            computeCenters();
+            calculateCovergence();
+            notConverged = checkConvergence();
+
             if (iteractionListenerOrNull != null) {
-                computeCenters();
-                calculateCovergence();
-                notConverged = checkConvergence();
                 iteractionListenerOrNull.actionPerformed(new ActionEvent(new IterationData(iteration, getClustersNumber()), 0, "ITERATION")); //TODO
             }
 
-            if (notConverged == 0) {
+            if (notConverged == false) {
                 break;
             }
         }
@@ -327,19 +325,22 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
 
     protected abstract void initConvergence();
 
-    protected int checkConvergence() {
-        int not = 0;
+    protected boolean checkConvergence() {
+        if (getClustersNumber() == 0) {
+            return true;
+        }
+
         if (convits == null) {
-            not = -1;
+            return true;
         } else {
 
             for (ConvitsVector vec : convitsVectors.values()) {
                 if (vec.checkConvits() == false) {
-                    not++;
+                    return true;
                 }
             }
         }
-        return not;
+        return false;
     }
 
     public abstract int getClustersNumber();
@@ -364,7 +365,6 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
     protected abstract Collection<Integer> getAllExamplars();
 
     private Map<Integer, Cluster<Integer>> computeOriginalAssigments(Collection<Integer> examplars, Collection<Integer> centers) {
-        System.out.println("org method...");
         Map<Integer, Cluster<Integer>> ret = new HashMap<Integer, Cluster<Integer>>();
         Map<Integer, Integer> clustered = new TreeMap<Integer, Integer>();
         Collection<Integer> unclustered = new TreeSet<Integer>(examplars);
