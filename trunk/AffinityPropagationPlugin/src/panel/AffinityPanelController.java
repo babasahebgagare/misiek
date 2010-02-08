@@ -116,11 +116,20 @@ public class AffinityPanelController implements Serializable {
         boolean refine = getRefine();
         boolean noise = getNoise();
         log = getLog();
-        System.out.println("pref: " + preferences);
         AffinityConnectingMethod connectingMode = getConnectingMode();
+
+        if (!validateNetwork()) {
+            return;
+        }
 
         if (!validateValues(lambda, preferences, iterations, convits, nodeNameAttr, edgeNameAttr, centersNameAttr)) {
             return;
+        }
+
+        if (!edgeNameAttr.equals(DEFAULT)) {
+            if (!validateSim(edgeNameAttr, log)) {
+                return;
+            }
         }
 
         algorithm = new CytoAffinityClustering(connectingMode, implementation, nodeNameAttr, edgeNameAttr, lambda.doubleValue(), preferences, iterations.intValue(), convits, refine, log, noise, centersNameAttr);
@@ -332,7 +341,7 @@ public class AffinityPanelController implements Serializable {
             return false;
         }
         if (log && preferences < 0.0) {
-            Messenger.message("Preferences paremater is not valid, if you want take log.");
+            Messenger.message("You have selected 'take log' option and chose negative preferences paremater. Uncheck 'take log' option or change preferences.");
             return false;
         }
         return true;
@@ -340,11 +349,10 @@ public class AffinityPanelController implements Serializable {
 
     private boolean validateValues(final Double lambda, final Double preferences, final Integer iterations, final Integer convits, final String nodeNameAttr, final String edgeNameAttr, final String centersNameAttr) {
         if (!validateLambda(lambda)) {
-            Messenger.message("Lambda paremater is not valid!");
+            Messenger.message("Lambda paremater have to be between 0 and 1!");
             return false;
         }
         if (!validatePreferences(preferences)) {
-
             return false;
         }
         if (!validateIterations(iterations)) {
@@ -465,9 +473,12 @@ public class AffinityPanelController implements Serializable {
 
         try {
             sim = Double.valueOf(val.toString());
+        } catch (NullPointerException e) {
+            sim = null;
         } catch (NumberFormatException e) {
             sim = null;
         }
+
         return sim;
     }
 
@@ -641,5 +652,34 @@ public class AffinityPanelController implements Serializable {
         } else {
             return AffinityGraphMode.UNDIRECTED;
         }
+    }
+
+    private boolean validateSim(String edgeNameAttr, boolean takelog) {
+        if (takelog) {
+            @SuppressWarnings("unchecked")
+            List<CyEdge> edges = Cytoscape.getCurrentNetwork().edgesList();
+            CyAttributes edgesAttributes = Cytoscape.getEdgeAttributes();
+
+            for (CyEdge edge : edges) {
+                String id = edge.getIdentifier();
+                Double probOrNull = tryGetDoubleAttribute(edgesAttributes, id, edgeNameAttr);
+                if (probOrNull != null) {
+                    if (probOrNull < 0) {
+                        Messenger.message("You have selected 'take log' option and for edge: " + edge.getIdentifier() + " similarity is negative. Unckeck 'take log' option or use other attribute for weight on edges");
+                        return false;
+                    }
+                }
+            }
+
+        }
+        return true;
+    }
+
+    private boolean validateNetwork() {
+        if (Cytoscape.getCurrentNetwork() == Cytoscape.getNullNetwork()) {
+            Messenger.message("You have to select some network");
+            return false;
+        }
+        return true;
     }
 }

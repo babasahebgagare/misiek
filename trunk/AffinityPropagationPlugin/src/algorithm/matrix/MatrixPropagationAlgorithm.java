@@ -102,9 +102,9 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
         //int i = Integer.valueOf(x);
         //int j = Integer.valueOf(y);
         //   if (graphMode == AffinityGraphMode.DIRECTED) {
-        if(x > N || y > N) {
-            System.out.println("ROZMIAR: "+N+ "query: "+x +" "+y);
-        }
+        //if(x > N || y > N) {
+        //    System.out.println("ROZMIAR: "+N+ "query: "+x +" "+y);
+        //}
         S.set(x, y, sim.doubleValue());
         //   } else {
         //       S.set(x, y, sim.doubleValue());

@@ -28,14 +28,17 @@
  *           Janusz Dutkowski (idea) (j.dutkowski@mimuw.edu.pl)
  *           Jerzy Tiuryn (supervisor) (tiuryn@mimuw.edu.pl)
  */
-
 package panel;
 
+import cytoscape.Cytoscape;
+import java.awt.Button;
 import java.io.Serializable;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import org.jdesktop.swingx.VerticalLayout;
 
 public class AffinityStatsPanelController implements Serializable {
 
@@ -64,5 +67,17 @@ public class AffinityStatsPanelController implements Serializable {
             DefaultTableModel model = (DefaultTableModel) statsTable.getModel();
             model.removeRow(row);
         }
+    }
+
+    public void showDetails() {
+        JFrame frame = new JFrame("Details");
+        frame.setLocationRelativeTo(Cytoscape.getDesktop());
+
+        frame.setVisible(true);
+        frame.setLayout(new VerticalLayout());
+        frame.add(statsTable);
+        frame.add(new Button("aaa"));
+        frame.pack();
+        frame.setVisible(true);
     }
 }
