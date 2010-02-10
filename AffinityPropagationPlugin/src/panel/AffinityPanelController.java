@@ -147,10 +147,15 @@ public class AffinityPanelController implements Serializable {
         Double preferences = getPreferences();
         Integer iterations = getIterations();
         String nodeNameAttr = getNodeAttr();
+        String centersNameAttr = getCentersAttr();
         Integer clusters = algorithm.getClustersNumber();
+        Integer convits = getConvits();
+        Integer madeIterations = algorithm.getCurrentIteration();
+        Boolean takeLog = getLog();
+        Boolean noise = getNoise();
 
         String network = Cytoscape.getCurrentNetwork().getTitle();
-        psc.addClusteringStat(network, lambda, preferences, clusters, iterations, nodeNameAttr);
+        psc.addClusteringStat(network, lambda, preferences, clusters, iterations, convits, madeIterations, nodeNameAttr, centersNameAttr, takeLog, noise);
 
         String centerAttr = getCentersAttr();
         centersAttr.add(centerAttr);
