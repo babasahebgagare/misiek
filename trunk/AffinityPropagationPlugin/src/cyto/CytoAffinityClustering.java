@@ -99,6 +99,10 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
         this.af = createAlgorithm(implementation);
     }
 
+    public int getCurrentIteration() {
+        return af.getCurrentIteration();
+    }
+
     public void setGraphMode(AffinityGraphMode graphMode) {
         this.graphMode = graphMode;
     }
@@ -156,6 +160,9 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
                 if (nodesAttributes.hasAttribute(node.getIdentifier(), nodeNameAttr)) {
                     nodesAttributes.deleteAttribute(node.getIdentifier(), nodeNameAttr);
                 }
+                if (nodesAttributes.hasAttribute(node.getIdentifier(), nodeNameAttr + "_intID")) {
+                    nodesAttributes.deleteAttribute(node.getIdentifier(), nodeNameAttr + "_intID");
+                }
             }
 
             int i = 0;
@@ -171,8 +178,9 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
                 for (Integer element : cluster.getElements()) {
                     String centerID = idMapping.get(cluster.getName());
                     String nodeID = idMapping.get(Integer.valueOf(element));
-                    nodesAttributes.setAttribute(nodeID, nodeNameAttr, Integer.valueOf(i));
-                    //nodesAttributes.setAttribute(nodeID, nodeNameAttr, id);
+                    //   nodesAttributes.setAttribute(nodeID, nodeNameAttr, centerID);
+                    nodesAttributes.setAttribute(nodeID, nodeNameAttr, centerID);
+                    nodesAttributes.setAttribute(nodeID, nodeNameAttr + "_num", Integer.valueOf(i));
                 }
                 i++;
             }

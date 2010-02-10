@@ -403,11 +403,10 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
                             if (simOrNull > maxOrNull) {
                                 maxOrNull = simOrNull;
                                 maxidOrNull = clusteredEx.getValue();
-                            }
+                                }
                         } else {
                             maxOrNull = simOrNull;
-                            maxidOrNull =
-                                    clusteredEx.getValue();
+                            maxidOrNull = clusteredEx.getValue();
                         }
                     }
                 }
