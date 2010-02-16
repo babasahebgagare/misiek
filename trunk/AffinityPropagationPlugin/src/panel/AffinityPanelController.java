@@ -38,7 +38,9 @@ import cytoscape.CyEdge;
 import cytoscape.Cytoscape;
 import cytoscape.data.CyAttributes;
 import cytoscape.task.util.TaskManager;
+import cytoscape.view.CyNetworkView;
 import giny.model.Edge;
+import giny.view.EdgeView;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
@@ -403,9 +405,25 @@ public class AffinityPanelController implements Serializable {
         for (String attrName : edgesAttributes.getAttributeNames()) {
             final byte cyType = edgesAttributes.getType(attrName);
             if (cyType == CyAttributes.TYPE_FLOATING) {
-                edgeAttrField.addItem(attrName);
+                CyNetworkView view = Cytoscape.getCurrentNetworkView();
+                EdgeView edgeView = (EdgeView) view.getEdgeViewsIterator().next();
+                Edge edge = edgeView.getEdge();
+                Double attr = edgesAttributes.getDoubleAttribute(edge.getIdentifier(), attrName);
+                if (attr != null) {
+                    edgeAttrField.addItem(attrName);
+                }
             } else if (cyType == CyAttributes.TYPE_STRING) {
-                edgeAttrField.addItem(attrName);
+                CyNetworkView view = Cytoscape.getCurrentNetworkView();
+                EdgeView edgeView = (EdgeView) view.getEdgeViewsIterator().next();
+                Edge edge = edgeView.getEdge();
+                String attr = edgesAttributes.getStringAttribute(edge.getIdentifier(), attrName);
+                try {
+                    if (attr != null) {
+                        Double val = Double.parseDouble(attr);
+                        edgeAttrField.addItem(attrName);
+                    }
+                } catch (NumberFormatException e) {
+                }
             }
         }
     }
