@@ -63,7 +63,7 @@ public class AffinityPanelController implements Serializable {
     private final static long serialVersionUID = 7526471155622776147L;
     private final String DEFAULT_PREFERENCE = "0.5";
     private final String DEFAULT_CLUSTER_ID = "cluster_id";
-    private final String DEFAULT_CENTERS_ID = "centers_id";
+    private final String DEFAULT_CENTERS_ID = "center_id";
     private final String DEFAULT_LAMBDA = "0.9";
     private final String DEFAULT = "DEFAULT";
     private JTextField lambdaField = null;
@@ -231,7 +231,7 @@ public class AffinityPanelController implements Serializable {
     }
 
     private boolean getRefine() {
-        return getRefineCheckBox().isSelected();
+        return true;
     }
 
     private boolean getNoise() {
