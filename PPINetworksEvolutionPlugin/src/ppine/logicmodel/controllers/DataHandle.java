@@ -28,7 +28,6 @@
  *           Janusz Dutkowski (idea, data) (j.dutkowski@mimuw.edu.pl)
  *           Jerzy Tiuryn (supervisor) (tiuryn@mimuw.edu.pl)
  */
-
 package ppine.logicmodel.controllers;
 
 import cytoscape.Cytoscape;
@@ -37,6 +36,7 @@ import java.util.Map;
 import java.awt.Color;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.TreeMap;
 import ppine.io.parsers.ExperimentParserStruct;
 import ppine.logicmodel.structs.ExpInteraction;
@@ -74,9 +74,9 @@ public class DataHandle {
     public PPINetworkExp createExpPPINetwork(String speciesName, String expNetworkName) {
         SpeciesTreeNode parentNetwork = networks.get(speciesName);
         // System.out.println("searching: " + speciesName);
-       // if (parentNetwork == null) {
-       //     System.out.println("PARENT NULL");
-       // }
+        // if (parentNetwork == null) {
+        //     System.out.println("PARENT NULL");
+        // }
         PPINetworkExp net = new PPINetworkExp(expNetworkName, parentNetwork);
         parentNetwork.getContext().addChild(net);
         networks.put(expNetworkName, net);
@@ -108,13 +108,14 @@ public class DataHandle {
         }
     }
 
-    public SpeciesTreeNode tryFindPPINetworkByProteinID(String sourceID) {
+    public Collection<SpeciesTreeNode> tryFindPPINetworkByProteinID(String sourceID, String targetID) {
+        Collection<SpeciesTreeNode> nets = new HashSet<SpeciesTreeNode>();
         for (SpeciesTreeNode network : networks.values()) {
-            if (network.containsProtein(sourceID)) {
-                return network;
+            if (network.containsProtein(sourceID) && network.containsProtein(targetID)) {
+                nets.add(network);
             }
         }
-        return null;
+        return nets;
     }
 
     public PPINetworkExp tryGetExpPPINetowrk(String expNetworkName) {
