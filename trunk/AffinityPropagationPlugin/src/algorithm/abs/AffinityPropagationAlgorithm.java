@@ -297,7 +297,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
 
     protected Double generateNoiseHelp(Double sim) {
 
-        return sim + epsilon * noiseGenerator.nextDouble();
+        return sim + epsilon * sim * noiseGenerator.nextDouble();
     }
 
     protected abstract void generateNoise();
@@ -403,7 +403,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
                             if (simOrNull > maxOrNull) {
                                 maxOrNull = simOrNull;
                                 maxidOrNull = clusteredEx.getValue();
-                                }
+                            }
                         } else {
                             maxOrNull = simOrNull;
                             maxidOrNull = clusteredEx.getValue();
