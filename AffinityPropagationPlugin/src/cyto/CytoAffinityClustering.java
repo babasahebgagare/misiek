@@ -157,11 +157,11 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
 
 
             for (CyNode node : nodes) {
+                if (nodesAttributes.hasAttribute(node.getIdentifier(), centersNameAttr)) {
+                    nodesAttributes.deleteAttribute(node.getIdentifier(), centersNameAttr);
+                }
                 if (nodesAttributes.hasAttribute(node.getIdentifier(), nodeNameAttr)) {
                     nodesAttributes.deleteAttribute(node.getIdentifier(), nodeNameAttr);
-                }
-                if (nodesAttributes.hasAttribute(node.getIdentifier(), nodeNameAttr + "_intID")) {
-                    nodesAttributes.deleteAttribute(node.getIdentifier(), nodeNameAttr + "_intID");
                 }
             }
 
@@ -179,8 +179,8 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
                     String centerID = idMapping.get(cluster.getName());
                     String nodeID = idMapping.get(Integer.valueOf(element));
                     //   nodesAttributes.setAttribute(nodeID, nodeNameAttr, centerID);
-                    nodesAttributes.setAttribute(nodeID, nodeNameAttr, centerID);
-                    nodesAttributes.setAttribute(nodeID, nodeNameAttr + "_num", Integer.valueOf(i));
+                    nodesAttributes.setAttribute(nodeID, centersNameAttr, centerID);
+                    nodesAttributes.setAttribute(nodeID, nodeNameAttr, Integer.valueOf(i));
                 }
                 i++;
             }
@@ -276,7 +276,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
                             sim = DEFAULT_WEIGHT;
                         }
                     }
-                    
+
                     if (graphMode == AffinityGraphMode.DIRECTED) {
                         af.setSimilarityInt(sourceIndex, targetIndex, sim);
                     } else {
@@ -343,36 +343,19 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
         Cytoscape.getCurrentNetworkView().redrawGraph(false, true);
 
         for (String name : nodeNames) {
-            String v = nodesAttributes.getStringAttribute(name, centersAttribute);
-            if (v != null) {
-                if (v.equals("1")) {
-                    CyNode node = Cytoscape.getCyNode(name);
-                    NodeView nodeView = currentView.getNodeView(node.getRootGraphIndex());
-                    double width = nodeView.getWidth();
-                    double height = nodeView.getHeight();
+            String v = nodesAttributes.getStringAttribute(name, centersNameAttr);
+            if (name.equals(v)) {
+                CyNode node = Cytoscape.getCyNode(name);
+                NodeView nodeView = currentView.getNodeView(node.getRootGraphIndex());
+                double width = nodeView.getWidth();
+                double height = nodeView.getHeight();
 
-                    nodeView.setWidth(width + 20.0);
-                    nodeView.setHeight(height + 20.0);
-                    nodeView.setShape(NodeShape.ELLIPSE.getGinyShape());
-                }
+                nodeView.setWidth(width + 20.0);
+                nodeView.setHeight(height + 20.0);
+                nodeView.setShape(NodeShape.ELLIPSE.getGinyShape());
             }
         }
         currentView.updateView();
-    }
-
-    public void saveCenters() {
-        Collection<Integer> centers = af.getCenters();
-        @SuppressWarnings("unchecked")
-        List<CyNode> nodes = Cytoscape.getCurrentNetwork().nodesList();
-
-        for (CyNode node : nodes) {
-            nodesAttributes.setAttribute(node.getIdentifier(), centersNameAttr, "");
-        }
-
-        for (Integer center : centers) {
-            String nodeStr = idMapping.get(center);
-            nodesAttributes.setAttribute(nodeStr, centersNameAttr, "1");
-        }
     }
 
     public void showCentersAfetrClustering() {
