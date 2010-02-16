@@ -36,27 +36,27 @@ import javax.swing.JOptionPane;
 public class Messenger {
 
     public static void message(final Object message) {
-        System.out.println(message);
+        //System.out.println(message);
         JOptionPane.showMessageDialog(Cytoscape.getDesktop(), message, "Warning", JOptionPane.WARNING_MESSAGE);
     }
 
     public static void messageInfo(final Object message) {
-        System.out.println(message);
+   //     System.out.println(message);
         JOptionPane.showMessageDialog(Cytoscape.getDesktop(), message, "Info", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public static void error(final Exception ex) {
-        System.out.println(ex.getMessage());
+      //  System.out.println(ex.getMessage());
         JOptionPane.showMessageDialog(Cytoscape.getDesktop(), ex.getMessage());
     }
 
     public static int confirmWarning(Object message) {
-        System.out.println(message);
+      //  System.out.println(message);
         return JOptionPane.showConfirmDialog(Cytoscape.getDesktop(), message, "Warning.", JOptionPane.WARNING_MESSAGE);
     }
 
     public static int confirmInfo(Object message) {
-        System.out.println(message);
+       // System.out.println(message);
         return JOptionPane.showConfirmDialog(Cytoscape.getDesktop(), message, "Info.", JOptionPane.INFORMATION_MESSAGE);
     }
 }

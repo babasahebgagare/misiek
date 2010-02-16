@@ -64,7 +64,7 @@ import utils.Messenger;
  */
 public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
 
-    private final double DEFAULT_WEIGHT = -0.5;
+    private final double DEFAULT_WEIGHT = 0.5;
     private String nodeNameAttr;
     private String edgeNameAttr;
     private String centersNameAttr;
@@ -262,6 +262,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
 
                     Double probOrNull = tryGetDoubleAttribute(edgesAttributes, id, edgeNameAttr);
                     Double sim;
+
                     if (probOrNull != null) {
                         if (log) {
                             sim = Math.log(probOrNull);
@@ -269,8 +270,13 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
                             sim = probOrNull;
                         }
                     } else {
-                        sim = DEFAULT_WEIGHT;
+                        if (log) {
+                            sim = Math.log(DEFAULT_WEIGHT);
+                        } else {
+                            sim = DEFAULT_WEIGHT;
+                        }
                     }
+                    
                     if (graphMode == AffinityGraphMode.DIRECTED) {
                         af.setSimilarityInt(sourceIndex, targetIndex, sim);
                     } else {
