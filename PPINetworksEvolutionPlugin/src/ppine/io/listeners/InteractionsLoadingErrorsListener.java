@@ -44,7 +44,7 @@ public class InteractionsLoadingErrorsListener implements ErrorListener {
     }
 
     public void errorOccured(ErrorEvent errorEvent) {
-        System.out.println(errorEvent.getSource());
+      //  System.out.println(errorEvent.getSource());
         panel.showErrorOccuredLabel(errorEvent);
     }
 }
