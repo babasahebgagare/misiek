@@ -28,12 +28,12 @@
  *           Janusz Dutkowski (idea, data) (j.dutkowski@mimuw.edu.pl)
  *           Jerzy Tiuryn (supervisor) (tiuryn@mimuw.edu.pl)
  */
-
 package ppine.io.readers.tasks;
 
 import ppine.io.exceptions.InteractionsFileFormatException;
 import ppine.io.parsers.rootparser.RootInteractionsParser;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Map;
 import ppine.io.parsers.InteractionParserStruct;
 import ppine.logicmodel.controllers.DataHandle;
@@ -99,11 +99,10 @@ public class LoadAllInteractionsTask extends PPINELoadTask {
             String TargetID = interaction.getTo();
             Double probability = interaction.getSim();
 
-            SpeciesTreeNode netOrNull = dh.tryFindPPINetworkByProteinID(SourceID);
-
-            if (netOrNull != null) {
-                if (tresholds.containsKey(netOrNull.getID())) {
-                    Double treshold = tresholds.get(netOrNull.getID());
+            Collection<SpeciesTreeNode> nets = dh.tryFindPPINetworkByProteinID(SourceID, TargetID);
+            for (SpeciesTreeNode net : nets) {
+                if (tresholds.containsKey(net.getID())) {
+                    Double treshold = tresholds.get(net.getID());
 
                     if (treshold == null || probability > treshold) {
                         String EdgeID = IDCreator.createInteractionID(SourceID, TargetID);
