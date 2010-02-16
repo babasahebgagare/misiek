@@ -44,7 +44,7 @@ public class FamiliesLoadingErrorsListener implements ErrorListener {
     }
 
     public void errorOccured(ErrorEvent errorEvent) {
-        System.out.println(errorEvent);
+        //System.out.println(errorEvent);
         panel.showErrorOccuredLabel(errorEvent);
     }
 }

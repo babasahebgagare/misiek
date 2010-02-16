@@ -44,7 +44,7 @@ public class SpeciesLoadingErrorsListener implements ErrorListener {
     }
 
     public void errorOccured(ErrorEvent errorEvent) {
-        System.out.println(errorEvent.toString());
+        //System.out.println(errorEvent.toString());
         panel.showErrorOccuredLabel(errorEvent);
     }
 }
