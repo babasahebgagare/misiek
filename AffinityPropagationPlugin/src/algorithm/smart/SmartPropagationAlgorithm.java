@@ -329,9 +329,11 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
         for (Examplar examplar : examplars.getExamplars().values()) {
             Collection<SiblingData> siblings = examplar.getSiblingMap().values();
             for (SiblingData sibling : siblings) {
-                double s = sibling.getS();
-                s = generateNoiseHelp(s);
-                sibling.setS(s);
+                if (sibling.getExamplarName().equals(examplar.getName())) {
+                    double s = sibling.getS();
+                    s = generateNoiseHelp(s);
+                    sibling.setS(s);
+                }
             }
         }
     }
@@ -347,16 +349,16 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
                 }
             }
         }
-  /*      System.out.println("EEEE");
+        /*      System.out.println("EEEE");
         for (Examplar examplar : examplars.getExamplars().values()) {
-            Collection<SiblingData> siblings = examplar.getSiblingMap().values();
-            for (SiblingData sibling : siblings) {
-                if (sibling.getExamplarName().equals(examplar.getName())) {
-                    System.out.println(sibling.getA() + sibling.getR());
-                }
-            }
+        Collection<SiblingData> siblings = examplar.getSiblingMap().values();
+        for (SiblingData sibling : siblings) {
+        if (sibling.getExamplarName().equals(examplar.getName())) {
+        System.out.println(sibling.getA() + sibling.getR());
         }
-             for (Examplar examplar : examplars.getExamplars().values()) {
+        }
+        }
+        for (Examplar examplar : examplars.getExamplars().values()) {
         Collection<SiblingData> siblings = examplar.getSiblingMap().values();
         for (SiblingData sibling : siblings) {
         if (sibling.getExamplarName().equals(examplar.getName())) {

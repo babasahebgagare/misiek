@@ -274,7 +274,7 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
 
     @Override
     protected void initConvergence() {
-   //     System.out.println("S: " + S.toString());
+        //     System.out.println("S: " + S.toString());
         if (convits != null) {
             for (int i = 0; i < N; i++) {
                 ConvitsVector vec = new ConvitsVector(convits.intValue());
@@ -287,16 +287,14 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
     @Override
     protected void generateNoise() {
         for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                double s = S.get(i, j);
-                s = generateNoiseHelp(s);
-                S.set(i, j, s);
-            }
+            double s = S.get(i, i);
+            s = generateNoiseHelp(s);
+            S.set(i, i, s);
+
         }
     }
 
     @Override
     protected void showInfo() {
-
     }
 }

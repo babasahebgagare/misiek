@@ -57,7 +57,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
         DIRECTED, UNDIRECTED
     }
     private Random noiseGenerator = new Random();
-    private final double epsilon = 0.0000001;
+    private final double epsilon = 0.000001;
     private double lambda;
     private int iterations;
     private boolean refine = true;
@@ -297,7 +297,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
 
     protected Double generateNoiseHelp(Double sim) {
 
-        return sim + epsilon * sim * noiseGenerator.nextDouble();
+        return sim - epsilon * noiseGenerator.nextDouble();
     }
 
     protected abstract void generateNoise();
