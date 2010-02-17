@@ -74,6 +74,7 @@ public class AffinityConnModePanel extends javax.swing.JPanel {
         weighetCentersGroup.add(orgRadio);
         orgRadio.setSelected(true);
         orgRadio.setText("Original method");
+        orgRadio.setToolTipText("For each object we look for nearest center iteratively");
         orgRadio.setName("orgRadio"); // NOI18N
         orgRadio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,6 +91,7 @@ public class AffinityConnModePanel extends javax.swing.JPanel {
 
         weighetCentersGroup.add(BSFRadio);
         BSFRadio.setText("Weighted BSF algorithm");
+        BSFRadio.setToolTipText("Weighet BSF from a set of centers");
         BSFRadio.setName("BSFRadio"); // NOI18N
         BSFRadio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

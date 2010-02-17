@@ -92,6 +92,7 @@
             </Property>
             <Property name="selected" type="boolean" value="true"/>
             <Property name="text" type="java.lang.String" value="Original method"/>
+            <Property name="toolTipText" type="java.lang.String" value="For each object we look for nearest center iteratively"/>
             <Property name="name" type="java.lang.String" value="orgRadio" noResource="true"/>
           </Properties>
           <Events>
@@ -105,6 +106,7 @@
               <ComponentRef name="weighetCentersGroup"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Weighted BSF algorithm"/>
+            <Property name="toolTipText" type="java.lang.String" value="Weighet BSF from a set of centers"/>
             <Property name="name" type="java.lang.String" value="BSFRadio" noResource="true"/>
           </Properties>
           <Events>

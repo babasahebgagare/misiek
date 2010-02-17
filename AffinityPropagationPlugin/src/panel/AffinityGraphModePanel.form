@@ -25,7 +25,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="graphModePanel" alignment="0" max="32767" attributes="0"/>
+          <Component id="graphModePanel" alignment="0" pref="286" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -54,7 +54,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="undirectedModeRadio" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="10" max="32767" attributes="0"/>
+                  <EmptySpace pref="26" max="32767" attributes="0"/>
                   <Component id="directedModeRadio" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
               </Group>
@@ -75,7 +75,8 @@
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="graphModeGroup"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="directed edges"/>
+            <Property name="text" type="java.lang.String" value="Directed edges"/>
+            <Property name="toolTipText" type="java.lang.String" value="Algorithm will interprets each edge as directed"/>
             <Property name="name" type="java.lang.String" value="directedModeRadio" noResource="true"/>
           </Properties>
         </Component>
@@ -85,7 +86,8 @@
               <ComponentRef name="graphModeGroup"/>
             </Property>
             <Property name="selected" type="boolean" value="true"/>
-            <Property name="text" type="java.lang.String" value="undirected edges"/>
+            <Property name="text" type="java.lang.String" value="Undirected edges"/>
+            <Property name="toolTipText" type="java.lang.String" value="Algorithm will interprets each edge as undirected"/>
             <Property name="name" type="java.lang.String" value="undirectedModeRadio" noResource="true"/>
           </Properties>
         </Component>
