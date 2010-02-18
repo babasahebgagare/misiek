@@ -40,8 +40,6 @@ import cytoscape.CyEdge;
 import cytoscape.CyNode;
 import cytoscape.Cytoscape;
 import cytoscape.data.CyAttributes;
-import cytoscape.layout.CyLayoutAlgorithm;
-import cytoscape.layout.CyLayouts;
 import cytoscape.task.TaskMonitor;
 import cytoscape.view.CyNetworkView;
 import cytoscape.visual.NodeShape;
