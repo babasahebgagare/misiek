@@ -205,7 +205,9 @@ public class AffinityPanelController implements Serializable {
     }
 
     public void showCenters(final String centersAttribute) {
-        cytoAlgorithmTask.showCenters(centersAttribute);
+        if (centersAttribute != null) {
+            cytoAlgorithmTask.showCenters(centersAttribute);
+        }
     }
 
     public String getCentersAttr() {
