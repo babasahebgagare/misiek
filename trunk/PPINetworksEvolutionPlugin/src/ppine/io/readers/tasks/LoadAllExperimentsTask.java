@@ -52,7 +52,7 @@ public class LoadAllExperimentsTask extends PPINELoadTask {
 
     public void run() {
         myThread = Thread.currentThread();
-        taskMonitor.setStatus("Loading experiments...");
+        taskMonitor.setStatus("Experiments are loading...");
         taskMonitor.setPercentCompleted(-1);
 
         try {
@@ -79,7 +79,7 @@ public class LoadAllExperimentsTask extends PPINELoadTask {
     }
 
     public String getTitle() {
-        return "Loading experiments...";
+        return "Experiments are loading...";
     }
 
     private void reading() throws IOException, ExperimentsFileFormatException {

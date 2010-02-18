@@ -55,7 +55,7 @@ public class LoadAllInteractionsTask extends PPINELoadTask {
 
     public void run() {
         myThread = Thread.currentThread();
-        taskMonitor.setStatus("Interactions loading...");
+        taskMonitor.setStatus("Interactions are loading...");
         taskMonitor.setPercentCompleted(-1);
 
         try {
@@ -82,7 +82,7 @@ public class LoadAllInteractionsTask extends PPINELoadTask {
     }
 
     public String getTitle() {
-        return "Loading interactions with tresholds...";
+        return "Interactions are loading...";
     }
 
     private void reading() throws IOException, InteractionsFileFormatException {

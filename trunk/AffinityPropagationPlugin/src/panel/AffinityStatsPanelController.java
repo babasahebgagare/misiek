@@ -31,7 +31,6 @@
 package panel;
 
 import cytoscape.Cytoscape;
-import java.awt.Button;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.swing.JFrame;
@@ -39,7 +38,6 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import org.jdesktop.swingx.VerticalLayout;
 
 public class AffinityStatsPanelController implements Serializable {
@@ -106,7 +104,7 @@ public class AffinityStatsPanelController implements Serializable {
             if (log.getNoise()) {
                 strTakeNoise = "YES";
             }
-            Object[] row = new Object[]{log.getNetwork(), log.getIterations(), log.getConvits(), log.getMadeIterations(), log.getPreferences(), log.getLambda(), log.getClusters(), log.getClusterID(), log.getCenterID(), strTakeLog, strTakeNoise};
+            Object[] row = new Object[]{log.getNetwork(), log.getIterations(), log.getConvits(), log.getPreferences(), log.getLambda(), strTakeLog, strTakeNoise, log.getClusterID(), log.getCenterID(), log.getMadeIterations(), log.getClusters()};
             model.addRow(row);
         }
 

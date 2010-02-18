@@ -50,14 +50,14 @@
                 <Column editable="false" title="Network" type="java.lang.String"/>
                 <Column editable="false" title="Iterations" type="java.lang.Integer"/>
                 <Column editable="false" title="Stop criterium" type="java.lang.Integer"/>
-                <Column editable="false" title="Made iterations" type="java.lang.Integer"/>
                 <Column editable="false" title="Preferences" type="java.lang.Double"/>
                 <Column editable="false" title="Lambda" type="java.lang.Double"/>
-                <Column editable="false" title="Clusters" type="java.lang.Integer"/>
-                <Column editable="false" title="Clusters ID" type="java.lang.String"/>
-                <Column editable="false" title="Centers ID" type="java.lang.String"/>
                 <Column editable="false" title="Take log" type="java.lang.String"/>
                 <Column editable="false" title="Noise" type="java.lang.String"/>
+                <Column editable="false" title="Clusters ID" type="java.lang.String"/>
+                <Column editable="false" title="Centers ID" type="java.lang.String"/>
+                <Column editable="false" title="Made iterations" type="java.lang.Integer"/>
+                <Column editable="false" title="Clusters" type="java.lang.Integer"/>
               </Table>
             </Property>
           </Properties>
