@@ -345,7 +345,7 @@ private void deleteVataButtonActionPerformed(java.awt.event.ActionEvent evt) {//
 }//GEN-LAST:event_deleteVataButtonActionPerformed
 
 private void testButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testButtonActionPerformed
-    Stats.printStats();
+//    Stats.printStats();
     DefaultLoadingController.showPPINELogsPanel();
 }//GEN-LAST:event_testButtonActionPerformed
 
