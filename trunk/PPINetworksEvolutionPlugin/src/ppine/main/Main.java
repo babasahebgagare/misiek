@@ -28,16 +28,39 @@
  *           Janusz Dutkowski (idea, data) (j.dutkowski@mimuw.edu.pl)
  *           Jerzy Tiuryn (supervisor) (tiuryn@mimuw.edu.pl)
  */
-
 package ppine.main;
 
+import cytoscape.Cytoscape;
 import cytoscape.plugin.CytoscapePlugin;
+import cytoscape.util.CytoscapeAction;
+import java.awt.event.ActionEvent;
 
 public class Main extends CytoscapePlugin {
 
     public Main() {
-        PluginInitializator.initAll();
-        PluginDataHandle.refreshPluginDataHandle();
+        //create a new action to respond to menu activation
+        NetworkEvolutionPluginAction action = new NetworkEvolutionPluginAction();
+        //set the preferred menu
+        action.setPreferredMenu("Plugins");
+        //and add it to the menus
+        Cytoscape.getDesktop().getCyMenus().addAction(action);
+    }
+
+    public class NetworkEvolutionPluginAction extends CytoscapeAction {
+
+        /**
+         * The constructor sets the text that should appear on the menu item.
+         */
+        public NetworkEvolutionPluginAction() {
+            super("NetworkEvolutionPlugin");
+
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            PluginInitializator.initAll();
+            PluginDataHandle.refreshPluginDataHandle();
+        }
     }
 }
 
