@@ -46,7 +46,6 @@ import cytoscape.task.TaskMonitor;
 import cytoscape.view.CyNetworkView;
 import cytoscape.visual.NodeShape;
 import giny.view.NodeView;
-import java.util.Collection;
 import java.util.TreeMap;
 import java.util.List;
 import java.util.Map;
@@ -144,10 +143,9 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
 
         Map<Integer, Cluster<Integer>> clusters = af.doClusterAssocInt();
 
-        if (clusters != null) {
-            for (CyLayoutAlgorithm layout : CyLayouts.getAllLayouts()) {
-                layout.setLayoutAttribute(nodeNameAttr);
-            }
+        if (clusters != null && clusters.size() > 0) {
+            psc.addCentersAttribute(centersNameAttr);
+
             for (Cluster<Integer> cluster : clusters.values()) {
                 clusterprior.add(cluster);
             }
@@ -184,6 +182,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
                 }
                 i++;
             }
+            showCenters(centersNameAttr);
         }
         //  clustersNumber = af.getClustersNumber();
         monitor.setPercentCompleted(100);

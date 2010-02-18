@@ -63,7 +63,7 @@ import utils.MathStats;
 public class AffinityPanelController implements Serializable {
 
     private final static long serialVersionUID = 7526471155622776147L;
-    private final String DEFAULT_PREFERENCE = "0.5";
+    private final String DEFAULT_PREFERENCE = "0.500";
     private final String DEFAULT_CLUSTER_ID = "cluster_id";
     private final String DEFAULT_CENTERS_ID = "center_id";
     private final String DEFAULT_LAMBDA = "0.9";
@@ -101,6 +101,11 @@ public class AffinityPanelController implements Serializable {
     public JPanel createAffinityPanel() {
         JPanel panel = new AffinityPanel(this);
         return panel;
+    }
+
+    public void addCentersAttribute(String attr) {
+        centersAttr.add(attr);
+        refreshCentersAttrList();
     }
 
     void doCluster() {
@@ -159,9 +164,9 @@ public class AffinityPanelController implements Serializable {
         String network = Cytoscape.getCurrentNetwork().getTitle();
         psc.addClusteringStat(network, lambda, preferences, clusters, iterations, convits, madeIterations, nodeNameAttr, centersNameAttr, takeLog, noise);
 
-        String centerAttr = getCentersAttr();
+        /* String centerAttr = getCentersAttr();
         centersAttr.add(centerAttr);
-        refreshCentersAttrList();
+        refreshCentersAttrList();*/
     }
 
     public JCheckBox getTransformingCheckbox() {
