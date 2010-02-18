@@ -56,7 +56,7 @@ public class LoadSpeciesInteractionsTask extends PPINELoadTask {
     @Override
     public void run() {
         myThread = Thread.currentThread();
-        taskMonitor.setStatus("Interactions loading for: " + network.getID());
+        taskMonitor.setStatus("Interactions ares loading for: " + network.getID());
         taskMonitor.setPercentCompleted(-1);
 
         try {
@@ -82,7 +82,7 @@ public class LoadSpeciesInteractionsTask extends PPINELoadTask {
     }
 
     public String getTitle() {
-        return "Loading interactions with treshold: " + String.valueOf(treshold);
+        return "Interactions are with treshold: " + String.valueOf(treshold);
     }
 
     private void reading() throws IOException, InteractionsFileFormatException {
@@ -116,7 +116,7 @@ public class LoadSpeciesInteractionsTask extends PPINELoadTask {
             if (percent > last_percent + 1) {
                 last_percent = percent;
                 taskMonitor.setPercentCompleted(Math.round(percent));
-                taskMonitor.setStatus("Interactions loading for: " + network.getID() + "  " + count);
+                taskMonitor.setStatus("Interactions are loading for: " + network.getID() + "  " + count);
             }
         }
     }

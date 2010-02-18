@@ -45,11 +45,11 @@ public class PanelsWithDetails extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Network", "Iterations", "Stop criterium", "Made iterations", "Preferences", "Lambda", "Clusters", "Clusters ID", "Centers ID", "Take log", "Noise"
+                "Network", "Iterations", "Stop criterium", "Preferences", "Lambda", "Take log", "Noise", "Clusters ID", "Centers ID", "Made iterations", "Clusters"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false, false, false, false

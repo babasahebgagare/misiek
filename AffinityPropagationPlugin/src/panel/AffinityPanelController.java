@@ -432,6 +432,10 @@ public class AffinityPanelController implements Serializable {
 
     public void refreshPreferences() {
         String edgeNameAttr = getEdgeAttr();
+        if (edgeNameAttr.equals(DEFAULT)) {
+            setPreferences(Double.parseDouble(DEFAULT_PREFERENCE));
+            return;
+        }
         if (!validateEdgeNameAttr(edgeNameAttr)) {
             return;
         }
@@ -703,6 +707,11 @@ public class AffinityPanelController implements Serializable {
     private boolean validateNetwork() {
         if (Cytoscape.getCurrentNetwork() == Cytoscape.getNullNetwork()) {
             Messenger.message("You have to select some network");
+            return false;
+        }
+
+        if (Cytoscape.getCurrentNetworkView() == Cytoscape.getNullNetworkView()) {
+            Messenger.message("You have to select some network view");
             return false;
         }
         return true;

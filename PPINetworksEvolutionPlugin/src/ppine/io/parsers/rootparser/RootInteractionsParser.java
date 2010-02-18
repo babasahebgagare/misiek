@@ -51,10 +51,10 @@ public class RootInteractionsParser {
         Double sim;
 
         try {
-            sim = Double.valueOf(tokens[2]);
+            sim = Double.valueOf(tokens[1]);
         } catch (NumberFormatException e) {
             throw new InteractionsFileFormatException(line, 0);
         }
-        return new InteractionParserStruct(tokens[0], tokens[1], sim);
+        return new InteractionParserStruct(tokens[0], tokens[2], sim);
     }
 }
