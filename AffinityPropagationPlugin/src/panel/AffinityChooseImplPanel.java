@@ -64,7 +64,6 @@ public class AffinityChooseImplPanel extends javax.swing.JPanel {
         implementationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Choose implementation"));
         implementationPanel.setMaximumSize(new java.awt.Dimension(270, 32767));
         implementationPanel.setName("implementationPanel"); // NOI18N
-        implementationPanel.setPreferredSize(new java.awt.Dimension(270, 56));
 
         radioImplementationGroup.add(radioSibling);
         radioSibling.setSelected(true);
@@ -83,7 +82,7 @@ public class AffinityChooseImplPanel extends javax.swing.JPanel {
             .addGroup(implementationPanelLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(radioMatrix)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addComponent(radioSibling)
                 .addGap(46, 46, 46))
         );
@@ -100,11 +99,11 @@ public class AffinityChooseImplPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(implementationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
+            .addComponent(implementationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(implementationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(implementationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

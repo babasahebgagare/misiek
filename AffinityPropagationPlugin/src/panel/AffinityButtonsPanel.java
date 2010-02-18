@@ -63,7 +63,6 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
         centersAttrList = new javax.swing.JComboBox();
 
         setMaximumSize(new java.awt.Dimension(270, 32767));
-        setPreferredSize(new java.awt.Dimension(270, 25));
 
         startButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/run.png"))); // NOI18N
         startButton.setText("Start");
@@ -111,7 +110,7 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(startButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(centersAttrList, 0, 69, Short.MAX_VALUE)
+                .addComponent(centersAttrList, 0, 68, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)

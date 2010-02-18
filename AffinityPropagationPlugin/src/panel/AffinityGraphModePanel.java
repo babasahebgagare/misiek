@@ -59,7 +59,6 @@ public class AffinityGraphModePanel extends javax.swing.JPanel {
 
         graphModePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Graph mode"));
         graphModePanel.setName("graphModePanel"); // NOI18N
-        graphModePanel.setPreferredSize(new java.awt.Dimension(270, 49));
 
         graphModeGroup.add(directedModeRadio);
         directedModeRadio.setText("Directed edges");
@@ -79,7 +78,7 @@ public class AffinityGraphModePanel extends javax.swing.JPanel {
             .addGroup(graphModePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(undirectedModeRadio)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addComponent(directedModeRadio)
                 .addGap(36, 36, 36))
         );
@@ -94,7 +93,7 @@ public class AffinityGraphModePanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(graphModePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+            .addComponent(graphModePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

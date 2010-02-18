@@ -32,7 +32,9 @@ package main;
 
 import cytoscape.Cytoscape;
 import cytoscape.plugin.CytoscapePlugin;
+import cytoscape.util.CytoscapeAction;
 import cytoscape.view.cytopanels.CytoPanelImp;
+import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import org.jdesktop.swingx.VerticalLayout;
@@ -47,32 +49,54 @@ import panel.AffinityStatsPanelController;
 public class AffinityMain extends CytoscapePlugin {
 
     public AffinityMain() {
+        //create a new action to respond to menu activation
+        APPluginAction action = new APPluginAction();
+        //set the preferred menu
+        action.setPreferredMenu("Plugins");
+        //and add it to the menus
+        Cytoscape.getDesktop().getCyMenus().addAction(action);
+    }
 
-        CytoPanelImp leftPanel = (CytoPanelImp) Cytoscape.getDesktop().getCytoPanel(SwingConstants.WEST);
+    public class APPluginAction extends CytoscapeAction {
 
-        AffinityStatsPanelController psc = new AffinityStatsPanelController();
-        AffinityPanelController pc = new AffinityPanelController(psc);
+        /**
+         * The constructor sets the text that should appear on the menu item.
+         */
+        public APPluginAction() {
+            super("APGraphClusteringPlugin");
+        }
 
-        JPanel myAff = new AffinityMainPanel();
-        myAff.setLayout(new VerticalLayout());
+        /**
+         * This method is called when the user selects the menu item.
+         */
+        public void actionPerformed(ActionEvent ae) {
+            //get the network object; this contains the graph
+            CytoPanelImp leftPanel = (CytoPanelImp) Cytoscape.getDesktop().getCytoPanel(SwingConstants.WEST);
 
-        JPanel chooseImplPanel = new AffinityChooseImplPanel(pc);
-        JPanel connModePanel = new AffinityConnModePanel(pc);
-        JPanel graphModePanel = new AffinityGraphModePanel(pc);
-        JPanel actionButtonsPanel = new AffinityButtonsPanel(pc);
+            AffinityStatsPanelController psc = new AffinityStatsPanelController();
+            AffinityPanelController pc = new AffinityPanelController(psc);
 
-        JPanel afpanel = pc.createAffinityPanel();
-        JPanel stats = psc.createAffinityStatsPanel();
+            JPanel myAff = new AffinityMainPanel();
+            myAff.setLayout(new VerticalLayout());
 
-        myAff.add(afpanel, 0);
-        myAff.add(chooseImplPanel, 1);
-        myAff.add(connModePanel, 2);
-        myAff.add(graphModePanel, 3);
-        myAff.add(actionButtonsPanel, 4);
-        myAff.add(stats, 5);
+            JPanel chooseImplPanel = new AffinityChooseImplPanel(pc);
+            JPanel connModePanel = new AffinityConnModePanel(pc);
+            JPanel graphModePanel = new AffinityGraphModePanel(pc);
+            JPanel actionButtonsPanel = new AffinityButtonsPanel(pc);
 
-        leftPanel.add("APGraphClustringPlugin", myAff);
-        //System.out.println("Affinity propagation");
+            JPanel afpanel = pc.createAffinityPanel();
+            JPanel stats = psc.createAffinityStatsPanel();
+
+            myAff.add(afpanel, 0);
+            myAff.add(chooseImplPanel, 1);
+            myAff.add(connModePanel, 2);
+            myAff.add(graphModePanel, 3);
+            myAff.add(actionButtonsPanel, 4);
+            myAff.add(stats, 5);
+
+            leftPanel.add("APGraphClustringPlugin", myAff);
+            //System.out.println("Affinity propagation");
+        }
     }
 }
 
