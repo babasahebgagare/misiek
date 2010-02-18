@@ -67,6 +67,7 @@ public class AffinityPanelController implements Serializable {
     private final String DEFAULT_CLUSTER_ID = "cluster_id";
     private final String DEFAULT_CENTERS_ID = "center_id";
     private final String DEFAULT_LAMBDA = "0.9";
+    private final int ITERATIONS_DEFAULT = 100;
     private final String DEFAULT = "DEFAULT";
     private JTextField lambdaField = null;
     private JTextField convitsField = null;
@@ -517,7 +518,7 @@ public class AffinityPanelController implements Serializable {
     }
 
     private void initIterationsField() {
-        iterationsField.setValue(Integer.valueOf(100));
+        iterationsField.setValue(Integer.valueOf(ITERATIONS_DEFAULT));
     }
 
     private void initLambdaField() {

@@ -324,7 +324,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
 
     public void showInfoAfterClustering() {
         if (!af.didConvergence()) {
-            Messenger.messageInfo("Algorithm did not converge after: " + (af.getCurrentIteration() - 1) + " iterations");
+            Messenger.messageInfo("Algorithm did not converge after: " + af.getCurrentIteration() + " iterations");
         } else {
             Messenger.messageInfo("Algorithm converged after: " + af.getCurrentIteration() + " iterations");
         }

@@ -36,7 +36,6 @@ import cytoscape.task.Task;
 import cytoscape.task.TaskMonitor;
 
 import cytoscape.task.ui.JTaskConfig;
-import panel.AffinityPanelController;
 
 /**
  * A wrapper for applying a cluster in a task. Use it something like
