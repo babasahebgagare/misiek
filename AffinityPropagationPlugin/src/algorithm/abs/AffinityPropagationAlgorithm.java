@@ -229,7 +229,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
         if (noise) {
             generateNoise();
         }
-
+        
         //   showInfo();
 
         for (iteration = 1; iteration <= iters; iteration++) {
@@ -254,6 +254,10 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
             if (notConverged == false) {
                 break;
             }
+        }
+
+        if(iteration > iters) {
+            iteration = iters;
         }
 
         computeCenters();
