@@ -364,29 +364,30 @@ public class AffinityPanelController implements Serializable {
 
     private boolean validateValues(final Double lambda, final Double preferences, final Integer iterations, final Integer convits, final String nodeNameAttr, final String edgeNameAttr, final String centersNameAttr) {
         if (!validateLambda(lambda)) {
-            Messenger.message("Lambda paremater have to be between 0 and 1!");
+            Messenger.message("Lambda paremater has to be between 0 and 1.");
             return false;
         }
         if (!validatePreferences(preferences)) {
+            Messenger.message("Preferences paremater has to be a real number.");
             return false;
         }
         if (!validateIterations(iterations)) {
-            Messenger.message("Iteration number paremater is not valid!");
+            Messenger.message("Iteration number has to be a integer greater equal 1.");
             return false;
         }
         if (!validateConvits(convits)) {
-            Messenger.message("Convits paremater is not valid!");
+            Messenger.message("Convits paremater has to be empty or integer.");
             return false;
         }
         if (!validateEdgeNameAttr(edgeNameAttr)) {
-            Messenger.message("Edge name paremater is not valid!");
+            Messenger.message("Edge name paremater is not valid.");
             return false;
         }
         if (!validateNodeNameAttr(nodeNameAttr)) {
             if (cancelDialog) {
                 cancelDialog = false;
             } else {
-                Messenger.message("Node name paremater is not valid!");
+                Messenger.message("Node name paremater is not valid");
             }
             return false;
         }
@@ -551,7 +552,7 @@ public class AffinityPanelController implements Serializable {
         try {
             return (Integer) iterationsField.getValue();
         } catch (NumberFormatException e) {
-            Messenger.error(e);
+         //   Messenger.error(e);
             return null;
         }
     }
@@ -561,8 +562,8 @@ public class AffinityPanelController implements Serializable {
         try {
             return Double.valueOf(preferencesField.getText());
         } catch (NumberFormatException e) {
-            Messenger.error(e);
-            Messenger.message(preferencesField.getText());
+       //     Messenger.error(e);
+       //     Messenger.message(preferencesField.getText());
             return null;
         }
     }
@@ -578,7 +579,7 @@ public class AffinityPanelController implements Serializable {
             return Double.valueOf(lambdaField.getText());
         } catch (NumberFormatException ex) {
             //Logger.getLogger(AffinityPanelController.class.getName()).log(Level.SEVERE, null, ex);
-            Messenger.error(ex);
+          //  Messenger.error(ex);
             return null;
         }
     }
@@ -588,7 +589,7 @@ public class AffinityPanelController implements Serializable {
         try {
             return Integer.valueOf(convitsField.getText());
         } catch (NumberFormatException e) {
-            Messenger.error(e);
+      //      Messenger.error(e);
             return null;
         }
     }
