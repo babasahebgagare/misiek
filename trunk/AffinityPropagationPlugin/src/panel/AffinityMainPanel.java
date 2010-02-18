@@ -49,7 +49,7 @@ public class AffinityMainPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         setMaximumSize(new java.awt.Dimension(283, 32767));
-        setPreferredSize(new java.awt.Dimension(283, 144));
+        setPreferredSize(new java.awt.Dimension(271, 144));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -59,7 +59,7 @@ public class AffinityMainPanel extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 557, Short.MAX_VALUE)
+            .addGap(0, 144, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

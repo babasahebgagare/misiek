@@ -415,23 +415,27 @@ public class AffinityPanelController implements Serializable {
             final byte cyType = edgesAttributes.getType(attrName);
             if (cyType == CyAttributes.TYPE_FLOATING) {
                 CyNetworkView view = Cytoscape.getCurrentNetworkView();
-                EdgeView edgeView = (EdgeView) view.getEdgeViewsIterator().next();
-                Edge edge = edgeView.getEdge();
-                Double attr = edgesAttributes.getDoubleAttribute(edge.getIdentifier(), attrName);
-                if (attr != null) {
-                    edgeAttrField.addItem(attrName);
+                if (view.getEdgeViewsList().size() > 0) {
+                    EdgeView edgeView = (EdgeView) view.getEdgeViewsIterator().next();
+                    Edge edge = edgeView.getEdge();
+                    Double attr = edgesAttributes.getDoubleAttribute(edge.getIdentifier(), attrName);
+                    if (attr != null) {
+                        edgeAttrField.addItem(attrName);
+                    }
                 }
             } else if (cyType == CyAttributes.TYPE_STRING) {
                 CyNetworkView view = Cytoscape.getCurrentNetworkView();
-                EdgeView edgeView = (EdgeView) view.getEdgeViewsIterator().next();
-                Edge edge = edgeView.getEdge();
-                String attr = edgesAttributes.getStringAttribute(edge.getIdentifier(), attrName);
-                try {
-                    if (attr != null) {
-                        Double val = Double.parseDouble(attr);
-                        edgeAttrField.addItem(attrName);
+                if (view.getEdgeViewsList().size() > 0) {
+                    EdgeView edgeView = (EdgeView) view.getEdgeViewsIterator().next();
+                    Edge edge = edgeView.getEdge();
+                    String attr = edgesAttributes.getStringAttribute(edge.getIdentifier(), attrName);
+                    try {
+                        if (attr != null) {
+                            Double val = Double.parseDouble(attr);
+                            edgeAttrField.addItem(attrName);
+                        }
+                    } catch (NumberFormatException e) {
                     }
-                } catch (NumberFormatException e) {
                 }
             }
         }
@@ -552,7 +556,7 @@ public class AffinityPanelController implements Serializable {
         try {
             return (Integer) iterationsField.getValue();
         } catch (NumberFormatException e) {
-         //   Messenger.error(e);
+            //   Messenger.error(e);
             return null;
         }
     }
@@ -562,8 +566,8 @@ public class AffinityPanelController implements Serializable {
         try {
             return Double.valueOf(preferencesField.getText());
         } catch (NumberFormatException e) {
-       //     Messenger.error(e);
-       //     Messenger.message(preferencesField.getText());
+            //     Messenger.error(e);
+            //     Messenger.message(preferencesField.getText());
             return null;
         }
     }
@@ -579,7 +583,7 @@ public class AffinityPanelController implements Serializable {
             return Double.valueOf(lambdaField.getText());
         } catch (NumberFormatException ex) {
             //Logger.getLogger(AffinityPanelController.class.getName()).log(Level.SEVERE, null, ex);
-          //  Messenger.error(ex);
+            //  Messenger.error(ex);
             return null;
         }
     }
@@ -589,7 +593,7 @@ public class AffinityPanelController implements Serializable {
         try {
             return Integer.valueOf(convitsField.getText());
         } catch (NumberFormatException e) {
-      //      Messenger.error(e);
+            //      Messenger.error(e);
             return null;
         }
     }
