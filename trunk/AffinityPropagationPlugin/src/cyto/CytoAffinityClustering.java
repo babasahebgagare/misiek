@@ -34,7 +34,7 @@ import algorithm.abs.AffinityPropagationAlgorithm;
 import algorithm.abs.AffinityPropagationAlgorithm.AffinityConnectingMethod;
 import algorithm.abs.AffinityPropagationAlgorithm.AffinityGraphMode;
 import algorithm.matrix.MatrixPropagationAlgorithm;
-import algorithm.abs.Cluster;
+import algorithm.abs.ClusterInteger;
 import algorithm.smart.SmartPropagationAlgorithm;
 import cytoscape.CyEdge;
 import cytoscape.CyNode;
@@ -131,7 +131,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
     public void doCluster(final TaskMonitor monitor) {
         this.taskMonitor = monitor;
         super.setMyThread(Thread.currentThread());
-        PriorityQueue<Cluster<Integer>> clusterprior = new PriorityQueue<Cluster<Integer>>();
+        PriorityQueue<ClusterInteger> clusterprior = new PriorityQueue<ClusterInteger>();
 
         monitor.setStatus("Loading similarity matrix...");
 
@@ -139,12 +139,12 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
         monitor.setStatus("Clustering...");
         createIteractionListener(monitor);
 
-        Map<Integer, Cluster<Integer>> clusters = af.doClusterAssocInt();
+        Map<Integer, ClusterInteger> clusters = af.doClusterAssocInt();
 
         if (clusters != null && clusters.size() > 0) {
             psc.addCentersAttribute(centersNameAttr);
 
-            for (Cluster<Integer> cluster : clusters.values()) {
+            for (ClusterInteger cluster : clusters.values()) {
                 clusterprior.add(cluster);
             }
             @SuppressWarnings("unchecked")
@@ -164,7 +164,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
             int i = 0;
 
             while (clusterprior.size() > 0) {
-                Cluster<Integer> cluster = clusterprior.poll();
+                ClusterInteger cluster = clusterprior.poll();
                 /*    int strl = String.valueOf(i).length();
                 String id = "";
                 for (int j = strl; j < strlen; j++) {

@@ -28,11 +28,9 @@
  *           Janusz Dutkowski (idea) (j.dutkowski@mimuw.edu.pl)
  *           Jerzy Tiuryn (supervisor) (tiuryn@mimuw.edu.pl)
  */
-
-
 package prime;
 
-import algorithm.abs.Cluster;
+import algorithm.abs.ClusterInteger;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -52,8 +50,8 @@ public class PrimeAlgorithm {
         init(sources);
     }
 
-    public Map<Integer, Cluster<Integer>> run() {
-        Map<Integer, Cluster<Integer>> ret = new TreeMap<Integer, Cluster<Integer>>();
+    public Map<Integer, ClusterInteger> run() {
+        Map<Integer, ClusterInteger> ret = new TreeMap<Integer, ClusterInteger>();
 
         while (edges.size() > 0) {
             PrimeEdge minEdge = edges.poll();
@@ -78,16 +76,16 @@ public class PrimeAlgorithm {
         }
 
         for (Integer source : sources) {
-            Cluster<Integer> clust = new Cluster<Integer>(source);
+            ClusterInteger clust = new ClusterInteger(source);
             clust.add(source);
             ret.put(source, clust);
-        //  current.addNode(node);
+            //  current.addNode(node);
         }
 
         for (PrimeNode node : graph.getNodes()) {
             if (node.getSourceName() != null) {
                 if (!sources.contains(node.getName())) {
-                    Cluster<Integer> cluster = ret.get(node.getSourceName());
+                    ClusterInteger cluster = ret.get(node.getSourceName());
                     cluster.add(node.getName());
                 }
             }

@@ -69,7 +69,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
     protected boolean notConverged = true;
     protected Integer convits = null;
     protected ActionListener iteractionListenerOrNull = null;
-    protected Map<Integer, Cluster<Integer>> assigments;
+    protected Map<Integer, ClusterInteger> assigments;
     protected Map<Integer, ConvitsVector> convitsVectors = new TreeMap<Integer, ConvitsVector>();
     private Collection<Integer> refined = null;
     private int currentID = 0;
@@ -115,7 +115,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
         //  boolean debug = false;
         Collection<Integer> refinedCenters = new TreeSet<Integer>();
 
-        for (Cluster<Integer> cluster : assigments.values()) {
+        for (ClusterInteger cluster : assigments.values()) {
 
             int maxid = cluster.getName().intValue();
             Integer maxlevel = Integer.valueOf(0);
@@ -157,7 +157,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
 
     public abstract void setSimilarityInt(Integer other, Integer curr, Double sim);
 
-    private Map<Integer, Cluster<Integer>> computeFloydAssigments(Collection<Integer> examplars, Collection<Integer> centers) {
+    private Map<Integer, ClusterInteger> computeFloydAssigments(Collection<Integer> examplars, Collection<Integer> centers) {
         return null;
     }
 
@@ -204,11 +204,11 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
     }
 
     public Map<Integer, Integer> doClusterInt() {
-        final Map<Integer, Cluster<Integer>> help = doClusterAssocInt();
+        final Map<Integer, ClusterInteger> help = doClusterAssocInt();
         if (help != null) {
             final Map<Integer, Integer> res = new TreeMap<Integer, Integer>();
 
-            for (Entry<Integer, Cluster<Integer>> entry : help.entrySet()) {
+            for (Entry<Integer, ClusterInteger> entry : help.entrySet()) {
                 for (Integer obj : entry.getValue().getElements()) {
                     res.put(obj, entry.getKey());
                 }
@@ -220,7 +220,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
         }
     }
 
-    public Map<Integer, Cluster<Integer>> doClusterAssocInt() {
+    public Map<Integer, ClusterInteger> doClusterAssocInt() {
         int iters = getIterations();
         if (iteractionListenerOrNull != null) {
             iteractionListenerOrNull.actionPerformed(new ActionEvent(new IterationData(1, 0), 0, "ITERATION"));
@@ -369,15 +369,15 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
 
     protected abstract Collection<Integer> getAllExamplars();
 
-    private Map<Integer, Cluster<Integer>> computeOriginalAssigments(Collection<Integer> examplars, Collection<Integer> centers) {
-        Map<Integer, Cluster<Integer>> ret = new HashMap<Integer, Cluster<Integer>>();
+    private Map<Integer, ClusterInteger> computeOriginalAssigments(Collection<Integer> examplars, Collection<Integer> centers) {
+        Map<Integer, ClusterInteger> ret = new HashMap<Integer, ClusterInteger>();
         Map<Integer, Integer> clustered = new TreeMap<Integer, Integer>();
         Collection<Integer> unclustered = new TreeSet<Integer>(examplars);
         Collection<Integer> unclusteredHelp = new TreeSet<Integer>(examplars);
 
         for (Integer center : centers) {
             //   System.out.println("CENTER: " + center);
-            Cluster<Integer> clust = new Cluster<Integer>(center);
+            ClusterInteger clust = new ClusterInteger(center);
             clust.add(center);
             ret.put(center, clust);
             clustered.put(center, center);
@@ -416,7 +416,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
                     }
                 }
                 if (maxidOrNull != null) {
-                    Cluster<Integer> cluster = ret.get(maxidOrNull);
+                    ClusterInteger cluster = ret.get(maxidOrNull);
                     cluster.add(examplar);
                     clustered.put(examplar, maxidOrNull);
                     unclustered.remove(examplar);
@@ -427,7 +427,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
         return ret;
     }
 
-    private Map<Integer, Cluster<Integer>> computePrimeAssigments(Collection<Integer> examplars, Collection<Integer> centers) {
+    private Map<Integer, ClusterInteger> computePrimeAssigments(Collection<Integer> examplars, Collection<Integer> centers) {
         PrimeGraph graph = new PrimeGraph();
 
         for (Integer examplar : examplars) {
@@ -484,13 +484,13 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
     @Override
     public Map<String, Cluster<String>> doClusterAssoc() {
         Map<String, Cluster<String>> res = new HashMap<String, Cluster<String>>();
-        Map<Integer, Cluster<Integer>> resInt = doClusterAssocInt();
+        Map<Integer, ClusterInteger> resInt = doClusterAssocInt();
         if (resInt == null) {
             return null;
         }
 
-        for (Entry<Integer, Cluster<Integer>> entry : resInt.entrySet()) {
-            Cluster<Integer> clusterInt = entry.getValue();
+        for (Entry<Integer, ClusterInteger> entry : resInt.entrySet()) {
+            ClusterInteger clusterInt = entry.getValue();
             Cluster<String> cluster = new Cluster<String>(idRevMapper.get(clusterInt.getName()));
             for (Integer ex : clusterInt.getElements()) {
                 cluster.add(idRevMapper.get(ex));
