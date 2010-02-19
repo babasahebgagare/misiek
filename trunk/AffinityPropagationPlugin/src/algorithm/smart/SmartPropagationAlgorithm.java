@@ -33,7 +33,6 @@ package algorithm.smart;
 import algorithm.abs.AffinityPropagationAlgorithm;
 import algorithm.abs.ConvitsVector;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.TreeSet;
 
@@ -107,11 +106,10 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
         for (Examplar examplar : examplars.getExamplars().values()) {
             if (!examplar.getName().equals(name)) {
                 SiblingData sibling = examplar.getSiblingMap().get(name);
-                //    if (sibling != null) {
-                double r = sibling.getR();
-                sum += Math.max(0, r);
-                //  }
-
+                if (sibling != null) {
+                    double r = sibling.getR();
+                    sum += Math.max(0, r);
+                }
             }
         }
 
@@ -144,8 +142,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
                 SiblingData sibling = examplar.getSiblingMap().get(siblingName);
                 if (sibling != null) {
                     double rik = sibling.getR();
-                    sum +=
-                            Math.max(0, rik);
+                    sum += Math.max(0, rik);
                 }
 
             }
@@ -337,40 +334,40 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
 
     @Override
     protected void showInfo() {
-        System.out.println("SSSSS");
-        for (Examplar examplar : examplars.getExamplars().values()) {
-            Collection<SiblingData> siblings = examplar.getSiblingMap().values();
-            for (SiblingData sibling : siblings) {
-                if (sibling.getName().equals(examplar.getName())) {
-                    System.out.println(sibling.getS());
-                }
-            }
-        }
-        /*      System.out.println("EEEE");
-        for (Examplar examplar : examplars.getExamplars().values()) {
-        Collection<SiblingData> siblings = examplar.getSiblingMap().values();
-        for (SiblingData sibling : siblings) {
-        if (sibling.getExamplarName().equals(examplar.getName())) {
-        System.out.println(sibling.getA() + sibling.getR());
-        }
-        }
-        }
-        for (Examplar examplar : examplars.getExamplars().values()) {
-        Collection<SiblingData> siblings = examplar.getSiblingMap().values();
-        for (SiblingData sibling : siblings) {
-        if (sibling.getExamplarName().equals(examplar.getName())) {
-        System.out.println(sibling.getA());
-        }
-        }
-        }
-        System.out.println("RRRRRRRRRRRRRRR");
-        for (Examplar examplar : examplars.getExamplars().values()) {
-        Collection<SiblingData> siblings = examplar.getSiblingMap().values();
-        for (SiblingData sibling : siblings) {
-        if (sibling.getExamplarName().equals(examplar.getName())) {
-        System.out.println(sibling.getR());
-        }
-        }
-        }*/
     }
+    /*System.out.println("SSSSS");
+    for (Examplar examplar : examplars.getExamplars().values()) {
+    Collection<SiblingData> siblings = examplar.getSiblingMap().values();
+    for (SiblingData sibling : siblings) {
+    if (sibling.getName().equals(examplar.getName())) {
+    System.out.println(sibling.getS());
+    }
+    }
+    }
+    System.out.println("EEEE");
+    for (Examplar examplar : examplars.getExamplars().values()) {
+    Collection<SiblingData> siblings = examplar.getSiblingMap().values();
+    for (SiblingData sibling : siblings) {
+    if (sibling.getExamplarName().equals(examplar.getName())) {
+    System.out.println(sibling.getA() + sibling.getR());
+    }
+    }
+    }
+    for (Examplar examplar : examplars.getExamplars().values()) {
+    Collection<SiblingData> siblings = examplar.getSiblingMap().values();
+    for (SiblingData sibling : siblings) {
+    if (sibling.getExamplarName().equals(examplar.getName())) {
+    System.out.println(sibling.getA());
+    }
+    }
+    }
+    System.out.println("RRRRRRRRRRRRRRR");
+    for (Examplar examplar : examplars.getExamplars().values()) {
+    Collection<SiblingData> siblings = examplar.getSiblingMap().values();
+    for (SiblingData sibling : siblings) {
+    if (sibling.getExamplarName().equals(examplar.getName())) {
+    System.out.println(sibling.getR());
+    }
+    }
+    }*/
 }

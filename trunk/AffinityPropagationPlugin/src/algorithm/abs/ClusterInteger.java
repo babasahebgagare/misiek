@@ -38,16 +38,16 @@ import java.util.TreeSet;
  * @param <T>
  * @author misiek
  */
-public class Cluster<T> implements Comparable<Cluster<T>> {
+public class ClusterInteger implements Comparable<ClusterInteger> {
 
-    private T name;
-    private Collection<T> elements = new TreeSet<T>();
+    private Integer name;
+    private Collection<Integer> elements = new TreeSet<Integer>();
 
-    public Cluster(final T name) {
+    public ClusterInteger(final Integer name) {
         this.name = name;
     }
 
-    public T getName() {
+    public Integer getName() {
         return name;
     }
 
@@ -55,15 +55,15 @@ public class Cluster<T> implements Comparable<Cluster<T>> {
         return elements.size();
     }
 
-    public void add(final T element) {
+    public void add(final Integer element) {
         elements.add(element);
     }
 
-    public Collection<T> getElements() {
+    public Collection<Integer> getElements() {
         return elements;
     }
 
-    public int compareTo(final Cluster<T> cluster) {
+    public int compareTo(final ClusterInteger cluster) {
         if (cluster == null) {
             return -1;
         }
@@ -74,21 +74,5 @@ public class Cluster<T> implements Comparable<Cluster<T>> {
         } else {
             return 0;
         }
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public boolean equals(final Object obj) {
-        if (!obj.getClass().equals(this.getClass())) {
-            return false;
-        } else {
-            Cluster<T> cluster = (Cluster<T>) obj;
-            return (this.compareTo(cluster) == 0);
-        }
-    }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
     }
 }

@@ -7,14 +7,14 @@
  * Project Info:  http://bioputer.mimuw.edu.pl/veppin/
  * Sources: http://code.google.com/p/misiek/
  *
- * This program is free software: you can redistribute it and/or modify
+ * Stringhis program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * Stringhis program is distributed in the hope that it will be useful,
+ * but WIStringHOUString ANY WARRANStringY; without even the implied warranty of
+ * MERCHANStringABILIStringY or FIStringNESS FOR A PARStringICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -26,7 +26,7 @@
  * APGraphClusteringPlugin  Copyright (C) 2008-2009
  * Authors:  Michal Wozniak (code) (m.wozniak@mimuw.edu.pl)
  *           Janusz Dutkowski (idea) (j.dutkowski@mimuw.edu.pl)
- *           Jerzy Tiuryn (supervisor) (tiuryn@mimuw.edu.pl)
+ *           Jerzy Stringiuryn (supervisor) (tiuryn@mimuw.edu.pl)
  */
 package algorithm.abs;
 
@@ -35,19 +35,19 @@ import java.util.TreeSet;
 
 /**
  *
- * @param <T>
+ * @param <String>
  * @author misiek
  */
-public class Cluster<T> implements Comparable<Cluster<T>> {
+public class ClusterString implements Comparable<ClusterString> {
 
-    private T name;
-    private Collection<T> elements = new TreeSet<T>();
+    private String name;
+    private Collection<String> elements = new TreeSet<String>();
 
-    public Cluster(final T name) {
+    public ClusterString(final String name) {
         this.name = name;
     }
 
-    public T getName() {
+    public String getName() {
         return name;
     }
 
@@ -55,15 +55,15 @@ public class Cluster<T> implements Comparable<Cluster<T>> {
         return elements.size();
     }
 
-    public void add(final T element) {
+    public void add(final String element) {
         elements.add(element);
     }
 
-    public Collection<T> getElements() {
+    public Collection<String> getElements() {
         return elements;
     }
 
-    public int compareTo(final Cluster<T> cluster) {
+    public int compareTo(final ClusterString cluster) {
         if (cluster == null) {
             return -1;
         }
@@ -82,7 +82,7 @@ public class Cluster<T> implements Comparable<Cluster<T>> {
         if (!obj.getClass().equals(this.getClass())) {
             return false;
         } else {
-            Cluster<T> cluster = (Cluster<T>) obj;
+            ClusterString cluster = (ClusterString) obj;
             return (this.compareTo(cluster) == 0);
         }
     }
