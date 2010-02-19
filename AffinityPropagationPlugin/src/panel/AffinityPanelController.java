@@ -368,7 +368,7 @@ public class AffinityPanelController implements Serializable {
             return false;
         }
         if (!validatePreferences(preferences)) {
-            Messenger.message("Preferences paremater has to be a real number.");
+            //Messenger.message("Preferences paremater has to be a real number.");
             return false;
         }
         if (!validateIterations(iterations)) {
