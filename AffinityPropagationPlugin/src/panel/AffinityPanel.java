@@ -30,9 +30,12 @@
  */
 package panel;
 
+import javax.swing.JTextField;
+
 public class AffinityPanel extends javax.swing.JPanel {
 
     private AffinityPanelController pc = null;
+    public static JTextField epsilon;
 
     /** Creates new form AffinityPanel */
     public AffinityPanel() {
@@ -50,14 +53,15 @@ public class AffinityPanel extends javax.swing.JPanel {
         pc.setNodeAttrField(nodeAttrNameField);
         pc.setIterationsField(iterationsSpinner);
         pc.setLambdaField(labmbdaField);
-       // pc.setDirecedGraphRadio();
+        // pc.setDirecedGraphRadio();
         pc.setPreferencesField(preferenceField);
-    //   pc.setRefineCheckBox(refineCheckBox);
+        //   pc.setRefineCheckBox(refineCheckBox);
         pc.setLogCheckBox(transformingCheckbox);
         pc.setCentersAttrField(centersNameAttrField);
         pc.setNoiseCheckBox(noiseCheckBox);
-    //    pc.setNoiseCheckBox(noiseCheckbox);
+        //    pc.setNoiseCheckBox(noiseCheckbox);
         pc.initPanelFields();
+        //AffinityPanel.epsilon = epsilonField;
     }
 
     /** This method is called from within the constructor to
@@ -206,23 +210,23 @@ public class AffinityPanel extends javax.swing.JPanel {
                             .addGroup(parametersPanelLayout.createSequentialGroup()
                                 .addComponent(convitsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addGroup(parametersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(parametersPanelLayout.createSequentialGroup()
+                        .addGroup(parametersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, parametersPanelLayout.createSequentialGroup()
                                 .addComponent(preferenceField, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(refreshButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, parametersPanelLayout.createSequentialGroup()
-                                .addGap(59, 59, 59)
-                                .addGroup(parametersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(noiseCheckBox)
-                                    .addComponent(transformingCheckbox)))
-                            .addGroup(parametersPanelLayout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, parametersPanelLayout.createSequentialGroup()
                                 .addComponent(edgeAttrCombo, 0, 81, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(convitsField, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
-                            .addComponent(iterationsSpinner, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
-                            .addComponent(labmbdaField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE))))
+                            .addComponent(convitsField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                            .addComponent(iterationsSpinner, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                            .addComponent(labmbdaField, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                            .addGroup(parametersPanelLayout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addGroup(parametersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(transformingCheckbox)
+                                    .addComponent(noiseCheckBox))))))
                 .addContainerGap())
         );
         parametersPanelLayout.setVerticalGroup(
@@ -252,15 +256,16 @@ public class AffinityPanel extends javax.swing.JPanel {
                     .addComponent(lambdaLabel)
                     .addComponent(labmbdaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(parametersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(parametersPanelLayout.createSequentialGroup()
-                        .addComponent(transformingCheckbox)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(noiseCheckBox))
+                .addGroup(parametersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(parametersPanelLayout.createSequentialGroup()
                         .addComponent(transforminLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3))))
+                        .addComponent(jLabel3)
+                        .addGap(8, 8, 8))
+                    .addGroup(parametersPanelLayout.createSequentialGroup()
+                        .addComponent(transformingCheckbox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(noiseCheckBox))))
         );
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Output attributes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP));
@@ -305,7 +310,7 @@ public class AffinityPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(centersNameAttrField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -343,7 +348,6 @@ public class AffinityPanel extends javax.swing.JPanel {
     private void refreshButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButton1ActionPerformed
         pc.refreshPreferences();
     }//GEN-LAST:event_refreshButton1ActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField centersNameAttrField;
     private javax.swing.JTextField convitsField;

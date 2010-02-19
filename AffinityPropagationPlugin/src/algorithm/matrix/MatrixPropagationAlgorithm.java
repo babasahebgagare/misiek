@@ -277,7 +277,7 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
         //     System.out.println("S: " + S.toString());
         if (convits != null) {
             for (int i = 0; i < N; i++) {
-                ConvitsVector vec = new ConvitsVector(convits.intValue());
+                ConvitsVector vec = new ConvitsVector(convits.intValue(), Integer.valueOf(i));
                 vec.init();
                 convitsVectors.put(Integer.valueOf(i), vec);
             }

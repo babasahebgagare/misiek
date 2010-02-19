@@ -34,6 +34,7 @@ import algorithm.abs.AffinityPropagationAlgorithm;
 import algorithm.abs.ConvitsVector;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.TreeSet;
 
 /** You have to set parameters and do init() befor clustering. */
@@ -55,7 +56,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
         for (Examplar examplar : examplars.getExamplars().values()) {
             Collection<SiblingData> siblings = examplar.getSiblingMap().values();
             for (SiblingData sibling : siblings) {
-                sibling.setA(sibling.getA() * (1 - getLambda()) + getLambda() * sibling.getAold());
+                sibling.setA(sibling.getA() * (1 - lambda) + lambda * sibling.getAold());
             }
         }
     }
@@ -64,7 +65,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
         for (Examplar examplar : examplars.getExamplars().values()) {
             Collection<SiblingData> siblings = examplar.getSiblingMap().values();
             for (SiblingData sibling : siblings) {
-                sibling.setR(sibling.getR() * (1 - getLambda()) + getLambda() * sibling.getRold());
+                sibling.setR(sibling.getR() * (1 - lambda) + lambda * sibling.getRold());
             }
         }
     }
@@ -73,10 +74,10 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
         for (Examplar examplar : examplars.getExamplars().values()) {
             Collection<SiblingData> siblings = examplar.getSiblingMap().values();
             for (SiblingData sibling : siblings) {
-                if (sibling.getExamplarName().equals(examplar.getName())) {
-                    sibling.setA(computeEqPom(sibling.getExamplarName()));
+                if (sibling.getName().equals(examplar.getName())) {
+                    sibling.setA(computeEqPom(sibling.getName()));
                 } else {
-                    sibling.setA(computeNotEqPom(examplar.getName(), sibling.getExamplarName()));
+                    sibling.setA(computeNotEqPom(examplar.getName(), sibling.getName()));
                 }
 
             }
@@ -84,7 +85,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
     }
 
     protected void computeCenters() {
-        Collection<Integer> ret = new HashSet<Integer>();
+        Collection<Integer> ret = new TreeSet<Integer>();
         for (Examplar examplar : examplars.getExamplars().values()) {
             SiblingData sibling = examplar.getSiblingMap().get(examplar.getName());
             double e = sibling.getA() + sibling.getR();
@@ -106,11 +107,10 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
         for (Examplar examplar : examplars.getExamplars().values()) {
             if (!examplar.getName().equals(name)) {
                 SiblingData sibling = examplar.getSiblingMap().get(name);
-                if (sibling != null) {
-                    double r = sibling.getR();
-                    sum +=
-                            Math.max(0, r);
-                }
+                //    if (sibling != null) {
+                double r = sibling.getR();
+                sum += Math.max(0, r);
+                //  }
 
             }
         }
@@ -121,7 +121,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
     private double computeMaxPom(final Collection<SiblingData> siblings, final Integer examplarName) {
         double max = -INF;
         for (SiblingData sibling : siblings) {
-            if (!sibling.getExamplarName().equals(examplarName)) {
+            if (!sibling.getName().equals(examplarName)) {
                 double pom = sibling.getA() + sibling.getS();
                 if (pom > max) {
                     max = pom;
@@ -158,7 +158,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
         for (Examplar examplar : examplars.getExamplars().values()) {
             Collection<SiblingData> siblings = examplar.getSiblingMap().values();
             for (SiblingData sibling : siblings) {
-                double maxpom = computeMaxPom(siblings, sibling.getExamplarName());
+                double maxpom = computeMaxPom(siblings, sibling.getName());
                 sibling.setR(sibling.getS() - maxpom);
             }
 
@@ -317,7 +317,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
         if (convits != null) {
 
             for (Integer ex : examplars.getExamplars().keySet()) {
-                ConvitsVector vec = new ConvitsVector(convits.intValue());
+                ConvitsVector vec = new ConvitsVector(convits.intValue(), ex);
                 vec.init();
                 convitsVectors.put(ex, vec);
             }
@@ -327,14 +327,11 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
     @Override
     protected void generateNoise() {
         for (Examplar examplar : examplars.getExamplars().values()) {
-            Collection<SiblingData> siblings = examplar.getSiblingMap().values();
-            for (SiblingData sibling : siblings) {
-                if (sibling.getExamplarName().equals(examplar.getName())) {
-                    double s = sibling.getS();
-                    s = generateNoiseHelp(s);
-                    sibling.setS(s);
-                }
-            }
+            Map<Integer, SiblingData> siblings = examplar.getSiblingMap();
+            SiblingData sibling = siblings.get(examplar.getName());
+            double s = sibling.getS();
+            s = generateNoiseHelp(s);
+            sibling.setS(s);
         }
     }
 
@@ -344,7 +341,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
         for (Examplar examplar : examplars.getExamplars().values()) {
             Collection<SiblingData> siblings = examplar.getSiblingMap().values();
             for (SiblingData sibling : siblings) {
-                if (sibling.getExamplarName().equals(examplar.getName())) {
+                if (sibling.getName().equals(examplar.getName())) {
                     System.out.println(sibling.getS());
                 }
             }
