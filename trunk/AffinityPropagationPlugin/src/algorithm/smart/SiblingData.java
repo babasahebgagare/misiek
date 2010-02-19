@@ -28,18 +28,16 @@
  *           Janusz Dutkowski (idea) (j.dutkowski@mimuw.edu.pl)
  *           Jerzy Tiuryn (supervisor) (tiuryn@mimuw.edu.pl)
  */
-
-
 package algorithm.smart;
 
-public class SiblingData {
+public class SiblingData implements Comparable<SiblingData> {
 
     private double r;
     private double rold;
     private double a;
     private double aold;
     private double s;
-    private Integer examplarName;
+    private Integer name;
 
     public SiblingData(final double s, final Integer examplarName) {
         this.a = 0;
@@ -47,7 +45,7 @@ public class SiblingData {
         this.r = 0;
         this.rold = 0;
         this.aold = 0;
-        this.examplarName = examplarName;
+        this.name = examplarName;
     }
 
     public double getA() {
@@ -58,12 +56,12 @@ public class SiblingData {
         this.a = a;
     }
 
-    public Integer getExamplarName() {
-        return examplarName;
+    public Integer getName() {
+        return name;
     }
 
-    public void setExamplarName(final Integer examplarName) {
-        this.examplarName = examplarName;
+    public void setName(final Integer name) {
+        this.name = name;
     }
 
     public double getR() {
@@ -98,9 +96,15 @@ public class SiblingData {
         this.rold = rold;
     }
 
+    public int compareTo(SiblingData ex) {
+
+        return this.name.compareTo(ex.getName());
+
+    }
+
     @Override
     public String toString() {
-        String ret = "[" + examplarName + ": " + "r: " + r + " a: " + a + " s: " + s + "]";
+        String ret = "[" + name + ": " + "r: " + r + " a: " + a + " s: " + s + "]";
         return ret;
     }
 }

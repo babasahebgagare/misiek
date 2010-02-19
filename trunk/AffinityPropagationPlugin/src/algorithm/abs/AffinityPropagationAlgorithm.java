@@ -58,7 +58,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
     }
     private Random noiseGenerator = new Random();
     private final double epsilon = 0.0000001;
-    private double lambda;
+    protected double lambda;
     private int iterations;
     private boolean refine = true;
     private boolean noise = true;
@@ -70,7 +70,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
     protected Integer convits = null;
     protected ActionListener iteractionListenerOrNull = null;
     protected Map<Integer, Cluster<Integer>> assigments;
-    protected Map<Integer, ConvitsVector> convitsVectors = new HashMap<Integer, ConvitsVector>();
+    protected Map<Integer, ConvitsVector> convitsVectors = new TreeMap<Integer, ConvitsVector>();
     private Collection<Integer> refined = null;
     private int currentID = 0;
     protected Map<String, Integer> idMapper = new TreeMap<String, Integer>();
@@ -229,7 +229,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
         if (noise) {
             generateNoise();
         }
-        
+
         //   showInfo();
 
         for (iteration = 1; iteration <= iters; iteration++) {
@@ -256,7 +256,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
             }
         }
 
-        if(iteration > iters) {
+        if (iteration > iters) {
             iteration = iters;
         }
 
@@ -300,8 +300,9 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
     }
 
     protected Double generateNoiseHelp(Double sim) {
-
-        return sim - Math.abs(sim) * epsilon * noiseGenerator.nextDouble();
+        double ran_tmp = noiseGenerator.nextDouble();
+        double noise_tmp = Math.abs(sim) * epsilon * ran_tmp;
+        return sim - noise_tmp;
     }
 
     protected abstract void generateNoise();

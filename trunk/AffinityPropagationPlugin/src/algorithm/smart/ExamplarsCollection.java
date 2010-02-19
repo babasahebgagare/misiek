@@ -28,8 +28,6 @@
  *           Janusz Dutkowski (idea) (j.dutkowski@mimuw.edu.pl)
  *           Jerzy Tiuryn (supervisor) (tiuryn@mimuw.edu.pl)
  */
-
-
 package algorithm.smart;
 
 import java.util.Arrays;
@@ -115,7 +113,7 @@ public class ExamplarsCollection {
             Collection<SiblingData> sibling = examplar.getSiblingMap().values();
             for (SiblingData data : sibling) {
                 Integer row = mapper.get(examplar.getName());
-                Integer col = mapper.get(data.getExamplarName());
+                Integer col = mapper.get(data.getName());
 
                 Double value;
                 if (kind.equals("R")) {

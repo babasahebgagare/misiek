@@ -108,7 +108,7 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(startButton)
+                .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(centersAttrList, 0, 68, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -128,7 +128,7 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
-
+        //System.out.println("------------");
         pc.doCluster();
 }//GEN-LAST:event_startButtonActionPerformed
 
@@ -141,7 +141,6 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
         String centersAttribute = (String) centersAttrList.getSelectedItem();
         pc.showCenters(centersAttribute);
     }//GEN-LAST:event_jButton1ActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox centersAttrList;
     private javax.swing.JButton helpButton;

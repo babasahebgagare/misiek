@@ -28,25 +28,24 @@
  *           Janusz Dutkowski (idea) (j.dutkowski@mimuw.edu.pl)
  *           Jerzy Tiuryn (supervisor) (tiuryn@mimuw.edu.pl)
  */
-
-
 package algorithm.abs;
 
 import java.util.Vector;
 
-public class ConvitsVector {
+public class ConvitsVector implements Comparable<ConvitsVector> {
 
     private Vector<Boolean> convits;
     private int current;
     private int len;
     private boolean ready;
+    private Integer name;
 
-    public ConvitsVector(int len) {
+    public ConvitsVector(int len, Integer n) {
         this.len = len;
         this.convits = new Vector<Boolean>(len);
         this.current = 0;
         this.ready = false;
-
+        this.name = n;
     }
 
     public void addCovits(boolean b) {
@@ -76,5 +75,9 @@ public class ConvitsVector {
         for (int i = 0; i < len; i++) {
             this.convits.add(Boolean.valueOf(true));
         }
+    }
+
+    public int compareTo(ConvitsVector o) {
+        return this.name.compareTo(o.name);
     }
 }
