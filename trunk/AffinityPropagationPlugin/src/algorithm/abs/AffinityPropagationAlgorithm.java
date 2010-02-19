@@ -70,7 +70,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
     protected Integer convits = null;
     protected ActionListener iteractionListenerOrNull = null;
     protected Map<Integer, ClusterInteger> assigments;
-    protected Map<Integer, ConvitsVector> convitsVectors = new TreeMap<Integer, ConvitsVector>();
+    protected Map<Integer, ConvitsVector> convitsVectors = new HashMap<Integer, ConvitsVector>();
     private Collection<Integer> refined = null;
     private int currentID = 0;
     protected Map<String, Integer> idMapper = new TreeMap<String, Integer>();
@@ -118,12 +118,12 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
         for (ClusterInteger cluster : assigments.values()) {
 
             int maxid = cluster.getName().intValue();
-            Integer maxlevel = Integer.valueOf(0);
+            int maxlevel = 0;
             Double maxsum = null;
             for (Integer curr : cluster.getElements()) {
                 int curr_int = curr.intValue();
                 Double sum = Double.valueOf(0);
-                Integer level = Integer.valueOf(0);
+                int level = 0;
                 for (Integer other : cluster.getElements()) {
                     Double simOrNull = tryGetSimilarityInt(other, curr_int);
                     if (simOrNull != null) {
@@ -138,7 +138,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
                     maxsum = sum;
                     maxid = curr_int;
                     maxlevel = level;
-                } else if (level.equals(maxlevel) && sum >= maxsum) {
+                } else if (level == maxlevel && sum >= maxsum) {
                     if (sum.equals(maxsum)) {
                         maxid = Math.min(maxid, curr_int);
                     } else {

@@ -31,7 +31,7 @@
 package algorithm.abs;
 
 import java.util.Collection;
-import java.util.TreeSet;
+import java.util.HashSet;
 
 /**
  *
@@ -41,7 +41,7 @@ import java.util.TreeSet;
 public class ClusterInteger implements Comparable<ClusterInteger> {
 
     private Integer name;
-    private Collection<Integer> elements = new TreeSet<Integer>();
+    private Collection<Integer> elements = new HashSet<Integer>();
 
     public ClusterInteger(final Integer name) {
         this.name = name;

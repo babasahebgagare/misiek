@@ -60,10 +60,10 @@ public class ConvitsVector implements Comparable<ConvitsVector> {
         if (ready == false) {
             return false;
         } else {
-            Boolean first = convits.firstElement();
+            boolean first = convits.firstElement().booleanValue();
 
             for (Boolean b : convits) {
-                if (!b.equals(first)) {
+                if (b != first) {
                     return false;
                 }
             }
