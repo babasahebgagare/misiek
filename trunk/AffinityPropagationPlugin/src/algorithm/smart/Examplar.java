@@ -30,8 +30,8 @@
  */
 package algorithm.smart;
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.Vector;
 
 /**
@@ -40,7 +40,7 @@ import java.util.Vector;
  */
 public class Examplar implements Comparable<Examplar> {
 
-    private Map<Integer, SiblingData> siblingMap = new TreeMap<Integer, SiblingData>();
+    private Map<Integer, SiblingData> siblingMap = new HashMap<Integer, SiblingData>();
     private Integer name;
     private Vector<Boolean> imcenter = null;
     private Integer convits = null;
