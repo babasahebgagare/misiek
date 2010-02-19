@@ -73,7 +73,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
         for (Examplar examplar : examplars.getExamplars().values()) {
             Collection<SiblingData> siblings = examplar.getSiblingMap().values();
             for (SiblingData sibling : siblings) {
-                if (sibling.getName().equals(examplar.getName())) {
+                if (sibling.getName().intValue() == examplar.getName().intValue()) {
                     sibling.setA(computeEqPom(sibling.getName()));
                 } else {
                     sibling.setA(computeNotEqPom(examplar.getName(), sibling.getName()));
@@ -104,7 +104,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
     private double computeEqPom(final Integer name) {
         double sum = 0;
         for (Examplar examplar : examplars.getExamplars().values()) {
-            if (!examplar.getName().equals(name)) {
+            if (examplar.getName().intValue() != name.intValue()) {
                 SiblingData sibling = examplar.getSiblingMap().get(name);
                 if (sibling != null) {
                     double r = sibling.getR();
@@ -119,7 +119,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
     private double computeMaxPom(final Collection<SiblingData> siblings, final Integer examplarName) {
         double max = -INF;
         for (SiblingData sibling : siblings) {
-            if (!sibling.getName().equals(examplarName)) {
+            if (sibling.getName().intValue() != examplarName.intValue()) {
                 double pom = sibling.getA() + sibling.getS();
                 if (pom > max) {
                     max = pom;
@@ -138,7 +138,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
         double sum = 0;
 
         for (Examplar examplar : examplars.getExamplars().values()) {
-            if (!examplar.getName().equals(examplarName) && !examplar.getName().equals(siblingName)) {
+            if ((examplar.getName().intValue() != examplarName.intValue()) && (examplar.getName().intValue() != siblingName.intValue())) {
                 SiblingData sibling = examplar.getSiblingMap().get(siblingName);
                 if (sibling != null) {
                     double rik = sibling.getR();
