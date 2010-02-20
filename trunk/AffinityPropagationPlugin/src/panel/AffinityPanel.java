@@ -159,9 +159,9 @@ public class AffinityPanel extends javax.swing.JPanel {
 
         refreshButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/refresh.png"))); // NOI18N
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("panel/ui_properties"); // NOI18N
-        refreshButton.setToolTipText(bundle.getString("RafreshButton.ToolTip")); // NOI18N
+        refreshButton.setToolTipText(bundle.getString("ReloadButton.ToolTip")); // NOI18N
         refreshButton.setMargin(new java.awt.Insets(1, 6, 1, 6));
-        refreshButton.setName("refreshButton"); // NOI18N
+        refreshButton.setName("reloadButton"); // NOI18N
         refreshButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 refreshButtonActionPerformed(evt);
@@ -169,9 +169,9 @@ public class AffinityPanel extends javax.swing.JPanel {
         });
 
         refreshButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/refresh.png"))); // NOI18N
-        refreshButton1.setToolTipText(bundle.getString("RafreshButton.ToolTip")); // NOI18N
+        refreshButton1.setToolTipText(bundle.getString("RefreshButton.ToolTip")); // NOI18N
         refreshButton1.setMargin(new java.awt.Insets(1, 6, 1, 6));
-        refreshButton1.setName("refreshButton1"); // NOI18N
+        refreshButton1.setName("refreshButton"); // NOI18N
         refreshButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 refreshButton1ActionPerformed(evt);
