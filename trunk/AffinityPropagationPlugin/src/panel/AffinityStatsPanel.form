@@ -126,6 +126,7 @@
           <Image iconType="3" name="/resources/icons/details.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Details"/>
+        <Property name="toolTipText" type="java.lang.String" value="Details of clustering history"/>
         <Property name="name" type="java.lang.String" value="jButton1" noResource="true"/>
       </Properties>
       <Events>
