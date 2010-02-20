@@ -351,9 +351,18 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
                     nodeView.setWidth(width + 20.0);
                     nodeView.setHeight(height + 20.0);
                     nodeView.setShape(NodeShape.ELLIPSE.getGinyShape());
+                    nodeView.setSelected(true);
+                }
+            } else {
+                CyNode node = Cytoscape.getCyNode(name);
+                NodeView nodeView = currentView.getNodeView(node.getRootGraphIndex());
+                if (nodeView != null) {
+                    nodeView.setSelected(false);
                 }
             }
+
         }
+
         currentView.updateView();
     }
 
