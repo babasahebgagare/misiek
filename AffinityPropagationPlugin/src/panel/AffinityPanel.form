@@ -28,7 +28,7 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="parametersPanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" max="32767" attributes="0"/>
+              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -314,13 +314,13 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="nodeAttrNameLabel" pref="118" max="32767" attributes="1"/>
-                      <Component id="jLabel2" alignment="0" pref="118" max="32767" attributes="1"/>
+                      <Component id="nodeAttrNameLabel" pref="103" max="32767" attributes="1"/>
+                      <Component id="jLabel2" alignment="0" pref="103" max="32767" attributes="1"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="centersNameAttrField" pref="113" max="32767" attributes="1"/>
-                      <Component id="nodeAttrNameField" alignment="0" pref="113" max="32767" attributes="1"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="centersNameAttrField" pref="114" max="32767" attributes="1"/>
+                      <Component id="nodeAttrNameField" pref="114" max="32767" attributes="1"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -335,10 +335,9 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="centersNameAttrField" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="centersNameAttrField" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="15" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -348,6 +347,7 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="center_id"/>
             <Property name="toolTipText" type="java.lang.String" value="Cytoscape attribute to store nearest center name"/>
+            <Property name="alignmentY" type="float" value="0.0"/>
             <Property name="name" type="java.lang.String" value="centersNameAttrField" noResource="true"/>
           </Properties>
         </Component>
