@@ -348,6 +348,9 @@
             <Property name="text" type="java.lang.String" value="center_id"/>
             <Property name="toolTipText" type="java.lang.String" value="Cytoscape attribute to store nearest center name"/>
             <Property name="alignmentY" type="float" value="0.0"/>
+            <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+              <Insets value="[1, 1, 2, 1]"/>
+            </Property>
             <Property name="name" type="java.lang.String" value="centersNameAttrField" noResource="true"/>
           </Properties>
         </Component>
@@ -355,6 +358,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="cluster_id"/>
             <Property name="toolTipText" type="java.lang.String" value="Cytoscape attribute to store cluster id&apos;s"/>
+            <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+              <Insets value="[1, 1, 2, 1]"/>
+            </Property>
             <Property name="name" type="java.lang.String" value="nodeAttrNameField" noResource="true"/>
           </Properties>
         </Component>
