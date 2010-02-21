@@ -274,10 +274,12 @@ public class AffinityPanel extends javax.swing.JPanel {
         centersNameAttrField.setText("center_id");
         centersNameAttrField.setToolTipText("Cytoscape attribute to store nearest center name");
         centersNameAttrField.setAlignmentY(0.0F);
+        centersNameAttrField.setMargin(new java.awt.Insets(1, 1, 2, 1));
         centersNameAttrField.setName("centersNameAttrField"); // NOI18N
 
         nodeAttrNameField.setText("cluster_id");
         nodeAttrNameField.setToolTipText("Cytoscape attribute to store cluster id's");
+        nodeAttrNameField.setMargin(new java.awt.Insets(1, 1, 2, 1));
         nodeAttrNameField.setName("nodeAttrNameField"); // NOI18N
 
         jLabel2.setText("Center ID:");
