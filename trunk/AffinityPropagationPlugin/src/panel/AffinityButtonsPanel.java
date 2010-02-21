@@ -138,6 +138,7 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String centersAttribute = (String) centersAttrList.getSelectedItem();
+    //    System.out.println("selected:" + centersAttribute);
         pc.showCenters(centersAttribute);
     }//GEN-LAST:event_jButton1ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
