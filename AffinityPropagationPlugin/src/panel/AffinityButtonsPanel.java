@@ -42,6 +42,7 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
     private AffinityPanelController pc;
     private JPanel chooseImplPanel;
     private JPanel connModePanel;
+    private JPanel graphModePanel;
 
     /** Creates new form JActionButton
      * @param pc
@@ -115,6 +116,7 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
 
         jLabel1.setForeground(new java.awt.Color(0, 0, 153));
         jLabel1.setText(">>Advanced options");
+        jLabel1.setBorder(javax.swing.BorderFactory.createCompoundBorder());
         jLabel1.setName("jLabel1"); // NOI18N
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -137,7 +139,7 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 26, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(152, Short.MAX_VALUE)
+                        .addContainerGap(148, Short.MAX_VALUE)
                         .addComponent(jLabel1)))
                 .addContainerGap())
         );
@@ -177,6 +179,7 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
         AffinityAdvancedOptionsPanel advancedOptionsPanel = new AffinityAdvancedOptionsPanel(frame);
         advancedOptionsPanel.addToMainPanel(chooseImplPanel);
         advancedOptionsPanel.addToMainPanel(connModePanel);
+        advancedOptionsPanel.addToMainPanel(graphModePanel);
 
         frame.add(advancedOptionsPanel);
         frame.pack();
@@ -199,5 +202,9 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
 
     public void addConnModePanel(JPanel connModePanel) {
         this.connModePanel = connModePanel;
+    }
+
+    public void addGraphModePanel(JPanel graphModePanel) {
+        this.graphModePanel = graphModePanel;
     }
 }
