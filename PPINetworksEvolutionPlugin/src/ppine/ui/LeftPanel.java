@@ -43,7 +43,6 @@ import ppine.main.PluginDataHandle;
 import ppine.ui.dataloading.DefaultLoadingController;
 import ppine.utils.JTreeModelSpeciesGenerator;
 import ppine.utils.Messenger;
-import ppine.utils.Stats;
 import ppine.viewmodel.controllers.CytoProjector;
 
 public class LeftPanel extends javax.swing.JPanel {

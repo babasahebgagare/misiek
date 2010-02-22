@@ -37,6 +37,9 @@ import java.awt.event.ActionEvent;
 
 public class Main extends CytoscapePlugin {
 
+    private static boolean activated = false;
+    private static boolean first_use = true;
+
     public Main() {
         //create a new action to respond to menu activation
         NetworkEvolutionPluginAction action = new NetworkEvolutionPluginAction();
@@ -56,10 +59,24 @@ public class Main extends CytoscapePlugin {
 
         }
 
-        @Override
+        /*     @Override
         public void actionPerformed(ActionEvent ae) {
-            PluginInitializator.initAll();
-            PluginDataHandle.refreshPluginDataHandle();
+        PluginInitializator.initAll();
+
+        }*/
+        public void actionPerformed(ActionEvent ae) {
+            //get the network object; this contains the graph
+            if (activated == false) {
+                activated = true;
+                if (first_use == true) {
+                    first_use = false;
+                    PluginInitializator.initAll();
+                }
+                PluginInitializator.activatePlugin();
+            } else {
+                activated = false;
+                PluginInitializator.disactivatePlugin();
+            }
         }
     }
 }
