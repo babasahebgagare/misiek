@@ -28,7 +28,6 @@
  *           Janusz Dutkowski (idea, data) (j.dutkowski@mimuw.edu.pl)
  *           Jerzy Tiuryn (supervisor) (tiuryn@mimuw.edu.pl)
  */
-
 package ppine.main;
 
 import ppine.cytolisteners.CytoListeners;
@@ -49,6 +48,18 @@ import ppine.visual.calculators.PPINENodeAppearanceCalculator;
 import org.jdesktop.swingx.VerticalLayout;
 
 public class PluginInitializator {
+
+    private static JPanel myPanel;
+
+    static void activatePlugin() {
+        CytoPanelImp leftPanel = (CytoPanelImp) Cytoscape.getDesktop().getCytoPanel(SwingConstants.WEST);
+        leftPanel.add(ResourceBundle.getBundle("ppine/resources/ui").getString("TABNAME"), myPanel);
+    }
+
+    static void disactivatePlugin() {
+        CytoPanelImp leftPanel = (CytoPanelImp) Cytoscape.getDesktop().getCytoPanel(SwingConstants.WEST);
+        leftPanel.remove(myPanel);
+    }
 
     private static void initCommonVisualStyle() {
         VisualMappingManager vmm = Cytoscape.getVisualMappingManager();
@@ -71,28 +82,26 @@ public class PluginInitializator {
     }
 
     private static void initUI() {
-        CytoPanelImp leftPanel = (CytoPanelImp) Cytoscape.getDesktop().getCytoPanel(SwingConstants.WEST);
-
         LeftPanel myLeftPanel = new LeftPanel();
-        JPanel myPanel = new PPINEMainPanel();
+        myPanel = new PPINEMainPanel();
 
         //   JPanel logsPanel = new LogsPanel();
         SpeciesFamilyColorPanel families = new SpeciesFamilyColorPanel();
-      //  MIPSPanel mipsPanel = new MIPSPanel();
+        //  MIPSPanel mipsPanel = new MIPSPanel();
         myPanel.setLayout(new VerticalLayout());
         myPanel.add(myLeftPanel);
         myPanel.add(families);
-  //      myPanel.add(mipsPanel);
+        //      myPanel.add(mipsPanel);
         //     myPanel.add(logsPanel);
 
         PluginMenusHandle.setPPINEPanel(myPanel);
         PluginMenusHandle.setFamiliesColorListPanel(families);
-        leftPanel.add(ResourceBundle.getBundle("ppine/resources/ui").getString("TABNAME"), myPanel);
     }
 
     public static void initAll() {
         initUI();
         initVisualStyles();
+        PluginDataHandle.refreshPluginDataHandle();
     }
 
     public static void initVisualStyles() {

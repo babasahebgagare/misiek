@@ -48,6 +48,10 @@ import panel.AffinityStatsPanelController;
 
 public class AffinityMain extends CytoscapePlugin {
 
+    private static boolean activated = false;
+    private static boolean first_use = true;
+    private JPanel myAff;
+
     public AffinityMain() {
         //create a new action to respond to menu activation
         APPluginAction action = new APPluginAction();
@@ -55,6 +59,32 @@ public class AffinityMain extends CytoscapePlugin {
         action.setPreferredMenu("Plugins");
         //and add it to the menus
         Cytoscape.getDesktop().getCyMenus().addAction(action);
+    }
+
+    private void createMyPanel() {
+        AffinityStatsPanelController psc = new AffinityStatsPanelController();
+        AffinityPanelController pc = new AffinityPanelController(psc);
+
+        myAff = new AffinityMainPanel();
+        myAff.setLayout(new VerticalLayout());
+
+        JPanel chooseImplPanel = new AffinityChooseImplPanel(pc);
+        JPanel connModePanel = new AffinityConnModePanel(pc);
+        JPanel graphModePanel = new AffinityGraphModePanel(pc);
+        AffinityButtonsPanel actionButtonsPanel = new AffinityButtonsPanel(pc);
+        actionButtonsPanel.addChooseImplPanel(chooseImplPanel);
+        actionButtonsPanel.addConnModePanel(connModePanel);
+
+        JPanel afpanel = pc.createAffinityPanel();
+        JPanel stats = psc.createAffinityStatsPanel();
+
+        myAff.add(afpanel);
+        //      myAff.add(chooseImplPanel, 1);
+        //      myAff.add(connModePanel, 2);
+        myAff.add(graphModePanel);
+        myAff.add(actionButtonsPanel);
+        myAff.add(stats);
+
     }
 
     public class APPluginAction extends CytoscapeAction {
@@ -66,38 +96,36 @@ public class AffinityMain extends CytoscapePlugin {
             super("APGraphClusteringPlugin");
         }
 
+        private void activatePlugin() {
+            CytoPanelImp leftPanel = (CytoPanelImp) Cytoscape.getDesktop().getCytoPanel(SwingConstants.WEST);
+
+            leftPanel.add("APGraphClustringPlugin", myAff);
+            //System.out.println("Affinity propagation");
+        }
+
+        private void disactivatePlugin() {
+            CytoPanelImp leftPanel = (CytoPanelImp) Cytoscape.getDesktop().getCytoPanel(SwingConstants.WEST);
+
+            leftPanel.remove(myAff);
+            //System.out.println("Affinity propagation");
+        }
+
         /**
          * This method is called when the user selects the menu item.
          */
         public void actionPerformed(ActionEvent ae) {
             //get the network object; this contains the graph
-            CytoPanelImp leftPanel = (CytoPanelImp) Cytoscape.getDesktop().getCytoPanel(SwingConstants.WEST);
-
-            AffinityStatsPanelController psc = new AffinityStatsPanelController();
-            AffinityPanelController pc = new AffinityPanelController(psc);
-
-            JPanel myAff = new AffinityMainPanel();
-            myAff.setLayout(new VerticalLayout());
-
-            JPanel chooseImplPanel = new AffinityChooseImplPanel(pc);
-            JPanel connModePanel = new AffinityConnModePanel(pc);
-            JPanel graphModePanel = new AffinityGraphModePanel(pc);
-            AffinityButtonsPanel actionButtonsPanel = new AffinityButtonsPanel(pc);
-            actionButtonsPanel.addChooseImplPanel(chooseImplPanel);
-            actionButtonsPanel.addConnModePanel(connModePanel);
-
-            JPanel afpanel = pc.createAffinityPanel();
-            JPanel stats = psc.createAffinityStatsPanel();
-
-            myAff.add(afpanel);
-            //      myAff.add(chooseImplPanel, 1);
-            //      myAff.add(connModePanel, 2);
-            myAff.add(graphModePanel);
-            myAff.add(actionButtonsPanel);
-            myAff.add(stats);
-
-            leftPanel.add("APGraphClustringPlugin", myAff);
-            //System.out.println("Affinity propagation");
+            if (activated == false) {
+                activated = true;
+                if (first_use == true) {
+                    first_use = false;
+                    createMyPanel();
+                }
+                activatePlugin();
+            } else {
+                activated = false;
+                disactivatePlugin();
+            }
         }
     }
 }
