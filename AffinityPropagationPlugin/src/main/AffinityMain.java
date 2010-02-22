@@ -82,17 +82,19 @@ public class AffinityMain extends CytoscapePlugin {
             JPanel chooseImplPanel = new AffinityChooseImplPanel(pc);
             JPanel connModePanel = new AffinityConnModePanel(pc);
             JPanel graphModePanel = new AffinityGraphModePanel(pc);
-            JPanel actionButtonsPanel = new AffinityButtonsPanel(pc);
+            AffinityButtonsPanel actionButtonsPanel = new AffinityButtonsPanel(pc);
+            actionButtonsPanel.addChooseImplPanel(chooseImplPanel);
+            actionButtonsPanel.addConnModePanel(connModePanel);
 
             JPanel afpanel = pc.createAffinityPanel();
             JPanel stats = psc.createAffinityStatsPanel();
 
-            myAff.add(afpanel, 0);
-            myAff.add(chooseImplPanel, 1);
-            myAff.add(connModePanel, 2);
-            myAff.add(graphModePanel, 3);
-            myAff.add(actionButtonsPanel, 4);
-            myAff.add(stats, 5);
+            myAff.add(afpanel);
+            //      myAff.add(chooseImplPanel, 1);
+            //      myAff.add(connModePanel, 2);
+            myAff.add(graphModePanel);
+            myAff.add(actionButtonsPanel);
+            myAff.add(stats);
 
             leftPanel.add("APGraphClustringPlugin", myAff);
             //System.out.println("Affinity propagation");

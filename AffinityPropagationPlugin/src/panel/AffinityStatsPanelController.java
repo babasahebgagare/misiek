@@ -70,9 +70,9 @@ public class AffinityStatsPanelController implements Serializable {
         log.setTakeLog(getLog);
         log.setNoise(noise);
 
-        logs.add(log);
+        logs.add(0, log);
         DefaultTableModel model = (DefaultTableModel) statsTable.getModel();
-        model.addRow(new Object[]{network, iterations, preferences, lambda, clusters, clusterID});
+        model.insertRow(0, new Object[]{network, iterations, preferences, lambda, clusters, clusterID});
     }
 
     void deleteSelectedRow() {
