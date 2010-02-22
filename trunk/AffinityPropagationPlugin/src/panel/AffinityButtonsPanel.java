@@ -30,13 +30,18 @@
  */
 package panel;
 
+import cytoscape.Cytoscape;
 import help.AffHelpBroker;
 import java.awt.event.ActionEvent;
 import javax.help.CSH;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class AffinityButtonsPanel extends javax.swing.JPanel {
 
     private AffinityPanelController pc;
+    private JPanel chooseImplPanel;
+    private JPanel connModePanel;
 
     /** Creates new form JActionButton
      * @param pc
@@ -57,10 +62,16 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton2 = new javax.swing.JButton();
         startButton = new javax.swing.JButton();
         helpButton = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         centersAttrList = new javax.swing.JComboBox();
+        jLabel1 = new javax.swing.JLabel();
+
+        jButton2.setText("jButton2");
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jButton2.setName("jButton2"); // NOI18N
 
         setMaximumSize(new java.awt.Dimension(270, 32767));
 
@@ -102,27 +113,45 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
         centersAttrList.setToolTipText("Select centers attribute");
         centersAttrList.setName("centersAttrList"); // NOI18N
 
+        jLabel1.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel1.setText(">>Advanced options");
+        jLabel1.setName("jLabel1"); // NOI18N
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AdvancedOptionsOpen(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(centersAttrList, 0, 66, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(centersAttrList, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 26, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(152, Short.MAX_VALUE)
+                        .addComponent(jLabel1)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jButton1)
-                .addComponent(startButton)
-                .addComponent(centersAttrList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(helpButton)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(startButton)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(centersAttrList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(helpButton)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -138,13 +167,37 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String centersAttribute = (String) centersAttrList.getSelectedItem();
-    //    System.out.println("selected:" + centersAttribute);
+        //    System.out.println("selected:" + centersAttribute);
         pc.showCenters(centersAttribute);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void AdvancedOptionsOpen(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AdvancedOptionsOpen
+        JFrame frame = new JFrame("Menu of Advanced Options");
+
+        AffinityAdvancedOptionsPanel advancedOptionsPanel = new AffinityAdvancedOptionsPanel(frame);
+        advancedOptionsPanel.addToMainPanel(chooseImplPanel);
+        advancedOptionsPanel.addToMainPanel(connModePanel);
+
+        frame.add(advancedOptionsPanel);
+        frame.pack();
+        frame.setLocationRelativeTo(Cytoscape.getDesktop());
+        frame.setResizable(false);
+        frame.setVisible(true);
+    }//GEN-LAST:event_AdvancedOptionsOpen
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox centersAttrList;
     private javax.swing.JButton helpButton;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton startButton;
     // End of variables declaration//GEN-END:variables
+
+    public void addChooseImplPanel(JPanel chooseImplPanel) {
+        this.chooseImplPanel = chooseImplPanel;
+    }
+
+    public void addConnModePanel(JPanel connModePanel) {
+        this.connModePanel = connModePanel;
+    }
 }
