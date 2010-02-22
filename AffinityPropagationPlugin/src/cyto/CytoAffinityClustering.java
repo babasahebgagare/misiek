@@ -180,7 +180,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
                 }
                 i++;
             }
-            //       showCenters(centersNameAttr);
+            showCenters(centersNameAttr);
             psc.addCentersAttribute(centersNameAttr);
         }
         //  clustersNumber = af.getClustersNumber();
