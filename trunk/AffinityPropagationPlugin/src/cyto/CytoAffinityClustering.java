@@ -51,6 +51,7 @@ import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.TreeSet;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import listeners.IterationListener;
 import panel.AffinityPanelController;
 import utils.Messenger;
@@ -179,7 +180,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
                 }
                 i++;
             }
-            showCenters(centersNameAttr);
+            //       showCenters(centersNameAttr);
             psc.addCentersAttribute(centersNameAttr);
         }
         //  clustersNumber = af.getClustersNumber();
@@ -202,14 +203,17 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
     private Set<String> selectConnectedNodes(final List<CyEdge> edges, final List<CyNode> nodes) {
         Set<String> nodesNames = new TreeSet<String>();
 
-
         for (CyEdge edge : edges) {
             String sourceID = edge.getSource().getIdentifier();
             String targetID = edge.getTarget().getIdentifier();
 
             if (!sourceID.equals(targetID)) {
-                nodesNames.add(targetID);
-                nodesNames.add(sourceID);
+                if (!nodesNames.contains(sourceID)) {
+                    nodesNames.add(sourceID);
+                }
+                if (!nodesNames.contains(targetID)) {
+                    nodesNames.add(targetID);
+                }
             }
         }
 
@@ -330,40 +334,42 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
 
     public void showCenters(final String centersAttribute) {
 
-        CyNetworkView currentView = Cytoscape.getCurrentNetworkView();
-        @SuppressWarnings("unchecked")
-        List<CyEdge> edges = Cytoscape.getCurrentNetwork().edgesList();
-        @SuppressWarnings("unchecked")
-        List<CyNode> nodes = Cytoscape.getCurrentNetwork().nodesList();
-        Set<String> nodeNames = selectConnectedNodes(edges, nodes);
+        SwingUtilities.invokeLater(new Runnable() {
 
-        Cytoscape.getCurrentNetworkView().redrawGraph(false, true);
+            public void run() {
+                Cytoscape.getCurrentNetworkView().redrawGraph(false, true);
+                CyNetworkView currentView = Cytoscape.getCurrentNetworkView();
+                @SuppressWarnings("unchecked")
+                List<CyEdge> edges = Cytoscape.getCurrentNetwork().edgesList();
+                @SuppressWarnings("unchecked")
+                List<CyNode> nodes = Cytoscape.getCurrentNetwork().nodesList();
+                Set<String> nodeNames = selectConnectedNodes(edges, nodes);
 
-        for (String name : nodeNames) {
-            String v = nodesAttributes.getStringAttribute(name, centersAttribute);
-            if (name.equals(v)) {
-                CyNode node = Cytoscape.getCyNode(name);
-                NodeView nodeView = currentView.getNodeView(node.getRootGraphIndex());
-                if (nodeView != null) {
-                    double width = nodeView.getWidth();
-                    double height = nodeView.getHeight();
+                for (String name : nodeNames) {
+                    String v = nodesAttributes.getStringAttribute(name, centersAttribute);
+                    if (name.equals(v)) {
+                        CyNode node = Cytoscape.getCyNode(name);
+                        NodeView nodeView = currentView.getNodeView(node.getRootGraphIndex());
+                        if (nodeView != null) {
+                            double width = nodeView.getWidth();
+                            double height = nodeView.getHeight();
 
-                    nodeView.setWidth(width + 20.0);
-                    nodeView.setHeight(height + 20.0);
-                    nodeView.setShape(NodeShape.ELLIPSE.getGinyShape());
-                    nodeView.setSelected(true);
+                            nodeView.setWidth(width + 20.0);
+                            nodeView.setHeight(height + 20.0);
+                            nodeView.setShape(NodeShape.ELLIPSE.getGinyShape());
+                            nodeView.setSelected(true);
+                        }
+                    } else {
+                        CyNode node = Cytoscape.getCyNode(name);
+                        NodeView nodeView = currentView.getNodeView(node.getRootGraphIndex());
+                        if (nodeView != null) {
+                            nodeView.setSelected(false);
+                        }
+                    }
                 }
-            } else {
-                CyNode node = Cytoscape.getCyNode(name);
-                NodeView nodeView = currentView.getNodeView(node.getRootGraphIndex());
-                if (nodeView != null) {
-                    nodeView.setSelected(false);
-                }
+                currentView.updateView();
             }
-
-        }
-
-        currentView.updateView();
+        });
     }
 
     public void showCentersAfetrClustering() {
