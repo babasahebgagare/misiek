@@ -116,6 +116,7 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
 
         jLabel1.setForeground(new java.awt.Color(0, 0, 153));
         jLabel1.setText(">>Advanced options");
+        jLabel1.setToolTipText("Click here to customise advanced options");
         jLabel1.setBorder(javax.swing.BorderFactory.createCompoundBorder());
         jLabel1.setName("jLabel1"); // NOI18N
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -129,18 +130,17 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(centersAttrList, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(helpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 26, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(148, Short.MAX_VALUE)
-                        .addComponent(jLabel1)))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -179,7 +179,7 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
         AffinityAdvancedOptionsPanel advancedOptionsPanel = new AffinityAdvancedOptionsPanel(frame);
         advancedOptionsPanel.addToMainPanel(chooseImplPanel);
         advancedOptionsPanel.addToMainPanel(connModePanel);
-        advancedOptionsPanel.addToMainPanel(graphModePanel);
+  //      advancedOptionsPanel.addToMainPanel(graphModePanel);
 
         frame.add(advancedOptionsPanel);
         frame.pack();
