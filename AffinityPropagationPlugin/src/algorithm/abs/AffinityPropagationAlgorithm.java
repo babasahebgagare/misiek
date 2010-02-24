@@ -234,18 +234,31 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
 
         for (iteration = 1; iteration <= iters; iteration++) {
 
+            //   long startTime = System.nanoTime();
             copyResponsibilies();
             computeResponsibilities();
             avgResponsibilies();
 
+            //long respTime = System.nanoTime();
+            //System.out.println("1:" + String.valueOf(respTime - startTime));
+
             copyAvailabilities();
             computeAvailabilities();
             avgAvailabilities();
-            //   showInfo();
+
+            //long avaTime = System.nanoTime();
+            //System.out.println("2:" + String.valueOf(avaTime - respTime));
 
             computeCenters();
+
+            //long cenTime = System.nanoTime();
+            //System.out.println("3:" + String.valueOf(cenTime - avaTime));
+
             calculateCovergence();
             notConverged = checkConvergence();
+
+            //long checkTime = System.nanoTime();
+            //System.out.println("4:" + String.valueOf(checkTime - cenTime));
 
             if (iteractionListenerOrNull != null) {
                 iteractionListenerOrNull.actionPerformed(new ActionEvent(new IterationData(iteration, getClustersNumber()), 0, "ITERATION")); //TODO

@@ -32,69 +32,89 @@ package algorithm.smart;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.TreeMap;
 import java.util.Map;
+import java.util.TreeSet;
 
 public class ExamplarsCollection {
 
-    Map<Integer, Examplar> examplars = new HashMap<Integer, Examplar>();
-    Integer convits = null;
+    private Examplar[] examplars;
+    private Integer convits = null;
+    private int size;
 
-    public ExamplarsCollection() {
+    public ExamplarsCollection(int size, final Integer convits) {
+        this.size = size;
+        this.convits = convits;
+        this.examplars = new Examplar[size];
+        for (int i = 0; i < size; i++) {
+            examplars[i] = null;
+        }
     }
 
-    public ExamplarsCollection(final Integer convits) {
+    public ExamplarsCollection(int size) {
+        this.size = size;
+        this.examplars = new Examplar[size];
+        for (int i = 0; i < size; i++) {
+            examplars[i] = null;
+        }
+    }
+
+    public void setConvits(Integer convits) {
         this.convits = convits;
     }
 
     public int size() {
-        return examplars.size();
+        return size;
     }
 
     public void setSimilarity(final Integer from, final Integer to, final double sim) {
-        Examplar exfrom = examplars.get(from);
+        Examplar exfrom = examplars[from];
         if (exfrom == null) {
             exfrom = new Examplar(from, convits);
-            examplars.put(from, exfrom);
+            examplars[from] = exfrom;
         }
-        Examplar exto = examplars.get(to);
+        Examplar exto = examplars[to];
         if (exto == null) {
             exto = new Examplar(to, convits);
-            examplars.put(to, exto);
+            examplars[to] = exto;
         }
         exfrom.createSibling(sim, to);
+        exto.addEdgeIn(from);
     }
 
     @Override
     public String toString() {
         StringBuffer ret = new StringBuffer();
-        for (Integer key : examplars.keySet()) {
-            ret.append(key);
+        for (int i = 0; i < size; i++) {
+            ret.append(i);
             ret.append(": ");
-            ret.append(examplars.get(key).toString());
+            ret.append(examplars[i].toString());
             ret.append("\n");
         }
         return ret.toString();
     }
 
-    public Map<Integer, Examplar> getExamplars() {
+    public Examplar[] getExamplars() {
         return examplars;
     }
 
-    public void setExamplars(final Map<Integer, Examplar> examplars) {
-        this.examplars = examplars;
+    public Collection<Integer> getKeySet() {
+        Collection<Integer> keys = new TreeSet<Integer>();
+        for (int i = 0; i < size; i++) {
+            keys.add(i);
+        }
+        return keys;
     }
 
     private String valuesToString(String kind) {
-        int N = examplars.size();
+        int N = size;
         StringBuffer res = new StringBuffer();
         Double[][] matrix = new Double[N][N];
         Map<Integer, Integer> mapper = new TreeMap<Integer, Integer>();
 
         Integer[] examplarsPom = new Integer[N];
         int pos = 0;
-        for (Examplar examplar : examplars.values()) {
+        for (Examplar examplar : examplars) {
             examplarsPom[pos] = (examplar.getName());
             pos++;
         }
@@ -110,9 +130,9 @@ public class ExamplarsCollection {
             }
         }
 
-        for (Examplar examplar : examplars.values()) {
-            Collection<SiblingData> sibling = examplar.getSiblingMap().values();
-            for (SiblingData data : sibling) {
+        for (Examplar examplar : examplars) {
+            Collection<EdgeOutData> sibling = examplar.getSiblingMap().values();
+            for (EdgeOutData data : sibling) {
                 Integer row = mapper.get(examplar.getName());
                 Integer col = mapper.get(data.getName());
 
@@ -149,5 +169,9 @@ public class ExamplarsCollection {
 
     public String similaritiesToString() {
         return valuesToString("S");
+    }
+
+    Examplar get(int k) {
+        return examplars[k];
     }
 }

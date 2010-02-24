@@ -30,7 +30,7 @@
  */
 package algorithm.smart;
 
-public class SiblingData implements Comparable<SiblingData> {
+public class EdgeOutData implements Comparable<EdgeOutData> {
 
     private double r;
     private double rold;
@@ -39,7 +39,7 @@ public class SiblingData implements Comparable<SiblingData> {
     private double s;
     private Integer name;
 
-    public SiblingData(final double s, final Integer examplarName) {
+    public EdgeOutData(final double s, final Integer examplarName) {
         this.a = 0;
         this.s = s;
         this.r = 0;
@@ -96,7 +96,7 @@ public class SiblingData implements Comparable<SiblingData> {
         this.rold = rold;
     }
 
-    public int compareTo(SiblingData ex) {
+    public int compareTo(EdgeOutData ex) {
 
         return this.name.compareTo(ex.getName());
 
