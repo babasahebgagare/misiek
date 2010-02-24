@@ -30,8 +30,10 @@
  */
 package algorithm.smart;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeSet;
 import java.util.Vector;
 
 /**
@@ -40,7 +42,8 @@ import java.util.Vector;
  */
 public class Examplar implements Comparable<Examplar> {
 
-    private Map<Integer, SiblingData> siblingMap = new HashMap<Integer, SiblingData>();
+    private Map<Integer, EdgeOutData> edgesOutDataMap = new HashMap<Integer, EdgeOutData>();
+    private Collection<Integer> edgesIn = new TreeSet<Integer>();
     private Integer name;
     private Vector<Boolean> imcenter = null;
     private Integer convits = null;
@@ -54,23 +57,24 @@ public class Examplar implements Comparable<Examplar> {
     }
 
     public void createSibling(final double s, final Integer siblingName) {
-        SiblingData sibling = new SiblingData(s, siblingName);
-        siblingMap.put(siblingName, sibling);
+        EdgeOutData sibling = new EdgeOutData(s, siblingName);
+        edgesOutDataMap.put(siblingName, sibling);
+
     }
 
     @Override
     public String toString() {
         StringBuffer ret = new StringBuffer(name);
         ret.append(": ");
-        for (Integer key : siblingMap.keySet()) {
-            ret.append(siblingMap.get(key).toString());
+        for (Integer key : edgesOutDataMap.keySet()) {
+            ret.append(edgesOutDataMap.get(key).toString());
             ret.append("\n");
         }
         return ret.toString();
     }
 
-    public Map<Integer, SiblingData> getSiblingMap() {
-        return siblingMap;
+    public Map<Integer, EdgeOutData> getSiblingMap() {
+        return edgesOutDataMap;
     }
 
     public Integer getName() {
@@ -110,5 +114,13 @@ public class Examplar implements Comparable<Examplar> {
 
         return this.getName().compareTo(ex.getName());
 
+    }
+
+    void addEdgeIn(Integer from) {
+        edgesIn.add(from);
+    }
+
+    public Collection<Integer> getEdgesIn() {
+        return edgesIn;
     }
 }
