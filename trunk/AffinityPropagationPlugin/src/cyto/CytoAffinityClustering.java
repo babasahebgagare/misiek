@@ -41,6 +41,7 @@ import cytoscape.CyNode;
 import cytoscape.Cytoscape;
 import cytoscape.data.CyAttributes;
 import cytoscape.task.TaskMonitor;
+import cytoscape.task.ui.JTask;
 import cytoscape.view.CyNetworkView;
 import cytoscape.visual.NodeShape;
 import giny.view.NodeView;
@@ -134,11 +135,11 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
         super.setMyThread(Thread.currentThread());
         PriorityQueue<ClusterInteger> clusterprior = new PriorityQueue<ClusterInteger>();
 
-        monitor.setStatus("Loading similarity matrix...");
+        taskMonitor.setStatus("Loading similarity matrix...");
 
         setParameters();
-        monitor.setStatus("Clustering...");
-        createIteractionListener(monitor);
+        taskMonitor.setStatus("Clustering...");
+        createIteractionListener(taskMonitor);
 
         Map<Integer, ClusterInteger> clusters = af.doClusterAssocInt();
 
@@ -180,11 +181,13 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
                 }
                 i++;
             }
-            showCenters(centersNameAttr);
             psc.addCentersAttribute(centersNameAttr);
+            showCenters(centersNameAttr);
         }
+        //    ((JTask) taskMonitor).setDone();
+        taskMonitor.setPercentCompleted(100);
+        showInfoAfterClustering();
         //  clustersNumber = af.getClustersNumber();
-        monitor.setPercentCompleted(100);
         psc.clusteringCompleted();
     }
 
@@ -390,5 +393,13 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
             }
         }
         return true;
+    }
+
+    public void halt() {
+        canceled = true;
+        if (myThread != null) {
+            myThread.stop();
+            ((JTask) taskMonitor).setDone();
+        }
     }
 }

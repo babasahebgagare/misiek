@@ -84,6 +84,11 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
         return (notConverged == false);
     }
 
+    @Override
+    public void halt() {
+        iteration = getIterations();
+    }
+
     /*    public void setGraphMode(AffinityGraphMode mode) {
     this.graphMode = mode;
     }*/

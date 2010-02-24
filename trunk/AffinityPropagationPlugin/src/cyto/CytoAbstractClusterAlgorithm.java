@@ -48,7 +48,7 @@ public abstract class CytoAbstractClusterAlgorithm implements CytoClusterAlgorit
     protected PropertyChangeSupport pcs;
     protected boolean debug = false;
     protected boolean canceled = false;
-    private Thread myThread = null;
+    protected Thread myThread = null;
     protected TaskMonitor taskMonitor = null;
 
     public CytoAbstractClusterAlgorithm() {
@@ -99,14 +99,6 @@ public abstract class CytoAbstractClusterAlgorithm implements CytoClusterAlgorit
     @Override
     public String toString() {
         return getName();
-    }
-
-    public void halt() {
-        canceled = true;
-        if (myThread != null) {
-            myThread.interrupt();
-            ((JTask) taskMonitor).setDone();
-        }
     }
 
     public abstract Integer getClustersNumber();

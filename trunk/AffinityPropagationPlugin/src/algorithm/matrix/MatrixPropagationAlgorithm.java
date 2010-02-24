@@ -58,11 +58,6 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
         S = new DoubleMatrix2D(N, N, -inf);
     }
 
-    @Override
-    public void halt() {
-        // TODO
-    }
-
     public int getN() {
         return N;
     }
