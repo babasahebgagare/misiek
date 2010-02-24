@@ -200,10 +200,6 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
     }
 
     @Override
-    public void halt() {
-    }
-
-    @Override
     public void setN(final int N) {
         //  System.out.println("tworze");
         examplars = new ExamplarsCollection(N, convits);
