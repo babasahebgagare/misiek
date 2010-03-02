@@ -51,10 +51,6 @@ public interface CytoClusterAlgorithm {
 
     public void revertSettings();
 
-    public void showCenters(final String centersAttribute);
-
-    public void showCentersAfetrClustering();
-
     public void showInfoAfterClustering();
 
     public void updateSettings();

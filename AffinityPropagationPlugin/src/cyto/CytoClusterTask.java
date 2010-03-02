@@ -107,8 +107,4 @@ public class CytoClusterTask implements Task {
 
         return result;
     }
-
-    public void showCenters(final String centersAttribute) {
-        cluster.showCenters(centersAttribute);
-    }
 }

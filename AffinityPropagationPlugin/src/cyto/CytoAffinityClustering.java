@@ -42,9 +42,6 @@ import cytoscape.Cytoscape;
 import cytoscape.data.CyAttributes;
 import cytoscape.task.TaskMonitor;
 import cytoscape.task.ui.JTask;
-import cytoscape.view.CyNetworkView;
-import cytoscape.visual.NodeShape;
-import giny.view.NodeView;
 import java.util.TreeMap;
 import java.util.List;
 import java.util.Map;
@@ -52,7 +49,6 @@ import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.TreeSet;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 import listeners.IterationListener;
 import panel.AffinityPanelController;
 import utils.Messenger;
@@ -166,29 +162,24 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
 
             while (clusterprior.size() > 0) {
                 ClusterInteger cluster = clusterprior.poll();
-                /*    int strl = String.valueOf(i).length();
-                String id = "";
-                for (int j = strl; j < strlen; j++) {
-                id = id + "0";
-                }
-                id = id + String.valueOf(i);*/
                 for (Integer element : cluster.getElements()) {
                     String centerID = idMapping.get(cluster.getName());
                     String nodeID = idMapping.get(Integer.valueOf(element));
-                    //   nodesAttributes.setAttribute(nodeID, nodeNameAttr, centerID);
                     nodesAttributes.setAttribute(nodeID, centersNameAttr, centerID);
                     nodesAttributes.setAttribute(nodeID, nodeNameAttr, Integer.valueOf(i));
                 }
                 i++;
             }
+            taskMonitor.setPercentCompleted(100);
+            taskMonitor.setStatus("Centers highlighting...");
             psc.addCentersAttribute(centersNameAttr);
-            showCenters(centersNameAttr);
+            psc.showCenters(centersNameAttr);
         }
         //    ((JTask) taskMonitor).setDone();
         taskMonitor.setPercentCompleted(100);
         showInfoAfterClustering();
         //  clustersNumber = af.getClustersNumber();
-        psc.clusteringCompleted();
+        psc.clusteringCompleted(af.getClustersNumber(), af.getIterations());
     }
 
     public void setAffinityPanelController(AffinityPanelController psc) {
@@ -203,32 +194,12 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
         }
     }
 
-    private Set<String> selectConnectedNodes(final List<CyEdge> edges, final List<CyNode> nodes) {
-        Set<String> nodesNames = new TreeSet<String>();
-
-        for (CyEdge edge : edges) {
-            String sourceID = edge.getSource().getIdentifier();
-            String targetID = edge.getTarget().getIdentifier();
-
-            if (!sourceID.equals(targetID)) {
-                if (!nodesNames.contains(sourceID)) {
-                    nodesNames.add(sourceID);
-                }
-                if (!nodesNames.contains(targetID)) {
-                    nodesNames.add(targetID);
-                }
-            }
-        }
-
-        return nodesNames;
-    }
-
     private void setParameters() {
         @SuppressWarnings("unchecked")
         List<CyEdge> edges = Cytoscape.getCurrentNetwork().edgesList();
         @SuppressWarnings("unchecked")
         List<CyNode> nodes = Cytoscape.getCurrentNetwork().nodesList();
-        Set<String> nodeNames = selectConnectedNodes(edges, nodes);
+        Set<String> nodeNames = psc.selectConnectedNodes(edges, nodes);
 
         CyAttributes edgesAttributes = Cytoscape.getEdgeAttributes();
 
@@ -333,50 +304,6 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
         } else {
             Messenger.messageInfo("Algorithm converged after: " + af.getCurrentIteration() + " iterations");
         }
-    }
-
-    public void showCenters(final String centersAttribute) {
-
-        SwingUtilities.invokeLater(new Runnable() {
-
-            public void run() {
-                Cytoscape.getCurrentNetworkView().redrawGraph(false, true);
-                CyNetworkView currentView = Cytoscape.getCurrentNetworkView();
-                @SuppressWarnings("unchecked")
-                List<CyEdge> edges = Cytoscape.getCurrentNetwork().edgesList();
-                @SuppressWarnings("unchecked")
-                List<CyNode> nodes = Cytoscape.getCurrentNetwork().nodesList();
-                Set<String> nodeNames = selectConnectedNodes(edges, nodes);
-
-                for (String name : nodeNames) {
-                    String v = nodesAttributes.getStringAttribute(name, centersAttribute);
-                    if (name.equals(v)) {
-                        CyNode node = Cytoscape.getCyNode(name);
-                        NodeView nodeView = currentView.getNodeView(node.getRootGraphIndex());
-                        if (nodeView != null) {
-                            double width = nodeView.getWidth();
-                            double height = nodeView.getHeight();
-
-                            nodeView.setWidth(width + 20.0);
-                            nodeView.setHeight(height + 20.0);
-                            nodeView.setShape(NodeShape.ELLIPSE.getGinyShape());
-                            nodeView.setSelected(true);
-                        }
-                    } else {
-                        CyNode node = Cytoscape.getCyNode(name);
-                        NodeView nodeView = currentView.getNodeView(node.getRootGraphIndex());
-                        if (nodeView != null) {
-                            nodeView.setSelected(false);
-                        }
-                    }
-                }
-                currentView.updateView();
-            }
-        });
-    }
-
-    public void showCentersAfetrClustering() {
-        showCenters(centersNameAttr);
     }
 
     @Override
