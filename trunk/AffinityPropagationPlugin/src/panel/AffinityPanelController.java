@@ -30,31 +30,36 @@
  */
 package panel;
 
-import algorithm.abs.AffinityPropagationAlgorithm.AffinityConnectingMethod;
-import algorithm.abs.AffinityPropagationAlgorithm.AffinityGraphMode;
 import cyto.CytoAffinityClustering;
 import cyto.CytoClusterTask;
-import cytoscape.CyEdge;
-import cytoscape.Cytoscape;
-import cytoscape.data.CyAttributes;
 import cytoscape.task.util.TaskManager;
-import cytoscape.view.CyNetworkView;
 import giny.model.Edge;
 import giny.view.EdgeView;
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.List;
-import java.util.TreeSet;
 import java.util.Vector;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
-import utils.Messenger;
 import utils.MathStats;
+import algorithm.abs.AffinityPropagationAlgorithm.AffinityConnectingMethod;
+import algorithm.abs.AffinityPropagationAlgorithm.AffinityGraphMode;
+import cytoscape.CyEdge;
+import cytoscape.CyNode;
+import cytoscape.Cytoscape;
+import cytoscape.data.CyAttributes;
+import cytoscape.view.CyNetworkView;
+import cytoscape.visual.NodeShape;
+import giny.view.NodeView;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import utils.Messenger;
 
 /**
  *
@@ -92,9 +97,7 @@ public class AffinityPanelController implements Serializable {
     public final static int MATRIX_IMPLEMENTATION = 0;
     public final static int SMART_IMPLEMENTATION = 1;
     private boolean log = false;
-    private CytoClusterTask cytoAlgorithmTask;
     private Collection<String> centersAttr = new TreeSet<String>();
-    private CytoAffinityClustering algorithm;
 
     public AffinityPanelController(final AffinityStatsPanelController psc) {
         this.psc = psc;
@@ -148,25 +151,25 @@ public class AffinityPanelController implements Serializable {
             }
         }
 
-        algorithm = new CytoAffinityClustering(connectingMode, implementation, nodeNameAttr, edgeNameAttr, lambda.doubleValue(), preferences, iterations.intValue(), convits, refine, log, noise, centersNameAttr);
+        CytoAffinityClustering algorithm = new CytoAffinityClustering(connectingMode, implementation, nodeNameAttr, edgeNameAttr, lambda.doubleValue(), preferences, iterations.intValue(), convits, refine, log, noise, centersNameAttr);
         algorithm.setStepsCount(steps);
         algorithm.setGraphMode(graphMode);
         algorithm.setAffinityPanelController(this);
-        cytoAlgorithmTask = new CytoClusterTask(algorithm);
+        CytoClusterTask cytoAlgorithmTask = new CytoClusterTask(algorithm);
 
         TaskManager.executeTask(cytoAlgorithmTask,
                 CytoClusterTask.getDefaultTaskConfig());
     }
 
-    public void clusteringCompleted() {
+    public void clusteringCompleted(Integer clustersCount, Integer madeIter) {
         Double lambda = getLambda();
         Double preferences = getPreferences();
         Integer iterations = getIterations();
         String nodeNameAttr = getNodeAttr();
         String centersNameAttr = getCentersAttr();
-        Integer clusters = algorithm.getClustersNumber();
+        Integer clusters = clustersCount;
         Integer convits = getConvits();
-        Integer madeIterations = algorithm.getCurrentIteration();
+        Integer madeIterations = madeIter;
         Boolean takeLog = getLog();
         Boolean noise = getNoise();
 
@@ -218,10 +221,66 @@ public class AffinityPanelController implements Serializable {
         this.stepsFiled = stepsFiled;
     }
 
-    public void showCenters(final String centersAttribute) {
-        if (centersAttribute != null) {
-            cytoAlgorithmTask.showCenters(centersAttribute);
+    public Set<String> selectConnectedNodes(final List<CyEdge> edges, final List<CyNode> nodes) {
+        Set<String> nodesNames = new TreeSet<String>();
+
+        for (CyEdge edge : edges) {
+            String sourceID = edge.getSource().getIdentifier();
+            String targetID = edge.getTarget().getIdentifier();
+
+            if (!sourceID.equals(targetID)) {
+                if (!nodesNames.contains(sourceID)) {
+                    nodesNames.add(sourceID);
+                }
+                if (!nodesNames.contains(targetID)) {
+                    nodesNames.add(targetID);
+                }
+            }
         }
+
+        return nodesNames;
+    }
+
+    public void showCenters(final String centersAttribute) {
+        final CyAttributes nodesAttributes = Cytoscape.getNodeAttributes();
+        if (centersAttribute != null) {
+      //      SwingUtilities.invokeLater(new Runnable() {
+
+       //         public void run() {
+                    Cytoscape.getCurrentNetworkView().redrawGraph(false, true);
+                    CyNetworkView currentView = Cytoscape.getCurrentNetworkView();
+                    @SuppressWarnings("unchecked")
+                    List<CyEdge> edges = Cytoscape.getCurrentNetwork().edgesList();
+                    @SuppressWarnings("unchecked")
+                    List<CyNode> nodes = Cytoscape.getCurrentNetwork().nodesList();
+                    Set<String> nodeNames = selectConnectedNodes(edges, nodes);
+
+                    for (String name : nodeNames) {
+                        String v = nodesAttributes.getStringAttribute(name, centersAttribute);
+                        if (name.equals(v)) {
+                            CyNode node = Cytoscape.getCyNode(name);
+                            NodeView nodeView = currentView.getNodeView(node.getRootGraphIndex());
+                            if (nodeView != null) {
+                                double width = nodeView.getWidth();
+                                double height = nodeView.getHeight();
+
+                                nodeView.setWidth(width + 20.0);
+                                nodeView.setHeight(height + 20.0);
+                                nodeView.setShape(NodeShape.ELLIPSE.getGinyShape());
+                                nodeView.setSelected(true);
+                            }
+                        } else {
+                            CyNode node = Cytoscape.getCyNode(name);
+                            NodeView nodeView = currentView.getNodeView(node.getRootGraphIndex());
+                            if (nodeView != null) {
+                                nodeView.setSelected(false);
+                            }
+                        }
+                    }
+                    currentView.updateView();
+                }
+         //   });
+       // }
     }
 
     public String getCentersAttr() {

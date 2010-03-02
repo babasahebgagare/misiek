@@ -35,7 +35,6 @@ package cyto;
 import cytoscape.layout.Tunable;
 import cytoscape.task.TaskMonitor;
 
-import cytoscape.task.ui.JTask;
 import java.beans.PropertyChangeSupport;
 import javax.swing.JPanel;
 
