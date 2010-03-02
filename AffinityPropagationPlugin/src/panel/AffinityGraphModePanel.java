@@ -55,8 +55,6 @@ public class AffinityGraphModePanel extends javax.swing.JPanel {
         directedModeRadio = new javax.swing.JRadioButton();
         undirectedModeRadio = new javax.swing.JRadioButton();
 
-        setPreferredSize(new java.awt.Dimension(270, 49));
-
         graphModePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Graph mode"));
         graphModePanel.setName("graphModePanel"); // NOI18N
 
@@ -78,7 +76,7 @@ public class AffinityGraphModePanel extends javax.swing.JPanel {
             .addGroup(graphModePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(undirectedModeRadio)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(directedModeRadio)
                 .addGap(36, 36, 36))
         );
