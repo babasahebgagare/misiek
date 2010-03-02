@@ -36,8 +36,11 @@ import cytoscape.task.util.TaskManager;
 import giny.model.Edge;
 import giny.view.EdgeView;
 import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -241,46 +244,62 @@ public class AffinityPanelController implements Serializable {
         return nodesNames;
     }
 
-    public void showCenters(final String centersAttribute) {
+    public void showCentersHelp(final String centersAttribute) {
+        if (centersAttribute == null) {
+            return;
+        }
         final CyAttributes nodesAttributes = Cytoscape.getNodeAttributes();
-        if (centersAttribute != null) {
-      //      SwingUtilities.invokeLater(new Runnable() {
-
-       //         public void run() {
-                    Cytoscape.getCurrentNetworkView().redrawGraph(false, true);
-                    CyNetworkView currentView = Cytoscape.getCurrentNetworkView();
-                    @SuppressWarnings("unchecked")
-                    List<CyEdge> edges = Cytoscape.getCurrentNetwork().edgesList();
-                    @SuppressWarnings("unchecked")
-                    List<CyNode> nodes = Cytoscape.getCurrentNetwork().nodesList();
-                    Set<String> nodeNames = selectConnectedNodes(edges, nodes);
-
-                    for (String name : nodeNames) {
-                        String v = nodesAttributes.getStringAttribute(name, centersAttribute);
-                        if (name.equals(v)) {
-                            CyNode node = Cytoscape.getCyNode(name);
-                            NodeView nodeView = currentView.getNodeView(node.getRootGraphIndex());
-                            if (nodeView != null) {
-                                double width = nodeView.getWidth();
-                                double height = nodeView.getHeight();
-
-                                nodeView.setWidth(width + 20.0);
-                                nodeView.setHeight(height + 20.0);
-                                nodeView.setShape(NodeShape.ELLIPSE.getGinyShape());
-                                nodeView.setSelected(true);
-                            }
-                        } else {
-                            CyNode node = Cytoscape.getCyNode(name);
-                            NodeView nodeView = currentView.getNodeView(node.getRootGraphIndex());
-                            if (nodeView != null) {
-                                nodeView.setSelected(false);
-                            }
-                        }
-                    }
-                    currentView.updateView();
+        Cytoscape.getCurrentNetworkView().redrawGraph(false, true);
+        CyNetworkView currentView = Cytoscape.getCurrentNetworkView();
+        @SuppressWarnings(value = "unchecked")
+        List<CyEdge> edges = Cytoscape.getCurrentNetwork().edgesList();
+        @SuppressWarnings(value = "unchecked")
+        List<CyNode> nodes = Cytoscape.getCurrentNetwork().nodesList();
+        Set<String> nodeNames = selectConnectedNodes(edges, nodes);
+        for (String name : nodeNames) {
+            String v = nodesAttributes.getStringAttribute(name, centersAttribute);
+            if (name.equals(v)) {
+                CyNode node = Cytoscape.getCyNode(name);
+                NodeView nodeView = currentView.getNodeView(node.getRootGraphIndex());
+                if (nodeView != null) {
+                    double width = nodeView.getWidth();
+                    double height = nodeView.getHeight();
+                    nodeView.setWidth(width + 20.0);
+                    nodeView.setHeight(height + 20.0);
+                    nodeView.setShape(NodeShape.ELLIPSE.getGinyShape());
+                    nodeView.setSelected(true);
                 }
-         //   });
-       // }
+            } else {
+                CyNode node = Cytoscape.getCyNode(name);
+                NodeView nodeView = currentView.getNodeView(node.getRootGraphIndex());
+                if (nodeView != null) {
+                    nodeView.setSelected(false);
+                }
+            }
+        }
+        currentView.updateView();
+    }
+
+    public void showCentersAndWait(final String centersAttribute) {
+        try {
+            SwingUtilities.invokeAndWait(new Runnable() {
+                public void run() {
+                    showCentersHelp(centersAttribute);
+                }
+            });
+        } catch (InterruptedException ex) {
+            Logger.getLogger(AffinityPanelController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvocationTargetException ex) {
+            Logger.getLogger(AffinityPanelController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void showCentersAndNotWait(final String centersAttribute) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                showCentersHelp(centersAttribute);
+            }
+        });
     }
 
     public String getCentersAttr() {
@@ -502,6 +521,9 @@ public class AffinityPanelController implements Serializable {
 
     public void refreshPreferences() {
         String edgeNameAttr = getEdgeAttr();
+        if (edgeNameAttr == null) {
+            return;
+        }
         if (edgeNameAttr.equals(DEFAULT)) {
             setPreferences(Double.parseDouble(DEFAULT_PREFERENCE));
             return;

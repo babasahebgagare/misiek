@@ -68,7 +68,7 @@ public class AffinityPanel extends javax.swing.JPanel {
         //    pc.setNoiseCheckBox(noiseCheckbox);
         pc.initPanelFields();
 
-     //   setLayout();
+        //   setLayout();
 
         //AffinityPanel.epsilon = epsilonField;
     }
@@ -472,7 +472,7 @@ public class AffinityPanel extends javax.swing.JPanel {
 }//GEN-LAST:event_preferenceFieldActionPerformed
 
     private void edgeAttrComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edgeAttrComboActionPerformed
-        //      pc.refreshPreferences();
+        pc.refreshPreferences();
     }//GEN-LAST:event_edgeAttrComboActionPerformed
 
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
@@ -486,7 +486,6 @@ public class AffinityPanel extends javax.swing.JPanel {
     private void nodeAttrNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nodeAttrNameFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nodeAttrNameFieldActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField centersNameAttrField;
     private javax.swing.JTextField convitsField;

@@ -95,6 +95,7 @@ public class AffinityStatsPanel extends javax.swing.JPanel {
         cleanButton.setText("Delete row");
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("panel/ui_properties"); // NOI18N
         cleanButton.setToolTipText(bundle.getString("DeleteRowButton.ToolTip")); // NOI18N
+        cleanButton.setMargin(new java.awt.Insets(2, 5, 2, 5));
         cleanButton.setName("cleanButton"); // NOI18N
         cleanButton.setPreferredSize(new java.awt.Dimension(107, 23));
         cleanButton.addActionListener(new java.awt.event.ActionListener() {
@@ -106,6 +107,7 @@ public class AffinityStatsPanel extends javax.swing.JPanel {
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/details.png"))); // NOI18N
         jButton1.setText("Details");
         jButton1.setToolTipText("Details of clustering history");
+        jButton1.setMargin(new java.awt.Insets(2, 5, 2, 5));
         jButton1.setName("jButton1"); // NOI18N
         jButton1.setPreferredSize(new java.awt.Dimension(87, 23));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -132,8 +134,8 @@ public class AffinityStatsPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cleanButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cleanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents

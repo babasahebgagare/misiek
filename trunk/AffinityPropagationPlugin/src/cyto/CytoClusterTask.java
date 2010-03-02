@@ -70,8 +70,8 @@ public class CytoClusterTask implements Task {
      */
     public void run() {
         cluster.doCluster(monitor);
-      //  cluster.showInfoAfterClustering();
-    //    cluster.showCentersAfetrClustering();
+        cluster.showInfoAfterClustering();
+        //    cluster.showCentersAfetrClustering();
     }
 
     /**
