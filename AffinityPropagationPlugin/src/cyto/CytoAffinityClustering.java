@@ -47,7 +47,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
-import java.util.TreeSet;
 import javax.swing.JPanel;
 import listeners.IterationListener;
 import panel.AffinityPanelController;
@@ -173,11 +172,11 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
             taskMonitor.setPercentCompleted(100);
             taskMonitor.setStatus("Centers highlighting...");
             psc.addCentersAttribute(centersNameAttr);
-            psc.showCenters(centersNameAttr);
+            psc.showCentersAndWait(centersNameAttr);
         }
         //    ((JTask) taskMonitor).setDone();
         taskMonitor.setPercentCompleted(100);
-        showInfoAfterClustering();
+        //showInfoAfterClustering();
         //  clustersNumber = af.getClustersNumber();
         psc.clusteringCompleted(af.getClustersNumber(), af.getIterations());
     }

@@ -73,7 +73,7 @@ public class AffinityMain extends CytoscapePlugin {
         AffinityButtonsPanel actionButtonsPanel = new AffinityButtonsPanel(pc);
         actionButtonsPanel.addChooseImplPanel(chooseImplPanel);
         actionButtonsPanel.addConnModePanel(connModePanel);
-    //    actionButtonsPanel.addGraphModePanel(graphModePanel);
+        //    actionButtonsPanel.addGraphModePanel(graphModePanel);
 
         JPanel afpanel = pc.createAffinityPanel();
         JPanel stats = psc.createAffinityStatsPanel();
@@ -100,6 +100,8 @@ public class AffinityMain extends CytoscapePlugin {
             CytoPanelImp leftPanel = (CytoPanelImp) Cytoscape.getDesktop().getCytoPanel(SwingConstants.WEST);
 
             leftPanel.add("APGraphClustringPlugin", myAff);
+            int index = leftPanel.indexOfComponent("APGraphClustringPlugin");
+            leftPanel.setSelectedIndex(index);
             //System.out.println("Affinity propagation");
         }
 

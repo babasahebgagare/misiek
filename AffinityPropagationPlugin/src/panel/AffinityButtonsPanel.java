@@ -81,6 +81,7 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
         jPanel3.setName("jPanel3"); // NOI18N
 
         jPanel1.setName("jPanel1"); // NOI18N
+        jPanel1.setPreferredSize(new java.awt.Dimension(270, 23));
 
         helpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/help.png"))); // NOI18N
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("panel/ui_properties"); // NOI18N
@@ -89,6 +90,7 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
         helpButton.setMargin(new java.awt.Insets(2, 0, 2, 0));
         helpButton.setMaximumSize(new java.awt.Dimension(25, 25));
         helpButton.setName("helpButton"); // NOI18N
+        helpButton.setPreferredSize(new java.awt.Dimension(23, 23));
         helpButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 helpButtonActionPerformed(evt);
@@ -98,7 +100,7 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
         jButton3.setText("Advanced options");
         jButton3.setMargin(new java.awt.Insets(2, 0, 2, 0));
         jButton3.setName("jButton3"); // NOI18N
-        jButton3.setPreferredSize(new java.awt.Dimension(93, 25));
+        jButton3.setPreferredSize(new java.awt.Dimension(93, 23));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -110,6 +112,7 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
         startButton.setToolTipText(bundle.getString("StartButton.ToolTip")); // NOI18N
         startButton.setMargin(new java.awt.Insets(2, 0, 2, 0));
         startButton.setName("startButton"); // NOI18N
+        startButton.setPreferredSize(new java.awt.Dimension(51, 23));
         startButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 startButtonActionPerformed(evt);
@@ -131,9 +134,10 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(helpButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
-            .addComponent(startButton, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+            .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+                .addComponent(helpButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, Short.MAX_VALUE))
         );
 
         jPanel2.setName("jPanel2"); // NOI18N
@@ -144,6 +148,7 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
         jButton1.setAlignmentY(0.0F);
         jButton1.setMargin(new java.awt.Insets(2, 0, 2, 0));
         jButton1.setName("jButton1"); // NOI18N
+        jButton1.setPreferredSize(new java.awt.Dimension(107, 23));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -153,6 +158,7 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
         centersAttrList.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         centersAttrList.setToolTipText("Select centers attribute");
         centersAttrList.setName("centersAttrList"); // NOI18N
+        centersAttrList.setPreferredSize(new java.awt.Dimension(57, 23));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -168,8 +174,8 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(centersAttrList, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(centersAttrList, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -184,7 +190,7 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -212,7 +218,7 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String centersAttribute = (String) centersAttrList.getSelectedItem();
         //    System.out.println("selected:" + centersAttribute);
-        pc.showCenters(centersAttribute);
+        pc.showCentersAndNotWait(centersAttribute);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

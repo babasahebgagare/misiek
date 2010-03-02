@@ -39,8 +39,8 @@
               <Component id="jScrollPane1" pref="82" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="cleanButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cleanButton" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                  <Component id="jButton1" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -110,6 +110,9 @@
         <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
           <ResourceString bundle="panel/ui_properties.properties" key="DeleteRowButton.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
         </Property>
+        <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+          <Insets value="[2, 5, 2, 5]"/>
+        </Property>
         <Property name="name" type="java.lang.String" value="cleanButton" noResource="true"/>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[107, 23]"/>
@@ -126,6 +129,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Details"/>
         <Property name="toolTipText" type="java.lang.String" value="Details of clustering history"/>
+        <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+          <Insets value="[2, 5, 2, 5]"/>
+        </Property>
         <Property name="name" type="java.lang.String" value="jButton1" noResource="true"/>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[87, 23]"/>
