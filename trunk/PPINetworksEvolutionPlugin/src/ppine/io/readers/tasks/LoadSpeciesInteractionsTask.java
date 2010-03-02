@@ -105,7 +105,7 @@ public class LoadSpeciesInteractionsTask extends PPINELoadTask {
 
             if (treshold == null || probability > treshold) {
                 if (network.containsProtein(TargetID) && network.containsProtein(SourceID)) {
-                    String EdgeID = IDCreator.createInteractionID(SourceID, TargetID);
+                    String EdgeID = IDCreator.createInteractionID(SourceID, TargetID, probability);
                     dh.createInteraction(EdgeID, SourceID, TargetID, probability, network);
                     count++;
                 }

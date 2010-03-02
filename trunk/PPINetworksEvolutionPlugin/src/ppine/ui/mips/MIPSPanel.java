@@ -28,16 +28,21 @@
  *           Janusz Dutkowski (idea, data) (j.dutkowski@mimuw.edu.pl)
  *           Jerzy Tiuryn (supervisor) (tiuryn@mimuw.edu.pl)
  */
-
 package ppine.ui.mips;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Collection;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import java.util.Map;
+import java.util.Collection;
+import cytoscape.CyNode;
+import cytoscape.Cytoscape;
+import cytoscape.data.CyAttributes;
+import cytoscape.view.CyNetworkView;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MIPSPanel extends javax.swing.JPanel {
 
@@ -67,9 +72,11 @@ public class MIPSPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
         jButton1.setText("MIPS Names");
         jButton1.setIconTextGap(2);
+        jButton1.setMargin(new java.awt.Insets(2, 0, 2, 0));
         jButton1.setName("jButton1"); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,6 +86,7 @@ public class MIPSPanel extends javax.swing.JPanel {
 
         jButton2.setText("MIPS Complexes");
         jButton2.setIconTextGap(2);
+        jButton2.setMargin(new java.awt.Insets(2, 0, 2, 0));
         jButton2.setName("jButton2"); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,6 +117,14 @@ public class MIPSPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton5.setText("aaaa");
+        jButton5.setName("jButton5"); // NOI18N
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -118,13 +134,15 @@ public class MIPSPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE))
+                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE))))
+                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -133,7 +151,8 @@ public class MIPSPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton3)
@@ -165,11 +184,11 @@ public class MIPSPanel extends javax.swing.JPanel {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         try {
             ComplexesCytoReader textReader = new ComplexesCytoReader();
-            myComplex = textReader.readProteins(jTextArea1);
+            myComplex = textReader.readProteins();
             ComplexesComparator comparator = new ComplexesComparator(mipsComplexes, myComplex);
             comparator.compare();
         } catch (IOException ex) {
-            Logger.getLogger(MIPSPanel.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("DUPA");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -187,11 +206,35 @@ public class MIPSPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        final CyAttributes nodesAttributes = Cytoscape.getNodeAttributes();
+        Cytoscape.getCurrentNetworkView().redrawGraph(false, true);
+        CyNetworkView currentView = Cytoscape.getCurrentNetworkView();
+        @SuppressWarnings("unchecked")
+        List<CyNode> nodes = Cytoscape.getCurrentNetwork().nodesList();
+
+        String mcodeAttr = "MCODE_Cluster";
+        String outattr = "MCODE_ClusterID";
+        ArrayList clusterArrayList = new ArrayList();
+
+
+        for (CyNode node : nodes) {
+            clusterArrayList = (ArrayList) nodesAttributes.getAttributeList(node.getIdentifier(), mcodeAttr);
+            for (int i = 0; i < clusterArrayList.size(); i++) {
+                nodesAttributes.setAttribute(node.getIdentifier(), outattr, String.valueOf(clusterArrayList.get(i)));
+                //System.out.println("node: " + node.getIdentifier() + " " + clusterArrayList.get(i));
+            }
+            //String val = String.valueOf(v);
+            //nodesAttributes.setAttribute(node.getIdentifier(), outattr);
+        }
+
+    }//GEN-LAST:event_jButton5ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables

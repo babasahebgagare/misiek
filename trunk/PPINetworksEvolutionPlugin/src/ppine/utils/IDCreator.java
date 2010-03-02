@@ -28,7 +28,6 @@
  *           Janusz Dutkowski (idea, data) (j.dutkowski@mimuw.edu.pl)
  *           Jerzy Tiuryn (supervisor) (tiuryn@mimuw.edu.pl)
  */
-
 package ppine.utils;
 
 import ppine.io.parsers.ExperimentParserStruct;
@@ -42,19 +41,19 @@ public class IDCreator {
     private static int networkID = 0;
 
     public static String createExpInteractionID(ExperimentParserStruct interaction) {
-        return interaction.getFrom() + "_" + interaction.getTo() + "_" + interaction.getExpID();
+        return interaction.getFrom() + " (" + interaction.getExpID() + ") " + interaction.getTo();
     }
 
     public static String createExpNetworkID(String speciesName) {
         return speciesName + "_EXP";
     }
 
-    public static String createInteractionID(String SourceID, String TargetID) {
-        return SourceID + "-" + TargetID;
+    public static String createInteractionID(String SourceID, String TargetID, Double prob) {
+        return SourceID + " (" + prob + ") " + TargetID;
     }
 
     public static String createNetCytoNetworkID(String ID) {
-       // System.out.println(ID);
+        // System.out.println(ID);
         if (!CytoUtil.cytoNetworkExist(ID)) {
             return ID;
         }
@@ -73,7 +72,7 @@ public class IDCreator {
 
     public static String createNetworkProjectionID(SpeciesTreeNode networkTarget, CytoAbstractPPINetwork cytoNetworkSource) {
         networkID++;
-        return "PROJ_" + cytoNetworkSource.getID() + "_ON_" + networkTarget.getID() + "_" + String.valueOf(networkID);
+        return "MAP_" + cytoNetworkSource.getID() + "_ON_" + networkTarget.getID() + "_" + String.valueOf(networkID);
     }
 
     public static String createProteinProjectionID(Protein targetProteinProject, CytoAbstractPPINetwork cytoProjection) {
