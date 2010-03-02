@@ -28,7 +28,6 @@
  *           Janusz Dutkowski (idea, data) (j.dutkowski@mimuw.edu.pl)
  *           Jerzy Tiuryn (supervisor) (tiuryn@mimuw.edu.pl)
  */
-
 package ppine.ui.mips;
 
 import java.util.Collection;
@@ -46,20 +45,38 @@ public class ComplexesComparator {
     }
 
     public void compare() {
+        double maxJaccard = 0;
+        Complex bestMipsComplex = null;
+        //Complex bestMyComplex = null;
         for (Complex mipsComplex : complexes.values()) {
             Double jaccard = compareComplexes(myComplex, mipsComplex);
-
+            if (jaccard > maxJaccard) {
+                maxJaccard = jaccard;
+                bestMipsComplex = mipsComplex;
+            }
+            //  System.out.println("Jaccard: " + jaccard + " " + mipsComplex.getName() + " " + mipsComplex.getProteins().size() + " " + myComplex.getProteins().size());
         }
+        String msg = bestMipsComplex.getName() + " & " + bestMipsComplex.getProteins().size() + " & " + myComplex.getProteins().size() + " & " + round(maxJaccard, 4) + " & " + bestMipsComplex.getName() + " & " + bestMipsComplex.getDesc() + " \\\\";
+        // String msg = "COMPLEX: " + mipsComplex.getName() + " jaccard: " + jaccard + "MIPS SIZE: " + mipsComplex.getProteins().size() + " COMP SIZE: " + myComplex.getProteins().size();
+        ComplexesLogger.log(msg);
+        System.out.println(msg);
+
     }
 
+    /* public void compare() {
+    for (Complex mipsComplex : complexes.values()) {
+    Double jaccard = compareComplexes(myComplex, mipsComplex);
+    System.out.println("Jaccard: " + jaccard + " " + mipsComplex.getName() + " " + mipsComplex.getProteins().size() + " " + myComplex.getProteins().size());
+    }
+    }*/
     private Double compareComplexes(Complex myComplex, Complex mipsComplex) {
         Collection<String> sum = getSum(myComplex, mipsComplex);
         Collection<String> inter = getInter(myComplex, mipsComplex);
         Double jaccard = Double.valueOf((double) inter.size() / (double) sum.size());
-        if (jaccard > 0.1) {
-            String msg = mipsComplex.getName() + " & " + mipsComplex.getProteins().size() + " & " + myComplex.getProteins().size() + " & " + round(jaccard, 4) + " & " + mipsComplex.getName() + " & " + mipsComplex.getDesc() + " \\\\";
-            // String msg = "COMPLEX: " + mipsComplex.getName() + " jaccard: " + jaccard + "MIPS SIZE: " + mipsComplex.getProteins().size() + " COMP SIZE: " + myComplex.getProteins().size();
-            ComplexesLogger.log(msg);
+        //  if (jaccard > 0.1) {
+        //     String msg = mipsComplex.getName() + " & " + mipsComplex.getProteins().size() + " & " + myComplex.getProteins().size() + " & " + round(jaccard, 4) + " & " + mipsComplex.getName() + " & " + mipsComplex.getDesc() + " \\\\";
+        // String msg = "COMPLEX: " + mipsComplex.getName() + " jaccard: " + jaccard + "MIPS SIZE: " + mipsComplex.getProteins().size() + " COMP SIZE: " + myComplex.getProteins().size();
+        //     ComplexesLogger.log(msg);
 
         //    Collection<String> diff1 = getDiff(myComplex, mipsComplex);
         //    Collection<String> diff2 = getDiff(mipsComplex, myComplex);
@@ -67,7 +84,7 @@ public class ComplexesComparator {
         //    printCollection(diff1);
         //    ComplexesLogger.log("MIPS - MY COMPLEX: ");
         //    printCollection(diff2);
-        }
+//        }
 
         return jaccard;
     }

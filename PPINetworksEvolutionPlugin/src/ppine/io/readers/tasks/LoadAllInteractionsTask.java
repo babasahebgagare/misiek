@@ -105,7 +105,7 @@ public class LoadAllInteractionsTask extends PPINELoadTask {
                     Double treshold = tresholds.get(net.getID());
 
                     if (treshold == null || probability > treshold) {
-                        String EdgeID = IDCreator.createInteractionID(SourceID, TargetID);
+                        String EdgeID = IDCreator.createInteractionID(SourceID, TargetID, probability);
 
                         dh.createInteraction(EdgeID, SourceID, TargetID, probability);
                         created++;

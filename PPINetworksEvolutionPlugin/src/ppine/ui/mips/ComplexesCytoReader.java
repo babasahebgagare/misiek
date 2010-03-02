@@ -42,7 +42,7 @@ public class ComplexesCytoReader {
 
     private Complex proteinsComplex = new Complex("my_complex");
 
-    public Complex readProteins(JTextArea area) throws IOException {
+    public Complex readProteins() throws IOException {
 
         CyNetwork network = Cytoscape.getCurrentNetwork();
         @SuppressWarnings("unchecked")
