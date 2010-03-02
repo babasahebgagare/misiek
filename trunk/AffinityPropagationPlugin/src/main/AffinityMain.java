@@ -50,7 +50,7 @@ public class AffinityMain extends CytoscapePlugin {
 
     private static boolean activated = false;
     private static boolean first_use = true;
-    private JPanel myAff;
+    private AffinityMainPanel myAff;
 
     public AffinityMain() {
         //create a new action to respond to menu activation
@@ -66,7 +66,6 @@ public class AffinityMain extends CytoscapePlugin {
         AffinityPanelController pc = new AffinityPanelController(psc);
 
         myAff = new AffinityMainPanel();
-        myAff.setLayout(new VerticalLayout());
 
         JPanel chooseImplPanel = new AffinityChooseImplPanel(pc);
         JPanel connModePanel = new AffinityConnModePanel(pc);
@@ -79,12 +78,12 @@ public class AffinityMain extends CytoscapePlugin {
         JPanel afpanel = pc.createAffinityPanel();
         JPanel stats = psc.createAffinityStatsPanel();
 
-        myAff.add(afpanel);
+        myAff.addPanel(afpanel);
         //      myAff.add(chooseImplPanel, 1);
         //      myAff.add(connModePanel, 2);
-        myAff.add(graphModePanel);
-        myAff.add(actionButtonsPanel);
-        myAff.add(stats);
+        myAff.addPanel(graphModePanel);
+        myAff.addPanel(actionButtonsPanel);
+        myAff.addPanel(stats);
 
     }
 

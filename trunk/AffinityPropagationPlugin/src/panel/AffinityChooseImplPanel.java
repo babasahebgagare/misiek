@@ -61,7 +61,7 @@ public class AffinityChooseImplPanel extends javax.swing.JPanel {
         radioSibling = new javax.swing.JRadioButton();
         radioMatrix = new javax.swing.JRadioButton();
 
-        implementationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Choose implementation"));
+        implementationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Implementation"));
         implementationPanel.setMaximumSize(new java.awt.Dimension(270, 32767));
         implementationPanel.setName("implementationPanel"); // NOI18N
 
@@ -82,7 +82,7 @@ public class AffinityChooseImplPanel extends javax.swing.JPanel {
             .addGroup(implementationPanelLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(radioMatrix)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                 .addComponent(radioSibling)
                 .addGap(46, 46, 46))
         );
@@ -97,7 +97,7 @@ public class AffinityChooseImplPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(implementationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(implementationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

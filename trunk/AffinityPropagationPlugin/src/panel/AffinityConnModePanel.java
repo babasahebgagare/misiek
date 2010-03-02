@@ -28,8 +28,6 @@
  *           Janusz Dutkowski (idea) (j.dutkowski@mimuw.edu.pl)
  *           Jerzy Tiuryn (supervisor) (tiuryn@mimuw.edu.pl)
  */
-
-
 package panel;
 
 public class AffinityConnModePanel extends javax.swing.JPanel {
@@ -41,6 +39,10 @@ public class AffinityConnModePanel extends javax.swing.JPanel {
         this.pc = pc;
         initComponents();
 
+        stepsCheckbox.setEnabled(true);
+        stepsCheckbox.setSelected(true);
+        stepsField.setEnabled(true);
+        stepsField.setText("1");
         pc.setStepsFiled(stepsField);
         pc.setOriginalModeRadio(orgRadio);
         pc.setBsfModeRadio(BSFRadio);
@@ -63,12 +65,10 @@ public class AffinityConnModePanel extends javax.swing.JPanel {
         stepsField = new javax.swing.JTextField();
         stepsCheckbox = new javax.swing.JCheckBox();
 
-        setPreferredSize(new java.awt.Dimension(270, 72));
-
         nearesCenterPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Search for nearest center"));
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("panel/ui_properties"); // NOI18N
         nearesCenterPanel.setToolTipText(bundle.getString("SearchNearestNodeCenterPanel.ToolTip")); // NOI18N
-        nearesCenterPanel.setMaximumSize(new java.awt.Dimension(270, 32767));
+        nearesCenterPanel.setMaximumSize(null);
         nearesCenterPanel.setName("nearesCenterPanel"); // NOI18N
 
         weighetCentersGroup.add(orgRadio);
@@ -119,7 +119,7 @@ public class AffinityConnModePanel extends javax.swing.JPanel {
                 .addGroup(nearesCenterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(nearesCenterPanelLayout.createSequentialGroup()
                         .addComponent(orgRadio)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                         .addComponent(stepsCheckbox)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(stepsField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -180,7 +180,6 @@ public class AffinityConnModePanel extends javax.swing.JPanel {
     private void BSFRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSFRadioActionPerformed
         checkBoxRefresh();
 }//GEN-LAST:event_BSFRadioActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton BSFRadio;
     private javax.swing.JPanel nearesCenterPanel;
