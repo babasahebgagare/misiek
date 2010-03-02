@@ -170,7 +170,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
                 i++;
             }
             taskMonitor.setPercentCompleted(100);
-            taskMonitor.setStatus("Centers highlighting...");
+            taskMonitor.setStatus("Clustering completed. Please wait, centers are highlighting...");
             psc.addCentersAttribute(centersNameAttr);
             psc.showCentersAndWait(centersNameAttr);
         }
@@ -178,7 +178,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
         taskMonitor.setPercentCompleted(100);
         //showInfoAfterClustering();
         //  clustersNumber = af.getClustersNumber();
-        psc.clusteringCompleted(af.getClustersNumber(), af.getIterations());
+        psc.clusteringCompleted(af.getClustersNumber(), af.getCurrentIteration());
     }
 
     public void setAffinityPanelController(AffinityPanelController psc) {

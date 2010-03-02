@@ -37,7 +37,6 @@ import cytoscape.view.cytopanels.CytoPanelImp;
 import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import org.jdesktop.swingx.VerticalLayout;
 import panel.AffinityButtonsPanel;
 import panel.AffinityChooseImplPanel;
 import panel.AffinityConnModePanel;
