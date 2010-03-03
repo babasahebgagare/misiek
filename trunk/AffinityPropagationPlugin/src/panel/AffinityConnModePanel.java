@@ -65,11 +65,15 @@ public class AffinityConnModePanel extends javax.swing.JPanel {
         stepsField = new javax.swing.JTextField();
         stepsCheckbox = new javax.swing.JCheckBox();
 
+        setMaximumSize(new java.awt.Dimension(280, 32767));
+        setPreferredSize(new java.awt.Dimension(280, 72));
+
         nearesCenterPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Search for nearest center"));
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("panel/ui_properties"); // NOI18N
         nearesCenterPanel.setToolTipText(bundle.getString("SearchNearestNodeCenterPanel.ToolTip")); // NOI18N
         nearesCenterPanel.setMaximumSize(null);
         nearesCenterPanel.setName("nearesCenterPanel"); // NOI18N
+        nearesCenterPanel.setPreferredSize(new java.awt.Dimension(280, 72));
 
         weighetCentersGroup.add(orgRadio);
         orgRadio.setSelected(true);
@@ -119,7 +123,7 @@ public class AffinityConnModePanel extends javax.swing.JPanel {
                 .addGroup(nearesCenterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(nearesCenterPanelLayout.createSequentialGroup()
                         .addComponent(orgRadio)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                         .addComponent(stepsCheckbox)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(stepsField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -141,7 +145,7 @@ public class AffinityConnModePanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(nearesCenterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(nearesCenterPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

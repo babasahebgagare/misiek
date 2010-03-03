@@ -54,7 +54,10 @@ public class PluginInitializator {
 
     static void activatePlugin() {
         CytoPanelImp leftPanel = (CytoPanelImp) Cytoscape.getDesktop().getCytoPanel(SwingConstants.WEST);
-        leftPanel.add(ResourceBundle.getBundle("ppine/resources/ui").getString("TABNAME"), myPanel);
+        String tabName = ResourceBundle.getBundle("ppine/resources/ui").getString("TABNAME");
+        leftPanel.add(tabName, myPanel);
+        int index = leftPanel.indexOfComponent(tabName);
+        leftPanel.setSelectedIndex(index);
     }
 
     static void disactivatePlugin() {

@@ -28,9 +28,10 @@
  *           Janusz Dutkowski (idea, data) (j.dutkowski@mimuw.edu.pl)
  *           Jerzy Tiuryn (supervisor) (tiuryn@mimuw.edu.pl)
  */
-
 package ppine.logicmodel.controllers;
 
+import cytoscape.Cytoscape;
+import cytoscape.data.CyAttributes;
 import java.util.Collection;
 import ppine.viewmodel.controllers.CytoDataHandle;
 import ppine.viewmodel.structs.CytoAbstractPPINetwork;
@@ -100,8 +101,39 @@ public class ProjectorNetwork {
                 String ProteinProjectionID = IDCreator.createProteinProjectionID(proteinProject, projection);
                 CytoProteinProjection proteinProjection = cdh.createCytoProteinProjection(ProteinProjectionID, proteinProject, projection, cytoProtein);
                 node.addCytoProteinInside(proteinProjection);
+                projectAttributes(cytoProtein.getCytoID(), proteinProjection.getCytoID());  // to remove
             }
 
         }
+    }
+
+    private static void projectAttributes(String proteinID, String newProteinID) {
+
+        CyAttributes nodeAttributes = Cytoscape.getNodeAttributes();
+
+        String[] attributes = nodeAttributes.getAttributeNames();
+        for (String attribute : attributes) {
+            if (!attribute.equals("ID") && !attribute.equals("hiddenLabel") && !attribute.equals("canonicalName")) {
+                System.out.println("map: " + attribute);
+            }
+            if (nodeAttributes.getType(attribute) == nodeAttributes.TYPE_STRING) {
+                String attr = nodeAttributes.getStringAttribute(proteinID, attribute);
+                if (attr != null) {
+                    nodeAttributes.setAttribute(newProteinID, attribute, attr);
+                }
+            } else if (nodeAttributes.getType(attribute) == nodeAttributes.TYPE_FLOATING) {
+                Double attr = nodeAttributes.getDoubleAttribute(proteinID, attribute);
+                if (attr != null) {
+                    nodeAttributes.setAttribute(newProteinID, attribute, attr);
+                }
+            } else if (nodeAttributes.getType(attribute) == nodeAttributes.TYPE_INTEGER) {
+                Integer attr = nodeAttributes.getIntegerAttribute(proteinID, attribute);
+                if (attr != null) {
+                    nodeAttributes.setAttribute(newProteinID, attribute, attr);
+                }
+            }
+        }
+
+
     }
 }
