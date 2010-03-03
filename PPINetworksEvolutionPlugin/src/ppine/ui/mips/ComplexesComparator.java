@@ -47,19 +47,23 @@ public class ComplexesComparator {
     public void compare() {
         double maxJaccard = 0;
         Complex bestMipsComplex = null;
-        //Complex bestMyComplex = null;
         for (Complex mipsComplex : complexes.values()) {
-            Double jaccard = compareComplexes(myComplex, mipsComplex);
-            if (jaccard > maxJaccard) {
-                maxJaccard = jaccard;
-                bestMipsComplex = mipsComplex;
+            if (myComplex.size() > 1) {
+                Double jaccard = compareComplexes(myComplex, mipsComplex);
+                if (jaccard > maxJaccard) {
+                    maxJaccard = jaccard;
+                    bestMipsComplex = mipsComplex;
+                }
             }
             //  System.out.println("Jaccard: " + jaccard + " " + mipsComplex.getName() + " " + mipsComplex.getProteins().size() + " " + myComplex.getProteins().size());
         }
-        String msg = bestMipsComplex.getName() + " & " + bestMipsComplex.getProteins().size() + " & " + myComplex.getProteins().size() + " & " + round(maxJaccard, 4) + " & " + bestMipsComplex.getName() + " & " + bestMipsComplex.getDesc() + " \\\\";
-        // String msg = "COMPLEX: " + mipsComplex.getName() + " jaccard: " + jaccard + "MIPS SIZE: " + mipsComplex.getProteins().size() + " COMP SIZE: " + myComplex.getProteins().size();
-        ComplexesLogger.log(msg);
-        System.out.println(msg);
+        if (bestMipsComplex != null) {
+            Collection<String> inter = getInter(bestMipsComplex, myComplex);
+            String msg = bestMipsComplex.getName() + "\t" + bestMipsComplex.getProteins().size() + "\t" + myComplex.getProteins().size() + "\t" + inter.size() + "\t" + round(maxJaccard, 4);
+            // String msg = "COMPLEX: " + mipsComplex.getName() + " jaccard: " + jaccard + "MIPS SIZE: " + mipsComplex.getProteins().size() + " COMP SIZE: " + myComplex.getProteins().size();
+            ComplexesLogger.log(msg);
+            System.out.println(msg);
+        }
 
     }
 

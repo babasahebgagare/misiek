@@ -256,24 +256,19 @@ public class AffinityPanelController implements Serializable {
         @SuppressWarnings(value = "unchecked")
         List<CyNode> nodes = Cytoscape.getCurrentNetwork().nodesList();
         Set<String> nodeNames = selectConnectedNodes(edges, nodes);
+        Cytoscape.getCurrentNetwork().unselectAllNodes();
         for (String name : nodeNames) {
             String v = nodesAttributes.getStringAttribute(name, centersAttribute);
             if (name.equals(v)) {
                 CyNode node = Cytoscape.getCyNode(name);
                 NodeView nodeView = currentView.getNodeView(node.getRootGraphIndex());
                 if (nodeView != null) {
-                    double width = nodeView.getWidth();
-                    double height = nodeView.getHeight();
-                    nodeView.setWidth(width + 20.0);
-                    nodeView.setHeight(height + 20.0);
+                    //             double width = nodeView.getWidth();
+                    //             double height = nodeView.getHeight();
+                    //             nodeView.setWidth(width + 20.0);
+                    //             nodeView.setHeight(height + 20.0);
                     nodeView.setShape(NodeShape.ELLIPSE.getGinyShape());
                     nodeView.setSelected(true);
-                }
-            } else {
-                CyNode node = Cytoscape.getCyNode(name);
-                NodeView nodeView = currentView.getNodeView(node.getRootGraphIndex());
-                if (nodeView != null) {
-                    nodeView.setSelected(false);
                 }
             }
         }
@@ -283,6 +278,7 @@ public class AffinityPanelController implements Serializable {
     public void showCentersAndWait(final String centersAttribute) {
         try {
             SwingUtilities.invokeAndWait(new Runnable() {
+
                 public void run() {
                     showCentersHelp(centersAttribute);
                 }
@@ -296,6 +292,7 @@ public class AffinityPanelController implements Serializable {
 
     public void showCentersAndNotWait(final String centersAttribute) {
         SwingUtilities.invokeLater(new Runnable() {
+
             public void run() {
                 showCentersHelp(centersAttribute);
             }

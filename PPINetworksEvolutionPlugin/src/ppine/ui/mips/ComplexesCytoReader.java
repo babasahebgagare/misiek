@@ -28,21 +28,54 @@
  *           Janusz Dutkowski (idea, data) (j.dutkowski@mimuw.edu.pl)
  *           Jerzy Tiuryn (supervisor) (tiuryn@mimuw.edu.pl)
  */
-
 package ppine.ui.mips;
 
 import cytoscape.CyNetwork;
+import java.io.IOException;
+import cytoscape.CyEdge;
 import cytoscape.CyNode;
 import cytoscape.Cytoscape;
-import java.io.IOException;
+import cytoscape.data.CyAttributes;
+import cytoscape.view.CyNetworkView;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
-import javax.swing.JTextArea;
+import java.util.TreeMap;
 
 public class ComplexesCytoReader {
 
-    private Complex proteinsComplex = new Complex("my_complex");
+    Complex proteinsComplex = new Complex("my_complex");
+
+    public Collection<Complex> readAllComplexes(String attribute) {
+        Map<String, Complex> complexes = new TreeMap<String, Complex>();
+
+        final CyAttributes nodesAttributes = Cytoscape.getNodeAttributes();
+        Cytoscape.getCurrentNetworkView().redrawGraph(false, true);
+        @SuppressWarnings(value = "unchecked")
+        List<CyNode> nodes = Cytoscape.getCurrentNetwork().nodesList();
+
+        Cytoscape.getCurrentNetwork().unselectAllNodes();
+        for (CyNode node : nodes) {
+
+            String cluster_id = nodesAttributes.getStringAttribute(node.getIdentifier(), attribute);
+
+            if (cluster_id != null && !cluster_id.equals("")) {
+                if (!complexes.containsKey(cluster_id)) {
+                    Complex new_comp = new Complex(cluster_id);
+                    complexes.put(cluster_id, new_comp);
+                }
+                Complex comp = complexes.get(cluster_id);
+                comp.addProtein(node.getIdentifier());
+            } else {
+                System.out.println("jest: " + node.getIdentifier());
+            }
+        }
+        return complexes.values();
+    }
 
     public Complex readProteins() throws IOException {
+
 
         CyNetwork network = Cytoscape.getCurrentNetwork();
         @SuppressWarnings("unchecked")
