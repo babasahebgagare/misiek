@@ -55,8 +55,8 @@ import cytoscape.CyNode;
 import cytoscape.Cytoscape;
 import cytoscape.data.CyAttributes;
 import cytoscape.view.CyNetworkView;
-import cytoscape.visual.NodeShape;
 import giny.view.NodeView;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -249,29 +249,22 @@ public class AffinityPanelController implements Serializable {
             return;
         }
         final CyAttributes nodesAttributes = Cytoscape.getNodeAttributes();
-        Cytoscape.getCurrentNetworkView().redrawGraph(false, true);
+
         CyNetworkView currentView = Cytoscape.getCurrentNetworkView();
         @SuppressWarnings(value = "unchecked")
-        List<CyEdge> edges = Cytoscape.getCurrentNetwork().edgesList();
-        @SuppressWarnings(value = "unchecked")
         List<CyNode> nodes = Cytoscape.getCurrentNetwork().nodesList();
-        Set<String> nodeNames = selectConnectedNodes(edges, nodes);
+        
         Cytoscape.getCurrentNetwork().unselectAllNodes();
-        for (String name : nodeNames) {
+
+        Collection<CyNode> cynodes = new HashSet<CyNode>();
+        for (CyNode node : nodes) {
+            String name = node.getIdentifier();
             String v = nodesAttributes.getStringAttribute(name, centersAttribute);
             if (name.equals(v)) {
-                CyNode node = Cytoscape.getCyNode(name);
-                NodeView nodeView = currentView.getNodeView(node.getRootGraphIndex());
-                if (nodeView != null) {
-                    //             double width = nodeView.getWidth();
-                    //             double height = nodeView.getHeight();
-                    //             nodeView.setWidth(width + 20.0);
-                    //             nodeView.setHeight(height + 20.0);
-                    nodeView.setShape(NodeShape.ELLIPSE.getGinyShape());
-                    nodeView.setSelected(true);
-                }
+                cynodes.add(node);
             }
         }
+        currentView.getNetwork().setSelectedNodeState(cynodes, true);
         currentView.updateView();
     }
 
@@ -805,4 +798,39 @@ public class AffinityPanelController implements Serializable {
         }
         return true;
     }
+
+    /*  public void showCentersAndWait(final Collection<String> centersStr) {
+    try {
+    SwingUtilities.invokeAndWait(new Runnable() {
+
+    public void run() {
+    //  Cytoscape.getCurrentNetworkView().redrawGraph(false, true);
+    CyNetworkView currentView = Cytoscape.getCurrentNetworkView();
+
+    //long startTime = System.nanoTime();
+    Cytoscape.getCurrentNetwork().unselectAllNodes();
+
+    //long respTime = System.nanoTime();
+    //System.out.println("1:" + String.valueOf(respTime - startTime));
+    Collection<CyNode> cynodes = new HashSet<CyNode>();
+    for (String name : centersStr) {
+    //   System.out.println(name);
+    //long start = System.nanoTime();
+    CyNode node = Cytoscape.getCyNode(name);
+    cynodes.add(node);
+    
+
+    }
+    currentView.getNetwork().setSelectedNodeState(cynodes, true);
+
+    currentView.updateView();
+    }
+    });
+    } catch (InterruptedException ex) {
+    Logger.getLogger(AffinityPanelController.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (InvocationTargetException ex) {
+    Logger.getLogger(AffinityPanelController.class.getName()).log(Level.SEVERE, null, ex);
+    }
+
+    }*/
 }

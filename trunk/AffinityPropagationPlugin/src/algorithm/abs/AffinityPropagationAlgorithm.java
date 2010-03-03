@@ -76,6 +76,14 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
     protected Map<String, Integer> idMapper = new TreeMap<String, Integer>();
     protected Map<Integer, String> idRevMapper = new TreeMap<Integer, String>();
 
+    public void setIdMapper(Map<String, Integer> idMapper) {
+        this.idMapper = idMapper;
+    }
+
+    public void setIdRevMapper(Map<Integer, String> idRevMapper) {
+        this.idRevMapper = idRevMapper;
+    }
+
     public int getCurrentIteration() {
         return iteration;
     }
