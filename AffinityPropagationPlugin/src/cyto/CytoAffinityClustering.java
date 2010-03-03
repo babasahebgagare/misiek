@@ -171,7 +171,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
                 }
                 i++;
             }
-            taskMonitor.setStatus("Please wait, centers are highlighting...");
+            taskMonitor.setStatus("Centers are highlighting...");
             ((JTask) taskMonitor).setTitle("Clustering completed.");
             taskMonitor.setPercentCompleted(100);
             psc.addCentersAttribute(centersNameAttr);
@@ -228,6 +228,8 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
             //    af.setSimilarityInt(it, it, preferences);
             i++;
         }
+        af.setIdMapper(nodeMapping);
+        af.setIdRevMapper(idMapping);
 
         for (CyEdge edge : edges) {
 
