@@ -82,7 +82,7 @@ public class AffinityChooseImplPanel extends javax.swing.JPanel {
             .addGroup(implementationPanelLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(radioMatrix)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addComponent(radioSibling)
                 .addGap(46, 46, 46))
         );
