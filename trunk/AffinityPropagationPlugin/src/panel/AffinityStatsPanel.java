@@ -63,6 +63,7 @@ public class AffinityStatsPanel extends javax.swing.JPanel {
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(280, 404));
 
         statsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -89,6 +90,7 @@ public class AffinityStatsPanel extends javax.swing.JPanel {
         });
         statsTable.setFocusCycleRoot(true);
         statsTable.setName("statsTable"); // NOI18N
+        statsTable.setPreferredSize(null);
         jScrollPane1.setViewportView(statsTable);
 
         cleanButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/delete.png"))); // NOI18N
@@ -124,9 +126,9 @@ public class AffinityStatsPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(cleanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,7 +143,6 @@ public class AffinityStatsPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cleanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cleanButtonActionPerformed
-
         psc.deleteSelectedRow();
     }//GEN-LAST:event_cleanButtonActionPerformed
 

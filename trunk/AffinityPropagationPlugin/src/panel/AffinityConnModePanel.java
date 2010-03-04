@@ -66,14 +66,12 @@ public class AffinityConnModePanel extends javax.swing.JPanel {
         stepsCheckbox = new javax.swing.JCheckBox();
 
         setMaximumSize(new java.awt.Dimension(280, 32767));
-        setPreferredSize(new java.awt.Dimension(280, 72));
 
         nearesCenterPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Search for nearest center"));
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("panel/ui_properties"); // NOI18N
         nearesCenterPanel.setToolTipText(bundle.getString("SearchNearestNodeCenterPanel.ToolTip")); // NOI18N
         nearesCenterPanel.setMaximumSize(null);
         nearesCenterPanel.setName("nearesCenterPanel"); // NOI18N
-        nearesCenterPanel.setPreferredSize(new java.awt.Dimension(280, 72));
 
         weighetCentersGroup.add(orgRadio);
         orgRadio.setSelected(true);

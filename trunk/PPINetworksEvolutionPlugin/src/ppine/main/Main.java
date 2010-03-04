@@ -55,7 +55,7 @@ public class Main extends CytoscapePlugin {
          * The constructor sets the text that should appear on the menu item.
          */
         public NetworkEvolutionPluginAction() {
-            super("NetworkEvolutionPlugin");
+            super("NetworkEvolution");
 
         }
 
