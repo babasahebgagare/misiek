@@ -3,8 +3,8 @@
 <project name="ppine-Plugin" default="run-all-windows" basedir="../">
     <description>Ant script</description>
 
-    <property name="project-name" value="NetworkEvolutionPlugin" />
-    <property name="affinity-name" value="APGraphClusteringPlugin" />
+    <property name="project-name" value="NetworkEvolution" />
+    <property name="affinity-name" value="APCluster" />
     <property name="project-dir" value="PPINetworksEvolutionPlugin" />
     <property name="affinity-dir" value="AffinityPropagationPlugin" />
     <property name="affinity-console-name" value="AffinityPropagationConsole" />
