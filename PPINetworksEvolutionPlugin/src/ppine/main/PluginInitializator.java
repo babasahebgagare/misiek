@@ -54,7 +54,7 @@ public class PluginInitializator {
 
     static void activatePlugin() {
         CytoPanelImp leftPanel = (CytoPanelImp) Cytoscape.getDesktop().getCytoPanel(SwingConstants.WEST);
-        String tabName = ResourceBundle.getBundle("ppine/resources/ui").getString("TABNAME");
+        String tabName = "NetworkEvolution";
         leftPanel.add(tabName, myPanel);
         int index = leftPanel.indexOfComponent(tabName);
         leftPanel.setSelectedIndex(index);
@@ -91,11 +91,11 @@ public class PluginInitializator {
 
         //   JPanel logsPanel = new LogsPanel();
         SpeciesFamilyColorPanel families = new SpeciesFamilyColorPanel();
-        //MIPSPanel mipsPanel = new MIPSPanel();
+       // MIPSPanel mipsPanel = new MIPSPanel();
         myPanel.setLayout(new VerticalLayout());
         myPanel.add(myLeftPanel);
         myPanel.add(families);
-        //  myPanel.add(mipsPanel);
+       // myPanel.add(mipsPanel);
         //     myPanel.add(logsPanel);
 
         PluginMenusHandle.setPPINEPanel(myPanel);

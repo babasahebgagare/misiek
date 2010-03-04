@@ -57,17 +57,15 @@ public class AffinityMainPanel extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
 
         setMaximumSize(new java.awt.Dimension(280, 32767));
-        setPreferredSize(new java.awt.Dimension(280, 144));
 
         jPanel1.setMaximumSize(new java.awt.Dimension(280, 32767));
         jPanel1.setName("jPanel1"); // NOI18N
-        jPanel1.setPreferredSize(new java.awt.Dimension(280, 144));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 280, Short.MAX_VALUE)
+            .addGap(0, 262, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

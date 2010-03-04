@@ -101,7 +101,7 @@ public class ProjectorNetwork {
                 String ProteinProjectionID = IDCreator.createProteinProjectionID(proteinProject, projection);
                 CytoProteinProjection proteinProjection = cdh.createCytoProteinProjection(ProteinProjectionID, proteinProject, projection, cytoProtein);
                 node.addCytoProteinInside(proteinProjection);
-            //    projectAttributes(cytoProtein.getCytoID(), proteinProjection.getCytoID());  // to remove
+                projectAttributes(cytoProtein.getCytoID(), proteinProjection.getCytoID());  // to remove
             }
 
         }

@@ -92,14 +92,14 @@ public class AffinityMain extends CytoscapePlugin {
          * The constructor sets the text that should appear on the menu item.
          */
         public APPluginAction() {
-            super("APGraphClusteringPlugin");
+            super("APCluster");
         }
 
         private void activatePlugin() {
             CytoPanelImp leftPanel = (CytoPanelImp) Cytoscape.getDesktop().getCytoPanel(SwingConstants.WEST);
 
-            leftPanel.add("APGraphClustringPlugin", myAff);
-            int index = leftPanel.indexOfComponent("APGraphClustringPlugin");
+            leftPanel.add("APCluster", myAff);
+            int index = leftPanel.indexOfComponent("APCluster");
             leftPanel.setSelectedIndex(index);
             //System.out.println("Affinity propagation");
         }
