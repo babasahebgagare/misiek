@@ -47,7 +47,7 @@ public class ComplexesCytoReader {
 
     Complex proteinsComplex = new Complex("my_complex");
 
-    public Collection<Complex> readAllComplexes(String attribute) {
+    public Map<String, Complex> readAllComplexes(String attribute) {
         Map<String, Complex> complexes = new TreeMap<String, Complex>();
 
         final CyAttributes nodesAttributes = Cytoscape.getNodeAttributes();
@@ -58,7 +58,15 @@ public class ComplexesCytoReader {
         Cytoscape.getCurrentNetwork().unselectAllNodes();
         for (CyNode node : nodes) {
 
-            String cluster_id = nodesAttributes.getStringAttribute(node.getIdentifier(), attribute);
+            String cluster_id = null;
+            if (nodesAttributes.getType(attribute) == nodesAttributes.TYPE_STRING) {
+                cluster_id = nodesAttributes.getStringAttribute(node.getIdentifier(), attribute);
+            } else if (nodesAttributes.getType(attribute) == nodesAttributes.TYPE_INTEGER) {
+                Integer id = nodesAttributes.getIntegerAttribute(node.getIdentifier(), attribute);
+                if (id != null) {
+                    cluster_id = String.valueOf(id);
+                }
+            }
 
             if (cluster_id != null && !cluster_id.equals("")) {
                 if (!complexes.containsKey(cluster_id)) {
@@ -67,11 +75,9 @@ public class ComplexesCytoReader {
                 }
                 Complex comp = complexes.get(cluster_id);
                 comp.addProtein(node.getIdentifier());
-            } else {
-                System.out.println("jest: " + node.getIdentifier());
             }
         }
-        return complexes.values();
+        return complexes;
     }
 
     public Complex readProteins() throws IOException {

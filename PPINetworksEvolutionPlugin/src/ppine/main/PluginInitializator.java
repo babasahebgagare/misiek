@@ -91,11 +91,11 @@ public class PluginInitializator {
 
         //   JPanel logsPanel = new LogsPanel();
         SpeciesFamilyColorPanel families = new SpeciesFamilyColorPanel();
-        MIPSPanel mipsPanel = new MIPSPanel();
+        //MIPSPanel mipsPanel = new MIPSPanel();
         myPanel.setLayout(new VerticalLayout());
         myPanel.add(myLeftPanel);
         myPanel.add(families);
-        myPanel.add(mipsPanel);
+        //  myPanel.add(mipsPanel);
         //     myPanel.add(logsPanel);
 
         PluginMenusHandle.setPPINEPanel(myPanel);

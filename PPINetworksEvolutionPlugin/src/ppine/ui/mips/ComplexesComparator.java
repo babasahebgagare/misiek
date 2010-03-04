@@ -37,11 +37,17 @@ import java.util.TreeSet;
 public class ComplexesComparator {
 
     private Map<String, Complex> complexes;
+    private Map<String, Complex> complexes2;
     private Complex myComplex;
 
     public ComplexesComparator(Map<String, Complex> complexes, Complex myComplex) {
         this.complexes = complexes;
         this.myComplex = myComplex;
+    }
+
+    public ComplexesComparator(Map<String, Complex> complexes, Map<String, Complex> complexes2) {
+        this.complexes = complexes;
+        this.complexes2 = complexes2;
     }
 
     public void compare() {
@@ -65,6 +71,28 @@ public class ComplexesComparator {
             System.out.println(msg);
         }
 
+    }
+
+    public void compareAll() {
+        for (Complex leftComplex : complexes.values()) {
+            double maxJaccard = -1;
+            Complex bestRightComplex = null;
+            for (Complex rightComplex : complexes2.values()) {
+                if (rightComplex.size() > 0) {
+                    Double jaccard = compareComplexes(leftComplex, rightComplex);
+                    if (jaccard > maxJaccard) {
+                        maxJaccard = jaccard;
+                        bestRightComplex = rightComplex;
+                    }
+                }
+            }
+            if (bestRightComplex != null) {
+                Collection<String> inter = getInter(bestRightComplex, leftComplex);
+                String msg = bestRightComplex.getName() + "\t" + leftComplex.getName() + "\t" + bestRightComplex.getProteins().size() + "\t" + leftComplex.getProteins().size() + "\t" + inter.size() + "\t" + round(maxJaccard, 4);
+                ComplexesLogger.log(msg);
+                System.out.println(msg);
+            }
+        }
     }
 
     /* public void compare() {
