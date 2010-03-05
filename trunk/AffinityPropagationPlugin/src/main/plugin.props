@@ -10,11 +10,9 @@ pluginName=APCluster
 
 # Description used to give users information about the plugin such as what it does.
 # Html tags are encouraged for formatting purposes.
-pluginDescription=
-<p>Usage:</p>
-
-<p>Contact: </p>
-m.wozniak@mimuw.edu.pl, j.dutkowski.mimuw.edu.pl
+pluginDescription=The plugin provides a user-friendly implementation of Affinity Propagation - a general purpose graph clustering algorithm (Brendan J. Frey and Delbert Dueck, Science 2007). It can be used to identify coherent modules in biological networks.
+#<p>Contact: </p>
+#m.wozniak@mimuw.edu.pl, j.dutkowski.mimuw.edu.pl
 
 # Plugin version number, this must be two numbers separated by a decimlal.  Ex. 0.2, 14.03
 pluginVersion=2.0
@@ -35,7 +33,7 @@ projectURL=http://code.google.com/p/misiek/
 pluginAuthorsInstitutions=J. Dutkowski, M. Wozniak, J. Tiuryn:Warsaw University
 
 # Date this plugin/plugin version was released
-releaseDate=October 16, 2009
+releaseDate=March 05, 2010
 
 # If this plugin is never meant to be downloaded except as part of a plugin (not common) add this property.  Default is "no"
 themeOnly=no
