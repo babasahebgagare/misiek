@@ -6,14 +6,14 @@
     </head>
     <body bgcolor="white">
         <h1>Protein family trees</h1>
-        Protein family trees should be provided in an enriched standard recursive format.
-        Each line in the file should describe one protein family tree as follows: <br>
-        (speciesNode1, speciesNode2, ...)familyName; <br>
-        Where speciesNode has recursive format: <br>
-        speciesNode := [proteinNode1,proteinNode2, ...]speciesName <br>
-        Where proteinNode has recursice format: <br>
-        proteinNode := proteinName if proteins is a leaf, or: <br>
-        proteinNode := (speciesNode1, speciesNode2, ...)proteinName.
+Protein family trees should be provided in an enriched recursive format that is similar to Newick, but which puts siblings from the
+same species in brackets and adds species information after the closing bracket. This extra information is necessary because we
+have to distinguish the species from which the nodes are coming from. Each line in the file should describe one protein family tree
+as follows: <br>
+<i>([nodeA1, nodeA2, ...]speciesA, [nodeB1, nodeB2, ...]speciesB)familyName;</i><br>
+Where each node has recursive format:<br>
+<i>node := proteinName if node is a leaf</i>, or:<br>
+<i>node := ([nodeC1, nodeC2, ...]speciesC, [nodeD1, nodeD2, ...]speciesD)nodeName</i>.
         <h1>Example: </h1>
 ([([ce_ce13562]ce,[dm_dm178]dm)bi_i1318]Bilateria,[sc_sc5512,sc_sc1833,sc_sc3895,sc_sc4997]sc)root_222;
     </body>

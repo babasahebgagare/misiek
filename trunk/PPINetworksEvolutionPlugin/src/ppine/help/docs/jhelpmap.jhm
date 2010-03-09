@@ -4,6 +4,7 @@
   PUBLIC "-//Sun Microsystems Inc.//DTD JavaHelp Map Version 1.0//EN" "http://java.sun.com/products/javahelp/map_1_0.dtd">
 <map version="1.0">
     <mapID target="Introduction" url="hIndex.html"/>
+    <mapID target="Installation" url="hinstallation.html"/>
     <mapID target="Species file format" url="hSpeciesFileFormat.html"/>
     <mapID target="Interactions file format" url="hInteractionsFileFormat.html"/>
     <mapID target="Proteins trees file format" url="hProteinsTreesFileFormat.html"/>
