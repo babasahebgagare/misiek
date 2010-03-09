@@ -13,13 +13,11 @@ Our implementation provides the following options:
 Original method (follows the original AP implementations): <br>
 For every node we look for neighbors which are cluster centers and assign the node to the nearest one. If depth is greater
 than 1 then we allow indirectly connected nodes to be assigned to the center (this extends the original method).
-                
             </li>
             <li>
 Weighted BSF method (specific to our plugin): <br>
 In the case of incomplete graphs (especially sparse graphs), it is possible that none of the nodes neighbors will be a cluster
 center. When this option is selected, we look for shortest paths in the weighted network from nodes to cluster centers.
-
             </li>
         </ul>
     </body>
