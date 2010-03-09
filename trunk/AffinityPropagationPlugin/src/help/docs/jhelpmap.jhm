@@ -4,11 +4,9 @@
   PUBLIC "-//Sun Microsystems Inc.//DTD JavaHelp Map Version 1.0//EN" "http://java.sun.com/products/javahelp/map_1_0.dtd">
 <map version="1.0">
     <mapID target="Introduction" url="index.html"/>
-    <mapID target="Noise" url="hnoise.html"/>
-    <mapID target="Implementation" url="himplementation.html"/>
-    <mapID target="AffinityAbout" url="haffinity_about.html"/>
-    <mapID target="NearestCenter" url="hnearest_center.html"/>
-    <mapID target="ConnectingMode" url="hconnecting_mode.html"/>
+    <mapID target="Installation" url="hinstallation.html"/>
     <mapID target="Parameters" url="hparameters.html"/>
+    <mapID target="AdditionalOptions" url="hadditional_options.html"/>
+    <mapID target="Implementations" url="himplementation.html"/>
     <mapID target="License" url="hlicense.html"/>
 </map>

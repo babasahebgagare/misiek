@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+        <title>Additional options</title>
+        <meta name="generator" content="DocBook XSL Stylesheets V1.70.1">
+    </head>
+    <body bgcolor="white">
+        <h1>Assigning nodes to the nearest center</h1>
+After the cluster centers (exemplars) are determined in the first phase of the algorithm, each node is assigned to the nearest center.
+Our implementation provides the following options:
+        <ul>
+            <li>
+Original method (follows the original AP implementations): <br>
+For every node we look for neighbors which are cluster centers and assign the node to the nearest one. If depth is greater
+than 1 then we allow indirectly connected nodes to be assigned to the center (this extends the original method).
+                
+            </li>
+            <li>
+Weighted BSF method (specific to our plugin): <br>
+In the case of incomplete graphs (especially sparse graphs), it is possible that none of the nodes neighbors will be a cluster
+center. When this option is selected, we look for shortest paths in the weighted network from nodes to cluster centers.
+
+            </li>
+        </ul>
+    </body>
+</html>

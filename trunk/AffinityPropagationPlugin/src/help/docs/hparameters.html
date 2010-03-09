@@ -7,20 +7,28 @@
     <body bgcolor="white">
         <h1>Affinity propagation parameters</h1>
         <ul>
-            <li>Number of iterations</li>
-            <li>Stop criterion - stops after n-th iterations without any center change</li>
-            <li>Preference - preference for a node to be a center (currently equal for every node)</li>
-            <li>Lambda</li>
+            <li>Edge weight attribute (click refresh if no attribute names are listed) - this attribute provides the similarities between datapoints:
+Affinity Propagation takes as input a collection of real-valued similarities between data points, where the similarity
+<i>s(i; k)</i> indicates how well the data point with index <i>k</i> is suited to be the exemplar for data point <i>i</i>.</li>
+            <li>Number of iterations - maximum number of iterations to be performed</li>
+            <li>Stop criterion <i>(n)</i> - algorithm will stops after the <i>n</i>-th iterations without any change in centers (exemplars). In this situation,
+we say that the algorithm converged. If maximum number of interactions is reached before the stop criterion is not satisfied,
+then the algorithm did not converge. The current clusters can still be retrieved in this situation.</li>
+            <li>Preference - the preference for a node to be an exemplar (cluster center); currently equal for every node.</li>
+            <li>Lambda (damping factor) - when updating the messages, each message is set to &lambda; times its value from the previous iteration
+                plus 1 - &lambda; times its prescribed updated value, where the damping factor &lambda; is between 0 and 1.</li>
+            <li>Noise option - for some networks adding noise is crucial to arrive at meaningful clusters. One example is in situations where
+two or more nodes have equal affinity to become exemplars. In such cases adding noise breaks the symmetry and allows
+one of the nodes to be selected. The original implementation adds noise to the similarity values associated with edges. We
+found that more stable results are achieved when noise is added to node preferences. Currently noise is equal to <i>preference*
+epsilon * (random real number from a uniform distribution on [0; 1]</i>) where <i>epsilon = 0.0000001</i>.</li>
         </ul>
 
-        <h1>Implementation-specific parameters</h1>
+        <h1>Other implementation-specific parameters</h1>
         <ul>
-            <li>Node name attribute</li>
-            <li>Centers name attribute</li>
-            <li>Edge weight attribute (click refresh if no attribute names are listed)</li>
-            <li>Refine centers - if selected, a refinement procedure will be applied after
-            all iterations have passed, to determining the best center for each cluster among all cluster members</li>
-            <li>Take log - if selected, edges weights will be set to log(edge_weight) </li>
+            <li>Cluster ID - name of the node attribute which will store cluster assignments</li>
+            <li>Center ID - name of the node attribute which will store center assignments</li>
+            <li>Take log - if selected, edges weights will be set to log(edge weight)</li>
         </ul>
     </body>
 </html>
