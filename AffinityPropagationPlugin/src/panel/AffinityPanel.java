@@ -30,11 +30,9 @@
  */
 package panel;
 
-import java.awt.Button;
 import java.awt.GridLayout;
 import java.awt.Label;
 import java.awt.TextField;
-import javax.swing.GroupLayout;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -124,7 +122,7 @@ public class AffinityPanel extends javax.swing.JPanel {
         iteretionsLabel.setText("Number of iterations:");
         iteretionsLabel.setName("iteretionsLabel"); // NOI18N
 
-        convitsLabel.setText("Stop criterium:");
+        convitsLabel.setText("Stop criterion:");
         convitsLabel.setName("convitsLabel"); // NOI18N
 
         preferenceLabel.setText("Preference:");

@@ -131,7 +131,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="convitsLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Stop criterium:"/>
+                <Property name="text" type="java.lang.String" value="Stop criterion:"/>
                 <Property name="name" type="java.lang.String" value="convitsLabel" noResource="true"/>
               </Properties>
             </Component>
