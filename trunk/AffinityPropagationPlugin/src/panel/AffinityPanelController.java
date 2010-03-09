@@ -253,7 +253,7 @@ public class AffinityPanelController implements Serializable {
         CyNetworkView currentView = Cytoscape.getCurrentNetworkView();
         @SuppressWarnings(value = "unchecked")
         List<CyNode> nodes = Cytoscape.getCurrentNetwork().nodesList();
-        
+
         Cytoscape.getCurrentNetwork().unselectAllNodes();
 
         Collection<CyNode> cynodes = new HashSet<CyNode>();
@@ -507,6 +507,8 @@ public class AffinityPanelController implements Serializable {
                 }
             }
         }
+        edgeAttrField.setSelectedIndex(edgeAttrField.getItemCount() - 1);
+       // refreshPreferences();
     }
 
     public void refreshPreferences() {

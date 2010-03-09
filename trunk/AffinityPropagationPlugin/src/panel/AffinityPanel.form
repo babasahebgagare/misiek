@@ -55,7 +55,7 @@
               <Group type="102" alignment="1" attributes="0">
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="jPanel4" alignment="0" max="32767" attributes="1"/>
-                      <Group type="102" alignment="1" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jPanel3" max="32767" attributes="0"/>
@@ -69,8 +69,8 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jPanel3" min="0" pref="130" max="32767" attributes="1"/>
-                      <Component id="jPanel2" alignment="0" max="32767" attributes="1"/>
+                      <Component id="jPanel2" max="32767" attributes="1"/>
+                      <Component id="jPanel3" alignment="0" max="32767" attributes="1"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
@@ -110,7 +110,8 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="preferenceLabel" min="-2" pref="24" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lambdaLabel" pref="20" max="32767" attributes="0"/>
+                      <Component id="lambdaLabel" pref="19" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -161,7 +162,6 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="refreshButton1" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="labmbdaField" alignment="0" pref="115" max="32767" attributes="1"/>
                   <Component id="convitsField" alignment="0" pref="115" max="32767" attributes="1"/>
                   <Component id="iterationsSpinner" alignment="0" pref="115" max="32767" attributes="1"/>
                   <Group type="102" alignment="1" attributes="0">
@@ -169,6 +169,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="refreshButton" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="labmbdaField" alignment="1" pref="115" max="32767" attributes="1"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -189,7 +190,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="labmbdaField" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
