@@ -22,8 +22,8 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="dataPanel" alignment="0" pref="270" max="32767" attributes="3"/>
-          <Component id="netsActionsPanel" alignment="0" pref="270" max="32767" attributes="3"/>
           <Component id="intPanel" alignment="1" pref="270" max="32767" attributes="1"/>
+          <Component id="netsActionsPanel" alignment="0" pref="270" max="32767" attributes="3"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -31,9 +31,10 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="dataPanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="netsActionsPanel" min="-2" pref="143" max="-2" attributes="0"/>
+              <Component id="netsActionsPanel" min="-2" pref="155" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="intPanel" min="-2" max="-2" attributes="0"/>
+              <Component id="intPanel" min="-2" pref="81" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -174,7 +175,7 @@
                       <Component id="showButton" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="102" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="114" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

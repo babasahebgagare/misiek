@@ -28,9 +28,9 @@
  *           Janusz Dutkowski (idea, data) (j.dutkowski@mimuw.edu.pl)
  *           Jerzy Tiuryn (supervisor) (tiuryn@mimuw.edu.pl)
  */
-
 package ppine.ui;
 
+import javax.swing.JCheckBox;
 import ppine.ui.familycolors.SpeciesFamilyColorPanel;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -47,6 +47,7 @@ public class PluginMenusHandle {
     private static JButton newDataButton = null;
     private static JButton deleteDataButton = null;
     private static JButton updateDataButton = null;
+    private static JCheckBox mapWithAttrCheckbox = null;
     private static JPanel ppinePanel = null;
     private static SpeciesFamilyColorPanel familiesColorListPanel = null;
 
@@ -159,5 +160,13 @@ public class PluginMenusHandle {
         PluginMenusHandle.getNewDataButton().setEnabled(true);
         PluginMenusHandle.getUpdateDataButton().setEnabled(true);
         PluginMenusHandle.getDeleteDataButton().setEnabled(true);
+    }
+
+    static void setMapWithAttributesCkeckBox(JCheckBox checkbox) {
+        mapWithAttrCheckbox = checkbox;
+    }
+
+    public static JCheckBox getMapWithAttrCheckbox() {
+        return mapWithAttrCheckbox;
     }
 }

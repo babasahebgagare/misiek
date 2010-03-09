@@ -43,6 +43,7 @@ import ppine.viewmodel.structs.CytoProteinProjection;
 import ppine.logicmodel.structs.SpeciesTreeNode;
 import ppine.logicmodel.structs.Protein;
 import ppine.main.PluginDataHandle;
+import ppine.ui.PluginMenusHandle;
 import ppine.utils.IDCreator;
 
 public class ProjectorNetwork {
@@ -101,7 +102,9 @@ public class ProjectorNetwork {
                 String ProteinProjectionID = IDCreator.createProteinProjectionID(proteinProject, projection);
                 CytoProteinProjection proteinProjection = cdh.createCytoProteinProjection(ProteinProjectionID, proteinProject, projection, cytoProtein);
                 node.addCytoProteinInside(proteinProjection);
-                projectAttributes(cytoProtein.getCytoID(), proteinProjection.getCytoID());  // to remove
+             //   if (PluginMenusHandle.getMapWithAttrCheckbox().isSelected()) {
+             //       projectAttributes(cytoProtein.getCytoID(), proteinProjection.getCytoID());  // to remove
+             //   }
             }
 
         }
@@ -114,22 +117,23 @@ public class ProjectorNetwork {
         String[] attributes = nodeAttributes.getAttributeNames();
         for (String attribute : attributes) {
             if (!attribute.equals("ID") && !attribute.equals("hiddenLabel") && !attribute.equals("canonicalName")) {
-                System.out.println("map: " + attribute);
-            }
-            if (nodeAttributes.getType(attribute) == nodeAttributes.TYPE_STRING) {
-                String attr = nodeAttributes.getStringAttribute(proteinID, attribute);
-                if (attr != null) {
-                    nodeAttributes.setAttribute(newProteinID, attribute, attr);
-                }
-            } else if (nodeAttributes.getType(attribute) == nodeAttributes.TYPE_FLOATING) {
-                Double attr = nodeAttributes.getDoubleAttribute(proteinID, attribute);
-                if (attr != null) {
-                    nodeAttributes.setAttribute(newProteinID, attribute, attr);
-                }
-            } else if (nodeAttributes.getType(attribute) == nodeAttributes.TYPE_INTEGER) {
-                Integer attr = nodeAttributes.getIntegerAttribute(proteinID, attribute);
-                if (attr != null) {
-                    nodeAttributes.setAttribute(newProteinID, attribute, attr);
+                //   System.out.println("map: " + attribute);
+
+                if (nodeAttributes.getType(attribute) == nodeAttributes.TYPE_STRING) {
+                    String attr = nodeAttributes.getStringAttribute(proteinID, attribute);
+                    if (attr != null) {
+                        nodeAttributes.setAttribute(newProteinID, attribute, attr);
+                    }
+                } else if (nodeAttributes.getType(attribute) == nodeAttributes.TYPE_FLOATING) {
+                    Double attr = nodeAttributes.getDoubleAttribute(proteinID, attribute);
+                    if (attr != null) {
+                        nodeAttributes.setAttribute(newProteinID, attribute, attr);
+                    }
+                } else if (nodeAttributes.getType(attribute) == nodeAttributes.TYPE_INTEGER) {
+                    Integer attr = nodeAttributes.getIntegerAttribute(proteinID, attribute);
+                    if (attr != null) {
+                        nodeAttributes.setAttribute(newProteinID, attribute, attr);
+                    }
                 }
             }
         }
