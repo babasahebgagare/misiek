@@ -55,7 +55,6 @@ import cytoscape.CyNode;
 import cytoscape.Cytoscape;
 import cytoscape.data.CyAttributes;
 import cytoscape.view.CyNetworkView;
-import giny.view.NodeView;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -352,7 +351,13 @@ public class AffinityPanelController implements Serializable {
     }
 
     private boolean validateEdgeNameAttr(final String edgeNameAttr) {
-        return (edgeNameAttr != null && !edgeNameAttr.equals(""));
+        if (edgeNameAttr == null || edgeNameAttr.equals("")) {
+            return false;
+        }
+        if (!validateCyEdgeAttribute(edgeNameAttr, Cytoscape.getEdgeAttributes(), Cytoscape.getCurrentNetworkView())) {
+            return false;
+        }
+        return true;
     }
 
     private boolean validateIterations(final Integer iterations) {
@@ -424,7 +429,7 @@ public class AffinityPanelController implements Serializable {
             return false;
         }
         if (log && preferences < 0.0) {
-            Messenger.message("You have selected 'take log' option and chose negative preferences paremater. Uncheck 'take log' option or change preferences.");
+            Messenger.message("You have selected 'take log' option and chose negative preferences parameter. Uncheck 'take log' option or change preferences.");
             return false;
         }
         return true;
@@ -432,7 +437,7 @@ public class AffinityPanelController implements Serializable {
 
     private boolean validateValues(final Double lambda, final Double preferences, final Integer iterations, final Integer convits, final String nodeNameAttr, final String edgeNameAttr, final String centersNameAttr) {
         if (!validateLambda(lambda)) {
-            Messenger.message("Lambda paremater has to be between 0 and 1.");
+            Messenger.message("Lambda parameter has to be between 0 and 1.");
             return false;
         }
         if (!validatePreferences(preferences)) {
@@ -444,18 +449,20 @@ public class AffinityPanelController implements Serializable {
             return false;
         }
         if (!validateConvits(convits)) {
-            Messenger.message("Convits paremater has to be empty or integer.");
+            Messenger.message("Stop criterion parameter has to be empty or integer.");
             return false;
         }
         if (!validateEdgeNameAttr(edgeNameAttr)) {
-            Messenger.message("Edge name paremater is not valid.");
+            Messenger.message("Current edge name parameter is not valid. List of attributes will be updated.");
+            refreshEdgeAttrField();
+            refreshPreferences();
             return false;
         }
         if (!validateNodeNameAttr(nodeNameAttr)) {
             if (cancelDialog) {
                 cancelDialog = false;
             } else {
-                Messenger.message("Node name paremater is not valid");
+                Messenger.message("ClusterID parameter is not valid");
             }
             return false;
         }
@@ -463,7 +470,7 @@ public class AffinityPanelController implements Serializable {
             if (cancelDialog) {
                 cancelDialog = false;
             } else {
-                Messenger.message("Node name paremater is not valid!");
+                Messenger.message("CenterID parameter is not valid.");
             }
             return false;
         }
@@ -476,39 +483,17 @@ public class AffinityPanelController implements Serializable {
     }
 
     public void refreshEdgeAttrField() {
+        CyNetworkView view = Cytoscape.getCurrentNetworkView();
         edgeAttrField.removeAllItems();
         edgeAttrField.addItem(DEFAULT);
         CyAttributes edgesAttributes = Cytoscape.getEdgeAttributes();
         for (String attrName : edgesAttributes.getAttributeNames()) {
-            final byte cyType = edgesAttributes.getType(attrName);
-            if (cyType == CyAttributes.TYPE_FLOATING) {
-                CyNetworkView view = Cytoscape.getCurrentNetworkView();
-                if (view.getEdgeViewsList().size() > 0) {
-                    EdgeView edgeView = (EdgeView) view.getEdgeViewsIterator().next();
-                    Edge edge = edgeView.getEdge();
-                    Double attr = edgesAttributes.getDoubleAttribute(edge.getIdentifier(), attrName);
-                    if (attr != null) {
-                        edgeAttrField.addItem(attrName);
-                    }
-                }
-            } else if (cyType == CyAttributes.TYPE_STRING) {
-                CyNetworkView view = Cytoscape.getCurrentNetworkView();
-                if (view.getEdgeViewsList().size() > 0) {
-                    EdgeView edgeView = (EdgeView) view.getEdgeViewsIterator().next();
-                    Edge edge = edgeView.getEdge();
-                    String attr = edgesAttributes.getStringAttribute(edge.getIdentifier(), attrName);
-                    try {
-                        if (attr != null) {
-                            Double val = Double.parseDouble(attr);
-                            edgeAttrField.addItem(attrName);
-                        }
-                    } catch (NumberFormatException e) {
-                    }
-                }
+            if (validateCyEdgeAttribute(attrName, edgesAttributes, view)) {
+                edgeAttrField.addItem(attrName);
             }
         }
         edgeAttrField.setSelectedIndex(edgeAttrField.getItemCount() - 1);
-       // refreshPreferences();
+        // refreshPreferences();
     }
 
     public void refreshPreferences() {
@@ -799,6 +784,35 @@ public class AffinityPanelController implements Serializable {
             return false;
         }
         return true;
+    }
+
+    private boolean validateCyEdgeAttribute(String attrName, CyAttributes edgesAttributes, CyNetworkView view) {
+        final byte cyType = edgesAttributes.getType(attrName);
+        if (cyType == CyAttributes.TYPE_FLOATING) {
+
+            if (view.getEdgeViewsList().size() > 0) {
+                EdgeView edgeView = (EdgeView) view.getEdgeViewsIterator().next();
+                Edge edge = edgeView.getEdge();
+                Double attr = edgesAttributes.getDoubleAttribute(edge.getIdentifier(), attrName);
+                if (attr != null) {
+                    return true;
+                }
+            }
+        } else if (cyType == CyAttributes.TYPE_STRING) {
+            if (view.getEdgeViewsList().size() > 0) {
+                EdgeView edgeView = (EdgeView) view.getEdgeViewsIterator().next();
+                Edge edge = edgeView.getEdge();
+                String attr = edgesAttributes.getStringAttribute(edge.getIdentifier(), attrName);
+                try {
+                    if (attr != null) {
+                        Double val = Double.parseDouble(attr);
+                        return true;
+                    }
+                } catch (NumberFormatException e) {
+                }
+            }
+        }
+        return false;
     }
 
     /*  public void showCentersAndWait(final Collection<String> centersStr) {
