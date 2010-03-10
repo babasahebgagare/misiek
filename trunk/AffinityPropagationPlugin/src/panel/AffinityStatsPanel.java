@@ -108,7 +108,7 @@ public class AffinityStatsPanel extends javax.swing.JPanel {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/details.png"))); // NOI18N
         jButton1.setText("Details");
-        jButton1.setToolTipText("Details of clustering history");
+        jButton1.setToolTipText(bundle.getString("HistoryDetails.Tooltip")); // NOI18N
         jButton1.setMargin(new java.awt.Insets(2, 5, 2, 5));
         jButton1.setName("jButton1"); // NOI18N
         jButton1.setPreferredSize(new java.awt.Dimension(87, 23));

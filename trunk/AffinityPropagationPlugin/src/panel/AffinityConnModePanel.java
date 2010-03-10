@@ -68,15 +68,15 @@ public class AffinityConnModePanel extends javax.swing.JPanel {
         setMaximumSize(new java.awt.Dimension(280, 32767));
 
         nearesCenterPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Search for nearest center"));
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("panel/ui_properties"); // NOI18N
-        nearesCenterPanel.setToolTipText(bundle.getString("SearchNearestNodeCenterPanel.ToolTip")); // NOI18N
+        nearesCenterPanel.setToolTipText("");
         nearesCenterPanel.setMaximumSize(null);
         nearesCenterPanel.setName("nearesCenterPanel"); // NOI18N
 
         weighetCentersGroup.add(orgRadio);
         orgRadio.setSelected(true);
         orgRadio.setText("Original method");
-        orgRadio.setToolTipText("For each object we look for nearest center iteratively");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("panel/ui_properties"); // NOI18N
+        orgRadio.setToolTipText(bundle.getString("Original.ToolTip")); // NOI18N
         orgRadio.setName("orgRadio"); // NOI18N
         orgRadio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,7 +93,7 @@ public class AffinityConnModePanel extends javax.swing.JPanel {
 
         weighetCentersGroup.add(BSFRadio);
         BSFRadio.setText("Weighted BSF algorithm");
-        BSFRadio.setToolTipText("Weighet BSF from a set of centers");
+        BSFRadio.setToolTipText(bundle.getString("Weighet.ToolTip")); // NOI18N
         BSFRadio.setName("BSFRadio"); // NOI18N
         BSFRadio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

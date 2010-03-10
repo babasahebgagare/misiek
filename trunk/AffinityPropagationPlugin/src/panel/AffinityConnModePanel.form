@@ -42,9 +42,7 @@
             <TitledBorder title="Search for nearest center"/>
           </Border>
         </Property>
-        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="panel/ui_properties.properties" key="SearchNearestNodeCenterPanel.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
-        </Property>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="null"/>
         </Property>
@@ -92,7 +90,9 @@
             </Property>
             <Property name="selected" type="boolean" value="true"/>
             <Property name="text" type="java.lang.String" value="Original method"/>
-            <Property name="toolTipText" type="java.lang.String" value="For each object we look for nearest center iteratively"/>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="panel/ui_properties.properties" key="Original.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
             <Property name="name" type="java.lang.String" value="orgRadio" noResource="true"/>
           </Properties>
           <Events>
@@ -106,7 +106,9 @@
               <ComponentRef name="weighetCentersGroup"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Weighted BSF algorithm"/>
-            <Property name="toolTipText" type="java.lang.String" value="Weighet BSF from a set of centers"/>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="panel/ui_properties.properties" key="Weighet.ToolTip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
             <Property name="name" type="java.lang.String" value="BSFRadio" noResource="true"/>
           </Properties>
           <Events>

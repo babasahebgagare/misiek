@@ -86,7 +86,8 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/refresh.png"))); // NOI18N
         jButton1.setText("Highlight centers");
-        jButton1.setToolTipText("Refresh centers");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("panel/ui_properties"); // NOI18N
+        jButton1.setToolTipText(bundle.getString("HighlightCentersButton.Tooltip")); // NOI18N
         jButton1.setAlignmentY(0.0F);
         jButton1.setMargin(new java.awt.Insets(2, 0, 2, 0));
         jButton1.setName("jButton1"); // NOI18N
@@ -98,12 +99,11 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
         });
 
         centersAttrList.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        centersAttrList.setToolTipText("Select centers attribute");
+        centersAttrList.setToolTipText(bundle.getString("CentersAttributeList.Tooltip")); // NOI18N
         centersAttrList.setName("centersAttrList"); // NOI18N
         centersAttrList.setPreferredSize(new java.awt.Dimension(57, 23));
 
         helpButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/help.png"))); // NOI18N
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("panel/ui_properties"); // NOI18N
         helpButton.setToolTipText(bundle.getString("HelpButton.ToolTip")); // NOI18N
         helpButton.setAlignmentY(0.0F);
         helpButton.setMargin(new java.awt.Insets(2, 0, 2, 0));
@@ -117,6 +117,7 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
         });
 
         jButton3.setText("Advanced options");
+        jButton3.setToolTipText(bundle.getString("AdvancedOptions.ToolTip")); // NOI18N
         jButton3.setMargin(new java.awt.Insets(2, 0, 2, 0));
         jButton3.setName("jButton3"); // NOI18N
         jButton3.addActionListener(new java.awt.event.ActionListener() {

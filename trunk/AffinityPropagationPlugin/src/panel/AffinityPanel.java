@@ -162,7 +162,8 @@ public class AffinityPanel extends javax.swing.JPanel {
         jPanel3.setName("jPanel3"); // NOI18N
 
         edgeAttrCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "DEFAULT" }));
-        edgeAttrCombo.setToolTipText("Default weight value: 0.5");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("panel/ui_properties"); // NOI18N
+        edgeAttrCombo.setToolTipText(bundle.getString("EdgeWeightAttributeCombobox")); // NOI18N
         edgeAttrCombo.setName("edgeAttrCombo"); // NOI18N
         edgeAttrCombo.setPreferredSize(new java.awt.Dimension(70, 21));
         edgeAttrCombo.addActionListener(new java.awt.event.ActionListener() {
@@ -171,18 +172,17 @@ public class AffinityPanel extends javax.swing.JPanel {
             }
         });
 
-        iterationsSpinner.setToolTipText("Maximal number of iterations");
+        iterationsSpinner.setToolTipText(bundle.getString("NumberOfIterationsField")); // NOI18N
         iterationsSpinner.setName("iterationsSpinner"); // NOI18N
         iterationsSpinner.setPreferredSize(new java.awt.Dimension(26, 21));
         iterationsSpinner.setValue(200);
 
         convitsField.setText("10");
-        convitsField.setToolTipText("If the set of centers will not change by this number of iterations, then the algorithm stops.");
+        convitsField.setToolTipText(bundle.getString("StopCriterionField")); // NOI18N
         convitsField.setName("convitsField"); // NOI18N
         convitsField.setPreferredSize(new java.awt.Dimension(18, 21));
 
         refreshButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/refresh.png"))); // NOI18N
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("panel/ui_properties"); // NOI18N
         refreshButton1.setToolTipText(bundle.getString("RefreshButton.ToolTip")); // NOI18N
         refreshButton1.setMargin(new java.awt.Insets(1, 0, 1, 0));
         refreshButton1.setName("refreshButton"); // NOI18N
@@ -194,6 +194,7 @@ public class AffinityPanel extends javax.swing.JPanel {
         });
 
         labmbdaField.setText("0.5");
+        labmbdaField.setToolTipText(bundle.getString("LambdaField")); // NOI18N
         labmbdaField.setName("labmbdaField"); // NOI18N
         labmbdaField.setPreferredSize(new java.awt.Dimension(22, 21));
         labmbdaField.addActionListener(new java.awt.event.ActionListener() {
@@ -203,7 +204,7 @@ public class AffinityPanel extends javax.swing.JPanel {
         });
 
         preferenceField.setText("0.5");
-        preferenceField.setToolTipText("Median is default and recommended.");
+        preferenceField.setToolTipText(bundle.getString("PreferenceField")); // NOI18N
         preferenceField.setName("preferenceField"); // NOI18N
         preferenceField.setPreferredSize(new java.awt.Dimension(22, 21));
         preferenceField.addActionListener(new java.awt.event.ActionListener() {
@@ -261,8 +262,10 @@ public class AffinityPanel extends javax.swing.JPanel {
         jPanel4.setName("jPanel4"); // NOI18N
 
         noiseCheckBox.setSelected(true);
+        noiseCheckBox.setToolTipText(bundle.getString("NoiseCheckbox")); // NOI18N
         noiseCheckBox.setName("noiseCheckBox"); // NOI18N
 
+        transformingCheckbox.setToolTipText(bundle.getString("TakeLogCheckbox")); // NOI18N
         transformingCheckbox.setName("transformingCheckbox"); // NOI18N
 
         transforminLabel.setText("Log transform edge weights:");
@@ -330,7 +333,7 @@ public class AffinityPanel extends javax.swing.JPanel {
         jPanel8.setName("jPanel8"); // NOI18N
 
         nodeAttrNameField.setText("cluster_id");
-        nodeAttrNameField.setToolTipText("Cytoscape attribute to store cluster id's");
+        nodeAttrNameField.setToolTipText(bundle.getString("ClusterIDField")); // NOI18N
         nodeAttrNameField.setMargin(new java.awt.Insets(1, 1, 2, 1));
         nodeAttrNameField.setName("nodeAttrNameField"); // NOI18N
         nodeAttrNameField.addActionListener(new java.awt.event.ActionListener() {
@@ -340,7 +343,7 @@ public class AffinityPanel extends javax.swing.JPanel {
         });
 
         centersNameAttrField.setText("center_id");
-        centersNameAttrField.setToolTipText("Cytoscape attribute to store nearest center name");
+        centersNameAttrField.setToolTipText("<html> Name of the center attribute which will store cluster assignments </html>");
         centersNameAttrField.setAlignmentY(0.0F);
         centersNameAttrField.setMargin(new java.awt.Insets(1, 1, 2, 1));
         centersNameAttrField.setName("centersNameAttrField"); // NOI18N

@@ -68,11 +68,13 @@ public class AffinityChooseImplPanel extends javax.swing.JPanel {
         radioImplementationGroup.add(radioSibling);
         radioSibling.setSelected(true);
         radioSibling.setText("Sibling lists");
-        radioSibling.setToolTipText("faster");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("panel/ui_properties"); // NOI18N
+        radioSibling.setToolTipText(bundle.getString("SiblingLists.Tooltip")); // NOI18N
         radioSibling.setName("radioSibling"); // NOI18N
 
         radioImplementationGroup.add(radioMatrix);
         radioMatrix.setText("Matrix");
+        radioMatrix.setToolTipText(bundle.getString("MatrixImplementation.Tooltip")); // NOI18N
         radioMatrix.setName("radioMatrix"); // NOI18N
 
         javax.swing.GroupLayout implementationPanelLayout = new javax.swing.GroupLayout(implementationPanel);

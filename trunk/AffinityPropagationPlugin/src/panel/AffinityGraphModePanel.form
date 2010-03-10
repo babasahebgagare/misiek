@@ -71,7 +71,9 @@
               <ComponentRef name="graphModeGroup"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Directed edges"/>
-            <Property name="toolTipText" type="java.lang.String" value="Algorithm will interprets each edge as directed"/>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="panel/ui_properties.properties" key="DirectedOption.Tooltip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
             <Property name="name" type="java.lang.String" value="directedModeRadio" noResource="true"/>
           </Properties>
         </Component>
@@ -82,7 +84,9 @@
             </Property>
             <Property name="selected" type="boolean" value="true"/>
             <Property name="text" type="java.lang.String" value="Undirected edges"/>
-            <Property name="toolTipText" type="java.lang.String" value="Algorithm will interprets each edge as undirected"/>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="panel/ui_properties.properties" key="UndirectedOption.Tooltip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
             <Property name="name" type="java.lang.String" value="undirectedModeRadio" noResource="true"/>
           </Properties>
         </Component>
