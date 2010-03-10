@@ -453,7 +453,7 @@ public class AffinityPanelController implements Serializable {
             return false;
         }
         if (!validateEdgeNameAttr(edgeNameAttr)) {
-            Messenger.message("Current edge name parameter is not valid. List of attributes will be updated.");
+            Messenger.message("Current edge weight attribute is not valid. List of attributes will be updated.");
             refreshEdgeAttrField();
             refreshPreferences();
             return false;
@@ -462,7 +462,7 @@ public class AffinityPanelController implements Serializable {
             if (cancelDialog) {
                 cancelDialog = false;
             } else {
-                Messenger.message("ClusterID parameter is not valid");
+                Messenger.message("ClusterID attribute name is not valid");
             }
             return false;
         }
@@ -470,7 +470,7 @@ public class AffinityPanelController implements Serializable {
             if (cancelDialog) {
                 cancelDialog = false;
             } else {
-                Messenger.message("CenterID parameter is not valid.");
+                Messenger.message("CenterID attribute name is not valid.");
             }
             return false;
         }
