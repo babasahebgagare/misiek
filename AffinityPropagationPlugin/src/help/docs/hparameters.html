@@ -11,9 +11,10 @@
 Affinity Propagation takes as input a collection of real-valued similarities between data points, where the similarity
 <i>s(i; k)</i> indicates how well the data point with index <i>k</i> is suited to be the exemplar for data point <i>i</i>.</li>
             <li>Number of iterations - maximum number of iterations to be performed</li>
-            <li>Stop criterion <i>(n)</i> - algorithm will stops after the <i>n</i>-th iterations without any change in centers (exemplars). In this situation,
-we say that the algorithm converged. If maximum number of interactions is reached before the stop criterion is not satisfied,
-then the algorithm did not converge. The current clusters can still be retrieved in this situation.</li>
+            <li>Stop criterion (<i>n</i>) - algorithm will stop after the <i>n</i>-th iteration without any change in centers (exemplars).
+                In this situation, we say that the algorithm converged. If the maximum number of interactions is reached before the
+                stop criterion is satisfied, then the algorithm did not converge. The current clusters can still be retrieved in this
+                situation.</li>
             <li>Preference - the preference for a node to be an exemplar (cluster center); currently equal for every node.</li>
             <li>Lambda (damping factor) - when updating the messages, each message is set to &lambda; times its value from the previous iteration
                 plus 1 - &lambda; times its prescribed updated value, where the damping factor &lambda; is between 0 and 1.</li>
