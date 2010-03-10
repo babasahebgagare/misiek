@@ -203,7 +203,9 @@
                     <StringItem index="0" value="DEFAULT"/>
                   </StringArray>
                 </Property>
-                <Property name="toolTipText" type="java.lang.String" value="Default weight value: 0.5"/>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="panel/ui_properties.properties" key="EdgeWeightAttributeCombobox" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
                 <Property name="name" type="java.lang.String" value="edgeAttrCombo" noResource="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[70, 21]"/>
@@ -215,7 +217,9 @@
             </Component>
             <Component class="javax.swing.JSpinner" name="iterationsSpinner">
               <Properties>
-                <Property name="toolTipText" type="java.lang.String" value="Maximal number of iterations"/>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="panel/ui_properties.properties" key="NumberOfIterationsField" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
                 <Property name="name" type="java.lang.String" value="iterationsSpinner" noResource="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[26, 21]"/>
@@ -228,7 +232,9 @@
             <Component class="javax.swing.JTextField" name="convitsField">
               <Properties>
                 <Property name="text" type="java.lang.String" value="10"/>
-                <Property name="toolTipText" type="java.lang.String" value="If the set of centers will not change by this number of iterations, then the algorithm stops."/>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="panel/ui_properties.properties" key="StopCriterionField" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
                 <Property name="name" type="java.lang.String" value="convitsField" noResource="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[18, 21]"/>
@@ -258,6 +264,9 @@
             <Component class="javax.swing.JTextField" name="labmbdaField">
               <Properties>
                 <Property name="text" type="java.lang.String" value="0.5"/>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="panel/ui_properties.properties" key="LambdaField" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
                 <Property name="name" type="java.lang.String" value="labmbdaField" noResource="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[22, 21]"/>
@@ -270,7 +279,9 @@
             <Component class="javax.swing.JTextField" name="preferenceField">
               <Properties>
                 <Property name="text" type="java.lang.String" value="0.5"/>
-                <Property name="toolTipText" type="java.lang.String" value="Median is default and recommended."/>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="panel/ui_properties.properties" key="PreferenceField" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
                 <Property name="name" type="java.lang.String" value="preferenceField" noResource="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[22, 21]"/>
@@ -349,11 +360,17 @@
             <Component class="javax.swing.JCheckBox" name="noiseCheckBox">
               <Properties>
                 <Property name="selected" type="boolean" value="true"/>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="panel/ui_properties.properties" key="NoiseCheckbox" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
                 <Property name="name" type="java.lang.String" value="noiseCheckBox" noResource="true"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="transformingCheckbox">
               <Properties>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="panel/ui_properties.properties" key="TakeLogCheckbox" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
                 <Property name="name" type="java.lang.String" value="transformingCheckbox" noResource="true"/>
               </Properties>
             </Component>
@@ -443,7 +460,9 @@
             <Component class="javax.swing.JTextField" name="nodeAttrNameField">
               <Properties>
                 <Property name="text" type="java.lang.String" value="cluster_id"/>
-                <Property name="toolTipText" type="java.lang.String" value="Cytoscape attribute to store cluster id&apos;s"/>
+                <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="panel/ui_properties.properties" key="ClusterIDField" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
                 <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
                   <Insets value="[1, 1, 2, 1]"/>
                 </Property>
@@ -456,7 +475,7 @@
             <Component class="javax.swing.JTextField" name="centersNameAttrField">
               <Properties>
                 <Property name="text" type="java.lang.String" value="center_id"/>
-                <Property name="toolTipText" type="java.lang.String" value="Cytoscape attribute to store nearest center name"/>
+                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt; Name of the center attribute which will store cluster assignments &lt;/html&gt;"/>
                 <Property name="alignmentY" type="float" value="0.0"/>
                 <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
                   <Insets value="[1, 1, 2, 1]"/>

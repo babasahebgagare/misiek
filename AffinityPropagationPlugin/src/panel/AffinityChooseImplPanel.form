@@ -72,7 +72,9 @@
             </Property>
             <Property name="selected" type="boolean" value="true"/>
             <Property name="text" type="java.lang.String" value="Sibling lists"/>
-            <Property name="toolTipText" type="java.lang.String" value="faster"/>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="panel/ui_properties.properties" key="SiblingLists.Tooltip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
             <Property name="name" type="java.lang.String" value="radioSibling" noResource="true"/>
           </Properties>
         </Component>
@@ -82,6 +84,9 @@
               <ComponentRef name="radioImplementationGroup"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Matrix"/>
+            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="panel/ui_properties.properties" key="MatrixImplementation.Tooltip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
             <Property name="name" type="java.lang.String" value="radioMatrix" noResource="true"/>
           </Properties>
         </Component>

@@ -61,13 +61,14 @@ public class AffinityGraphModePanel extends javax.swing.JPanel {
 
         graphModeGroup.add(directedModeRadio);
         directedModeRadio.setText("Directed edges");
-        directedModeRadio.setToolTipText("Algorithm will interprets each edge as directed");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("panel/ui_properties"); // NOI18N
+        directedModeRadio.setToolTipText(bundle.getString("DirectedOption.Tooltip")); // NOI18N
         directedModeRadio.setName("directedModeRadio"); // NOI18N
 
         graphModeGroup.add(undirectedModeRadio);
         undirectedModeRadio.setSelected(true);
         undirectedModeRadio.setText("Undirected edges");
-        undirectedModeRadio.setToolTipText("Algorithm will interprets each edge as undirected");
+        undirectedModeRadio.setToolTipText(bundle.getString("UndirectedOption.Tooltip")); // NOI18N
         undirectedModeRadio.setName("undirectedModeRadio"); // NOI18N
 
         javax.swing.GroupLayout graphModePanelLayout = new javax.swing.GroupLayout(graphModePanel);

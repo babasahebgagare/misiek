@@ -8,5 +8,6 @@
     <mapID target="Parameters" url="hparameters.html"/>
     <mapID target="AdditionalOptions" url="hadditional_options.html"/>
     <mapID target="Implementations" url="himplementation.html"/>
+    <mapID target="Examples" url="hExampleUseCase.html"/>
     <mapID target="License" url="hlicense.html"/>
 </map>

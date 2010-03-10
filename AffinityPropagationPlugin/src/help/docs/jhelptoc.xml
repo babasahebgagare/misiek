@@ -9,6 +9,7 @@
         <tocitem target="Parameters" text="Parameters" />
         <tocitem target="AdditionalOptions" text="Additional options" />
         <tocitem target="Implementations" text="Implementations" />
+        <tocitem target="Examples" text="Examples and manual" />
         <tocitem target="License" text="License GPL v3.0" />
     </tocitem>
 </toc>

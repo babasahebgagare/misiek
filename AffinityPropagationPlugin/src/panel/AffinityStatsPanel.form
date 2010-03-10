@@ -134,7 +134,9 @@
           <Image iconType="3" name="/resources/icons/details.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Details"/>
-        <Property name="toolTipText" type="java.lang.String" value="Details of clustering history"/>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="panel/ui_properties.properties" key="HistoryDetails.Tooltip" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
         <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
           <Insets value="[2, 5, 2, 5]"/>
         </Property>
