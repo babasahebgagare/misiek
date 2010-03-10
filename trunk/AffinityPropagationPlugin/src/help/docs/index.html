@@ -1,14 +1,26 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <title>AP graph clustering plugin </title>
+        <title>APCluster plugin</title>
         <meta name="generator" content="DocBook XSL Stylesheets V1.70.1">
     </head>
     <body bgcolor="white">
        <!--  <div class="article" lang="en">AP graph clustering plugin</div> -->
-        <h1>AP graph clustering plugin</h1>
-        This is an unofficial implementation of the affinity propagation algorithm of Brendan J. Frey and Delbert Dueck. For
-        details on the algorithm, original implementations and references please visit the official Affinity Propagation website:
+        <h1>APCluster plugin</h1>
+The <i>APCluster</i> plugin provides a Cytoscape-compliant implementation of
+the Affinity Propagation algorithm (Frey and Dueck, Science 2007). The
+algorithm identifies meaningful clusters by passing messages which
+encode the affinity of one data point to become an examplar for
+another data point. The main benefit our implementation is that it
+enables the user to run AP on any network straight from the Cytoscape
+GUI and immediately visualize the results.  APCluster also makes it
+easy to control the parameters of the algorithm by keeping track of
+parameter settings and results from multiple executions. The
+advantages of AP include its speed and ability to cluster a wide range
+of networks (both weighted and unweighted, as well as directed and
+undirected). <br>
+For details on the algorithm, original implementations and references
+please visit the official Affinity Propagation website:
         <br> <a href="http://www.psi.toronto.edu/affinitypropagation/">http://www.psi.toronto.edu/affinitypropagation/</a>.<br>
         This plugin is an open source application (GPL 3 license). The plugin jar file, instructions and sources are available at:
         <br><a href="http://bioputer.mimuw.edu.pl/modevo">http://bioputer.mimuw.edu.pl/modevo</a>. <br>
@@ -19,5 +31,10 @@
        This plugin was implemented by Michal Wozniak. Project idea and guidance came from Janusz Dutkowski and Jerzy Tiuryn.<br>
        Affiliation: Institute of Informatics, University of Warsaw<br>
        E-mail: {m.wozniak,januszd,tiuryn}@mimuw.edu.pl <br>
+
+       <h1>About the affinity propagation clustering algorithm</h1>
+       For information about the algorithm, original implementations and references please visit the official webpage: <br />
+        <a href="http://www.psi.toronto.edu/affinitypropagation/" > http://www.psi.toronto.edu/affinitypropagation/</a>
+    </body>
     </body>
 </html>
