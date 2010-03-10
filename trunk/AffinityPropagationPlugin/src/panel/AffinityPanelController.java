@@ -50,6 +50,7 @@ import javax.swing.JTextField;
 import utils.MathStats;
 import algorithm.abs.AffinityPropagationAlgorithm.AffinityConnectingMethod;
 import algorithm.abs.AffinityPropagationAlgorithm.AffinityGraphMode;
+import cyto.CytoListeners;
 import cytoscape.CyEdge;
 import cytoscape.CyNode;
 import cytoscape.Cytoscape;
@@ -604,10 +605,11 @@ public class AffinityPanelController implements Serializable {
         initLambdaField();
         initConvitsField();
         initNodeAttrField();
-        refreshEdgeAttrField();
         initIterationsField();
         initPreferencesField();
         initCentersNameAttr();
+        refreshEdgeAttrField();
+        refreshPreferences();
     }
 
     public Integer getIterations() {
