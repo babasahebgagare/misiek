@@ -30,7 +30,7 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="parametersPanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" min="-2" pref="73" max="-2" attributes="0"/>
+              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -110,7 +110,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="preferenceLabel" min="-2" pref="24" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lambdaLabel" pref="19" max="32767" attributes="0"/>
+                      <Component id="lambdaLabel" pref="21" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -185,7 +185,7 @@
                       <Component id="convitsField" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="preferenceField" max="32767" attributes="1"/>
+                          <Component id="preferenceField" pref="23" max="32767" attributes="1"/>
                           <Component id="refreshButton1" alignment="0" min="-2" max="-2" attributes="1"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -418,12 +418,9 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jPanel7" min="-2" max="-2" attributes="1"/>
+              <Component id="jPanel7" alignment="0" max="32767" attributes="1"/>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jPanel8" min="-2" max="-2" attributes="1"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="jPanel8" alignment="0" max="32767" attributes="1"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -452,6 +449,7 @@
                       <Component id="nodeAttrNameField" min="-2" pref="21" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="centersNameAttrField" min="-2" pref="21" max="-2" attributes="0"/>
+                      <EmptySpace pref="11" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -508,6 +506,7 @@
                       <Component id="nodeAttrNameLabel" min="-2" pref="19" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" pref="22" max="-2" attributes="0"/>
+                      <EmptySpace pref="12" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
