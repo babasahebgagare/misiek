@@ -475,7 +475,7 @@ public class AffinityPanelController implements Serializable {
             return false;
         } else {
             if (findEmptyValues(edgeNameAttr, Cytoscape.getEdgeAttributes(), Cytoscape.getCurrentNetworkView())) {
-                int ret = Messenger.confirmInfo("For some edge weight is not specified. The algorithm interprets this as a lack of edge. Continue?");
+                int ret = Messenger.confirmInfo("For some edges weight is not specified. The algorithm interprets this as a lack of edge. Continue?");
 
                 if (ret != JOptionPane.OK_OPTION) {
                     return false;
