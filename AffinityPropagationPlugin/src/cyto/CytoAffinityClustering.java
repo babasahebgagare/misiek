@@ -206,7 +206,7 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
         List<CyEdge> edges = Cytoscape.getCurrentNetwork().edgesList();
         @SuppressWarnings("unchecked")
         List<CyNode> nodes = Cytoscape.getCurrentNetwork().nodesList();
-        Set<String> nodeNames = psc.selectConnectedNodes(edges, nodes);
+        Set<String> nodeNames = psc.selectConnectedNodes(edges, nodes, edgeNameAttr);
 
         CyAttributes edgesAttributes = Cytoscape.getEdgeAttributes();
 
@@ -237,28 +237,15 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
             String sourceID = edge.getSource().getIdentifier();
             String targetID = edge.getTarget().getIdentifier();
             if (!sourceID.equals(targetID)) {
-                //   CyNode cyTarget = (CyNode) Cytoscape.getRootGraph().getNode(edge.getTarget().getRootGraphIndex());
-                //   CyNode cySource = (CyNode) Cytoscape.getRootGraph().getNode(edge.getSource().getRootGraphIndex());
                 Integer sourceIndex = nodeMapping.get(sourceID);
                 Integer targetIndex = nodeMapping.get(targetID);
 
-                if (!sourceID.equals(targetID)) {
-
-                    Double probOrNull = tryGetDoubleAttribute(edgesAttributes, id, edgeNameAttr);
+                if (edgeNameAttr.equals(psc.DEFAULT)) {
                     Double sim;
-
-                    if (probOrNull != null) {
-                        if (log) {
-                            sim = Math.log(probOrNull);
-                        } else {
-                            sim = probOrNull;
-                        }
+                    if (log) {
+                        sim = Math.log(DEFAULT_WEIGHT);
                     } else {
-                        if (log) {
-                            sim = Math.log(DEFAULT_WEIGHT);
-                        } else {
-                            sim = DEFAULT_WEIGHT;
-                        }
+                        sim = DEFAULT_WEIGHT;
                     }
 
                     if (graphMode == AffinityGraphMode.DIRECTED) {
@@ -267,13 +254,26 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
                         af.setSimilarityInt(sourceIndex, targetIndex, sim);
                         af.setSimilarityInt(targetIndex, sourceIndex, sim);
                     }
-                    // if (Cytoscape.getCurrentNetwork().getEdgeCount(cyTarget, cySource, true) == 0) {
-                    //  System.out.println("two ways: " + sourceID + " " + targetID);
-                    //af.setSimilarityInt(sourceIndex, targetIndex, sim);
-                    // af.setSimilarityInt(targetIndex, sourceIndex, sim);
-                    // } else {
-                    //    System.out.println("one way");
-                    // }
+                } else {
+                    Double probOrNull = tryGetDoubleAttribute(edgesAttributes, id, edgeNameAttr);
+
+                    if (probOrNull != null) {
+                        Double sim;
+                        if (log) {
+                            sim = Math.log(probOrNull);
+                        } else {
+                            sim = probOrNull;
+                        }
+                        if (graphMode == AffinityGraphMode.DIRECTED) {
+                            af.setSimilarityInt(sourceIndex, targetIndex, sim);
+                        } else {
+                            af.setSimilarityInt(sourceIndex, targetIndex, sim);
+                            af.setSimilarityInt(targetIndex, sourceIndex, sim);
+                        }
+                    }
+
+
+
                 }
             }
         }

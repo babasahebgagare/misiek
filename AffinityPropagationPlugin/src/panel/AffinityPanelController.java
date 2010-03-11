@@ -77,7 +77,7 @@ public class AffinityPanelController implements Serializable {
     private final String DEFAULT_LAMBDA = "0.5";
     private final String CONVITS_DEFAULT = "50";
     private final int ITERATIONS_DEFAULT = 500;
-    private final String DEFAULT = "DEFAULT";
+    public final String DEFAULT = "DEFAULT";
     private JTextField lambdaField = null;
     private JTextField convitsField = null;
     private JTextField nodeAttrField = null;
@@ -224,7 +224,7 @@ public class AffinityPanelController implements Serializable {
         this.stepsFiled = stepsFiled;
     }
 
-    public Set<String> selectConnectedNodes(final List<CyEdge> edges, final List<CyNode> nodes) {
+    public Set<String> selectConnectedNodes(final List<CyEdge> edges, final List<CyNode> nodes, String edgeAttr) {
         Set<String> nodesNames = new TreeSet<String>();
 
         for (CyEdge edge : edges) {
@@ -232,11 +232,23 @@ public class AffinityPanelController implements Serializable {
             String targetID = edge.getTarget().getIdentifier();
 
             if (!sourceID.equals(targetID)) {
-                if (!nodesNames.contains(sourceID)) {
-                    nodesNames.add(sourceID);
-                }
-                if (!nodesNames.contains(targetID)) {
-                    nodesNames.add(targetID);
+                if (edgeAttr.equals(DEFAULT)) {
+                    if (!nodesNames.contains(sourceID)) {
+                        nodesNames.add(sourceID);
+                    }
+                    if (!nodesNames.contains(targetID)) {
+                        nodesNames.add(targetID);
+                    }
+                } else {
+                    Double val = tryGetDoubleAttribute(Cytoscape.getEdgeAttributes(), edge.getIdentifier(), edgeAttr);
+                    if (val != null) {
+                        if (!nodesNames.contains(sourceID)) {
+                            nodesNames.add(sourceID);
+                        }
+                        if (!nodesNames.contains(targetID)) {
+                            nodesNames.add(targetID);
+                        }
+                    }
                 }
             }
         }
@@ -352,6 +364,9 @@ public class AffinityPanelController implements Serializable {
     }
 
     private boolean validateEdgeNameAttr(final String edgeNameAttr) {
+        if (edgeNameAttr.equals(DEFAULT)) {
+            return true;
+        }
         if (edgeNameAttr == null || edgeNameAttr.equals("")) {
             return false;
         }
@@ -458,6 +473,14 @@ public class AffinityPanelController implements Serializable {
             refreshEdgeAttrField();
             refreshPreferences();
             return false;
+        } else {
+            if (findEmptyValues(edgeNameAttr, Cytoscape.getEdgeAttributes(), Cytoscape.getCurrentNetworkView())) {
+                int ret = Messenger.confirmInfo("For some edge weight is not specified. The algorithm interprets this as a lack of edge. Continue?");
+
+                if (ret != JOptionPane.OK_OPTION) {
+                    return false;
+                }
+            }
         }
         if (!validateNodeNameAttr(nodeNameAttr)) {
             if (cancelDialog) {
@@ -793,62 +816,65 @@ public class AffinityPanelController implements Serializable {
         if (cyType == CyAttributes.TYPE_FLOATING) {
 
             if (view.getEdgeViewsList().size() > 0) {
-                EdgeView edgeView = (EdgeView) view.getEdgeViewsIterator().next();
-                Edge edge = edgeView.getEdge();
-                Double attr = edgesAttributes.getDoubleAttribute(edge.getIdentifier(), attrName);
-                if (attr != null) {
-                    return true;
+                for (Object edgeViewObject : view.getEdgeViewsList()) {
+                    EdgeView edgeView = (EdgeView) edgeViewObject;
+                    Edge edge = edgeView.getEdge();
+                    Double attr = edgesAttributes.getDoubleAttribute(edge.getIdentifier(), attrName);
+                    if (attr != null) {
+                        return true;
+                    }
                 }
             }
         } else if (cyType == CyAttributes.TYPE_STRING) {
             if (view.getEdgeViewsList().size() > 0) {
-                EdgeView edgeView = (EdgeView) view.getEdgeViewsIterator().next();
-                Edge edge = edgeView.getEdge();
-                String attr = edgesAttributes.getStringAttribute(edge.getIdentifier(), attrName);
-                try {
-                    if (attr != null) {
-                        Double val = Double.parseDouble(attr);
-                        return true;
+                boolean exists = false;
+                for (Object edgeViewObject : view.getEdgeViewsList()) {
+                    EdgeView edgeView = (EdgeView) edgeViewObject;
+                    Edge edge = edgeView.getEdge();
+                    String attr = edgesAttributes.getStringAttribute(edge.getIdentifier(), attrName);
+                    try {
+                        if (attr != null && !attr.equals("")) {
+                            Double val = Double.parseDouble(attr);
+                            exists = true;
+                        }
+                    } catch (NumberFormatException e) {
+                        return false;
                     }
-                } catch (NumberFormatException e) {
                 }
+                return exists;
             }
         }
         return false;
     }
 
-    /*  public void showCentersAndWait(final Collection<String> centersStr) {
-    try {
-    SwingUtilities.invokeAndWait(new Runnable() {
+    private boolean findEmptyValues(String attrName, CyAttributes edgesAttributes, CyNetworkView view) {
+        final byte cyType = edgesAttributes.getType(attrName);
+        if (cyType == CyAttributes.TYPE_FLOATING) {
 
-    public void run() {
-    //  Cytoscape.getCurrentNetworkView().redrawGraph(false, true);
-    CyNetworkView currentView = Cytoscape.getCurrentNetworkView();
+            if (view.getEdgeViewsList().size() > 0) {
+                for (Object edgeViewObject : view.getEdgeViewsList()) {
+                    EdgeView edgeView = (EdgeView) edgeViewObject;
+                    Edge edge = edgeView.getEdge();
+                    Double attr = edgesAttributes.getDoubleAttribute(edge.getIdentifier(), attrName);
+                    if (attr == null) {
+                        return true;
+                    }
+                }
+            }
+        } else if (cyType == CyAttributes.TYPE_STRING) {
+            if (view.getEdgeViewsList().size() > 0) {
+                for (Object edgeViewObject : view.getEdgeViewsList()) {
+                    EdgeView edgeView = (EdgeView) edgeViewObject;
+                    Edge edge = edgeView.getEdge();
+                    String attr = edgesAttributes.getStringAttribute(edge.getIdentifier(), attrName);
+                    if (attr == null || attr.equals("")) {
+                        return true;
+                    }
 
-    //long startTime = System.nanoTime();
-    Cytoscape.getCurrentNetwork().unselectAllNodes();
+                }
+            }
 
-    //long respTime = System.nanoTime();
-    //System.out.println("1:" + String.valueOf(respTime - startTime));
-    Collection<CyNode> cynodes = new HashSet<CyNode>();
-    for (String name : centersStr) {
-    //   System.out.println(name);
-    //long start = System.nanoTime();
-    CyNode node = Cytoscape.getCyNode(name);
-    cynodes.add(node);
-    
-
+        }
+        return false;
     }
-    currentView.getNetwork().setSelectedNodeState(cynodes, true);
-
-    currentView.updateView();
-    }
-    });
-    } catch (InterruptedException ex) {
-    Logger.getLogger(AffinityPanelController.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (InvocationTargetException ex) {
-    Logger.getLogger(AffinityPanelController.class.getName()).log(Level.SEVERE, null, ex);
-    }
-
-    }*/
 }
