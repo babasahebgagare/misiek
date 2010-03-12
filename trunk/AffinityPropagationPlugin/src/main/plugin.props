@@ -26,11 +26,11 @@ pluginCategory=Analysis
 # -- The following properties are OPTIONAL -- #
 
 # URL to a website that gives more information about your plugin, Ex. http://my-lab-site.org
-projectURL=http://code.google.com/p/misiek/
+projectURL=http://bioputer.mimuw.edu.pl/modevo
 
 # List of authors.  Note each author and institution pair are separated by a : (colon)
 # each additional author institution pair must be separated from other pairs bye a ; (semicolon)
-pluginAuthorsInstitutions=J. Dutkowski, M. Wozniak, J. Tiuryn:Warsaw University
+pluginAuthorsInstitutions=Michal Wozniak:University of Warsaw;Janusz Dutkowski:University of Warsaw
 
 # Date this plugin/plugin version was released
 releaseDate=March 05, 2010

@@ -10,9 +10,9 @@ pluginName=NetworkEvolution
 
 # Description used to give users information about the plugin such as what it does.
 # Html tags are encouraged for formatting purposes.
-pluginDescription=NetworkEvolution plugin allows the user to map selected network regions to interactomes of evolutionary predecessors and descendants, making it possible to interactively inspect the evolutionary changes and observe both conservation and diversification of specific components.
+pluginDescription=The plugin allows the user to map selected network regions to interactomes of evolutionary predecessors and descendants, making it possible to interactively inspect evolutionary changes and observe both conservation and diversification of specific network components.
 # <p>Contact: </p>
-# m.wozniak@mimuw.edu.pl, j.dutkowski.mimuw.edu.pl
+# m.wozniak@mimuw.edu.pl, j.dutkowski@mimuw.edu.pl
 
 # Plugin version number, this must be two numbers separated by a decimlal.  Ex. 0.2, 14.03
 pluginVersion=2.0
@@ -26,14 +26,14 @@ pluginCategory=Analysis
 # -- The following properties are OPTIONAL -- #
 
 # URL to a website that gives more information about your plugin, Ex. http://my-lab-site.org
-projectURL=http://code.google.com/p/misiek/
+projectURL=http://bioputer.mimuw.edu.pl/modevo
 
 # List of authors.  Note each author and institution pair are separated by a : (colon)
 # each additional author institution pair must be separated from other pairs bye a ; (semicolon)
-pluginAuthorsInstitutions=J. Dutkowski, M. Wozniak, J. Tiuryn:Warsaw University
+pluginAuthorsInstitutions=Michal Wozniak:University of Warsaw;Janusz Dutkowski:University of Warsaw;
 
 # Date this plugin/plugin version was released
-releaseDate=March 05, 2009
+releaseDate=March 05, 2010
 
 # If this plugin is never meant to be downloaded except as part of a plugin (not common) add this property.  Default is "no"
 themeOnly=no
