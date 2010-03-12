@@ -28,95 +28,120 @@
  *           Janusz Dutkowski (idea, data) (j.dutkowski@mimuw.edu.pl)
  *           Jerzy Tiuryn (supervisor) (tiuryn@mimuw.edu.pl)
  */
-
 package ppine.visual.calculators;
 
-import cytoscape.CyNetwork;
-import cytoscape.Cytoscape;
-import cytoscape.visual.NodeAppearance;
 import cytoscape.visual.NodeAppearanceCalculator;
-import cytoscape.visual.NodeShape;
 import cytoscape.visual.VisualPropertyType;
-import giny.model.Node;
-import java.awt.Color;
-import ppine.viewmodel.controllers.CytoDataHandle;
-import ppine.viewmodel.structs.CytoAbstractPPINetwork;
-import ppine.viewmodel.structs.CytoProtein;
-import ppine.logicmodel.structs.Family;
-import ppine.logicmodel.structs.Protein;
-import ppine.main.PluginDataHandle;
-import ppine.viewmodel.structs.CytoProteinProjection;
+import cytoscape.visual.calculators.Calculator;
+import java.util.List;
 
 public class PPINENodeAppearanceCalculator extends NodeAppearanceCalculator {
 
+    Calculator defaultCalc = null;
+    Calculator calcmy = null;
+
+    public PPINENodeAppearanceCalculator(Calculator defaultCalc) {
+        this.defaultCalc = defaultCalc;
+        calcmy = new PPINEBasicNodeCalculator("PPINENodeCalculator", defaultCalc.getMappings().get(0), defaultCalc.getVisualPropertyType());
+    }
+
     @Override
+    public Calculator getCalculator(VisualPropertyType type) {
+        //PassThroughMapping m = new PassThroughMapping("", AbstractCalculator.ID);
+        if (calcmy.getVisualPropertyType().equals(type)) {
+            return calcmy;
+        } else {
+            return super.getCalculator(type);
+        }
+    }
+
+    @Override
+    public List<Calculator> getCalculators() {
+        List<Calculator> calcsl = super.getCalculators();
+        calcsl.add(calcmy);
+        // PassThroughMapping m = new PassThroughMapping("", AbstractCalculator.ID);
+        // Calculator calcmy = new PPINEBasicNodeCalculator("aaa", m, type);
+
+        // calcs.add(calcmy);
+        return calcsl;
+    }
+
+    /*@Override
     public void calculateNodeAppearance(NodeAppearance appr, Node node, CyNetwork cyNetwork) {
-        super.calculateNodeAppearance(appr, node, cyNetwork);
-        CytoDataHandle cdh = PluginDataHandle.getCytoDataHandle();
+    System.out.println("stary!");
+    super.calculateNodeAppearance(appr, node, cyNetwork);
+    CytoDataHandle cdh = PluginDataHandle.getCytoDataHandle();
 
-        if (cdh == null) {
-            return;
-        }
 
-        CytoAbstractPPINetwork cytoNetworkOrNull = cdh.tryFindNetworkByCytoID(cyNetwork.getIdentifier());
-        if (cytoNetworkOrNull != null) {
-            CytoProtein cytoProteinOrNull = cdh.tryGetCytoProteinByIndex(node.getRootGraphIndex());
-            if (cytoProteinOrNull != null) {
-                Protein protein = cytoProteinOrNull.getProtein();
-                Family family = protein.getFamily();
+    if (cdh == null) {
+    return;
+    }
 
-                if (cytoProteinOrNull.getClass().equals(CytoProteinProjection.class)) {
-                    CytoProteinProjection cytoProteinProjection = (CytoProteinProjection) cytoProteinOrNull;
-                    CytoProtein cytoMotherProtein = cytoProteinProjection.tryGetCytoMotherProtein();
-                    if (cytoMotherProtein != null) {
-                        Color manColorOrNull = tryGetManuallyChangedColor(appr, node);
-                        if (manColorOrNull == null) {
+    CytoAbstractPPINetwork cytoNetworkOrNull = cdh.tryFindNetworkByCytoID(cyNetwork.getIdentifier());
+    if (cytoNetworkOrNull != null) {
+    CytoProtein cytoProteinOrNull = cdh.tryGetCytoProteinByIndex(node.getRootGraphIndex());
+    if (cytoProteinOrNull != null) {
+    Protein protein = cytoProteinOrNull.getProtein();
+    Family family = protein.getFamily();
 
-                            int index = cytoMotherProtein.getIndex();
-                            Node motherNode = Cytoscape.getRootGraph().getNode(index);
-                            NodeAppearance app = Cytoscape.getVisualMappingManager().getVisualStyle().getNodeAppearanceCalculator().calculateNodeAppearance(motherNode, cyNetwork);
-                            Color fillColor = (Color) app.get(VisualPropertyType.NODE_FILL_COLOR);
-                            appr.set(VisualPropertyType.NODE_FILL_COLOR, fillColor);
+    if (cytoProteinOrNull.getClass().equals(CytoProteinProjection.class)) {
 
-                        } else {
-                            appr.set(VisualPropertyType.NODE_FILL_COLOR, manColorOrNull);
-                        }
 
-                        Protein parent = protein.getContext().tryGetParentProtein();
-                        if (parent != null) {
-                            appr.set(VisualPropertyType.NODE_TOOLTIP, "Family: " + family.getFamilyID() + ", ancestor: " + parent.getID());
-                        } else {
-                            appr.set(VisualPropertyType.NODE_TOOLTIP, "Family: " + family.getFamilyID());
-                        }
-                    } else {
-                    }
-                } else {
+    //      System.out.println("projected protein");
+    CytoProteinProjection cytoProteinProjection = (CytoProteinProjection) cytoProteinOrNull;
+    CytoProtein cytoMotherProtein = cytoProteinProjection.tryGetCytoMotherProtein();
+    if (cytoMotherProtein != null) {
+    Color manColorOrNull = tryGetManuallyChangedColor(appr, node);
+    if (manColorOrNull == null) {
 
-                    Color manColor = tryGetManuallyChangedColor(appr, node);
-                    if (manColor == null) {
-                        appr.set(VisualPropertyType.NODE_FILL_COLOR, family.getColor());
-                    } else {
-                        appr.set(VisualPropertyType.NODE_FILL_COLOR, manColor);
-                    }
+    int index = cytoMotherProtein.getIndex();
+    Node motherNode = Cytoscape.getRootGraph().getNode(index);
+    NodeAppearance app = Cytoscape.getVisualMappingManager().getVisualStyle().getNodeAppearanceCalculator().calculateNodeAppearance(motherNode, cyNetwork);
+    Color fillColor = (Color) app.get(VisualPropertyType.NODE_FILL_COLOR);
+    appr.set(VisualPropertyType.NODE_FILL_COLOR, fillColor);
 
-                    appr.set(VisualPropertyType.NODE_TOOLTIP, "Family: " + family.getFamilyID());
-                }
+    } else {
+    appr.set(VisualPropertyType.NODE_FILL_COLOR, manColorOrNull);
+    }
 
-                appr.set(VisualPropertyType.NODE_LABEL, protein.getID());
-                appr.set(VisualPropertyType.NODE_SHAPE, NodeShape.ROUND_RECT);
-            }
-        }
-        appr.applyBypass(node);
+    Protein parent = protein.getContext().tryGetParentProtein();
+    if (parent != null) {
+    appr.set(VisualPropertyType.NODE_TOOLTIP, "Family: " + family.getFamilyID() + ", ancestor: " + parent.getID());
+    } else {
+    appr.set(VisualPropertyType.NODE_TOOLTIP, "Family: " + family.getFamilyID());
+    }
+    } else {
+    }
+    } else {
+    
+    Color manColor = tryGetManuallyChangedColor(appr, node);
+    if (manColor == null) {
+    appr.set(VisualPropertyType.NODE_FILL_COLOR, family.getColor());
+    } else {
+    appr.set(VisualPropertyType.NODE_FILL_COLOR, manColor);
+    }
+    //         System.out.println("common protein");
+
+    appr.set(VisualPropertyType.NODE_TOOLTIP, "Family: " + family.getFamilyID());
+    }
+
+    appr.set(VisualPropertyType.NODE_LABEL, protein.getID());
+    appr.set(VisualPropertyType.NODE_SHAPE, NodeShape.ROUND_RECT);
+    //      System.out.println("Setting visual styles");
+    }
+    }
+
+    // appr.applyBypass(node, new LinkedList<VisualPropertyType>());
     }
 
     private Color tryGetManuallyChangedColor(NodeAppearance appr, Node node) {
-        appr.applyBypass(node);
-        Color bypasstmp = (Color) appr.get(VisualPropertyType.NODE_FILL_COLOR);
-        Color bypasscolor = new Color(bypasstmp.getRed(), bypasstmp.getGreen(), bypasstmp.getBlue());
-        if (bypasscolor.equals(Color.WHITE)) {
-            return null;
-        } else {
-            return bypasscolor;
-        }
+    //   appr.applyBypass(node, new LinkedList<VisualPropertyType>());
+    Color bypasstmp = (Color) appr.get(VisualPropertyType.NODE_FILL_COLOR);
+    Color bypasscolor = new Color(bypasstmp.getRed(), bypasstmp.getGreen(), bypasstmp.getBlue());
+    if (bypasscolor.equals(Color.WHITE)) {
+    return null;
+    } else {
+    return bypasscolor;
     }
+    }*/
 }

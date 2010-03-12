@@ -77,7 +77,8 @@
     </target>
 
     <target name="run-all-windows" depends="compile-all-plugins,copy-all-plugins" description="Run Cytoscape with plugin">
-        <exec command="${cytoscape-path}/cytoscape.bat" dir="${cytoscape-path}"/>
+<!--        <exec command="${cytoscape-path}/cytoscape.bat" dir="${cytoscape-path}"/> -->
+        <exec command="java -Dswing.aatext=true -Xss5M -Xmx1500M -jar cytoscape.jar cytoscape.CyMain -p plugins" dir="${cytoscape-path}" />
     </target>
 
     <target name="run-all-linux" depends="compile-all-plugins,copy-all-plugins" description="Run Cytoscape with plugin">
