@@ -28,23 +28,44 @@
  *           Janusz Dutkowski (idea, data) (j.dutkowski@mimuw.edu.pl)
  *           Jerzy Tiuryn (supervisor) (tiuryn@mimuw.edu.pl)
  */
-
 package ppine.visual.calculators;
 
-import cytoscape.CyNetwork;
-import cytoscape.visual.EdgeAppearance;
 import cytoscape.visual.EdgeAppearanceCalculator;
 import cytoscape.visual.VisualPropertyType;
-import giny.model.Edge;
-import java.awt.Color;
-import ppine.main.PluginDataHandle;
-import ppine.viewmodel.controllers.CytoDataHandle;
-import ppine.viewmodel.structs.CytoAbstractPPINetwork;
-import ppine.viewmodel.structs.CytoExpInteraction;
-import ppine.viewmodel.structs.CytoInteraction;
+import cytoscape.visual.calculators.Calculator;
+import java.util.List;
 
 public class PPINEEdgeAppearanceCalculator extends EdgeAppearanceCalculator {
 
+    Calculator defaultCalc = null;
+    Calculator calcmy = null;
+
+    public PPINEEdgeAppearanceCalculator(Calculator defaultCalc) {
+        this.defaultCalc = defaultCalc;
+        calcmy = new PPINEBasicEdgeCalculator("PPINEEdgeCalculator", defaultCalc.getMappings().get(0), defaultCalc.getVisualPropertyType());
+    }
+
+    @Override
+    public Calculator getCalculator(VisualPropertyType type) {
+        //PassThroughMapping m = new PassThroughMapping("", AbstractCalculator.ID);
+        if (calcmy.getVisualPropertyType().equals(type)) {
+            return calcmy;
+        } else {
+            return super.getCalculator(type);
+        }
+    }
+
+    @Override
+    public List<Calculator> getCalculators() {
+        List<Calculator> calcsl = super.getCalculators();
+        calcsl.add(calcmy);
+        // PassThroughMapping m = new PassThroughMapping("", AbstractCalculator.ID);
+        // Calculator calcmy = new PPINEBasicNodeCalculator("aaa", m, type);
+
+        // calcs.add(calcmy);
+        return calcsl;
+    }
+/*
     @Override
     public void calculateEdgeAppearance(EdgeAppearance appr, Edge edge, CyNetwork cyNetwork) {
         super.calculateEdgeAppearance(appr, edge, cyNetwork);
@@ -75,9 +96,9 @@ public class PPINEEdgeAppearanceCalculator extends EdgeAppearanceCalculator {
                 appr.set(VisualPropertyType.EDGE_COLOR, cytoExpInteraction.getExp().getColor());
             }
         }
-        appr.applyBypass(edge);
+        //appr.applyBypass(edge, new LinkedList<VisualPropertyType>());
     }
-
+*/
     /*private double calculateCytoInteractionWidth(double probability) {
     return probability * probability * 5;
     }*/

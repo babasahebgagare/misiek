@@ -49,7 +49,7 @@ public class CytoVisualHandle {
     }
 
     public static void applyVisualStyleForNetwork(CyNetworkView cyNetworkView) {
-        VisualStyle PPINEStyle = Cytoscape.getVisualMappingManager().getCalculatorCatalog().getVisualStyle("PPINEStyle");
+        VisualStyle PPINEStyle = Cytoscape.getVisualMappingManager().getCalculatorCatalog().getVisualStyle("NetworkEvolutionStyle");
         cyNetworkView.applyVizmapper(PPINEStyle);
         Cytoscape.getVisualMappingManager().setVisualStyle(PPINEStyle);
     }
