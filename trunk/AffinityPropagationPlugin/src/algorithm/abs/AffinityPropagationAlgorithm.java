@@ -1,5 +1,5 @@
 /* ===========================================================
- * APGraphClusteringPlugin : Java implementation of Affinity Propagation
+ * APGraphClusteringPlugin : Java implementation of affinity propagation
  * algorithm as Cytoscape plugin.
  * ===========================================================
  *
@@ -185,7 +185,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
 
     @Override
     public java.lang.String getName() {
-        return "Affinity Propagation";
+        return "affinity propagation";
     }
 
     public double getLambda() {

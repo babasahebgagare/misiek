@@ -1,5 +1,5 @@
 /* ===========================================================
- * APGraphClusteringPlugin : Java implementation of Affinity Propagation
+ * APGraphClusteringPlugin : Java implementation of affinity propagation
  * algorithm as Cytoscape plugin.
  * ===========================================================
  *
@@ -101,14 +101,14 @@ public class AffinityMain extends CytoscapePlugin {
             leftPanel.add("APCluster", myAff);
             int index = leftPanel.indexOfComponent("APCluster");
             leftPanel.setSelectedIndex(index);
-            //System.out.println("Affinity propagation");
+            //System.out.println("affinity propagation");
         }
 
         private void disactivatePlugin() {
             CytoPanelImp leftPanel = (CytoPanelImp) Cytoscape.getDesktop().getCytoPanel(SwingConstants.WEST);
 
             leftPanel.remove(myAff);
-            //System.out.println("Affinity propagation");
+            //System.out.println("affinity propagation");
         }
 
         /**
