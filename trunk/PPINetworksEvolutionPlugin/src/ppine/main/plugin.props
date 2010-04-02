@@ -15,7 +15,7 @@ pluginDescription=The plugin allows the user to map selected network regions to 
 # m.wozniak@mimuw.edu.pl, j.dutkowski@mimuw.edu.pl
 
 # Plugin version number, this must be two numbers separated by a decimlal.  Ex. 0.2, 14.03
-pluginVersion=2.0
+pluginVersion=2.1
 
 # Compatible Cytoscape version. If there are more than one version, seperate by ",".
 cytoscapeVersion=2.6.2,2.6.3
