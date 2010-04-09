@@ -34,7 +34,6 @@
               <Component id="netsActionsPanel" min="-2" pref="155" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="intPanel" min="-2" pref="81" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

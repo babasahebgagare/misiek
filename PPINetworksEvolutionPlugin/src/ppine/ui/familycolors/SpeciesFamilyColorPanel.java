@@ -28,10 +28,10 @@
  *           Janusz Dutkowski (idea, data) (j.dutkowski@mimuw.edu.pl)
  *           Jerzy Tiuryn (supervisor) (tiuryn@mimuw.edu.pl)
  */
-
 package ppine.ui.familycolors;
 
 import javax.swing.JButton;
+import javax.swing.SwingUtilities;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 
@@ -48,9 +48,13 @@ public class SpeciesFamilyColorPanel extends javax.swing.JPanel {
     }
 
     public void refresh() {
-        TableModel model = new JTableButtonModel();
-        jTable1.setModel(model);
-        jTable1.repaint();
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                TableModel model = new JTableButtonModel();
+                jTable1.setModel(model);
+                jTable1.repaint();
+            }
+        });
     }
 
     /** This method is called from within the constructor to

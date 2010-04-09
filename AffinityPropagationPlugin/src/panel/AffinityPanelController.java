@@ -50,7 +50,6 @@ import javax.swing.JTextField;
 import utils.MathStats;
 import algorithm.abs.AffinityPropagationAlgorithm.AffinityConnectingMethod;
 import algorithm.abs.AffinityPropagationAlgorithm.AffinityGraphMode;
-import cyto.CytoListeners;
 import cytoscape.CyEdge;
 import cytoscape.CyNode;
 import cytoscape.Cytoscape;
@@ -825,6 +824,19 @@ public class AffinityPanelController implements Serializable {
                     }
                 }
             }
+        } else if (cyType == CyAttributes.TYPE_INTEGER) {
+
+            if (view.getEdgeViewsList().size() > 0) {
+                for (Object edgeViewObject : view.getEdgeViewsList()) {
+                    EdgeView edgeView = (EdgeView) edgeViewObject;
+                    Edge edge = edgeView.getEdge();
+                    Integer attr = edgesAttributes.getIntegerAttribute(edge.getIdentifier(), attrName);
+                    if (attr != null) {
+                        return true;
+                    }
+                }
+            }
+
         } else if (cyType == CyAttributes.TYPE_STRING) {
             if (view.getEdgeViewsList().size() > 0) {
                 boolean exists = false;
@@ -856,6 +868,18 @@ public class AffinityPanelController implements Serializable {
                     EdgeView edgeView = (EdgeView) edgeViewObject;
                     Edge edge = edgeView.getEdge();
                     Double attr = edgesAttributes.getDoubleAttribute(edge.getIdentifier(), attrName);
+                    if (attr == null) {
+                        return true;
+                    }
+                }
+            }
+        } else if (cyType == CyAttributes.TYPE_INTEGER) {
+
+            if (view.getEdgeViewsList().size() > 0) {
+                for (Object edgeViewObject : view.getEdgeViewsList()) {
+                    EdgeView edgeView = (EdgeView) edgeViewObject;
+                    Edge edge = edgeView.getEdge();
+                    Integer attr = edgesAttributes.getIntegerAttribute(edge.getIdentifier(), attrName);
                     if (attr == null) {
                         return true;
                     }
