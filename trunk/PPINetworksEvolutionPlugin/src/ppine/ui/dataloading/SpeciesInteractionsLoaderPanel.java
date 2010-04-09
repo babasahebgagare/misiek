@@ -41,6 +41,7 @@ public class SpeciesInteractionsLoaderPanel extends javax.swing.JPanel {
 
     private String name;
     private String filepath;
+    private InteractionsLoaderPanel intPanel;
 
     /** Creates new form SpeciesInteractionsLoaderPanel
      * @param name
@@ -54,9 +55,10 @@ public class SpeciesInteractionsLoaderPanel extends javax.swing.JPanel {
         return filepath;
     }
 
-    public SpeciesInteractionsLoaderPanel(final String name) {
+    public SpeciesInteractionsLoaderPanel(final String name, final InteractionsLoaderPanel intPanel) {
         initComponents();
         this.name = name;
+        this.intPanel = intPanel;
         TitledBorder border = (TitledBorder) this.getBorder();
         border.setTitle(name);
         setActualLoadedUIState();
@@ -174,6 +176,7 @@ public class SpeciesInteractionsLoaderPanel extends javax.swing.JPanel {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = fc.getSelectedFile();
             filepath = file.getAbsolutePath();
+            intPanel.enableLoadButton();
             //      PluginDataHandle.getLoadingDataHandle().addInteractionFilename(name, filepath);
             filepathLabel.setText(filepath);
         }

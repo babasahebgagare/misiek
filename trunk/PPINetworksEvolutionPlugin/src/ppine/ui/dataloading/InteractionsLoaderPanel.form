@@ -116,7 +116,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="chooseOneFileButton" min="-2" pref="115" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="oneFilenameLoabel" min="-2" max="-2" attributes="0"/>
+                          <Component id="oneFilenameLabel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="249" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -131,7 +131,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="chooseOneFileButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="oneFilenameLoabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="oneFilenameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="oneFileLoadingPanel" max="32767" attributes="0"/>
@@ -171,10 +171,10 @@
                     </DimensionLayout>
                   </Layout>
                 </Container>
-                <Component class="javax.swing.JLabel" name="oneFilenameLoabel">
+                <Component class="javax.swing.JLabel" name="oneFilenameLabel">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="filename"/>
-                    <Property name="name" type="java.lang.String" value="oneFilenameLoabel" noResource="true"/>
+                    <Property name="name" type="java.lang.String" value="oneFilenameLabel" noResource="true"/>
                   </Properties>
                 </Component>
               </SubComponents>

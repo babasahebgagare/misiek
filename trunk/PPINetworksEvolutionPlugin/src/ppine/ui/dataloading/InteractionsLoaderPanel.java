@@ -72,6 +72,22 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
         setActualUIState();
     }
 
+    public void setStateChoosen(){
+        loadButton.setEnabled(true);
+        cleanButton.setEnabled(false);
+    }
+    
+    public void setStateLoaded(){
+        loadButton.setEnabled(false);
+        cleanButton.setEnabled(true);
+    }
+
+    public void setStateClean(){
+        loadButton.setEnabled(false);
+        cleanButton.setEnabled(false);
+    }
+
+
     public void setLoaderPanel(DataLoaderPanel loaderPanel) {
         this.loaderPanel = loaderPanel;
     }
@@ -93,7 +109,7 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
         oneLodingPanel = new javax.swing.JPanel();
         chooseOneFileButton = new javax.swing.JButton();
         oneFileLoadingPanel = new javax.swing.JPanel();
-        oneFilenameLoabel = new javax.swing.JLabel();
+        oneFilenameLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         loadingPanel = new javax.swing.JPanel();
         cleanButton = new javax.swing.JButton();
@@ -149,8 +165,8 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
             .addGap(0, 412, Short.MAX_VALUE)
         );
 
-        oneFilenameLoabel.setText("filename");
-        oneFilenameLoabel.setName("oneFilenameLoabel"); // NOI18N
+        oneFilenameLabel.setText("filename");
+        oneFilenameLabel.setName("oneFilenameLabel"); // NOI18N
 
         javax.swing.GroupLayout oneLodingPanelLayout = new javax.swing.GroupLayout(oneLodingPanel);
         oneLodingPanel.setLayout(oneLodingPanelLayout);
@@ -160,7 +176,7 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(chooseOneFileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(oneFilenameLoabel)
+                .addComponent(oneFilenameLabel)
                 .addGap(249, 249, 249))
             .addGroup(oneLodingPanelLayout.createSequentialGroup()
                 .addComponent(oneFileLoadingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -172,7 +188,7 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(oneLodingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(chooseOneFileButton)
-                    .addComponent(oneFilenameLoabel))
+                    .addComponent(oneFilenameLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(oneFileLoadingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -254,7 +270,7 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
     }
 
     private void refreshLoadingUI() {
-        oneFilenameLoabel.setText("filename");
+        oneFilenameLabel.setText("filename");
         refreshSpeciesList();
         refreshSpeciesListForOneFile();
     }
@@ -287,12 +303,18 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
         if (PluginDataHandle.getLoadedDataHandle().fromOneFileLoaded()) {
             setOneFileTabEnabled();
             setOneFileTabSelected();
+            cleanButton.setEnabled(true);
+            loadButton.setEnabled(true);
             onefilepath = PluginDataHandle.getLoadedDataHandle().getOneInteractionFilename();
-            oneFilenameLoabel.setText(onefilepath);
+            oneFilenameLabel.setText(onefilepath);
         } else if (PluginDataHandle.getLoadedDataHandle().fromManyFilesLoaded()) {
             setManyFilesTabEnabled();
             setManyFilesTabSelected();
+            cleanButton.setEnabled(true);
+            loadButton.setEnabled(true);
         } else {
+            loadButton.setEnabled(false);
+            cleanButton.setEnabled(false);
             setBothTabEnabled();
             setOneFileTabSelected();
         }
@@ -338,7 +360,7 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
 
         for (String species : dh.getNetworks().keySet()) {
             if (!species.contains("EXP")) {
-                SpeciesInteractionsLoaderPanel panel = new SpeciesInteractionsLoaderPanel(species);
+                SpeciesInteractionsLoaderPanel panel = new SpeciesInteractionsLoaderPanel(species, this);
                 panels.add(panel);
                 loadingPanel.add(panel);
             }
@@ -346,6 +368,7 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
     }
 
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
+        cleanButton.setEnabled(true);
         if (isManyFilesSelected()) {
             updateFromManyFiles();
             setManyFilesTabEnabled();
@@ -364,6 +387,8 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
         DefaultLoadingController.deleteAllInteractions();
         refreshLoadingUI();
         setBothTabEnabled();
+        loadButton.setEnabled(false);
+        cleanButton.setEnabled(false);
     }//GEN-LAST:event_cleanButtonActionPerformed
 
     private void chooseOneFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseOneFileButtonActionPerformed
@@ -373,7 +398,8 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = fc.getSelectedFile();
             onefilepath = file.getAbsolutePath();
-            oneFilenameLoabel.setText(onefilepath);
+            oneFilenameLabel.setText(onefilepath);
+            loadButton.setEnabled(true);
         }
     }//GEN-LAST:event_chooseOneFileButtonActionPerformed
 
@@ -388,7 +414,7 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
     private javax.swing.JButton loadButton;
     private javax.swing.JPanel loadingPanel;
     private javax.swing.JPanel oneFileLoadingPanel;
-    private javax.swing.JLabel oneFilenameLoabel;
+    private javax.swing.JLabel oneFilenameLabel;
     private javax.swing.JPanel oneLodingPanel;
     // End of variables declaration//GEN-END:variables
 
@@ -477,5 +503,9 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
             ldh.addInteractionData(speciesName, filename, tresholdOrNull);
             AbstractDataReader.getInstance().readSpeciesInteractions(network, filename, tresholdOrNull, errorListener);
         }
+    }
+
+    void enableLoadButton() {
+        loadButton.setEnabled(true);
     }
 }
