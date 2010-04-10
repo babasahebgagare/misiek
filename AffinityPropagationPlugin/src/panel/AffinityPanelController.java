@@ -521,6 +521,7 @@ public class AffinityPanelController implements Serializable {
 
     public void refreshPreferences() {
         String edgeNameAttr = getEdgeAttr();
+//        System.out.println("tuu:" + edgeNameAttr);
         if (edgeNameAttr == null) {
             return;
         }
@@ -531,6 +532,7 @@ public class AffinityPanelController implements Serializable {
         if (!validateEdgeNameAttr(edgeNameAttr)) {
             return;
         }
+  //      System.out.println("after validation");
         @SuppressWarnings("unchecked")
         List<CyEdge> edges = Cytoscape.getCurrentNetwork().edgesList();
         CyAttributes edgesAttributes = Cytoscape.getEdgeAttributes();
