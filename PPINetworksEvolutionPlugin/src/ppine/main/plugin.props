@@ -18,7 +18,7 @@ pluginDescription=The plugin allows the user to map selected network regions to 
 pluginVersion=2.1
 
 # Compatible Cytoscape version. If there are more than one version, seperate by ",".
-cytoscapeVersion=2.6.2,2.6.3
+cytoscapeVersion=2.6.2,2.6.3,2.7.0
 
 # Category, use one of the categories listed on the http://cytoscape.org/plugins2.php site
 pluginCategory=Analysis
