@@ -140,48 +140,48 @@ public class CytoAffinityClustering extends CytoAbstractClusterAlgorithm {
 
         Map<Integer, ClusterInteger> clusters = af.doClusterAssocInt();
 
-        if (clusters != null && clusters.size() > 0) {
+        //      if (clusters != null && clusters.size() > 0) {
 
-            for (ClusterInteger cluster : clusters.values()) {
-                clusterprior.add(cluster);
-            }
-            @SuppressWarnings("unchecked")
-            List<CyNode> nodes = Cytoscape.getCurrentNetwork().nodesList();
-            //    int strlen = String.valueOf(nodes.size()).length();
-
-
-            for (CyNode node : nodes) {
-                if (nodesAttributes.hasAttribute(node.getIdentifier(), centersNameAttr)) {
-                    nodesAttributes.deleteAttribute(node.getIdentifier(), centersNameAttr);
-                }
-                if (nodesAttributes.hasAttribute(node.getIdentifier(), nodeNameAttr)) {
-                    nodesAttributes.deleteAttribute(node.getIdentifier(), nodeNameAttr);
-                }
-            }
-
-            int i = 0;
-
-            while (clusterprior.size() > 0) {
-                ClusterInteger cluster = clusterprior.poll();
-                for (Integer element : cluster.getElements()) {
-                    String centerID = idMapping.get(cluster.getName());
-                    String nodeID = idMapping.get(Integer.valueOf(element));
-                    nodesAttributes.setAttribute(nodeID, centersNameAttr, centerID);
-                    nodesAttributes.setAttribute(nodeID, nodeNameAttr, Integer.valueOf(i));
-                }
-                i++;
-            }
-            taskMonitor.setStatus("Centers are highlighting...");
-            ((JTask) taskMonitor).setTitle("Clustering completed.");
-            taskMonitor.setPercentCompleted(100);
-            psc.addCentersAttribute(centersNameAttr);
-            try {
-                Thread.sleep(2);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(CytoAffinityClustering.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            psc.showCentersAndWait(centersNameAttr);
+        for (ClusterInteger cluster : clusters.values()) {
+            clusterprior.add(cluster);
         }
+        @SuppressWarnings("unchecked")
+        List<CyNode> nodes = Cytoscape.getCurrentNetwork().nodesList();
+        //    int strlen = String.valueOf(nodes.size()).length();
+
+
+        for (CyNode node : nodes) {
+            if (nodesAttributes.hasAttribute(node.getIdentifier(), centersNameAttr)) {
+                nodesAttributes.deleteAttribute(node.getIdentifier(), centersNameAttr);
+            }
+            if (nodesAttributes.hasAttribute(node.getIdentifier(), nodeNameAttr)) {
+                nodesAttributes.deleteAttribute(node.getIdentifier(), nodeNameAttr);
+            }
+        }
+
+        int i = 0;
+
+        while (clusterprior.size() > 0) {
+            ClusterInteger cluster = clusterprior.poll();
+            for (Integer element : cluster.getElements()) {
+                String centerID = idMapping.get(cluster.getName());
+                String nodeID = idMapping.get(Integer.valueOf(element));
+                nodesAttributes.setAttribute(nodeID, centersNameAttr, centerID);
+                nodesAttributes.setAttribute(nodeID, nodeNameAttr, Integer.valueOf(i));
+            }
+            i++;
+        }
+        //   }
+        taskMonitor.setStatus("Centers are highlighting...");
+        ((JTask) taskMonitor).setTitle("Clustering completed.");
+        taskMonitor.setPercentCompleted(100);
+        psc.addCentersAttribute(centersNameAttr);
+        try {
+            Thread.sleep(2);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(CytoAffinityClustering.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        psc.showCentersAndWait(centersNameAttr);
         //    ((JTask) taskMonitor).setDone();
         taskMonitor.setPercentCompleted(100);
         //showInfoAfterClustering();

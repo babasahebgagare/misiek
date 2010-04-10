@@ -69,7 +69,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
     protected boolean notConverged = true;
     protected Integer convits = null;
     protected ActionListener iteractionListenerOrNull = null;
-    protected Map<Integer, ClusterInteger> assigments;
+    protected Map<Integer, ClusterInteger> assignments;
     protected Map<Integer, ConvitsVector> convitsVectors = new HashMap<Integer, ConvitsVector>();
     private Collection<Integer> refined = null;
     private int currentID = 0;
@@ -128,7 +128,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
         //  boolean debug = false;
         Collection<Integer> refinedCenters = new TreeSet<Integer>();
 
-        for (ClusterInteger cluster : assigments.values()) {
+        for (ClusterInteger cluster : assignments.values()) {
 
             int maxid = cluster.getName().intValue();
             int maxlevel = 0;
@@ -170,7 +170,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
 
     public abstract void setSimilarityInt(Integer other, Integer curr, Double sim);
 
-    private Map<Integer, ClusterInteger> computeFloydAssigments(Collection<Integer> examplars, Collection<Integer> centers) {
+    private Map<Integer, ClusterInteger> computeFloydAssignments(Collection<Integer> examplars, Collection<Integer> centers) {
         return null;
     }
 
@@ -288,19 +288,19 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
 
         computeCenters();
         if (getClustersNumber() != 0) {
-            computeAssigments();
+            computeAssignments();
             if (refine) {
                 //     System.out.println("REFINE...");
                 refineCenters();
-                computeAssigments();
+                computeAssignments();
             }
-            return assigments;
+            return assignments;
         } else {
-            return null;
+            return new HashMap<Integer, ClusterInteger>();
         }
     }
 
-    protected void computeAssigments() {
+    protected void computeAssignments() {
         Collection<Integer> examplars = getAllExamplars();
         Collection<Integer> centers;
         if (refined == null) {
@@ -309,19 +309,19 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
             centers = refined;
         }
         if (centers.size() == 0) {
-            assigments = null;
+            assignments = null;
             return;
         }
 
         if (connectingMode == AffinityConnectingMethod.PRIME_ALG) {
 
-            assigments = computePrimeAssigments(examplars, centers);
+            assignments = computePrimeAssignments(examplars, centers);
         } else if (connectingMode == AffinityConnectingMethod.ORIGINAL) {
-            assigments = computeOriginalAssigments(examplars, centers);
+            assignments = computeOriginalAssignments(examplars, centers);
         } else if (connectingMode == AffinityConnectingMethod.FLOYD_ALG) {
-            assigments = computeFloydAssigments(examplars, centers);
+            assignments = computeFloydAssignments(examplars, centers);
         } else {
-            assigments = null;
+            assignments = null;
         }
     }
 
@@ -395,7 +395,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
 
     protected abstract Collection<Integer> getAllExamplars();
 
-    private Map<Integer, ClusterInteger> computeOriginalAssigments(Collection<Integer> examplars, Collection<Integer> centers) {
+    private Map<Integer, ClusterInteger> computeOriginalAssignments(Collection<Integer> examplars, Collection<Integer> centers) {
         Map<Integer, ClusterInteger> ret = new HashMap<Integer, ClusterInteger>();
         Map<Integer, Integer> clustered = new TreeMap<Integer, Integer>();
         Collection<Integer> unclustered = new TreeSet<Integer>(examplars);
@@ -453,7 +453,7 @@ public abstract class AffinityPropagationAlgorithm extends AbstractClusterAlgori
         return ret;
     }
 
-    private Map<Integer, ClusterInteger> computePrimeAssigments(Collection<Integer> examplars, Collection<Integer> centers) {
+    private Map<Integer, ClusterInteger> computePrimeAssignments(Collection<Integer> examplars, Collection<Integer> centers) {
         PrimeGraph graph = new PrimeGraph();
 
         for (Integer examplar : examplars) {
