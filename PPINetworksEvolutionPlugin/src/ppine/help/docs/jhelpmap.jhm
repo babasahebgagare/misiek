@@ -5,10 +5,10 @@
 <map version="1.0">
     <mapID target="Introduction" url="hIndex.html"/>
     <mapID target="Installation" url="hinstallation.html"/>
-    <mapID target="Species file format" url="hSpeciesFileFormat.html"/>
-    <mapID target="Interactions file format" url="hInteractionsFileFormat.html"/>
-    <mapID target="Proteins trees file format" url="hProteinsTreesFileFormat.html"/>
-    <mapID target="Experiments file format" url="hExperiments.html"/>
+    <mapID target="Species tree" url="hSpeciesFileFormat.html"/>
+    <mapID target="Interactions" url="hInteractionsFileFormat.html"/>
+    <mapID target="Protein family trees" url="hProteinsTreesFileFormat.html"/>
+    <mapID target="Experiments" url="hExperiments.html"/>
     <mapID target="Example use case" url="hExampleUseCase.html"/>
     <mapID target="License" url="hlicense.html"/>
 </map>
