@@ -28,72 +28,51 @@
  *           Janusz Dutkowski (idea) (j.dutkowski@mimuw.edu.pl)
  *           Jerzy Tiuryn (supervisor) (tiuryn@mimuw.edu.pl)
  */
+package algorithm.abs;
 
+import java.util.Collection;
+import java.util.HashSet;
 
-package prime;
+/**
+ *
+ * @param <T>
+ * @author misiek
+ */
+public class ClusterInteger implements Comparable<ClusterInteger> {
 
-public class PrimeEdge implements Comparable<PrimeEdge> {
+    private Integer name;
+    private Collection<Integer> elements = new HashSet<Integer>();
 
-    private Integer from;
-    private Integer to;
-    private Double weight;
-
-    public PrimeEdge(Integer from, Integer to, Double weight) {
-        this.from = from;
-        this.to = to;
-        this.weight = weight;
+    public ClusterInteger(final Integer name) {
+        this.name = name;
     }
 
-    public Integer getFrom() {
-        return from;
+    public Integer getName() {
+        return name;
     }
 
-    public void setFrom(Integer from) {
-        this.from = from;
+    public int size() {
+        return elements.size();
     }
 
-    public Integer getTo() {
-        return to;
+    public void add(final Integer element) {
+        elements.add(element);
     }
 
-    public void setTo(Integer to) {
-        this.to = to;
+    public Collection<Integer> getElements() {
+        return elements;
     }
 
-    public Double getWeight() {
-        return weight;
-    }
-
-    public void setWeight(Double weight) {
-        this.weight = weight;
-    }
-
-    public int compareTo(PrimeEdge e) {
-        if (e == null) {
+    public int compareTo(final ClusterInteger cluster) {
+        if (cluster == null) {
             return -1;
         }
-        if (this.getWeight() < e.getWeight()) {
+        if (this.size() > cluster.size()) {
             return -1;
-        } else if (this.getWeight() > e.getWeight()) {
+        } else if (this.size() < cluster.size()) {
             return 1;
         } else {
             return 0;
         }
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public boolean equals(final Object obj) {
-        if (!obj.getClass().equals(this.getClass())) {
-            return false;
-        } else {
-            PrimeEdge e = (PrimeEdge) obj;
-            return (this.compareTo(e) == 0);
-        }
-    }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
     }
 }

@@ -1,5 +1,5 @@
 /* ===========================================================
- * APGraphClusteringPlugin : Java implementation of Affinity Propagation
+ * APGraphClusteringPlugin : Java implementation of affinity propagation
  * algorithm as Cytoscape plugin.
  * ===========================================================
  *
@@ -58,11 +58,6 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
         S = new DoubleMatrix2D(N, N, -inf);
     }
 
-    @Override
-    public void halt() {
-        // TODO
-    }
-
     public int getN() {
         return N;
     }
@@ -102,9 +97,9 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
         //int i = Integer.valueOf(x);
         //int j = Integer.valueOf(y);
         //   if (graphMode == AffinityGraphMode.DIRECTED) {
-        if(x > N || y > N) {
-            System.out.println("ROZMIAR: "+N+ "query: "+x +" "+y);
-        }
+        //if(x > N || y > N) {
+        //    System.out.println("ROZMIAR: "+N+ "query: "+x +" "+y);
+        //}
         S.set(x, y, sim.doubleValue());
         //   } else {
         //       S.set(x, y, sim.doubleValue());
@@ -274,10 +269,10 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
 
     @Override
     protected void initConvergence() {
-   //     System.out.println("S: " + S.toString());
+        //     System.out.println("S: " + S.toString());
         if (convits != null) {
             for (int i = 0; i < N; i++) {
-                ConvitsVector vec = new ConvitsVector(convits.intValue());
+                ConvitsVector vec = new ConvitsVector(convits.intValue(), Integer.valueOf(i));
                 vec.init();
                 convitsVectors.put(Integer.valueOf(i), vec);
             }
@@ -287,16 +282,14 @@ public class MatrixPropagationAlgorithm extends AffinityPropagationAlgorithm {
     @Override
     protected void generateNoise() {
         for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                double s = S.get(i, j);
-                s = generateNoiseHelp(s);
-                S.set(i, j, s);
-            }
+            double s = S.get(i, i);
+            s = generateNoiseHelp(s);
+            S.set(i, i, s);
+
         }
     }
 
     @Override
     protected void showInfo() {
-       
     }
 }

@@ -1,7 +1,39 @@
+/* ===========================================================
+ * APGraphClusteringPlugin : Java implementation of affinity propagation
+ * algorithm as Cytoscape plugin.
+ * ===========================================================
+ *
+ *
+ * Project Info:  http://bioputer.mimuw.edu.pl/veppin/
+ * Sources: http://code.google.com/p/misiek/
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>
+ *
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
+ * in the United States and other countries.]
+ *
+ * APGraphClusteringPlugin  Copyright (C) 2008-2009
+ * Authors:  Michal Wozniak (code) (m.wozniak@mimuw.edu.pl)
+ *           Janusz Dutkowski (idea) (j.dutkowski@mimuw.edu.pl)
+ *           Jerzy Tiuryn (supervisor) (tiuryn@mimuw.edu.pl)
+ */
 package algorithm.smart;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeSet;
 import java.util.Vector;
 
 /**
@@ -10,7 +42,8 @@ import java.util.Vector;
  */
 public class Examplar implements Comparable<Examplar> {
 
-    private Map<Integer, SiblingData> siblingMap = new HashMap<Integer, SiblingData>();
+    private Map<Integer, EdgeOutData> edgesOutDataMap = new HashMap<Integer, EdgeOutData>();
+    private Collection<Integer> edgesIn = new TreeSet<Integer>();
     private Integer name;
     private Vector<Boolean> imcenter = null;
     private Integer convits = null;
@@ -24,23 +57,24 @@ public class Examplar implements Comparable<Examplar> {
     }
 
     public void createSibling(final double s, final Integer siblingName) {
-        SiblingData sibling = new SiblingData(s, siblingName);
-        siblingMap.put(siblingName, sibling);
+        EdgeOutData sibling = new EdgeOutData(s, siblingName);
+        edgesOutDataMap.put(siblingName, sibling);
+
     }
 
     @Override
     public String toString() {
         StringBuffer ret = new StringBuffer(name);
         ret.append(": ");
-        for (Integer key : siblingMap.keySet()) {
-            ret.append(siblingMap.get(key).toString());
+        for (Integer key : edgesOutDataMap.keySet()) {
+            ret.append(edgesOutDataMap.get(key).toString());
             ret.append("\n");
         }
         return ret.toString();
     }
 
-    public Map<Integer, SiblingData> getSiblingMap() {
-        return siblingMap;
+    public Map<Integer, EdgeOutData> getSiblingMap() {
+        return edgesOutDataMap;
     }
 
     public Integer getName() {
@@ -80,5 +114,13 @@ public class Examplar implements Comparable<Examplar> {
 
         return this.getName().compareTo(ex.getName());
 
+    }
+
+    void addEdgeIn(Integer from) {
+        edgesIn.add(from);
+    }
+
+    public Collection<Integer> getEdgesIn() {
+        return edgesIn;
     }
 }

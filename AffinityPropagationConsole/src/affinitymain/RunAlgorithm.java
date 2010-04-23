@@ -3,6 +3,7 @@ package affinitymain;
 import algorithm.abs.AffinityPropagationAlgorithm;
 import algorithm.abs.AffinityPropagationAlgorithm.AffinityConnectingMethod;
 import algorithm.abs.Cluster;
+import algorithm.abs.ClusterInteger;
 import algorithm.matrix.MatrixPropagationAlgorithm;
 import algorithm.smart.SmartPropagationAlgorithm;
 import java.io.BufferedOutputStream;
@@ -146,7 +147,7 @@ public class RunAlgorithm {
             bw = new BufferedWriter(new OutputStreamWriter(bos));
             System.out.println(kind);
             if (kind.equals("centers")) {
-                Map<Integer, Cluster<Integer>> clusters = af.doClusterAssocInt();
+                Map<Integer, ClusterInteger> clusters = af.doClusterAssocInt();
                 //Map<Integer, Cluster<Integer>> clusters = af.doClusterAssocInt();
                 if (clusters != null) {
                     for (Integer clustName : clusters.keySet()) {

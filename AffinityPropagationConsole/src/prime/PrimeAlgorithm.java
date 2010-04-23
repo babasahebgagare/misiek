@@ -1,16 +1,42 @@
+/* ===========================================================
+ * APGraphClusteringPlugin : Java implementation of affinity propagation
+ * algorithm as Cytoscape plugin.
+ * ===========================================================
+ *
+ *
+ * Project Info:  http://bioputer.mimuw.edu.pl/veppin/
+ * Sources: http://code.google.com/p/misiek/
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>
+ *
+ * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
+ * in the United States and other countries.]
+ *
+ * APGraphClusteringPlugin  Copyright (C) 2008-2009
+ * Authors:  Michal Wozniak (code) (m.wozniak@mimuw.edu.pl)
+ *           Janusz Dutkowski (idea) (j.dutkowski@mimuw.edu.pl)
+ *           Jerzy Tiuryn (supervisor) (tiuryn@mimuw.edu.pl)
+ */
 package prime;
 
-import algorithm.abs.Cluster;
+import algorithm.abs.ClusterInteger;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.PriorityQueue;
 import java.util.TreeMap;
 
-/**
- *
- * @author misiek (mw219725@gmail.com)
- */
 public class PrimeAlgorithm {
 
     private PrimeGraph graph;
@@ -24,8 +50,8 @@ public class PrimeAlgorithm {
         init(sources);
     }
 
-    public Map<Integer, Cluster<Integer>> run() {
-        Map<Integer, Cluster<Integer>> ret = new TreeMap<Integer, Cluster<Integer>>();
+    public Map<Integer, ClusterInteger> run() {
+        Map<Integer, ClusterInteger> ret = new TreeMap<Integer, ClusterInteger>();
 
         while (edges.size() > 0) {
             PrimeEdge minEdge = edges.poll();
@@ -50,16 +76,16 @@ public class PrimeAlgorithm {
         }
 
         for (Integer source : sources) {
-            Cluster<Integer> clust = new Cluster<Integer>(source);
+            ClusterInteger clust = new ClusterInteger(source);
             clust.add(source);
             ret.put(source, clust);
-        //  current.addNode(node);
+            //  current.addNode(node);
         }
 
         for (PrimeNode node : graph.getNodes()) {
             if (node.getSourceName() != null) {
                 if (!sources.contains(node.getName())) {
-                    Cluster<Integer> cluster = ret.get(node.getSourceName());
+                    ClusterInteger cluster = ret.get(node.getSourceName());
                     cluster.add(node.getName());
                 }
             }
@@ -69,7 +95,6 @@ public class PrimeAlgorithm {
     }
 
     private void init(Collection<Integer> sources) {
-        System.out.println("CENTERS: " + sources.size());
         for (Integer source : sources) {
             PrimeNode node = graph.getNode(source);
             node.setDistance(Double.valueOf(0));
