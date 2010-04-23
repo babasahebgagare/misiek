@@ -23,7 +23,7 @@
  * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
- * NetworkEvolutionPlugin  Copyright (C) 2008-2009
+ * NetworkEvolutionPlugin  Copyright (C) 2008-2010
  * Authors:  Michal Wozniak (code) (m.wozniak@mimuw.edu.pl)
  *           Janusz Dutkowski (idea, data) (j.dutkowski@mimuw.edu.pl)
  *           Jerzy Tiuryn (supervisor) (tiuryn@mimuw.edu.pl)
