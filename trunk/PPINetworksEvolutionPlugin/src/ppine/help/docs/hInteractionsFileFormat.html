@@ -11,6 +11,14 @@ one particular interaction:<br>
         proteinLabel1 probability proteinLabel2
         <br>
         Where the probability is a real number ranging from 0 to 1.
+        In general the probability value is used to filter out less confident
+interactions to improve the clarity of the network and efficiency of
+the analysis. A threshold for the probability value is determined by
+the user before loading the data. A lower threshold can usually be
+selected for the root network because it is small and has less edges
+(one node summarizes an entire family of proteins) so it can be
+displayed without compromising performance. For larger networks a
+higher threshold should be used.
         <h1>Example: </h1>
 fu i4 0.4724 fu_i4 <br>
 fu i4 0.1622 fu_i11 <br>

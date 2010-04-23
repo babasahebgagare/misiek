@@ -18,11 +18,9 @@
             <li>Preference - the preference for a node to be an exemplar (cluster center); currently equal for every node.</li>
             <li>Lambda (damping factor) - when updating the messages, each message is set to &lambda; times its value from the previous iteration
                 plus 1 - &lambda; times its prescribed updated value, where the damping factor &lambda; is between 0 and 1.</li>
-            <li>Noise option - for some networks adding noise is crucial to arrive at meaningful clusters. One example is in situations where
-two or more nodes have equal affinity to become exemplars. In such cases adding noise breaks the symmetry and allows
-one of the nodes to be selected. The original implementation adds noise to the similarity values associated with edges. We
-found that more stable results are achieved when noise is added to node preferences. Currently noise is equal to <i>preference*
-epsilon * (random real number from a uniform distribution on [0; 1]</i>) where <i>epsilon = 0.0000001</i>.</li>
+            <li>Noise option - in most cases adding random noise to the preference values of the nodes improves efficiency and clustering results
+                (please see section below). Currently noise is equal to <i>preference * epsilon * (random real number from a uniform distribution
+                on [0; 1]</i>) where <i>epsilon = 0.0000001</i>.</li>
         </ul>
 
         <h1>Other implementation-specific parameters</h1>
@@ -31,5 +29,17 @@ epsilon * (random real number from a uniform distribution on [0; 1]</i>) where <
             <li>Center ID - name of the node attribute which will store center assignments</li>
             <li>Take log - if selected, edges weights will be set to log(edge_weight)</li>
         </ul>
+        <h1>Noise option</h1>
+        For some networks adding noise is crucial to arrive at meaningful
+clusters. One example is in situations where two or more nodes have
+equal affinity to become exemplars. In such cases adding noise breaks
+the symmetry and allows one of the nodes to be selected. The original
+implementation adds noise to the similarity values associated with
+edges. We found that more stable results are achieved when noise is
+added to node preferences (please see the "Clique example" on our web
+page: 
+<a href="http://bioputer.mimuw.edu.pl/modevo/manuals/example-on-two-cliques.pdf"> 
+    http://bioputer.mimuw.edu.pl/modevo/manuals/example-on-two-cliques.pdf
+</a>
     </body>
 </html>
