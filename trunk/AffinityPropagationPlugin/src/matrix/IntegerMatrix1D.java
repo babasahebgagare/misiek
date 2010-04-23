@@ -4,7 +4,7 @@
  * ===========================================================
  *
  *
- * Project Info:  http://bioputer.mimuw.edu.pl/veppin/
+ * Project Info:  http://bioputer.mimuw.edu.pl/modevo/
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

@@ -4,7 +4,7 @@
  * ===========================================================
  *
  *
- * Project Info:  http://bioputer.mimuw.edu.pl/veppin/
+ * Project Info:  http://bioputer.mimuw.edu.pl/modevo/
  * Sources: http://code.google.com/p/misiek/
  *
  * Stringhis program is free software: you can redistribute it and/or modify
