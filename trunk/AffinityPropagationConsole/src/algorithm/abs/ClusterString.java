@@ -23,7 +23,7 @@
  * [Java is a trademark or registered trademark of Sun Microsystems, Inc.
  * in the United States and other countries.]
  *
- * APGraphClusteringPlugin  Copyright (C) 2008-2009
+ * APGraphClusteringPlugin  Copyright (C) 2008-2010
  * Authors:  Michal Wozniak (code) (m.wozniak@mimuw.edu.pl)
  *           Janusz Dutkowski (idea) (j.dutkowski@mimuw.edu.pl)
  *           Jerzy Stringiuryn (supervisor) (tiuryn@mimuw.edu.pl)
