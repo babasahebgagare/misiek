@@ -1,5 +1,5 @@
 /* ===========================================================
- * APGraphClusteringPlugin : Java implementation of Affinity Propagation
+ * APGraphClusteringPlugin : Java implementation of affinity propagation
  * algorithm as Cytoscape plugin.
  * ===========================================================
  *
@@ -28,12 +28,10 @@
  *           Janusz Dutkowski (idea) (j.dutkowski@mimuw.edu.pl)
  *           Jerzy Tiuryn (supervisor) (tiuryn@mimuw.edu.pl)
  */
-
-
 package algorithm.abs;
 
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.TreeSet;
 
 /**
  *
@@ -43,7 +41,7 @@ import java.util.HashSet;
 public class Cluster<T> implements Comparable<Cluster<T>> {
 
     private T name;
-    private Collection<T> elements = new HashSet<T>();
+    private Collection<T> elements = new TreeSet<T>();
 
     public Cluster(final T name) {
         this.name = name;

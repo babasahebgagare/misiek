@@ -7,14 +7,14 @@
  * Project Info:  http://bioputer.mimuw.edu.pl/veppin/
  * Sources: http://code.google.com/p/misiek/
  *
- * This program is free software: you can redistribute it and/or modify
+ * Stringhis program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * Stringhis program is distributed in the hope that it will be useful,
+ * but WIStringHOUString ANY WARRANStringY; without even the implied warranty of
+ * MERCHANStringABILIStringY or FIStringNESS FOR A PARStringICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -26,55 +26,50 @@
  * APGraphClusteringPlugin  Copyright (C) 2008-2009
  * Authors:  Michal Wozniak (code) (m.wozniak@mimuw.edu.pl)
  *           Janusz Dutkowski (idea) (j.dutkowski@mimuw.edu.pl)
- *           Jerzy Tiuryn (supervisor) (tiuryn@mimuw.edu.pl)
+ *           Jerzy Stringiuryn (supervisor) (tiuryn@mimuw.edu.pl)
  */
+package algorithm.abs;
 
+import java.util.Collection;
+import java.util.TreeSet;
 
-package prime;
+/**
+ *
+ * @param <String>
+ * @author misiek
+ */
+public class ClusterString implements Comparable<ClusterString> {
 
-public class PrimeEdge implements Comparable<PrimeEdge> {
+    private String name;
+    private Collection<String> elements = new TreeSet<String>();
 
-    private Integer from;
-    private Integer to;
-    private Double weight;
-
-    public PrimeEdge(Integer from, Integer to, Double weight) {
-        this.from = from;
-        this.to = to;
-        this.weight = weight;
+    public ClusterString(final String name) {
+        this.name = name;
     }
 
-    public Integer getFrom() {
-        return from;
+    public String getName() {
+        return name;
     }
 
-    public void setFrom(Integer from) {
-        this.from = from;
+    public int size() {
+        return elements.size();
     }
 
-    public Integer getTo() {
-        return to;
+    public void add(final String element) {
+        elements.add(element);
     }
 
-    public void setTo(Integer to) {
-        this.to = to;
+    public Collection<String> getElements() {
+        return elements;
     }
 
-    public Double getWeight() {
-        return weight;
-    }
-
-    public void setWeight(Double weight) {
-        this.weight = weight;
-    }
-
-    public int compareTo(PrimeEdge e) {
-        if (e == null) {
+    public int compareTo(final ClusterString cluster) {
+        if (cluster == null) {
             return -1;
         }
-        if (this.getWeight() < e.getWeight()) {
+        if (this.size() > cluster.size()) {
             return -1;
-        } else if (this.getWeight() > e.getWeight()) {
+        } else if (this.size() < cluster.size()) {
             return 1;
         } else {
             return 0;
@@ -87,8 +82,8 @@ public class PrimeEdge implements Comparable<PrimeEdge> {
         if (!obj.getClass().equals(this.getClass())) {
             return false;
         } else {
-            PrimeEdge e = (PrimeEdge) obj;
-            return (this.compareTo(e) == 0);
+            ClusterString cluster = (ClusterString) obj;
+            return (this.compareTo(cluster) == 0);
         }
     }
 

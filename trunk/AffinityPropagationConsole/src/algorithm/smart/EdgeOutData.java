@@ -28,72 +28,83 @@
  *           Janusz Dutkowski (idea) (j.dutkowski@mimuw.edu.pl)
  *           Jerzy Tiuryn (supervisor) (tiuryn@mimuw.edu.pl)
  */
+package algorithm.smart;
 
+public class EdgeOutData implements Comparable<EdgeOutData> {
 
-package prime;
+    private double r;
+    private double rold;
+    private double a;
+    private double aold;
+    private double s;
+    private Integer name;
 
-public class PrimeEdge implements Comparable<PrimeEdge> {
-
-    private Integer from;
-    private Integer to;
-    private Double weight;
-
-    public PrimeEdge(Integer from, Integer to, Double weight) {
-        this.from = from;
-        this.to = to;
-        this.weight = weight;
+    public EdgeOutData(final double s, final Integer examplarName) {
+        this.a = 0;
+        this.s = s;
+        this.r = 0;
+        this.rold = 0;
+        this.aold = 0;
+        this.name = examplarName;
     }
 
-    public Integer getFrom() {
-        return from;
+    public double getA() {
+        return a;
     }
 
-    public void setFrom(Integer from) {
-        this.from = from;
+    public void setA(final double a) {
+        this.a = a;
     }
 
-    public Integer getTo() {
-        return to;
+    public Integer getName() {
+        return name;
     }
 
-    public void setTo(Integer to) {
-        this.to = to;
+    public void setName(final Integer name) {
+        this.name = name;
     }
 
-    public Double getWeight() {
-        return weight;
+    public double getR() {
+        return r;
     }
 
-    public void setWeight(Double weight) {
-        this.weight = weight;
+    public void setR(final double r) {
+        this.r = r;
     }
 
-    public int compareTo(PrimeEdge e) {
-        if (e == null) {
-            return -1;
-        }
-        if (this.getWeight() < e.getWeight()) {
-            return -1;
-        } else if (this.getWeight() > e.getWeight()) {
-            return 1;
-        } else {
-            return 0;
-        }
+    public double getS() {
+        return s;
+    }
+
+    public void setS(final double s) {
+        this.s = s;
+    }
+
+    public double getAold() {
+        return aold;
+    }
+
+    public void setAold(final double aold) {
+        this.aold = aold;
+    }
+
+    public double getRold() {
+        return rold;
+    }
+
+    public void setRold(final double rold) {
+        this.rold = rold;
+    }
+
+    public int compareTo(EdgeOutData ex) {
+
+        return this.name.compareTo(ex.getName());
+
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    public boolean equals(final Object obj) {
-        if (!obj.getClass().equals(this.getClass())) {
-            return false;
-        } else {
-            PrimeEdge e = (PrimeEdge) obj;
-            return (this.compareTo(e) == 0);
-        }
-    }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
+    public String toString() {
+        String ret = "[" + name + ": " + "r: " + r + " a: " + a + " s: " + s + "]";
+        return ret;
     }
 }

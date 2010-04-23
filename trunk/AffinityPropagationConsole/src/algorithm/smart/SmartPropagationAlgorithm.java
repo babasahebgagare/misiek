@@ -1,5 +1,5 @@
 /* ===========================================================
- * APGraphClusteringPlugin : Java implementation of Affinity Propagation
+ * APGraphClusteringPlugin : Java implementation of affinity propagation
  * algorithm as Cytoscape plugin.
  * ===========================================================
  *
@@ -33,7 +33,7 @@ package algorithm.smart;
 import algorithm.abs.AffinityPropagationAlgorithm;
 import algorithm.abs.ConvitsVector;
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.Map;
 import java.util.TreeSet;
 
 /** You have to set parameters and do init() befor clustering. */
@@ -52,31 +52,46 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
     }
 
     protected void avgAvailabilities() {
-        for (Examplar examplar : examplars.getExamplars().values()) {
-            Collection<SiblingData> siblings = examplar.getSiblingMap().values();
-            for (SiblingData sibling : siblings) {
-                sibling.setA(sibling.getA() * (1 - getLambda()) + getLambda() * sibling.getAold());
+        for (Examplar examplar : examplars.getExamplars()) {
+            Collection<EdgeOutData> siblings = examplar.getSiblingMap().values();
+            for (EdgeOutData sibling : siblings) {
+                sibling.setA(sibling.getA() * (1 - lambda) + lambda * sibling.getAold());
             }
         }
     }
 
     protected void avgResponsibilies() {
-        for (Examplar examplar : examplars.getExamplars().values()) {
-            Collection<SiblingData> siblings = examplar.getSiblingMap().values();
-            for (SiblingData sibling : siblings) {
-                sibling.setR(sibling.getR() * (1 - getLambda()) + getLambda() * sibling.getRold());
+        for (Examplar examplar : examplars.getExamplars()) {
+            Collection<EdgeOutData> siblings = examplar.getSiblingMap().values();
+            for (EdgeOutData sibling : siblings) {
+                sibling.setR(sibling.getR() * (1 - lambda) + lambda * sibling.getRold());
             }
         }
     }
 
     protected void computeAvailabilities() {
-        for (Examplar examplar : examplars.getExamplars().values()) {
-            Collection<SiblingData> siblings = examplar.getSiblingMap().values();
-            for (SiblingData sibling : siblings) {
-                if (sibling.getExamplarName().equals(examplar.getName())) {
-                    sibling.setA(computeEqPom(sibling.getExamplarName()));
+        for (int k = 0; k < examplars.size(); k++) {
+            Examplar exK = examplars.get(k);
+            double sum = 0;
+            for (int ip : exK.getEdgesIn()) {
+                if (ip != k) {
+                    Examplar exIp = examplars.get(ip);
+                    double ripk = exIp.getSiblingMap().get(k).getR();
+                    sum = sum + Math.max(0, ripk);
+                }
+            }
+
+            for (int i : exK.getEdgesIn()) {
+                Examplar exI = examplars.get(i);
+                EdgeOutData edgeIK = exI.getSiblingMap().get(k);
+                if (i == k) {
+                    edgeIK.setA(sum);
                 } else {
-                    sibling.setA(computeNotEqPom(examplar.getName(), sibling.getExamplarName()));
+                    double rik = exI.getSiblingMap().get(k).getR();
+                    double sumI = sum - Math.max(0, rik);
+                    double rkk = exK.getSiblingMap().get(k).getR();
+
+                    edgeIK.setA(Math.min(0, rkk + sumI));
                 }
 
             }
@@ -84,92 +99,53 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
     }
 
     protected void computeCenters() {
-        Collection<Integer> ret = new HashSet<Integer>();
-        for (Examplar examplar : examplars.getExamplars().values()) {
-            SiblingData sibling = examplar.getSiblingMap().get(examplar.getName());
+        Collection<Integer> ret = new TreeSet<Integer>();
+        for (Examplar examplar : examplars.getExamplars()) {
+            EdgeOutData sibling = examplar.getSiblingMap().get(examplar.getName());
             double e = sibling.getA() + sibling.getR();
-            //    System.out.println(examplar.getName() + " "+e);
             if (e > 0) {
                 ret.add(examplar.getName());
-                //         examplar.setImCenter(true, iteration);
-            }// else {
-            //   examplar.setImCenter(false, iteration);
-            //}
-
+            }
         }
 
         centers = ret;
     }
 
-    private double computeEqPom(final Integer name) {
-        double sum = 0;
-        for (Examplar examplar : examplars.getExamplars().values()) {
-            if (!examplar.getName().equals(name)) {
-                SiblingData sibling = examplar.getSiblingMap().get(name);
-                if (sibling != null) {
-                    double r = sibling.getR();
-                    sum +=
-                            Math.max(0, r);
-                }
-
-            }
-        }
-
-        return sum;
-    }
-
-    private double computeMaxPom(final Collection<SiblingData> siblings, final Integer examplarName) {
-        double max = -INF;
-        for (SiblingData sibling : siblings) {
-            if (!sibling.getExamplarName().equals(examplarName)) {
-                double pom = sibling.getA() + sibling.getS();
-                if (pom > max) {
-                    max = pom;
-                }
-
-            }
-        }
-        return max;
-    }
-
-    private double computeNotEqPom(final Integer examplarName,
-            final Integer siblingName) {
-        SiblingData sib = examplars.getExamplars().get(siblingName).getSiblingMap().get(siblingName);
-        double rkk = sib.getR();
-
-        double sum = 0;
-
-        for (Examplar examplar : examplars.getExamplars().values()) {
-            if (!examplar.getName().equals(examplarName) && !examplar.getName().equals(siblingName)) {
-                SiblingData sibling = examplar.getSiblingMap().get(siblingName);
-                if (sibling != null) {
-                    double rik = sibling.getR();
-                    sum +=
-                            Math.max(0, rik);
-                }
-
-            }
-        }
-        double ret = Math.min(0, rkk + sum);
-        return ret;
-    }
-
     protected void computeResponsibilities() {
-        for (Examplar examplar : examplars.getExamplars().values()) {
-            Collection<SiblingData> siblings = examplar.getSiblingMap().values();
-            for (SiblingData sibling : siblings) {
-                double maxpom = computeMaxPom(siblings, sibling.getExamplarName());
-                sibling.setR(sibling.getS() - maxpom);
+        for (int i = 0; i < examplars.size(); i++) {
+            Examplar exI = examplars.get(i);
+
+            int bestK = i;
+            double max1 = -INF;
+            double max2 = -INF;
+            for (EdgeOutData sibIKp : exI.getSiblingMap().values()) {
+                double pom = sibIKp.getA() + sibIKp.getS();
+                if (pom > max1) {
+                    max2 = max1;
+                    max1 = pom;
+                    bestK = sibIKp.getName();
+                } else if (pom > max2) {
+                    max2 = pom;
+                }
             }
 
+            for (EdgeOutData sibIK : exI.getSiblingMap().values()) {
+                double sik = sibIK.getS();
+                double maxpom;
+                if (sibIK.getName() == bestK) {
+                    maxpom = max2;
+                } else {
+                    maxpom = max1;
+                }
+                sibIK.setR(sik - maxpom);
+            }
         }
-
     }
 
     protected void copyAvailabilities() {
-        for (Examplar examplar : examplars.getExamplars().values()) {
-            Collection<SiblingData> siblings = examplar.getSiblingMap().values();
-            for (SiblingData sibling : siblings) {
+        for (Examplar examplar : examplars.getExamplars()) {
+            Collection<EdgeOutData> siblings = examplar.getSiblingMap().values();
+            for (EdgeOutData sibling : siblings) {
                 sibling.setAold(sibling.getA());
             }
 
@@ -177,9 +153,9 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
     }
 
     protected void copyResponsibilies() {
-        for (Examplar examplar : examplars.getExamplars().values()) {
-            Collection<SiblingData> siblings = examplar.getSiblingMap().values();
-            for (SiblingData sibling : siblings) {
+        for (Examplar examplar : examplars.getExamplars()) {
+            Collection<EdgeOutData> siblings = examplar.getSiblingMap().values();
+            for (EdgeOutData sibling : siblings) {
                 sibling.setRold(sibling.getR());
             }
 
@@ -220,15 +196,13 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
 
     @Override
     public void init() {
-        examplars = new ExamplarsCollection(convits);
-    }
-
-    @Override
-    public void halt() {
+        //examplars = new ExamplarsCollection(convits);
     }
 
     @Override
     public void setN(final int N) {
+        //  System.out.println("tworze");
+        examplars = new ExamplarsCollection(N, convits);
     }
 
     public void setSimilarities(double[][] sim) {
@@ -257,10 +231,8 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
 
     @Override
     public void setConstPreferences(Double preferences) {
-        
-        Collection<Integer> examplarsNames = examplars.getExamplars().keySet();
-        for (Integer exName : examplarsNames) {
-            setSimilarityInt(exName, exName, preferences);
+        for (int i = 0; i < examplars.size(); i++) {
+            setSimilarityInt(i, i, preferences);
         }
     }
 
@@ -271,13 +243,13 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
 
     @Override
     protected Collection<Integer> getAllExamplars() {
-        return new TreeSet<Integer>(examplars.getExamplars().keySet());
+        return new TreeSet<Integer>(examplars.getKeySet());
     }
 
     protected Double tryGetSimilarityInt(Integer i, Integer j) {
 
-        Examplar ix = examplars.getExamplars().get(i);
-        SiblingData sibling = ix.getSiblingMap().get(j);
+        Examplar ix = examplars.getExamplars()[i];
+        EdgeOutData sibling = ix.getSiblingMap().get(j);
         if (sibling == null) {
             return null;
         } else {
@@ -291,8 +263,8 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
         Integer i = idMapper.get(from);
         Integer j = idMapper.get(to);
 
-        Examplar ix = examplars.getExamplars().get(i);
-        SiblingData sibling = ix.getSiblingMap().get(j);
+        Examplar ix = examplars.getExamplars()[i];
+        EdgeOutData sibling = ix.getSiblingMap().get(j);
         if (sibling == null) {
             return null;
         } else {
@@ -303,7 +275,7 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
     @Override
     protected void calculateCovergence() {
         if (convits != null) {
-            for (Integer ex : examplars.getExamplars().keySet()) {
+            for (int ex = 0; ex < examplars.size(); ex++) {
                 if (centers.contains(ex)) {
                     convitsVectors.get(ex).addCovits(true);
                 } else {
@@ -317,8 +289,8 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
     protected void initConvergence() {
         if (convits != null) {
 
-            for (Integer ex : examplars.getExamplars().keySet()) {
-                ConvitsVector vec = new ConvitsVector(convits.intValue());
+            for (int ex = 0; ex < examplars.size(); ex++) {
+                ConvitsVector vec = new ConvitsVector(convits.intValue(), ex);
                 vec.init();
                 convitsVectors.put(ex, vec);
             }
@@ -327,52 +299,16 @@ public class SmartPropagationAlgorithm extends AffinityPropagationAlgorithm {
 
     @Override
     protected void generateNoise() {
-        for (Examplar examplar : examplars.getExamplars().values()) {
-            Collection<SiblingData> siblings = examplar.getSiblingMap().values();
-            for (SiblingData sibling : siblings) {
-                double s = sibling.getS();
-                s = generateNoiseHelp(s);
-                sibling.setS(s);
-            }
+        for (Examplar examplar : examplars.getExamplars()) {
+            Map<Integer, EdgeOutData> siblings = examplar.getSiblingMap();
+            EdgeOutData sibling = siblings.get(examplar.getName());
+            double s = sibling.getS();
+            s = generateNoiseHelp(s);
+            sibling.setS(s);
         }
     }
 
     @Override
     protected void showInfo() {
-        System.out.println("SSSSS");
-        for (Examplar examplar : examplars.getExamplars().values()) {
-            Collection<SiblingData> siblings = examplar.getSiblingMap().values();
-            for (SiblingData sibling : siblings) {
-                if (sibling.getExamplarName().equals(examplar.getName())) {
-                    System.out.println(sibling.getS());
-                }
-            }
-        }
-        /*      System.out.println("EEEE");
-        for (Examplar examplar : examplars.getExamplars().values()) {
-        Collection<SiblingData> siblings = examplar.getSiblingMap().values();
-        for (SiblingData sibling : siblings) {
-        if (sibling.getExamplarName().equals(examplar.getName())) {
-        System.out.println(sibling.getA() + sibling.getR());
-        }
-        }
-        }
-        for (Examplar examplar : examplars.getExamplars().values()) {
-        Collection<SiblingData> siblings = examplar.getSiblingMap().values();
-        for (SiblingData sibling : siblings) {
-        if (sibling.getExamplarName().equals(examplar.getName())) {
-        System.out.println(sibling.getA());
-        }
-        }
-        }
-        System.out.println("RRRRRRRRRRRRRRR");
-        for (Examplar examplar : examplars.getExamplars().values()) {
-        Collection<SiblingData> siblings = examplar.getSiblingMap().values();
-        for (SiblingData sibling : siblings) {
-        if (sibling.getExamplarName().equals(examplar.getName())) {
-        System.out.println(sibling.getR());
-        }
-        }
-        }*/
     }
 }
