@@ -5,10 +5,10 @@
 <toc version="1.0">
         <tocitem target="Introduction" text="PPINE Plugin Manual">
         <tocitem target="Installation" text="Installation"/>
-        <tocitem target="Species file format" text="Species file format"/>
-        <tocitem target="Interactions file format" text="Interactions file format"/>
-        <tocitem target="Proteins trees file format" text="Proteins trees file format"/>
-        <tocitem target="Experiments file format" text="Experiments file format"/>
+        <tocitem target="Species tree" text="Species tree"/>
+        <tocitem target="Interactions" text="Interactions"/>
+        <tocitem target="Protein family trees" text="Protein family trees"/>
+        <tocitem target="Experiments" text="Experiments"/>
         <tocitem target="Example use case" text="Examples and manual"/>
         <tocitem target="License" text="License GPL v3.0" />
     </tocitem>
