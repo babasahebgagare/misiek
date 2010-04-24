@@ -3,7 +3,8 @@
 <!DOCTYPE toc
   PUBLIC "-//Sun Microsystems Inc.//DTD JavaHelp TOC Version 1.0//EN" "http://java.sun.com/products/javahelp/toc_1_0.dtd">
 <toc version="1.0">
-    <tocitem target="Introduction" text="Affinity propagation Plugin Manual">
+    <tocitem target="Introduction" text="About"/>
+    <tocitem target="Manual" text="Manual">
         <!--<tocitem target="AboutAffinity" text="About Affinity Propagation algorithm" /> -->
         <tocitem target="Installation" text="Installation"/>
         <tocitem target="Parameters" text="Parameters" />

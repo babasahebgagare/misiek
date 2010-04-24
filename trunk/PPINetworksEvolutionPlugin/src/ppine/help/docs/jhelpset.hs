@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><helpset version="1.0">
-   <title>PPINE Plugin User Manual</title>
+   <title>NetworkEvolution Plugin User Manual</title>
    <maps>
       <homeID>top</homeID>
       <mapref location="jhelpmap.jhm"/>

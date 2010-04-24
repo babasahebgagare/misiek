@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><helpset version="1.0">
-   <title>Affinity propagation User Manual</title>
+   <title>APCluster Plugin User Manual</title>
    <maps>
       <homeID>top</homeID>
       <mapref location="jhelpmap.jhm"/>

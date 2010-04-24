@@ -20,5 +20,10 @@ In the case of incomplete graphs (especially sparse graphs), it is possible that
 center. When this option is selected, we look for shortest paths in the weighted network from nodes to cluster centers.
             </li>
         </ul>
+    <h1>Directed/undirected</h1>
+    This option tells the program to treat the edges in the graph as either directed or undirected. If "undirected" option 
+    is selected, then for each edge, the plugin will create edges in each direction with the same weight. In the directed
+    case the edges will be read as specified (lacking edges in one direction will be assigned similarity equal to -&infin;).
+
     </body>
 </html>
