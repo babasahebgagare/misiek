@@ -3,13 +3,17 @@
 <!DOCTYPE toc
   PUBLIC "-//Sun Microsystems Inc.//DTD JavaHelp TOC Version 1.0//EN" "http://java.sun.com/products/javahelp/toc_1_0.dtd">
 <toc version="1.0">
-        <tocitem target="Introduction" text="PPINE Plugin Manual">
+    <tocitem target="Introduction" text="About"/>
+    <tocitem target="Manual" text="Manual">
         <tocitem target="Installation" text="Installation"/>
-        <tocitem target="Species tree" text="Species tree"/>
-        <tocitem target="Interactions" text="Interactions"/>
-        <tocitem target="Protein family trees" text="Protein family trees"/>
-        <tocitem target="Experiments" text="Experiments"/>
+      <!--  <tocitem target="Species tree" text="Species tree"/> -->
         <tocitem target="Example use case" text="Examples and manual"/>
+        <tocitem target="Input file formats" text="Input file formats">
+            <tocitem target="Species tree" text="Species tree"/>
+            <tocitem target="Protein family trees" text="Protein family trees"/>
+            <tocitem target="Interactions" text="Interactions"/>
+            <tocitem target="Experiments" text="Experiments"/>
+        </tocitem>
         <tocitem target="License" text="License GPL v3.0" />
     </tocitem>
 </toc>
