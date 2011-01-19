@@ -32,8 +32,7 @@ package panel;
 
 import cytoscape.Cytoscape;
 import help.AffHelpBroker;
-import java.awt.event.ActionEvent;
-import javax.help.CSH;
+import javax.help.HelpBroker;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -198,8 +197,12 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
 }//GEN-LAST:event_startButtonActionPerformed
 
     private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpButtonActionPerformed
-        CSH.DisplayHelpFromSource csh = new CSH.DisplayHelpFromSource(AffHelpBroker.getHelpBroker("Introduction"));
-        csh.actionPerformed(new ActionEvent(this, 120, "Introduction"));
+        // CSH.DisplayHelpFromSource csh = new CSH.DisplayHelpFromSource(AffHelpBroker.getHelpBroker("Introduction"));
+        // csh.actionPerformed(new ActionEvent(this, 120, "Introduction"));
+        HelpBroker helpBroker = AffHelpBroker.getHelpBroker("Introduction");
+        //CSH.DisplayHelpFromSource csh = new CSH.DisplayHelpFromSource(helpBroker);
+        helpBroker.initPresentation();
+        helpBroker.setDisplayed(true);
     }//GEN-LAST:event_helpButtonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -222,7 +225,6 @@ public class AffinityButtonsPanel extends javax.swing.JPanel {
         frame.setResizable(false);
         frame.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox centersAttrList;
     private javax.swing.JButton helpButton;
