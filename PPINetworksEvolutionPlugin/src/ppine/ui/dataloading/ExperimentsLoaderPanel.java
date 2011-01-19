@@ -33,7 +33,7 @@ package ppine.ui.dataloading;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
-import javax.help.CSH;
+import javax.help.HelpBroker;
 import javax.swing.JFileChooser;
 import ppine.help.PPINEHelpBroker;
 import ppine.io.listeners.ExperimentsLoadingErrorsListener;
@@ -230,8 +230,12 @@ public class ExperimentsLoaderPanel extends javax.swing.JPanel {
 }//GEN-LAST:event_cleanButtonActionPerformed
 
     private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpButtonActionPerformed
-        CSH.DisplayHelpFromSource csh = new CSH.DisplayHelpFromSource(PPINEHelpBroker.getHelpBroker("Species file format"));
-        csh.actionPerformed(new ActionEvent(this, 120, "Species file format"));
+        //CSH.DisplayHelpFromSource csh = new CSH.DisplayHelpFromSource(PPINEHelpBroker.getHelpBroker("Species file format"));
+        //csh.actionPerformed(new ActionEvent(this, 120, "Species file format"));
+        HelpBroker helpBroker = PPINEHelpBroker.getHelpBroker("Experiments");
+        //CSH.DisplayHelpFromSource csh = new CSH.DisplayHelpFromSource(helpBroker);
+        helpBroker.initPresentation();
+        helpBroker.setDisplayed(true);
 }//GEN-LAST:event_helpButtonActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton chooseFile;

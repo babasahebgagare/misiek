@@ -28,7 +28,6 @@
  *           Janusz Dutkowski (idea, data) (j.dutkowski@mimuw.edu.pl)
  *           Jerzy Tiuryn (supervisor) (tiuryn@mimuw.edu.pl)
  */
-
 package ppine.ui.dataloading;
 
 import ppine.io.AbstractDataReader;
@@ -40,7 +39,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.Vector;
-import javax.help.CSH;
+import javax.help.HelpBroker;
 import javax.swing.JFileChooser;
 import ppine.help.PPINEHelpBroker;
 import ppine.io.listeners.InteractionsLoadingErrorsListener;
@@ -72,21 +71,20 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
         setActualUIState();
     }
 
-    public void setStateChoosen(){
+    public void setStateChoosen() {
         loadButton.setEnabled(true);
         cleanButton.setEnabled(false);
     }
-    
-    public void setStateLoaded(){
+
+    public void setStateLoaded() {
         loadButton.setEnabled(false);
         cleanButton.setEnabled(true);
     }
 
-    public void setStateClean(){
+    public void setStateClean() {
         loadButton.setEnabled(false);
         cleanButton.setEnabled(false);
     }
-
 
     public void setLoaderPanel(DataLoaderPanel loaderPanel) {
         this.loaderPanel = loaderPanel;
@@ -379,8 +377,12 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
 }//GEN-LAST:event_loadButtonActionPerformed
 
     private void infoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_infoButtonActionPerformed
-        CSH.DisplayHelpFromSource csh = new CSH.DisplayHelpFromSource(PPINEHelpBroker.getHelpBroker("Interactions file format"));
-        csh.actionPerformed(new ActionEvent(this, 120, "Interactions file format"));
+       // CSH.DisplayHelpFromSource csh = new CSH.DisplayHelpFromSource(PPINEHelpBroker.getHelpBroker("Interactions file format"));
+       // csh.actionPerformed(new ActionEvent(this, 120, "Interactions file format"));
+        HelpBroker helpBroker = PPINEHelpBroker.getHelpBroker("Interactions");
+        //CSH.DisplayHelpFromSource csh = new CSH.DisplayHelpFromSource(helpBroker);
+        helpBroker.initPresentation();
+        helpBroker.setDisplayed(true);
     }//GEN-LAST:event_infoButtonActionPerformed
 
     private void cleanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cleanButtonActionPerformed
@@ -402,7 +404,6 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
             loadButton.setEnabled(true);
         }
     }//GEN-LAST:event_chooseOneFileButtonActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton chooseOneFileButton;
     private javax.swing.JButton cleanButton;
@@ -497,7 +498,7 @@ public class InteractionsLoaderPanel extends javax.swing.JPanel {
 
             ldh.addInteractionData(speciesName, filename, tresholdOrNull);
             readAISpeciesInteractions(network, filename, tresholdOrNull, oldTresholdOrNull);
-        //       AbstractDataReader.getInstance().readAISpeciesInteractions(network, filename, tresholdOrNull, oldTresholdOrNull);
+            //       AbstractDataReader.getInstance().readAISpeciesInteractions(network, filename, tresholdOrNull, oldTresholdOrNull);
         } else {
             InteractionsLoadingErrorsListener errorListener = new InteractionsLoadingErrorsListener(loaderPanel);
             ldh.addInteractionData(speciesName, filename, tresholdOrNull);

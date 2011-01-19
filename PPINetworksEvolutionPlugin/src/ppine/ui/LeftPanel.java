@@ -35,6 +35,7 @@ import cytoscape.Cytoscape;
 import java.awt.event.ActionEvent;
 import java.util.Collection;
 import javax.help.CSH;
+import javax.help.HelpBroker;
 import javax.swing.JOptionPane;
 import ppine.help.PPINEHelpBroker;
 import ppine.viewmodel.structs.CytoProtein;
@@ -329,8 +330,11 @@ private void newDataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 }//GEN-LAST:event_newDataButtonActionPerformed
 
 private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpButtonActionPerformed
-    CSH.DisplayHelpFromSource csh = new CSH.DisplayHelpFromSource(PPINEHelpBroker.getHelpBroker("Introduction"));
-    csh.actionPerformed(new ActionEvent(this, 120, "Introduction"));
+    HelpBroker helpBroker = PPINEHelpBroker.getHelpBroker("Introduction");
+    //CSH.DisplayHelpFromSource csh = new CSH.DisplayHelpFromSource(helpBroker);
+    helpBroker.initPresentation();
+    helpBroker.setDisplayed(true);
+    //csh.actionPerformed(evt);
 }//GEN-LAST:event_helpButtonActionPerformed
 
 private void deleteVataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteVataButtonActionPerformed
