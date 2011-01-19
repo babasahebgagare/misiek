@@ -33,7 +33,7 @@ package ppine.ui.dataloading;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
-import javax.help.CSH;
+import javax.help.HelpBroker;
 import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
 import ppine.help.PPINEHelpBroker;
@@ -243,8 +243,13 @@ public class GenesTreesLoaderPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_loadButtonActionPerformed
 
     private void infoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_infoButtonActionPerformed
-        CSH.DisplayHelpFromSource csh = new CSH.DisplayHelpFromSource(PPINEHelpBroker.getHelpBroker("Proteins trees file format"));
-        csh.actionPerformed(new ActionEvent(this, 120, "Proteins trees file format"));
+        //CSH.DisplayHelpFromSource csh = new CSH.DisplayHelpFromSource(PPINEHelpBroker.getHelpBroker("Proteins trees file format"));
+        //csh.actionPerformed(new ActionEvent(this, 120, "Proteins trees file format"));
+        HelpBroker helpBroker = PPINEHelpBroker.getHelpBroker("Protein family trees");
+        //CSH.DisplayHelpFromSource csh = new CSH.DisplayHelpFromSource(helpBroker);
+        helpBroker.initPresentation();
+        helpBroker.setDisplayed(true);
+
     }//GEN-LAST:event_infoButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

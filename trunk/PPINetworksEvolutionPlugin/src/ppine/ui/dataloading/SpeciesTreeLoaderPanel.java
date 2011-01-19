@@ -28,12 +28,11 @@
  *           Janusz Dutkowski (idea, data) (j.dutkowski@mimuw.edu.pl)
  *           Jerzy Tiuryn (supervisor) (tiuryn@mimuw.edu.pl)
  */
-
 package ppine.ui.dataloading;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
-import javax.help.CSH;
+import javax.help.HelpBroker;
 import javax.swing.JFileChooser;
 import javax.swing.tree.TreeModel;
 import ppine.help.PPINEHelpBroker;
@@ -249,15 +248,19 @@ public class SpeciesTreeLoaderPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_loadTreeButtonActionPerformed
 
     private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpButtonActionPerformed
-        CSH.DisplayHelpFromSource csh = new CSH.DisplayHelpFromSource(PPINEHelpBroker.getHelpBroker("Species file format"));
-        csh.actionPerformed(new ActionEvent(this, 120, "Species file format"));
+       // CSH.DisplayHelpFromSource csh = new CSH.DisplayHelpFromSource(PPINEHelpBroker.getHelpBroker("Species file format"));
+       // csh.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "Species file format"));
+        //HelpBroker helpBroker = PPINEHelpBroker.getHelpBroker("Species file format");
+        HelpBroker helpBroker = PPINEHelpBroker.getHelpBroker("Species tree");
+        //CSH.DisplayHelpFromSource csh = new CSH.DisplayHelpFromSource(helpBroker);
+        helpBroker.initPresentation();
+        helpBroker.setDisplayed(true);
     }//GEN-LAST:event_helpButtonActionPerformed
 
     private void cleanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cleanButtonActionPerformed
         UIController.getInstance().deleteData();
         setUnloadedState();
     }//GEN-LAST:event_cleanButtonActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton chooseFile;
     private javax.swing.JButton cleanButton;
