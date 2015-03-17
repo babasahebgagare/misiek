@@ -1,0 +1,5 @@
+We developed new tools which cooperatively can be used to map evolving protein interaction networks at the module level. These tools are implemented as plugins for the widely used Cytoscape network visualization platform. The first plugin provides a user-friendly implementation of Affinity Propagation - a general purpose clustering algorithm (Brendan J. Frey and Delbert Dueck, Science 2007) which can be used to identify coherent modules in biological networks. The second plugin addresses the problem of visual analysis of network evolution and comparison of networks across species. It provides the capability to visualize consecutive evolutionary stages of protein interaction networks based on phylogenetic information. Together, the two plugins can be used to identify and trace the evolution of network modules.
+
+Availability: The software, input data and usage scenarios are freely available from the project website: http://bioputer.mimuw.edu.pl/modevo. The plugins have been registered on the Cytoscape website.
+
+An update: Fixed help issues under Cytoscape 2.8.0.
